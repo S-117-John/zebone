@@ -1,0 +1,168 @@
+<% layout('/layouts/default.html', {title: '交易记录管理', libs: ['dataGrid']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header">
+			<div class="box-title">
+				<i class="fa fa-list-alt"></i> ${text('交易记录管理')}
+			</div>
+			<div class="box-tools pull-right">
+				<a href="#" class="btn btn-default" id="btnSearch" title="${text('查询')}"><i class="fa fa-filter"></i> ${text('查询')}</a>
+				<% if(hasPermi('pay:tradeRecord:edit')){ %>
+					<a href="${ctx}/pay/tradeRecord/form" class="btn btn-default btnTool" title="${text('新增交易记录')}"><i class="fa fa-plus"></i> ${text('新增')}</a>
+				<% } %>
+				<div class="btn-group">
+					<a href="javascript:" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+						<i class="fa fa-navicon"></i> <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:" id="btnExport"><i class="glyphicon glyphicon-export"></i> 导出</a></li>
+<!--						<li><a href="javascript:" id="btnImport"><i class="glyphicon glyphicon-import"></i> 导入</a></li>-->
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="box-body">
+			<#form:form id="searchForm" model="${tradeRecord}" action="${ctx}/pay/tradeRecord/listData" method="post" class="form-inline hide"
+					data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}" data-order-by="${parameter.orderBy}">
+				<div class="form-group">
+					<label class="control-label">${text('支付方式')}：</label>
+					<div class="control-inline width-120">
+						<#form:select path="payType" dictType="pay_type" blankOption="true" class="form-control"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('商户订单号')}：</label>
+					<div class="control-inline">
+						<#form:input path="outTradeNo" maxlength="255" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('交易号')}：</label>
+					<div class="control-inline">
+						<#form:input path="tradeNo" maxlength="255" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('交易金额')}：</label>
+					<div class="control-inline">
+						<#form:input path="totalAmount" maxlength="255" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('实收金额')}：</label>
+					<div class="control-inline">
+						<#form:input path="receiptAmount" maxlength="255" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('交易时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="gmtPayment_gte" readonly="true" maxlength="20" class="form-control Wdate-date"
+							dataFormat="date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false,onpicked:function(){gmtPayment_lte.click()}});"/>
+						&nbsp;--&nbsp;
+						<#form:input path="gmtPayment_lte" readonly="true" maxlength="20" class="form-control Wdate-date"
+							dataFormat="date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('交易状态')}：</label>
+					<div class="control-inline width-120">
+						<#form:select path="tradeStatus" dictType="trade_status" blankOption="true" class="form-control"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('备注')}：</label>
+					<div class="control-inline">
+						<#form:input path="remarks" maxlength="255" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('买家账号')}：</label>
+					<div class="control-inline">
+						<#form:input path="buyerLogonId" maxlength="255" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('买家用户id')}：</label>
+					<div class="control-inline">
+						<#form:input path="buyerUserId" maxlength="255" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('交易创建时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="createDate_gte" readonly="true" maxlength="20" class="form-control Wdate-date"
+							dataFormat="date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false,onpicked:function(){createDate_lte.click()}});"/>
+						&nbsp;--&nbsp;
+						<#form:input path="createDate_lte" readonly="true" maxlength="20" class="form-control Wdate-date"
+							dataFormat="date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('数据状态')}：</label>
+					<div class="control-inline width-120">
+						<#form:select path="status" dictType="sys_search_status" blankOption="true" class="form-control"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary btn-sm">${text('查询')}</button>
+					<button type="reset" class="btn btn-default btn-sm">${text('重置')}</button>
+				</div>
+			</#form:form>
+			<table id="dataGrid"></table>
+			<div id="dataGridPage"></div>
+		</div>
+	</div>
+</div>
+<% } %>
+<script>
+// 初始化DataGrid对象
+$('#dataGrid').dataGrid({
+	searchForm: $("#searchForm"),
+	columnModel: [
+		{header:'${text('支付方式')}', name:'payType', index:'a.pay_type', width:150, align:"left", frozen:true,formatter: function(val, obj, row, act){
+				return js.getDictLabel(${@DictUtils.getDictListJson('pay_type')}, val, '${text('未知')}', true);
+			}},
+		{header:'${text('商户订单号')}', name:'outTradeNo', index:'a.out_trade_no', width:150, align:"left"},
+		{header:'${text('交易号')}', name:'tradeNo', index:'a.trade_no', width:150, align:"left"},
+		{header:'${text('交易金额')}', name:'totalAmount', index:'a.total_amount', width:150, align:"left"},
+		{header:'${text('实收金额')}', name:'receiptAmount', index:'a.receipt_amount', width:150, align:"left"},
+		{header:'${text('交易时间')}', name:'gmtPayment', index:'a.gmt_payment', width:150, align:"center"},
+		{header:'${text('交易状态')}', name:'tradeStatus', index:'a.trade_status', width:150, align:"center", formatter: function(val, obj, row, act){
+			return js.getDictLabel(${@DictUtils.getDictListJson('trade_status')}, val, '${text('未知')}', true);
+		}},
+		{header:'${text('备注')}', name:'remarks', index:'a.remarks', width:150, align:"left"},
+		{header:'${text('买家账号')}', name:'buyerLogonId', index:'a.buyer_logon_id', width:150, align:"left"},
+		{header:'${text('买家用户id')}', name:'buyerUserId', index:'a.buyer_user_id', width:150, align:"left"},
+		{header:'${text('交易创建时间')}', name:'createDate', index:'a.create_date', width:150, align:"center"},
+		{header:'${text('数据状态')}', name:'status', index:'a.status', width:150, align:"center", formatter: function(val, obj, row, act){
+			return js.getDictLabel(${@DictUtils.getDictListJson('sys_search_status')}, val, '${text('未知')}', true);
+		}},
+		// {header:'${text('操作')}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
+		// 	var actions = [];
+		// 	<% if(hasPermi('pay:tradeRecord:edit')){ %>
+		// 		actions.push('<a href="${ctx}/pay/tradeRecord/form?id='+row.id+'" class="btnList" title="${text('编辑交易记录')}"><i class="fa fa-pencil"></i></a>&nbsp;');
+		// 		if (row.status == Global.STATUS_NORMAL){
+		// 			actions.push('<a href="${ctx}/pay/tradeRecord/disable?id='+row.id+'" class="btnList" title="${text('停用交易记录')}" data-confirm="${text('确认要停用该交易记录吗？')}"><i class="glyphicon glyphicon-ban-circle"></i></a>&nbsp;');
+		// 		}
+		// 		if (row.status == Global.STATUS_DISABLE){
+		// 			actions.push('<a href="${ctx}/pay/tradeRecord/enable?id='+row.id+'" class="btnList" title="${text('启用交易记录')}" data-confirm="${text('确认要启用该交易记录吗？')}"><i class="glyphicon glyphicon-ok-circle"></i></a>&nbsp;');
+		// 		}
+		// 		actions.push('<a href="${ctx}/pay/tradeRecord/delete?id='+row.id+'" class="btnList" title="${text('删除交易记录')}" data-confirm="${text('确认要删除该交易记录吗？')}"><i class="fa fa-trash-o"></i></a>&nbsp;');
+		// 	<% } %>
+		// 	return actions.join('');
+		// }}
+	],
+	// 加载成功后执行事件
+	ajaxSuccess: function(data){
+		
+	}
+});
+
+$('#btnExport').click(function(){
+	js.ajaxSubmitForm($('#searchForm'), {
+		url:'${ctx}/pay/tradeRecord/exportData',
+		downloadFile:true
+	});
+});
+</script>

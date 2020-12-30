@@ -1,0 +1,87 @@
+<% layout('/layouts/default.html', {title: '支付宝配置管理', libs: ['dataGrid']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header">
+			<div class="box-title">
+				<i class="fa fa-list-alt"></i> ${text('支付宝配置管理')}
+			</div>
+			<div class="box-tools pull-right">
+				<a href="#" class="btn btn-default" id="btnSearch" title="${text('查询')}"><i class="fa fa-filter"></i> ${text('查询')}</a>
+				<% if(hasPermi('ali:aliConfig:edit')){ %>
+					<a href="${ctx}/ali/aliConfig/form" class="btn btn-default btnTool" title="${text('新增支付宝配置')}"><i class="fa fa-plus"></i> ${text('新增')}</a>
+				<% } %>
+			</div>
+		</div>
+		<div class="box-body">
+			<#form:form id="searchForm" model="${aliConfig}" action="${ctx}/ali/aliConfig/listData" method="post" class="form-inline hide"
+					data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}" data-order-by="${parameter.orderBy}">
+				<div class="form-group">
+					<label class="control-label">${text('应用ID')}：</label>
+					<div class="control-inline">
+						<#form:input path="appId" maxlength="255" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('应用名称')}：</label>
+					<div class="control-inline">
+						<#form:input path="appName" maxlength="255" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('商户')}：</label>
+					<div class="control-inline width-120">
+						<#form:select path="merchantId" dictType="sys_yes_no" blankOption="true" class="form-control"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('状态')}：</label>
+					<div class="control-inline width-120">
+						<#form:select path="status" dictType="sys_search_status" blankOption="true" class="form-control"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary btn-sm">${text('查询')}</button>
+					<button type="reset" class="btn btn-default btn-sm">${text('重置')}</button>
+				</div>
+			</#form:form>
+			<table id="dataGrid"></table>
+			<div id="dataGridPage"></div>
+		</div>
+	</div>
+</div>
+<% } %>
+<script>
+// 初始化DataGrid对象
+$('#dataGrid').dataGrid({
+	searchForm: $("#searchForm"),
+	columnModel: [
+		{header:'${text('应用ID')}', name:'appId', index:'a.app_id', width:150, align:"left", frozen:true},
+		{header:'${text('应用名称')}', name:'appName', index:'a.app_name', width:150, align:"left"},
+		// {header:'${text('支付宝网关')}', name:'gateway', index:'a.gateway', width:200, align:"left"},
+		{header:'${text('商户')}', name:'merchantName', index:'a.merchant_name', width:150, align:"center"},
+
+		{header:'${text('状态')}', name:'status', index:'a.status', width:150, align:"center", formatter: function(val, obj, row, act){
+			return js.getDictLabel(${@DictUtils.getDictListJson('sys_search_status')}, val, '${text('未知')}', true);
+		}},
+		{header:'${text('备注')}', name:'remarks', index:'a.remarks', width:150, align:"left"},
+		{header:'${text('操作')}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
+			var actions = [];
+			<% if(hasPermi('ali:aliConfig:edit')){ %>
+				actions.push('<a href="${ctx}/ali/aliConfig/form?id='+row.id+'" class="btnList" title="${text('编辑支付宝配置')}"><i class="fa fa-pencil"></i></a>&nbsp;');
+				if (row.status == Global.STATUS_NORMAL){
+					actions.push('<a href="${ctx}/ali/aliConfig/disable?id='+row.id+'" class="btnList" title="${text('停用支付宝配置')}" data-confirm="${text('确认要停用该支付宝配置吗？')}"><i class="glyphicon glyphicon-ban-circle"></i></a>&nbsp;');
+				}
+				if (row.status == Global.STATUS_DISABLE){
+					actions.push('<a href="${ctx}/ali/aliConfig/enable?id='+row.id+'" class="btnList" title="${text('启用支付宝配置')}" data-confirm="${text('确认要启用该支付宝配置吗？')}"><i class="glyphicon glyphicon-ok-circle"></i></a>&nbsp;');
+				}
+				actions.push('<a href="${ctx}/ali/aliConfig/delete?id='+row.id+'" class="btnList" title="${text('删除支付宝配置')}" data-confirm="${text('确认要删除该支付宝配置吗？')}"><i class="fa fa-trash-o"></i></a>&nbsp;');
+			<% } %>
+			return actions.join('');
+		}}
+	],
+	// 加载成功后执行事件
+	ajaxSuccess: function(data){
+		
+	}
+});
+</script>

@@ -1,0 +1,141 @@
+<% layout('/layouts/default.html', {title: '微信配置管理', libs: ['validate','fileupload']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header with-border">
+			<div class="box-title">
+				<i class="fa fa-list-alt"></i> ${text(wxConfig.isNewRecord ? '新增微信配置' : '编辑微信配置')}
+			</div>
+			<div class="box-tools pull-right">
+				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+			</div>
+		</div>
+		<#form:form id="inputForm" model="${wxConfig}" action="${ctx}/wx/wxConfig/save" method="post" class="form-horizontal">
+			<div class="box-body">
+				<div class="form-unit">${text('基本信息')}</div>
+				<#form:hidden path="id"/>
+				<div class="row">
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label class="control-label col-sm-4" title="">
+								<span class="required hide">*</span> ${text('应用ID')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-8">
+								<#form:input path="appId" maxlength="255" class="form-control"/>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label class="control-label col-sm-4" title="">
+								<span class="required hide">*</span> ${text('应用名称')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-8">
+								<#form:input path="appName" maxlength="255" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label class="control-label col-sm-4" title="">
+								<span class="required hide">*</span> ${text('开发者密钥')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-8">
+								<#form:input path="appSecret" maxlength="255" class="form-control"/>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="row">
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label class="control-label col-sm-4" title="">
+								<span class="required hide">*</span> ${text('商户ID')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-8">
+								<#form:input path="mchId" maxlength="255" class="form-control"/>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label class="control-label col-sm-4" title="">
+								<span class="required hide">*</span> ${text('平台商户号')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-8">
+								<#form:input path="merchantId" maxlength="255" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label class="control-label col-sm-4" title="">
+								<span class="required hide">*</span> ${text('支付密钥')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-8">
+								<#form:input path="paySignKey" maxlength="255" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('备注')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:textarea path="remarks" rows="4" maxlength="255" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label class="control-label col-sm-4" title="">
+								<span class="required hide">*</span> ${text('token')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-8">
+								<#form:input path="token" maxlength="255" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2">${text('附件上传')}：</label>
+							<div class="col-sm-10">
+								<#form:fileupload id="uploadFile" bizKey="${wxConfig.id}" bizType="wxConfig_file"
+									uploadType="all" class="" readonly="false" returnPath="true" filePathInputId="certificatePath"/>
+								<#form:input path="certificatePath"  readonly="true"  class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="box-footer">
+				<div class="row">
+					<div class="col-sm-offset-2 col-sm-10">
+						<% if (hasPermi('wx:wxConfig:edit')){ %>
+							<button type="submit" class="btn btn-sm btn-primary" id="btnSubmit"><i class="fa fa-check"></i> ${text('保 存')}</button>&nbsp;
+						<% } %>
+						<button type="button" class="btn btn-sm btn-default" id="btnCancel" onclick="js.closeCurrentTabPage()"><i class="fa fa-reply-all"></i> ${text('关 闭')}</button>
+					</div>
+				</div>
+			</div>
+		</#form:form>
+	</div>
+</div>
+<% } %>
+<script>
+$("#inputForm").validate({
+	submitHandler: function(form){
+		js.ajaxSubmitForm($(form), function(data){
+			js.showMessage(data.message);
+			if(data.result == Global.TRUE){
+				js.closeCurrentTabPage(function(contentWindow){
+					contentWindow.page();
+				});
+			}
+		}, "json");
+    }
+});
+</script>
