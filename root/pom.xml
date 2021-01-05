@@ -18,6 +18,7 @@
         <module>../modules/core</module>
         <module>../web</module>
 		<module>../modules/pay</module>
+		<module>../modules/quality</module>
     </modules>
 	
 	<developers>  

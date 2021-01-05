@@ -51,6 +51,11 @@
 			<version>${project.parent.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.zebone</groupId>
+			<artifactId>quality</artifactId>
+			<version>0.0.1</version>
+		</dependency>
 
 
 
