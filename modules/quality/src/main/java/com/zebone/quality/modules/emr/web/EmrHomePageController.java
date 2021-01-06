@@ -105,10 +105,10 @@ public class EmrHomePageController extends BaseController {
 		if(result.size()>0){
 			QualityCesareanSection qualityCesareanSection = new QualityCesareanSection();
 			emrHomePage = result.get(0);
-			qualityCesareanSection.setQualityPhysician(emrHomePage.getQcDocName());
-			qualityCesareanSection.setQualityNurse(emrHomePage.getQcNurseName());
-			qualityCesareanSection.setAttendingPhysician(emrHomePage.getConsultName());
-			qualityCesareanSection.setRsponsibleNurse(emrHomePage.getNurseName());
+			qualityCesareanSection.setCm0111(emrHomePage.getQcDocName());
+			qualityCesareanSection.setCm0112(emrHomePage.getQcNurseName());
+			qualityCesareanSection.setCm0113(emrHomePage.getConsultName());
+			qualityCesareanSection.setCm0114(emrHomePage.getNurseName());
 			qualityCesareanSection.setIsNewRecord(true);
 			model.addAttribute("qualityCesareanSection", qualityCesareanSection);
 		}else {

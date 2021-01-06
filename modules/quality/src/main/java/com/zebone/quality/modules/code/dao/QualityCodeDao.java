@@ -10,7 +10,7 @@ import com.zebone.quality.modules.code.entity.QualityCode;
 /**
  * 编码对照DAO接口
  * @author lijin
- * @version 2020-12-31
+ * @version 2021-01-05
  */
 @MyBatisDao
 public interface QualityCodeDao extends CrudDao<QualityCode> {

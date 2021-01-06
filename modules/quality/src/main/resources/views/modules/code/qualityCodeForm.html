@@ -14,13 +14,12 @@
 				<div class="form-unit">${text('基本信息')}</div>
 				<#form:hidden path="id"/>
 				<div class="row">
-				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('编码key')}：<i class="fa icon-question hide"></i></label>
+								<span class="required hide">*</span> ${text('本系统字典类型')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-5">
-								<#form:input path="codeKey" maxlength="255" class="form-control"/>
+								<#form:input path="dictType" maxlength="255" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -29,9 +28,9 @@
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('编码value')}：<i class="fa icon-question hide"></i></label>
+								<span class="required hide">*</span> ${text('本系统字典值')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-5">
-								<#form:input path="codeValue" maxlength="255" class="form-control"/>
+								<#form:input path="dictValue" maxlength="255" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -43,6 +42,28 @@
 								<span class="required hide">*</span> ${text('编码名称')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-5">
 								<#form:input path="name" maxlength="255" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('HIS编码值')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-5">
+								<#form:input path="hisCode" maxlength="255" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('本系统字典名称')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-5">
+								<#form:input path="dictName" maxlength="255" class="form-control"/>
 							</div>
 						</div>
 					</div>

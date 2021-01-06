@@ -5,12 +5,6 @@ package com.zebone.quality.modules.code.service;
 
 import java.util.List;
 
-import com.jeesite.common.service.ServiceException;
-import com.jeesite.common.utils.excel.ExcelImport;
-import com.jeesite.common.validator.ValidatorUtils;
-import com.jeesite.modules.sys.entity.EmpUser;
-import com.jeesite.modules.sys.entity.User;
-import com.jeesite.modules.sys.utils.UserUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,14 +12,11 @@ import com.jeesite.common.entity.Page;
 import com.jeesite.common.service.CrudService;
 import com.zebone.quality.modules.code.entity.QualityCode;
 import com.zebone.quality.modules.code.dao.QualityCodeDao;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.validation.ConstraintViolationException;
 
 /**
  * 编码对照Service
  * @author lijin
- * @version 2020-12-31
+ * @version 2021-01-05
  */
 @Service
 @Transactional(readOnly=true)
@@ -82,51 +73,18 @@ public class QualityCodeService extends CrudService<QualityCodeDao, QualityCode>
 		super.delete(qualityCode);
 	}
 
-	/**
-	 * 导入用户数据
-	 * @param file 导入的用户数据文件
-	 * @param isUpdateSupport 是否更新支持，如果已存在，则进行更新数据
-	 */
-	@Transactional(readOnly=false)
-	public String importData(MultipartFile file, Boolean isUpdateSupport) {
-		if (file == null){
-			throw new ServiceException("请选择导入的数据文件！");
+
+
+	public String getDictValue(String dictType,String hisCode){
+		QualityCode qualityCode = new QualityCode();
+		qualityCode.setDictType(dictType);
+		qualityCode.setHisCode(hisCode);
+		List<QualityCode> qualityCodeList = this.findList(qualityCode);
+		if(qualityCodeList.size()>0){
+			return qualityCodeList.get(0).getDictValue();
+		}else {
+			return null;
 		}
-		int successNum = 0; int failureNum = 0;
-		StringBuilder successMsg = new StringBuilder();
-		StringBuilder failureMsg = new StringBuilder();
-		try(ExcelImport ei = new ExcelImport(file, 2, 0)){
-			List<QualityCode> list = ei.getDataList(QualityCode.class);
-			for (QualityCode qualityCode : list) {
-				try{
-					this.save(qualityCode);
-					successNum++;
-					successMsg.append("<br/>" + successNum + "、 更新成功 ");
-				} catch (Exception e) {
-					failureNum++;
-					String msg = "<br/>" + failureNum + "、导入失败 " ;
-					if (e instanceof ConstraintViolationException){
-						List<String> messageList = ValidatorUtils.extractPropertyAndMessageAsList((ConstraintViolationException)e, ": ");
-						for (String message : messageList) {
-							msg += message + "; ";
-						}
-					}else{
-						msg += e.getMessage();
-					}
-					failureMsg.append(msg);
-					logger.error(msg, e);
-				}
-			}
-		} catch (Exception e) {
-			failureMsg.append(e.getMessage());
-			logger.error(e.getMessage(), e);
-		}
-		if (failureNum > 0) {
-			failureMsg.insert(0, "很抱歉，导入失败！共 " + failureNum + " 条数据格式不正确，错误如下：");
-			throw new ServiceException(failureMsg.toString());
-		}else{
-			successMsg.insert(0, "恭喜您，数据已全部导入成功！共 " + successNum + " 条，数据如下：");
-		}
-		return successMsg.toString();
 	}
+
 }

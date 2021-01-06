@@ -12,7 +12,7 @@ import com.zebone.quality.modules.emr.entity.EmrHomePage;
  * @author lijin
  * @version 2021-01-04
  */
-@MyBatisDao
+@MyBatisDao(dataSourceName="ds2")
 public interface EmrHomePageDao extends CrudDao<EmrHomePage> {
 	
 }

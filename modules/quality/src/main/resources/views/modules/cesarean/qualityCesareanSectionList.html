@@ -18,7 +18,7 @@
 				<div class="form-group">
 					<label class="control-label">${text('患者病案号')}：</label>
 					<div class="control-inline">
-						<#form:input path="patientCaseNumber" maxlength="255" class="form-control width-120"/>
+						<#form:input path="caseId" maxlength="255" class="form-control width-120"/>
 					</div>
 				</div>
 				<div class="form-group">
@@ -37,14 +37,14 @@
 $('#dataGrid').dataGrid({
 	searchForm: $("#searchForm"),
 	columnModel: [
-		{header:'${text('质控医师')}', name:'qualityPhysician', index:'a.quality_physician', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
+		{header:'${text('质控医师')}', name:'cm0111', index:'a.cm0111', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
 			return '<a href="${ctx}/cesarean/qualityCesareanSection/form?id='+row.id+'" class="btnList" data-title="${text('编辑剖宫产')}">'+(val||row.id)+'</a>';
 		}},
-		{header:'${text('质控护士')}', name:'qualityNurse', index:'a.quality_nurse', width:150, align:"left"},
-		{header:'${text('主治医师')}', name:'attendingPhysician', index:'a.attending_physician', width:150, align:"left"},
-		{header:'${text('责任护士')}', name:'rsponsibleNurse', index:'a.rsponsible_nurse', width:150, align:"left"},
-		{header:'${text('上报科室')}', name:'reportDept', index:'a.report_dept', width:150, align:"left"},
-		{header:'${text('患者病案号')}', name:'patientCaseNumber', index:'a.patient_case_number', width:150, align:"left"},
+		{header:'${text('质控护士')}', name:'cm0112', index:'a.cm0112', width:150, align:"left"},
+		{header:'${text('主治医师')}', name:'cm0113', index:'a.cm0113', width:150, align:"left"},
+		{header:'${text('责任护士')}', name:'cm0114', index:'a.cm0114', width:150, align:"left"},
+		{header:'${text('上报科室')}', name:'cm0115', index:'a.cm0115', width:150, align:"left"},
+		{header:'${text('患者病案号')}', name:'caseId', index:'a.case_id', width:150, align:"left"},
 		{header:'${text('操作')}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
 			var actions = [];
 			<% if(hasPermi('cesarean:qualityCesareanSection:edit')){ %>
