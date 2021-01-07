@@ -3,6 +3,7 @@
  */
 package com.jeesite.modules.config;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,6 +20,7 @@ import com.jeesite.common.io.PropertiesUtils;
  */
 @SpringBootApplication(scanBasePackages={"com.jeesite.modules","com.zebone"})
 @EntityScan(basePackages = {"com.zebone"})
+@MapperScan("com.zebone.quality.modules")
 public class Application extends SpringBootServletInitializer {
 	
 	public static void main(String[] args) {

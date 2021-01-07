@@ -5,6 +5,11 @@ package com.zebone.quality.modules.cesarean.service;
 
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.zebone.quality.common.utils.RestTemplateUtil;
+import com.zebone.quality.modules.cesarean.entity.CesareanSection;
+import com.zebone.quality.modules.emr.entity.EmrData;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -72,5 +77,16 @@ public class QualityCesareanSectionService extends CrudService<QualityCesareanSe
 	public void delete(QualityCesareanSection qualityCesareanSection) {
 		super.delete(qualityCesareanSection);
 	}
-	
+
+	public String upload(QualityCesareanSection qualityCesareanSection){
+		Gson gson = new Gson();
+		CesareanSection cesareanSection = new CesareanSection();
+		BeanUtils.copyProperties(qualityCesareanSection,cesareanSection);
+		String json = gson.toJson(cesareanSection);
+		String result = RestTemplateUtil.getInstance().postForString(json,"http://192.168.1.3:80/interface/010102/CS/1.2/put/");
+		System.out.println(result);
+
+		return result;
+	}
+
 }

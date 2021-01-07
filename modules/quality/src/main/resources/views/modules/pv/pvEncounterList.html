@@ -1,0 +1,649 @@
+<% layout('/layouts/default.html', {title: '就诊记录管理', libs: ['dataGrid']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header">
+			<div class="box-title">
+				<i class="fa fa-list-alt"></i> ${text('就诊记录管理')}
+			</div>
+			<div class="box-tools pull-right">
+				<a href="#" class="btn btn-default" id="btnSearch" title="${text('查询')}"><i class="fa fa-filter"></i> ${text('查询')}</a>
+				<% if(hasPermi('pv:pvEncounter:edit')){ %>
+					<a href="${ctx}/pv/pvEncounter/form" class="btn btn-default btnTool" title="${text('新增就诊记录')}"><i class="fa fa-plus"></i> ${text('新增')}</a>
+				<% } %>
+			</div>
+		</div>
+		<div class="box-body">
+			<#form:form id="searchForm" model="${pvEncounter}" action="${ctx}/pv/pvEncounter/listData" method="post" class="form-inline hide"
+					data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}" data-order-by="${parameter.orderBy}">
+				<div class="form-group">
+					<label class="control-label">${text('pk_org')}：</label>
+					<div class="control-inline">
+						<#form:input path="pkOrg" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('pk_pi')}：</label>
+					<div class="control-inline">
+						<#form:input path="pkPi" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('code_pv')}：</label>
+					<div class="control-inline">
+						<#form:input path="codePv" maxlength="16" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('eu_pvtype')}：</label>
+					<div class="control-inline">
+						<#form:input path="euPvtype" maxlength="3" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('date_begin')}：</label>
+					<div class="control-inline">
+						<#form:input path="dateBegin" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('date_end')}：</label>
+					<div class="control-inline">
+						<#form:input path="dateEnd" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('eu_status')}：</label>
+					<div class="control-inline">
+						<#form:input path="euStatus" maxlength="3" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('flag_in')}：</label>
+					<div class="control-inline">
+						<#form:input path="flagIn" maxlength="1" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('flag_settle')}：</label>
+					<div class="control-inline">
+						<#form:input path="flagSettle" maxlength="1" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('name_pi')}：</label>
+					<div class="control-inline">
+						<#form:input path="namePi" maxlength="40" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('dt_sex')}：</label>
+					<div class="control-inline">
+						<#form:input path="dtSex" maxlength="20" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('age_pv')}：</label>
+					<div class="control-inline">
+						<#form:input path="agePv" maxlength="256" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('address')}：</label>
+					<div class="control-inline">
+						<#form:input path="address" maxlength="256" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('dt_marry')}：</label>
+					<div class="control-inline">
+						<#form:input path="dtMarry" maxlength="20" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('pk_dept')}：</label>
+					<div class="control-inline">
+						<#form:input path="pkDept" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('pk_dept_ns')}：</label>
+					<div class="control-inline">
+						<#form:input path="pkDeptNs" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('date_clinic')}：</label>
+					<div class="control-inline">
+						<#form:input path="dateClinic" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('date_admit')}：</label>
+					<div class="control-inline">
+						<#form:input path="dateAdmit" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('pk_wg')}：</label>
+					<div class="control-inline">
+						<#form:input path="pkWg" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('bed_no')}：</label>
+					<div class="control-inline">
+						<#form:input path="bedNo" maxlength="30" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('pk_emp_tre')}：</label>
+					<div class="control-inline">
+						<#form:input path="pkEmpTre" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('name_emp_tre')}：</label>
+					<div class="control-inline">
+						<#form:input path="nameEmpTre" maxlength="40" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('pk_emp_phy')}：</label>
+					<div class="control-inline">
+						<#form:input path="pkEmpPhy" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('name_emp_phy')}：</label>
+					<div class="control-inline">
+						<#form:input path="nameEmpPhy" maxlength="40" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('pk_emp_ns')}：</label>
+					<div class="control-inline">
+						<#form:input path="pkEmpNs" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('name_emp_ns')}：</label>
+					<div class="control-inline">
+						<#form:input path="nameEmpNs" maxlength="40" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('pk_insu')}：</label>
+					<div class="control-inline">
+						<#form:input path="pkInsu" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('pk_picate')}：</label>
+					<div class="control-inline">
+						<#form:input path="pkPicate" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('pk_emp_reg')}：</label>
+					<div class="control-inline">
+						<#form:input path="pkEmpReg" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('name_emp_reg')}：</label>
+					<div class="control-inline">
+						<#form:input path="nameEmpReg" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('date_reg')}：</label>
+					<div class="control-inline">
+						<#form:input path="dateReg" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('flag_cancel')}：</label>
+					<div class="control-inline">
+						<#form:input path="flagCancel" maxlength="1" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('pk_emp_cancel')}：</label>
+					<div class="control-inline">
+						<#form:input path="pkEmpCancel" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('name_emp_cancel')}：</label>
+					<div class="control-inline">
+						<#form:input path="nameEmpCancel" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('date_cancel')}：</label>
+					<div class="control-inline">
+						<#form:input path="dateCancel" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('eu_status_fp')}：</label>
+					<div class="control-inline">
+						<#form:input path="euStatusFp" maxlength="3" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('creator')}：</label>
+					<div class="control-inline">
+						<#form:input path="creator" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('create_time')}：</label>
+					<div class="control-inline">
+						<#form:input path="createTime" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('modifier')}：</label>
+					<div class="control-inline">
+						<#form:input path="modifier" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('modity_time')}：</label>
+					<div class="control-inline">
+						<#form:input path="modityTime" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('del_flag')}：</label>
+					<div class="control-inline">
+						<#form:input path="delFlag" maxlength="1" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('height')}：</label>
+					<div class="control-inline">
+						<#form:input path="height" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('weight')}：</label>
+					<div class="control-inline">
+						<#form:input path="weight" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('ts')}：</label>
+					<div class="control-inline">
+						<#form:input path="ts" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('addrcode_regi')}：</label>
+					<div class="control-inline">
+						<#form:input path="addrcodeRegi" maxlength="30" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('addr_regi')}：</label>
+					<div class="control-inline">
+						<#form:input path="addrRegi" maxlength="256" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('addr_regi_dt')}：</label>
+					<div class="control-inline">
+						<#form:input path="addrRegiDt" maxlength="256" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('postcode_regi')}：</label>
+					<div class="control-inline">
+						<#form:input path="postcodeRegi" maxlength="30" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('addrcode_cur')}：</label>
+					<div class="control-inline">
+						<#form:input path="addrcodeCur" maxlength="30" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('addr_cur')}：</label>
+					<div class="control-inline">
+						<#form:input path="addrCur" maxlength="256" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('addr_cur_dt')}：</label>
+					<div class="control-inline">
+						<#form:input path="addrCurDt" maxlength="256" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('postcode_cur')}：</label>
+					<div class="control-inline">
+						<#form:input path="postcodeCur" maxlength="30" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('unit_work')}：</label>
+					<div class="control-inline">
+						<#form:input path="unitWork" maxlength="256" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('tel_work')}：</label>
+					<div class="control-inline">
+						<#form:input path="telWork" maxlength="30" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('postcode_work')}：</label>
+					<div class="control-inline">
+						<#form:input path="postcodeWork" maxlength="30" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('name_rel')}：</label>
+					<div class="control-inline">
+						<#form:input path="nameRel" maxlength="40" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('dt_ralation')}：</label>
+					<div class="control-inline">
+						<#form:input path="dtRalation" maxlength="30" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('tel_rel')}：</label>
+					<div class="control-inline">
+						<#form:input path="telRel" maxlength="30" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('addr_rel')}：</label>
+					<div class="control-inline">
+						<#form:input path="addrRel" maxlength="256" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('dt_pvsource')}：</label>
+					<div class="control-inline">
+						<#form:input path="dtPvsource" maxlength="30" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('eu_pvmode')}：</label>
+					<div class="control-inline">
+						<#form:input path="euPvmode" maxlength="2" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('dt_hprealtype')}：</label>
+					<div class="control-inline">
+						<#form:input path="dtHprealtype" maxlength="2" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('dt_specunit')}：</label>
+					<div class="control-inline">
+						<#form:input path="dtSpecunit" maxlength="30" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('flag_spec')}：</label>
+					<div class="control-inline">
+						<#form:input path="flagSpec" maxlength="1" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('eu_locked')}：</label>
+					<div class="control-inline">
+						<#form:input path="euLocked" maxlength="2" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('note')}：</label>
+					<div class="control-inline">
+						<#form:input path="note" maxlength="1280" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('eu_disetype')}：</label>
+					<div class="control-inline">
+						<#form:input path="euDisetype" maxlength="2" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('dt_idtype_rel')}：</label>
+					<div class="control-inline">
+						<#form:input path="dtIdtypeRel" maxlength="30" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('idno_rel')}：</label>
+					<div class="control-inline">
+						<#form:input path="idnoRel" maxlength="30" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('flag_mi')}：</label>
+					<div class="control-inline">
+						<#form:input path="flagMi" maxlength="1" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('name_spouse')}：</label>
+					<div class="control-inline">
+						<#form:input path="nameSpouse" maxlength="40" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('idno_spouse')}：</label>
+					<div class="control-inline">
+						<#form:input path="idnoSpouse" maxlength="30" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('desc_symp')}：</label>
+					<div class="control-inline">
+						<#form:input path="descSymp" maxlength="256" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('desc_epid')}：</label>
+					<div class="control-inline">
+						<#form:input path="descEpid" maxlength="256" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('desc_treat')}：</label>
+					<div class="control-inline">
+						<#form:input path="descTreat" maxlength="256" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('pk_dept_dist')}：</label>
+					<div class="control-inline">
+						<#form:input path="pkDeptDist" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('dt_spcdtype')}：</label>
+					<div class="control-inline">
+						<#form:input path="dtSpcdtype" maxlength="30" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('reason_cancel')}：</label>
+					<div class="control-inline">
+						<#form:input path="reasonCancel" maxlength="128" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('tel_agent')}：</label>
+					<div class="control-inline">
+						<#form:input path="telAgent" maxlength="30" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('idno_agent')}：</label>
+					<div class="control-inline">
+						<#form:input path="idnoAgent" maxlength="30" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('name_agent')}：</label>
+					<div class="control-inline">
+						<#form:input path="nameAgent" maxlength="120" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('addr_agent')}：</label>
+					<div class="control-inline">
+						<#form:input path="addrAgent" maxlength="128" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('flag_card_chk')}：</label>
+					<div class="control-inline">
+						<#form:input path="flagCardChk" maxlength="1" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('dt_disease')}：</label>
+					<div class="control-inline">
+						<#form:input path="dtDisease" maxlength="30" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('pk_dept_area')}：</label>
+					<div class="control-inline">
+						<#form:input path="pkDeptArea" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary btn-sm">${text('查询')}</button>
+					<button type="reset" class="btn btn-default btn-sm">${text('重置')}</button>
+				</div>
+			</#form:form>
+			<table id="dataGrid"></table>
+			<div id="dataGridPage"></div>
+		</div>
+	</div>
+</div>
+<% } %>
+<script>
+// 初始化DataGrid对象
+$('#dataGrid').dataGrid({
+	searchForm: $("#searchForm"),
+	columnModel: [
+		{header:'${text('pk_org')}', name:'pkOrg', index:'a.pk_org', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
+			return '<a href="${ctx}/pv/pvEncounter/form?pkPv='+row.pkPv+'" class="btnList" data-title="${text('编辑就诊记录')}">'+(val||row.id)+'</a>';
+		}},
+		{header:'${text('pk_pi')}', name:'pkPi', index:'a.pk_pi', width:150, align:"left"},
+		{header:'${text('code_pv')}', name:'codePv', index:'a.code_pv', width:150, align:"left"},
+		{header:'${text('eu_pvtype')}', name:'euPvtype', index:'a.eu_pvtype', width:150, align:"left"},
+		{header:'${text('date_begin')}', name:'dateBegin', index:'a.date_begin', width:150, align:"center"},
+		{header:'${text('date_end')}', name:'dateEnd', index:'a.date_end', width:150, align:"center"},
+		{header:'${text('eu_status')}', name:'euStatus', index:'a.eu_status', width:150, align:"left"},
+		{header:'${text('flag_in')}', name:'flagIn', index:'a.flag_in', width:150, align:"left"},
+		{header:'${text('flag_settle')}', name:'flagSettle', index:'a.flag_settle', width:150, align:"left"},
+		{header:'${text('name_pi')}', name:'namePi', index:'a.name_pi', width:150, align:"left"},
+		{header:'${text('dt_sex')}', name:'dtSex', index:'a.dt_sex', width:150, align:"left"},
+		{header:'${text('age_pv')}', name:'agePv', index:'a.age_pv', width:150, align:"left"},
+		{header:'${text('address')}', name:'address', index:'a.address', width:150, align:"left"},
+		{header:'${text('dt_marry')}', name:'dtMarry', index:'a.dt_marry', width:150, align:"left"},
+		{header:'${text('pk_dept')}', name:'pkDept', index:'a.pk_dept', width:150, align:"left"},
+		{header:'${text('pk_dept_ns')}', name:'pkDeptNs', index:'a.pk_dept_ns', width:150, align:"left"},
+		{header:'${text('date_clinic')}', name:'dateClinic', index:'a.date_clinic', width:150, align:"center"},
+		{header:'${text('date_admit')}', name:'dateAdmit', index:'a.date_admit', width:150, align:"center"},
+		{header:'${text('pk_wg')}', name:'pkWg', index:'a.pk_wg', width:150, align:"left"},
+		{header:'${text('bed_no')}', name:'bedNo', index:'a.bed_no', width:150, align:"left"},
+		{header:'${text('pk_emp_tre')}', name:'pkEmpTre', index:'a.pk_emp_tre', width:150, align:"left"},
+		{header:'${text('name_emp_tre')}', name:'nameEmpTre', index:'a.name_emp_tre', width:150, align:"left"},
+		{header:'${text('pk_emp_phy')}', name:'pkEmpPhy', index:'a.pk_emp_phy', width:150, align:"left"},
+		{header:'${text('name_emp_phy')}', name:'nameEmpPhy', index:'a.name_emp_phy', width:150, align:"left"},
+		{header:'${text('pk_emp_ns')}', name:'pkEmpNs', index:'a.pk_emp_ns', width:150, align:"left"},
+		{header:'${text('name_emp_ns')}', name:'nameEmpNs', index:'a.name_emp_ns', width:150, align:"left"},
+		{header:'${text('pk_insu')}', name:'pkInsu', index:'a.pk_insu', width:150, align:"left"},
+		{header:'${text('pk_picate')}', name:'pkPicate', index:'a.pk_picate', width:150, align:"left"},
+		{header:'${text('pk_emp_reg')}', name:'pkEmpReg', index:'a.pk_emp_reg', width:150, align:"left"},
+		{header:'${text('name_emp_reg')}', name:'nameEmpReg', index:'a.name_emp_reg', width:150, align:"left"},
+		{header:'${text('date_reg')}', name:'dateReg', index:'a.date_reg', width:150, align:"center"},
+		{header:'${text('flag_cancel')}', name:'flagCancel', index:'a.flag_cancel', width:150, align:"left"},
+		{header:'${text('pk_emp_cancel')}', name:'pkEmpCancel', index:'a.pk_emp_cancel', width:150, align:"left"},
+		{header:'${text('name_emp_cancel')}', name:'nameEmpCancel', index:'a.name_emp_cancel', width:150, align:"left"},
+		{header:'${text('date_cancel')}', name:'dateCancel', index:'a.date_cancel', width:150, align:"center"},
+		{header:'${text('eu_status_fp')}', name:'euStatusFp', index:'a.eu_status_fp', width:150, align:"left"},
+		{header:'${text('creator')}', name:'creator', index:'a.creator', width:150, align:"left"},
+		{header:'${text('create_time')}', name:'createTime', index:'a.create_time', width:150, align:"center"},
+		{header:'${text('modifier')}', name:'modifier', index:'a.modifier', width:150, align:"left"},
+		{header:'${text('modity_time')}', name:'modityTime', index:'a.modity_time', width:150, align:"center"},
+		{header:'${text('del_flag')}', name:'delFlag', index:'a.del_flag', width:150, align:"left"},
+		{header:'${text('height')}', name:'height', index:'a.height', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('weight')}', name:'weight', index:'a.weight', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('ts')}', name:'ts', index:'a.ts', width:150, align:"center"},
+		{header:'${text('addrcode_regi')}', name:'addrcodeRegi', index:'a.addrcode_regi', width:150, align:"left"},
+		{header:'${text('addr_regi')}', name:'addrRegi', index:'a.addr_regi', width:150, align:"left"},
+		{header:'${text('addr_regi_dt')}', name:'addrRegiDt', index:'a.addr_regi_dt', width:150, align:"left"},
+		{header:'${text('postcode_regi')}', name:'postcodeRegi', index:'a.postcode_regi', width:150, align:"left"},
+		{header:'${text('addrcode_cur')}', name:'addrcodeCur', index:'a.addrcode_cur', width:150, align:"left"},
+		{header:'${text('addr_cur')}', name:'addrCur', index:'a.addr_cur', width:150, align:"left"},
+		{header:'${text('addr_cur_dt')}', name:'addrCurDt', index:'a.addr_cur_dt', width:150, align:"left"},
+		{header:'${text('postcode_cur')}', name:'postcodeCur', index:'a.postcode_cur', width:150, align:"left"},
+		{header:'${text('unit_work')}', name:'unitWork', index:'a.unit_work', width:150, align:"left"},
+		{header:'${text('tel_work')}', name:'telWork', index:'a.tel_work', width:150, align:"left"},
+		{header:'${text('postcode_work')}', name:'postcodeWork', index:'a.postcode_work', width:150, align:"left"},
+		{header:'${text('name_rel')}', name:'nameRel', index:'a.name_rel', width:150, align:"left"},
+		{header:'${text('dt_ralation')}', name:'dtRalation', index:'a.dt_ralation', width:150, align:"left"},
+		{header:'${text('tel_rel')}', name:'telRel', index:'a.tel_rel', width:150, align:"left"},
+		{header:'${text('addr_rel')}', name:'addrRel', index:'a.addr_rel', width:150, align:"left"},
+		{header:'${text('dt_pvsource')}', name:'dtPvsource', index:'a.dt_pvsource', width:150, align:"left"},
+		{header:'${text('eu_pvmode')}', name:'euPvmode', index:'a.eu_pvmode', width:150, align:"left"},
+		{header:'${text('dt_hprealtype')}', name:'dtHprealtype', index:'a.dt_hprealtype', width:150, align:"left"},
+		{header:'${text('dt_specunit')}', name:'dtSpecunit', index:'a.dt_specunit', width:150, align:"left"},
+		{header:'${text('flag_spec')}', name:'flagSpec', index:'a.flag_spec', width:150, align:"left"},
+		{header:'${text('eu_locked')}', name:'euLocked', index:'a.eu_locked', width:150, align:"left"},
+		{header:'${text('note')}', name:'note', index:'a.note', width:150, align:"left"},
+		{header:'${text('eu_disetype')}', name:'euDisetype', index:'a.eu_disetype', width:150, align:"left"},
+		{header:'${text('dt_idtype_rel')}', name:'dtIdtypeRel', index:'a.dt_idtype_rel', width:150, align:"left"},
+		{header:'${text('idno_rel')}', name:'idnoRel', index:'a.idno_rel', width:150, align:"left"},
+		{header:'${text('flag_mi')}', name:'flagMi', index:'a.flag_mi', width:150, align:"left"},
+		{header:'${text('name_spouse')}', name:'nameSpouse', index:'a.name_spouse', width:150, align:"left"},
+		{header:'${text('idno_spouse')}', name:'idnoSpouse', index:'a.idno_spouse', width:150, align:"left"},
+		{header:'${text('desc_symp')}', name:'descSymp', index:'a.desc_symp', width:150, align:"left"},
+		{header:'${text('desc_epid')}', name:'descEpid', index:'a.desc_epid', width:150, align:"left"},
+		{header:'${text('desc_treat')}', name:'descTreat', index:'a.desc_treat', width:150, align:"left"},
+		{header:'${text('pk_dept_dist')}', name:'pkDeptDist', index:'a.pk_dept_dist', width:150, align:"left"},
+		{header:'${text('dt_spcdtype')}', name:'dtSpcdtype', index:'a.dt_spcdtype', width:150, align:"left"},
+		{header:'${text('reason_cancel')}', name:'reasonCancel', index:'a.reason_cancel', width:150, align:"left"},
+		{header:'${text('tel_agent')}', name:'telAgent', index:'a.tel_agent', width:150, align:"left"},
+		{header:'${text('idno_agent')}', name:'idnoAgent', index:'a.idno_agent', width:150, align:"left"},
+		{header:'${text('name_agent')}', name:'nameAgent', index:'a.name_agent', width:150, align:"left"},
+		{header:'${text('addr_agent')}', name:'addrAgent', index:'a.addr_agent', width:150, align:"left"},
+		{header:'${text('flag_card_chk')}', name:'flagCardChk', index:'a.flag_card_chk', width:150, align:"left"},
+		{header:'${text('dt_disease')}', name:'dtDisease', index:'a.dt_disease', width:150, align:"left"},
+		{header:'${text('pk_dept_area')}', name:'pkDeptArea', index:'a.pk_dept_area', width:150, align:"left"},
+		{header:'${text('操作')}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
+			var actions = [];
+			<% if(hasPermi('pv:pvEncounter:edit')){ %>
+				actions.push('<a href="${ctx}/pv/pvEncounter/form?pkPv='+row.pkPv+'" class="btnList" title="${text('编辑就诊记录')}"><i class="fa fa-pencil"></i></a>&nbsp;');
+				actions.push('<a href="${ctx}/pv/pvEncounter/delete?pkPv='+row.pkPv+'" class="btnList" title="${text('删除就诊记录')}" data-confirm="${text('确认要删除该就诊记录吗？')}"><i class="fa fa-trash-o"></i></a>&nbsp;');
+			<% } %>
+			return actions.join('');
+		}}
+	],
+	// 加载成功后执行事件
+	ajaxSuccess: function(data){
+		
+	}
+});
+</script>

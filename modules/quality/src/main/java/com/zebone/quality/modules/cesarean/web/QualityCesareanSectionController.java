@@ -6,6 +6,8 @@ package com.zebone.quality.modules.cesarean.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.zebone.quality.modules.common.UploadResult;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,8 @@ import com.jeesite.common.entity.Page;
 import com.jeesite.common.web.BaseController;
 import com.zebone.quality.modules.cesarean.entity.QualityCesareanSection;
 import com.zebone.quality.modules.cesarean.service.QualityCesareanSectionService;
+
+import java.util.Optional;
 
 /**
  * 剖宫产Controller
@@ -81,6 +85,15 @@ public class QualityCesareanSectionController extends BaseController {
 	@ResponseBody
 	public String save(@Validated QualityCesareanSection qualityCesareanSection) {
 		qualityCesareanSectionService.save(qualityCesareanSection);
+		String result = qualityCesareanSectionService.upload(qualityCesareanSection);
+		Gson gson = new Gson();
+
+		UploadResult uploadResult = gson.fromJson(result, UploadResult.class);
+		String resultCode = Optional.ofNullable(uploadResult).map(a->a.getCode()).orElse("上传失败");
+		if("1000".equals(resultCode)){
+			String errorMessage = Optional.ofNullable(uploadResult).map(a->a.getMessage()).orElse("上传失败");
+			return renderResult(Global.FALSE, text(errorMessage));
+		}
 		return renderResult(Global.TRUE, text("保存剖宫产成功！"));
 	}
 	

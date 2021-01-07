@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zebone.quality.modules.emr.dao.EmrDataDao">
+	
+	<!-- 查询数据
+	<select id="findList" resultType="EmrHomePage">
+		SELECT ${sqlMap.column.toSql()}
+		FROM ${sqlMap.table.toSql()}
+		<where>
+			${sqlMap.where.toSql()}
+		</where>
+		ORDER BY ${sqlMap.order.toSql()}
+	</select> -->
+
+	<select id="getCaesareanSectionData" resultType="com.zebone.quality.modules.emr.entity.EmrData">
+		select
+		emr.QC_DOC_NAME,
+		emr.QC_NURSE_NAME,
+		emr.CONSULT_NAME,
+		emr.NURSE_NAME,
+		emr.PAT_NO,
+		emr.FLAG_READMIT,
+		emr.BIRTH_DATE,
+       	emr.MED_PAY_MODE,
+       	pv.WEIGHT,
+       	pv.HEIGHT,
+       	inf.WEIGHT infWeight,
+       	lab.DATE_LAST,
+       	pv.DATE_BEGIN cm0241,
+       	pv.DATE_END cm0242,
+		emr.ADMIT_PATH_NAME cm032,
+		lab.NUM_PRODUCT cs111,
+		recdt.DT_OUT_MODE cs113,
+		rec.PRE_WEEKS cs114,
+		recdt.POS_FO cs115,
+		ops.ANES_TYPE_NAME cs124,
+		recdt.DATE_OUT cs242
+		from EMR_HOME_PAGE emr
+		left join  PV_ENCOUNTER pv on emr.PK_PV = pv.PK_PV
+		left join PV_INFANT inf on inf.PK_PV = emr.PK_PV
+		left join PI_LABOR lab on lab.PK_PI = emr.PK_PI
+		left join PV_LABOR_REC_DT recdt on recdt.PK_PV = emr.PK_PV
+		left join PV_LABOR_REC rec on rec.PK_PV = emr.PK_PV
+		left join EMR_HOME_PAGE_OPS ops on ops.PK_PAGE = emr.PK_PAGE
+		where emr.PAT_NO = #{caseId}
+	</select>
+</mapper>
