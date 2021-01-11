@@ -10,7 +10,7 @@ import com.zebone.quality.modules.base.entity.QualityDisease;
 /**
  * 病种设置DAO接口
  * @author lijin
- * @version 2020-12-30
+ * @version 2021-01-08
  */
 @MyBatisDao
 public interface QualityDiseaseDao extends CrudDao<QualityDisease> {

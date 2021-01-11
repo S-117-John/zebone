@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class UploadResult {
 
-    private String code;
+    private Integer code;
 
     private String message;
 }

@@ -22,53 +22,15 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label">${text('主诊断')}：</label>
-					<div class="control-inline">
-						<#form:input path="mainDiagnosis" maxlength="255" class="form-control width-120"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">${text('出院科室')}：</label>
-					<div class="control-inline width-120" >
-						<#form:treeselect id="dept" title="${text('机构选择')}"
-							path="dept.officeCode" labelPath="dept.officeName" 
-							url="${ctx}/sys/office/treeData" allowClear="true"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">${text('最大年龄')}：</label>
-					<div class="control-inline">
-						<#form:input path="maxAge" class="form-control width-120"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">${text('最大住院天数')}：</label>
-					<div class="control-inline">
-						<#form:input path="maxDay" class="form-control width-120"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">${text('最小年龄')}：</label>
-					<div class="control-inline">
-						<#form:input path="minAge" class="form-control width-120"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">${text('最小出院天数')}：</label>
-					<div class="control-inline">
-						<#form:input path="minDay" class="form-control width-120"/>
-					</div>
-				</div>
-				<div class="form-group">
 					<label class="control-label">${text('名称')}：</label>
 					<div class="control-inline">
 						<#form:input path="name" maxlength="255" class="form-control width-120"/>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label">${text('手术编码')}：</label>
-					<div class="control-inline">
-						<#form:input path="surgicalCode" maxlength="255" class="form-control width-120"/>
+					<label class="control-label">${text('病种分类')}：</label>
+					<div class="control-inline width-120">
+						<#form:select path="type" dictType="diseaseClassification" blankOption="true" class="form-control"/>
 					</div>
 				</div>
 				<div class="form-group">
@@ -90,11 +52,11 @@ $('#dataGrid').dataGrid({
 		{header:'${text('编码')}', name:'code', index:'a.code', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
 			return '<a href="${ctx}/base/qualityDisease/form?id='+row.id+'" class="btnList" data-title="${text('编辑病种设置')}">'+(val||row.id)+'</a>';
 		}},
-
 		{header:'${text('名称')}', name:'name', index:'a.name', width:150, align:"left"},
-
-		{header:'${text('出院科室')}', name:'dept.officeName', index:'a.dept', width:150, align:"center"},
-
+		{header:'${text('上传接口url')}', name:'interfaceUrl', index:'a.interface_url', width:150, align:"left"},
+		{header:'${text('病种分类')}', name:'type', index:'a.type', width:150, align:"center", formatter: function(val, obj, row, act){
+			return js.getDictLabel(${@DictUtils.getDictListJson('diseaseClassification')}, val, '${text('未知')}', true);
+		}},
 		{header:'${text('操作')}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
 			var actions = [];
 			<% if(hasPermi('base:qualityDisease:edit')){ %>
@@ -105,7 +67,6 @@ $('#dataGrid').dataGrid({
 				if (row.status == Global.STATUS_DISABLE){
 					actions.push('<a href="${ctx}/base/qualityDisease/enable?id='+row.id+'" class="btnList" title="${text('启用病种设置')}" data-confirm="${text('确认要启用该病种设置吗？')}"><i class="glyphicon glyphicon-ok-circle"></i></a>&nbsp;');
 				}
-				actions.push('<a href="${ctx}/base/qualityDisease/form?id='+row.id+'" class="btnList" title="${text('上报')}"><i class="fa fa-reorder"></i></a>&nbsp;');
 				actions.push('<a href="${ctx}/base/qualityDisease/delete?id='+row.id+'" class="btnList" title="${text('删除病种设置')}" data-confirm="${text('确认要删除该病种设置吗？')}"><i class="fa fa-trash-o"></i></a>&nbsp;');
 			<% } %>
 			return actions.join('');

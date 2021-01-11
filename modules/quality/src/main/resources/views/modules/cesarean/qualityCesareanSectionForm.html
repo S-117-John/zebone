@@ -159,7 +159,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required ">*</span> ${text('患者体重')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm0213" class="form-control required digits"/>
+								<#form:input path="cm0213" class="form-control required number"/>
 							</div>
 						</div>
 					</div>
@@ -170,7 +170,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required ">*</span> ${text('患者身高')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm0215" class="form-control required digits"/>
+								<#form:input path="cm0215" class="form-control required number"/>
 							</div>
 						</div>
 					</div>
@@ -181,7 +181,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required ">*</span> ${text('新生儿出生体重')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm0216" class="form-control required digits"/>
+								<#form:input path="cm0216" class="form-control required number"/>
 							</div>
 						</div>
 					</div>
@@ -192,7 +192,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required ">*</span> ${text('末次月经日期是否确定')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="cs0221" dictType="CS_0_2_2_1" class="form-control required" />
+								<#form:checkbox path="cs0221" dictType="CS_0_2_2_1" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -449,6 +449,22 @@
 						</div>
 					</div>
 				</div>
+
+
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hidden">*</span> ${text('孕妇要求剖宫产的评估')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cs221" dictType="CS_2_2_1" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -534,6 +550,9 @@
 						</div>
 					</div>
 				</div>
+
+
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -556,6 +575,19 @@
 						</div>
 					</div>
 				</div>
+
+				<div id="cs54Row" class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('术后24小时内实际输血量（ml）')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cs54"  class="form-control required number" />
+							</div>
+						</div>
+					</div>
+				</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -598,6 +630,19 @@
 						</div>
 					</div>
 				</div>
+
+				<div id="cs63Row" class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('再次手术原因')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cs63" dictType="CS_6_3" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1400,16 +1445,36 @@ $("#inputForm").validate({
 				window.location.href = "${ctx}/cesarean/qualityCesareanSection/form?id="+data;
 			}
 		});
-		// js.ajaxSubmit('${ctx}/api/emr/emrHomePage/data',{patNo: $("#patientCaseNumber").val()}, function(data){
-		// 	if(data!=null){
-		// 		alert(data);
-		// 		window.location.href = "${ctx}/cesarean/qualityCesareanSection/form?id="+data;
-		// 		// js.closeCurrentTabPage(function(contentWindow){
-		// 		// 	contentWindow.page();
-		// 		// });
-		// 		// window.location.href = "${ctx}/cesarean/qualityCesareanSection/form?id="+JSON.stringify(data);
-		// 	}
-		// },'json', false, '正在获取数据...');
-
 	});
+
+
+	//术后24小时内输血量(CS-5-3)等于"实际量ml"(a)时必填;
+	//若该字段无相应取值，则接口中不必提交该字段
+	// 术后24小时内实际输血量应‎≥0
+	$('#cs53').on('ifChecked', function(){
+		var v = $('#cs53 input:radio:checked').val();
+		if(v=="a"){
+			$("#cs54Row").removeClass("hidden");
+			$('#cs54').addClass("required")
+		}else if(v=="b"){
+			$("#cs54Row").addClass("hidden");
+			$('#cs54').removeClass("required")
+		}
+	});
+
+
+	// 是否再次手术(CS-6-2)等于"是"(y)时必填;
+	// 若该字段无相应取值，则接口中不必提交该字段
+	$('#cs62').on('ifChecked', function(){
+		var v = $('#cs62 input:radio:checked').val();
+		if(v=="y"){
+			$("#cs63Row").removeClass("hidden");
+			$('#cs63').addClass("required")
+		}else if(v=="n"){
+			$("#cs63Row").addClass("hidden");
+			$('#cs63').removeClass("required")
+		}
+	});
+
+
 </script>

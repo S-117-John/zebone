@@ -484,7 +484,7 @@ public class QualityCesareanSection extends DataEntity<QualityCesareanSection> {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date cs022;		// 末次月经日期
 
-	@SerializedName("CS-2-2-2-1")
+	@SerializedName("CS-0-2-2-1")
 	private String cs0221;		// 末次月经日期是否确定
 
 	@SerializedName("CS-1-1-1")

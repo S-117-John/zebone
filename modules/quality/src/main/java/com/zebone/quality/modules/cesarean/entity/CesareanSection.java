@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.gson.annotations.SerializedName;
 import com.jeesite.common.lang.DateUtils;
 import lombok.Data;
+import org.apache.commons.beanutils.converters.StringArrayConverter;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,7 +13,7 @@ import java.util.List;
 @Data
 public class CesareanSection {
 
-    @SerializedName("caseid")
+    @SerializedName("caseId")
     private String caseId;		// 患者病案号
     @SerializedName("CM-0-1-1-1")
     private String cm0111;		// 质控医师
@@ -33,33 +34,35 @@ public class CesareanSection {
     @SerializedName("CM-0-1-5")
     private String cm015;		// 是否出院后31天内重复住院
 
-    @SerializedName("CM-0-2-1-1")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date cm0211;		// 出生日期
+
+
+    private transient Date cm0211;		// 出生日期
+
     @SerializedName("CM-0-2-1-3")
     private Double cm0213;		// 患者体重（kg）
     @SerializedName("CM-0-2-1-5")
     private Double cm0215;		// 患者身高（cm）
     @SerializedName("CM-0-2-1-6")
     private Double cm0216;		// 新生儿出生体重（克）
-    @SerializedName("CM-0-2-3-1")
-    private String cm0231;		// 到达本院急诊或者门诊日期时间是否确定
 
-    @SerializedName("CM-0-2-3-2")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date cm0232;		// 到达本院急诊或者门诊日期时间
+    private transient String cm0231;		// 到达本院急诊或者门诊日期时间是否确定
 
-    @SerializedName("CM-0-2-4-1")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date cm0241;		// 入院日期时间
+    /**
+     * 到达本院急诊或者门诊日期时间
+     */
+    private transient Date cm0232;
 
-    @SerializedName("CM-0-2-4-2")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date cm0242;		// 出院日期时间
 
-    @SerializedName("CM-0-2-6-1")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date cm0261;		// 手术开始（切皮）日期时间
+
+    private transient Date cm0241;		// 入院日期时间
+
+
+
+    private transient Date cm0242;		// 出院日期时间
+
+
+
+    private transient Date cm0261;		// 手术开始（切皮）日期时间
 
 
     private transient Date cm0262;		// 手术结束（缝皮结束）日期时间
@@ -210,8 +213,8 @@ public class CesareanSection {
     @SerializedName("CM-5-2-10")
     private String cm521$0;		// 出院时的知情告知
 
-    @SerializedName("CM-7-2-5")
-    private String cm725;		// 告知随访
+
+    private transient String cm725;		// 告知随访
 
     @SerializedName("CM-5-2-11")
     private String cm521$1;		// 膳食评价
@@ -283,8 +286,8 @@ public class CesareanSection {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date cs022;		// 末次月经日期
 
-    @SerializedName("CS-2-2-2-1")
-    private String cs0221;		// 末次月经日期是否确定
+
+    private transient String cs0221;		// 末次月经日期是否确定
 
     @SerializedName("CS-1-1-1")
     private String cs111;		// 产次
@@ -304,11 +307,11 @@ public class CesareanSection {
     @SerializedName("CS-1-1-6")
     private String cs116;		// 胎儿数量
 
-    @SerializedName("CS-1-2-1")
-    private String cs121;		// 手术前风险评估的检查项目
 
-    @SerializedName("CS-1-2-2")
-    private String cs122;		// 手术前知情告知
+    private transient String cs121;		// 手术前风险评估的检查项目
+
+
+    private transient String cs122;		// 手术前知情告知
 
     @SerializedName("CS-1-2-4")
     private String cs124;		// 麻醉方式
@@ -386,9 +389,9 @@ public class CesareanSection {
     private String cs231;		// 手术方式选择
 
 
-    @SerializedName("CS-2-4-2")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date cs242;		// 胎儿娩出日期时间
+
+
+    private transient Date cs242;		// 胎儿娩出日期时间
 
     @SerializedName("CS-4-1")
     private String cs41;		// 是否实施新生儿Apgar评分
@@ -411,8 +414,8 @@ public class CesareanSection {
     @SerializedName("CS-5-1-1")
     private String cs511;		// 术后24小时内实际出血量（ml）
 
-    @SerializedName("CS-5-2-1")
-    private String cs521;		// 剖宫产产后出血可能的原因
+
+    private transient String cs521;		// 剖宫产产后出血可能的原因
 
     @SerializedName("CS-5-3")
     private String cs53;		// 术后24小时内输血量
@@ -420,8 +423,8 @@ public class CesareanSection {
     @SerializedName("CS-5-4")
     private String cs54;		// 术后24小时内实际输血量（ml）
 
-    @SerializedName("CS-5-5")
-    private String cs55;		// 止血干预措施的选择
+
+    private transient String cs55;		// 止血干预措施的选择
 
     @SerializedName("CS-6-1-1")
     private String cs611;		// 是否有剖宫产并发症
@@ -507,11 +510,11 @@ public class CesareanSection {
     @SerializedName("CS-8-2")
     private String cs82;		// 提供母乳喂养
 
-    @SerializedName("CS-9-1-1")
-    private String cs911;		// 住院期间为产妇提供术前健康教育
 
-    @SerializedName("CS-9-1-2")
-    private String cs912;		// 提供产后康复健康教育
+    private transient String cs911;		// 住院期间为产妇提供术前健康教育
+
+
+    private transient String cs912;		// 提供产后康复健康教育
 
     @SerializedName("CS-9-1-3")
     private String cs913;		// 是否提供术后镇痛
@@ -543,8 +546,8 @@ public class CesareanSection {
     @SerializedName("CS-12-5")
     private String cs1$25;		// HBsAg阳性母亲的新生儿，出生后注射乙肝免疫球蛋白(HBIG)情况
 
-    @SerializedName("CS-12-31")
-    private String cs123$1;		// 麻醉前知情告知
+
+    private transient String cs123$1;		// 麻醉前知情告知
 
     @SerializedName("CM-7-2-1")
     private List<String> cm721List;
@@ -558,11 +561,171 @@ public class CesareanSection {
     @SerializedName("CM-0-2-6-2")
     private String cm0262String;
 
+    @SerializedName("CM-0-2-3-2")
+    private String cm0232String;
+
+    @SerializedName("CM-0-2-4-1")
+    private String cm0241String;
+
+    @SerializedName("CM-0-2-3-1")
+    private List<String> cm0231List;
+
+    @SerializedName("CM-0-2-6-1")
+    private String cm0261String;
+
+    @SerializedName("CS-2-4-2")
+    private String cs242String;
+
+    @SerializedName("CS-9-1-1")
+    private List<String> cs911List;
+
+    @SerializedName("CM-0-2-4-2")
+    private String cm0242String;
+
+    @SerializedName("CS-9-1-2")
+    private List<String> cs912List;
+
+    @SerializedName("CM-7-2-5")
+    private List<String> cm725List;
+
+    @SerializedName("CM-0-2-1-1")
+    private String cm0211String;
+
+    @SerializedName("CS-1-2-1")
+    private List<String> cs121List;
+
+    @SerializedName("CS-1-2-2")
+    private List<String> cs122List;
+
+    @SerializedName("CS-5-5")
+    private List<String> cs55List;
+
+    @SerializedName("CS-5-2-1")
+    private List<String> cs521List;
+
+    @SerializedName("CS-1-2-31")
+    private List<String> cs123$1List;
+
+    @SerializedName("CS-0-2-2-1")
+    private List<String> cs0221List;
+
+    public void setCs0221(String cs0221) {
+        this.cs0221 = cs0221;
+        List<String> list = new ArrayList<>();
+        list.add(cs0221);
+        cs0221List = list;
+    }
+
+    public void setCs123$1(String cs123$1) {
+        this.cs123$1 = cs123$1;
+        List<String> list = new ArrayList<>();
+        String[] strings = cs123$1.split(",");
+        for (String s : strings) {
+            list.add(s);
+        }
+        cs123$1List = list;
+    }
+
+    public void setCs521(String cs521) {
+        this.cs521 = cs521;
+        List<String> list = new ArrayList<>();
+        String[] strings = cs521.split(",");
+        for (String s : strings) {
+            list.add(s);
+        }
+        cs521List = list;
+    }
+
+    public void setCs55(String cs55) {
+        this.cs55 = cs55;
+        List<String> list = new ArrayList<>();
+        String[] strings = cs55.split(",");
+        for (String s : strings) {
+            list.add(s);
+        }
+        cs55List = list;
+    }
+
+    public void setCs122(String cs122) {
+        this.cs122 = cs122;
+        List<String> list = new ArrayList<>();
+        String[] strings = cs122.split(",");
+        for (String s : strings) {
+            list.add(s);
+        }
+        cs122List = list;
+    }
+
+    public void setCs121(String cs121) {
+        this.cs121 = cs121;
+        List<String> list = new ArrayList<>();
+        String[] strings = cs121.split(",");
+        for (String s : strings) {
+            list.add(s);
+        }
+        cs121List = list;
+    }
+
+    public void setCm0211(Date cm0211) {
+        this.cm0211 = cm0211;
+        this.cm0211String = DateUtils.formatDate(cm0211,"yyyy-MM-dd");
+    }
+
+    public void setCm725(String cm725) {
+        this.cm725 = cm725;
+        List<String> list = new ArrayList<>();
+        String[] strings = cm725.split(",");
+        for (String s : strings) {
+            list.add(s);
+        }
+        cm725List = list;
+    }
+
+    public void setCs912(String cs912) {
+        this.cs912 = cs912;
+        List<String> list = new ArrayList<>();
+        String[] strings = cs912.split(",");
+        for (String s : strings) {
+            list.add(s);
+        }
+        cs912List = list;
+    }
+
+    public void setCm0242(Date cm0242) {
+        this.cm0242 = cm0242;
+        this.cm0242String = DateUtils.formatDate(cm0242,"yyyy-MM-dd HH:mm");
+    }
+
+    public void setCs911(String cs911) {
+        this.cs911 = cs911;
+        List<String> list = new ArrayList<>();
+        String[] strings = cs911.split(",");
+        for (String s : strings) {
+            list.add(s);
+        }
+        cs911List = list;
+    }
+
+    public void setCs242(Date cs242) {
+        this.cs242 = cs242;
+        this.cs242String = DateUtils.formatDate(cs242,"yyyy-MM-dd HH:mm");
+    }
+
+    public void setCm0261(Date cm0261) {
+        this.cm0261 = cm0261;
+        this.cm0261String = DateUtils.formatDate(cm0261,"yyyy-MM-dd HH:mm");
+    }
+
+    public void setCm0241(Date cm0241) {
+        this.cm0241 = cm0241;
+        this.cm0241String = DateUtils.formatDate(cm0241,"yyyy-MM-dd HH:mm");
+    }
+
     public void setCm721(String cm721) {
         this.cm721 = cm721;
         List<String> list = new ArrayList<>();
-        String[] cm721s = cm721.split(",");
-        for (String s : cm721s) {
+        String[] strings = cm721.split(",");
+        for (String s : strings) {
             list.add(s);
         }
         cm721List = list;
@@ -588,8 +751,23 @@ public class CesareanSection {
         cm723List = list;
     }
 
+    public void setCm0231(String cm0231) {
+        this.cm0231 = cm0231;
+        List<String> list = new ArrayList<>();
+        String[] strings = cm0231.split(",");
+        for (String s : strings) {
+            list.add(s);
+        }
+        cm0231List = list;
+    }
+
     public void setCm0262(Date cm0262) {
         this.cm0262 = cm0262;
         this.cm0262String = DateUtils.formatDate(cm0262,"yyyy-MM-dd HH:mm");
+    }
+
+    public void setCm0232(Date cm0232) {
+        this.cm0232 = cm0232;
+        this.cm0232String = DateUtils.formatDate(cm0232,"yyyy-MM-dd HH:mm");
     }
 }

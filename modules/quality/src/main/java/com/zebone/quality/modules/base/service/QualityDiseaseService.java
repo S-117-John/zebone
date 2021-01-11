@@ -16,7 +16,7 @@ import com.zebone.quality.modules.base.dao.QualityDiseaseDao;
 /**
  * 病种设置Service
  * @author lijin
- * @version 2020-12-30
+ * @version 2021-01-08
  */
 @Service
 @Transactional(readOnly=true)

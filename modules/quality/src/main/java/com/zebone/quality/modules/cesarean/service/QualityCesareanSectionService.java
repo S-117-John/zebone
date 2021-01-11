@@ -6,6 +6,7 @@ package com.zebone.quality.modules.cesarean.service;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.jeesite.common.config.Global;
 import com.zebone.quality.common.utils.RestTemplateUtil;
 import com.zebone.quality.modules.cesarean.entity.CesareanSection;
 import com.zebone.quality.modules.emr.entity.EmrData;
@@ -83,7 +84,7 @@ public class QualityCesareanSectionService extends CrudService<QualityCesareanSe
 		CesareanSection cesareanSection = new CesareanSection();
 		BeanUtils.copyProperties(qualityCesareanSection,cesareanSection);
 		String json = gson.toJson(cesareanSection);
-		String result = RestTemplateUtil.getInstance().postForString(json,"http://192.168.1.3:80/interface/010102/CS/1.2/put/");
+		String result = RestTemplateUtil.getInstance().postForString(json, Global.getConfig("quality.url")+"010102/CS/1.2/put/");
 		System.out.println(result);
 
 		return result;

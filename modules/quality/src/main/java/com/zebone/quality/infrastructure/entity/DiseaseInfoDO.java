@@ -2,6 +2,7 @@ package com.zebone.quality.infrastructure.entity;
 
 import lombok.Data;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -21,42 +22,25 @@ public class DiseaseInfoDO{
     /**
      * 编码
      */
+    @Column(columnDefinition = "varchar(32) COMMENT '病种编码'",unique = true)
     private String code;
 
     /**
      * 名称
      */
+    @Column(columnDefinition = "varchar(32) COMMENT '病种名称'")
     private String name;
 
+    /**
+     GHCZBFJK
+     * 病种分类
+     */
+    @Column(columnDefinition = "varchar(32) COMMENT '病种分类'")
+    private String type;
 
     /**
-     * 主要诊断
+     * 接口地址
      */
-    private String mainDiagnosis;
-
-
-    /**
-     * 手术编码
-     */
-    private String surgicalCode;
-
-    private Integer minAge;
-
-    private Integer maxAge;
-
-    /**
-     * 最小住院天数
-     */
-    private Integer minDay;
-
-    /**
-     * 最大住院天数
-     */
-    private Integer maxDay;
-
-
-    /**
-     * 出院科室
-     */
-    private String dept;
+    @Column(columnDefinition = "varchar(64) COMMENT '上传接口URL'")
+    private String interfaceUrl;
 }

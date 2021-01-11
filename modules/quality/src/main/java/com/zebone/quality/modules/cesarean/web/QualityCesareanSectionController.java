@@ -89,8 +89,8 @@ public class QualityCesareanSectionController extends BaseController {
 		Gson gson = new Gson();
 
 		UploadResult uploadResult = gson.fromJson(result, UploadResult.class);
-		String resultCode = Optional.ofNullable(uploadResult).map(a->a.getCode()).orElse("上传失败");
-		if("1000".equals(resultCode)){
+		Integer resultCode = Optional.ofNullable(uploadResult).map(a->a.getCode()).orElse(null);
+		if(resultCode==1000){
 			String errorMessage = Optional.ofNullable(uploadResult).map(a->a.getMessage()).orElse("上传失败");
 			return renderResult(Global.FALSE, text(errorMessage));
 		}
