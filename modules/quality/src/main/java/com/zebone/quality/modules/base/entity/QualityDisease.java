@@ -13,7 +13,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 /**
  * 病种设置Entity
  * @author lijin
- * @version 2021-01-08
+ * @version 2021-01-11
  */
 @Table(name="quality_disease", alias="a", columns={
 		@Column(name="id", attrName="id", label="id", isPK=true),
@@ -21,6 +21,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="name", attrName="name", label="名称", queryType=QueryType.LIKE),
 		@Column(name="interface_url", attrName="interfaceUrl", label="上传接口url"),
 		@Column(name="type", attrName="type", label="病种分类"),
+		@Column(name="image", attrName="image", label="图标"),
 	}, orderBy="a.id DESC"
 )
 public class QualityDisease extends DataEntity<QualityDisease> {
@@ -30,6 +31,7 @@ public class QualityDisease extends DataEntity<QualityDisease> {
 	private String name;		// 名称
 	private String interfaceUrl;		// 上传接口url
 	private String type;		// 病种分类
+	private String image;		// 图标
 	
 	public QualityDisease() {
 		this(null);
@@ -73,6 +75,15 @@ public class QualityDisease extends DataEntity<QualityDisease> {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+	
+	@Length(min=0, max=3000, message="图标长度不能超过 3000 个字符")
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 }

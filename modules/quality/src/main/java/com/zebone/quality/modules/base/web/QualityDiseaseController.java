@@ -25,7 +25,7 @@ import com.zebone.quality.modules.base.service.QualityDiseaseService;
 /**
  * 病种设置Controller
  * @author lijin
- * @version 2021-01-08
+ * @version 2021-01-11
  */
 @Controller
 @RequestMapping(value = "${adminPath}/base/qualityDisease")

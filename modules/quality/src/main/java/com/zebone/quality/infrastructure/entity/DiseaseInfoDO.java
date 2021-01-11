@@ -38,6 +38,9 @@ public class DiseaseInfoDO{
     @Column(columnDefinition = "varchar(32) COMMENT '病种分类'")
     private String type;
 
+    @Column(columnDefinition = "varchar(3000) COMMENT '图标'")
+    private String image;
+
     /**
      * 接口地址
      */
