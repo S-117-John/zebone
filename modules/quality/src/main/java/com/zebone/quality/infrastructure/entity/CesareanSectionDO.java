@@ -17,20 +17,9 @@ import java.util.Date;
 @Table(name = "QUALITY_CESAREAN_SECTION")
 public class CesareanSectionDO extends BaseEntity{
 
-    /**
-     * 出生日期
-     */
-    private Date cm0211;
 
-    /**
-     * 患者体重（kg）
-     */
-    private Double cm0213;
 
-    /**
-     * 患者身高（cm）
-     */
-    private Double cm0215;
+
 
 
     /**
@@ -55,21 +44,12 @@ public class CesareanSectionDO extends BaseEntity{
     @Column(length = 32)
     private String cm0231;
 
-    /**
-     * 到达本院急诊或者门诊日期时间：
-     */
-    private Date cm0232;
-
-    /**
-     * 入院日期时间：
-     */
-    private Date cm0241;
 
 
-    /**
-     * 出院日期时间
-     */
-    private Date cm0242;
+
+
+
+
 
 
     /**
@@ -82,23 +62,11 @@ public class CesareanSectionDO extends BaseEntity{
      */
     private Date cm0262;
 
-    /**
-     * 费用支付方式：
-     */
-    @Column(length = 32)
-    private String cm031;
 
-    /**
-     * 收入住院途径：
-     */
-    @Column(length = 32)
-    private String cm032;
 
-    /**
-     * 到院交通工具：
-     */
-    @Column(length = 32)
-    private String cm033;
+
+
+
 
     /**
      * 产次
