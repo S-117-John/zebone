@@ -13,7 +13,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 /**
  * 病种设置Entity
  * @author lijin
- * @version 2021-01-11
+ * @version 2021-01-12
  */
 @Table(name="quality_disease", alias="a", columns={
 		@Column(name="id", attrName="id", label="id", isPK=true),
@@ -22,6 +22,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="interface_url", attrName="interfaceUrl", label="上传接口url"),
 		@Column(name="type", attrName="type", label="病种分类"),
 		@Column(name="image", attrName="image", label="图标"),
+		@Column(name="form_url", attrName="formUrl", label="表单Url"),
 	}, orderBy="a.id DESC"
 )
 public class QualityDisease extends DataEntity<QualityDisease> {
@@ -32,6 +33,7 @@ public class QualityDisease extends DataEntity<QualityDisease> {
 	private String interfaceUrl;		// 上传接口url
 	private String type;		// 病种分类
 	private String image;		// 图标
+	private String formUrl;		// 表单Url
 	
 	public QualityDisease() {
 		this(null);
@@ -84,6 +86,15 @@ public class QualityDisease extends DataEntity<QualityDisease> {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+	
+	@Length(min=0, max=64, message="表单Url长度不能超过 64 个字符")
+	public String getFormUrl() {
+		return formUrl;
+	}
+
+	public void setFormUrl(String formUrl) {
+		this.formUrl = formUrl;
 	}
 	
 }

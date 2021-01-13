@@ -13,47 +13,25 @@
 
 
 				<div class="col-md-3">
-					<ul class="list-group">
-						<li class="list-group-item">呼吸系统疾病/手术</li>
-						<li class="list-group-item">神经系统疾病/手术</li>
-						<li class="list-group-item">生殖系统疾病/手术</li>
-						<li class="list-group-item">心血管系统疾病/手术</li>
-						<li class="list-group-item">运动系统疾病/手术</li>
-						<li class="list-group-item">肿瘤(手术治疗)</li>
-						<li class="list-group-item">其他疾病/手术</li>
-					</ul>
+					<div class="list-group">
+						<%  for(type in typeList){ %>
+						<button id="${type.dictValue}" type="button" class="list-group-item">${type.dictLabelOrig}</button>
+						<% } %>
+					</div>
 				</div>
 
 
 				<div class="col-md-9">
 
 
-					<div class="row">
-
-						<div class="col-md-4">
-							<div class="content">
-								<img data-v-3816ded4="" src="data:image/.png;base64,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" class="img">
-								<div title="围手术期预防深静脉血栓栓塞" class="text">剖宫产</div>
-								<div class="btn"><a href="${ctx}/cesarean/qualityCesareanSection/list">上报</a></div>
-							</div>
-						</div>
-
-						<div class="col-md-4">
-							<div class="content">
-								<img data-v-3816ded4="" src="data:image/.png;base64,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" class="img">
-								<div title="围手术期预防深静脉血栓栓塞" class="text">围手术期预防深静脉血栓栓塞</div>
-								<div class="btn">上报</div>
-							</div>
-						</div>
-
-						<div class="col-md-4">
-							<div class="content">
-								<img data-v-3816ded4="" src="data:image/.png;base64,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" class="img">
-								<div title="围手术期预防深静脉血栓栓塞" class="text">围手术期预防深静脉血栓栓塞</div>
-								<div class="btn">上报</div>
-							</div>
-						</div>
-
+					<div id="row" class="row">
+<!--						<div class="col-md-4">-->
+<!--							<div class="content">-->
+<!--								<img data-v-3816ded4="" src="data:image/.png;base64,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" class="img">-->
+<!--								<div title="围手术期预防深静脉血栓栓塞" class="text">剖宫产</div>-->
+<!--								<div class="btn"><a href="${ctx}/cesarean/qualityCesareanSection/list">上报</a></div>-->
+<!--							</div>-->
+<!--						</div>-->
 
 					</div>
 
@@ -104,3 +82,48 @@
 		cursor: pointer;
 	}
 </style>
+<script>
+$(".list-group-item").click(function (){
+	var id = $(this).attr("id");
+	$("#row").html("");
+	$.ajax({
+		url: "${ctx}/base/qualityDisease/api",
+		data: {type:id},
+		success: function (data){
+			for (var i = 0; i < data.length; i++) {
+				if(i%3==0){
+					var row = $('<div class="row"></div>');
+					var col = '<div class="col-md-4">' +
+							'<div class="content">' +
+							'<img data-v-3816ded4="" src="'+data[i].image+'" class="img">' +
+							'<div title="'+data[i].name+'" class="text">'+data[i].name+'</div>' +
+							'<div id="'+data[i].formUrl+'" title="'+data[i].name+'" class="btn reportBtn">上报</div>' +
+							'</div>' +
+							'</div>';
+					row.append(col);
+					$("#row").append(row);
+				}else {
+					var col = '<div class="col-md-4">' +
+							'<div class="content">' +
+							'<img data-v-3816ded4="" src="'+data[i].image+'" class="img">' +
+							'<div title="'+data[i].name+'" class="text">'+data[i].name+'</div>' +
+							'<div id="'+data[i].formUrl+'" title="'+data[i].name+'" class="btn reportBtn">上报</div>' +
+							'</div>' +
+							'</div>';
+					$("#row").children(".row:last-child").append(col);
+				}
+			}
+		}
+	});
+});
+
+
+
+
+$('.reportBtn').live('click', function(){
+	var formUrl = $(this).attr("id");
+	var title = $(this).attr("title")
+	js.addTabPage($(this), title, "${ctx}"+formUrl, true, true);
+});
+
+</script>

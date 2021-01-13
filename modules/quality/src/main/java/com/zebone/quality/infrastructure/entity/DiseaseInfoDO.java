@@ -46,4 +46,7 @@ public class DiseaseInfoDO{
      */
     @Column(columnDefinition = "varchar(64) COMMENT '上传接口URL'")
     private String interfaceUrl;
+
+    @Column(columnDefinition = "varchar(64) COMMENT '表单Url'")
+    private String formUrl;
 }

@@ -9,6 +9,9 @@ import com.jeesite.common.entity.Page;
 import com.jeesite.common.utils.excel.ExcelExport;
 import com.jeesite.common.utils.excel.annotation.ExcelField;
 import com.jeesite.common.web.BaseController;
+import com.jeesite.modules.sys.entity.DictData;
+import com.jeesite.modules.sys.entity.DictType;
+import com.jeesite.modules.sys.utils.DictUtils;
 import com.zebone.quality.modules.code.entity.QualityCode;
 import com.zebone.quality.modules.code.service.QualityCodeService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -42,8 +45,10 @@ public class ReportController extends BaseController {
 	 * 查询列表
 	 */
 	@RequestMapping(value = {"list", ""})
-	public String list() {
+	public String list(Model model) {
 
+		List<DictData> dictTypeList = DictUtils.getDictList("diseaseClassification");
+		model.addAttribute("typeList",dictTypeList);
 		return "modules/report/reportList";
 	}
 	

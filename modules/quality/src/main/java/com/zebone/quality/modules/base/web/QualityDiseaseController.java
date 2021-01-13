@@ -22,10 +22,12 @@ import com.jeesite.common.web.BaseController;
 import com.zebone.quality.modules.base.entity.QualityDisease;
 import com.zebone.quality.modules.base.service.QualityDiseaseService;
 
+import java.util.List;
+
 /**
  * 病种设置Controller
  * @author lijin
- * @version 2021-01-11
+ * @version 2021-01-12
  */
 @Controller
 @RequestMapping(value = "${adminPath}/base/qualityDisease")
@@ -118,5 +120,10 @@ public class QualityDiseaseController extends BaseController {
 		qualityDiseaseService.delete(qualityDisease);
 		return renderResult(Global.TRUE, text("删除病种设置成功！"));
 	}
-	
+
+	@ResponseBody
+	@RequestMapping(value = "api")
+	public List<QualityDisease> dataList(QualityDisease qualityDisease){
+		return qualityDiseaseService.findList(qualityDisease);
+	}
 }

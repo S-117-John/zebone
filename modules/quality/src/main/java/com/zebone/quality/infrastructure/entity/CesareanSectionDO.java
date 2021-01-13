@@ -720,101 +720,37 @@ public class CesareanSectionDO extends BaseEntity{
     @Column(length = 32)
     private String cm34;
 
-    /**
-     * 离院方式选择
-     */
-    @Column(length = 32)
-    private String cm43;
-
-    /**
-     * 非医嘱离院可能涉及因素
-     */
-    @Column(length = 32)
-    private String cm45;
 
 
-    /**
-     * 其他非医嘱离院因素填写
-     */
-    @Column(length = 32)
-    private String cm441;
 
 
-    /**
-     * 死亡可能涉及因素
-     */
-    @Column(length = 32)
-    private String cm46;
 
 
-    /**
-     * 患者是否对服务的体验与评价
-     */
-    @Column(length = 32)
-    private String cm51;
 
 
-    /**
-     * 医院整体评级
-     */
-    @Column(length = 32)
-    private String cm521;
-
-    /**
-     * 患者推荐
-     */
-    @Column(length = 32)
-    private String cm522;
-
-    /**
-     * 病房、床单元和卫生间清洁度
-     */
-    @Column(length = 32)
-    private String cm523;
-
-    /**
-     * 病房与周边噪音
-     */
-    @Column(length = 32)
-    private String cm525;
-
-    /**
-     * 医生沟通
-     */
-    @Column(length = 32)
-    private String cm526;
-
-    /**
-     * 护士沟通
-     */
-    @Column(length = 32)
-    private String cm527;
 
 
-    /**
-     * 药师沟通
-     */
-    @Column(length = 32)
-    private String cm528;
 
 
-    /**
-     * 康复计划
-     */
-    @Column(length = 32)
-    private String cm529;
 
-    /**
-     * 出院时的知情告知
-     */
-    @Column(length = 32)
-    private String cm_5_2_10;
 
-    /**
-     * 膳食评价
-     */
-    @Column(length = 32)
-    private String cm_5_2_11;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * 体内乙肝病毒检测是否阳性孕妇
@@ -861,155 +797,20 @@ public class CesareanSectionDO extends BaseEntity{
     @Column(length = 32,name = "CS_12_5")
     private String cs_1$2_5;
 
-    /**
-     *住院总费用
-     */
-
-    private Double cm61;
-
-    /**
-     * 住院总费用其中自付金额
-     */
-    private Double cm62;
-
-    /**
-     *一般医疗服务费
-     */
-    private Double cm63;
-
-    /**
-     * 一般治疗操作费
-     */
-    private Double cm64;
-
-    /**
-     * 护理费
-     */
-    private Double cm65;
-
-    /**
-     * 综合医疗服务类其他费用
-     */
-    private Double cm66;
-
-    /**
-     * 病理诊断费
-     */
-    private Double cm67;
-
-    /**
-     * 实验室诊断费
-     */
-    private Double cm68;
-
-    /**
-     * 影像学诊断费
-     */
-    private Double cm69;
-
-    /**
-     * 临床诊断项目费
-     */
-    private Double cm_6_10;
-
-    /**
-     * 非手术治疗项目费
-     */
-    private Double cm_6_11;
-
-    /**
-     * 其中：临床物理治疗费
-     */
-    private Double cm_6_12;
-
-    /**
-     * 手术治疗费
-     */
-    private Double cm_6_13;
-
-    /**
-     * 其中：麻醉费
-     */
-    private Double cm_6_14;
-
-    /**
-     * 其中：手术费
-     */
-    private Double cm_6_15;
-
-    /**
-     * 康复费
-     */
-    private Double cm_6_16;
-
-    /**
-     * 中医治疗费
-     */
-    private Double cm_6_17;
-
-    /**
-     * 西药费
-     */
-    private Double cm_6_18;
-
-    /**
-     * 其中：抗菌药物费
-     */
-    private Double cm_6_19;
-
-    /**
-     * 中成药费
-     */
-    private Double cm_6_20;
-
-    /**
-     * 中草药费
-     */
-    private Double cm_6_21;
-
-    /**
-     * 血费
-     */
-    private Double cm_6_22;
-
-    /**
-     * 白蛋白类制品费
-     */
-    private Double cm_6_23;
-
-    /**
-     * 球蛋白类制品费
-     */
-    private Double cm_6_24;
-
-    /**
-     *凝血因子类制品费
-     */
-    private Double cm_6_25;
-
-    /**
-     * 细胞因子类制品费
-     */
-    private Double cm_6_26;
-
-    /**
-     * 检查用一次性医用材料费
-     */
-    private Double cm_6_27;
-
-    /**
-     * 治疗用一次性医用材料费
-     */
-    private Double cm_6_28;
 
 
-    /**
-     * 手术用一次性医用材料费
-     */
-    private Double cm_6_29;
 
-    /**
-     * 其他费
-     */
-    private Double cm_6_30;
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
