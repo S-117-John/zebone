@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * 病种设置Controller
  * @author lijin
- * @version 2021-01-12
+ * @version 2021-01-14
  */
 @Controller
 @RequestMapping(value = "${adminPath}/base/qualityDisease")
@@ -126,4 +126,5 @@ public class QualityDiseaseController extends BaseController {
 	public List<QualityDisease> dataList(QualityDisease qualityDisease){
 		return qualityDiseaseService.findList(qualityDisease);
 	}
+
 }

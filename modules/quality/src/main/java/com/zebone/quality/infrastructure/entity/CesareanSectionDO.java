@@ -38,11 +38,6 @@ public class CesareanSectionDO extends BaseEntity{
      */
     private Date cs022;
 
-    /**
-     * 到达本院急诊或者门诊日期时间是否确定
-     */
-    @Column(length = 32)
-    private String cm0231;
 
 
 
@@ -52,15 +47,7 @@ public class CesareanSectionDO extends BaseEntity{
 
 
 
-    /**
-     * 手术开始（切皮）日期时间：
-     */
-    private Date cm0261;
 
-    /**
-     * 手术结束（缝皮结束）日期时间：
-     */
-    private Date cm0262;
 
 
 
@@ -688,37 +675,8 @@ public class CesareanSectionDO extends BaseEntity{
     @Column(length = 32)
     private String cm725;
 
-    /**
-     * 手术野皮肤准备常用方法的选择
-     */
-    @Column(length = 32)
-    private String cm31;
-
-    /**
-     * 使用含抗菌剂（三氯生）缝线
-     */
-    @Column(length = 32)
-    private String cm32;
 
 
-    /**
-     * 其他含抗菌剂缝线填写
-     */
-    @Column(length = 32)
-    private String cm321;
-
-
-    /**
-     * 手术切口类别的选择
-     */
-    @Column(length = 32)
-    private String cm33;
-
-    /**
-     * 手术切口愈合情况的选择
-     */
-    @Column(length = 32)
-    private String cm34;
 
 
 

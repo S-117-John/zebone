@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author 卡卡西
@@ -38,8 +40,8 @@ public class DiseaseInfoDO{
     @Column(columnDefinition = "varchar(32) COMMENT '病种分类'")
     private String type;
 
-    @Column(columnDefinition = "varchar(3000) COMMENT '图标'")
-    private String image;
+    @Column(columnDefinition = "varchar(1000) COMMENT '图标'")
+    private String imagePath;
 
     /**
      * 接口地址
@@ -49,4 +51,7 @@ public class DiseaseInfoDO{
 
     @Column(columnDefinition = "varchar(64) COMMENT '表单Url'")
     private String formUrl;
+
+
+
 }

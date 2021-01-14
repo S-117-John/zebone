@@ -12,11 +12,12 @@ import com.jeesite.common.entity.Page;
 import com.jeesite.common.service.CrudService;
 import com.zebone.quality.modules.base.entity.QualityDisease;
 import com.zebone.quality.modules.base.dao.QualityDiseaseDao;
+import com.jeesite.modules.file.utils.FileUploadUtils;
 
 /**
  * 病种设置Service
  * @author lijin
- * @version 2021-01-12
+ * @version 2021-01-14
  */
 @Service
 @Transactional(readOnly=true)
@@ -51,6 +52,8 @@ public class QualityDiseaseService extends CrudService<QualityDiseaseDao, Qualit
 	@Transactional(readOnly=false)
 	public void save(QualityDisease qualityDisease) {
 		super.save(qualityDisease);
+		// 保存上传图片
+		FileUploadUtils.saveFileUpload(qualityDisease.getId(), "qualityDisease_image");
 	}
 	
 	/**
