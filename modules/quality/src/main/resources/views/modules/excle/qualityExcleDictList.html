@@ -1,0 +1,88 @@
+<% layout('/layouts/default.html', {title: '病种数据编码字典管理', libs: ['dataGrid']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header">
+			<div class="box-title">
+				<i class="fa fa-list-alt"></i> ${text('病种数据编码字典管理')}
+			</div>
+			<div class="box-tools pull-right">
+				<a href="#" class="btn btn-default" id="btnSearch" title="${text('查询')}"><i class="fa fa-filter"></i> ${text('查询')}</a>
+				<% if(hasPermi('excle:qualityExcleDict:edit')){ %>
+					<a href="${ctx}/excle/qualityExcleDict/import/data" class="btn btn-default btnTool" title="${text('新增病种数据编码字典')}"><i class="fa fa-plus"></i> ${text('新增')}</a>
+				<% } %>
+
+				<a href="${ctx}/excle/qualityExcleDict/import/type" class="btn btn-default btnTool" title="${text('导入字典类型')}"><i class="fa fa-plus"></i> ${text('导入字典类型')}</a>
+
+			</div>
+		</div>
+		<div class="box-body">
+			<#form:form id="searchForm" model="${qualityExcleDict}" action="${ctx}/excle/qualityExcleDict/listData" method="post" class="form-inline hide"
+					data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}" data-order-by="${parameter.orderBy}">
+				<div class="form-group">
+					<label class="control-label">${text('code')}：</label>
+					<div class="control-inline">
+						<#form:input path="code" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('dict_value')}：</label>
+					<div class="control-inline">
+						<#form:input path="dictValue" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('dict_label')}：</label>
+					<div class="control-inline">
+						<#form:input path="dictLabel" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('dict_id')}：</label>
+					<div class="control-inline">
+						<#form:input path="dictId" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('table_name')}：</label>
+					<div class="control-inline">
+						<#form:input path="tableName" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary btn-sm">${text('查询')}</button>
+					<button type="reset" class="btn btn-default btn-sm">${text('重置')}</button>
+				</div>
+			</#form:form>
+			<table id="dataGrid"></table>
+			<div id="dataGridPage"></div>
+		</div>
+	</div>
+</div>
+<% } %>
+<script>
+// 初始化DataGrid对象
+$('#dataGrid').dataGrid({
+	searchForm: $("#searchForm"),
+	columnModel: [
+		{header:'${text('code')}', name:'code', index:'a.code', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
+			return '<a href="${ctx}/excle/qualityExcleDict/form?dictId='+row.dictId+'" class="btnList" data-title="${text('编辑病种数据编码字典')}">'+(val||row.id)+'</a>';
+		}},
+		{header:'${text('dict_value')}', name:'dictValue', index:'a.dict_value', width:150, align:"left"},
+		{header:'${text('dict_label')}', name:'dictLabel', index:'a.dict_label', width:150, align:"left"},
+		{header:'${text('dict_id')}', name:'dictId', index:'a.dict_id', width:150, align:"left"},
+		{header:'${text('table_name')}', name:'tableName', index:'a.table_name', width:150, align:"left"},
+		{header:'${text('操作')}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
+			var actions = [];
+			<% if(hasPermi('excle:qualityExcleDict:edit')){ %>
+				actions.push('<a href="${ctx}/excle/qualityExcleDict/form?dictId='+row.dictId+'" class="btnList" title="${text('编辑病种数据编码字典')}"><i class="fa fa-pencil"></i></a>&nbsp;');
+				actions.push('<a href="${ctx}/excle/qualityExcleDict/delete?dictId='+row.dictId+'" class="btnList" title="${text('删除病种数据编码字典')}" data-confirm="${text('确认要删除该病种数据编码字典吗？')}"><i class="fa fa-trash-o"></i></a>&nbsp;');
+			<% } %>
+			return actions.join('');
+		}}
+	],
+	// 加载成功后执行事件
+	ajaxSuccess: function(data){
+		
+	}
+});
+</script>

@@ -1,0 +1,1909 @@
+<% layout('/layouts/default.html', {title: 'STK脑梗死（首次住院）管理', libs: ['dataGrid']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header">
+			<div class="box-title">
+				<i class="fa fa-list-alt"></i> ${text('STK脑梗死（首次住院）管理')}
+			</div>
+			<div class="box-tools pull-right">
+				<a href="#" class="btn btn-default" id="btnSearch" title="${text('查询')}"><i class="fa fa-filter"></i> ${text('查询')}</a>
+				<% if(hasPermi('quality:qualityStk:edit')){ %>
+					<a href="${ctx}/quality/qualityStk/form" class="btn btn-default btnTool" title="${text('新增STK脑梗死（首次住院）')}"><i class="fa fa-plus"></i> ${text('新增')}</a>
+				<% } %>
+			</div>
+		</div>
+		<div class="box-body">
+			<#form:form id="searchForm" model="${qualityStk}" action="${ctx}/quality/qualityStk/listData" method="post" class="form-inline hide"
+					data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}" data-order-by="${parameter.orderBy}">
+				<div class="form-group">
+					<label class="control-label">${text('备注')}：</label>
+					<div class="control-inline">
+						<#form:input path="remarks" maxlength="500" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('状态')}：</label>
+					<div class="control-inline width-120">
+						<#form:select path="status" dictType="sys_search_status" blankOption="true" class="form-control"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('患者病案号')}：</label>
+					<div class="control-inline">
+						<#form:input path="caseId" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('质控医师')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm0111" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('质控护士')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm0112" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('主治医师')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm0113" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('责任护士')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm0114" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('上报科室')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm0115" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('主要诊断ICD-10四位亚目编码与名称')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm0131" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('主要诊断ICD-10六位临床扩展编码与名称')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm0132" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm0141" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其他ICD-9-CM-3四位亚目编码与名称')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm01411" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm0142" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其他ICD-9-CM-3六位临床扩展编码与名称')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm01421" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('是否出院后31天内重复住院')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm015" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('出生日期')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm0211" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('患者性别')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm0212" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('患者体重')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm0213" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('患者身高')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm0215" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('发病日期时间是否无法确定或无记录')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm0221" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('发病日期时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm0222" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('到达本院急诊或者门诊日期时间是否无法确定或无记录')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm0231" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('到达本院急诊或者门诊日期时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm0232" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('入院日期时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm0241" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('出院日期时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm0242" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('入住CCU日期时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm0251" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('离开CCU日期时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm0252" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('手术开始')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm0261" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('手术结束')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm0262" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('费用支付方式')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm031" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('收入住院途径')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm032" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('到院交通工具')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm033" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('手术野皮肤准备常用方法的选择')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm31" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('使用含抗菌剂')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm32" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其他含抗菌剂缝线填写')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm321" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('手术切口类别的选择')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm33" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('手术切口愈合情况的选择')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm34" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('离院方式选择')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm43" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其他非医嘱离院因素填写')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm441" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('非医嘱离院可能涉及因素')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm45" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('死亡可能涉及因素')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm46" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('患者是否对服务的体验与评价')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm51" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('整体医院评级')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm521" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('出院时的知情告知')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm5210" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('膳食评价')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm5211" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('患者推荐')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm522" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('病房、床单元和卫生间清洁度')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm523" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('病房与周边噪音')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm525" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('医生沟通')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm526" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('护士沟通')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm527" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('药师沟通')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm528" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('康复计划')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm529" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('住院总费用')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm61" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('临床诊断项目费')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm610" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('非手术治疗项目费')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm611" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其中')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm612" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('手术治疗费')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm613" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其中')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm614" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其中')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm615" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('康复费')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm616" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('中医治疗费')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm617" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('西药费')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm618" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其中')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm619" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('住院总费用其中自付金额')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm62" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('中成药费')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm620" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('中草药费')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm621" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('血费')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm622" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('白蛋白类制品费')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm623" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('球蛋白类制品费')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm624" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('凝血因子类制品费')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm625" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('细胞因子类制品费')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm626" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('检查用一次性医用材料费')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm627" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('治疗用一次性医用材料费')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm628" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('手术用一次性医用材料费')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm629" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('一般医疗服务费')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm63" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其他费')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm630" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('一般治疗操作费')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm64" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('护理费')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm65" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('综合医疗服务类其他费用')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm66" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('病理诊断费')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm67" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('实验室诊断费')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm68" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('影像学诊断费')}：</label>
+					<div class="control-inline">
+						<#form:input path="cm69" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其他主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk0131" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('现场评估生命体征，施行急救')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk041" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('到达现场后10分钟内完成院前卒中评分')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk042" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('现场急救维持生命体征稳定')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk043" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('利用车载信息系统、微信、彩信等多种形式传输心电图等院前信息至目标医院')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk044" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('血管功能评估时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk101" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('血管功能评估方法')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk102" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('出院时Essen卒中风险评分')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1211" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('Essen卒中风险评分值')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk12121" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('实施卒中健康教育有记录')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1213" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('主要风险因素')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1221" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其他风险因素')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1222" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('交与患者“出院小结”的副本告知患者出院时风险因素')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1231" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('出院带药')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1232" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('告知发生紧急情况时求援救治途径')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1233" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('出院时教育与随访')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1234" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('告知何为风险因素与紧急情况')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1235" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('是否有出院时mRS评分')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1241" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('出院时mRS评分')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1242" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('出院时mRS评分')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1243" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('发病的主要原因')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1244" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其他发病的主要原因')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk12441" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('是否有功能障碍')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk130" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('功能障碍评价')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk131" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('是否提供早期康复医疗服务')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1311" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('康复治疗适宜性评估结果')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk132" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('康复实施人员资质选择')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk133" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('首次实施康复治疗时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1341" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('选择未能进行康复原因')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk135" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('是否实施介入治疗	字')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1510" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('介入治疗日期时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk15111" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('介入治疗时机')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk152" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('决定适应证医师职称')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk153" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('介入主刀医师职称')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk154" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('血管内介入治疗术式选择')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1551" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('大血管闭塞重症患者实施血管内适应证选择')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk156" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其它适应证')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1561" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('是否实施影像学评估血管再通分级')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk157" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('血管再通分级')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1571" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('血管内介入治疗完成时间 DTN时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk158" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('急诊医师接诊日期时间是否确定')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1111" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('急诊医师接诊日期时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1112" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('呼吸')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk114" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('脉搏')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk115" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('收缩压')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk116" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('舒张压')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk117" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('急诊后首次评估还是入院后首次评估')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk121" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('急诊首次实施神经功能缺损NIHSS评估')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1211" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('急诊首次评估日期时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk12121" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('实施神经功能缺损NIHSS评估分值')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk12131" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('入院后首次实施神经功能缺损NIHSS评估')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1221" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('入院后首次评估日期时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk12221" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('实施神经功能缺损NIHSS评估分值')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk12231" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('是否实施首次头部影像学检查')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk131" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('头部影像学检查项目')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk132" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('报告日期时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1331" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('全血细胞计数')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk141" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('急诊或入院后首次全血细胞计数报告日期时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk14111" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('急诊或入院后首次全血细胞计数报告日期时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1412" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('红血球计数RBC检测值')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1413" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('白细胞计数WBC检测值')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1414" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('血小板PLT检测值')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1415" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('急诊/入院后24小时内首次临床检验检查')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk142" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('凝血功能检查项目')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1421" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('报告日期时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk14221" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('报告日期时间是否确定')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1423" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('C-反应蛋白:检测值')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1424" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('同型半胱氨酸（HCY）:检测值')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1425" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('空腹血糖:检测值')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1426" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('血清肌酐:检测值')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1427" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('血清尿素氮:检测值')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1428" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('尿酸:检测值')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1429" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('生化检验项目')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1431" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('报告日期时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk14321" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('报告日期时间是否确定')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1433" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('急诊或入院后是否首次实施心电图')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk151" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('报告日期时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1521" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('心电图')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk153" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其他心电图')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk1531" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('发病→到达急诊“绿色通道”时间是否确定')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk2111" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('发病→到达急诊“绿色通道”时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk2112" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('发病→到达急诊“绿色通道”时间评估结论')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk212" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('头部影像学检查评估的选择')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk213" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其他头部影像学检查')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk2131" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('是否有溶栓禁忌症')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk221" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('溶栓禁忌症选择')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk222" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其他临床医师认定的其他禁忌症')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk2221" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('发病时段适应证')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk2311" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('溶栓适应证的选择')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk2312" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('溶栓的评估结论的选择')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk232" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('溶栓开始日期时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk24111" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('溶栓终止日期时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk24211" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('溶栓药选择')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk243" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('实施溶栓')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk244" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('溶栓药物使用时机 DTN')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk2451" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('是否实施溶栓后72小时NIHSS评估')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk2511" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('溶栓后2小时分值')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk25121" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('溶栓后24小时分值')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk25131" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('溶栓后48小时分值')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk25141" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('溶栓后72小时分值')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk25151" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('是否实施溶栓')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk2521" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('溶栓后72小时影像学复查项目')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk2522" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('是否出现溶栓治疗并发症')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk2531" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('并发症严重程度')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk2532" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('溶栓治疗院内延误时间超过1小时主要原因的选择')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk261" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('溶栓治疗医嘱未能执行主要原因的')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk262" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('是否实施房颤患者脑卒中风险评估')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk311" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('是否为房颤患者脑卒中')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk3111" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('房颤患者脑卒中风险评估分值')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk3121" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('CHA2DS2-VASc评分大于2分')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk313" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('是否有使用抗凝药物的禁忌证')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk321" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('使用抗凝药物的禁忌症')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk322" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('是否使用抗凝药物')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk331" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('首剂用药日期时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk33211" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('抗凝药物选择')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk333" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('是否使用阿司匹林禁忌证')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk411" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('阿司匹林禁忌症')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk412" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('首剂用药日期时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk4221" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('患者类别选择')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk423" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('药物选择')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk43" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其他抗血小板药物')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk431" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('血脂评价时间的选择')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk51" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('血脂评价结果')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk52" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('是否有他汀药物禁忌症')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk531" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('他汀类药物禁忌证的选择')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk532" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('是否有用药长期医嘱-他汀类药物')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk54" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('他汀类常用药物选择')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk541" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('是否糖尿病患者')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk551" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('选择降糖药物的类别')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk552" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其他降糖药物')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk5521" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('是否高血压患者')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk571" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('选择降压药物的类别')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk572" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其它降压药物')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk5721" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('入院时是否正常进食与饮水')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk61" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('是否进行吞咽评估')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk620" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('首次吞咽困难评估日期时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk6211" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('评价方法选择')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk631" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其他评价方法填写')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk6311" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('未进行吞咽困难评价的原因')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk632" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其它未进行吞咽困难评价的原因')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk6321" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('入院后病情判定')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk71" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('是否需要做预防DVT治疗')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk721" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('禁忌证选择')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk722" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('预防DVT治疗医嘱下达日期时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk72311" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('预防DVT治疗方法')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk7314" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其他预防DVT治疗药物')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk7315" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('出院时继续使用抗血小扳聚集治疗药物')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk81" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其他抗血小板聚集治疗药物')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk811" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('出院时使用选择他汀类药物')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk82" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('出院时使用抗凝药物')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk83" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('出院时使用降糖药物的类别')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk84" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其他降糖药物')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk841" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('出院时有高血压患者选择降压药物的类别')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk85" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('是否出院时有高血压')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk850" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其他降压药物')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk851" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('入院时是否有重点护理评估记录')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk91" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('行走评估结果')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk911" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('呼吸评估结果')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk912" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('饮食评估结果')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk913" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('吞咽评估结果')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk914" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('压疮评估')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk9151" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('压疮评估结果选择')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk916" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('预防压疮告知')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk917" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('吸烟史')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk931" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('吸烟程度评估')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk932" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('接受戒烟的建议或者戒烟治疗')}：</label>
+					<div class="control-inline">
+						<#form:input path="stk933" maxlength="32" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary btn-sm">${text('查询')}</button>
+					<button type="reset" class="btn btn-default btn-sm">${text('重置')}</button>
+				</div>
+			</#form:form>
+			<table id="dataGrid"></table>
+			<div id="dataGridPage"></div>
+		</div>
+	</div>
+</div>
+<% } %>
+<script>
+// 初始化DataGrid对象
+$('#dataGrid').dataGrid({
+	searchForm: $("#searchForm"),
+	columnModel: [
+		{header:'${text('创建时间')}', name:'createDate', index:'a.create_date', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
+			return '<a href="${ctx}/quality/qualityStk/form?id='+row.id+'" class="btnList" data-title="${text('编辑STK脑梗死（首次住院）')}">'+(val||row.id)+'</a>';
+		}},
+		{header:'${text('备注')}', name:'remarks', index:'a.remarks', width:150, align:"left"},
+		{header:'${text('状态')}', name:'status', index:'a.status', width:150, align:"center", formatter: function(val, obj, row, act){
+			return js.getDictLabel(${@DictUtils.getDictListJson('sys_search_status')}, val, '${text('未知')}', true);
+		}},
+		{header:'${text('患者病案号')}', name:'caseId', index:'a.case_id', width:150, align:"left"},
+		{header:'${text('质控医师')}', name:'cm0111', index:'a.cm_0_1_1_1', width:150, align:"left"},
+		{header:'${text('质控护士')}', name:'cm0112', index:'a.cm_0_1_1_2', width:150, align:"left"},
+		{header:'${text('主治医师')}', name:'cm0113', index:'a.cm_0_1_1_3', width:150, align:"left"},
+		{header:'${text('责任护士')}', name:'cm0114', index:'a.cm_0_1_1_4', width:150, align:"left"},
+		{header:'${text('上报科室')}', name:'cm0115', index:'a.cm_0_1_1_5', width:150, align:"left"},
+		{header:'${text('主要诊断ICD-10四位亚目编码与名称')}', name:'cm0131', index:'a.cm_0_1_3_1', width:150, align:"left"},
+		{header:'${text('主要诊断ICD-10六位临床扩展编码与名称')}', name:'cm0132', index:'a.cm_0_1_3_2', width:150, align:"left"},
+		{header:'${text('主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称')}', name:'cm0141', index:'a.cm_0_1_4_1', width:150, align:"left"},
+		{header:'${text('其他ICD-9-CM-3四位亚目编码与名称')}', name:'cm01411', index:'a.cm_0_1_4_1_1', width:150, align:"left"},
+		{header:'${text('主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称')}', name:'cm0142', index:'a.cm_0_1_4_2', width:150, align:"left"},
+		{header:'${text('其他ICD-9-CM-3六位临床扩展编码与名称')}', name:'cm01421', index:'a.cm_0_1_4_2_1', width:150, align:"left"},
+		{header:'${text('是否出院后31天内重复住院')}', name:'cm015', index:'a.cm_0_1_5', width:150, align:"left"},
+		{header:'${text('出生日期')}', name:'cm0211', index:'a.cm_0_2_1_1', width:150, align:"center"},
+		{header:'${text('患者性别')}', name:'cm0212', index:'a.cm_0_2_1_2', width:150, align:"left"},
+		{header:'${text('患者体重')}', name:'cm0213', index:'a.cm_0_2_1_3', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('患者身高')}', name:'cm0215', index:'a.cm_0_2_1_5', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('发病日期时间是否无法确定或无记录')}', name:'cm0221', index:'a.cm_0_2_2_1', width:150, align:"left"},
+		{header:'${text('发病日期时间')}', name:'cm0222', index:'a.cm_0_2_2_2', width:150, align:"center"},
+		{header:'${text('到达本院急诊或者门诊日期时间是否无法确定或无记录')}', name:'cm0231', index:'a.cm_0_2_3_1', width:150, align:"left"},
+		{header:'${text('到达本院急诊或者门诊日期时间')}', name:'cm0232', index:'a.cm_0_2_3_2', width:150, align:"center"},
+		{header:'${text('入院日期时间')}', name:'cm0241', index:'a.cm_0_2_4_1', width:150, align:"center"},
+		{header:'${text('出院日期时间')}', name:'cm0242', index:'a.cm_0_2_4_2', width:150, align:"center"},
+		{header:'${text('入住CCU日期时间')}', name:'cm0251', index:'a.cm_0_2_5_1', width:150, align:"center"},
+		{header:'${text('离开CCU日期时间')}', name:'cm0252', index:'a.cm_0_2_5_2', width:150, align:"center"},
+		{header:'${text('手术开始')}', name:'cm0261', index:'a.cm_0_2_6_1', width:150, align:"center"},
+		{header:'${text('手术结束')}', name:'cm0262', index:'a.cm_0_2_6_2', width:150, align:"center"},
+		{header:'${text('费用支付方式')}', name:'cm031', index:'a.cm_0_3_1', width:150, align:"left"},
+		{header:'${text('收入住院途径')}', name:'cm032', index:'a.cm_0_3_2', width:150, align:"left"},
+		{header:'${text('到院交通工具')}', name:'cm033', index:'a.cm_0_3_3', width:150, align:"left"},
+		{header:'${text('手术野皮肤准备常用方法的选择')}', name:'cm31', index:'a.cm_3_1', width:150, align:"left"},
+		{header:'${text('使用含抗菌剂')}', name:'cm32', index:'a.cm_3_2', width:150, align:"left"},
+		{header:'${text('其他含抗菌剂缝线填写')}', name:'cm321', index:'a.cm_3_2_1', width:150, align:"left"},
+		{header:'${text('手术切口类别的选择')}', name:'cm33', index:'a.cm_3_3', width:150, align:"left"},
+		{header:'${text('手术切口愈合情况的选择')}', name:'cm34', index:'a.cm_3_4', width:150, align:"left"},
+		{header:'${text('离院方式选择')}', name:'cm43', index:'a.cm_4_3', width:150, align:"left"},
+		{header:'${text('其他非医嘱离院因素填写')}', name:'cm441', index:'a.cm_4_4_1', width:150, align:"left"},
+		{header:'${text('非医嘱离院可能涉及因素')}', name:'cm45', index:'a.cm_4_5', width:150, align:"left"},
+		{header:'${text('死亡可能涉及因素')}', name:'cm46', index:'a.cm_4_6', width:150, align:"left"},
+		{header:'${text('患者是否对服务的体验与评价')}', name:'cm51', index:'a.cm_5_1', width:150, align:"left"},
+		{header:'${text('整体医院评级')}', name:'cm521', index:'a.cm_5_2_1', width:150, align:"left"},
+		{header:'${text('出院时的知情告知')}', name:'cm5210', index:'a.cm_5_2_10', width:150, align:"left"},
+		{header:'${text('膳食评价')}', name:'cm5211', index:'a.cm_5_2_11', width:150, align:"left"},
+		{header:'${text('患者推荐')}', name:'cm522', index:'a.cm_5_2_2', width:150, align:"left"},
+		{header:'${text('病房、床单元和卫生间清洁度')}', name:'cm523', index:'a.cm_5_2_3', width:150, align:"left"},
+		{header:'${text('病房与周边噪音')}', name:'cm525', index:'a.cm_5_2_5', width:150, align:"left"},
+		{header:'${text('医生沟通')}', name:'cm526', index:'a.cm_5_2_6', width:150, align:"left"},
+		{header:'${text('护士沟通')}', name:'cm527', index:'a.cm_5_2_7', width:150, align:"left"},
+		{header:'${text('药师沟通')}', name:'cm528', index:'a.cm_5_2_8', width:150, align:"left"},
+		{header:'${text('康复计划')}', name:'cm529', index:'a.cm_5_2_9', width:150, align:"left"},
+		{header:'${text('住院总费用')}', name:'cm61', index:'a.cm_6_1', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('临床诊断项目费')}', name:'cm610', index:'a.cm_6_10', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('非手术治疗项目费')}', name:'cm611', index:'a.cm_6_11', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('其中')}', name:'cm612', index:'a.cm_6_12', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('手术治疗费')}', name:'cm613', index:'a.cm_6_13', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('其中')}', name:'cm614', index:'a.cm_6_14', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('其中')}', name:'cm615', index:'a.cm_6_15', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('康复费')}', name:'cm616', index:'a.cm_6_16', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('中医治疗费')}', name:'cm617', index:'a.cm_6_17', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('西药费')}', name:'cm618', index:'a.cm_6_18', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('其中')}', name:'cm619', index:'a.cm_6_19', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('住院总费用其中自付金额')}', name:'cm62', index:'a.cm_6_2', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('中成药费')}', name:'cm620', index:'a.cm_6_20', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('中草药费')}', name:'cm621', index:'a.cm_6_21', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('血费')}', name:'cm622', index:'a.cm_6_22', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('白蛋白类制品费')}', name:'cm623', index:'a.cm_6_23', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('球蛋白类制品费')}', name:'cm624', index:'a.cm_6_24', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('凝血因子类制品费')}', name:'cm625', index:'a.cm_6_25', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('细胞因子类制品费')}', name:'cm626', index:'a.cm_6_26', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('检查用一次性医用材料费')}', name:'cm627', index:'a.cm_6_27', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('治疗用一次性医用材料费')}', name:'cm628', index:'a.cm_6_28', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('手术用一次性医用材料费')}', name:'cm629', index:'a.cm_6_29', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('一般医疗服务费')}', name:'cm63', index:'a.cm_6_3', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('其他费')}', name:'cm630', index:'a.cm_6_30', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('一般治疗操作费')}', name:'cm64', index:'a.cm_6_4', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('护理费')}', name:'cm65', index:'a.cm_6_5', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('综合医疗服务类其他费用')}', name:'cm66', index:'a.cm_6_6', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('病理诊断费')}', name:'cm67', index:'a.cm_6_7', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('实验室诊断费')}', name:'cm68', index:'a.cm_6_8', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('影像学诊断费')}', name:'cm69', index:'a.cm_6_9', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('其他主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称')}', name:'stk0131', index:'a.stk_0_1_3_1', width:150, align:"left"},
+		{header:'${text('现场评估生命体征，施行急救')}', name:'stk041', index:'a.stk_0_4_1', width:150, align:"left"},
+		{header:'${text('到达现场后10分钟内完成院前卒中评分')}', name:'stk042', index:'a.stk_0_4_2', width:150, align:"left"},
+		{header:'${text('现场急救维持生命体征稳定')}', name:'stk043', index:'a.stk_0_4_3', width:150, align:"left"},
+		{header:'${text('利用车载信息系统、微信、彩信等多种形式传输心电图等院前信息至目标医院')}', name:'stk044', index:'a.stk_0_4_4', width:150, align:"left"},
+		{header:'${text('血管功能评估时间')}', name:'stk101', index:'a.stk_10_1', width:150, align:"left"},
+		{header:'${text('血管功能评估方法')}', name:'stk102', index:'a.stk_10_2', width:150, align:"left"},
+		{header:'${text('出院时Essen卒中风险评分')}', name:'stk1211', index:'a.stk_12_1_1', width:150, align:"left"},
+		{header:'${text('Essen卒中风险评分值')}', name:'stk12121', index:'a.stk_12_1_2_1', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('实施卒中健康教育有记录')}', name:'stk1213', index:'a.stk_12_1_3', width:150, align:"left"},
+		{header:'${text('主要风险因素')}', name:'stk1221', index:'a.stk_12_2_1', width:150, align:"left"},
+		{header:'${text('其他风险因素')}', name:'stk1222', index:'a.stk_12_2_2', width:150, align:"left"},
+		{header:'${text('交与患者“出院小结”的副本告知患者出院时风险因素')}', name:'stk1231', index:'a.stk_12_3_1', width:150, align:"left"},
+		{header:'${text('出院带药')}', name:'stk1232', index:'a.stk_12_3_2', width:150, align:"left"},
+		{header:'${text('告知发生紧急情况时求援救治途径')}', name:'stk1233', index:'a.stk_12_3_3', width:150, align:"left"},
+		{header:'${text('出院时教育与随访')}', name:'stk1234', index:'a.stk_12_3_4', width:150, align:"left"},
+		{header:'${text('告知何为风险因素与紧急情况')}', name:'stk1235', index:'a.stk_12_3_5', width:150, align:"left"},
+		{header:'${text('是否有出院时mRS评分')}', name:'stk1241', index:'a.stk_12_4_1', width:150, align:"left"},
+		{header:'${text('出院时mRS评分')}', name:'stk1242', index:'a.stk_12_4_2', width:150, align:"left"},
+		{header:'${text('出院时mRS评分')}', name:'stk1243', index:'a.stk_12_4_3', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('发病的主要原因')}', name:'stk1244', index:'a.stk_12_4_4', width:150, align:"left"},
+		{header:'${text('其他发病的主要原因')}', name:'stk12441', index:'a.stk_12_4_4_1', width:150, align:"left"},
+		{header:'${text('是否有功能障碍')}', name:'stk130', index:'a.stk_13_0', width:150, align:"left"},
+		{header:'${text('功能障碍评价')}', name:'stk131', index:'a.stk_13_1', width:150, align:"left"},
+		{header:'${text('是否提供早期康复医疗服务')}', name:'stk1311', index:'a.stk_13_1_1', width:150, align:"left"},
+		{header:'${text('康复治疗适宜性评估结果')}', name:'stk132', index:'a.stk_13_2', width:150, align:"left"},
+		{header:'${text('康复实施人员资质选择')}', name:'stk133', index:'a.stk_13_3', width:150, align:"left"},
+		{header:'${text('首次实施康复治疗时间')}', name:'stk1341', index:'a.stk_13_4_1', width:150, align:"center"},
+		{header:'${text('选择未能进行康复原因')}', name:'stk135', index:'a.stk_13_5', width:150, align:"left"},
+		{header:'${text('是否实施介入治疗	字')}', name:'stk1510', index:'a.stk_15_1_0', width:150, align:"left"},
+		{header:'${text('介入治疗日期时间')}', name:'stk15111', index:'a.stk_15_1_1_1', width:150, align:"center"},
+		{header:'${text('介入治疗时机')}', name:'stk152', index:'a.stk_15_2', width:150, align:"left"},
+		{header:'${text('决定适应证医师职称')}', name:'stk153', index:'a.stk_15_3', width:150, align:"left"},
+		{header:'${text('介入主刀医师职称')}', name:'stk154', index:'a.stk_15_4', width:150, align:"left"},
+		{header:'${text('血管内介入治疗术式选择')}', name:'stk1551', index:'a.stk_15_5_1', width:150, align:"left"},
+		{header:'${text('大血管闭塞重症患者实施血管内适应证选择')}', name:'stk156', index:'a.stk_15_6', width:150, align:"left"},
+		{header:'${text('其它适应证')}', name:'stk1561', index:'a.stk_15_6_1', width:150, align:"left"},
+		{header:'${text('是否实施影像学评估血管再通分级')}', name:'stk157', index:'a.stk_15_7', width:150, align:"left"},
+		{header:'${text('血管再通分级')}', name:'stk1571', index:'a.stk_15_7_1', width:150, align:"left"},
+		{header:'${text('血管内介入治疗完成时间 DTN时间')}', name:'stk158', index:'a.stk_15_8', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('急诊医师接诊日期时间是否确定')}', name:'stk1111', index:'a.stk_1_1_1_1', width:150, align:"left"},
+		{header:'${text('急诊医师接诊日期时间')}', name:'stk1112', index:'a.stk_1_1_1_2', width:150, align:"center"},
+		{header:'${text('呼吸')}', name:'stk114', index:'a.stk_1_1_4', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('脉搏')}', name:'stk115', index:'a.stk_1_1_5', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('收缩压')}', name:'stk116', index:'a.stk_1_1_6', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('舒张压')}', name:'stk117', index:'a.stk_1_1_7', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('急诊后首次评估还是入院后首次评估')}', name:'stk121', index:'a.stk_1_2_1', width:150, align:"left"},
+		{header:'${text('急诊首次实施神经功能缺损NIHSS评估')}', name:'stk1211', index:'a.stk_1_2_1_1', width:150, align:"left"},
+		{header:'${text('急诊首次评估日期时间')}', name:'stk12121', index:'a.stk_1_2_1_2_1', width:150, align:"center"},
+		{header:'${text('实施神经功能缺损NIHSS评估分值')}', name:'stk12131', index:'a.stk_1_2_1_3_1', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('入院后首次实施神经功能缺损NIHSS评估')}', name:'stk1221', index:'a.stk_1_2_2_1', width:150, align:"left"},
+		{header:'${text('入院后首次评估日期时间')}', name:'stk12221', index:'a.stk_1_2_2_2_1', width:150, align:"center"},
+		{header:'${text('实施神经功能缺损NIHSS评估分值')}', name:'stk12231', index:'a.stk_1_2_2_3_1', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('是否实施首次头部影像学检查')}', name:'stk131', index:'a.stk_1_3_1', width:150, align:"left"},
+		{header:'${text('头部影像学检查项目')}', name:'stk132', index:'a.stk_1_3_2', width:150, align:"left"},
+		{header:'${text('报告日期时间')}', name:'stk1331', index:'a.stk_1_3_3_1', width:150, align:"center"},
+		{header:'${text('全血细胞计数')}', name:'stk141', index:'a.stk_1_4_1', width:150, align:"left"},
+		{header:'${text('急诊或入院后首次全血细胞计数报告日期时间')}', name:'stk14111', index:'a.stk_1_4_1_1_1', width:150, align:"left"},
+		{header:'${text('急诊或入院后首次全血细胞计数报告日期时间')}', name:'stk1412', index:'a.stk_1_4_1_2', width:150, align:"center"},
+		{header:'${text('红血球计数RBC检测值')}', name:'stk1413', index:'a.stk_1_4_1_3', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('白细胞计数WBC检测值')}', name:'stk1414', index:'a.stk_1_4_1_4', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('血小板PLT检测值')}', name:'stk1415', index:'a.stk_1_4_1_5', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('急诊/入院后24小时内首次临床检验检查')}', name:'stk142', index:'a.stk_1_4_2', width:150, align:"left"},
+		{header:'${text('凝血功能检查项目')}', name:'stk1421', index:'a.stk_1_4_2_1', width:150, align:"left"},
+		{header:'${text('报告日期时间')}', name:'stk14221', index:'a.stk_1_4_2_2_1', width:150, align:"center"},
+		{header:'${text('报告日期时间是否确定')}', name:'stk1423', index:'a.stk_1_4_2_3', width:150, align:"left"},
+		{header:'${text('C-反应蛋白:检测值')}', name:'stk1424', index:'a.stk_1_4_2_4', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('同型半胱氨酸（HCY）:检测值')}', name:'stk1425', index:'a.stk_1_4_2_5', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('空腹血糖:检测值')}', name:'stk1426', index:'a.stk_1_4_2_6', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('血清肌酐:检测值')}', name:'stk1427', index:'a.stk_1_4_2_7', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('血清尿素氮:检测值')}', name:'stk1428', index:'a.stk_1_4_2_8', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('尿酸:检测值')}', name:'stk1429', index:'a.stk_1_4_2_9', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('生化检验项目')}', name:'stk1431', index:'a.stk_1_4_3_1', width:150, align:"left"},
+		{header:'${text('报告日期时间')}', name:'stk14321', index:'a.stk_1_4_3_2_1', width:150, align:"left"},
+		{header:'${text('报告日期时间是否确定')}', name:'stk1433', index:'a.stk_1_4_3_3', width:150, align:"left"},
+		{header:'${text('急诊或入院后是否首次实施心电图')}', name:'stk151', index:'a.stk_1_5_1', width:150, align:"left"},
+		{header:'${text('报告日期时间')}', name:'stk1521', index:'a.stk_1_5_2_1', width:150, align:"center"},
+		{header:'${text('心电图')}', name:'stk153', index:'a.stk_1_5_3', width:150, align:"left"},
+		{header:'${text('其他心电图')}', name:'stk1531', index:'a.stk_1_5_3_1', width:150, align:"left"},
+		{header:'${text('发病→到达急诊“绿色通道”时间是否确定')}', name:'stk2111', index:'a.stk_2_1_1_1', width:150, align:"left"},
+		{header:'${text('发病→到达急诊“绿色通道”时间')}', name:'stk2112', index:'a.stk_2_1_1_2', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('发病→到达急诊“绿色通道”时间评估结论')}', name:'stk212', index:'a.stk_2_1_2', width:150, align:"left"},
+		{header:'${text('头部影像学检查评估的选择')}', name:'stk213', index:'a.stk_2_1_3', width:150, align:"left"},
+		{header:'${text('其他头部影像学检查')}', name:'stk2131', index:'a.stk_2_1_3_1', width:150, align:"left"},
+		{header:'${text('是否有溶栓禁忌症')}', name:'stk221', index:'a.stk_2_2_1', width:150, align:"left"},
+		{header:'${text('溶栓禁忌症选择')}', name:'stk222', index:'a.stk_2_2_2', width:150, align:"left"},
+		{header:'${text('其他临床医师认定的其他禁忌症')}', name:'stk2221', index:'a.stk_2_2_2_1', width:150, align:"left"},
+		{header:'${text('发病时段适应证')}', name:'stk2311', index:'a.stk_2_3_1_1', width:150, align:"left"},
+		{header:'${text('溶栓适应证的选择')}', name:'stk2312', index:'a.stk_2_3_1_2', width:150, align:"left"},
+		{header:'${text('溶栓的评估结论的选择')}', name:'stk232', index:'a.stk_2_3_2', width:150, align:"left"},
+		{header:'${text('溶栓开始日期时间')}', name:'stk24111', index:'a.stk_2_4_1_1_1', width:150, align:"center"},
+		{header:'${text('溶栓终止日期时间')}', name:'stk24211', index:'a.stk_2_4_2_1_1', width:150, align:"center"},
+		{header:'${text('溶栓药选择')}', name:'stk243', index:'a.stk_2_4_3', width:150, align:"left"},
+		{header:'${text('实施溶栓')}', name:'stk244', index:'a.stk_2_4_4', width:150, align:"left"},
+		{header:'${text('溶栓药物使用时机 DTN')}', name:'stk2451', index:'a.stk_2_4_5_1', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('是否实施溶栓后72小时NIHSS评估')}', name:'stk2511', index:'a.stk_2_5_1_1', width:150, align:"left"},
+		{header:'${text('溶栓后2小时分值')}', name:'stk25121', index:'a.stk_2_5_1_2_1', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('溶栓后24小时分值')}', name:'stk25131', index:'a.stk_2_5_1_3_1', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('溶栓后48小时分值')}', name:'stk25141', index:'a.stk_2_5_1_4_1', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('溶栓后72小时分值')}', name:'stk25151', index:'a.stk_2_5_1_5_1', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('是否实施溶栓')}', name:'stk2521', index:'a.stk_2_5_2_1', width:150, align:"left"},
+		{header:'${text('溶栓后72小时影像学复查项目')}', name:'stk2522', index:'a.stk_2_5_2_2', width:150, align:"left"},
+		{header:'${text('是否出现溶栓治疗并发症')}', name:'stk2531', index:'a.stk_2_5_3_1', width:150, align:"left"},
+		{header:'${text('并发症严重程度')}', name:'stk2532', index:'a.stk_2_5_3_2', width:150, align:"left"},
+		{header:'${text('溶栓治疗院内延误时间超过1小时主要原因的选择')}', name:'stk261', index:'a.stk_2_6_1', width:150, align:"left"},
+		{header:'${text('溶栓治疗医嘱未能执行主要原因的')}', name:'stk262', index:'a.stk_2_6_2', width:150, align:"left"},
+		{header:'${text('是否实施房颤患者脑卒中风险评估')}', name:'stk311', index:'a.stk_3_1_1', width:150, align:"left"},
+		{header:'${text('是否为房颤患者脑卒中')}', name:'stk3111', index:'a.stk_3_1_1_1', width:150, align:"left"},
+		{header:'${text('房颤患者脑卒中风险评估分值')}', name:'stk3121', index:'a.stk_3_1_2_1', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text('CHA2DS2-VASc评分大于2分')}', name:'stk313', index:'a.stk_3_1_3', width:150, align:"left"},
+		{header:'${text('是否有使用抗凝药物的禁忌证')}', name:'stk321', index:'a.stk_3_2_1', width:150, align:"left"},
+		{header:'${text('使用抗凝药物的禁忌症')}', name:'stk322', index:'a.stk_3_2_2', width:150, align:"left"},
+		{header:'${text('是否使用抗凝药物')}', name:'stk331', index:'a.stk_3_3_1', width:150, align:"left"},
+		{header:'${text('首剂用药日期时间')}', name:'stk33211', index:'a.stk_3_3_2_1_1', width:150, align:"center"},
+		{header:'${text('抗凝药物选择')}', name:'stk333', index:'a.stk_3_3_3', width:150, align:"left"},
+		{header:'${text('是否使用阿司匹林禁忌证')}', name:'stk411', index:'a.stk_4_1_1', width:150, align:"left"},
+		{header:'${text('阿司匹林禁忌症')}', name:'stk412', index:'a.stk_4_1_2', width:150, align:"left"},
+		{header:'${text('首剂用药日期时间')}', name:'stk4221', index:'a.stk_4_2_2_1', width:150, align:"center"},
+		{header:'${text('患者类别选择')}', name:'stk423', index:'a.stk_4_2_3', width:150, align:"left"},
+		{header:'${text('药物选择')}', name:'stk43', index:'a.stk_4_3', width:150, align:"left"},
+		{header:'${text('其他抗血小板药物')}', name:'stk431', index:'a.stk_4_3_1', width:150, align:"left"},
+		{header:'${text('血脂评价时间的选择')}', name:'stk51', index:'a.stk_5_1', width:150, align:"left"},
+		{header:'${text('血脂评价结果')}', name:'stk52', index:'a.stk_5_2', width:150, align:"left"},
+		{header:'${text('是否有他汀药物禁忌症')}', name:'stk531', index:'a.stk_5_3_1', width:150, align:"left"},
+		{header:'${text('他汀类药物禁忌证的选择')}', name:'stk532', index:'a.stk_5_3_2', width:150, align:"left"},
+		{header:'${text('是否有用药长期医嘱-他汀类药物')}', name:'stk54', index:'a.stk_5_4', width:150, align:"left"},
+		{header:'${text('他汀类常用药物选择')}', name:'stk541', index:'a.stk_5_4_1', width:150, align:"left"},
+		{header:'${text('是否糖尿病患者')}', name:'stk551', index:'a.stk_5_5_1', width:150, align:"left"},
+		{header:'${text('选择降糖药物的类别')}', name:'stk552', index:'a.stk_5_5_2', width:150, align:"left"},
+		{header:'${text('其他降糖药物')}', name:'stk5521', index:'a.stk_5_5_2_1', width:150, align:"left"},
+		{header:'${text('是否高血压患者')}', name:'stk571', index:'a.stk_5_7_1', width:150, align:"left"},
+		{header:'${text('选择降压药物的类别')}', name:'stk572', index:'a.stk_5_7_2', width:150, align:"left"},
+		{header:'${text('其它降压药物')}', name:'stk5721', index:'a.stk_5_7_2_1', width:150, align:"left"},
+		{header:'${text('入院时是否正常进食与饮水')}', name:'stk61', index:'a.stk_6_1', width:150, align:"left"},
+		{header:'${text('是否进行吞咽评估')}', name:'stk620', index:'a.stk_6_2_0', width:150, align:"left"},
+		{header:'${text('首次吞咽困难评估日期时间')}', name:'stk6211', index:'a.stk_6_2_1_1', width:150, align:"center"},
+		{header:'${text('评价方法选择')}', name:'stk631', index:'a.stk_6_3_1', width:150, align:"left"},
+		{header:'${text('其他评价方法填写')}', name:'stk6311', index:'a.stk_6_3_1_1', width:150, align:"left"},
+		{header:'${text('未进行吞咽困难评价的原因')}', name:'stk632', index:'a.stk_6_3_2', width:150, align:"left"},
+		{header:'${text('其它未进行吞咽困难评价的原因')}', name:'stk6321', index:'a.stk_6_3_2_1', width:150, align:"left"},
+		{header:'${text('入院后病情判定')}', name:'stk71', index:'a.stk_7_1', width:150, align:"left"},
+		{header:'${text('是否需要做预防DVT治疗')}', name:'stk721', index:'a.stk_7_2_1', width:150, align:"left"},
+		{header:'${text('禁忌证选择')}', name:'stk722', index:'a.stk_7_2_2', width:150, align:"left"},
+		{header:'${text('预防DVT治疗医嘱下达日期时间')}', name:'stk72311', index:'a.stk_7_2_3_1_1', width:150, align:"center"},
+		{header:'${text('预防DVT治疗方法')}', name:'stk7314', index:'a.stk_7_3_1_4', width:150, align:"left"},
+		{header:'${text('其他预防DVT治疗药物')}', name:'stk7315', index:'a.stk_7_3_1_5', width:150, align:"left"},
+		{header:'${text('出院时继续使用抗血小扳聚集治疗药物')}', name:'stk81', index:'a.stk_8_1', width:150, align:"left"},
+		{header:'${text('其他抗血小板聚集治疗药物')}', name:'stk811', index:'a.stk_8_1_1', width:150, align:"left"},
+		{header:'${text('出院时使用选择他汀类药物')}', name:'stk82', index:'a.stk_8_2', width:150, align:"left"},
+		{header:'${text('出院时使用抗凝药物')}', name:'stk83', index:'a.stk_8_3', width:150, align:"left"},
+		{header:'${text('出院时使用降糖药物的类别')}', name:'stk84', index:'a.stk_8_4', width:150, align:"left"},
+		{header:'${text('其他降糖药物')}', name:'stk841', index:'a.stk_8_4_1', width:150, align:"left"},
+		{header:'${text('出院时有高血压患者选择降压药物的类别')}', name:'stk85', index:'a.stk_8_5', width:150, align:"left"},
+		{header:'${text('是否出院时有高血压')}', name:'stk850', index:'a.stk_8_5_0', width:150, align:"left"},
+		{header:'${text('其他降压药物')}', name:'stk851', index:'a.stk_8_5_1', width:150, align:"left"},
+		{header:'${text('入院时是否有重点护理评估记录')}', name:'stk91', index:'a.stk_9_1', width:150, align:"left"},
+		{header:'${text('行走评估结果')}', name:'stk911', index:'a.stk_9_1_1', width:150, align:"left"},
+		{header:'${text('呼吸评估结果')}', name:'stk912', index:'a.stk_9_1_2', width:150, align:"left"},
+		{header:'${text('饮食评估结果')}', name:'stk913', index:'a.stk_9_1_3', width:150, align:"left"},
+		{header:'${text('吞咽评估结果')}', name:'stk914', index:'a.stk_9_1_4', width:150, align:"left"},
+		{header:'${text('压疮评估')}', name:'stk9151', index:'a.stk_9_1_5_1', width:150, align:"left"},
+		{header:'${text('压疮评估结果选择')}', name:'stk916', index:'a.stk_9_1_6', width:150, align:"left"},
+		{header:'${text('预防压疮告知')}', name:'stk917', index:'a.stk_9_1_7', width:150, align:"left"},
+		{header:'${text('吸烟史')}', name:'stk931', index:'a.stk_9_3_1', width:150, align:"left"},
+		{header:'${text('吸烟程度评估')}', name:'stk932', index:'a.stk_9_3_2', width:150, align:"left"},
+		{header:'${text('接受戒烟的建议或者戒烟治疗')}', name:'stk933', index:'a.stk_9_3_3', width:150, align:"left"},
+		{header:'${text('操作')}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
+			var actions = [];
+			<% if(hasPermi('quality:qualityStk:edit')){ %>
+				actions.push('<a href="${ctx}/quality/qualityStk/form?id='+row.id+'" class="btnList" title="${text('编辑STK脑梗死（首次住院）')}"><i class="fa fa-pencil"></i></a>&nbsp;');
+				if (row.status == Global.STATUS_NORMAL){
+					actions.push('<a href="${ctx}/quality/qualityStk/disable?id='+row.id+'" class="btnList" title="${text('停用STK脑梗死（首次住院）')}" data-confirm="${text('确认要停用该STK脑梗死（首次住院）吗？')}"><i class="glyphicon glyphicon-ban-circle"></i></a>&nbsp;');
+				}
+				if (row.status == Global.STATUS_DISABLE){
+					actions.push('<a href="${ctx}/quality/qualityStk/enable?id='+row.id+'" class="btnList" title="${text('启用STK脑梗死（首次住院）')}" data-confirm="${text('确认要启用该STK脑梗死（首次住院）吗？')}"><i class="glyphicon glyphicon-ok-circle"></i></a>&nbsp;');
+				}
+				actions.push('<a href="${ctx}/quality/qualityStk/delete?id='+row.id+'" class="btnList" title="${text('删除STK脑梗死（首次住院）')}" data-confirm="${text('确认要删除该STK脑梗死（首次住院）吗？')}"><i class="fa fa-trash-o"></i></a>&nbsp;');
+			<% } %>
+			return actions.join('');
+		}}
+	],
+	// 加载成功后执行事件
+	ajaxSuccess: function(data){
+		
+	}
+});
+</script>
