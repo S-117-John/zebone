@@ -14,8 +14,7 @@ import java.util.Date;
 @Data
 public class BaseEntity extends DataEntity{
 
-    @Id
-    private String id;
+
 
     /**
      * 质控医师
