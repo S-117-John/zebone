@@ -4,18 +4,18 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
-		<groupId>com.jeesite</groupId>
-		<artifactId>jeesite-parent</artifactId>
+		<groupId>com.zebone</groupId>
+		<artifactId>zebone-parent</artifactId>
 		<version>4.0.8-SNAPSHOT</version>
 		<relativePath>../parent/pom.xml</relativePath>
 	</parent>
 	
-	<artifactId>jeesite-web</artifactId>
+	<artifactId>zebone-web</artifactId>
 	<packaging>war</packaging>
 	
-	<name>JeeSite Web</name>
-	<url>http://jeesite.com</url>
-	<inceptionYear>2013-Now</inceptionYear>
+	<name>Zebone Web</name>
+	<url>http://www.zebone.cn/</url>
+	<inceptionYear>2020-Now</inceptionYear>
 	
 	<properties>
 		
@@ -40,15 +40,15 @@
 		
 		<!-- 核心模块 -->
 		<dependency>
-			<groupId>com.jeesite</groupId>
-			<artifactId>jeesite-module-core</artifactId>
-			<version>${project.parent.version}</version>
+			<groupId>com.zebone</groupId>
+			<artifactId>zebone-module-core</artifactId>
+			<version>4.0.8-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.jeesite</groupId>
+			<groupId>com.zebone</groupId>
 			<artifactId>pay</artifactId>
-			<version>${project.parent.version}</version>
+			<version>4.0.8-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>

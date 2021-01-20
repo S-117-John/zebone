@@ -4,18 +4,18 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
-		<groupId>com.jeesite</groupId>
-		<artifactId>jeesite-parent</artifactId>
+		<groupId>com.zebone</groupId>
+		<artifactId>zebone-parent</artifactId>
 		<version>4.0.8-SNAPSHOT</version>
 		<relativePath>../../parent/pom.xml</relativePath>
 	</parent>
 	
-	<artifactId>jeesite-module-core</artifactId>
+	<artifactId>zebone-module-core</artifactId>
 	<packaging>jar</packaging>
 	
-	<name>JeeSite Module Core</name>
-	<url>http://jeesite.com</url>
-	<inceptionYear>2013-Now</inceptionYear>
+	<name>Zebone Module Core</name>
+	<url>http://www.zebone.cn/</url>
+	<inceptionYear>2020-Now</inceptionYear>
 	
 	<properties>
 	
@@ -24,8 +24,8 @@
 	<dependencies>
 		
 		<dependency>
-			<groupId>com.jeesite</groupId>
-			<artifactId>jeesite-common</artifactId>
+			<groupId>com.zebone</groupId>
+			<artifactId>zebone-common</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
 		
@@ -43,19 +43,11 @@
 		</plugins>
 	</build>
 	
-	<developers>  
-		<developer>
-			<id>thinkgem</id>
-			<name>WangZhen</name>
-			<email>thinkgem at 163.com</email>
-			<roles><role>Project lead</role></roles>
-			<timezone>+8</timezone>  
-		</developer>
-	</developers>
+
 	
 	<organization>
-		<name>JeeSite</name>
-		<url>http://jeesite.com</url>
+		<name>Zebone</name>
+		<url>http://www.zebone.cn/</url>
 	</organization>
 	
 </project>

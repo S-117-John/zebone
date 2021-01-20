@@ -3,14 +3,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	
-	<groupId>com.jeesite</groupId>
-	<artifactId>jeesite-root</artifactId>
+	<groupId>com.zebone</groupId>
+	<artifactId>Zebone-root</artifactId>
 	<version>4.0.8-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	
-	<name>JeeSite</name>
-	<url>http://jeesite.com</url>
-	<inceptionYear>2013-Now</inceptionYear>
+
+	<name>Zebone</name>
+	<url>http://www.zebone.cn/</url>
+	<inceptionYear>2020-Now</inceptionYear>
 	
 	<modules>
         <module>../parent</module>
@@ -21,19 +21,11 @@
 		<module>../modules/quality</module>
     </modules>
 	
-	<developers>  
-		<developer>
-			<id>thinkgem</id>
-			<name>WangZhen</name>
-			<email>thinkgem at 163.com</email>
-			<roles><role>Project lead</role></roles>
-			<timezone>+8</timezone>  
-		</developer>
-	</developers>
+
 	
 	<organization>
-		<name>JeeSite</name>
-		<url>http://jeesite.com</url>
+		<name>Zebone</name>
+		<url>http://www.zebone.cn</url>
 	</organization>
 	
 </project>

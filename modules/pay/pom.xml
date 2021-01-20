@@ -4,8 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
-		<groupId>com.jeesite</groupId>
-		<artifactId>jeesite-parent</artifactId>
+		<groupId>com.zebone</groupId>
+		<artifactId>zebone-parent</artifactId>
 		<version>4.0.8-SNAPSHOT</version>
 		<relativePath>../../parent/pom.xml</relativePath>
 		
@@ -21,9 +21,7 @@
 	<artifactId>pay</artifactId>
 	<packaging>jar</packaging>
 	
-	<name>JeeSite Module Template</name>
-	<url>http://jeesite.com</url>
-	<inceptionYear>2013-Now</inceptionYear>
+
 	
 	<properties>
 		
@@ -32,8 +30,8 @@
 	<dependencies>
 			
 		<dependency>
-			<groupId>com.jeesite</groupId>
-			<artifactId>jeesite-module-core</artifactId>
+			<groupId>com.zebone</groupId>
+			<artifactId>zebone-module-core</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
 
@@ -89,19 +87,5 @@
 		</plugins>
 	</build>
 	
-	<developers>  
-		<developer>
-			<id>thinkgem</id>
-			<name>WangZhen</name>
-			<email>thinkgem at 163.com</email>
-			<roles><role>Project lead</role></roles>
-			<timezone>+8</timezone>  
-		</developer>
-	</developers>
-	
-	<organization>
-		<name>JeeSite</name>
-		<url>http://jeesite.com</url>
-	</organization>
-	
+
 </project>

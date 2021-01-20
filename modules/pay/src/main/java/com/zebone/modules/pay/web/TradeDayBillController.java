@@ -34,6 +34,7 @@ import com.zebone.modules.pay.entity.TradeDayBill;
 import com.zebone.modules.pay.service.TradeDayBillService;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -116,9 +117,10 @@ public class TradeDayBillController extends BaseController {
 			//获取支付宝账单地址
 			String billUrl = aliPayService.downLoadAliBill(simpleDateFormatBill.format(tradeDayBill.getBillDate()),tradeDayBill.getAppId());
 			//下载对账单
-			String billName = FileUtils.downloadFromUrl(billUrl,billDir);
+//			String billName = FileUtils.downloadFromUrl(billUrl,billDir);
 			//解压对账单
-			List<String> fileNames = FileUtils.unZipBillFiles(billName,billDir);
+			List<String> fileNames = new ArrayList<>();
+//			List<String> fileNames = FileUtils.unZipBillFiles(billName,billDir);
 			//读取csv文件
 			for (String fileName : fileNames) {
 				List<String[]> contentList = CsvUtil.CSVReadAll(fileName);
