@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2013-Now http://jeesite.com All rights reserved.
  */
-package com.zebone.quality.modules.quality.entity;
+package com.zebone.quality.modules.men.entity;
 
 import org.hibernate.validator.constraints.Length;
 

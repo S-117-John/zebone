@@ -7,13 +7,13 @@
 			</div>
 			<div class="box-tools pull-right">
 				<a href="#" class="btn btn-default" id="btnSearch" title="${text('查询')}"><i class="fa fa-filter"></i> ${text('查询')}</a>
-				<% if(hasPermi('quality:qualityMen:edit')){ %>
-					<a href="${ctx}/quality/qualityMen/form" class="btn btn-default btnTool" title="${text('新增MEN脑膜瘤（初发手术治疗）')}"><i class="fa fa-plus"></i> ${text('新增')}</a>
+				<% if(hasPermi('men:qualityMen:edit')){ %>
+					<a href="${ctx}/men/qualityMen/form" class="btn btn-default btnTool" title="${text('新增MEN脑膜瘤（初发手术治疗）')}"><i class="fa fa-plus"></i> ${text('新增')}</a>
 				<% } %>
 			</div>
 		</div>
 		<div class="box-body">
-			<#form:form id="searchForm" model="${qualityMen}" action="${ctx}/quality/qualityMen/listData" method="post" class="form-inline hide"
+			<#form:form id="searchForm" model="${qualityMen}" action="${ctx}/men/qualityMen/listData" method="post" class="form-inline hide"
 					data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}" data-order-by="${parameter.orderBy}">
 				<div class="form-group">
 					<label class="control-label">${text('患者病案号')}：</label>
@@ -38,7 +38,7 @@ $('#dataGrid').dataGrid({
 	searchForm: $("#searchForm"),
 	columnModel: [
 		{header:'${text('质控医师')}', name:'cm_0_1_1_1', index:'a.cm_0_1_1_1', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
-			return '<a href="${ctx}/quality/qualityMen/form?id='+row.id+'" class="btnList" data-title="${text('编辑MEN脑膜瘤（初发手术治疗）')}">'+(val||row.id)+'</a>';
+			return '<a href="${ctx}/men/qualityMen/form?id='+row.id+'" class="btnList" data-title="${text('编辑MEN脑膜瘤（初发手术治疗）')}">'+(val||row.id)+'</a>';
 		}},
 		{header:'${text('质控护士')}', name:'cm_0_1_1_2', index:'a.cm_0_1_1_2', width:150, align:"left"},
 		{header:'${text('主治医师')}', name:'cm_0_1_1_3', index:'a.cm_0_1_1_3', width:150, align:"left"},
@@ -47,15 +47,15 @@ $('#dataGrid').dataGrid({
 		{header:'${text('患者病案号')}', name:'caseid', index:'a.caseid', width:150, align:"left"},
 		{header:'${text('操作')}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
 			var actions = [];
-			<% if(hasPermi('quality:qualityMen:edit')){ %>
-				actions.push('<a href="${ctx}/quality/qualityMen/form?id='+row.id+'" class="btnList" title="${text('编辑MEN脑膜瘤（初发手术治疗）')}"><i class="fa fa-pencil"></i></a>&nbsp;');
+			<% if(hasPermi('men:qualityMen:edit')){ %>
+				actions.push('<a href="${ctx}/men/qualityMen/form?id='+row.id+'" class="btnList" title="${text('编辑MEN脑膜瘤（初发手术治疗）')}"><i class="fa fa-pencil"></i></a>&nbsp;');
 				if (row.status == Global.STATUS_NORMAL){
-					actions.push('<a href="${ctx}/quality/qualityMen/disable?id='+row.id+'" class="btnList" title="${text('停用MEN脑膜瘤（初发手术治疗）')}" data-confirm="${text('确认要停用该MEN脑膜瘤（初发手术治疗）吗？')}"><i class="glyphicon glyphicon-ban-circle"></i></a>&nbsp;');
+					actions.push('<a href="${ctx}/men/qualityMen/disable?id='+row.id+'" class="btnList" title="${text('停用MEN脑膜瘤（初发手术治疗）')}" data-confirm="${text('确认要停用该MEN脑膜瘤（初发手术治疗）吗？')}"><i class="glyphicon glyphicon-ban-circle"></i></a>&nbsp;');
 				}
 				if (row.status == Global.STATUS_DISABLE){
-					actions.push('<a href="${ctx}/quality/qualityMen/enable?id='+row.id+'" class="btnList" title="${text('启用MEN脑膜瘤（初发手术治疗）')}" data-confirm="${text('确认要启用该MEN脑膜瘤（初发手术治疗）吗？')}"><i class="glyphicon glyphicon-ok-circle"></i></a>&nbsp;');
+					actions.push('<a href="${ctx}/men/qualityMen/enable?id='+row.id+'" class="btnList" title="${text('启用MEN脑膜瘤（初发手术治疗）')}" data-confirm="${text('确认要启用该MEN脑膜瘤（初发手术治疗）吗？')}"><i class="glyphicon glyphicon-ok-circle"></i></a>&nbsp;');
 				}
-				actions.push('<a href="${ctx}/quality/qualityMen/delete?id='+row.id+'" class="btnList" title="${text('删除MEN脑膜瘤（初发手术治疗）')}" data-confirm="${text('确认要删除该MEN脑膜瘤（初发手术治疗）吗？')}"><i class="fa fa-trash-o"></i></a>&nbsp;');
+				actions.push('<a href="${ctx}/men/qualityMen/delete?id='+row.id+'" class="btnList" title="${text('删除MEN脑膜瘤（初发手术治疗）')}" data-confirm="${text('确认要删除该MEN脑膜瘤（初发手术治疗）吗？')}"><i class="fa fa-trash-o"></i></a>&nbsp;');
 			<% } %>
 			return actions.join('');
 		}}

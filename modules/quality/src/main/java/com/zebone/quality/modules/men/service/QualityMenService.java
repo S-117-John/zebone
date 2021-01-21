@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2013-Now http://jeesite.com All rights reserved.
  */
-package com.zebone.quality.modules.quality.service;
+package com.zebone.quality.modules.men.service;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jeesite.common.entity.Page;
 import com.jeesite.common.service.CrudService;
-import com.zebone.quality.modules.quality.entity.QualityMen;
-import com.zebone.quality.modules.quality.dao.QualityMenDao;
+import com.zebone.quality.modules.men.entity.QualityMen;
+import com.zebone.quality.modules.men.dao.QualityMenDao;
 
 /**
  * MEN脑膜瘤（初发手术治疗）Service

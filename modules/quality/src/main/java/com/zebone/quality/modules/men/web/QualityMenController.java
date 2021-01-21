@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2013-Now http://jeesite.com All rights reserved.
  */
-package com.zebone.quality.modules.quality.web;
+package com.zebone.quality.modules.men.web;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jeesite.common.config.Global;
 import com.jeesite.common.entity.Page;
 import com.jeesite.common.web.BaseController;
-import com.zebone.quality.modules.quality.entity.QualityMen;
-import com.zebone.quality.modules.quality.service.QualityMenService;
+import com.zebone.quality.modules.men.entity.QualityMen;
+import com.zebone.quality.modules.men.service.QualityMenService;
 
 /**
  * MEN脑膜瘤（初发手术治疗）Controller
@@ -28,7 +28,7 @@ import com.zebone.quality.modules.quality.service.QualityMenService;
  * @version 2021-01-21
  */
 @Controller
-@RequestMapping(value = "${adminPath}/quality/qualityMen")
+@RequestMapping(value = "${adminPath}/men/qualityMen")
 public class QualityMenController extends BaseController {
 
 	@Autowired
@@ -45,17 +45,17 @@ public class QualityMenController extends BaseController {
 	/**
 	 * 查询列表
 	 */
-	@RequiresPermissions("quality:qualityMen:view")
+	@RequiresPermissions("men:qualityMen:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(QualityMen qualityMen, Model model) {
 		model.addAttribute("qualityMen", qualityMen);
-		return "modules/quality/qualityMenList";
+		return "modules/men/qualityMenList";
 	}
 	
 	/**
 	 * 查询列表数据
 	 */
-	@RequiresPermissions("quality:qualityMen:view")
+	@RequiresPermissions("men:qualityMen:view")
 	@RequestMapping(value = "listData")
 	@ResponseBody
 	public Page<QualityMen> listData(QualityMen qualityMen, HttpServletRequest request, HttpServletResponse response) {
@@ -66,17 +66,17 @@ public class QualityMenController extends BaseController {
 	/**
 	 * 查看编辑表单
 	 */
-	@RequiresPermissions("quality:qualityMen:view")
+	@RequiresPermissions("men:qualityMen:view")
 	@RequestMapping(value = "form")
 	public String form(QualityMen qualityMen, Model model) {
 		model.addAttribute("qualityMen", qualityMen);
-		return "modules/quality/qualityMenForm";
+		return "modules/men/qualityMenForm";
 	}
 
 	/**
 	 * 保存MEN脑膜瘤（初发手术治疗）
 	 */
-	@RequiresPermissions("quality:qualityMen:edit")
+	@RequiresPermissions("men:qualityMen:edit")
 	@PostMapping(value = "save")
 	@ResponseBody
 	public String save(@Validated QualityMen qualityMen) {
@@ -87,7 +87,7 @@ public class QualityMenController extends BaseController {
 	/**
 	 * 停用MEN脑膜瘤（初发手术治疗）
 	 */
-	@RequiresPermissions("quality:qualityMen:edit")
+	@RequiresPermissions("men:qualityMen:edit")
 	@RequestMapping(value = "disable")
 	@ResponseBody
 	public String disable(QualityMen qualityMen) {
@@ -99,7 +99,7 @@ public class QualityMenController extends BaseController {
 	/**
 	 * 启用MEN脑膜瘤（初发手术治疗）
 	 */
-	@RequiresPermissions("quality:qualityMen:edit")
+	@RequiresPermissions("men:qualityMen:edit")
 	@RequestMapping(value = "enable")
 	@ResponseBody
 	public String enable(QualityMen qualityMen) {
@@ -111,7 +111,7 @@ public class QualityMenController extends BaseController {
 	/**
 	 * 删除MEN脑膜瘤（初发手术治疗）
 	 */
-	@RequiresPermissions("quality:qualityMen:edit")
+	@RequiresPermissions("men:qualityMen:edit")
 	@RequestMapping(value = "delete")
 	@ResponseBody
 	public String delete(QualityMen qualityMen) {
