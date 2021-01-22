@@ -78,11 +78,11 @@ jdbc:
   pool:
 
     # 初始化连接数
-    init: 1
+    init: 10
     # 最小连接数
-    minIdle: 3
+    minIdle: 30
     # 最大连接数
-    maxActive: 20
+    maxActive: 200
 
   # 多数据源名称列表，启用方式：@MyBatisDao(dataSourceName="ds2")
   dataSourceNames: ds2
