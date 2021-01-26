@@ -11,7 +11,14 @@
 		</div>
 		<#form:form id="inputForm" model="${qualityCap}" action="${ctx}/cap/qualityCap/save" method="post" class="form-horizontal">
 			<div class="box-body">
-				<div class="form-unit">${text('基本信息')}</div>
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					基本信息 （请参照出院/住院病历首页信息填写）
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+				<div class="form-unit">${text('适用的ICD-10编码与疾病名称：')}</div>
 				<div class="row">
 				<div class="row">
 					<div class="col-xs-12">
@@ -2136,3 +2143,4 @@ $("#inputForm").validate({
     }
 });
 </script>
+<style href="${ctxStatic}/quality_common.css" type="text/css"></style>
