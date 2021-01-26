@@ -32,7 +32,7 @@
 								<#form:input path="caseId" maxlength="255" class="form-control required"/>
 							</div>
 							<div class="col-sm-3">
-								<button type="button" class="btn btn-sm btn-primary" id="patientSubmit"><i class="fa fa-check"></i> ${text('导入患者信息')}</button>&nbsp;
+								<button type="button" class="btn btn-sm btn-primary" id="patientSubmit" onclick="importPatient()"><i class="fa fa-check"></i> ${text('导入患者信息')}</button>&nbsp;
 							</div>
 						</div>
 					</div>
@@ -1388,6 +1388,9 @@
 	</div>
 </div>
 <% } %>
+
+<script type="text/javascript" src="${ctxStatic}/importPatient.js"></script>
+<link rel="stylesheet" type="text/css" href="${ctxStatic}/quality_common.css"></linf>
 <script>
 $("#inputForm").validate({
 	submitHandler: function(form){
@@ -1402,50 +1405,8 @@ $("#inputForm").validate({
     }
 });
 </script>
-<style>
-	.form-cursor{
-		font-size: 14px;
-		color: #3362CD;
-		letter-spacing: 0;
-		font-family: PingFangSC-Semibold;
-		cursor: pointer;
-		font-weight: 600;
-	}
-	.form-title{
-		font-size: 16px;
-		margin: 12px auto 0;
-		margin-top: 0;
-		text-align: left;
-		line-height: 40px;
-		background: #F5F7FD;
-		margin-top: 24px;
-	}
-	.circle{
-		display: inline-block;
-		background: #3362CD;
-		width: 2px;
-		height: 20px;
-		padding: 0 !important;
-		border-radius: 2px;
-		margin: 0 8px;
-		vertical-align: middle;
-		margin-top: -4px;
-	}
-</style>
 
 <script>
-
-
-	$("#patientSubmit").click(function (){
-		$.ajax({
-			url:'${ctx}/api/emr/emrHomePage/data',
-			type: "POST",
-			data: {patNo: $("#caseId").val()},
-			success:function (data){
-				window.location.href = "${ctx}/cesarean/qualityCesareanSection/form?id="+data;
-			}
-		});
-	});
 
 
 	//术后24小时内输血量(CS-5-3)等于"实际量ml"(a)时必填;
