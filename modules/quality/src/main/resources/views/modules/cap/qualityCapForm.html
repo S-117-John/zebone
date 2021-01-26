@@ -20,7 +20,6 @@
 				</p>
 				<div class="form-unit">${text('适用的ICD-10编码与疾病名称：')}</div>
 				<div class="row">
-				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="">
@@ -163,6 +162,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('相关日期时间信息：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -302,6 +304,8 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('其他相关信息：')}</div>
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -335,6 +339,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					Cap-1: 患儿入院病情评估
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -346,6 +359,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('儿童CAP病情严重度评估：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -379,11 +395,15 @@
 						</div>
 					</div>
 				</div>
+
+
+				<div class="form-unit">${text('符合重症住院及住ICU/RCU标准：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('是否符合重症')}：<i class="fa icon-question hide"></i></label>
+								<span class="required hide">*</span> ${text('是否为重症住院及住ICU/RCU患儿')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_1_2_1" dictType="CAP_1_2_1" blankOption="true" class="form-control" />
 							</div>
@@ -412,17 +432,29 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('住院前接种肺炎链球菌疫苗和（或）流感疫苗的患儿：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('是否接种肺炎链球菌疫苗和')}：<i class="fa icon-question hide"></i></label>
+								<span class="required hide">*</span> ${text('是否接种肺炎链球菌疫苗和（或）流感疫苗的')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_1_3_1" dictType="CAP_1_3_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					Cap-2: 首次氧合评估情况
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -489,6 +521,17 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					Cap-3: 重症肺炎(重症+ICU/RCU)住院后首剂抗菌药物治疗前采集标本情况
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+				<div class="form-unit">${text('重症并收入ICU/RCU的患儿：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -500,6 +543,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('实施首次采集标本时段：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -545,6 +591,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('病原学检查 ：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -611,6 +660,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('实验室检查 ：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -644,6 +696,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('病原学检测结果：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -678,6 +733,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					Cap-4: 抗菌药物使用情况
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -758,6 +822,17 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					Cap-5: 经验性抗感染治疗选择药物种类
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+				<div class="form-unit">${text('病情评估后，拟诊需抗感染治疗肺炎缘由：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -791,6 +866,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('经验性抗感染治疗选择药物种类：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -912,6 +990,17 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					Cap-6: 初始治疗评价无效患儿重复病原学检查与病原针对性治疗情况
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+				<div class="form-unit">${text('初始治疗72小时后无效者，重复病原学检查：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1416,6 +1505,16 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					Cap-8: 住院期间为患儿/患儿家长提供健康教育与出院时提供教育告知情况
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1471,6 +1570,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					Cap-9: 离院方式
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1570,6 +1678,16 @@
 						</div>
 					</div>
 				</div>
+
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					Cap-10: 患儿家长对服务的体验与评价
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1691,6 +1809,16 @@
 						</div>
 					</div>
 				</div>
+
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					Cap-11: 抗菌药物疗程（天数）
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1772,6 +1900,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					Cap-12: 住院费用
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -2143,4 +2280,4 @@ $("#inputForm").validate({
     }
 });
 </script>
-<style href="${ctxStatic}/quality_common.css" type="text/css"></style>
+<link href="${ctxStatic}/quality_common.css" rel="stylesheet"/>
