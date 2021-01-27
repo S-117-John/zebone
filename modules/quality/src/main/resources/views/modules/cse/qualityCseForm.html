@@ -1,4 +1,6 @@
 <% layout('/layouts/default.html', {title: 'CSE惊厥性癫痫持续状态管理', libs: ['validate']}){ %>
+<script type="text/javascript" src="${ctxStatic}/importPatient.js"></script>
+<link rel="stylesheet" type="text/css" href="${ctxStatic}/quality_common.css"></linf>
 <div class="main-content">
 	<div class="box box-main">
 		<div class="box-header with-border">
@@ -2408,8 +2410,6 @@
 	</div>
 </div>
 <% } %>
-<script type="text/javascript" src="${ctxStatic}/importPatient.js"></script>
-<link rel="stylesheet" type="text/css" href="${ctxStatic}/quality_common.css"></linf>
 <script>
 $("#inputForm").validate({
 	submitHandler: function(form){
