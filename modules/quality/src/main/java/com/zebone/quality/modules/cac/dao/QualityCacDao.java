@@ -10,7 +10,7 @@ import com.zebone.quality.modules.cac.entity.QualityCac;
 /**
  * quality_cacDAO接口
  * @author 卡卡西
- * @version 2021-01-19
+ * @version 2021-01-27
  */
 @MyBatisDao
 public interface QualityCacDao extends CrudDao<QualityCac> {
