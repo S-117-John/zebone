@@ -11,8 +11,31 @@
 		</div>
 		<#form:form id="inputForm" model="${qualityIch}" action="${ctx}/ich/qualityIch/save" method="post" class="form-horizontal">
 			<div class="box-body">
-				<div class="form-unit">${text('基本信息')}</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					基本信息
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+				<div class="form-unit">${text('适用的ICD-10编码与疾病名称：')}</div>
+
 				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('患者病案号')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-5">
+								<#form:input path="caseid" maxlength="64" class="form-control"/>
+							</div>
+							<div class="col-sm-3 hide">
+								<button type="button" class="btn btn-sm btn-primary" id="patientSubmit" onclick="importPatient()"><i class="fa fa-check"></i> ${text('导入患者信息')}</button>&nbsp;
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -64,17 +87,6 @@
 								<span class="required hide">*</span> ${text('上报科室')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_0_1_1_5" maxlength="32" class="form-control"/>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('患者病案号')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-10">
-								<#form:input path="caseId" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -178,6 +190,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('相关日期时间信息：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -352,6 +367,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('其他相关信息：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -385,6 +403,17 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					ICH-1 急诊评估
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+				<div class="form-unit">${text('医师接诊时间：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -474,6 +503,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('发病 24 小时内到院急诊首次用Glasgow昏迷量表，或者神经功能缺损NIHSS评估评估病情：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -542,6 +574,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('急诊首次头部影像学检查：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -653,6 +688,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('急诊入住”卒中中心”：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -676,6 +714,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					ICH-2 急性脑出血患者入院24小时内的血压管理
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -742,6 +789,17 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					ICH-3 急性脑出血患者预防深静脉血栓
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+				<div class="form-unit">${text('入院后病情判定：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -753,6 +811,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('预防DVT治疗医嘱日期与时间：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -853,6 +914,17 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					ICH-4 急性脑出血患者进行吞咽困难评价
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+				<div class="form-unit">${text('入院时正常进食与饮水：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -864,6 +936,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('入院24小时内进行首次吞咽困难评估时间：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -931,6 +1006,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					ICH-5 急性出血性卒中患者住院期间接受影像学检测
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1031,6 +1115,17 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					ICH-6 重症急性期出血性卒中患者接受神经外科评估及干预
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+				<div class="form-unit">${text('手术前评价严重程度ICH评分：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1120,6 +1215,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('重症急性期脑出血患者接受神经外科干预措施：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1219,6 +1317,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					ICH-8 急性脑出血卒中患者病因诊断
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1285,6 +1392,17 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					ICH-9 住院期间为患者提供健康教育与出院时提供教育告知五要素
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+				<div class="form-unit">${text('卒中重点护理评估和健康教育：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1494,6 +1612,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('出院时提供教育告知五要素：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1549,6 +1670,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					ICH-10 离院方式
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1593,6 +1723,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					ICH-11 患者对服务的体验与评价
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1725,6 +1864,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					ICH-12 住院费用
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
