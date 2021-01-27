@@ -13,12 +13,13 @@
 			<div class="box-body">
 				<div class="form-unit">${text('基本信息')}</div>
 				<div class="row">
+				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('质控医师')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm0111" maxlength="32" class="form-control"/>
+								<#form:input path="cm_0_1_1_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -29,7 +30,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('质控护士')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm0112" maxlength="32" class="form-control"/>
+								<#form:input path="cm_0_1_1_2" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -40,7 +41,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('主治医师')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm0113" maxlength="32" class="form-control"/>
+								<#form:input path="cm_0_1_1_3" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -51,7 +52,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('责任护士')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm0114" maxlength="32" class="form-control"/>
+								<#form:input path="cm_0_1_1_4" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -62,7 +63,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('上报科室')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm0115" maxlength="32" class="form-control"/>
+								<#form:input path="cm_0_1_1_5" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -73,7 +74,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('患者病案号')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="caseId" maxlength="32" class="form-control"/>
+								<#form:input path="caseid" maxlength="64" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -84,7 +85,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('主要诊断ICD-10四位亚目编码与名称')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm0131" maxlength="32" class="form-control"/>
+								<#form:select path="cm_0_1_3_1" dictType="STEMI_CM_0_1_3_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -95,7 +96,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('主要诊断ICD-10六位临床扩展编码与名称')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm0132" maxlength="32" class="form-control"/>
+								<#form:select path="cm_0_1_3_2" dictType="STEMI_CM_0_1_3_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -106,7 +107,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm0141" maxlength="32" class="form-control"/>
+								<#form:select path="cm_0_1_4_1" dictType="STEMI_CM_0_1_4_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -117,7 +118,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm0142" dictType="CM_0_1_4_2" blankOption="true" class="form-control" />
+								<#form:select path="cm_0_1_4_2" dictType="STEMI_CM_0_1_4_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -128,7 +129,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否出院后31天内重复住院')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm015" maxlength="32" class="form-control"/>
+								<#form:select path="cm_0_1_5" dictType="STEMI_CM_0_1_5" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -139,7 +140,8 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('出生日期')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm0211" class="form-control"/>
+								<#form:input path="cm_0_2_1_1" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 							</div>
 						</div>
 					</div>
@@ -150,7 +152,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('患者性别')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="cm0212" dictType="CM_0_2_1_2" class="form-control" />
+								<#form:select path="cm_0_2_1_2" dictType="STEMI_CM_0_2_1_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -161,7 +163,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('患者体重')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm0213" class="form-control number"/>
+								<#form:input path="cm_0_2_1_3" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -172,7 +174,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('患者身高')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm0215" class="form-control number"/>
+								<#form:input path="cm_0_2_1_5" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -183,7 +185,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('发病日期时间是否无法确定或无记录')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="cm0221" dictType="CM_0_2_2_1" class="form-control" />
+								<#form:select path="cm_0_2_2_1" dictType="STEMI_CM_0_2_2_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -194,7 +196,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('发病日期时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm0222" readonly="true" maxlength="20" class="form-control Wdate"
+								<#form:input path="cm_0_2_2_2" readonly="true" maxlength="20" class="form-control Wdate"
 									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 							</div>
 						</div>
@@ -206,7 +208,8 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('到达本院急诊或者门诊日期时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm0232" class="form-control"/>
+								<#form:input path="cm_0_2_3_2" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 							</div>
 						</div>
 					</div>
@@ -217,7 +220,8 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('入院日期时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm0241" class="form-control"/>
+								<#form:input path="cm_0_2_4_1" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 							</div>
 						</div>
 					</div>
@@ -228,7 +232,8 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('出院日期时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm0242" class="form-control"/>
+								<#form:input path="cm_0_2_4_2" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 							</div>
 						</div>
 					</div>
@@ -239,7 +244,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('入住CCU日期时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm0251" readonly="true" maxlength="20" class="form-control Wdate"
+								<#form:input path="cm_0_2_5_1" readonly="true" maxlength="20" class="form-control Wdate"
 									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 							</div>
 						</div>
@@ -251,7 +256,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('离开CCU日期时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm0252" readonly="true" maxlength="20" class="form-control Wdate"
+								<#form:input path="cm_0_2_5_2" readonly="true" maxlength="20" class="form-control Wdate"
 									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 							</div>
 						</div>
@@ -263,7 +268,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('费用支付方式')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm031" maxlength="32" class="form-control"/>
+								<#form:select path="cm_0_3_1" dictType="STEMI_CM_0_3_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -274,7 +279,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('收入住院途径')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm032" maxlength="32" class="form-control"/>
+								<#form:select path="cm_0_3_2" dictType="STEMI_CM_0_3_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -285,7 +290,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('到院交通工具')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm033" maxlength="32" class="form-control"/>
+								<#form:select path="cm_0_3_3" dictType="STEMI_CM_0_3_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -296,7 +301,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('救护车类型')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi046" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_0_4_6" dictType="STEMI_0_4_6" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -307,7 +312,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否现场评估生命体征，施行急救')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi041" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_0_4_1" dictType="STEMI_0_4_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -318,7 +323,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('到达现场后10分钟内是否完成心电图检查')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi042" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_0_4_2" dictType="STEMI_0_4_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -329,7 +334,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('现场急救维持生命体征稳定措施选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi043" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_0_4_3" dictType="STEMI_0_4_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -340,7 +345,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('对持续胸痛＞15分钟和心电图ST段抬高，且无“阿斯匹林”禁忌症的患者用药')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi044" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_0_4_4" dictType="STEMI_0_4_4" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -351,7 +356,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否利用救护车中车载信息系统、微信、彩信等多种形式传输心电图等院前信息至目标医院')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi045" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_0_4_5" dictType="STEMI_0_4_5" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -362,7 +367,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否入院前在救护车上开始溶栓治疗')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi047" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_0_4_7" dictType="STEMI_0_4_7" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -373,7 +378,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否有症状和病史')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="stemi114" dictType="STEMI_1_1_4" class="form-control" />
+								<#form:select path="stemi_1_1_4" dictType="STEMI_1_1_4" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -384,7 +389,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('症状和体征选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi115" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_1_1_5" dictType="STEMI_1_1_5" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -395,7 +400,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否实施首次采用Killip分级法评估心功能')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="stemi116" dictType="STEMI_1_1_6" class="form-control" />
+								<#form:select path="stemi_1_1_6" dictType="STEMI_1_1_6" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -406,7 +411,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('Killip分级，症状及体征选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi117" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_1_1_7" dictType="STEMI_1_1_7" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -417,7 +422,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否实施首次心电图检查')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="stemi111" dictType="STEMI_1_1_1" class="form-control" />
+								<#form:select path="stemi_1_1_1" dictType="STEMI_1_1_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -428,7 +433,8 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('心电图检查结果确诊STEMI报告日期时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi1121" class="form-control"/>
+								<#form:input path="stemi_1_1_2_1" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 							</div>
 						</div>
 					</div>
@@ -439,7 +445,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('心电图检查结果，具有STEMI特征性诊断标准的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi113" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_1_1_3" dictType="STEMI_1_1_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -450,7 +456,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他心电图检查结果填写')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi1131" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_1_1_3_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -461,7 +467,18 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否有P2Y12受体拮抗剂禁忌证')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="stemi121" dictType="STEMI_1_2_1" class="form-control" />
+								<#form:select path="stemi_1_2_1" dictType="STEMI_1_2_1" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('备注')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:textarea path="remarks" rows="4" maxlength="500" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -472,7 +489,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('P2Y12受体拮抗剂禁忌证')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi122" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_1_2_2" dictType="STEMI_1_2_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -483,7 +500,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他P2Y12受体拮抗剂禁忌证填写')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi1221" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_1_2_2_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -494,7 +511,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('首剂给予双联抗血小板药负荷剂量')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi123" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_1_2_3" dictType="STEMI_1_2_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -505,7 +522,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他抗血小板药物填写')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi1231" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_1_2_3_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -516,7 +533,8 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('用药日期时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi1241" class="form-control"/>
+								<#form:input path="stemi_1_2_4_1" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 							</div>
 						</div>
 					</div>
@@ -527,7 +545,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否实施首次心脏标志物检测')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="stemi1311" dictType="STEMI_1_3_1_1" class="form-control" />
+								<#form:select path="stemi_1_3_1_1" dictType="STEMI_1_3_1_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -538,7 +556,8 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('首次心脏标志物检测结果报告日期时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi13121" class="form-control"/>
+								<#form:input path="stemi_1_3_1_2_1" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 							</div>
 						</div>
 					</div>
@@ -549,7 +568,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('首次心脏标志物检测选项和数值')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi132" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_1_3_2" dictType="STEMI_1_3_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -560,7 +579,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('肌钙蛋白T检测选项')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi1411" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_1_4_1_1" dictType="STEMI_1_4_1_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -571,7 +590,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('肌钙蛋白T检测值')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi1321" maxlength="11" class="form-control digits"/>
+								<#form:input path="stemi_1_3_2_1" maxlength="11" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -582,7 +601,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('肌钙蛋白T定性检测选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi1412" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_1_4_1_2" dictType="STEMI_1_4_1_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -593,7 +612,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('肌钙蛋白I检测选项')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi1421" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_1_4_2_1" dictType="STEMI_1_4_2_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -604,7 +623,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('肌钙蛋白I检测值')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi1322" maxlength="11" class="form-control digits"/>
+								<#form:input path="stemi_1_3_2_2" maxlength="11" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -615,7 +634,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('肌钙蛋白I定性检测选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi1422" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_1_4_2_2" dictType="STEMI_1_4_2_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -626,7 +645,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('肌酸激酶同工酶检测选项')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi1431" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_1_4_3_1" dictType="STEMI_1_4_3_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -637,7 +656,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('肌酸激酶同工酶检测值')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi1323" maxlength="11" class="form-control digits"/>
+								<#form:input path="stemi_1_3_2_3" maxlength="11" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -648,7 +667,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('肌酸激酶同工酶定性检测选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi1432" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_1_4_3_2" dictType="STEMI_1_4_3_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -659,7 +678,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('心肌肌红蛋白检测选项')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi1441" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_1_4_4_1" dictType="STEMI_1_4_4_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -670,7 +689,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('心肌肌红蛋白检测值')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi1324" maxlength="11" class="form-control digits"/>
+								<#form:input path="stemi_1_3_2_4" maxlength="11" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -681,7 +700,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('心肌肌红蛋白定性检测选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi1442" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_1_4_4_2" dictType="STEMI_1_4_4_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -692,7 +711,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('B型钠尿肽检测选项')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi1451" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_1_4_5_1" dictType="STEMI_1_4_5_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -703,7 +722,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('B型钠尿肽检测值')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi1325" maxlength="11" class="form-control digits"/>
+								<#form:input path="stemi_1_3_2_5" maxlength="11" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -714,7 +733,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('B型钠尿肽定性检测选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi1452" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_1_4_5_2" dictType="STEMI_1_4_5_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -725,7 +744,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('N端B型钠尿肽前体检测选项')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi1461" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_1_4_6_1" dictType="STEMI_1_4_6_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -736,7 +755,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('N端B型钠尿肽前体检测值')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi1326" maxlength="11" class="form-control digits"/>
+								<#form:input path="stemi_1_3_2_6" maxlength="11" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -747,7 +766,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('N端B型钠尿肽前体定性检测选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi1462" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_1_4_6_2" dictType="STEMI_1_4_6_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -758,7 +777,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否实施首次X线胸片检查')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="stemi211" dictType="STEMI_2_1_1" class="form-control" />
+								<#form:select path="stemi_2_1_1" dictType="STEMI_2_1_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -769,7 +788,8 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('首次X线胸片检查报告日期时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi2121" class="form-control"/>
+								<#form:input path="stemi_2_1_2_1" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 							</div>
 						</div>
 					</div>
@@ -780,7 +800,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否有肺淤血或肺水肿')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi213" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_2_1_3" dictType="STEMI_2_1_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -791,7 +811,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否实施首次超声心动图')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="stemi221" dictType="STEMI_2_2_1" class="form-control" />
+								<#form:select path="stemi_2_2_1" dictType="STEMI_2_2_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -802,7 +822,8 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('报告日期时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi2221" class="form-control"/>
+								<#form:input path="stemi_2_2_2_1" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 							</div>
 						</div>
 					</div>
@@ -813,7 +834,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('左室射血分（LVEF）测量值')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi2231" maxlength="11" class="form-control digits"/>
+								<#form:input path="stemi_2_2_3_1" maxlength="11" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -824,7 +845,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('左室舒张末径（LVEDd）数值')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi22331" maxlength="11" class="form-control digits"/>
+								<#form:input path="stemi_2_2_3_3_1" maxlength="11" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -835,7 +856,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否有左室室壁瘤')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi2234" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_2_2_3_4" dictType="STEMI_2_2_3_4" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -846,7 +867,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否实施GRACE危险评分评估')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="stemi2311" dictType="STEMI_2_3_1_1" class="form-control" />
+								<#form:select path="stemi_2_3_1_1" dictType="STEMI_2_3_1_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -857,7 +878,8 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('评估日期时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi23121" class="form-control"/>
+								<#form:input path="stemi_2_3_1_2_1" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 							</div>
 						</div>
 					</div>
@@ -868,7 +890,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('实施首次GRACE危险评分值')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi23131" maxlength="11" class="form-control digits"/>
+								<#form:input path="stemi_2_3_1_3_1" maxlength="11" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -879,7 +901,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('GRACE危险评估分层的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi2314" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_2_3_1_4" dictType="STEMI_2_3_1_4" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -890,7 +912,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否实施TIMI危险分层评估')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="stemi2321" dictType="STEMI_2_3_2_1" class="form-control" />
+								<#form:select path="stemi_2_3_2_1" dictType="STEMI_2_3_2_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -901,7 +923,8 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('评估日期时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi23221" class="form-control"/>
+								<#form:input path="stemi_2_3_2_2_1" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 							</div>
 						</div>
 					</div>
@@ -912,7 +935,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('实施首次TIMI危险分层分值')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi23231" maxlength="11" class="form-control digits"/>
+								<#form:input path="stemi_2_3_2_3_1" maxlength="11" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -923,7 +946,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('TIMI危险分层的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi2324" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_2_3_2_4" dictType="STEMI_2_3_2_4" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -934,7 +957,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否实施CRUSADE出血风险评分')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="stemi2331" dictType="STEMI_2_3_3_1" class="form-control" />
+								<#form:select path="stemi_2_3_3_1" dictType="STEMI_2_3_3_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -945,7 +968,8 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('评估日期时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi23321" class="form-control"/>
+								<#form:input path="stemi_2_3_3_2_1" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 							</div>
 						</div>
 					</div>
@@ -956,7 +980,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('实施首次CRUSADE出血风险评分值')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi23331" maxlength="11" class="form-control digits"/>
+								<#form:input path="stemi_2_3_3_3_1" maxlength="11" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -967,7 +991,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('CRUSADE出血风险评分分层的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi2334" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_2_3_3_4" dictType="STEMI_2_3_3_4" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -978,7 +1002,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('实施再灌注治疗的模式')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="stemi302" dictType="STEMI_3_0_2" blankOption="true" class="form-control" />
+								<#form:select path="stemi_3_0_2" dictType="STEMI_3_0_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -989,7 +1013,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('STEMI溶栓适应证')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi311" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_1_1" dictType="STEMI_3_1_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1000,7 +1024,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否有溶栓治疗禁忌症')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3121" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_1_2_1" dictType="STEMI_3_1_2_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1011,7 +1035,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('绝对禁忌证选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3122" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_1_2_2" dictType="STEMI_3_1_2_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1022,7 +1046,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('相对禁忌证选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3123" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_1_2_3" dictType="STEMI_3_1_2_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1033,7 +1057,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否实施溶栓治疗')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi313" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_1_3" dictType="STEMI_3_1_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1044,7 +1068,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('溶栓药物选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi314" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_1_4" dictType="STEMI_3_1_4" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1055,7 +1079,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他溶栓药物')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3141" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_3_1_4_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -1066,7 +1090,8 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('输注开始日期时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3151" class="form-control"/>
+								<#form:input path="stemi_3_1_5_1" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 							</div>
 						</div>
 					</div>
@@ -1077,7 +1102,8 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('输注完成日期时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3161" class="form-control"/>
+								<#form:input path="stemi_3_1_6_1" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 							</div>
 						</div>
 					</div>
@@ -1088,7 +1114,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('到达医院STEMI确诊报告日期与时间至溶栓时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3171" maxlength="11" class="form-control digits"/>
+								<#form:input path="stemi_3_1_7_1" maxlength="11" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -1099,7 +1125,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('临床评估溶栓成功')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi318" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_1_8" dictType="STEMI_3_1_8" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1110,7 +1136,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('溶栓治疗并发症的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi319" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_1_9" dictType="STEMI_3_1_9" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1121,7 +1147,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('溶栓治疗延迟原因')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3110" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_1_10" dictType="STEMI_3_1_10" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1132,7 +1158,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否实施PCI治疗')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi321" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_1" dictType="STEMI_3_2_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1143,7 +1169,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('PCI适应证')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32213" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_2_1_3" dictType="STEMI_3_2_2_1_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1154,7 +1180,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('直接PCI适应证')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32211" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_2_1_1" dictType="STEMI_3_2_2_1_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1165,7 +1191,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('直接PCI适应证填写')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi322111" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_3_2_2_1_1_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -1176,7 +1202,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('溶栓后PCI适应证')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32212" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_2_1_2" dictType="STEMI_3_2_2_1_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1187,7 +1213,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否有PCI禁忌证')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi322" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_2" dictType="STEMI_3_2_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1198,7 +1224,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('PCI禁忌证选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3221" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_2_1" dictType="STEMI_3_2_2_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1209,7 +1235,8 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('PCI导丝通过梗死相关动脉日期时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32221" class="form-control"/>
+								<#form:input path="stemi_3_2_2_2_1" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 							</div>
 						</div>
 					</div>
@@ -1220,7 +1247,8 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('完成时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32231" class="form-control"/>
+								<#form:input path="stemi_3_2_2_3_1" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 							</div>
 						</div>
 					</div>
@@ -1231,7 +1259,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('确诊STEMI至PCI导丝通过梗死相关动脉')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32241" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_3_2_2_4_1" maxlength="32" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -1242,7 +1270,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('治疗延迟原因选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3225" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_2_5" dictType="STEMI_3_2_2_5" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1253,7 +1281,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('主要病变血管')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3231" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_1" dictType="STEMI_3_2_3_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1264,7 +1292,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('LAD-冠状动脉狭窄程度分级')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32321" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_2_1" dictType="STEMI_3_2_3_2_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1275,7 +1303,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('LAD-术前主要靶血管TIMI血流分级的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32325" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_2_5" dictType="STEMI_3_2_3_2_5" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1286,7 +1314,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('LCX-冠状动脉狭窄程度分级')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32322" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_2_2" dictType="STEMI_3_2_3_2_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1297,7 +1325,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('LCX-术前主要靶血管TIMI血流分级的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32326" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_2_6" dictType="STEMI_3_2_3_2_6" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1308,7 +1336,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('RCA-冠状动脉狭窄程度分级')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32323" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_2_3" dictType="STEMI_3_2_3_2_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1319,7 +1347,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('RCA-术前主要靶血管TIMI血流分级的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32327" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_2_7" dictType="STEMI_3_2_3_2_7" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1330,7 +1358,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('LM-冠状动脉狭窄程度分级')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32324" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_2_4" dictType="STEMI_3_2_3_2_4" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1341,7 +1369,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('LM-术前主要靶血管TIMI血流分级的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32328" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_2_8" dictType="STEMI_3_2_3_2_8" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1352,7 +1380,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('PCI治疗主要靶血管')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3233" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_3" dictType="STEMI_3_2_3_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1363,7 +1391,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('LM-PCI术后即刻主要靶血管TIMI血流分级的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32331" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_3_1" dictType="STEMI_3_2_3_3_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1374,7 +1402,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('LM-置入冠状动脉支架选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32332" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_3_2" dictType="STEMI_3_2_3_3_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1385,7 +1413,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('LM-置入冠状动脉支架填写')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi323321" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_3_2_3_3_2_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -1396,7 +1424,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('LAD-PCI术后即刻主要靶血管TIMI血流分级的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32333" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_3_3" dictType="STEMI_3_2_3_3_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1407,7 +1435,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('LAD-置入冠状动脉支架选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32334" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_3_4" dictType="STEMI_3_2_3_3_4" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1418,7 +1446,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('LAD-置入冠状动脉支架填写')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi323341" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_3_2_3_3_4_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -1429,7 +1457,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('LCX-PCI术后即刻主要靶血管TIMI血流分级的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32335" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_3_5" dictType="STEMI_3_2_3_3_5" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1440,7 +1468,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('LCX-置入冠状动脉支架选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32336" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_3_6" dictType="STEMI_3_2_3_3_6" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1451,7 +1479,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('LCX-置入冠状动脉支架填写')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi323361" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_3_2_3_3_6_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -1462,7 +1490,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('LM-LAD-PCI术后即刻主要靶血管TIMI血流分级的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32337" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_3_7" dictType="STEMI_3_2_3_3_7" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1473,7 +1501,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('LM-LAD-置入冠状动脉支架选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32338" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_3_8" dictType="STEMI_3_2_3_3_8" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1484,7 +1512,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('LM-LAD-置入冠状动脉支架填写')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi323381" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_3_2_3_3_8_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -1495,7 +1523,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('LM-LCX-PCI术后即刻主要靶血管TIMI血流分级的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32391" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_9_1" dictType="STEMI_3_2_3_9_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1506,7 +1534,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('LM-LCX-置入冠状动脉支架选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi323310" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_3_10" dictType="STEMI_3_2_3_3_10" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1517,7 +1545,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('LM-LCX-置入冠状动脉支架填写')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3233101" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_3_2_3_3_10_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -1528,7 +1556,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('RCA-PCI术后即刻主要靶血管TIMI血流分级的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi323311" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_3_11" dictType="STEMI_3_2_3_3_11" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1539,7 +1567,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('RCA-置入冠状动脉支架选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi323312" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_3_12" dictType="STEMI_3_2_3_3_12" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1550,7 +1578,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('RCA-置入冠状动脉支架填写')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3233121" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_3_2_3_3_12_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -1561,7 +1589,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('LM-中间支-PCI术后即刻主要靶血管TIMI血流分级的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi323313" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_3_13" dictType="STEMI_3_2_3_3_13" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1572,7 +1600,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('LM-中间支-置入冠状动脉支架选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi323314" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_3_14" dictType="STEMI_3_2_3_3_14" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1583,7 +1611,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('LM-中间支-置入冠状动脉支架填写')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3233141" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_3_2_3_3_14_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -1594,7 +1622,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('中间支-PCI术后即刻主要靶血管TIMI血流分级的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi323151" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_15_1" dictType="STEMI_3_2_3_15_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1605,7 +1633,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('中间支-置入冠状动脉支架选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi323316" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_3_3_16" dictType="STEMI_3_2_3_3_16" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1616,7 +1644,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('中间支-置入冠状动脉支架填写')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3233161" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_3_2_3_3_16_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -1627,7 +1655,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('ICD-9-CM-3编码与名称')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3241" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_4_1" dictType="STEMI_3_2_4_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1638,7 +1666,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('治疗血管的数量的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3242" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_4_2" dictType="STEMI_3_2_4_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1649,7 +1677,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('置入血管支架的数量现在')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3243" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_4_3" dictType="STEMI_3_2_4_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1660,7 +1688,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('心脏团队讨论决策模式的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3244" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_4_4" dictType="STEMI_3_2_4_4" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1671,7 +1699,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('近期主要并发症的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3251" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_5_1" dictType="STEMI_3_2_5_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1682,7 +1710,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他近期主要并发症')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32511" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_3_2_5_1_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -1693,7 +1721,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('近期并发症治疗主要措施的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3252" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_5_2" dictType="STEMI_3_2_5_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1704,7 +1732,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他近期并发症治疗主要措施')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32521" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_3_2_5_2_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -1715,7 +1743,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否实施CathPCI风险评估')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3261" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_6_1" dictType="STEMI_3_2_6_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1726,7 +1754,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('总分值')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi326211" maxlength="11" class="form-control digits"/>
+								<#form:input path="stemi_3_2_6_2_1_1" maxlength="11" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -1737,7 +1765,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('院内患者死亡风险')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi32622" maxlength="11" class="form-control digits"/>
+								<#form:input path="stemi_3_2_6_2_2" maxlength="11" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -1748,7 +1776,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否实施围术期抗凝治疗')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3271" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_7_1" dictType="STEMI_3_2_7_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1759,7 +1787,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('肠外抗凝药物选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3272" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_2_7_2" dictType="STEMI_3_2_7_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1770,7 +1798,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他肠外抗凝药物')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3273" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_3_2_7_3" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -1781,7 +1809,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi330" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_3_0" dictType="STEMI_3_3_0" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1792,7 +1820,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('医院自身原因')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3311" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_3_1_1" dictType="STEMI_3_3_1_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1803,7 +1831,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他医院自身原因')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi33111" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_3_3_1_1_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -1814,7 +1842,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('患者自身原因转院')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3312" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_3_1_2" dictType="STEMI_3_3_1_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1825,7 +1853,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他患者自身原因')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi33121" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_3_3_1_2_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -1836,7 +1864,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('转院类型及适应症')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi332" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_3_2" dictType="STEMI_3_3_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1847,7 +1875,8 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('转院日期时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3331" class="form-control"/>
+								<#form:input path="stemi_3_3_3_1" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 							</div>
 						</div>
 					</div>
@@ -1858,7 +1887,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('到医院就诊至转出时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3341" maxlength="11" class="form-control digits"/>
+								<#form:input path="stemi_3_3_4_1" maxlength="11" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -1869,7 +1898,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('医院是否具备接受外院“转院PCI”患者的能力')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi34" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_4" dictType="STEMI_3_4" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1880,7 +1909,8 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('患者从不具备实施PCI能力医院转运到本院急诊或门诊日期')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3411" class="form-control"/>
+								<#form:input path="stemi_3_4_1_1" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 							</div>
 						</div>
 					</div>
@@ -1891,7 +1921,8 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('PCI导丝通过梗死相关动脉的时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3421" class="form-control"/>
+								<#form:input path="stemi_3_4_2_1" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 							</div>
 						</div>
 					</div>
@@ -1902,7 +1933,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('医院转出时间至PCI导丝通过梗死相关动脉')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi3431" maxlength="11" class="form-control digits"/>
+								<#form:input path="stemi_3_4_3_1" maxlength="11" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -1913,7 +1944,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('治疗延迟原因选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi344" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_3_4_4" dictType="STEMI_3_4_4" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1924,7 +1955,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否有β-受体阻滞剂禁忌证')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="stemi411" dictType="STEMI_4_1_1" class="form-control" />
+								<#form:select path="stemi_4_1_1" dictType="STEMI_4_1_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1935,7 +1966,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('β-受体阻滞剂禁忌症')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi4121" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_4_1_2_1" dictType="STEMI_4_1_2_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1946,7 +1977,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他β-受体阻滞剂禁忌症')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi41211" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_4_1_2_1_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -1957,7 +1988,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('β-受体阻滞剂相对禁忌症')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi4122" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_4_1_2_2" dictType="STEMI_4_1_2_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1968,7 +1999,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他β-受体阻滞剂相对禁忌症')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi41221" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_4_1_2_2_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -1979,7 +2010,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('使用首剂β-受体阻滞剂')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi42" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_4_2" dictType="STEMI_4_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1990,7 +2021,8 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('首剂用药日期时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi431" class="form-control"/>
+								<#form:input path="stemi_4_3_1" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 							</div>
 						</div>
 					</div>
@@ -2001,7 +2033,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('双联抗血小板药物是否有用药长期医嘱')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="stemi511" dictType="STEMI_5_1_1" class="form-control" />
+								<#form:select path="stemi_5_1_1" dictType="STEMI_5_1_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2012,7 +2044,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('双联抗血小板药物品名的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi512" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_5_1_2" dictType="STEMI_5_1_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2023,7 +2055,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('双联抗血小板药物品名填写')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi5121" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_5_1_2_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -2034,7 +2066,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('β阻滞剂是否有用药长期医嘱')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="stemi521" dictType="STEMI_5_2_1" class="form-control" />
+								<#form:select path="stemi_5_2_1" dictType="STEMI_5_2_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2045,7 +2077,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('长期医嘱中使用β-受体阻滞剂品名的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi522" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_5_2_2" dictType="STEMI_5_2_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2056,7 +2088,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否有ACEI抑制剂/ARB类药物禁忌症')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="stemi531" dictType="STEMI_5_3_1" class="form-control" />
+								<#form:select path="stemi_5_3_1" dictType="STEMI_5_3_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2067,7 +2099,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('ACE抑制剂/ARB类药物禁忌症的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi532" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_5_3_2" dictType="STEMI_5_3_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2078,7 +2110,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否有ACEI抑制剂/ARB类药物长期医嘱')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi533" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_5_3_3" dictType="STEMI_5_3_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2089,7 +2121,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('使用ACE抑制剂药物名称的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi534A" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_5_3_4_a" dictType="STEMI_5_3_4_A" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2100,7 +2132,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他ACE抑制剂药物')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi534A1" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_5_3_4_a_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -2111,7 +2143,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('使用ARB类药物名称的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi534B" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_5_3_4_b" dictType="STEMI_5_3_4_B" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2122,7 +2154,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他ARB类药物')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi534B1" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_5_3_4_b_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -2133,7 +2165,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否有他汀类药禁忌证')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="stemi541" dictType="STEMI_5_4_1" class="form-control" />
+								<#form:select path="stemi_5_4_1" dictType="STEMI_5_4_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2144,7 +2176,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('他汀类药物禁忌证的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi542" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_5_4_2" dictType="STEMI_5_4_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2155,7 +2187,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否有用药长期医嘱')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi543" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_5_4_3" dictType="STEMI_5_4_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2166,7 +2198,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('给予他汀类药物名称的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi544" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_5_4_4" dictType="STEMI_5_4_4" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2177,7 +2209,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他其他降脂药物')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi5441" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_5_4_4_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -2188,7 +2220,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否有出院带药医嘱-抗血小板药物')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="stemi61" dictType="STEMI_6_1" class="form-control" />
+								<#form:select path="stemi_6_1" dictType="STEMI_6_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2199,7 +2231,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('双联抗血小板药物品名的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi612" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_6_1_2" dictType="STEMI_6_1_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2210,7 +2242,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他双联抗血小板药物品')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi6121" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_6_1_2_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -2221,7 +2253,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否有β阻滞剂出院带药医嘱')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="stemi62" dictType="STEMI_6_2" class="form-control" />
+								<#form:select path="stemi_6_2" dictType="STEMI_6_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2232,7 +2264,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('使用β-受体阻滞剂品名的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi622" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_6_2_2" dictType="STEMI_6_2_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2243,7 +2275,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否有出院带药医嘱-ACEI抑制剂/ARB类药物医嘱')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi63" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_6_3" dictType="STEMI_6_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2254,7 +2286,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('使用ACEI抑制剂或者ARB类药物')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi632" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_6_3_2" dictType="STEMI_6_3_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2265,7 +2297,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('使用ACE抑制剂药物名称的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi632A" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_6_3_2_a" dictType="STEMI_6_3_2_A" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2276,7 +2308,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他ACE抑制剂药物')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi632A1" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_6_3_2_a_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -2287,7 +2319,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('使用ARB类药物名称的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi632B" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_6_3_2_b" dictType="STEMI_6_3_2_B" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2298,7 +2330,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他ARB类药物')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi632B1" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_6_3_2_b_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -2309,7 +2341,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否有出院带药医嘱-他汀类药物医嘱')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="stemi64" dictType="STEMI_6_4" class="form-control" />
+								<#form:select path="stemi_6_4" dictType="STEMI_6_4" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2320,7 +2352,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('给予他汀类药物名称的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi642" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_6_4_2" dictType="STEMI_6_4_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2331,7 +2363,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他降脂药物')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi6421" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_6_4_2_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -2342,7 +2374,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否有醛固酮受体拮抗剂药物禁忌证')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="stemi651" dictType="STEMI_6_5_1" class="form-control" />
+								<#form:select path="stemi_6_5_1" dictType="STEMI_6_5_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2353,7 +2385,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('醛固酮受体拮抗剂药物禁忌证的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi652" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_6_5_2" dictType="STEMI_6_5_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2364,7 +2396,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('醛固酮受体拮抗剂药物禁忌证填写')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi6521" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_6_5_2_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -2375,7 +2407,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否有醛固酮受体拮抗剂药物适应证')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi653" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_6_5_3" dictType="STEMI_6_5_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2386,7 +2418,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('醛固酮受体拮抗剂药物适应证的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi654" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_6_5_4" dictType="STEMI_6_5_4" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2397,7 +2429,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否有出院带药医嘱-醛固酮受体拮抗剂')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi655" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_6_5_5" dictType="STEMI_6_5_5" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2408,7 +2440,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('出院带药医嘱中使用醛固酮受体拮抗剂品名的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi656" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_6_5_6" dictType="STEMI_6_5_6" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2419,7 +2451,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他醛固酮受体拮抗剂品名')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi6561" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_6_5_6_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -2430,7 +2462,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('血脂评价时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="stemi71" dictType="STEMI_7_1" blankOption="true" class="form-control" />
+								<#form:select path="stemi_7_1" dictType="STEMI_7_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2441,7 +2473,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('血脂评价结果')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="stemi72" dictType="STEMI_7_2" blankOption="true" class="form-control" />
+								<#form:select path="stemi_7_2" dictType="STEMI_7_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2452,7 +2484,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否有他汀药物禁忌症')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="stemi731" dictType="STEMI_7_3_1" class="form-control" />
+								<#form:select path="stemi_7_3_1" dictType="STEMI_7_3_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2463,7 +2495,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('他汀类药物禁忌证的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi732" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_7_3_2" dictType="STEMI_7_3_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2474,7 +2506,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否有他汀类药物长期医嘱')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="stemi74" dictType="STEMI_7_4" class="form-control" />
+								<#form:select path="stemi_7_4" dictType="STEMI_7_4" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2485,7 +2517,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否有他汀类药物出院带药医嘱')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="stemi75" dictType="STEMI_7_5" class="form-control" />
+								<#form:select path="stemi_7_5" dictType="STEMI_7_5" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2496,7 +2528,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('吸烟史')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="stemi811" dictType="STEMI_8_1_1" class="form-control" />
+								<#form:select path="stemi_8_1_1" dictType="STEMI_8_1_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2507,7 +2539,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('吸烟程度评估有记录')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi812" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_8_1_2" dictType="STEMI_8_1_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2518,7 +2550,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('接受戒烟的建议或者戒烟治疗有记录')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi813" maxlength="32" class="form-control"/>
+								<#form:select path="stemi_8_1_3" dictType="STEMI_8_1_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2529,7 +2561,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="stemi821" dictType="STEMI_8_2_1" class="form-control" />
+								<#form:select path="stemi_8_2_1" dictType="STEMI_8_2_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2540,7 +2572,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('实施针对控制危险因素评估结果的教育')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="stemi822" dictType="STEMI_8_2_2" class="form-control" />
+								<#form:select path="stemi_8_2_2" dictType="STEMI_8_2_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2551,7 +2583,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('二级预防')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="stemi83" dictType="STEMI_8_3" class="form-control" />
+								<#form:select path="stemi_8_3" dictType="STEMI_8_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2562,7 +2594,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('交与患者“出院小结”的副本告知患者出院时风险因素')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="stemi841" dictType="STEMI_8_4_1" class="form-control" />
+								<#form:select path="stemi_8_4_1" dictType="STEMI_8_4_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2573,7 +2605,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('出院带药')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="stemi842" dictType="STEMI_8_4_2" class="form-control" />
+								<#form:select path="stemi_8_4_2" dictType="STEMI_8_4_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2584,7 +2616,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('告知发生紧急情况时求援救治途径')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="stemi843" dictType="STEMI_8_4_3" class="form-control" />
+								<#form:select path="stemi_8_4_3" dictType="STEMI_8_4_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2595,7 +2627,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('出院时教育与随访')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="stemi844" dictType="STEMI_8_4_4" class="form-control" />
+								<#form:select path="stemi_8_4_4" dictType="STEMI_8_4_4" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2606,7 +2638,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('告知何为风险因素与紧急情况')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="stemi845" dictType="STEMI_8_4_4" class="form-control" />
+								<#form:select path="stemi_8_4_5" dictType="STEMI_8_4_5" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2617,7 +2649,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('出院时状态评估结果')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="stemi921" dictType="STEMI_9_2_1" class="form-control" />
+								<#form:select path="stemi_9_2_1" dictType="STEMI_9_2_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2628,7 +2660,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他出院时状态填写')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi9211" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_9_2_1_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -2639,7 +2671,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('末次GRACE危险评估是否有记录')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="stemi922A2" dictType="STEMI_9_2_2_A_2" class="form-control" />
+								<#form:select path="stemi_9_2_2_a_2" dictType="STEMI_9_2_2_A_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2650,7 +2682,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('末次GRACE危险评估')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="stemi922A11" maxlength="32" class="form-control"/>
+								<#form:input path="stemi_9_2_2_a_1_1" maxlength="32" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -2661,7 +2693,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('GRACE危险评估分层的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="stemi922A3" dictType="STEMI_9_2_2_A_3" blankOption="true" class="form-control" />
+								<#form:select path="stemi_9_2_2_a_3" dictType="STEMI_9_2_2_A_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2672,7 +2704,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('离院方式选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm43" maxlength="32" class="form-control"/>
+								<#form:select path="cm_4_3" dictType="STEMI_CM_4_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2683,7 +2715,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('非医嘱离院可能涉及因素')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm45" maxlength="32" class="form-control"/>
+								<#form:select path="cm_4_5" dictType="STEMI_CM_4_5" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2694,7 +2726,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他非医嘱离院因素填写')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm441" maxlength="32" class="form-control"/>
+								<#form:input path="cm_4_4_1" maxlength="32" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -2705,7 +2737,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('死亡可能涉及因素')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm46" maxlength="32" class="form-control"/>
+								<#form:select path="cm_4_6" dictType="STEMI_CM_4_6" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2716,7 +2748,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('患者是否对服务的体验与评价')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm51" maxlength="32" class="form-control"/>
+								<#form:select path="cm_5_1" dictType="STEMI_CM_5_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2727,7 +2759,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('整体医院评级')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm521" maxlength="32" class="form-control"/>
+								<#form:select path="cm_5_2_1" dictType="STEMI_CM_5_2_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2738,7 +2770,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('患者推荐')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm522" maxlength="32" class="form-control"/>
+								<#form:select path="cm_5_2_2" dictType="STEMI_CM_5_2_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2749,7 +2781,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('病房、床单元和卫生间清洁度')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm523" maxlength="32" class="form-control"/>
+								<#form:select path="cm_5_2_3" dictType="STEMI_CM_5_2_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2760,7 +2792,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('病房与周边噪音')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm525" maxlength="32" class="form-control"/>
+								<#form:select path="cm_5_2_5" dictType="STEMI_CM_5_2_5" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2771,7 +2803,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('医生沟通')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm526" maxlength="32" class="form-control"/>
+								<#form:select path="cm_5_2_6" dictType="STEMI_CM_5_2_6" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2782,7 +2814,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('护士沟通')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm527" maxlength="32" class="form-control"/>
+								<#form:select path="cm_5_2_7" dictType="STEMI_CM_5_2_7" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2793,7 +2825,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('药师沟通')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm528" maxlength="32" class="form-control"/>
+								<#form:select path="cm_5_2_8" dictType="STEMI_CM_5_2_8" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2804,7 +2836,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('康复计划')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm529" maxlength="32" class="form-control"/>
+								<#form:select path="cm_5_2_9" dictType="STEMI_CM_5_2_9" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2815,7 +2847,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('出院时的知情告知')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm5210" maxlength="32" class="form-control"/>
+								<#form:select path="cm_5_2_10" dictType="STEMI_CM_5_2_10" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2826,7 +2858,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('膳食评价')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm5211" maxlength="32" class="form-control"/>
+								<#form:select path="cm_5_2_11" dictType="STEMI_CM_5_2_11" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -2837,7 +2869,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('住院总费用')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm61" class="form-control number"/>
+								<#form:input path="cm_6_1" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -2848,7 +2880,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('住院总费用其中自付金额')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm62" class="form-control number"/>
+								<#form:input path="cm_6_2" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -2859,7 +2891,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('一般医疗服务费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm63" class="form-control number"/>
+								<#form:input path="cm_6_3" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -2870,7 +2902,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('一般治疗操作费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm64" class="form-control number"/>
+								<#form:input path="cm_6_4" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -2881,7 +2913,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('护理费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm65" class="form-control number"/>
+								<#form:input path="cm_6_5" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -2892,7 +2924,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('综合医疗服务类其他费用')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm66" class="form-control number"/>
+								<#form:input path="cm_6_6" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -2903,7 +2935,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('病理诊断费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm67" class="form-control number"/>
+								<#form:input path="cm_6_7" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -2914,7 +2946,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('实验室诊断费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm68" class="form-control number"/>
+								<#form:input path="cm_6_8" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -2925,7 +2957,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('影像学诊断费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm69" class="form-control number"/>
+								<#form:input path="cm_6_9" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -2936,7 +2968,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('临床诊断项目费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm610" class="form-control number"/>
+								<#form:input path="cm_6_10" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -2947,7 +2979,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('非手术治疗项目费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm611" class="form-control number"/>
+								<#form:input path="cm_6_11" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -2958,7 +2990,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其中')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm612" class="form-control number"/>
+								<#form:input path="cm_6_12" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -2969,7 +3001,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('手术治疗费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm613" class="form-control number"/>
+								<#form:input path="cm_6_13" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -2980,7 +3012,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其中')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm614" class="form-control number"/>
+								<#form:input path="cm_6_14" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -2991,7 +3023,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其中')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm615" class="form-control number"/>
+								<#form:input path="cm_6_15" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -3002,7 +3034,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('康复费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm616" class="form-control number"/>
+								<#form:input path="cm_6_16" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -3013,7 +3045,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('中医治疗费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm617" class="form-control number"/>
+								<#form:input path="cm_6_17" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -3024,7 +3056,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('西药费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm618" class="form-control number"/>
+								<#form:input path="cm_6_18" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -3035,7 +3067,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其中')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm619" class="form-control number"/>
+								<#form:input path="cm_6_19" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -3046,7 +3078,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('中成药费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm620" class="form-control number"/>
+								<#form:input path="cm_6_20" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -3057,7 +3089,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('中草药费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm621" class="form-control number"/>
+								<#form:input path="cm_6_21" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -3068,7 +3100,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('血费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm622" class="form-control number"/>
+								<#form:input path="cm_6_22" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -3079,7 +3111,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('白蛋白类制品费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm623" class="form-control number"/>
+								<#form:input path="cm_6_23" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -3090,7 +3122,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('球蛋白类制品费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm624" class="form-control number"/>
+								<#form:input path="cm_6_24" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -3101,7 +3133,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('凝血因子类制品费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm625" class="form-control number"/>
+								<#form:input path="cm_6_25" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -3112,7 +3144,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('细胞因子类制品费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm626" class="form-control number"/>
+								<#form:input path="cm_6_26" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -3123,7 +3155,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('检查用一次性医用材料费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm627" class="form-control number"/>
+								<#form:input path="cm_6_27" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -3134,7 +3166,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('治疗用一次性医用材料费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm628" class="form-control number"/>
+								<#form:input path="cm_6_28" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -3145,7 +3177,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('手术用一次性医用材料费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm629" class="form-control number"/>
+								<#form:input path="cm_6_29" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -3156,7 +3188,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm630" class="form-control number"/>
+								<#form:input path="cm_6_30" class="form-control number"/>
 							</div>
 						</div>
 					</div>

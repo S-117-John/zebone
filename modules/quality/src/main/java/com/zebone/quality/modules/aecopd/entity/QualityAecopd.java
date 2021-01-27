@@ -17,7 +17,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 /**
  * AECOPD慢性阻塞性肺疾病急性发作（住院）Entity
  * @author 卡卡西
- * @version 2021-01-19
+ * @version 2021-01-27
  */
 @Table(name="quality_aecopd", alias="a", columns={
 		@Column(name="cm_0_1_1_1", attrName="cm_0_1_1_1", label="质控医师"),
@@ -25,7 +25,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_0_1_1_3", attrName="cm_0_1_1_3", label="主治医师"),
 		@Column(name="cm_0_1_1_4", attrName="cm_0_1_1_4", label="责任护士"),
 		@Column(name="cm_0_1_1_5", attrName="cm_0_1_1_5", label="上报科室"),
-		@Column(name="case_id", attrName="caseId", label="患者病案号"),
+		@Column(name="caseid", attrName="caseid", label="患者病案号"),
 		@Column(name="cm_0_1_3_1", attrName="cm_0_1_3_1", label="主要诊断ICD-10四位亚目编码与名称"),
 		@Column(name="cm_0_1_3_2", attrName="cm_0_1_3_2", label="主要诊断ICD-10六位临床扩展编码与名称"),
 		@Column(name="cm_0_1_4_1", attrName="cm_0_1_4_1", label="主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称"),
@@ -114,6 +114,11 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="aecopd_8_1_1", attrName="aecopd_8_1_1", label="有无吸烟史"),
 		@Column(name="aecopd_8_2", attrName="aecopd_8_2", label="吸烟程度评估有记录"),
 		@Column(name="aecopd_8_3", attrName="aecopd_8_3", label="接受戒烟的建议或者戒烟治疗有记录"),
+		@Column(name="cm_7_2_1", attrName="cm_7_2_1", label="交与患者“出院小结”的副本告知患者出院时风险因素"),
+		@Column(name="cm_7_2_2", attrName="cm_7_2_2", label="出院带药"),
+		@Column(name="cm_7_2_4", attrName="cm_7_2_4", label="告知发生紧急意外情况或者疾病复发如何救治及前途经"),
+		@Column(name="cm_7_2_5", attrName="cm_7_2_5", label="出院时教育与随访"),
+		@Column(name="cm_7_2_3", attrName="cm_7_2_3", label="告知何为发生紧急意外情况或者疾病复发"),
 		@Column(name="aecopd_9_1_1", attrName="aecopd_9_1_1", label="符合出院标准"),
 		@Column(name="cm_4_3", attrName="cm_4_3", label="离院方式选择"),
 		@Column(name="cm_4_5", attrName="cm_4_5", label="非医嘱离院可能涉及因素"),
@@ -160,19 +165,6 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_6_28", attrName="cm_6_28", label="治疗用一次性医用材料费"),
 		@Column(name="cm_6_29", attrName="cm_6_29", label="手术用一次性医用材料费"),
 		@Column(name="cm_6_30", attrName="cm_6_30", label="其他费"),
-		@Column(name="cm_0_1_4_1_1", attrName="cm01411", label="其他ICD-9-CM-3四位亚目编码与名称"),
-		@Column(name="cm_0_1_4_2_1", attrName="cm01421", label="其他ICD-9-CM-3六位临床扩展编码与名称"),
-		@Column(name="cm_0_2_2_1", attrName="cm0221", label="发病日期时间是否无法确定或无记录"),
-		@Column(name="cm_0_2_2_2", attrName="cm0222", label="发病日期时间"),
-		@Column(name="cm_0_2_3_1", attrName="cm0231", label="到达本院急诊或者门诊日期时间是否无法确定或无记录"),
-		@Column(name="cm_0_2_3_2", attrName="cm0232", label="到达本院急诊或者门诊日期时间"),
-		@Column(name="cm_0_2_6_1", attrName="cm0261", label="手术开始", comment="手术开始（切皮）日期时间"),
-		@Column(name="cm_0_2_6_2", attrName="cm0262", label="手术结束", comment="手术结束（缝皮结束）日期时间"),
-		@Column(name="cm_3_1", attrName="cm31", label="手术野皮肤准备常用方法的选择"),
-		@Column(name="cm_3_2", attrName="cm32", label="使用含抗菌剂", comment="使用含抗菌剂（三氯生）缝线"),
-		@Column(name="cm_3_2_1", attrName="cm321", label="其他含抗菌剂缝线填写"),
-		@Column(name="cm_3_3", attrName="cm33", label="手术切口类别的选择"),
-		@Column(name="cm_3_4", attrName="cm34", label="手术切口愈合情况的选择"),
 		@Column(name="id", attrName="id", label="id", isPK=true),
 	}, orderBy="a.update_date DESC"
 )
@@ -184,7 +176,7 @@ public class QualityAecopd extends DataEntity<QualityAecopd> {
 	private String cm_0_1_1_3;		// 主治医师
 	private String cm_0_1_1_4;		// 责任护士
 	private String cm_0_1_1_5;		// 上报科室
-	private String caseId;		// 患者病案号
+	private String caseid;		// 患者病案号
 	private String cm_0_1_3_1;		// 主要诊断ICD-10四位亚目编码与名称
 	private String cm_0_1_3_2;		// 主要诊断ICD-10六位临床扩展编码与名称
 	private String cm_0_1_4_1;		// 主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称
@@ -272,6 +264,11 @@ public class QualityAecopd extends DataEntity<QualityAecopd> {
 	private String aecopd_8_1_1;		// 有无吸烟史
 	private String aecopd_8_2;		// 吸烟程度评估有记录
 	private String aecopd_8_3;		// 接受戒烟的建议或者戒烟治疗有记录
+	private String cm_7_2_1;		// 交与患者“出院小结”的副本告知患者出院时风险因素
+	private String cm_7_2_2;		// 出院带药
+	private String cm_7_2_4;		// 告知发生紧急意外情况或者疾病复发如何救治及前途经
+	private String cm_7_2_5;		// 出院时教育与随访
+	private String cm_7_2_3;		// 告知何为发生紧急意外情况或者疾病复发
 	private String aecopd_9_1_1;		// 符合出院标准
 	private String cm_4_3;		// 离院方式选择
 	private String cm_4_5;		// 非医嘱离院可能涉及因素
@@ -318,19 +315,6 @@ public class QualityAecopd extends DataEntity<QualityAecopd> {
 	private Double cm_6_28;		// 治疗用一次性医用材料费
 	private Double cm_6_29;		// 手术用一次性医用材料费
 	private Double cm_6_30;		// 其他费
-	private String cm01411;		// 其他ICD-9-CM-3四位亚目编码与名称
-	private String cm01421;		// 其他ICD-9-CM-3六位临床扩展编码与名称
-	private String cm0221;		// 发病日期时间是否无法确定或无记录
-	private Date cm0222;		// 发病日期时间
-	private String cm0231;		// 到达本院急诊或者门诊日期时间是否无法确定或无记录
-	private Date cm0232;		// 到达本院急诊或者门诊日期时间
-	private Date cm0261;		// 手术开始（切皮）日期时间
-	private Date cm0262;		// 手术结束（缝皮结束）日期时间
-	private String cm31;		// 手术野皮肤准备常用方法的选择
-	private String cm32;		// 使用含抗菌剂（三氯生）缝线
-	private String cm321;		// 其他含抗菌剂缝线填写
-	private String cm33;		// 手术切口类别的选择
-	private String cm34;		// 手术切口愈合情况的选择
 	
 	public QualityAecopd() {
 		this(null);
@@ -385,13 +369,13 @@ public class QualityAecopd extends DataEntity<QualityAecopd> {
 		this.cm_0_1_1_5 = cm_0_1_1_5;
 	}
 	
-	@Length(min=0, max=32, message="患者病案号长度不能超过 32 个字符")
-	public String getCaseId() {
-		return caseId;
+	@Length(min=0, max=64, message="患者病案号长度不能超过 64 个字符")
+	public String getCaseid() {
+		return caseid;
 	}
 
-	public void setCaseId(String caseId) {
-		this.caseId = caseId;
+	public void setCaseid(String caseid) {
+		this.caseid = caseid;
 	}
 	
 	@Length(min=0, max=32, message="主要诊断ICD-10四位亚目编码与名称长度不能超过 32 个字符")
@@ -1171,6 +1155,51 @@ public class QualityAecopd extends DataEntity<QualityAecopd> {
 		this.aecopd_8_3 = aecopd_8_3;
 	}
 	
+	@Length(min=0, max=64, message="交与患者“出院小结”的副本告知患者出院时风险因素长度不能超过 64 个字符")
+	public String getCm_7_2_1() {
+		return cm_7_2_1;
+	}
+
+	public void setCm_7_2_1(String cm_7_2_1) {
+		this.cm_7_2_1 = cm_7_2_1;
+	}
+	
+	@Length(min=0, max=64, message="出院带药长度不能超过 64 个字符")
+	public String getCm_7_2_2() {
+		return cm_7_2_2;
+	}
+
+	public void setCm_7_2_2(String cm_7_2_2) {
+		this.cm_7_2_2 = cm_7_2_2;
+	}
+	
+	@Length(min=0, max=64, message="告知发生紧急意外情况或者疾病复发如何救治及前途经长度不能超过 64 个字符")
+	public String getCm_7_2_4() {
+		return cm_7_2_4;
+	}
+
+	public void setCm_7_2_4(String cm_7_2_4) {
+		this.cm_7_2_4 = cm_7_2_4;
+	}
+	
+	@Length(min=0, max=64, message="出院时教育与随访长度不能超过 64 个字符")
+	public String getCm_7_2_5() {
+		return cm_7_2_5;
+	}
+
+	public void setCm_7_2_5(String cm_7_2_5) {
+		this.cm_7_2_5 = cm_7_2_5;
+	}
+	
+	@Length(min=0, max=64, message="告知何为发生紧急意外情况或者疾病复发长度不能超过 64 个字符")
+	public String getCm_7_2_3() {
+		return cm_7_2_3;
+	}
+
+	public void setCm_7_2_3(String cm_7_2_3) {
+		this.cm_7_2_3 = cm_7_2_3;
+	}
+	
 	@Length(min=0, max=64, message="符合出院标准长度不能超过 64 个字符")
 	public String getAecopd_9_1_1() {
 		return aecopd_9_1_1;
@@ -1553,123 +1582,6 @@ public class QualityAecopd extends DataEntity<QualityAecopd> {
 
 	public void setCm_6_30(Double cm_6_30) {
 		this.cm_6_30 = cm_6_30;
-	}
-	
-	@Length(min=0, max=32, message="其他ICD-9-CM-3四位亚目编码与名称长度不能超过 32 个字符")
-	public String getCm01411() {
-		return cm01411;
-	}
-
-	public void setCm01411(String cm01411) {
-		this.cm01411 = cm01411;
-	}
-	
-	@Length(min=0, max=32, message="其他ICD-9-CM-3六位临床扩展编码与名称长度不能超过 32 个字符")
-	public String getCm01421() {
-		return cm01421;
-	}
-
-	public void setCm01421(String cm01421) {
-		this.cm01421 = cm01421;
-	}
-	
-	@Length(min=0, max=32, message="发病日期时间是否无法确定或无记录长度不能超过 32 个字符")
-	public String getCm0221() {
-		return cm0221;
-	}
-
-	public void setCm0221(String cm0221) {
-		this.cm0221 = cm0221;
-	}
-	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	public Date getCm0222() {
-		return cm0222;
-	}
-
-	public void setCm0222(Date cm0222) {
-		this.cm0222 = cm0222;
-	}
-	
-	@Length(min=0, max=32, message="到达本院急诊或者门诊日期时间是否无法确定或无记录长度不能超过 32 个字符")
-	public String getCm0231() {
-		return cm0231;
-	}
-
-	public void setCm0231(String cm0231) {
-		this.cm0231 = cm0231;
-	}
-	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	public Date getCm0232() {
-		return cm0232;
-	}
-
-	public void setCm0232(Date cm0232) {
-		this.cm0232 = cm0232;
-	}
-	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	public Date getCm0261() {
-		return cm0261;
-	}
-
-	public void setCm0261(Date cm0261) {
-		this.cm0261 = cm0261;
-	}
-	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	public Date getCm0262() {
-		return cm0262;
-	}
-
-	public void setCm0262(Date cm0262) {
-		this.cm0262 = cm0262;
-	}
-	
-	@Length(min=0, max=32, message="手术野皮肤准备常用方法的选择长度不能超过 32 个字符")
-	public String getCm31() {
-		return cm31;
-	}
-
-	public void setCm31(String cm31) {
-		this.cm31 = cm31;
-	}
-	
-	@Length(min=0, max=32, message="使用含抗菌剂长度不能超过 32 个字符")
-	public String getCm32() {
-		return cm32;
-	}
-
-	public void setCm32(String cm32) {
-		this.cm32 = cm32;
-	}
-	
-	@Length(min=0, max=32, message="其他含抗菌剂缝线填写长度不能超过 32 个字符")
-	public String getCm321() {
-		return cm321;
-	}
-
-	public void setCm321(String cm321) {
-		this.cm321 = cm321;
-	}
-	
-	@Length(min=0, max=32, message="手术切口类别的选择长度不能超过 32 个字符")
-	public String getCm33() {
-		return cm33;
-	}
-
-	public void setCm33(String cm33) {
-		this.cm33 = cm33;
-	}
-	
-	@Length(min=0, max=32, message="手术切口愈合情况的选择长度不能超过 32 个字符")
-	public String getCm34() {
-		return cm34;
-	}
-
-	public void setCm34(String cm34) {
-		this.cm34 = cm34;
 	}
 	
 }

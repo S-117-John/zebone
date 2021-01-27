@@ -16,7 +16,7 @@ import com.zebone.quality.modules.stemi.dao.QualityStemiDao;
 /**
  * STEMI急性心肌梗死（ST 段抬高型，首次住院）Service
  * @author lijin
- * @version 2021-01-13
+ * @version 2021-01-27
  */
 @Service
 @Transactional(readOnly=true)

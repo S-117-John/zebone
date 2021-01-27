@@ -10,7 +10,7 @@ import com.zebone.quality.modules.stemi.entity.QualityStemi;
 /**
  * STEMI急性心肌梗死（ST 段抬高型，首次住院）DAO接口
  * @author lijin
- * @version 2021-01-13
+ * @version 2021-01-27
  */
 @MyBatisDao
 public interface QualityStemiDao extends CrudDao<QualityStemi> {

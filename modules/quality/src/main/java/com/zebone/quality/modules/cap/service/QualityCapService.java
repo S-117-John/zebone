@@ -5,6 +5,12 @@ package com.zebone.quality.modules.cap.service;
 
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.jeesite.common.config.Global;
+import com.zebone.quality.common.utils.RestTemplateUtil;
+import com.zebone.quality.modules.cesarean.entity.CesareanSection;
+import com.zebone.quality.modules.cesarean.entity.QualityCesareanSection;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -72,5 +78,7 @@ public class QualityCapService extends CrudService<QualityCapDao, QualityCap> {
 	public void delete(QualityCap qualityCap) {
 		super.delete(qualityCap);
 	}
-	
+
+
+
 }

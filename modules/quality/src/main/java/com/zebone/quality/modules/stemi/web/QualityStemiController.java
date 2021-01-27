@@ -25,7 +25,7 @@ import com.zebone.quality.modules.stemi.service.QualityStemiService;
 /**
  * STEMI急性心肌梗死（ST 段抬高型，首次住院）Controller
  * @author lijin
- * @version 2021-01-13
+ * @version 2021-01-27
  */
 @Controller
 @RequestMapping(value = "${adminPath}/stemi/qualityStemi")

@@ -10,7 +10,7 @@ import com.zebone.quality.modules.aecopd.entity.QualityAecopd;
 /**
  * AECOPD慢性阻塞性肺疾病急性发作（住院）DAO接口
  * @author 卡卡西
- * @version 2021-01-19
+ * @version 2021-01-27
  */
 @MyBatisDao
 public interface QualityAecopdDao extends CrudDao<QualityAecopd> {

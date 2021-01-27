@@ -11,8 +11,14 @@
 		</div>
 		<#form:form id="inputForm" model="${qualityAecopd}" action="${ctx}/aecopd/qualityAecopd/save" method="post" class="form-horizontal">
 			<div class="box-body">
-				<div class="form-unit">${text('基本信息')}</div>
-				<div class="row">
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					基本信息
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+				<div class="form-unit">${text('适用的ICD-10编码与疾病名称：')}</div>
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -74,7 +80,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('患者病案号')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="caseId" maxlength="32" class="form-control"/>
+								<#form:input path="caseid" maxlength="64" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -260,6 +266,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					AECOPD-1: 患者入院病情评估
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -458,6 +473,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					AECOPD-2: 危重患者收住ICU情况
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -502,6 +526,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					AECOPD-3: 氧疗使用情况
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -524,6 +557,16 @@
 						</div>
 					</div>
 				</div>
+
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					AECOPD-4: 抗菌药物使用情况
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -636,6 +679,16 @@
 						</div>
 					</div>
 				</div>
+
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					AECOPD-5: 支气管舒张剂、糖皮质激素使用情况
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -715,6 +768,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					AECOPD-6: 合并症处理情况
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -880,11 +942,20 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					ACOPD-7: 危重患者使用无创或有创机械通气治疗情况
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('是否实施无创正压通气')}：<i class="fa icon-question hide"></i></label>
+								<span class="required hide">*</span> ${text('是否实施无创正压通气（NIV）')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
 								<#form:select path="aecopd_7_1_1" dictType="AECOPD_7_1_1" blankOption="true" class="form-control" />
 							</div>
@@ -1016,6 +1087,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					AECOPD-8: 住院期间为患者提供健康教育与出院时提供教育告知情况
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1049,6 +1129,70 @@
 						</div>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('交与患者“出院小结”的副本告知患者出院时风险因素')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_7_2_1" dictType="AECOPD_CM_7_2_1" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('出院带药')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_7_2_2" dictType="AECOPD_CM_7_2_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('告知发生紧急意外情况或者疾病复发如何救治及前途经')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_7_2_4" dictType="AECOPD_CM_7_2_4" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('出院时教育与随访')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_7_2_5" dictType="AECOPD_CM_7_2_5" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('告知何为发生紧急意外情况或者疾病复发')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_7_2_3" dictType="AECOPD_CM_7_2_3" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					AECOPD-9: 离院方式
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1104,6 +1248,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					AECOPD-10: 患者对服务的体验与评价
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1225,6 +1378,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					AECOPD11: 住院费用
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1554,137 +1716,6 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-6">
-						<div class="form-group">
-							<label class="control-label col-sm-4" title="">
-								<span class="required hide">*</span> ${text('其他ICD-9-CM-3四位亚目编码与名称')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-8">
-								<#form:input path="cm01411" maxlength="32" class="form-control"/>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-6">
-						<div class="form-group">
-							<label class="control-label col-sm-4" title="">
-								<span class="required hide">*</span> ${text('其他ICD-9-CM-3六位临床扩展编码与名称')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-8">
-								<#form:input path="cm01421" maxlength="32" class="form-control"/>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-6">
-						<div class="form-group">
-							<label class="control-label col-sm-4" title="">
-								<span class="required hide">*</span> ${text('发病日期时间是否无法确定或无记录')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-8">
-								<#form:input path="cm0221" maxlength="32" class="form-control"/>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-6">
-						<div class="form-group">
-							<label class="control-label col-sm-4" title="">
-								<span class="required hide">*</span> ${text('发病日期时间')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-8">
-								<#form:input path="cm0222" class="form-control"/>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-6">
-						<div class="form-group">
-							<label class="control-label col-sm-4" title="">
-								<span class="required hide">*</span> ${text('到达本院急诊或者门诊日期时间是否无法确定或无记录')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-8">
-								<#form:input path="cm0231" maxlength="32" class="form-control"/>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-6">
-						<div class="form-group">
-							<label class="control-label col-sm-4" title="">
-								<span class="required hide">*</span> ${text('到达本院急诊或者门诊日期时间')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-8">
-								<#form:input path="cm0232" class="form-control"/>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-6">
-						<div class="form-group">
-							<label class="control-label col-sm-4" title="">
-								<span class="required hide">*</span> ${text('手术开始')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-8">
-								<#form:input path="cm0261" class="form-control"/>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-6">
-						<div class="form-group">
-							<label class="control-label col-sm-4" title="">
-								<span class="required hide">*</span> ${text('手术结束')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-8">
-								<#form:input path="cm0262" class="form-control"/>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-6">
-						<div class="form-group">
-							<label class="control-label col-sm-4" title="">
-								<span class="required hide">*</span> ${text('手术野皮肤准备常用方法的选择')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-8">
-								<#form:input path="cm31" maxlength="32" class="form-control"/>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-6">
-						<div class="form-group">
-							<label class="control-label col-sm-4" title="">
-								<span class="required hide">*</span> ${text('使用含抗菌剂')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-8">
-								<#form:input path="cm32" maxlength="32" class="form-control"/>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-6">
-						<div class="form-group">
-							<label class="control-label col-sm-4" title="">
-								<span class="required hide">*</span> ${text('其他含抗菌剂缝线填写')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-8">
-								<#form:input path="cm321" maxlength="32" class="form-control"/>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-6">
-						<div class="form-group">
-							<label class="control-label col-sm-4" title="">
-								<span class="required hide">*</span> ${text('手术切口类别的选择')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-8">
-								<#form:input path="cm33" maxlength="32" class="form-control"/>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-6">
-						<div class="form-group">
-							<label class="control-label col-sm-4" title="">
-								<span class="required hide">*</span> ${text('手术切口愈合情况的选择')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-8">
-								<#form:input path="cm34" maxlength="32" class="form-control"/>
-							</div>
-						</div>
-					</div>
 				<#form:hidden path="id"/>
 				</div>
 				<div class="row">
@@ -1727,3 +1758,4 @@ $("#inputForm").validate({
     }
 });
 </script>
+<link href="${ctxStatic}/quality_common.css" rel="stylesheet"/>

@@ -235,9 +235,9 @@ spring:
 # 国际化管理（专业版+）
 #lang:
 #  enabled: true
-  jpa:
-    hibernate:
-      ddl-auto: update
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
 # 任务调度（个人版+）
 #job:
 #  enabled: true

@@ -16,7 +16,7 @@ import com.zebone.quality.modules.aecopd.dao.QualityAecopdDao;
 /**
  * AECOPD慢性阻塞性肺疾病急性发作（住院）Service
  * @author 卡卡西
- * @version 2021-01-19
+ * @version 2021-01-27
  */
 @Service
 @Transactional(readOnly=true)
