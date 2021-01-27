@@ -1,4 +1,6 @@
 <% layout('/layouts/default.html', {title: 'STEMI急性心肌梗死（ST 段抬高型，首次住院）管理', libs: ['validate']}){ %>
+<script type="text/javascript" src="${ctxStatic}/importPatient.js"></script>
+<link rel="stylesheet" type="text/css" href="${ctxStatic}/quality_common.css"></linf>
 <div class="main-content">
 	<div class="box box-main">
 		<div class="box-header with-border">
@@ -11,8 +13,32 @@
 		</div>
 		<#form:form id="inputForm" model="${qualityStemi}" action="${ctx}/stemi/qualityStemi/save" method="post" class="form-horizontal">
 			<div class="box-body">
-				<div class="form-unit">${text('基本信息')}</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					基本信息
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+				<div class="form-unit">${text('适用的ICD-10编码与疾病名称：')}</div>
+				<#form:hidden path="id"/>
+
 				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required">*</span> ${text('患者病案号')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-5">
+								<#form:input path="caseId" maxlength="255" class="form-control required"/>
+							</div>
+							<div class="col-sm-3 hide">
+								<button type="button" class="btn btn-sm btn-primary" id="patientSubmit" onclick="importPatient()"><i class="fa fa-check"></i> ${text('导入患者信息')}</button>&nbsp;
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -72,17 +98,6 @@
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('患者病案号')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-10">
-								<#form:input path="caseid" maxlength="64" class="form-control"/>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('主要诊断ICD-10四位亚目编码与名称')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cm_0_1_3_1" dictType="STEMI_CM_0_1_3_1" blankOption="true" class="form-control" />
@@ -134,6 +149,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('相关日期时间信息：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -262,6 +280,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('其他相关信息：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -372,6 +393,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					STEMI-1 到达医院后首剂双联抗血小板药物使用情况
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -416,6 +446,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('急诊或入院后首次心电图（ECG）检查：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -461,6 +494,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('到达医院急诊后即刻使用首剂双联抗血小板药：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -539,6 +575,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('首次心脏标志物检测项目选择：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -771,6 +810,17 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					STEMI-2 左心室射血分数
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+				<div class="form-unit">${text('X线胸片检查：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -805,6 +855,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('首次/入院时超声心动图(CDFA)检查：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -861,6 +914,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('风险评估与分值：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -996,6 +1052,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					STEMI-3：再灌注治疗
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1007,11 +1072,14 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('患者到院心电图确诊STEMI至溶栓药物注射时间：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('STEMI溶栓适应证')}：<i class="fa icon-question hide"></i></label>
+								<span class="required hide">*</span> ${text('STEMI溶栓适应证：')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
 								<#form:select path="stemi_3_1_1" dictType="STEMI_3_1_1" blankOption="true" class="form-control" />
 							</div>
@@ -1152,6 +1220,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('患者到院心电图确诊STEMI至经皮冠状动脉介入治疗(PCI)导丝通过梗死相关动脉时间：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1163,6 +1234,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('实施PCI适应证及时限：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1275,6 +1349,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('主要病变血管实施PCI的相关数据：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1649,6 +1726,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('ICD-9-CM-3编码与名称：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1693,6 +1773,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('近期并发症与治疗：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1737,6 +1820,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('PCI术后院内死亡风险评估--CathPCI风险评分：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1770,6 +1856,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('围术期抗凝治疗：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1803,11 +1892,14 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('需要急诊PCI患者，但（本院）无条件实施时，应立即将患者转往有条件行PCI的医院：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('')}：<i class="fa icon-question hide"></i></label>
+								<span class="required hide">*</span> ${text('（本院）无条件实施时，是否将患者转往有条件行PCI的医院：')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
 								<#form:select path="stemi_3_3_0" dictType="STEMI_3_3_0" blankOption="true" class="form-control" />
 							</div>
@@ -1892,11 +1984,14 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('患者从不具备实施PCI能力医院转运到本院（可实施PCI）PCI导丝通过梗死相关动脉的时间≤120分钟：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('医院是否具备接受外院“转院PCI”患者的能力')}：<i class="fa icon-question hide"></i></label>
+								<span class="required hide">*</span> ${text('医院是否具备接受外院“转院PCI”患者的能力：')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
 								<#form:select path="stemi_3_4" dictType="STEMI_3_4" blankOption="true" class="form-control" />
 							</div>
@@ -1907,7 +2002,7 @@
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('患者从不具备实施PCI能力医院转运到本院急诊或门诊日期')}：<i class="fa icon-question hide"></i></label>
+								<span class="required hide">*</span> ${text('患者从不具备实施PCI能力医院转运到本院急诊或门诊日期：')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
 								<#form:input path="stemi_3_4_1_1" readonly="true" maxlength="20" class="form-control Wdate"
 									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
@@ -1949,6 +2044,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					STEMI-4 到达医院后β受体阻滞剂使用情况
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -2027,6 +2131,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					STEMI-5 住院期间β受体阻滞剂、双联抗血小板药物、血管紧张素转化酶抑制剂(ACEI)或 血管紧张素受体阻断剂(ARB)、他汀类药物使用情况
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -2214,6 +2327,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					STEMI-6：出院时继续使用阿司匹林、β-阻滞剂、ACEI/ARB、他汀类药物有明示（无禁忌症者）
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -2456,6 +2578,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					STEMI-7：血脂评价与管理
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -2522,6 +2653,17 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					STEMI-8 住院期间为患者提供健康教育与出院时提供教育告知五要素情况
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+				<div class="form-unit">${text('健康（戒烟）辅导：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -2555,11 +2697,14 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('控制危险因素：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('')}：<i class="fa icon-question hide"></i></label>
+								<span class="required hide">*</span> ${text('（主要）危险因素的评估')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
 								<#form:select path="stemi_8_2_1" dictType="STEMI_8_2_1" blankOption="true" class="form-control" />
 							</div>
@@ -2577,6 +2722,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('坚持二级预防：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -2588,6 +2736,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('履行出院教育与告知五项要素：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -2643,6 +2794,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-unit">${text('出院前风险评估：')}</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -2698,6 +2852,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					STEMI-9 离院方式
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -2742,6 +2905,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					STEMI-10 患者对服务的体验与评价
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -2863,6 +3035,15 @@
 						</div>
 					</div>
 				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					STEMI-11 住院费用
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">

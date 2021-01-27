@@ -6,6 +6,10 @@ package com.zebone.quality.modules.stemi.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.zebone.quality.domain.UploadService;
+import com.zebone.quality.modules.common.UploadResult;
+import com.zebone.quality.modules.stemi.entity.Stemi;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +26,8 @@ import com.jeesite.common.web.BaseController;
 import com.zebone.quality.modules.stemi.entity.QualityStemi;
 import com.zebone.quality.modules.stemi.service.QualityStemiService;
 
+import java.util.Optional;
+
 /**
  * STEMI急性心肌梗死（ST 段抬高型，首次住院）Controller
  * @author lijin
@@ -33,6 +39,8 @@ public class QualityStemiController extends BaseController {
 
 	@Autowired
 	private QualityStemiService qualityStemiService;
+	@Autowired
+	private UploadService uploadService;
 	
 	/**
 	 * 获取数据
@@ -81,6 +89,16 @@ public class QualityStemiController extends BaseController {
 	@ResponseBody
 	public String save(@Validated QualityStemi qualityStemi) {
 		qualityStemiService.save(qualityStemi);
+
+		String result = uploadService.upload(qualityStemi,new Stemi(),"STEMI");
+		Gson gson = new Gson();
+		UploadResult uploadResult = gson.fromJson(result, UploadResult.class);
+		Integer resultCode = Optional.ofNullable(uploadResult).map(a->a.getCode()).orElse(null);
+		if(resultCode==1000){
+			String errorMessage = Optional.ofNullable(uploadResult).map(a->a.getMessage()).orElse("上传失败");
+			return renderResult(Global.FALSE, text(errorMessage));
+		}
+
 		return renderResult(Global.TRUE, text("保存STEMI急性心肌梗死（ST 段抬高型，首次住院）成功！"));
 	}
 	
