@@ -4,7 +4,12 @@
 package com.zebone.quality.modules.hf.service;
 
 import java.util.List;
+import java.util.Map;
 
+import com.zebone.quality.infrastructure.entity.HfDO;
+import com.zebone.quality.modules.hf.repository.HfRepository;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,12 +21,18 @@ import com.zebone.quality.modules.hf.dao.QualityHfDao;
 /**
  * HF心力衰竭Service
  * @author 卡卡西
- * @version 2021-01-27
+ * @version 2021-01-28
  */
 @Service
 @Transactional(readOnly=true)
 public class QualityHfService extends CrudService<QualityHfDao, QualityHf> {
-	
+
+	public Map<String,Object> findById(String id) {
+		Map<String,Object> result = dao.findById(id);
+		return result;
+	}
+
+
 	/**
 	 * 获取单条数据
 	 * @param qualityHf
@@ -70,9 +81,10 @@ public class QualityHfService extends CrudService<QualityHfDao, QualityHf> {
 	@Override
 	@Transactional(readOnly=false)
 	public void delete(QualityHf qualityHf) {
-		dao.phyDelete(qualityHf);
-//		super.delete(qualityHf);
-
+		super.delete(qualityHf);
 	}
+
+
+
 	
 }

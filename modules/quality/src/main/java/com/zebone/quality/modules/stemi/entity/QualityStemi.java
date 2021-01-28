@@ -5,18 +5,19 @@ package com.zebone.quality.modules.stemi.entity;
 
 import org.hibernate.validator.constraints.Length;
 import java.util.Date;
+import com.jeesite.common.mybatis.annotation.JoinTable;
+import com.jeesite.common.mybatis.annotation.JoinTable.Type;
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 import com.jeesite.common.entity.DataEntity;
 import com.jeesite.common.mybatis.annotation.Column;
 import com.jeesite.common.mybatis.annotation.Table;
-import org.hibernate.validator.constraints.NotBlank;
-
-import javax.validation.constraints.NotNull;
+import com.jeesite.common.mybatis.mapper.query.QueryType;
 
 /**
  * STEMI急性心肌梗死（ST 段抬高型，首次住院）Entity
  * @author lijin
- * @version 2021-01-27
+ * @version 2021-01-28
  */
 @Table(name="quality_stemi", alias="a", columns={
 		@Column(name="cm_0_1_1_1", attrName="cm_0_1_1_1", label="质控医师"),
@@ -930,7 +931,6 @@ public class QualityStemi extends DataEntity<QualityStemi> {
 	}
 	
 	@Length(min=0, max=32, message="是否实施首次心电图检查长度不能超过 32 个字符")
-	@NotBlank(message = "是否实施首次心电图检查不可为空")
 	public String getStemi_1_1_1() {
 		return stemi_1_1_1;
 	}
