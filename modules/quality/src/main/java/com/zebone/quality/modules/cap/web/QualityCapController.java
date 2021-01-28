@@ -26,6 +26,7 @@ import com.jeesite.common.web.BaseController;
 import com.zebone.quality.modules.cap.entity.QualityCap;
 import com.zebone.quality.modules.cap.service.QualityCapService;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 
 /**
@@ -88,7 +89,7 @@ public class QualityCapController extends BaseController {
 	@RequiresPermissions("cap:qualityCap:edit")
 	@PostMapping(value = "save")
 	@ResponseBody
-	public String save(@Validated QualityCap qualityCap) {
+	public String save(@Validated QualityCap qualityCap) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 		qualityCapService.save(qualityCap);
 
 		String result = uploadService.upload(qualityCap,new Cap(),"CAP");

@@ -107,7 +107,7 @@ public class QualityHfController extends BaseController {
 	@RequiresPermissions("hf:qualityHf:edit")
 	@PostMapping(value = "save")
 	@ResponseBody
-	public String save(@Validated QualityHf qualityHf) {
+	public String save(@Validated QualityHf qualityHf) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 		qualityHfService.save(qualityHf);
 
 		String result = uploadService.upload(qualityHf,new Hf(),"HF");
