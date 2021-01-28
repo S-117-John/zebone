@@ -6,7 +6,11 @@ package com.zebone.quality.modules.hf.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.zebone.quality.domain.UploadService;
 import com.zebone.quality.infrastructure.entity.HfDO;
+import com.zebone.quality.modules.common.UploadResult;
+import com.zebone.quality.modules.hf.entity.Hf;
 import com.zebone.quality.modules.hf.repository.HfRepository;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.MapUtils;
@@ -31,6 +35,7 @@ import com.zebone.quality.modules.hf.service.QualityHfService;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * HF心力衰竭Controller
@@ -43,6 +48,10 @@ public class QualityHfController extends BaseController {
 
 	@Autowired
 	private QualityHfService qualityHfService;
+
+
+	@Autowired
+	private UploadService uploadService;
 
 	/**
 	 * 获取数据
@@ -100,6 +109,16 @@ public class QualityHfController extends BaseController {
 	@ResponseBody
 	public String save(@Validated QualityHf qualityHf) {
 		qualityHfService.save(qualityHf);
+
+		String result = uploadService.upload(qualityHf,new Hf(),"HF");
+		Gson gson = new Gson();
+		UploadResult uploadResult = gson.fromJson(result, UploadResult.class);
+		Integer resultCode = Optional.ofNullable(uploadResult).map(a->a.getCode()).orElse(null);
+		if(resultCode==1000){
+			String errorMessage = Optional.ofNullable(uploadResult).map(a->a.getMessage()).orElse("上传失败");
+			return renderResult(Global.FALSE, text(errorMessage));
+		}
+
 		return renderResult(Global.TRUE, text("保存HF心力衰竭成功！"));
 	}
 	

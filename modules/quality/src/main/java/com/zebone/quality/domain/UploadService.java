@@ -1,6 +1,7 @@
 package com.zebone.quality.domain;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.jeesite.common.config.Global;
 import com.zebone.quality.common.utils.RestTemplateUtil;
 import com.zebone.quality.modules.base.entity.QualityDisease;
@@ -21,7 +22,7 @@ public class UploadService {
     private QualityDiseaseService qualityDiseaseService;
 
     public String upload(Object object,Object target,String code){
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
         BeanUtils.copyProperties(object,target);
         String json = gson.toJson(target);
         QualityDisease qualityDisease = new QualityDisease();
