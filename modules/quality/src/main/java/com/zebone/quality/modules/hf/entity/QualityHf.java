@@ -9,6 +9,11 @@ import com.jeesite.common.entity.DataEntity;
 import com.jeesite.common.mybatis.annotation.Column;
 import com.jeesite.common.mybatis.annotation.Table;
 import com.jeesite.common.mybatis.mapper.query.QueryType;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 
 /**
  * HF心力衰竭Entity
@@ -1239,6 +1244,7 @@ public class QualityHf extends DataEntity<QualityHf> {
 	}
 	
 	@Length(min=0, max=64, message="入院至使用首剂ACEI/ARB类药物时间大于24小时长度不能超过 64 个字符")
+	@NotBlank(message = "入院至使用首剂ACEI/ARB类药物时间大于24小时")
 	public String getHf_3_6() {
 		return hf_3_6;
 	}
@@ -2547,7 +2553,8 @@ public class QualityHf extends DataEntity<QualityHf> {
 	public void setCm_6_21(Double cm_6_21) {
 		this.cm_6_21 = cm_6_21;
 	}
-	
+
+	@NotNull(message = "血费不能为空")
 	public Double getCm_6_22() {
 		return cm_6_22;
 	}

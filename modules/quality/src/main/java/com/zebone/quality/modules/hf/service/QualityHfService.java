@@ -70,7 +70,9 @@ public class QualityHfService extends CrudService<QualityHfDao, QualityHf> {
 	@Override
 	@Transactional(readOnly=false)
 	public void delete(QualityHf qualityHf) {
-		super.delete(qualityHf);
+		dao.phyDelete(qualityHf);
+//		super.delete(qualityHf);
+
 	}
 	
 }
