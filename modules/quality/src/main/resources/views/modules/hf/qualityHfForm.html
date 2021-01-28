@@ -18,8 +18,11 @@
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="">
 								<span class="required ">*</span> ${text('质控医师')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-10">
+							<div class="col-sm-7">
 								<#form:input path="cm_0_1_1_1" maxlength="64" class="form-control required"/>
+							</div>
+							<div class="col-sm-3">
+								<button type="button" class="btn btn-sm btn-primary" id="patientSubmit" onclick="importPatient('hf/qualityHf')"><i class="fa fa-check"></i> ${text('导入患者信息')}</button>&nbsp;
 							</div>
 						</div>
 					</div>
@@ -2712,4 +2715,24 @@ $("#inputForm").validate({
 		}, "json");
     }
 });
+</script>
+
+<script>
+	function importPatient(url){
+		$.ajax({
+			url:'${ctx}/api/emr/emrHomePage/commonData',
+			type: "POST",
+			data: {patNo: $("#caseid").val()},
+			success:function (data){
+				var obj = JSON.parse(data);
+				for(var key in obj){//遍历json对象的每个key/value对,p为key
+
+					$("#"+key.toLowerCase()).val(obj[key])
+
+
+				}
+
+			}
+		});
+	}
 </script>

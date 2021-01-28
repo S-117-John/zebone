@@ -44,4 +44,26 @@
 		left join EMR_HOME_PAGE_OPS ops on ops.PK_PAGE = emr.PK_PAGE
 		where emr.PAT_NO = #{caseId}
 	</select>
+
+
+
+	<select id="getCommonData" resultType="java.util.Map">
+		select
+		emr.QC_DOC_NAME cm_0_1_1_1,
+		emr.QC_NURSE_NAME cm_0_1_1_2,
+		emr.CONSULT_NAME cm_0_1_1_3,
+		emr.NURSE_NAME cm_0_1_1_4,
+		emr.PAT_NO caseid,
+		emr.FLAG_READMIT cm_0_1_5,
+		emr.BIRTH_DATE cm_0_2_1_1,
+       	emr.MED_PAY_MODE cm_0_3_1,
+       	pv.WEIGHT cm_0_2_1_3,
+       	pv.HEIGHT cm_0_2_1_5,
+       	pv.DATE_BEGIN cm_0_2_4_1,
+       	pv.DATE_END cm_0_2_4_2,
+		emr.ADMIT_PATH_NAME cm_0_3_2
+		from EMR_HOME_PAGE emr
+		left join  PV_ENCOUNTER pv on emr.PK_PV = pv.PK_PV
+		where emr.PAT_NO = #{caseId}
+	</select>
 </mapper>

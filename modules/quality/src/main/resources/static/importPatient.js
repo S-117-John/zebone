@@ -1,10 +1,10 @@
-function importPatient(){
+function importPatient(url){
     $.ajax({
-        url:'${ctx}/api/emr/emrHomePage/data',
+        url:'${ctx}/api/emr/emrHomePage/commonData',
         type: "POST",
-        data: {patNo: $("#caseId").val()},
+        data: {patNo: $("#caseid").val()},
         success:function (data){
-            window.location.href = "${ctx}/cesarean/qualityCesareanSection/form?id="+data;
+            window.location.href = "${ctx}/"+url+"/form?id="+data;
         }
     });
 }

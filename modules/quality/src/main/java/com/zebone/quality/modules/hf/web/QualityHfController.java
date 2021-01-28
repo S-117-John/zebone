@@ -90,6 +90,8 @@ public class QualityHfController extends BaseController {
 		return "modules/hf/qualityHfForm";
 	}
 
+
+
 	/**
 	 * 保存HF心力衰竭
 	 */

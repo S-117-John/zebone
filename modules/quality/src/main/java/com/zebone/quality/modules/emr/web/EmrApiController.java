@@ -1,5 +1,7 @@
 package com.zebone.quality.modules.emr.web;
 
+import com.google.gson.Gson;
+import com.zebone.quality.modules.cap.entity.Cap;
 import com.zebone.quality.modules.cesarean.entity.QualityCesareanSection;
 import com.zebone.quality.modules.cesarean.service.QualityCesareanSectionService;
 import com.zebone.quality.modules.code.service.QualityCodeService;
@@ -8,13 +10,18 @@ import com.zebone.quality.modules.emr.entity.EmrData;
 import com.zebone.quality.modules.emr.entity.EmrHomePage;
 import com.zebone.quality.modules.emr.entity.PvEncounter;
 import com.zebone.quality.modules.emr.service.EmrDataService;
+import com.zebone.quality.modules.hf.entity.Hf;
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -32,7 +39,7 @@ public class EmrApiController {
     private EmrDataService emrDataService;
 
     @RequestMapping(value = "data")
-    public String listData(String patNo, HttpServletRequest request, HttpServletResponse response) {
+    public String listData(String patNo,String type, HttpServletRequest request, HttpServletResponse response) {
         List<EmrData> result = emrDataService.getCaesareanSectionData(patNo);
         if(result.size()>0){
             QualityCesareanSection qualityCesareanSection = new QualityCesareanSection();
@@ -93,6 +100,27 @@ public class EmrApiController {
             return id;
         }else {
             return null;
+        }
+    }
+
+    private static final HashMap<String, Object> map;
+
+    static {
+
+        map = new HashMap<>();
+        map.put("hf", Hf.class);
+        }
+
+    @RequestMapping(value = "commonData")
+    public String commonData(String patNo,String type, HttpServletRequest request, HttpServletResponse response) throws IllegalAccessException, InstantiationException, InvocationTargetException {
+        List<Map<String,Object>> result = emrDataService.getCommonData(patNo);
+        if(result.size()>0){
+            Map<String,Object> mapResult = result.get(0);
+            Gson gson = new Gson();
+            String jsonResult =  gson.toJson(mapResult);
+            return jsonResult;
+        }else {
+            return "";
         }
     }
 }

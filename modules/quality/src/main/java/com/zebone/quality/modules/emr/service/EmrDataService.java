@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 卡卡西
@@ -18,5 +19,9 @@ public class EmrDataService extends CrudService<EmrDataDao, EmrData> {
 
     public List<EmrData> getCaesareanSectionData(String caseId){
         return dao.getCaesareanSectionData(caseId);
+    }
+
+    public List<Map<String,Object>> getCommonData(String caseId){
+        return dao.getCommonData(caseId);
     }
 }
