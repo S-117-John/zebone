@@ -1,5 +1,6 @@
 package com.zebone.quality.domain;
 
+import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jeesite.common.config.Global;
@@ -24,7 +25,7 @@ public class UploadService {
     public String upload(Object object,Object target,String code){
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
         BeanUtils.copyProperties(object,target);
-        String json = gson.toJson(target);
+        String json = JSON.toJSONString(target);
         QualityDisease qualityDisease = new QualityDisease();
         qualityDisease.setCode(code);
         List<QualityDisease> list = qualityDiseaseService.findList(qualityDisease);
