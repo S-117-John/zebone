@@ -2703,6 +2703,7 @@
 </div>
 <% } %>
 <script>
+	let subTimes = 0;
 $("#inputForm").validate({
 	submitHandler: function(form){
 		js.ajaxSubmitForm($(form), function(data){
@@ -2718,9 +2719,13 @@ $("#inputForm").validate({
 					console.log(key.replace(new RegExp("-","g") ,"_").toLowerCase())
 					$("#"+key.replace(new RegExp("-","g") ,"_").toLowerCase()).addClass("required")
 				}
+				$("#inputForm").valid();
+				// if(subTimes = 0){
+				// 	let div = document.getElementById("btnSubmit");
+				// 	div.click()
+				// 	subTimes = 1;
+				// }
 
-				let div = document.getElementById("btnSubmit");
-				div.click()
 			}
 		}, "json");
     }
