@@ -366,42 +366,42 @@ public class QualityStemi extends DataEntity<QualityStemi> {
 	private Date stemi_1_3_1_2_1;		// 首次心脏标志物检测结果报告日期时间
 	private String stemi_1_3_2;		// 首次心脏标志物检测选项和数值
 	private String stemi_1_4_1_1;		// 肌钙蛋白T检测选项
-	private Long stemi_1_3_2_1;		// 肌钙蛋白T检测值(ng/Ml)
+	private Double stemi_1_3_2_1;		// 肌钙蛋白T检测值(ng/Ml)
 	private String stemi_1_4_1_2;		// 肌钙蛋白T定性检测选择
 	private String stemi_1_4_2_1;		// 肌钙蛋白I检测选项
-	private Long stemi_1_3_2_2;		// 肌钙蛋白I检测值(ng/mL)
+	private Double stemi_1_3_2_2;		// 肌钙蛋白I检测值(ng/mL)
 	private String stemi_1_4_2_2;		// 肌钙蛋白I定性检测选择
 	private String stemi_1_4_3_1;		// 肌酸激酶同工酶检测选项
-	private Long stemi_1_3_2_3;		// 肌酸激酶同工酶检测值(ng/mL)
+	private Double stemi_1_3_2_3;		// 肌酸激酶同工酶检测值(ng/mL)
 	private String stemi_1_4_3_2;		// 肌酸激酶同工酶定性检测选择
 	private String stemi_1_4_4_1;		// 心肌肌红蛋白检测选项
-	private Long stemi_1_3_2_4;		// 心肌肌红蛋白检测值(ng/mL)
+	private Double stemi_1_3_2_4;		// 心肌肌红蛋白检测值(ng/mL)
 	private String stemi_1_4_4_2;		// 心肌肌红蛋白定性检测选择
 	private String stemi_1_4_5_1;		// B型钠尿肽检测选项
-	private Long stemi_1_3_2_5;		// B型钠尿肽检测值(ng/L)
+	private Double stemi_1_3_2_5;		// B型钠尿肽检测值(ng/L)
 	private String stemi_1_4_5_2;		// B型钠尿肽定性检测选择
 	private String stemi_1_4_6_1;		// N端B型钠尿肽前体检测选项
-	private Long stemi_1_3_2_6;		// N端B型钠尿肽前体检测值(ng/L)
+	private Double stemi_1_3_2_6;		// N端B型钠尿肽前体检测值(ng/L)
 	private String stemi_1_4_6_2;		// N端B型钠尿肽前体定性检测选择
 	private String stemi_2_1_1;		// 是否实施首次X线胸片检查
 	private Date stemi_2_1_2_1;		// 首次X线胸片检查报告日期时间
 	private String stemi_2_1_3;		// 是否有肺淤血或肺水肿
 	private String stemi_2_2_1;		// 是否实施首次超声心动图(CDFA)检查
 	private Date stemi_2_2_2_1;		// 报告日期时间
-	private Long stemi_2_2_3_1;		// 左室射血分（LVEF）测量值(%)
-	private Long stemi_2_2_3_3_1;		// 左室舒张末径（LVEDd）数值(mm)
+	private Double stemi_2_2_3_1;		// 左室射血分（LVEF）测量值(%)
+	private Double stemi_2_2_3_3_1;		// 左室舒张末径（LVEDd）数值(mm)
 	private String stemi_2_2_3_4;		// 是否有左室室壁瘤
 	private String stemi_2_3_1_1;		// 是否实施GRACE危险评分评估
 	private Date stemi_2_3_1_2_1;		// 评估日期时间
-	private Long stemi_2_3_1_3_1;		// 实施首次GRACE危险评分值
+	private Double stemi_2_3_1_3_1;		// 实施首次GRACE危险评分值
 	private String stemi_2_3_1_4;		// GRACE危险评估分层的选择
 	private String stemi_2_3_2_1;		// 是否实施TIMI危险分层评估
 	private Date stemi_2_3_2_2_1;		// 评估日期时间
-	private Long stemi_2_3_2_3_1;		// 实施首次TIMI危险分层分值
+	private Double stemi_2_3_2_3_1;		// 实施首次TIMI危险分层分值
 	private String stemi_2_3_2_4;		// TIMI危险分层的选择
 	private String stemi_2_3_3_1;		// 是否实施CRUSADE出血风险评分
 	private Date stemi_2_3_3_2_1;		// 评估日期时间
-	private Long stemi_2_3_3_3_1;		// 实施首次CRUSADE出血风险评分值
+	private Double stemi_2_3_3_3_1;		// 实施首次CRUSADE出血风险评分值
 	private String stemi_2_3_3_4;		// CRUSADE出血风险评分分层的选择
 	private String stemi_3_0_2;		// 实施再灌注治疗的模式
 	private String stemi_3_1_1;		// STEMI溶栓适应证
@@ -413,7 +413,7 @@ public class QualityStemi extends DataEntity<QualityStemi> {
 	private String stemi_3_1_4_1;		// 其他溶栓药物
 	private Date stemi_3_1_5_1;		// 输注开始日期时间
 	private Date stemi_3_1_6_1;		// 输注完成日期时间
-	private Long stemi_3_1_7_1;		// 到达医院STEMI确诊报告日期与时间至溶栓时间（D2N）
+	private Double stemi_3_1_7_1;		// 到达医院STEMI确诊报告日期与时间至溶栓时间（D2N）
 	private String stemi_3_1_8;		// 临床评估溶栓成功(60~90 min)
 	private String stemi_3_1_9;		// 溶栓治疗并发症的选择
 	private String stemi_3_1_10;		// 溶栓治疗延迟原因
@@ -471,8 +471,8 @@ public class QualityStemi extends DataEntity<QualityStemi> {
 	private String stemi_3_2_5_2;		// 近期并发症治疗主要措施的选择
 	private String stemi_3_2_5_2_1;		// 其他近期并发症治疗主要措施
 	private String stemi_3_2_6_1;		// 是否实施CathPCI风险评估
-	private Long stemi_3_2_6_2_1_1;		// 总分值
-	private Long stemi_3_2_6_2_2;		// 院内患者死亡风险(%)
+	private Double stemi_3_2_6_2_1_1;		// 总分值
+	private Double stemi_3_2_6_2_2;		// 院内患者死亡风险(%)
 	private String stemi_3_2_7_1;		// 是否实施围术期抗凝治疗
 	private String stemi_3_2_7_2;		// 肠外抗凝药物选择
 	private String stemi_3_2_7_3;		// 其他肠外抗凝药物
@@ -483,11 +483,11 @@ public class QualityStemi extends DataEntity<QualityStemi> {
 	private String stemi_3_3_1_2_1;		// 其他患者自身原因
 	private String stemi_3_3_2;		// 转院类型及适应症
 	private Date stemi_3_3_3_1;		// 转院日期时间
-	private Long stemi_3_3_4_1;		// 到医院就诊至转出时间（分钟）
+	private Double stemi_3_3_4_1;		// 到医院就诊至转出时间（分钟）
 	private String stemi_3_4;		// 医院是否具备接受外院“转院PCI”患者的能力
 	private Date stemi_3_4_1_1;		// 患者从不具备实施PCI能力医院转运到本院急诊或门诊日期
 	private Date stemi_3_4_2_1;		// PCI导丝通过梗死相关动脉的时间
-	private Long stemi_3_4_3_1;		// 医院转出时间至PCI导丝通过梗死相关动脉（D2B1）时间（分钟）
+	private Double stemi_3_4_3_1;		// 医院转出时间至PCI导丝通过梗死相关动脉（D2B1）时间（分钟）
 	private String stemi_3_4_4;		// 治疗延迟原因选择
 	private String stemi_4_1_1;		// 是否有β-受体阻滞剂禁忌证
 	private String stemi_4_1_2_1;		// β-受体阻滞剂禁忌症
