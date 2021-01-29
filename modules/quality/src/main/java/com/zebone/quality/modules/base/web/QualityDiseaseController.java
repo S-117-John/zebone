@@ -61,7 +61,7 @@ public class QualityDiseaseController extends BaseController {
 	@RequestMapping(value = "listData")
 	@ResponseBody
 	public Page<QualityDisease> listData(QualityDisease qualityDisease, HttpServletRequest request, HttpServletResponse response) {
-		Page<QualityDisease> page = qualityDiseaseService.findPage(new Page<QualityDisease>(request, response), qualityDisease); 
+		Page<QualityDisease> page = qualityDiseaseService.findPage(new Page<QualityDisease>(request, response), qualityDisease);
 		return page;
 	}
 

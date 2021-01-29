@@ -23,6 +23,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="image_path", attrName="imagePath", label="图标"),
 		@Column(name="type", attrName="type", label="病种分类"),
 		@Column(name="form_url", attrName="formUrl", label="表单Url"),
+		@Column(name="status", attrName="status", label="状态"),
 	}, orderBy="a.id DESC"
 )
 public class QualityDisease extends DataEntity<QualityDisease> {

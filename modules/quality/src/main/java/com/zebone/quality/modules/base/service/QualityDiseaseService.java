@@ -41,7 +41,11 @@ public class QualityDiseaseService extends CrudService<QualityDiseaseDao, Qualit
 	 */
 	@Override
 	public Page<QualityDisease> findPage(Page<QualityDisease> page, QualityDisease qualityDisease) {
-		return super.findPage(page, qualityDisease);
+		qualityDisease.setPage(page);
+		System.out.println(qualityDisease.getSqlMap().getWhere().toSql());
+		List<QualityDisease> list = dao.findList(qualityDisease);
+		return page.setList(list);
+//		return super.findPage(page, qualityDisease);
 	}
 	
 	/**
