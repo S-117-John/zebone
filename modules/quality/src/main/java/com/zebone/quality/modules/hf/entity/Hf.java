@@ -40,7 +40,7 @@ public class Hf implements Serializable {
     private String cm_0_1_4_2;
     @JSONField(name="CM-0-1-5")
     private String cm_0_1_5;
-    @JSONField(format = "yyyy-MM-dd HH:mm",name = "CM-0-2-1-1")
+    @JSONField(format = "yyyy-MM-dd",name = "CM-0-2-1-1")
     private Date cm_0_2_1_1;
     @JSONField(name="CM-0-2-1-2")
     private String cm_0_2_1_2;
@@ -319,21 +319,21 @@ public class Hf implements Serializable {
     @JSONField(name="HF-8-1-3")
     private String hf_8_1_3;
     @JSONField(name="HF-8-2-1-A")
-    private String hf_8_2_1_a;
+    private List<String> hf_8_2_1_a;
     @JSONField(name="HF-8-2-1-B")
-    private String hf_8_2_1_b;
+    private List<String> hf_8_2_1_b;
     @JSONField(name="HF-8-2-2")
     private String hf_8_2_2;
     @JSONField(name="HF-8-3")
     private List<String> hf_8_3;
     @JSONField(name="HF-8-4-1")
-    private String hf_8_4_1;
+    private List<String> hf_8_4_1;
     @JSONField(name="HF-8-4-2")
-    private String hf_8_4_2;
+    private List<String> hf_8_4_2;
     @JSONField(name="HF-8-4-3")
     private String hf_8_4_3;
     @JSONField(name="HF-8-4-4")
-    private String hf_8_4_4;
+    private List<String> hf_8_4_4;
     @JSONField(name="HF-8-4-5")
     private String hf_8_4_5;
     @JSONField(name="HF-9-2-1-1")
@@ -1712,19 +1712,19 @@ public class Hf implements Serializable {
         this.hf_8_1_3 = hf_8_1_3;
     }
 
-    public String getHf_8_2_1_a() {
+    public List<String> getHf_8_2_1_a() {
         return hf_8_2_1_a;
     }
 
-    public void setHf_8_2_1_a(String hf_8_2_1_a) {
+    public void setHf_8_2_1_a(List<String> hf_8_2_1_a) {
         this.hf_8_2_1_a = hf_8_2_1_a;
     }
 
-    public String getHf_8_2_1_b() {
+    public List<String> getHf_8_2_1_b() {
         return hf_8_2_1_b;
     }
 
-    public void setHf_8_2_1_b(String hf_8_2_1_b) {
+    public void setHf_8_2_1_b(List<String> hf_8_2_1_b) {
         this.hf_8_2_1_b = hf_8_2_1_b;
     }
 
@@ -1744,19 +1744,19 @@ public class Hf implements Serializable {
         this.hf_8_3 = hf_8_3;
     }
 
-    public String getHf_8_4_1() {
+    public List<String> getHf_8_4_1() {
         return hf_8_4_1;
     }
 
-    public void setHf_8_4_1(String hf_8_4_1) {
+    public void setHf_8_4_1(List<String> hf_8_4_1) {
         this.hf_8_4_1 = hf_8_4_1;
     }
 
-    public String getHf_8_4_2() {
+    public List<String> getHf_8_4_2() {
         return hf_8_4_2;
     }
 
-    public void setHf_8_4_2(String hf_8_4_2) {
+    public void setHf_8_4_2(List<String> hf_8_4_2) {
         this.hf_8_4_2 = hf_8_4_2;
     }
 
@@ -1768,11 +1768,11 @@ public class Hf implements Serializable {
         this.hf_8_4_3 = hf_8_4_3;
     }
 
-    public String getHf_8_4_4() {
+    public List<String> getHf_8_4_4() {
         return hf_8_4_4;
     }
 
-    public void setHf_8_4_4(String hf_8_4_4) {
+    public void setHf_8_4_4(List<String> hf_8_4_4) {
         this.hf_8_4_4 = hf_8_4_4;
     }
 

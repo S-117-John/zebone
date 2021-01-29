@@ -1711,7 +1711,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required ">*</span> ${text('心衰原发疾病评估与教育')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="hf_8_2_1_a" dictType="HF_8_2_1_A" class="form-control required" />
+								<#form:checkbox path="hf_8_2_1_a" dictType="HF_8_2_1_A" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -1722,7 +1722,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required ">*</span> ${text('实施控制主要危险因素评估与教育')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="hf_8_2_1_b" dictType="HF_8_2_1_B" class="form-control required" />
+								<#form:checkbox path="hf_8_2_1_b" dictType="HF_8_2_1_B" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -1755,7 +1755,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required ">*</span> ${text('交与患者“出院小结”的副本告知患者出院时风险因素')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="hf_8_4_1" dictType="HF_8_4_1" class="form-control required" />
+								<#form:checkbox path="hf_8_4_1" dictType="HF_8_4_1" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -1766,7 +1766,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required ">*</span> ${text('出院带药')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="hf_8_4_2" dictType="HF_8_4_2" class="form-control required" />
+								<#form:checkbox path="hf_8_4_2" dictType="HF_8_4_2" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -1788,7 +1788,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required ">*</span> ${text('出院时教育与随访')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="hf_8_4_4" dictType="HF_8_4_4" class="form-control required" />
+								<#form:checkbox path="hf_8_4_4" dictType="HF_8_4_4" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -2711,6 +2711,16 @@ $("#inputForm").validate({
 				js.closeCurrentTabPage(function(contentWindow){
 					contentWindow.page();
 				});
+			}
+			if(data.result == Global.FALSE){
+				var obj = JSON.parse(data.message);
+				for(var key in obj.errorMessage){
+					console.log(key.replace(new RegExp("-","g") ,"_").toLowerCase())
+					$("#"+key.replace(new RegExp("-","g") ,"_").toLowerCase()).addClass("required")
+				}
+
+				let div = document.getElementById("btnSubmit");
+				div.click()
 			}
 		}, "json");
     }
