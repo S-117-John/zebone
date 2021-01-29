@@ -4,7 +4,10 @@ function importPatient(url){
         type: "POST",
         data: {patNo: $("#caseid").val()},
         success:function (data){
-            window.location.href = "${ctx}/"+url+"/form?id="+data;
+            var obj = JSON.parse(data);
+            for(var key in obj){//遍历json对象的每个key/value对,p为key
+                $("#"+key.toLowerCase()).val(obj[key])
+            }
         }
     });
 }

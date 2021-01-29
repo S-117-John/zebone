@@ -1,5 +1,7 @@
 package com.zebone.quality.common.utils;
 
+import com.jeesite.common.lang.StringUtils;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -33,11 +35,12 @@ public class CommonBeanUtils {
                     String targetFirstLetter = targetFieldName.substring(0, 1).toUpperCase();
                     String targetGetter = "set" + targetFirstLetter + targetFieldName.substring(1);
                     Method targetMethod = target.getClass().getMethod(targetGetter, List.class);
-                    String sourceValue = (String)value;
-                    List<String> list = new ArrayList<>();
-
-                    list = Arrays.asList(sourceValue.split(","));
-                    targetMethod.invoke(target,list);
+                    if(value != null){
+                        String sourceValue = (String)value;
+                        List<String> list = new ArrayList<>();
+                        list = Arrays.asList(sourceValue.split(","));
+                        targetMethod.invoke(target,list);
+                    }
                 }
             }
 

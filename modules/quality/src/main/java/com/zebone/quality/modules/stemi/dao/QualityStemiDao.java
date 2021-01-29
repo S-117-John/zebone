@@ -7,6 +7,8 @@ import com.jeesite.common.dao.CrudDao;
 import com.jeesite.common.mybatis.annotation.MyBatisDao;
 import com.zebone.quality.modules.stemi.entity.QualityStemi;
 
+import java.util.Map;
+
 /**
  * STEMI急性心肌梗死（ST 段抬高型，首次住院）DAO接口
  * @author lijin
@@ -14,5 +16,6 @@ import com.zebone.quality.modules.stemi.entity.QualityStemi;
  */
 @MyBatisDao
 public interface QualityStemiDao extends CrudDao<QualityStemi> {
-	
+
+    Map<String,Object> findById(String id);
 }

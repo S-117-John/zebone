@@ -4,6 +4,7 @@
 package com.zebone.quality.modules.stemi.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,12 +17,18 @@ import com.zebone.quality.modules.stemi.dao.QualityStemiDao;
 /**
  * STEMI急性心肌梗死（ST 段抬高型，首次住院）Service
  * @author lijin
- * @version 2021-01-28
+ * @version 2021-01-27
  */
 @Service
 @Transactional(readOnly=true)
 public class QualityStemiService extends CrudService<QualityStemiDao, QualityStemi> {
-	
+
+	public Map<String,Object> findById(String id) {
+		Map<String,Object> result = dao.findById(id);
+		return result;
+	}
+
+
 	/**
 	 * 获取单条数据
 	 * @param qualityStemi
@@ -70,7 +77,8 @@ public class QualityStemiService extends CrudService<QualityStemiDao, QualitySte
 	@Override
 	@Transactional(readOnly=false)
 	public void delete(QualityStemi qualityStemi) {
-		super.delete(qualityStemi);
+		dao.phyDelete(qualityStemi);
+		//super.delete(qualityStemi);
 	}
 	
 }
