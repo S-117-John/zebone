@@ -1,8 +1,12 @@
 package com.zebone.quality.processes;
 
 
+import com.jeesite.common.config.Global;
 import com.jeesite.common.entity.Page;
 import com.jeesite.common.utils.SpringUtils;
+import com.jeesite.common.web.BaseController;
+import com.zebone.quality.modules.base.entity.QualityDisease;
+import com.zebone.quality.modules.base.service.QualityDiseaseService;
 import com.zebone.quality.modules.hf.entity.QualityHf;
 import org.apache.commons.collections.MapUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -14,6 +18,7 @@ import org.flowable.task.api.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,10 +32,16 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(value = "${adminPath}/process")
-public class ProcessController {
+public class ProcessController extends BaseController {
+
+    @Autowired
+    private RuntimeService runtimeService;
 
     @Autowired
     private TaskService taskService;
+
+    @Autowired
+    private QualityDiseaseService qualityDiseaseService;
 
     /**
      * 查询列表
@@ -49,20 +60,29 @@ public class ProcessController {
     @ResponseBody
     public List<UserTask> list(HttpServletRequest request, HttpServletResponse response) {
         List<Task> tasks = taskService.createTaskQuery().taskAssignee("review").orderByTaskCreateTime().desc().list();
-
         List<UserTask> userTaskList = new ArrayList<>();
 
         for (Task task : tasks) {
+            QualityDisease qualityDisease = new QualityDisease();
+            Map<String, Object> map = taskService.getVariables(task.getId());
+            String formName = MapUtils.getString(map,"formName","");
+            List<QualityDisease> qualityDiseasesList = new ArrayList<>();
+            if(!StringUtils.isEmpty(formName)){
+                qualityDisease.setCode(formName.toUpperCase());
+                qualityDiseasesList = qualityDiseaseService.findList(qualityDisease);
+            }
+
 
             UserTask userTask = new UserTask();
             userTask.setProcessInstanceId(task.getProcessInstanceId());
             userTask.setFormKey(task.getFormKey());
             userTask.setTaskId(task.getId());
+            if(qualityDiseasesList.size()>0){
+                userTask.setTaskName(qualityDiseasesList.get(0).getName());
+                userTask.setCreateDate(task.getCreateTime());
+            }
+
             userTaskList.add(userTask);
-
-            Map<String, Object> map = taskService.getVariables(task.getId());
-
-            System.out.println(map);
         }
         return userTaskList;
     }
@@ -78,6 +98,13 @@ public class ProcessController {
     }
 
 
+
+    @RequestMapping(value = "delete")
+    @ResponseBody
+    public String delete(String taskId) {
+        taskService.deleteTask(taskId);
+        return renderResult(Global.TRUE, text("删除成功！"));
+    }
 
 
     /**
@@ -103,6 +130,7 @@ public class ProcessController {
         HashMap<String, Object> map = new HashMap<>(16);
         map.put("approve", true);
         taskService.complete(taskId, map);
-        return "流程审核通过！";
+
+        return  renderResult(Global.TRUE, text("流程审核通过！"));
     }
 }

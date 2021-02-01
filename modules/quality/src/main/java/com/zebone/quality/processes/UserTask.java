@@ -2,6 +2,8 @@ package com.zebone.quality.processes;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @author 卡卡西
  */
@@ -13,4 +15,8 @@ public class UserTask {
     private String formKey;
 
     private String taskId;
+
+    private String taskName;
+
+    private Date createDate;
 }

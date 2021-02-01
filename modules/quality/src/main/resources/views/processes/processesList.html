@@ -22,9 +22,13 @@ $('#dataGrid').dataGrid({
 	columnModel: [
 
 		{header:'${text('流程实例ID')}', name:'processInstanceId', width:150, align:"left"},
+		{header:'${text('任务名称')}', name:'taskName', width:150, align:"left"},
+		{header:'${text('创建时间')}', name:'createDate', index:'a.create_date', width:150, align:"left"},
 		{header:'${text('操作')}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
 				var actions = [];
-				actions.push('<a href="${ctx}/process/view?taskId='+row.taskId+'" class="btnList" title="${text('查看')}"><i class="fa fa-pencil"></i></a>');
+				actions.push('<a href="${ctx}/process/view?taskId='+row.taskId+'" class="btnList" title="${text('查看')}"><i class="fa fa-pencil"></i></a>&nbsp;');
+				actions.push('<a href="${ctx}/process/review?taskId='+row.taskId+'" class="btnList" title="${text('审批')}"><i class="fa fa-cogs"></i></a>&nbsp;');
+				actions.push('<a href="${ctx}/process/delete?taskId='+row.taskId+'" class="btnList" title="${text('删除任务')}" data-confirm="${text('确认要删除该任务吗？')}"><i class="fa fa-trash-o"></i></a>&nbsp;');
 				return actions.join('');
 			}}
 

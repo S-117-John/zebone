@@ -201,16 +201,16 @@ public class QualityHfController extends BaseController {
 	@RequiresPermissions("hf:qualityHf:edit")
 	@PostMapping(value = "review")
 	@ResponseBody
-	public String review(TaskHf qualityHf) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+	public String review(QualityHf qualityHf,String taskId) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 
-		Task task = taskService.createTaskQuery().taskId(qualityHf.getTaskId()).singleResult();
+		Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
 		if (task == null) {
 			return renderResult(Global.FALSE, text("流程不存在"));
 		}
 		//通过审核
 		HashMap<String, Object> map = new HashMap<>(16);
 		map.put("approve", true);
-		taskService.complete(qualityHf.getTaskId(), map);
+		taskService.complete(taskId, map);
 
 
 		String result = uploadService.upload(qualityHf,new Hf(),"HF");
