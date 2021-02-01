@@ -1,0 +1,2863 @@
+<% layout('/layouts/default.html', {title: 'HF心力衰竭管理', libs: ['validate']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header with-border">
+			<div class="box-title">
+				<i class="fa fa-list-alt"></i> ${text('审核HF心力衰竭')}
+			</div>
+			<div class="box-tools pull-right">
+				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+			</div>
+		</div>
+		<#form:form id="inputForm" model="${qualityHf}" action="${ctx}/hf/qualityHf/save" method="post" class="form-horizontal">
+			<div class="box-body">
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					基本信息
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+
+				<div class="form-unit">${text('基本信息')}</div>
+
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('患者病案号')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="caseid" readonly="true" maxlength="64" class="form-control required"/>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('质控医师')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_0_1_1_1" readonly="true" maxlength="64" class="form-control required"/>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('质控护士')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_0_1_1_2" readonly="true" maxlength="64" class="form-control required"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('主治医师')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_0_1_1_3" readonly="true" maxlength="64" class="form-control required"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('责任护士')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_0_1_1_4" readonly="true" maxlength="64" class="form-control required"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('上报科室')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_0_1_1_5" readonly="true" maxlength="64" class="form-control required"/>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('主要诊断或其他诊断ICD-10四位亚目编码与名称')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_0_1_3_1" disabled="disabled" readonly="true" dictType="HF_CM_0_1_3_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('主要诊断或其他诊断ICD-10六位临床扩展编码与名称')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_0_1_3_2" disabled="disabled" readonly="true" dictType="HF_CM_0_1_3_2" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('第一诊断或第二诊断对应的原发疾病ICD-10的三位类亚目编码与名称')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_0_1_4_1" readonly="true" dictType="HF_0_1_4_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('第一诊断或第二诊断对应的原发疾病ICD-10的三位类目编码与名称')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_0_1_4_2" readonly="true" dictType="HF_0_1_4_2" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_0_1_4_1" readonly="true" dictType="HF_CM_0_1_4_1" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_0_1_4_2" readonly="true" dictType="HF_CM_0_1_4_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('是否出院后31天内重复住院')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="cm_0_1_5" readonly="true" dictType="HF_CM_0_1_5" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('出生日期')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_0_2_1_1" readonly="true" maxlength="20" class="form-control Wdate required"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('患者性别')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="cm_0_2_1_2" readonly="true" dictType="HF_CM_0_2_1_2" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('患者体重')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_0_2_1_3" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('患者身高')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_0_2_1_5" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('发病日期时间是否无法确定或无记录')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:checkbox path="cm_0_2_2_1" readonly="true" dictType="HF_CM_0_2_2_1" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('发病日期时间')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_0_2_2_2" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('到达本院急诊或者门诊日期时间是否无法确定或无记录')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:checkbox path="cm_0_2_3_1" readonly="true" dictType="HF_CM_0_2_3_1" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('到达本院急诊或者门诊日期时间')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_0_2_3_2" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('入院日期时间')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_0_2_4_1" readonly="true" maxlength="20" class="form-control Wdate required"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('出院日期时间')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_0_2_4_2" readonly="true" maxlength="20" class="form-control Wdate required"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('入住CCU日期时间')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_0_2_5_1" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('离开CCU日期时间')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_0_2_5_2" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('手术开始')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_0_2_6_1" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('手术结束')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_0_2_6_2" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('费用支付方式')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_0_3_1" readonly="true" dictType="HF_CM_0_3_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('收入住院途径')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_0_3_2" readonly="true" dictType="HF_CM_0_3_2" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('到院交通工具')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_0_3_3" readonly="true" dictType="HF_CM_0_3_3" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					HF-1 左心室射血分数左心室功能评价与检测B型利钠肽实施情况
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('是否实施首次X线胸片检查')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_1_1_1" readonly="true" dictType="HF_1_1_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('首次X线胸片检查报告日期时间')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_1_1_2" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('首次X线胸片检查报告是否有肺淤血或肺水肿')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_1_1_3" readonly="true" dictType="HF_1_1_3" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('是否实施首次超声心动图(CDFA)检查')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_1_2_1" readonly="true" dictType="HF_1_2_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('报告日期时间')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_1_2_2" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('左室舒张末内径（LVEDD）')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_1_2_3_4" readonly="true" class="form-control number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('左室射血分（LVEF）测量值')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_1_2_3_1" readonly="true" class="form-control number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('左室射血分数评估结论')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_1_2_3_2" readonly="true" dictType="HF_1_2_3_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('是否有左心室室壁瘤')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_1_2_3_3" readonly="true" dictType="HF_1_2_3_3" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('实施首次评估患者的危险程度')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_1_3_1" readonly="true" dictType="HF_1_3_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('Killip分级评估结果的选择')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_1_3_3" readonly="true" dictType="HF_1_3_3" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('NYHA分级结果的选择')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_1_3_2" readonly="true" dictType="HF_1_3_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('是否为非瓣膜性房颤/房扑患者')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_1_3_5" readonly="true" dictType="HF_1_3_5" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('是否实施房颤患者风险评估')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_1_3_6_1" readonly="true" dictType="HF_1_3_6_1" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('房颤患者脑险评估分值')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_1_3_6_2" readonly="true" class="form-control number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('CHA2DS2-VASc评分大于2分')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_1_3_6_3" readonly="true" dictType="HF_1_3_6_3" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('急诊或入院后是否首次心电图（ECG）检查')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_1_4_1" readonly="true" dictType="HF_1_4_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('报告日期时间')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_1_4_2" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('QRS宽度')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_1_4_3" readonly="true" class="form-control number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('心电图')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:checkbox path="hf_1_4_4" readonly="true" dictType="HF_1_4_4" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他心电图检查结果')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_1_4_4_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('是否实施首次检测')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_1_5_1_1" readonly="true" dictType="HF_1_5_1_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('首次检测结果报告日期')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_1_5_1_2" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('首次检测选择')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:checkbox path="hf_1_5_3" readonly="true" dictType="HF_1_5_3" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('肌钙蛋白T（TnT）检测值')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_1_5_2_1" readonly="true" class="form-control number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('肌钙蛋白I（TnI）检测值')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_1_5_2_2" readonly="true" class="form-control number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('肌酸激酶同工酶（CK-MB）检测值')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_1_5_2_3" readonly="true" class="form-control number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('心肌肌红蛋白（Myo）检测值')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_1_5_2_4" readonly="true" class="form-control number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('B型钠尿肽（BNP）检测值')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_1_5_2_5" readonly="true" class="form-control number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('N端B型钠尿肽前体（NT-ProBNP）检测值')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_1_5_2_6" readonly="true" class="form-control number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					HF-2 到达医院后利尿剂使用情况
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('是否有利尿剂的禁忌证')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_2_1_a" readonly="true" dictType="HF_2_1_A" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('使用利尿剂的禁忌证选择')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_2_1" readonly="true" dictType="HF_2_1" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他使用利尿剂的禁忌证')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_2_1_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('首剂用药日期时间')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_2_2" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('常用利尿剂药物')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_2_3" readonly="true" dictType="HF_2_3" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他利尿剂药物填写')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_2_3_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('入院至使用首剂利尿剂时间大于24小时')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_2_5" readonly="true" dictType="HF_2_5" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('延迟治疗原因的选择')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_2_4" readonly="true" dictType="HF_2_4" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他延迟治疗原因')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_2_4_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					HF-3 肾素-血管紧张素系统抑制剂使用情况
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('左心室收缩功能障碍')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_3_1" readonly="true" dictType="HF_3_1" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('是否有ACEI抑制剂类药物禁忌证')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_3_2_a" readonly="true" dictType="HF_3_2_A" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('ACEI抑制剂类药物禁忌证与须慎用的情况')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_3_2_1" readonly="true" dictType="HF_3_2_1" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('ACE抑制剂药物')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_3_4_a" readonly="true" dictType="HF_3_4_A" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他ACEI药物')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_3_4_a_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('ARB类药物')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_3_4_b" readonly="true" dictType="HF_3_4_B" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他ARB类药物填写')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_3_4_b_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('是否有ARNI类药物禁忌证')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_3_2_b" readonly="true" dictType="HF_3_2_B" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('ARNI类药物禁忌证与须慎用的情况')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_3_2_2" readonly="true" dictType="HF_3_2_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('使用血管紧张素受体脑啡肽酶抑制剂')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_3_4_c" readonly="true" dictType="HF_3_4_C" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他使用血管紧张素受体脑啡肽酶抑制剂')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_3_4_c_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('首剂用药日期是否未确定')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:checkbox path="hf_3_3_1" readonly="true" dictType="HF_3_3_1" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('首剂用药日期时间')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_3_3" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('入院至使用首剂ACEI/ARB类药物时间大于24小时')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_3_6" readonly="true" dictType="HF_3_6" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('延迟治疗原因')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_3_5" readonly="true" dictType="HF_3_5" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他延迟治疗原因')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_3_5_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					HF-4 到达医院后β受体阻滞剂情况
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('是否有禁忌证与须慎用的情况')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_4_1_1" readonly="true" dictType="HF_4_1_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('β-受体阻滞剂禁忌证选择')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:checkbox path="hf_4_1_2" readonly="true" dictType="HF_4_1_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('使用首剂β-受体阻滞剂药物')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_4_3" readonly="true" dictType="HF_4_3" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他β-受体阻滞剂药物')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_4_3_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('首剂用药日期是否未确定')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_4_2_1" readonly="true"  dictType="HF_4_2_1" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('首剂用药日期时间')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_4_2" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime"  onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('入院至使用首剂β-受体阻滞剂时间大于24小时')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_4_5" readonly="true" dictType="HF_4_5" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('延迟治疗原因')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_4_4" readonly="true" dictType="HF_4_4" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他延迟治疗原因')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_4_4_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					HF-5 到达医院后醛固酮受体拮抗剂使用情况
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('是否有醛固酮受体拮抗剂的禁忌证')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_5_1_1" readonly="true" dictType="HF_5_1_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('醛固酮受体拮抗剂的禁忌证')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_5_1_2" readonly="true" dictType="HF_5_1_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('重度心衰使用醛固酮受体拮抗剂适用症')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:checkbox path="hf_5_2" readonly="true" dictType="HF_5_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他重度心衰使用醛固酮受体拮抗剂适用症')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_5_2_1_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('首剂用药日期是否未确定')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_5_3_1" readonly="true" dictType="HF_5_3_1" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('首剂用药日期时间')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_5_3" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" readonly="true" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('入院至使用首剂醛固酮受体拮抗剂时间大于24小时')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_5_6" readonly="true" dictType="HF_5_6" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('使用醛固酮受体拮抗剂')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_5_4" readonly="true" dictType="HF_5_4" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他醛固酮受体拮抗剂类药物')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_5_4_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('延迟治疗原因')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_5_5" readonly="true" dictType="HF_5_5" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他延迟治疗原因')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_5_5_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					HF-6 住院期间利尿剂、ACEI/ARB、β受体阻滞剂、醛固酮拮抗剂使用情况
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('是否有用药长期医嘱')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_6_1_1" readonly="true" dictType="HF_6_1_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('常用利尿剂药物的选择')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_6_1_2" readonly="true" dictType="HF_6_1_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他常用利尿剂')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_6_1_2_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('是否有ACEI或ARB药物长期医嘱')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_6_2_1" readonly="true" dictType="HF_6_2_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('使用ACEI抑制剂或者ARB或者ARNI类药物选择')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_6_2_2" readonly="true" dictType="HF_6_2_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('ACE抑制剂药物')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_6_2_2_a" readonly="true" dictType="HF_6_2_2_A" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他ACEI药物填写')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_6_2_2_a_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('ARB类药物')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_6_2_2_b" readonly="true" dictType="HF_6_2_2_B" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他ARB药物填写')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_6_2_2_b_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('使用血管紧张素受体脑啡肽酶抑制剂')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_6_2_2_c" readonly="true" dictType="HF_6_2_2_C" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他使用血管紧张素受体脑啡肽酶抑制剂')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_6_2_2_c_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('是否有β受体阻滞剂药物医嘱')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_6_3_1" readonly="true" dictType="HF_6_3_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('使用首剂β-受体阻滞剂药物')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_6_3_2" readonly="true" dictType="HF_6_3_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他β-受体阻滞剂药物填写')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_6_3_2_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('是否有醛固酮拮抗剂药物医嘱')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_6_4_1" readonly="true" dictType="HF_6_4_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('使用醛固酮受体拮抗剂')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_6_4_2" readonly="true" dictType="HF_6_4_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他醛固酮受体拮抗剂类药物填写')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_6_4_2_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('是否常用抗凝药物')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_6_5_1" readonly="true" dictType="HF_6_5_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('选择抗凝药物')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_6_5_2" readonly="true" dictType="HF_6_5_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他抗凝药物')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_6_5_2_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					HF-7 出院时利尿剂、ACEI/ARB、β受体阻滞剂、醛固酮拮抗剂使用情况
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('出院带药医嘱中是否有继续使用利尿剂记录医嘱')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_7_1_1" readonly="true" dictType="HF_7_1_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('常用利尿剂药物')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_7_1_2" readonly="true" dictType="HF_7_1_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他常用利尿剂')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_7_1_2_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('出院带药医嘱中是否有继续使用ACEI或ARB药物记录医嘱')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_7_2_1" readonly="true" dictType="HF_7_2_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('使用ACEI抑制剂或者ARB或者ARNI类药物选择')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_7_2_2" readonly="true" dictType="HF_7_2_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('ACE抑制剂药物')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_7_2_2_a" readonly="true" dictType="HF_7_2_2_A" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他ACEI药物')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_7_2_2_a_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('ARB类药物')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_7_2_2_b" readonly="true" dictType="HF_7_2_2_B" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他ARB药物填写')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_7_2_2_b_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('使用血管紧张素受体脑啡肽酶抑制剂')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_7_2_2_c" readonly="true" dictType="HF_7_2_2_C" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他使用血管紧张素受体脑啡肽酶抑制剂')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_7_2_2_c_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('出院带药医嘱中是否有继续使用β受体阻滞剂药物医嘱')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_7_3_1" readonly="true" dictType="HF_7_3_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('使用首剂β-受体阻滞剂药物')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_7_3_2" readonly="true" dictType="HF_7_3_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他β-受体阻滞剂药物填写')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_7_3_2_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('出院带药医嘱中是否有继续使用醛固酮拮抗剂药物医嘱')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_7_4_1" readonly="true" dictType="HF_7_4_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('使用醛固酮受体拮抗剂')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_7_4_2" readonly="true" dictType="HF_7_4_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他醛固酮受体拮抗剂')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_7_4_2_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('出院带药医嘱中是否有继续使用使用抗凝药物医嘱')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_7_5_1" readonly="true" dictType="HF_7_5_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('选择抗凝药物')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_7_5_2" readonly="true" dictType="HF_7_5_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他抗凝药物')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_7_5_2_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					HF-8 离院方式
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('离院方式选择')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_4_3" readonly="true" dictType="HF_CM_4_3" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('非医嘱离院可能涉及因素')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_4_5" readonly="true" dictType="HF_CM_4_5" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('其他非医嘱离院因素填写')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_4_4_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('死亡可能涉及因素')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_4_6" readonly="true" dictType="HF_CM_4_6" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					HF-9 住院期间为患者提供健康教育与出院时提供教育告知五要素情况
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('是否有吸烟史')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_8_1_1" readonly="true" dictType="HF_8_1_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('吸烟程度评估有记录')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:checkbox path="hf_8_1_2" readonly="true" dictType="HF_8_1_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('接受戒烟的建议或者戒烟治疗有记录')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:checkbox path="hf_8_1_3" readonly="true" dictType="HF_8_1_3" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('心衰原发疾病评估与教育')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:checkbox path="hf_8_2_1_a" readonly="true" dictType="HF_8_2_1_A" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('实施控制主要危险因素评估与教育')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:checkbox path="hf_8_2_1_b" readonly="true" dictType="HF_8_2_1_B" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('对控制危险因素评估的结果进行针对性的教育')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_8_2_2" readonly="true" dictType="HF_8_2_2" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('二级预防')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:checkbox path="hf_8_3" readonly="true" dictType="HF_8_3" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('交与患者“出院小结”的副本告知患者出院时风险因素')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:checkbox path="hf_8_4_1" readonly="true" dictType="HF_8_4_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('出院带药')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:checkbox path="hf_8_4_2" readonly="true" dictType="HF_8_4_2" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('告知发生紧急情况时求援救治途径')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:checkbox path="hf_8_4_3" readonly="true" dictType="HF_8_4_3" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('出院时教育与随访')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:checkbox path="hf_8_4_4" readonly="true" dictType="HF_8_4_4" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('告知何为风险因素与紧急情况')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:checkbox path="hf_8_4_5" readonly="true" dictType="HF_8_4_5" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('实施末次X线胸片检查')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_9_2_1_1" readonly="true" dictType="HF_9_2_1_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('是否有肺淤血或肺水肿')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_9_2_1_2" readonly="true" dictType="HF_9_2_1_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('是否实施末次超声心动图(CDFA)检查')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_9_2_2_1" readonly="true" dictType="HF_9_2_2_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('QRS宽度')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_9_2_2_2_4" readonly="true" class="form-control number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('左室射血分（LVEF）测量值')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_9_2_2_2_1" readonly="true" class="form-control number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('左室射血分数评估结论')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_9_2_2_2_2" readonly="true" dictType="HF_9_2_2_2_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('是否有左心室室壁瘤')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_9_2_2_2_3" readonly="true" dictType="HF_9_2_2_2_3" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('实施末次风险程度评估')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_9_2_3_1" readonly="true" dictType="HF_9_2_3_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('末次风险程度评估')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_9_2_3_2_ab" readonly="true" dictType="HF_9_2_3_2_AB" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('NYHA分级结果')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_9_2_3_2" readonly="true" dictType="HF_9_2_3_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('Killip分级评估结果')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_9_2_3_3" readonly="true" dictType="HF_9_2_3_3" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('实施末次检测')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_9_2_4_1" readonly="true" dictType="HF_9_2_4_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('末次检测选择')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:checkbox path="hf_9_2_4_2" readonly="true" dictType="HF_9_2_4_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('肌钙蛋白T（TnT）检测值')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_9_2_4_2_1" readonly="true" class="form-control number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('肌钙蛋白I（TnI）检测值')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_9_2_4_2_2" readonly="true" class="form-control number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('肌酸激酶同工酶（CK-MB）检测值')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_9_2_4_2_3" readonly="true" class="form-control number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('心肌肌红蛋白（Myo）检测值')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_9_2_4_2_4"  readonly="true" class="form-control number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('B型钠尿肽（BNP）检测值')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_9_2_4_2_5" readonly="true" class="form-control number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('N端B型钠尿肽前体（NT-ProBNP）检测值')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_9_2_4_2_6" readonly="true" class="form-control number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					HF-10 患者对服务的体验与评价
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('患者是否对服务的体验与评价')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="cm_5_1" readonly="true" dictType="HF_CM_5_1" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('整体医院评级')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_5_2_1" readonly="true" dictType="HF_CM_5_2_1" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('患者推荐')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_5_2_2" readonly="true" dictType="HF_CM_5_2_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('病房、床单元和卫生间清洁度')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_5_2_3" readonly="true" dictType="HF_CM_5_2_3" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('病房与周边噪音')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_5_2_5" readonly="true" dictType="HF_CM_5_2_5" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('医生沟通')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_5_2_6" readonly="true" dictType="HF_CM_5_2_6" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('护士沟通')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_5_2_7" readonly="true" dictType="HF_CM_5_2_7" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('药师沟通')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_5_2_8" readonly="true" dictType="HF_CM_5_2_8" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('康复计划')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_5_2_9" readonly="true" dictType="HF_CM_5_2_9" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('出院时的知情告知')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_5_2_10" readonly="true" dictType="HF_CM_5_2_10" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('膳食评价')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cm_5_2_11" readonly="true" dictType="HF_CM_5_2_11" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					HF-11 慢性HFrEF患者的心脏植入型电子器械治疗临床应用符合适应症
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('心脏再同步化临床应用符合适应症')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_11_4_1" readonly="true" dictType="HF_11_4_1" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('CRT临床应用的适应证（Ⅰ类）选择')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:checkbox path="hf_11_1_1" readonly="true" dictType="HF_11_1_1" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('安装心脏再同步治疗（CRT）装置')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_11_1_2" readonly="true" dictType="HF_11_1_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('安装日期时间')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_11_1_3" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('心脏再同步治疗（CRT）装置生产企业')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_11_1_4_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('心脏再同步治疗（CRT）装置型号')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_11_1_4_2" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('心脏再同步治疗（CRT）装置的费用(元)')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_11_1_4_3" readonly="true" class="form-control number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('是否有在药物优化治疗超过3个月后实施埋藏式心律转复除颤器')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_11_5_1" readonly="true" dictType="HF_11_5_1" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('心衰患者植入ICD适应证')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_11_5_2" readonly="true" dictType="HF_11_5_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('二级预防适应证')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_11_5_4" readonly="true" dictType="HF_11_5_4" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('一级预防适应证')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_11_5_3" readonly="true" dictType="HF_11_5_3" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('缺血性心脏病患者')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_11_5_3_1" readonly="true" dictType="HF_11_5_3_1" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('非缺血性心衰患者')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:select path="hf_11_5_3_2" readonly="true" dictType="HF_11_5_3_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('是否安装埋藏式心律转复除颤器（ICD）装置')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:radio path="hf_11_2_2" readonly="true" dictType="HF_11_2_2" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('安装日期时间')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_11_2_3" readonly="true" maxlength="20" class="form-control Wdate"
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('埋藏式心律转复除颤器')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_11_2_4_1" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('埋藏式心律转复除颤器')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_11_2_4_2" readonly="true" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('埋藏式心律转复除颤器（ICD）装置的费用')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="hf_11_2_5" readonly="true" class="form-control number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('通过优化流程实现从医院到社区的无缝衔接')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:checkbox path="hf_11_3_1" readonly="true" dictType="HF_11_3_1" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<p class="form-title form-cursor box-remark">
+					<span class="circle"></span>
+					HF-12 住院费用
+					<span class="pull-right">
+						<span class="arrow-up"></span>
+					</span>
+				</p>
+
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('住院总费用')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_1" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('住院总费用其中自付金额')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_2" readonly="true"  class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('一般医疗服务费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_3" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('一般治疗操作费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_4" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('护理费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_5" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('综合医疗服务类其他费用')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_6" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('病理诊断费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_7" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('实验室诊断费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_8" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('影像学诊断费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_9" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('临床诊断项目费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_10" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('非手术治疗项目费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_11" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('其中')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_12" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('手术治疗费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_13" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('其中：麻醉费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_14" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('其中：手术费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_15" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('康复费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_16" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('中医治疗费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_17" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('西药费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_18" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('其中：抗菌药物费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_19" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('中成药费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_20" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('中草药费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_21" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('血费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_22" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('白蛋白类制品费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_23" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('球蛋白类制品费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_24" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('凝血因子类制品费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_25" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('细胞因子类制品费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_26" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('检查用一次性医用材料费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_27" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('治疗用一次性医用材料费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_28" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('手术用一次性医用材料费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_29" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('其他费')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-10">
+								<#form:input path="cm_6_30" readonly="true" class="form-control required number"/>
+							</div>
+						</div>
+					</div>
+				<#form:hidden path="id"/>
+
+					<input type="hidden" id="taskId" name="taskId" value="${taskId}">
+				</div>
+			</div>
+			<div class="box-footer">
+				<div class="row">
+					<div class="col-sm-offset-2 col-sm-10">
+						<% if (hasPermi('hf:qualityHf:edit')){ %>
+							<button type="button" class="btn btn-sm btn-primary" id="review"><i class="fa fa-check"></i> ${text('审 核')}</button>&nbsp;
+						<% } %>
+						<button type="button" class="btn btn-sm btn-default" id="btnCancel" onclick="js.closeCurrentTabPage()"><i class="fa fa-reply-all"></i> ${text('关 闭')}</button>
+					</div>
+				</div>
+			</div>
+		</#form:form>
+	</div>
+</div>
+<% } %>
+<script>
+	let subTimes = 0;
+$("#inputForm").validate({
+	submitHandler: function(form){
+		js.ajaxSubmitForm($(form), function(data){
+			js.showMessage(data.message);
+			if(data.result == Global.TRUE){
+				js.closeCurrentTabPage(function(contentWindow){
+					contentWindow.page();
+				});
+			}
+			if(data.result == Global.FALSE){
+				var obj = JSON.parse(data.message);
+				for(var key in obj.errorMessage){
+					console.log(key.replace(new RegExp("-","g") ,"_").toLowerCase())
+					$("#"+key.replace(new RegExp("-","g") ,"_").toLowerCase()).addClass("required")
+				}
+				$("#inputForm").valid();
+				// if(subTimes = 0){
+				// 	let div = document.getElementById("btnSubmit");
+				// 	div.click()
+				// 	subTimes = 1;
+				// }
+
+			}
+		}, "json");
+    }
+});
+</script>
+
+<script>
+
+	$("#review").click(function (){
+		$.ajax({
+			url:'${ctx}/process/review',
+			type: "POST",
+			data: {taskId: $("#taskId").val(),approve:true},
+			success:function (data){
+				alert(data)
+
+			}
+		});
+	});
+
+
+</script>
+<link href="${ctxStatic}/quality_common.css" rel="stylesheet"/>

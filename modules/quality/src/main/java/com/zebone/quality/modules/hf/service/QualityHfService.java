@@ -3,12 +3,14 @@
  */
 package com.zebone.quality.modules.hf.service;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import com.zebone.quality.infrastructure.entity.HfDO;
 import com.zebone.quality.modules.hf.repository.HfRepository;
-import org.springframework.beans.BeanUtils;
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,7 +53,22 @@ public class QualityHfService extends CrudService<QualityHfDao, QualityHf> {
 	 */
 	@Override
 	public Page<QualityHf> findPage(Page<QualityHf> page, QualityHf qualityHf) {
-		return super.findPage(page, qualityHf);
+		qualityHf.setPage(page);
+		List<Map<String,Object>> result = dao.findListMap(qualityHf);
+		List<QualityHf> list = new ArrayList<>();
+		result.forEach(a->{
+			QualityHf bean = new QualityHf();
+			try {
+				BeanUtils.populate(bean,a);
+				list.add(bean);
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				e.printStackTrace();
+			}
+		});
+		return page.setList(list);
+//		return super.findPage(page, qualityHf);
 	}
 	
 	/**

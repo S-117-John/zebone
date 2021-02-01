@@ -21,7 +21,7 @@ demoMode: false
 
 server:
 
-  port: 8980
+  port: 8989
   context-path: /nhis
   tomcat:
     uri-encoding: UTF-8

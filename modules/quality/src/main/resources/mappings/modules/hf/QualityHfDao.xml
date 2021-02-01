@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zebone.quality.modules.hf.dao.QualityHfDao">
 	
-	<!-- 查询数据
-	<select id="findList" resultType="QualityHf">
-		SELECT ${sqlMap.column.toSql()}
-		FROM ${sqlMap.table.toSql()}
-		<where>
-			${sqlMap.where.toSql()}
-		</where>
-		ORDER BY ${sqlMap.order.toSql()}
-	</select> -->
+
+<!--	<select id="findList" resultType="java.util.Map">-->
+<!--		SELECT ${sqlMap.column.toSql()}-->
+<!--		FROM ${sqlMap.table.toSql()}-->
+<!--		<where>-->
+<!--			${sqlMap.where.toSql()}-->
+<!--		</where>-->
+<!--		ORDER BY ${sqlMap.order.toSql()}-->
+<!--	</select> -->
 
 
 	<select id="findById" resultType="java.util.Map">
@@ -267,6 +267,14 @@
 
 
 	</select>
+	<select id="findListMap" resultType="java.util.Map">
+		SELECT ${sqlMap.column.toSql()}
+		FROM ${sqlMap.table.toSql()}
+		<where>
+			${sqlMap.where.toSql()}
+		</where>
+		ORDER BY ${sqlMap.order.toSql()}
+	</select>
 
-	
+
 </mapper>

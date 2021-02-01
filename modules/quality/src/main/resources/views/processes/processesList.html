@@ -1,0 +1,37 @@
+<% layout('/layouts/default.html', {title: 'AF房颤管理', libs: ['dataGrid']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header">
+			<div class="box-title">
+				<i class="fa fa-list-alt"></i> ${text('任务列表')}
+			</div>
+		</div>
+		<div class="box-body">
+			<#form:form id="searchForm" action="${ctx}/process/listData" method="post" class="form-inline hide">
+			</#form:form>
+			<table id="dataGrid"></table>
+			<div id="dataGridPage"></div>
+		</div>
+	</div>
+</div>
+<% } %>
+<script>
+// 初始化DataGrid对象
+$('#dataGrid').dataGrid({
+	searchForm: $("#searchForm"),
+	columnModel: [
+
+		{header:'${text('流程实例ID')}', name:'processInstanceId', width:150, align:"left"},
+		{header:'${text('操作')}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
+				var actions = [];
+				actions.push('<a href="${ctx}/process/view?taskId='+row.taskId+'" class="btnList" title="${text('查看')}"><i class="fa fa-pencil"></i></a>');
+				return actions.join('');
+			}}
+
+	],
+	// 加载成功后执行事件
+	ajaxSuccess: function(data){
+		
+	}
+});
+</script>

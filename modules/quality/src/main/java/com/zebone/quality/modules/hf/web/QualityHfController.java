@@ -7,15 +7,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.zebone.quality.common.utils.TaskUtil;
 import com.zebone.quality.domain.UploadService;
 import com.zebone.quality.infrastructure.entity.HfDO;
 import com.zebone.quality.modules.common.UploadResult;
 import com.zebone.quality.modules.hf.entity.Hf;
+import com.zebone.quality.modules.hf.entity.TaskHf;
 import com.zebone.quality.modules.hf.repository.HfRepository;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 
+import org.flowable.engine.HistoryService;
+import org.flowable.engine.ProcessEngine;
+import org.flowable.engine.RuntimeService;
+import org.flowable.engine.TaskService;
+import org.flowable.engine.runtime.ProcessInstance;
+import org.flowable.task.api.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +41,7 @@ import com.zebone.quality.modules.hf.entity.QualityHf;
 import com.zebone.quality.modules.hf.service.QualityHfService;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -52,6 +61,18 @@ public class QualityHfController extends BaseController {
 
 	@Autowired
 	private UploadService uploadService;
+
+
+	@Autowired
+	private RuntimeService runtimeService;
+	@Autowired
+	private TaskService taskService;
+	@Autowired
+	private HistoryService historyService;
+
+
+
+
 
 	/**
 	 * 获取数据
@@ -98,7 +119,16 @@ public class QualityHfController extends BaseController {
 		model.addAttribute("qualityHf", qualityHf);
 		return "modules/hf/qualityHfForm";
 	}
-
+	/**
+	 * 审核表单
+	 */
+	@RequiresPermissions("hf:qualityHf:view")
+	@RequestMapping(value = "view")
+	public String viewForm(String id,String taskId, Model model) {
+		model.addAttribute("qualityHf", qualityHfService.get(id, false));
+		model.addAttribute("taskId",taskId);
+		return "modules/hf/qualityHfViewForm";
+	}
 
 
 	/**
@@ -109,6 +139,17 @@ public class QualityHfController extends BaseController {
 	@ResponseBody
 	public String save(@Validated QualityHf qualityHf) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 		qualityHfService.save(qualityHf);
+
+		//启动审批流程
+//		HashMap<String, Object> map = new HashMap<>();
+//		map.put("reviewUserId","review");
+//		map.put("uploadForm","/hf/qualityHf/view?id="+qualityHf.getId());
+//		map.put("formName","hf");
+//		map.put("formId",qualityHf.getId());
+//
+//		ProcessInstance processInstance =
+//				runtimeService.startProcessInstanceByKey("upload", map);
+		TaskUtil.startTask("hf",qualityHf.getId());
 
 		String result = uploadService.upload(qualityHf,new Hf(),"HF");
 		Gson gson = new Gson();
@@ -156,5 +197,33 @@ public class QualityHfController extends BaseController {
 		qualityHfService.delete(qualityHf);
 		return renderResult(Global.TRUE, text("删除HF心力衰竭成功！"));
 	}
+
+	@RequiresPermissions("hf:qualityHf:edit")
+	@PostMapping(value = "review")
+	@ResponseBody
+	public String review(TaskHf qualityHf) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+
+		Task task = taskService.createTaskQuery().taskId(qualityHf.getTaskId()).singleResult();
+		if (task == null) {
+			return renderResult(Global.FALSE, text("流程不存在"));
+		}
+		//通过审核
+		HashMap<String, Object> map = new HashMap<>(16);
+		map.put("approve", true);
+		taskService.complete(qualityHf.getTaskId(), map);
+
+
+		String result = uploadService.upload(qualityHf,new Hf(),"HF");
+		Gson gson = new Gson();
+		UploadResult uploadResult = gson.fromJson(result, UploadResult.class);
+		Integer resultCode = Optional.ofNullable(uploadResult).map(a->a.getCode()).orElse(null);
+		if(resultCode==1000){
+			String errorMessage = Optional.ofNullable(uploadResult).map(a->a.getMessage()).orElse("上传失败");
+			return renderResult(Global.FALSE, text(errorMessage));
+		}
+
+		return renderResult(Global.TRUE, text("流程审核通过！"));
+	}
+
 	
 }
