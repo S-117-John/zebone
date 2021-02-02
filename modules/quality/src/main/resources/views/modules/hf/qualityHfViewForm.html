@@ -2852,7 +2852,12 @@ $("#inputForm").validate({
 			type: "POST",
 			data: {taskId: $("#taskId").val(),approve:true},
 			success:function (data){
-				alert(data)
+				js.showMessage(data.message);
+				if(data.result == Global.TRUE){
+					js.closeCurrentTabPage(function(contentWindow){
+						contentWindow.page();
+					});
+				}
 
 			}
 		});
