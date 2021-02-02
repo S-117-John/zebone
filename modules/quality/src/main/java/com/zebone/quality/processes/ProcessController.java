@@ -5,6 +5,8 @@ import com.jeesite.common.config.Global;
 import com.jeesite.common.entity.Page;
 import com.jeesite.common.utils.SpringUtils;
 import com.jeesite.common.web.BaseController;
+import com.jeesite.modules.sys.entity.Role;
+import com.jeesite.modules.sys.utils.UserUtils;
 import com.zebone.quality.modules.base.entity.QualityDisease;
 import com.zebone.quality.modules.base.service.QualityDiseaseService;
 import com.zebone.quality.modules.hf.entity.QualityHf;
@@ -59,6 +61,11 @@ public class ProcessController extends BaseController {
     @RequestMapping(value = "/listData")
     @ResponseBody
     public List<UserTask> list(HttpServletRequest request, HttpServletResponse response) {
+        List<Role> roleList = UserUtils.getUser().getRoleList();
+        String system = UserUtils.getUser().getUserCode();
+        if(!"system".equals(system)&&!roleList.stream().anyMatch(a->"review".equals(a.getRoleCode()))){
+            return new ArrayList<>();
+        }
         List<Task> tasks = taskService.createTaskQuery().taskAssignee("review").orderByTaskCreateTime().desc().list();
         List<UserTask> userTaskList = new ArrayList<>();
 

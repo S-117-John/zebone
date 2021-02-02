@@ -157,7 +157,7 @@ public class Hf implements Serializable {
     @JSONField(name="HF-3-2-A")
     private String hf_3_2_a;
     @JSONField(name="HF-3-2-1")
-    private String hf_3_2_1;
+    private List<String> hf_3_2_1;
     @JSONField(name="HF-3-4-A")
     private String hf_3_4_a;
     @JSONField(name="HF-3-4-A-1")
@@ -1064,11 +1064,11 @@ public class Hf implements Serializable {
         this.hf_3_2_a = hf_3_2_a;
     }
 
-    public String getHf_3_2_1() {
+    public List<String> getHf_3_2_1() {
         return hf_3_2_1;
     }
 
-    public void setHf_3_2_1(String hf_3_2_1) {
+    public void setHf_3_2_1(List<String> hf_3_2_1) {
         this.hf_3_2_1 = hf_3_2_1;
     }
 
@@ -2415,4 +2415,6 @@ public class Hf implements Serializable {
     public void setCm_6_30(Double cm_6_30) {
         this.cm_6_30 = cm_6_30;
     }
+
+
 }

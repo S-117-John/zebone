@@ -21,4 +21,6 @@ public interface QualityHfDao extends CrudDao<QualityHf> {
     Map<String,Object> findById(String id);
 
     List<Map<String,Object>> findListMap(QualityHf qualityHf);
+
+    int updateHf(QualityHf qualityHf);
 }

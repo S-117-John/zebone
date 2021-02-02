@@ -101,7 +101,10 @@ public class QualityHfService extends CrudService<QualityHfDao, QualityHf> {
 		super.delete(qualityHf);
 	}
 
-
+	@Transactional(readOnly=false)
+	public int updateHf(QualityHf qualityHf){
+		return dao.updateHf(qualityHf);
+	}
 
 	
 }

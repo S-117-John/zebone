@@ -5,24 +5,19 @@ package com.zebone.quality.modules.hf.web;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 
 import com.google.gson.Gson;
 import com.zebone.quality.common.utils.TaskUtil;
 import com.zebone.quality.domain.UploadService;
-import com.zebone.quality.infrastructure.entity.HfDO;
 import com.zebone.quality.modules.common.UploadResult;
 import com.zebone.quality.modules.hf.entity.Hf;
-import com.zebone.quality.modules.hf.entity.TaskHf;
-import com.zebone.quality.modules.hf.repository.HfRepository;
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.collections.MapUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 
 import org.flowable.engine.HistoryService;
-import org.flowable.engine.ProcessEngine;
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
-import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.task.api.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,7 +37,6 @@ import com.zebone.quality.modules.hf.service.QualityHfService;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -137,19 +131,14 @@ public class QualityHfController extends BaseController {
 	@RequiresPermissions("hf:qualityHf:edit")
 	@PostMapping(value = "save")
 	@ResponseBody
+//	@Transactional
 	public String save(@Validated QualityHf qualityHf) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-		qualityHfService.save(qualityHf);
-
-		//启动审批流程
-//		HashMap<String, Object> map = new HashMap<>();
-//		map.put("reviewUserId","review");
-//		map.put("uploadForm","/hf/qualityHf/view?id="+qualityHf.getId());
-//		map.put("formName","hf");
-//		map.put("formId",qualityHf.getId());
-//
-//		ProcessInstance processInstance =
-//				runtimeService.startProcessInstanceByKey("upload", map);
-		TaskUtil.startTask("hf",qualityHf.getId());
+		if(qualityHf.getIsNewRecord()){
+			qualityHfService.save(qualityHf);
+			TaskUtil.startTask("hf",qualityHf.getId());
+		}else {
+			qualityHfService.updateHf(qualityHf);
+		}
 
 		String result = uploadService.upload(qualityHf,new Hf(),"HF");
 		Gson gson = new Gson();

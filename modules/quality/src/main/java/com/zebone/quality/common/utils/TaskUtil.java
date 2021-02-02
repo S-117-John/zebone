@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class TaskUtil {
 
-    public static void startTask(String formName,String formId){
+    public static String startTask(String formName,String formId){
 
         HashMap<String, Object> map = new HashMap<>();
         map.put("reviewUserId","review");
@@ -16,6 +16,7 @@ public class TaskUtil {
         map.put("formId",formId);
         RuntimeService runtimeService = SpringUtils.getBean(RuntimeService.class);
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("upload", map);
+        return processInstance.getProcessInstanceId();
     }
 
 }
