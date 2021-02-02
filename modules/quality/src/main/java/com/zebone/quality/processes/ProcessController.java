@@ -94,7 +94,7 @@ public class ProcessController extends BaseController {
     static {
         mapForm = new HashMap<>(16);
         mapForm.put("hf","redirect:/a/hf/qualityHf/view");
-
+        mapForm.put("stemi","redirect:/a/stemi/qualityStemi/view");
     }
 
 

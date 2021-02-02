@@ -3,12 +3,13 @@
  */
 package com.zebone.quality.modules.stemi.service;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.jeesite.common.entity.Page;
 import com.jeesite.common.service.CrudService;
 import com.zebone.quality.modules.stemi.entity.QualityStemi;
@@ -47,7 +48,22 @@ public class QualityStemiService extends CrudService<QualityStemiDao, QualitySte
 	 */
 	@Override
 	public Page<QualityStemi> findPage(Page<QualityStemi> page, QualityStemi qualityStemi) {
-		return super.findPage(page, qualityStemi);
+		qualityStemi.setPage(page);
+		List<Map<String,Object>> result = dao.findListMap(qualityStemi);
+		List<QualityStemi> list = new ArrayList<>();
+		result.forEach(a->{
+			QualityStemi bean = new QualityStemi();
+			try {
+				BeanUtils.populate(bean,a);
+				list.add(bean);
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				e.printStackTrace();
+			}
+		});
+		return page.setList(list);
+		//return super.findPage(page, qualityStemi);
 	}
 	
 	/**
