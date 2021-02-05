@@ -27,6 +27,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_0_1_1_3", attrName="cm_0_1_1_3", label="主治医师"),
 		@Column(name="cm_0_1_1_4", attrName="cm_0_1_1_4", label="责任护士"),
 		@Column(name="cm_0_1_1_5", attrName="cm_0_1_1_5", label="上报科室"),
+		@Column(name="caseid", attrName="caseid", label="患者病案号"),
 		@Column(name="cm_0_1_3_1", attrName="cm_0_1_3_1", label="主要诊断ICD-10四位亚目编码与名称"),
 		@Column(name="cm_0_1_3_2", attrName="cm_0_1_3_2", label="主要诊断ICD-10六位临床扩展编码与名称"),
 		@Column(name="cm_0_1_4_1", attrName="cm_0_1_4_1", label="主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称"),
