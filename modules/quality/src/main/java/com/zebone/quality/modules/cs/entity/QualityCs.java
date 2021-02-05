@@ -467,7 +467,7 @@ public class QualityCs extends DataEntity<QualityCs> {
 		this.cm_0_1_3_2 = cm_0_1_3_2;
 	}
 	
-	@CM-3编码与手术名称长度不能超过 64 个字符")
+
 	public String getCm_0_1_4_1() {
 		return cm_0_1_4_1;
 	}
@@ -716,7 +716,7 @@ public class QualityCs extends DataEntity<QualityCs> {
 		this.cs_1_2_5 = cs_1_2_5;
 	}
 	
-	@10编码及诊断名称长度不能超过 64 个字符")
+
 	public String getCs_1_2_6() {
 		return cs_1_2_6;
 	}
@@ -1161,7 +1161,7 @@ public class QualityCs extends DataEntity<QualityCs> {
 		this.cs_6_1_1 = cs_6_1_1;
 	}
 	
-	@10编码长度不能超过 64 个字符")
+
 	public String getCs_6_1_2_1() {
 		return cs_6_1_2_1;
 	}
@@ -1287,7 +1287,7 @@ public class QualityCs extends DataEntity<QualityCs> {
 		this.cs_7_1 = cs_7_1;
 	}
 	
-	@10编码长度不能超过 64 个字符")
+
 	public String getCs_7_2() {
 		return cs_7_2;
 	}
