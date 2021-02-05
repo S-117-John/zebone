@@ -7,8 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Entity
-@Table(name = "quality_hip")
+//@Entity
+//@Table(name = "quality_hip")
 @Data
 public class HipDO extends DataEntity{
 

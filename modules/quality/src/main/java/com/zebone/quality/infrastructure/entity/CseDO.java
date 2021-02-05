@@ -5,8 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Entity
-@Table(name = "QUALITY_CSE")
+//@Entity
+//@Table(name = "QUALITY_CSE")
 public class CseDO extends BaseEntity{
 
 

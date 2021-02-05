@@ -25,7 +25,7 @@ import com.zebone.quality.modules.stk.service.QualityStkService;
 /**
  * STK脑梗死（首次住院）Controller
  * @author 卡卡西
- * @version 2021-01-15
+ * @version 2021-02-05
  */
 @Controller
 @RequestMapping(value = "${adminPath}/stk/qualityStk")

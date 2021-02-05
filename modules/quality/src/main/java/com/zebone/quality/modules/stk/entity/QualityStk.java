@@ -17,20 +17,12 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 /**
  * STK脑梗死（首次住院）Entity
  * @author 卡卡西
- * @version 2021-01-15
+ * @version 2021-02-05
  */
 @Table(name="quality_stk", alias="a", columns={
 		@Column(name="id", attrName="id", label="id", isPK=true),
 		@Column(includeEntity=DataEntity.class),
-		@Column(name="case_id", attrName="caseId", label="患者病案号"),
 		@Column(name="cm_0_1_1_1", attrName="cm_0_1_1_1", label="质控医师"),
-		@Column(name="cm_0_1_4_1_1", attrName="cm01411", label="其他ICD-9-CM-3四位亚目编码与名称"),
-		@Column(name="cm_0_1_4_2_1", attrName="cm01421", label="其他ICD-9-CM-3六位临床扩展编码与名称"),
-		@Column(name="cm_3_1", attrName="cm31", label="手术野皮肤准备常用方法的选择"),
-		@Column(name="cm_3_2", attrName="cm32", label="使用含抗菌剂", comment="使用含抗菌剂（三氯生）缝线"),
-		@Column(name="cm_3_2_1", attrName="cm321", label="其他含抗菌剂缝线填写"),
-		@Column(name="cm_3_3", attrName="cm33", label="手术切口类别的选择"),
-		@Column(name="cm_3_4", attrName="cm34", label="手术切口愈合情况的选择"),
 		@Column(name="cm_0_1_1_2", attrName="cm_0_1_1_2", label="质控护士"),
 		@Column(name="cm_0_1_1_3", attrName="cm_0_1_1_3", label="主治医师"),
 		@Column(name="cm_0_1_1_4", attrName="cm_0_1_1_4", label="责任护士"),
@@ -110,6 +102,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="stk_2_2_2", attrName="stk_2_2_2", label="溶栓禁忌症选择"),
 		@Column(name="stk_2_2_2_1", attrName="stk_2_2_2_1", label="其他临床医师认定的其他禁忌症"),
 		@Column(name="stk_2_3_1_1", attrName="stk_2_3_1_1", label="发病时段适应证"),
+		@Column(name="caseid", attrName="caseid", label="患者病案号"),
 		@Column(name="stk_2_3_1_2", attrName="stk_2_3_1_2", label="溶栓适应证的选择"),
 		@Column(name="stk_2_3_2", attrName="stk_2_3_2", label="溶栓的评估结论的选择"),
 		@Column(name="stk_2_4_1_1_1", attrName="stk_2_4_1_1_1", label="溶栓开始日期时间"),
@@ -273,15 +266,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 public class QualityStk extends DataEntity<QualityStk> {
 	
 	private static final long serialVersionUID = 1L;
-	private String caseId;		// 患者病案号
 	private String cm_0_1_1_1;		// 质控医师
-	private String cm01411;		// 其他ICD-9-CM-3四位亚目编码与名称
-	private String cm01421;		// 其他ICD-9-CM-3六位临床扩展编码与名称
-	private String cm31;		// 手术野皮肤准备常用方法的选择
-	private String cm32;		// 使用含抗菌剂（三氯生）缝线
-	private String cm321;		// 其他含抗菌剂缝线填写
-	private String cm33;		// 手术切口类别的选择
-	private String cm34;		// 手术切口愈合情况的选择
 	private String cm_0_1_1_2;		// 质控护士
 	private String cm_0_1_1_3;		// 主治医师
 	private String cm_0_1_1_4;		// 责任护士
@@ -361,6 +346,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 	private String stk_2_2_2;		// 溶栓禁忌症选择
 	private String stk_2_2_2_1;		// 其他临床医师认定的其他禁忌症
 	private String stk_2_3_1_1;		// 发病时段适应证
+	private String caseid;		// 患者病案号
 	private String stk_2_3_1_2;		// 溶栓适应证的选择
 	private String stk_2_3_2;		// 溶栓的评估结论的选择
 	private Date stk_2_4_1_1_1;		// 溶栓开始日期时间
@@ -528,15 +514,6 @@ public class QualityStk extends DataEntity<QualityStk> {
 		super(id);
 	}
 	
-	@Length(min=0, max=32, message="患者病案号长度不能超过 32 个字符")
-	public String getCaseId() {
-		return caseId;
-	}
-
-	public void setCaseId(String caseId) {
-		this.caseId = caseId;
-	}
-	
 	@Length(min=0, max=32, message="质控医师长度不能超过 32 个字符")
 	public String getCm_0_1_1_1() {
 		return cm_0_1_1_1;
@@ -544,69 +521,6 @@ public class QualityStk extends DataEntity<QualityStk> {
 
 	public void setCm_0_1_1_1(String cm_0_1_1_1) {
 		this.cm_0_1_1_1 = cm_0_1_1_1;
-	}
-	
-	@Length(min=0, max=32, message="其他ICD-9-CM-3四位亚目编码与名称长度不能超过 32 个字符")
-	public String getCm01411() {
-		return cm01411;
-	}
-
-	public void setCm01411(String cm01411) {
-		this.cm01411 = cm01411;
-	}
-	
-	@Length(min=0, max=32, message="其他ICD-9-CM-3六位临床扩展编码与名称长度不能超过 32 个字符")
-	public String getCm01421() {
-		return cm01421;
-	}
-
-	public void setCm01421(String cm01421) {
-		this.cm01421 = cm01421;
-	}
-	
-	@Length(min=0, max=32, message="手术野皮肤准备常用方法的选择长度不能超过 32 个字符")
-	public String getCm31() {
-		return cm31;
-	}
-
-	public void setCm31(String cm31) {
-		this.cm31 = cm31;
-	}
-	
-	@Length(min=0, max=32, message="使用含抗菌剂长度不能超过 32 个字符")
-	public String getCm32() {
-		return cm32;
-	}
-
-	public void setCm32(String cm32) {
-		this.cm32 = cm32;
-	}
-	
-	@Length(min=0, max=32, message="其他含抗菌剂缝线填写长度不能超过 32 个字符")
-	public String getCm321() {
-		return cm321;
-	}
-
-	public void setCm321(String cm321) {
-		this.cm321 = cm321;
-	}
-	
-	@Length(min=0, max=32, message="手术切口类别的选择长度不能超过 32 个字符")
-	public String getCm33() {
-		return cm33;
-	}
-
-	public void setCm33(String cm33) {
-		this.cm33 = cm33;
-	}
-	
-	@Length(min=0, max=32, message="手术切口愈合情况的选择长度不能超过 32 个字符")
-	public String getCm34() {
-		return cm34;
-	}
-
-	public void setCm34(String cm34) {
-		this.cm34 = cm34;
 	}
 	
 	@Length(min=0, max=32, message="质控护士长度不能超过 32 个字符")
@@ -1300,6 +1214,15 @@ public class QualityStk extends DataEntity<QualityStk> {
 
 	public void setStk_2_3_1_1(String stk_2_3_1_1) {
 		this.stk_2_3_1_1 = stk_2_3_1_1;
+	}
+	
+	@Length(min=0, max=64, message="患者病案号长度不能超过 64 个字符")
+	public String getCaseid() {
+		return caseid;
+	}
+
+	public void setCaseid(String caseid) {
+		this.caseid = caseid;
 	}
 	
 	@Length(min=0, max=32, message="溶栓适应证的选择长度不能超过 32 个字符")

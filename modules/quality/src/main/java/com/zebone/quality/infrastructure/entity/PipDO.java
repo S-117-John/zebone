@@ -6,9 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Entity
-@Data
-@Table(name = "QUALITY_PIP")
+//@Entity
+//@Data
+//@Table(name = "QUALITY_PIP")
 public class PipDO extends BaseEntity{
 
 

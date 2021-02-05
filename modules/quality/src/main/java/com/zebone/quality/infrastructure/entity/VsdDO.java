@@ -5,8 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Entity
-@Table(name = "QUALITY_VSD")
+//@Entity
+//@Table(name = "QUALITY_VSD")
 public class VsdDO extends DataEntity{
 
 

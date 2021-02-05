@@ -6,9 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
-
-@Entity
-@Table(name = "QUALITY_CAP_ADULT")
+//
+//@Entity
+//@Table(name = "QUALITY_CAP_ADULT")
 @Data
 public class CapAdultDO extends BaseEntity{
 

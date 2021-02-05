@@ -10,7 +10,7 @@ import com.zebone.quality.modules.af.entity.QualityAf;
 /**
  * AF房颤DAO接口
  * @author kakaxi
- * @version 2021-01-14
+ * @version 2021-02-03
  */
 @MyBatisDao
 public interface QualityAfDao extends CrudDao<QualityAf> {

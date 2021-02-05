@@ -8,8 +8,8 @@ import javax.persistence.Table;
 import java.util.Date;
 
 @Data
-@Entity
-@Table(name = "QUALITY_BC")
+//@Entity
+//@Table(name = "QUALITY_BC")
 public class BcDO extends BaseEntity{
 
 

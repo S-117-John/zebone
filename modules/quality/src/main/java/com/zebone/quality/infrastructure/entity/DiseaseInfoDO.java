@@ -13,8 +13,8 @@ import java.util.List;
  * @author 卡卡西
  * 病种信息
  */
-@Entity
-@Table(name = "QUALITY_DISEASE")
+//@Entity
+//@Table(name = "QUALITY_DISEASE")
 @Data
 public class DiseaseInfoDO{
 

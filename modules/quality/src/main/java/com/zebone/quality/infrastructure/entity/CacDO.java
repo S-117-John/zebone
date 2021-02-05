@@ -7,8 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Entity
-@Table(name = "QUALITY_CAC")
+//@Entity
+//@Table(name = "QUALITY_CAC")
 @Data
 public class CacDO extends DataEntity{
 

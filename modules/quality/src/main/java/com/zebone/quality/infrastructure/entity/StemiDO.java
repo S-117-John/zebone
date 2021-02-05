@@ -12,9 +12,9 @@ import java.util.Date;
  * STEMI急性心肌梗死（ST 段抬高型，首次住院）
  * @author 卡卡西
  */
-@Entity
-@Data
-@Table(name = "QUALITY_STEMI")
+//@Entity
+//@Data
+//@Table(name = "QUALITY_STEMI")
 public class StemiDO extends DataEntity{
 
 

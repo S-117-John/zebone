@@ -6,8 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Entity
-@Table(name = "QUALITY_MVR")
+//@Entity
+//@Table(name = "QUALITY_MVR")
 public class MvrDO extends BaseEntity{
 
 

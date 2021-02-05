@@ -25,7 +25,7 @@ import com.zebone.quality.modules.af.service.QualityAfService;
 /**
  * AF房颤Controller
  * @author kakaxi
- * @version 2021-01-14
+ * @version 2021-02-03
  */
 @Controller
 @RequestMapping(value = "${adminPath}/af/qualityAf")

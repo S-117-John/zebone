@@ -7,9 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Entity
-@Data
-@Table(name = "quality_tia")
+//@Entity
+//@Data
+//@Table(name = "quality_tia")
 public class TiaDO extends BaseEntity{
 
     @Column(columnDefinition = "varchar(32) COMMENT '评估日期时间'")

@@ -7,8 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Entity
-@Table(name = "QUALITY_CAP")
+//@Entity
+//@Table(name = "QUALITY_CAP")
 @Data
 public class CapDO extends DataEntity{
 

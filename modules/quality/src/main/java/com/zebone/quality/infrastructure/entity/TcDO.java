@@ -6,9 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "quality_TC")
-@Data
+//@Entity
+//@Table(name = "quality_TC")
+//@Data
 public class TcDO extends BaseEntity{
 
     @Column(columnDefinition = "varchar(64) COMMENT '其他主要手术操作ICD-9-CM-3四位亚目编码与名称'")

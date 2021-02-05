@@ -10,8 +10,8 @@ import java.util.Date;
 /**
  * @author 卡卡西
  */
-@Entity
-@Table(name = "QUALITY_LC")
+//@Entity
+//@Table(name = "QUALITY_LC")
 @Data
 public class LcDO extends DataEntity{
 

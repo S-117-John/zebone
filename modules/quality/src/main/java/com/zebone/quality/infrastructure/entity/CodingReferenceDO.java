@@ -9,9 +9,9 @@ import javax.persistence.Table;
 /**
  * 编码对照
  */
-@Entity
+//@Entity
 @Data
-@Table(name = "QUALITY_CODE")
+//@Table(name = "QUALITY_CODE")
 public class CodingReferenceDO {
 
     @Id

@@ -7,9 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Entity
-@Table(name = "quality_tn")
-@Data
+//@Entity
+//@Table(name = "quality_tn")
+//@Data
 public class TnDO extends BaseEntity{
 
 

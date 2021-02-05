@@ -7,9 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Entity
-@Data
-@Table(name = "QUALITY_PA")
+//@Entity
+//@Data
+//@Table(name = "QUALITY_PA")
 public class PaDO extends DataEntity{
 
 

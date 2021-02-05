@@ -10,7 +10,7 @@ import com.zebone.quality.modules.stk.entity.QualityStk;
 /**
  * STK脑梗死（首次住院）DAO接口
  * @author 卡卡西
- * @version 2021-01-15
+ * @version 2021-02-05
  */
 @MyBatisDao
 public interface QualityStkDao extends CrudDao<QualityStk> {

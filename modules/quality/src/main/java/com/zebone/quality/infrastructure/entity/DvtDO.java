@@ -7,8 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Entity
-@Table(name = "QUALITY_DVT")
+//@Entity
+//@Table(name = "QUALITY_DVT")
 @Data
 public class DvtDO extends BaseEntity{
 

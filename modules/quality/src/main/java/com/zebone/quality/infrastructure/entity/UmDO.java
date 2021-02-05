@@ -5,8 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Entity
-@Table(name = "QUALITY_UM")
+//@Entity
+//@Table(name = "QUALITY_UM")
 public class UmDO extends DataEntity{
 
     @Column(columnDefinition = "varchar(64) COMMENT '质控医师'")

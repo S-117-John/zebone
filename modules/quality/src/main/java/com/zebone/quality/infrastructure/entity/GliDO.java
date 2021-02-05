@@ -7,8 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Entity
-@Table(name = "QUALITY_GLI")
+//@Entity
+//@Table(name = "QUALITY_GLI")
 @Data
 public class GliDO extends DataEntity{
 

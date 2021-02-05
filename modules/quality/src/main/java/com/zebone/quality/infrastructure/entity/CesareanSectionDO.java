@@ -12,9 +12,9 @@ import java.util.Date;
  * 剖宫产
  * @author 卡卡西
  */
-@Entity
+//@Entity
 @Data
-@Table(name = "QUALITY_CESAREAN_SECTION")
+//@Table(name = "QUALITY_CESAREAN_SECTION")
 public class CesareanSectionDO extends BaseEntity{
 
 
