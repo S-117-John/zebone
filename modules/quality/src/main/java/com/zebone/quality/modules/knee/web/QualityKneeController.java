@@ -6,6 +6,11 @@ package com.zebone.quality.modules.knee.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.zebone.quality.domain.UploadService;
+import com.zebone.quality.modules.common.UploadResult;
+import com.zebone.quality.modules.hip.entity.Hip;
+import com.zebone.quality.modules.knee.entity.Knee;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,10 +27,13 @@ import com.jeesite.common.web.BaseController;
 import com.zebone.quality.modules.knee.entity.QualityKnee;
 import com.zebone.quality.modules.knee.service.QualityKneeService;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.Optional;
+
 /**
  * Knee膝关节置换术Controller
  * @author 卡卡西
- * @version 2021-01-22
+ * @version 2021-02-07
  */
 @Controller
 @RequestMapping(value = "${adminPath}/knee/qualityKnee")
@@ -73,14 +81,28 @@ public class QualityKneeController extends BaseController {
 		return "modules/knee/qualityKneeForm";
 	}
 
+	@Autowired
+	private UploadService uploadService;
+
 	/**
 	 * 保存Knee膝关节置换术
 	 */
 	@RequiresPermissions("knee:qualityKnee:edit")
 	@PostMapping(value = "save")
 	@ResponseBody
-	public String save(@Validated QualityKnee qualityKnee) {
+	public String save(@Validated QualityKnee qualityKnee) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 		qualityKneeService.save(qualityKnee);
+
+
+		String result = uploadService.upload(qualityKnee,new Knee(),"KNEE");
+		Gson gson = new Gson();
+		UploadResult uploadResult = gson.fromJson(result, UploadResult.class);
+		Integer resultCode = Optional.ofNullable(uploadResult).map(a->a.getCode()).orElse(null);
+		if(resultCode==1000){
+			String errorMessage = Optional.ofNullable(uploadResult).map(a->a.getMessage()).orElse("上传失败");
+			return renderResult(Global.FALSE, text(errorMessage));
+		}
+
 		return renderResult(Global.TRUE, text("保存Knee膝关节置换术成功！"));
 	}
 	
