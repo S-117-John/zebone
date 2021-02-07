@@ -6,6 +6,11 @@ package com.zebone.quality.modules.stk.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.zebone.quality.domain.UploadService;
+import com.zebone.quality.modules.common.UploadResult;
+import com.zebone.quality.modules.hf.entity.Hf;
+import com.zebone.quality.modules.stk.entity.Stk;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,10 +27,13 @@ import com.jeesite.common.web.BaseController;
 import com.zebone.quality.modules.stk.entity.QualityStk;
 import com.zebone.quality.modules.stk.service.QualityStkService;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.Optional;
+
 /**
  * STK脑梗死（首次住院）Controller
  * @author 卡卡西
- * @version 2021-02-05
+ * @version 2021-02-07
  */
 @Controller
 @RequestMapping(value = "${adminPath}/stk/qualityStk")
@@ -33,7 +41,10 @@ public class QualityStkController extends BaseController {
 
 	@Autowired
 	private QualityStkService qualityStkService;
-	
+
+	@Autowired
+	private UploadService uploadService;
+
 	/**
 	 * 获取数据
 	 */
@@ -79,8 +90,18 @@ public class QualityStkController extends BaseController {
 	@RequiresPermissions("stk:qualityStk:edit")
 	@PostMapping(value = "save")
 	@ResponseBody
-	public String save(@Validated QualityStk qualityStk) {
+	public String save(@Validated QualityStk qualityStk) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 		qualityStkService.save(qualityStk);
+
+		String result = uploadService.upload(qualityStk,new Stk(),"STK");
+		Gson gson = new Gson();
+		UploadResult uploadResult = gson.fromJson(result, UploadResult.class);
+		Integer resultCode = Optional.ofNullable(uploadResult).map(a->a.getCode()).orElse(null);
+		if(resultCode==1000){
+			String errorMessage = Optional.ofNullable(uploadResult).map(a->a.getMessage()).orElse("上传失败");
+			return renderResult(Global.FALSE, text(errorMessage));
+		}
+
 		return renderResult(Global.TRUE, text("保存STK脑梗死（首次住院）成功！"));
 	}
 	
