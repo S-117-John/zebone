@@ -7,10 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
-//@Entity
-//@Table(name = "QUALITY_CAP")
+@Entity
+@Table(name = "QUALITY_CAP")
 @Data
 public class CapDO extends DataEntity{
+
 
 
     @Column(columnDefinition = "varchar(64) COMMENT '质控医师'")
@@ -39,7 +40,7 @@ public class CapDO extends DataEntity{
     private String cap_0_1_5_1;
     @Column(columnDefinition = "varchar(64) COMMENT '是否出院后31天内重复住院'")
     private String cm_0_1_5;
-    @Column(columnDefinition = "varchar(64) COMMENT '出生日期'")
+    @Column(columnDefinition = "datetime COMMENT '出生日期'")
     private Date cm_0_2_1_1;
     @Column(columnDefinition = "varchar(64) COMMENT '患儿性别'")
     private String cm_0_2_1_2;
@@ -49,19 +50,19 @@ public class CapDO extends DataEntity{
     private Double cm_0_2_1_5;
     @Column(columnDefinition = "varchar(64) COMMENT '发病日期时间是否无法确定或无记录'")
     private String cm_0_2_2_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '发病日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '发病日期时间'")
     private Date cm_0_2_2_2;
     @Column(columnDefinition = "varchar(64) COMMENT '到达本院急诊或者门诊日期时间是否无法确定或无记录'")
     private String cm_0_2_3_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '到达本院急诊或者门诊日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '到达本院急诊或者门诊日期时间'")
     private Date cm_0_2_3_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '入院日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '入院日期时间'")
     private Date cm_0_2_4_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '出院日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '出院日期时间'")
     private Date cm_0_2_4_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '入住ICU/RCU日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '入住ICU/RCU日期时间'")
     private Date cm_0_2_5_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '离开ICU/RCU日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '离开ICU/RCU日期时间'")
     private Date cm_0_2_5_2;
     @Column(columnDefinition = "varchar(64) COMMENT '费用支付方式'")
     private String cm_0_3_1;
@@ -105,7 +106,7 @@ public class CapDO extends DataEntity{
     private String cap_3_2_2;
     @Column(columnDefinition = "varchar(64) COMMENT '实施首次采集什么标本'")
     private String cap_3_2_3;
-    @Column(columnDefinition = "varchar(64) COMMENT '采集标本日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '采集标本日期时间'")
     private Date cap_3_2_4;
     @Column(columnDefinition = "varchar(64) COMMENT '细菌学检查项目的选择'")
     private String cap_3_3_1;
@@ -129,21 +130,21 @@ public class CapDO extends DataEntity{
     private String cap_3_5_1;
     @Column(columnDefinition = "varchar(64) COMMENT '其他病原学检测结果'")
     private String cap_3_5_1_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '获得病原学诊断报告结果的日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '获得病原学诊断报告结果的日期时间'")
     private Date cap_3_5_2;
     @Column(columnDefinition = "varchar(64) COMMENT '患儿有无接受抗菌药物治疗'")
     private String cap_4_0;
-    @Column(columnDefinition = "varchar(64) COMMENT '患儿入院后接受首剂抗菌药物治疗（注射剂输入/注射）时间'")
+    @Column(columnDefinition = "datetime COMMENT '患儿入院后接受首剂抗菌药物治疗（注射剂输入/注射）时间'")
     private Date cap_4_1_2;
     @Column(columnDefinition = "varchar(64) COMMENT '接受入院后首剂抗菌药物使用时机 DTN'")
     private String cap_4_1_3;
     @Column(columnDefinition = "varchar(64) COMMENT '使用首剂抗菌药物治疗途径'")
     private String cap_4_1_4;
-    @Column(columnDefinition = "varchar(64) COMMENT '抗菌药物注射剂输入/注射治疗终止日期与时间'")
+    @Column(columnDefinition = "datetime COMMENT '抗菌药物注射剂输入/注射治疗终止日期与时间'")
     private Date cap_4_1_5;
     @Column(columnDefinition = "varchar(64) COMMENT '是否抗菌药物注射剂改口服'")
     private String cap_4_2_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '抗菌药物注射剂改口服日期与时间'")
+    @Column(columnDefinition = "datetime COMMENT '抗菌药物注射剂改口服日期与时间'")
     private Date cap_4_2_2;
     @Column(columnDefinition = "varchar(64) COMMENT '拟诊需抗感染治疗肺炎缘由'")
     private String cap_5_1_1;
@@ -193,7 +194,7 @@ public class CapDO extends DataEntity{
     private String cap_6_1_7;
     @Column(columnDefinition = "varchar(64) COMMENT '其它重复病原学诊断结果'")
     private String cap_6_1_7_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '获得病原学诊断报告结果的日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '获得病原学诊断报告结果的日期时间'")
     private Date cap_6_1_8;
     @Column(columnDefinition = "varchar(64) COMMENT '病原针对性治疗情况'")
     private String cap_6_2_1;
@@ -227,9 +228,9 @@ public class CapDO extends DataEntity{
     private String cap_7_2_2;
     @Column(columnDefinition = "varchar(64) COMMENT '给予氧疗医嘱'")
     private String cap_7_2_5;
-    @Column(columnDefinition = "varchar(64) COMMENT '普通氧疗起始日期与时间'")
+    @Column(columnDefinition = "datetime COMMENT '普通氧疗起始日期与时间'")
     private Date cap_7_2_6;
-    @Column(columnDefinition = "varchar(64) COMMENT '普通氧疗终止日期与时间'")
+    @Column(columnDefinition = "datetime COMMENT '普通氧疗终止日期与时间'")
     private Date cap_7_2_7;
     @Column(columnDefinition = "double COMMENT '使用普通氧疗治疗天数'")
     private Double cap_7_2_8;
@@ -237,9 +238,9 @@ public class CapDO extends DataEntity{
     private String cap_7_3_1;
     @Column(columnDefinition = "varchar(64) COMMENT '无创通气指征'")
     private String cap_7_3_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '无创通气治疗起始日期与时间'")
+    @Column(columnDefinition = "datetime COMMENT '无创通气治疗起始日期与时间'")
     private Date cap_7_3_3;
-    @Column(columnDefinition = "varchar(64) COMMENT '无创通气治疗终止日期与时间'")
+    @Column(columnDefinition = "datetime COMMENT '无创通气治疗终止日期与时间'")
     private Date cap_7_3_4;
     @Column(columnDefinition = "double COMMENT '使用无创通气治疗小时数'")
     private Double cap_7_3_5;
@@ -247,9 +248,9 @@ public class CapDO extends DataEntity{
     private String cap_7_4_1;
     @Column(columnDefinition = "varchar(64) COMMENT '机械通气指征'")
     private String cap_7_4_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '有创机械通气治疗起始日期与时间'")
+    @Column(columnDefinition = "datetime COMMENT '有创机械通气治疗起始日期与时间'")
     private Date cap_7_4_3;
-    @Column(columnDefinition = "varchar(64) COMMENT '有创机械通气治疗终止日期与时间'")
+    @Column(columnDefinition = "datetime COMMENT '有创机械通气治疗终止日期与时间'")
     private Date cap_7_4_4;
     @Column(columnDefinition = "double COMMENT '使用有创机械通气治疗小时数'")
     private Double cap_7_4_5;
@@ -257,9 +258,9 @@ public class CapDO extends DataEntity{
     private String cap_7_5_1;
     @Column(columnDefinition = "varchar(64) COMMENT 'ECMO指征'")
     private String cap_7_5_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '体外膜肺治疗起始日期与时间'")
+    @Column(columnDefinition = "datetime COMMENT '体外膜肺治疗起始日期与时间'")
     private Date cap_7_5_3;
-    @Column(columnDefinition = "varchar(64) COMMENT '体外膜肺治疗终止日期与时间'")
+    @Column(columnDefinition = "datetime COMMENT '体外膜肺治疗终止日期与时间'")
     private Date cap_7_5_4;
     @Column(columnDefinition = "double COMMENT '使用体外膜肺治疗小时数'")
     private Double cap_7_5_5;
@@ -313,17 +314,17 @@ public class CapDO extends DataEntity{
     private String cm_5_2_10;
     @Column(columnDefinition = "varchar(64) COMMENT '膳食评价'")
     private String cm_5_2_11;
-    @Column(columnDefinition = "varchar(64) COMMENT '患儿接受首剂抗菌药物治疗注射剂输入/注射日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '患儿接受首剂抗菌药物治疗注射剂输入/注射日期时间'")
     private Date cap_11_1_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '患儿接受未剂抗菌药物治疗注射剂输入/注射日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '患儿接受未剂抗菌药物治疗注射剂输入/注射日期时间'")
     private Date cap_11_1_2;
     @Column(columnDefinition = "double COMMENT '注射剂输入/注射抗菌药物疗程（天数）'")
     private Double cap_11_1_3;
     @Column(columnDefinition = "varchar(64) COMMENT '是否抗菌药物注射剂改口服'")
     private String cap_11_2_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '改用抗菌药物口服剂首剂日期与时间'")
+    @Column(columnDefinition = "datetime COMMENT '改用抗菌药物口服剂首剂日期与时间'")
     private Date cap_11_2_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '末剂抗菌药物口服剂或出院日期与时间'")
+    @Column(columnDefinition = "datetime COMMENT '末剂抗菌药物口服剂或出院日期与时间'")
     private Date cap_11_2_3;
     @Column(columnDefinition = "double COMMENT '口服剂抗菌药物疗程（天数）'")
     private Double cap_11_2_4;
@@ -387,5 +388,6 @@ public class CapDO extends DataEntity{
     private Double cm_6_29;
     @Column(columnDefinition = "double COMMENT '其他费'")
     private Double cm_6_30;
+
 
 }

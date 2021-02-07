@@ -3,7 +3,13 @@
  */
 package com.zebone.quality.modules.cap.entity;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
+import java.util.Date;
+import com.jeesite.common.mybatis.annotation.JoinTable;
+import com.jeesite.common.mybatis.annotation.JoinTable.Type;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import javax.validation.constraints.NotNull;
 
 import com.jeesite.common.entity.DataEntity;
 import com.jeesite.common.mybatis.annotation.Column;
@@ -13,7 +19,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 /**
  * Cap社区获得性肺炎（儿童，首次住院）Entity
  * @author 卡卡西
- * @version 2021-01-22
+ * @version 2021-02-06
  */
 @Table(name="quality_cap", alias="a", columns={
 		@Column(name="cm_0_1_1_1", attrName="cm_0_1_1_1", label="质控医师"),
@@ -223,18 +229,18 @@ public class QualityCap extends DataEntity<QualityCap> {
 	private String cm_0_1_4_2;		// 主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称
 	private String cap_0_1_5_1;		// 其他主要手术操作ICD-9-CM-3六位临床扩展编码与名称
 	private String cm_0_1_5;		// 是否出院后31天内重复住院
-	private String cm_0_2_1_1;		// 出生日期
+	private Date cm_0_2_1_1;		// 出生日期
 	private String cm_0_2_1_2;		// 患儿性别
 	private Double cm_0_2_1_3;		// 患儿体重（kg）
 	private Double cm_0_2_1_5;		// 患儿身高（cm）
 	private String cm_0_2_2_1;		// 发病日期时间是否无法确定或无记录
-	private String cm_0_2_2_2;		// 发病日期时间
+	private Date cm_0_2_2_2;		// 发病日期时间
 	private String cm_0_2_3_1;		// 到达本院急诊或者门诊日期时间是否无法确定或无记录
-	private String cm_0_2_3_2;		// 到达本院急诊或者门诊日期时间
-	private String cm_0_2_4_1;		// 入院日期时间
-	private String cm_0_2_4_2;		// 出院日期时间
-	private String cm_0_2_5_1;		// 入住ICU/RCU日期时间
-	private String cm_0_2_5_2;		// 离开ICU/RCU日期时间
+	private Date cm_0_2_3_2;		// 到达本院急诊或者门诊日期时间
+	private Date cm_0_2_4_1;		// 入院日期时间
+	private Date cm_0_2_4_2;		// 出院日期时间
+	private Date cm_0_2_5_1;		// 入住ICU/RCU日期时间
+	private Date cm_0_2_5_2;		// 离开ICU/RCU日期时间
 	private String cm_0_3_1;		// 费用支付方式
 	private String cm_0_3_2;		// 收入住院途径
 	private String cm_0_3_3;		// 到院交通工具
@@ -256,7 +262,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 	private String cap_3_2_1;		// 是否入院之前已经经接受抗菌药物治疗
 	private String cap_3_2_2;		// 实施首次采集标本时段
 	private String cap_3_2_3;		// 实施首次采集什么标本
-	private String cap_3_2_4;		// 采集标本日期时间
+	private Date cap_3_2_4;		// 采集标本日期时间
 	private String cap_3_3_1;		// 细菌学检查项目的选择
 	private String cap_3_3_1_1;		// 其他细菌学检查项目
 	private String cap_3_3_2;		// 病毒学检查项目的选择
@@ -268,14 +274,14 @@ public class QualityCap extends DataEntity<QualityCap> {
 	private String cap_3_4_2_1;		// 其他临床实验室检查项目
 	private String cap_3_5_1;		// 病原学检测结果
 	private String cap_3_5_1_1;		// 其他病原学检测结果
-	private String cap_3_5_2;		// 获得病原学诊断报告结果的日期时间
+	private Date cap_3_5_2;		// 获得病原学诊断报告结果的日期时间
 	private String cap_4_0;		// 患儿有无接受抗菌药物治疗
-	private String cap_4_1_2;		// 患儿入院后接受首剂抗菌药物治疗（注射剂输入/注射）时间
+	private Date cap_4_1_2;		// 患儿入院后接受首剂抗菌药物治疗（注射剂输入/注射）时间
 	private String cap_4_1_3;		// 接受入院后首剂抗菌药物使用时机 DTN
 	private String cap_4_1_4;		// 使用首剂抗菌药物治疗途径
-	private String cap_4_1_5;		// 抗菌药物注射剂输入/注射治疗终止日期与时间
+	private Date cap_4_1_5;		// 抗菌药物注射剂输入/注射治疗终止日期与时间
 	private String cap_4_2_1;		// 是否抗菌药物注射剂改口服
-	private String cap_4_2_2;		// 抗菌药物注射剂改口服日期与时间
+	private Date cap_4_2_2;		// 抗菌药物注射剂改口服日期与时间
 	private String cap_5_1_1;		// 拟诊需抗感染治疗肺炎缘由
 	private String cap_5_1_1_1;		// 其他类型肺炎
 	private String cap_5_1_2;		// 是否需进行抗感染治疗
@@ -300,7 +306,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 	private String cap_6_1_6_1;		// 其它检查
 	private String cap_6_1_7;		// 重复病原学诊断结果选择
 	private String cap_6_1_7_1;		// 其它重复病原学诊断结果
-	private String cap_6_1_8;		// 获得病原学诊断报告结果的日期时间
+	private Date cap_6_1_8;		// 获得病原学诊断报告结果的日期时间
 	private String cap_6_2_1;		// 病原针对性治疗情况
 	private String cap_6_2_2;		// 抗感染治疗药物选择
 	private String cap_6_2_3;		// 青霉素类抗感染药物
@@ -317,23 +323,23 @@ public class QualityCap extends DataEntity<QualityCap> {
 	private String cap_7_2_1;		// 是否使用普通氧疗
 	private String cap_7_2_2;		// 普通氧疗指征
 	private String cap_7_2_5;		// 给予氧疗医嘱
-	private String cap_7_2_6;		// 普通氧疗起始日期与时间
-	private String cap_7_2_7;		// 普通氧疗终止日期与时间
+	private Date cap_7_2_6;		// 普通氧疗起始日期与时间
+	private Date cap_7_2_7;		// 普通氧疗终止日期与时间
 	private Double cap_7_2_8;		// 使用普通氧疗治疗天数
 	private String cap_7_3_1;		// 是否使用无创通气
 	private String cap_7_3_2;		// 无创通气指征
-	private String cap_7_3_3;		// 无创通气治疗起始日期与时间
-	private String cap_7_3_4;		// 无创通气治疗终止日期与时间
+	private Date cap_7_3_3;		// 无创通气治疗起始日期与时间
+	private Date cap_7_3_4;		// 无创通气治疗终止日期与时间
 	private Double cap_7_3_5;		// 使用无创通气治疗小时数
 	private String cap_7_4_1;		// 是否使用有创机械通气
 	private String cap_7_4_2;		// 机械通气指征
-	private String cap_7_4_3;		// 有创机械通气治疗起始日期与时间
-	private String cap_7_4_4;		// 有创机械通气治疗终止日期与时间
+	private Date cap_7_4_3;		// 有创机械通气治疗起始日期与时间
+	private Date cap_7_4_4;		// 有创机械通气治疗终止日期与时间
 	private Double cap_7_4_5;		// 使用有创机械通气治疗小时数
 	private String cap_7_5_1;		// 是否使用体外膜肺
 	private String cap_7_5_2;		// ECMO指征
-	private String cap_7_5_3;		// 体外膜肺治疗起始日期与时间
-	private String cap_7_5_4;		// 体外膜肺治疗终止日期与时间
+	private Date cap_7_5_3;		// 体外膜肺治疗起始日期与时间
+	private Date cap_7_5_4;		// 体外膜肺治疗终止日期与时间
 	private Double cap_7_5_5;		// 使用体外膜肺治疗小时数
 	private String cm_7_2_1;		// 交与患儿/患儿家长“出院小结”的副本告知出院时风险因素
 	private String cm_7_2_2;		// 出院带药
@@ -360,12 +366,12 @@ public class QualityCap extends DataEntity<QualityCap> {
 	private String cm_5_2_9;		// 康复计划
 	private String cm_5_2_10;		// 出院时的知情告知
 	private String cm_5_2_11;		// 膳食评价
-	private String cap_11_1_1;		// 患儿接受首剂抗菌药物治疗注射剂输入/注射日期时间
-	private String cap_11_1_2;		// 患儿接受未剂抗菌药物治疗注射剂输入/注射日期时间
+	private Date cap_11_1_1;		// 患儿接受首剂抗菌药物治疗注射剂输入/注射日期时间
+	private Date cap_11_1_2;		// 患儿接受未剂抗菌药物治疗注射剂输入/注射日期时间
 	private Double cap_11_1_3;		// 注射剂输入/注射抗菌药物疗程（天数）
 	private String cap_11_2_1;		// 是否抗菌药物注射剂改口服
-	private String cap_11_2_2;		// 改用抗菌药物口服剂首剂日期与时间
-	private String cap_11_2_3;		// 末剂抗菌药物口服剂或出院日期与时间
+	private Date cap_11_2_2;		// 改用抗菌药物口服剂首剂日期与时间
+	private Date cap_11_2_3;		// 末剂抗菌药物口服剂或出院日期与时间
 	private Double cap_11_2_4;		// 口服剂抗菌药物疗程（天数）
 	private Double cm_6_1;		// 住院总费用
 	private Double cm_6_2;		// 住院总费用其中自付金额
@@ -406,6 +412,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		super(id);
 	}
 	
+	@NotBlank(message="质控医师不能为空")
 	@Length(min=0, max=64, message="质控医师长度不能超过 64 个字符")
 	public String getCm_0_1_1_1() {
 		return cm_0_1_1_1;
@@ -415,6 +422,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_0_1_1_1 = cm_0_1_1_1;
 	}
 	
+	@NotBlank(message="质控护士不能为空")
 	@Length(min=0, max=64, message="质控护士长度不能超过 64 个字符")
 	public String getCm_0_1_1_2() {
 		return cm_0_1_1_2;
@@ -424,6 +432,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_0_1_1_2 = cm_0_1_1_2;
 	}
 	
+	@NotBlank(message="主治医师不能为空")
 	@Length(min=0, max=64, message="主治医师长度不能超过 64 个字符")
 	public String getCm_0_1_1_3() {
 		return cm_0_1_1_3;
@@ -433,6 +442,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_0_1_1_3 = cm_0_1_1_3;
 	}
 	
+	@NotBlank(message="责任护士不能为空")
 	@Length(min=0, max=64, message="责任护士长度不能超过 64 个字符")
 	public String getCm_0_1_1_4() {
 		return cm_0_1_1_4;
@@ -442,6 +452,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_0_1_1_4 = cm_0_1_1_4;
 	}
 	
+	@NotBlank(message="上报科室不能为空")
 	@Length(min=0, max=64, message="上报科室长度不能超过 64 个字符")
 	public String getCm_0_1_1_5() {
 		return cm_0_1_1_5;
@@ -451,6 +462,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_0_1_1_5 = cm_0_1_1_5;
 	}
 	
+	@NotBlank(message="患儿病案号不能为空")
 	@Length(min=0, max=64, message="患儿病案号长度不能超过 64 个字符")
 	public String getCaseid() {
 		return caseid;
@@ -460,6 +472,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.caseid = caseid;
 	}
 	
+	@NotBlank(message="主要诊断ICD-10四位亚目编码与名称不能为空")
 	@Length(min=0, max=64, message="主要诊断ICD-10四位亚目编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_3_1() {
 		return cm_0_1_3_1;
@@ -469,6 +482,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_0_1_3_1 = cm_0_1_3_1;
 	}
 	
+	@NotBlank(message="主要诊断ICD-10六位临床扩展编码与名称不能为空")
 	@Length(min=0, max=64, message="主要诊断ICD-10六位临床扩展编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_3_2() {
 		return cm_0_1_3_2;
@@ -514,6 +528,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_0_1_5_1 = cap_0_1_5_1;
 	}
 	
+	@NotBlank(message="是否出院后31天内重复住院不能为空")
 	@Length(min=0, max=64, message="是否出院后31天内重复住院长度不能超过 64 个字符")
 	public String getCm_0_1_5() {
 		return cm_0_1_5;
@@ -523,15 +538,17 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_0_1_5 = cm_0_1_5;
 	}
 	
-	@Length(min=0, max=64, message="出生日期长度不能超过 64 个字符")
-	public String getCm_0_2_1_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@NotNull(message="出生日期不能为空")
+	public Date getCm_0_2_1_1() {
 		return cm_0_2_1_1;
 	}
 
-	public void setCm_0_2_1_1(String cm_0_2_1_1) {
+	public void setCm_0_2_1_1(Date cm_0_2_1_1) {
 		this.cm_0_2_1_1 = cm_0_2_1_1;
 	}
 	
+	@NotBlank(message="患儿性别不能为空")
 	@Length(min=0, max=64, message="患儿性别长度不能超过 64 个字符")
 	public String getCm_0_2_1_2() {
 		return cm_0_2_1_2;
@@ -541,6 +558,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_0_2_1_2 = cm_0_2_1_2;
 	}
 	
+	@NotNull(message="患儿体重不能为空")
 	public Double getCm_0_2_1_3() {
 		return cm_0_2_1_3;
 	}
@@ -549,6 +567,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_0_2_1_3 = cm_0_2_1_3;
 	}
 	
+	@NotNull(message="患儿身高不能为空")
 	public Double getCm_0_2_1_5() {
 		return cm_0_2_1_5;
 	}
@@ -566,12 +585,12 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_0_2_2_1 = cm_0_2_2_1;
 	}
 	
-	@Length(min=0, max=64, message="发病日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_2_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_2_2() {
 		return cm_0_2_2_2;
 	}
 
-	public void setCm_0_2_2_2(String cm_0_2_2_2) {
+	public void setCm_0_2_2_2(Date cm_0_2_2_2) {
 		this.cm_0_2_2_2 = cm_0_2_2_2;
 	}
 	
@@ -584,51 +603,54 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_0_2_3_1 = cm_0_2_3_1;
 	}
 	
-	@Length(min=0, max=64, message="到达本院急诊或者门诊日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_3_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_3_2() {
 		return cm_0_2_3_2;
 	}
 
-	public void setCm_0_2_3_2(String cm_0_2_3_2) {
+	public void setCm_0_2_3_2(Date cm_0_2_3_2) {
 		this.cm_0_2_3_2 = cm_0_2_3_2;
 	}
 	
-	@Length(min=0, max=64, message="入院日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_4_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@NotNull(message="入院日期时间不能为空")
+	public Date getCm_0_2_4_1() {
 		return cm_0_2_4_1;
 	}
 
-	public void setCm_0_2_4_1(String cm_0_2_4_1) {
+	public void setCm_0_2_4_1(Date cm_0_2_4_1) {
 		this.cm_0_2_4_1 = cm_0_2_4_1;
 	}
 	
-	@Length(min=0, max=64, message="出院日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_4_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@NotNull(message="出院日期时间不能为空")
+	public Date getCm_0_2_4_2() {
 		return cm_0_2_4_2;
 	}
 
-	public void setCm_0_2_4_2(String cm_0_2_4_2) {
+	public void setCm_0_2_4_2(Date cm_0_2_4_2) {
 		this.cm_0_2_4_2 = cm_0_2_4_2;
 	}
 	
-	@Length(min=0, max=64, message="入住ICU/RCU日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_5_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_5_1() {
 		return cm_0_2_5_1;
 	}
 
-	public void setCm_0_2_5_1(String cm_0_2_5_1) {
+	public void setCm_0_2_5_1(Date cm_0_2_5_1) {
 		this.cm_0_2_5_1 = cm_0_2_5_1;
 	}
 	
-	@Length(min=0, max=64, message="离开ICU/RCU日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_5_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_5_2() {
 		return cm_0_2_5_2;
 	}
 
-	public void setCm_0_2_5_2(String cm_0_2_5_2) {
+	public void setCm_0_2_5_2(Date cm_0_2_5_2) {
 		this.cm_0_2_5_2 = cm_0_2_5_2;
 	}
 	
+	@NotBlank(message="费用支付方式不能为空")
 	@Length(min=0, max=64, message="费用支付方式长度不能超过 64 个字符")
 	public String getCm_0_3_1() {
 		return cm_0_3_1;
@@ -638,6 +660,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_0_3_1 = cm_0_3_1;
 	}
 	
+	@NotBlank(message="收入住院途径不能为空")
 	@Length(min=0, max=64, message="收入住院途径长度不能超过 64 个字符")
 	public String getCm_0_3_2() {
 		return cm_0_3_2;
@@ -647,6 +670,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_0_3_2 = cm_0_3_2;
 	}
 	
+	@NotBlank(message="到院交通工具不能为空")
 	@Length(min=0, max=64, message="到院交通工具长度不能超过 64 个字符")
 	public String getCm_0_3_3() {
 		return cm_0_3_3;
@@ -656,6 +680,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_0_3_3 = cm_0_3_3;
 	}
 	
+	@NotBlank(message="是否有重症肺炎的高危因素不能为空")
 	@Length(min=0, max=64, message="是否有重症肺炎的高危因素长度不能超过 64 个字符")
 	public String getCap_1_1_0() {
 		return cap_1_1_0;
@@ -728,6 +753,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_1_3_1 = cap_1_3_1;
 	}
 	
+	@NotBlank(message="实施首次氧合评估不能为空")
 	@Length(min=0, max=64, message="实施首次氧合评估长度不能超过 64 个字符")
 	public String getCap_2_1() {
 		return cap_2_1;
@@ -780,6 +806,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_2_4_4 = cap_2_4_4;
 	}
 	
+	@NotBlank(message="是否为重症并收入ICU/RCU的患儿不能为空")
 	@Length(min=0, max=64, message="是否为重症并收入ICU/RCU的患儿长度不能超过 64 个字符")
 	public String getCap_3_1_1() {
 		return cap_3_1_1;
@@ -789,6 +816,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_3_1_1 = cap_3_1_1;
 	}
 	
+	@NotBlank(message="是否入院之前已经经接受抗菌药物治疗不能为空")
 	@Length(min=0, max=64, message="是否入院之前已经经接受抗菌药物治疗长度不能超过 64 个字符")
 	public String getCap_3_2_1() {
 		return cap_3_2_1;
@@ -798,6 +826,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_3_2_1 = cap_3_2_1;
 	}
 	
+	@NotBlank(message="实施首次采集标本时段不能为空")
 	@Length(min=0, max=64, message="实施首次采集标本时段长度不能超过 64 个字符")
 	public String getCap_3_2_2() {
 		return cap_3_2_2;
@@ -807,6 +836,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_3_2_2 = cap_3_2_2;
 	}
 	
+	@NotBlank(message="实施首次采集什么标本不能为空")
 	@Length(min=0, max=64, message="实施首次采集什么标本长度不能超过 64 个字符")
 	public String getCap_3_2_3() {
 		return cap_3_2_3;
@@ -816,12 +846,13 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_3_2_3 = cap_3_2_3;
 	}
 	
-	@Length(min=0, max=64, message="采集标本日期时间长度不能超过 64 个字符")
-	public String getCap_3_2_4() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@NotNull(message="采集标本日期时间不能为空")
+	public Date getCap_3_2_4() {
 		return cap_3_2_4;
 	}
 
-	public void setCap_3_2_4(String cap_3_2_4) {
+	public void setCap_3_2_4(Date cap_3_2_4) {
 		this.cap_3_2_4 = cap_3_2_4;
 	}
 	
@@ -843,6 +874,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_3_3_1_1 = cap_3_3_1_1;
 	}
 	
+	@NotBlank(message="病毒学检查项目的选择不能为空")
 	@Length(min=0, max=64, message="病毒学检查项目的选择长度不能超过 64 个字符")
 	public String getCap_3_3_2() {
 		return cap_3_3_2;
@@ -861,6 +893,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_3_3_2_1 = cap_3_3_2_1;
 	}
 	
+	@NotBlank(message="肺炎支原体检查项目的选择不能为空")
 	@Length(min=0, max=64, message="肺炎支原体检查项目的选择长度不能超过 64 个字符")
 	public String getCap_3_3_3() {
 		return cap_3_3_3;
@@ -879,6 +912,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_3_3_3_1 = cap_3_3_3_1;
 	}
 	
+	@NotBlank(message="是否进行实验室检查不能为空")
 	@Length(min=0, max=64, message="是否进行实验室检查长度不能超过 64 个字符")
 	public String getCap_3_4_1() {
 		return cap_3_4_1;
@@ -924,15 +958,16 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_3_5_1_1 = cap_3_5_1_1;
 	}
 	
-	@Length(min=0, max=64, message="获得病原学诊断报告结果的日期时间长度不能超过 64 个字符")
-	public String getCap_3_5_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_3_5_2() {
 		return cap_3_5_2;
 	}
 
-	public void setCap_3_5_2(String cap_3_5_2) {
+	public void setCap_3_5_2(Date cap_3_5_2) {
 		this.cap_3_5_2 = cap_3_5_2;
 	}
 	
+	@NotBlank(message="患儿有无接受抗菌药物治疗不能为空")
 	@Length(min=0, max=64, message="患儿有无接受抗菌药物治疗长度不能超过 64 个字符")
 	public String getCap_4_0() {
 		return cap_4_0;
@@ -942,12 +977,12 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_4_0 = cap_4_0;
 	}
 	
-	@Length(min=0, max=64, message="患儿入院后接受首剂抗菌药物治疗长度不能超过 64 个字符")
-	public String getCap_4_1_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_4_1_2() {
 		return cap_4_1_2;
 	}
 
-	public void setCap_4_1_2(String cap_4_1_2) {
+	public void setCap_4_1_2(Date cap_4_1_2) {
 		this.cap_4_1_2 = cap_4_1_2;
 	}
 	
@@ -969,12 +1004,12 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_4_1_4 = cap_4_1_4;
 	}
 	
-	@Length(min=0, max=64, message="抗菌药物注射剂输入/注射治疗终止日期与时间长度不能超过 64 个字符")
-	public String getCap_4_1_5() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_4_1_5() {
 		return cap_4_1_5;
 	}
 
-	public void setCap_4_1_5(String cap_4_1_5) {
+	public void setCap_4_1_5(Date cap_4_1_5) {
 		this.cap_4_1_5 = cap_4_1_5;
 	}
 	
@@ -987,15 +1022,16 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_4_2_1 = cap_4_2_1;
 	}
 	
-	@Length(min=0, max=64, message="抗菌药物注射剂改口服日期与时间长度不能超过 64 个字符")
-	public String getCap_4_2_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_4_2_2() {
 		return cap_4_2_2;
 	}
 
-	public void setCap_4_2_2(String cap_4_2_2) {
+	public void setCap_4_2_2(Date cap_4_2_2) {
 		this.cap_4_2_2 = cap_4_2_2;
 	}
 	
+	@NotBlank(message="拟诊需抗感染治疗肺炎缘由不能为空")
 	@Length(min=0, max=64, message="拟诊需抗感染治疗肺炎缘由长度不能超过 64 个字符")
 	public String getCap_5_1_1() {
 		return cap_5_1_1;
@@ -1014,6 +1050,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_5_1_1_1 = cap_5_1_1_1;
 	}
 	
+	@NotBlank(message="是否需进行抗感染治疗不能为空")
 	@Length(min=0, max=64, message="是否需进行抗感染治疗长度不能超过 64 个字符")
 	public String getCap_5_1_2() {
 		return cap_5_1_2;
@@ -1023,6 +1060,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_5_1_2 = cap_5_1_2;
 	}
 	
+	@NotBlank(message="抗感染治疗药物选择不能为空")
 	@Length(min=0, max=64, message="抗感染治疗药物选择长度不能超过 64 个字符")
 	public String getCap_5_2_1() {
 		return cap_5_2_1;
@@ -1122,6 +1160,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_5_2_5_1 = cap_5_2_5_1;
 	}
 	
+	@NotBlank(message="初始治疗72小时后是否进行评价不能为空")
 	@Length(min=0, max=64, message="初始治疗72小时后是否进行评价长度不能超过 64 个字符")
 	public String getCap_6_1_1() {
 		return cap_6_1_1;
@@ -1212,12 +1251,12 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_6_1_7_1 = cap_6_1_7_1;
 	}
 	
-	@Length(min=0, max=64, message="获得病原学诊断报告结果的日期时间长度不能超过 64 个字符")
-	public String getCap_6_1_8() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_6_1_8() {
 		return cap_6_1_8;
 	}
 
-	public void setCap_6_1_8(String cap_6_1_8) {
+	public void setCap_6_1_8(Date cap_6_1_8) {
 		this.cap_6_1_8 = cap_6_1_8;
 	}
 	
@@ -1329,6 +1368,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_6_2_7_1 = cap_6_2_7_1;
 	}
 	
+	@NotBlank(message="是否使用氧疗与呼吸支持治疗不能为空")
 	@Length(min=0, max=64, message="是否使用氧疗与呼吸支持治疗长度不能超过 64 个字符")
 	public String getCap_7_1_1() {
 		return cap_7_1_1;
@@ -1365,21 +1405,21 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_7_2_5 = cap_7_2_5;
 	}
 	
-	@Length(min=0, max=64, message="普通氧疗起始日期与时间长度不能超过 64 个字符")
-	public String getCap_7_2_6() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_7_2_6() {
 		return cap_7_2_6;
 	}
 
-	public void setCap_7_2_6(String cap_7_2_6) {
+	public void setCap_7_2_6(Date cap_7_2_6) {
 		this.cap_7_2_6 = cap_7_2_6;
 	}
 	
-	@Length(min=0, max=64, message="普通氧疗终止日期与时间长度不能超过 64 个字符")
-	public String getCap_7_2_7() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_7_2_7() {
 		return cap_7_2_7;
 	}
 
-	public void setCap_7_2_7(String cap_7_2_7) {
+	public void setCap_7_2_7(Date cap_7_2_7) {
 		this.cap_7_2_7 = cap_7_2_7;
 	}
 	
@@ -1409,21 +1449,21 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_7_3_2 = cap_7_3_2;
 	}
 	
-	@Length(min=0, max=64, message="无创通气治疗起始日期与时间长度不能超过 64 个字符")
-	public String getCap_7_3_3() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_7_3_3() {
 		return cap_7_3_3;
 	}
 
-	public void setCap_7_3_3(String cap_7_3_3) {
+	public void setCap_7_3_3(Date cap_7_3_3) {
 		this.cap_7_3_3 = cap_7_3_3;
 	}
 	
-	@Length(min=0, max=64, message="无创通气治疗终止日期与时间长度不能超过 64 个字符")
-	public String getCap_7_3_4() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_7_3_4() {
 		return cap_7_3_4;
 	}
 
-	public void setCap_7_3_4(String cap_7_3_4) {
+	public void setCap_7_3_4(Date cap_7_3_4) {
 		this.cap_7_3_4 = cap_7_3_4;
 	}
 	
@@ -1453,21 +1493,21 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_7_4_2 = cap_7_4_2;
 	}
 	
-	@Length(min=0, max=64, message="有创机械通气治疗起始日期与时间长度不能超过 64 个字符")
-	public String getCap_7_4_3() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_7_4_3() {
 		return cap_7_4_3;
 	}
 
-	public void setCap_7_4_3(String cap_7_4_3) {
+	public void setCap_7_4_3(Date cap_7_4_3) {
 		this.cap_7_4_3 = cap_7_4_3;
 	}
 	
-	@Length(min=0, max=64, message="有创机械通气治疗终止日期与时间长度不能超过 64 个字符")
-	public String getCap_7_4_4() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_7_4_4() {
 		return cap_7_4_4;
 	}
 
-	public void setCap_7_4_4(String cap_7_4_4) {
+	public void setCap_7_4_4(Date cap_7_4_4) {
 		this.cap_7_4_4 = cap_7_4_4;
 	}
 	
@@ -1497,21 +1537,21 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_7_5_2 = cap_7_5_2;
 	}
 	
-	@Length(min=0, max=64, message="体外膜肺治疗起始日期与时间长度不能超过 64 个字符")
-	public String getCap_7_5_3() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_7_5_3() {
 		return cap_7_5_3;
 	}
 
-	public void setCap_7_5_3(String cap_7_5_3) {
+	public void setCap_7_5_3(Date cap_7_5_3) {
 		this.cap_7_5_3 = cap_7_5_3;
 	}
 	
-	@Length(min=0, max=64, message="体外膜肺治疗终止日期与时间长度不能超过 64 个字符")
-	public String getCap_7_5_4() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_7_5_4() {
 		return cap_7_5_4;
 	}
 
-	public void setCap_7_5_4(String cap_7_5_4) {
+	public void setCap_7_5_4(Date cap_7_5_4) {
 		this.cap_7_5_4 = cap_7_5_4;
 	}
 	
@@ -1568,6 +1608,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_7_2_5 = cm_7_2_5;
 	}
 	
+	@NotBlank(message="经有效治疗后，患儿病情明显好转,可以出院不能为空")
 	@Length(min=0, max=64, message="经有效治疗后，患儿病情明显好转,可以出院长度不能超过 64 个字符")
 	public String getCap_9_1_1_1() {
 		return cap_9_1_1_1;
@@ -1577,6 +1618,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_9_1_1_1 = cap_9_1_1_1;
 	}
 	
+	@NotBlank(message="出院前末次氧合评估不能为空")
 	@Length(min=0, max=64, message="出院前末次氧合评估长度不能超过 64 个字符")
 	public String getCap_9_2_1() {
 		return cap_9_2_1;
@@ -1611,6 +1653,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_9_2_2_2 = cap_9_2_2_2;
 	}
 	
+	@NotBlank(message="离院方式选择不能为空")
 	@Length(min=0, max=64, message="离院方式选择长度不能超过 64 个字符")
 	public String getCm_4_3() {
 		return cm_4_3;
@@ -1647,6 +1690,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_4_6 = cm_4_6;
 	}
 	
+	@NotBlank(message="患儿家长对服务的体验与评价不能为空")
 	@Length(min=0, max=64, message="患儿家长对服务的体验与评价长度不能超过 64 个字符")
 	public String getCm_5_1() {
 		return cm_5_1;
@@ -1746,21 +1790,23 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_5_2_11 = cm_5_2_11;
 	}
 	
-	@Length(min=0, max=64, message="患儿接受首剂抗菌药物治疗注射剂输入/注射日期时间长度不能超过 64 个字符")
-	public String getCap_11_1_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@NotNull(message="患儿接受首剂抗菌药物治疗注射剂输入/注射日期时间不能为空")
+	public Date getCap_11_1_1() {
 		return cap_11_1_1;
 	}
 
-	public void setCap_11_1_1(String cap_11_1_1) {
+	public void setCap_11_1_1(Date cap_11_1_1) {
 		this.cap_11_1_1 = cap_11_1_1;
 	}
 	
-	@Length(min=0, max=64, message="患儿接受未剂抗菌药物治疗注射剂输入/注射日期时间长度不能超过 64 个字符")
-	public String getCap_11_1_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@NotNull(message="患儿接受未剂抗菌药物治疗注射剂输入/注射日期时间不能为空")
+	public Date getCap_11_1_2() {
 		return cap_11_1_2;
 	}
 
-	public void setCap_11_1_2(String cap_11_1_2) {
+	public void setCap_11_1_2(Date cap_11_1_2) {
 		this.cap_11_1_2 = cap_11_1_2;
 	}
 	
@@ -1781,21 +1827,21 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_11_2_1 = cap_11_2_1;
 	}
 	
-	@Length(min=0, max=64, message="改用抗菌药物口服剂首剂日期与时间长度不能超过 64 个字符")
-	public String getCap_11_2_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_11_2_2() {
 		return cap_11_2_2;
 	}
 
-	public void setCap_11_2_2(String cap_11_2_2) {
+	public void setCap_11_2_2(Date cap_11_2_2) {
 		this.cap_11_2_2 = cap_11_2_2;
 	}
 	
-	@Length(min=0, max=64, message="末剂抗菌药物口服剂或出院日期与时间长度不能超过 64 个字符")
-	public String getCap_11_2_3() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_11_2_3() {
 		return cap_11_2_3;
 	}
 
-	public void setCap_11_2_3(String cap_11_2_3) {
+	public void setCap_11_2_3(Date cap_11_2_3) {
 		this.cap_11_2_3 = cap_11_2_3;
 	}
 	
@@ -1807,6 +1853,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cap_11_2_4 = cap_11_2_4;
 	}
 	
+	@NotNull(message="住院总费用不能为空")
 	public Double getCm_6_1() {
 		return cm_6_1;
 	}
@@ -1815,6 +1862,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_1 = cm_6_1;
 	}
 	
+	@NotNull(message="住院总费用其中自付金额不能为空")
 	public Double getCm_6_2() {
 		return cm_6_2;
 	}
@@ -1823,6 +1871,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_2 = cm_6_2;
 	}
 	
+	@NotNull(message="一般医疗服务费不能为空")
 	public Double getCm_6_3() {
 		return cm_6_3;
 	}
@@ -1831,6 +1880,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_3 = cm_6_3;
 	}
 	
+	@NotNull(message="一般治疗操作费不能为空")
 	public Double getCm_6_4() {
 		return cm_6_4;
 	}
@@ -1839,6 +1889,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_4 = cm_6_4;
 	}
 	
+	@NotNull(message="护理费不能为空")
 	public Double getCm_6_5() {
 		return cm_6_5;
 	}
@@ -1847,6 +1898,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_5 = cm_6_5;
 	}
 	
+	@NotNull(message="综合医疗服务类其他费用不能为空")
 	public Double getCm_6_6() {
 		return cm_6_6;
 	}
@@ -1855,6 +1907,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_6 = cm_6_6;
 	}
 	
+	@NotNull(message="病理诊断费不能为空")
 	public Double getCm_6_7() {
 		return cm_6_7;
 	}
@@ -1863,6 +1916,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_7 = cm_6_7;
 	}
 	
+	@NotNull(message="实验室诊断费不能为空")
 	public Double getCm_6_8() {
 		return cm_6_8;
 	}
@@ -1871,6 +1925,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_8 = cm_6_8;
 	}
 	
+	@NotNull(message="影像学诊断费不能为空")
 	public Double getCm_6_9() {
 		return cm_6_9;
 	}
@@ -1879,6 +1934,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_9 = cm_6_9;
 	}
 	
+	@NotNull(message="临床诊断项目费不能为空")
 	public Double getCm_6_10() {
 		return cm_6_10;
 	}
@@ -1887,6 +1943,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_10 = cm_6_10;
 	}
 	
+	@NotNull(message="非手术治疗项目费不能为空")
 	public Double getCm_6_11() {
 		return cm_6_11;
 	}
@@ -1895,6 +1952,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_11 = cm_6_11;
 	}
 	
+	@NotNull(message="其中不能为空")
 	public Double getCm_6_12() {
 		return cm_6_12;
 	}
@@ -1903,6 +1961,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_12 = cm_6_12;
 	}
 	
+	@NotNull(message="手术治疗费不能为空")
 	public Double getCm_6_13() {
 		return cm_6_13;
 	}
@@ -1911,6 +1970,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_13 = cm_6_13;
 	}
 	
+	@NotNull(message="其中不能为空")
 	public Double getCm_6_14() {
 		return cm_6_14;
 	}
@@ -1919,6 +1979,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_14 = cm_6_14;
 	}
 	
+	@NotNull(message="其中不能为空")
 	public Double getCm_6_15() {
 		return cm_6_15;
 	}
@@ -1927,6 +1988,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_15 = cm_6_15;
 	}
 	
+	@NotNull(message="康复费不能为空")
 	public Double getCm_6_16() {
 		return cm_6_16;
 	}
@@ -1935,6 +1997,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_16 = cm_6_16;
 	}
 	
+	@NotNull(message="中医治疗费不能为空")
 	public Double getCm_6_17() {
 		return cm_6_17;
 	}
@@ -1943,6 +2006,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_17 = cm_6_17;
 	}
 	
+	@NotNull(message="西药费不能为空")
 	public Double getCm_6_18() {
 		return cm_6_18;
 	}
@@ -1951,6 +2015,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_18 = cm_6_18;
 	}
 	
+	@NotNull(message="其中不能为空")
 	public Double getCm_6_19() {
 		return cm_6_19;
 	}
@@ -1959,6 +2024,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_19 = cm_6_19;
 	}
 	
+	@NotNull(message="中成药费不能为空")
 	public Double getCm_6_20() {
 		return cm_6_20;
 	}
@@ -1967,6 +2033,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_20 = cm_6_20;
 	}
 	
+	@NotNull(message="中草药费不能为空")
 	public Double getCm_6_21() {
 		return cm_6_21;
 	}
@@ -1975,6 +2042,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_21 = cm_6_21;
 	}
 	
+	@NotNull(message="血费不能为空")
 	public Double getCm_6_22() {
 		return cm_6_22;
 	}
@@ -1983,6 +2051,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_22 = cm_6_22;
 	}
 	
+	@NotNull(message="白蛋白类制品费不能为空")
 	public Double getCm_6_23() {
 		return cm_6_23;
 	}
@@ -1991,6 +2060,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_23 = cm_6_23;
 	}
 	
+	@NotNull(message="球蛋白类制品费不能为空")
 	public Double getCm_6_24() {
 		return cm_6_24;
 	}
@@ -1999,6 +2069,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_24 = cm_6_24;
 	}
 	
+	@NotNull(message="凝血因子类制品费不能为空")
 	public Double getCm_6_25() {
 		return cm_6_25;
 	}
@@ -2007,6 +2078,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_25 = cm_6_25;
 	}
 	
+	@NotNull(message="细胞因子类制品费不能为空")
 	public Double getCm_6_26() {
 		return cm_6_26;
 	}
@@ -2015,6 +2087,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_26 = cm_6_26;
 	}
 	
+	@NotNull(message="检查用一次性医用材料费不能为空")
 	public Double getCm_6_27() {
 		return cm_6_27;
 	}
@@ -2023,6 +2096,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_27 = cm_6_27;
 	}
 	
+	@NotNull(message="治疗用一次性医用材料费不能为空")
 	public Double getCm_6_28() {
 		return cm_6_28;
 	}
@@ -2031,6 +2105,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_28 = cm_6_28;
 	}
 	
+	@NotNull(message="手术用一次性医用材料费不能为空")
 	public Double getCm_6_29() {
 		return cm_6_29;
 	}
@@ -2039,6 +2114,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 		this.cm_6_29 = cm_6_29;
 	}
 	
+	@NotNull(message="其他费不能为空")
 	public Double getCm_6_30() {
 		return cm_6_30;
 	}

@@ -5,12 +5,6 @@ package com.zebone.quality.modules.cap.service;
 
 import java.util.List;
 
-import com.google.gson.Gson;
-import com.jeesite.common.config.Global;
-import com.zebone.quality.common.utils.RestTemplateUtil;
-import com.zebone.quality.modules.cesarean.entity.CesareanSection;
-import com.zebone.quality.modules.cesarean.entity.QualityCesareanSection;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +16,7 @@ import com.zebone.quality.modules.cap.dao.QualityCapDao;
 /**
  * Cap社区获得性肺炎（儿童，首次住院）Service
  * @author 卡卡西
- * @version 2021-01-22
+ * @version 2021-02-06
  */
 @Service
 @Transactional(readOnly=true)
@@ -78,7 +72,5 @@ public class QualityCapService extends CrudService<QualityCapDao, QualityCap> {
 	public void delete(QualityCap qualityCap) {
 		super.delete(qualityCap);
 	}
-
-
-
+	
 }

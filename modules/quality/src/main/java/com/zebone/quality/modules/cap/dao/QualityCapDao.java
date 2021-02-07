@@ -10,7 +10,7 @@ import com.zebone.quality.modules.cap.entity.QualityCap;
 /**
  * Cap社区获得性肺炎（儿童，首次住院）DAO接口
  * @author 卡卡西
- * @version 2021-01-22
+ * @version 2021-02-06
  */
 @MyBatisDao
 public interface QualityCapDao extends CrudDao<QualityCap> {

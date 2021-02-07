@@ -6,6 +6,11 @@ package com.zebone.quality.modules.um.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.zebone.quality.domain.UploadService;
+import com.zebone.quality.modules.common.UploadResult;
+import com.zebone.quality.modules.hf.entity.Hf;
+import com.zebone.quality.modules.um.entity.Um;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,10 +27,13 @@ import com.jeesite.common.web.BaseController;
 import com.zebone.quality.modules.um.entity.QualityUm;
 import com.zebone.quality.modules.um.service.QualityUmService;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.Optional;
+
 /**
  * UM子宫肌瘤（手术治疗）Controller
  * @author 卡卡西
- * @version 2021-01-22
+ * @version 2021-02-06
  */
 @Controller
 @RequestMapping(value = "${adminPath}/um/qualityUm")
@@ -33,7 +41,10 @@ public class QualityUmController extends BaseController {
 
 	@Autowired
 	private QualityUmService qualityUmService;
-	
+
+	@Autowired
+	private UploadService uploadService;
+
 	/**
 	 * 获取数据
 	 */
@@ -79,8 +90,18 @@ public class QualityUmController extends BaseController {
 	@RequiresPermissions("um:qualityUm:edit")
 	@PostMapping(value = "save")
 	@ResponseBody
-	public String save(@Validated QualityUm qualityUm) {
+	public String save(@Validated QualityUm qualityUm) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 		qualityUmService.save(qualityUm);
+
+		String result = uploadService.upload(qualityUm,new Um(),"HF");
+		Gson gson = new Gson();
+		UploadResult uploadResult = gson.fromJson(result, UploadResult.class);
+		Integer resultCode = Optional.ofNullable(uploadResult).map(a->a.getCode()).orElse(null);
+		if(resultCode==1000){
+			String errorMessage = Optional.ofNullable(uploadResult).map(a->a.getMessage()).orElse("上传失败");
+			return renderResult(Global.FALSE, text(errorMessage));
+		}
+
 		return renderResult(Global.TRUE, text("保存UM子宫肌瘤（手术治疗）成功！"));
 	}
 	
