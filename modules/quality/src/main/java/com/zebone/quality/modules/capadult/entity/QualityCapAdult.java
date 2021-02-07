@@ -17,7 +17,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 /**
  * Cap-Adult社区获得性肺炎（成人，首次住院）Entity
  * @author 卡卡西
- * @version 2021-01-18
+ * @version 2021-02-07
  */
 @Table(name="quality_cap_adult", alias="a", columns={
 		@Column(name="cm_0_1_1_1", attrName="cm_0_1_1_1", label="质控医师"),
@@ -25,12 +25,13 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_0_1_1_3", attrName="cm_0_1_1_3", label="主治医师"),
 		@Column(name="cm_0_1_1_4", attrName="cm_0_1_1_4", label="责任护士"),
 		@Column(name="cm_0_1_1_5", attrName="cm_0_1_1_5", label="上报科室"),
-		@Column(name="case_id", attrName="caseId", label="患者病案号"),
+		@Column(name="caseid", attrName="caseid", label="患者病案号"),
 		@Column(name="cm_0_1_3_1", attrName="cm_0_1_3_1", label="主要诊断ICD-10四位亚目编码与名称"),
 		@Column(name="cm_0_1_3_2", attrName="cm_0_1_3_2", label="主要诊断ICD-10六位临床扩展编码与名称"),
 		@Column(name="cm_0_1_4_1", attrName="cm_0_1_4_1", label="主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称"),
 		@Column(name="cm_0_1_4_2", attrName="cm_0_1_4_2", label="主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称"),
-		@Column(name="cm_0_1_5", attrName="cm_0_1_5", label="是否出院后31天内重复住院"),
+		@Column(name="cm_0_1_4_3", attrName="cm_0_1_4_3", label="其他主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称"),
+		@Column(name="cm_0_1_5", attrName="cm_0_1_5", label="肺炎出院后是否31天内重复住院"),
 		@Column(name="cm_0_2_1_1", attrName="cm_0_2_1_1", label="出生日期"),
 		@Column(name="cm_0_2_1_2", attrName="cm_0_2_1_2", label="患者性别"),
 		@Column(name="cm_0_2_1_3", attrName="cm_0_2_1_3", label="患者体重", comment="患者体重（kg）"),
@@ -39,11 +40,10 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_0_2_2_2", attrName="cm_0_2_2_2", label="发病日期时间"),
 		@Column(name="cm_0_2_3_1", attrName="cm_0_2_3_1", label="到达本院急诊或者门诊日期时间是否无法确定或无记录"),
 		@Column(name="cm_0_2_3_2", attrName="cm_0_2_3_2", label="到达本院急诊或者门诊日期时间"),
-		@Column(includeEntity=DataEntity.class),
 		@Column(name="cm_0_2_4_1", attrName="cm_0_2_4_1", label="入院日期时间"),
 		@Column(name="cm_0_2_4_2", attrName="cm_0_2_4_2", label="出院日期时间"),
-		@Column(name="cm_0_2_5_1", attrName="cm_0_2_5_1", label="入住CCU日期时间"),
-		@Column(name="cm_0_2_5_2", attrName="cm_0_2_5_2", label="离开CCU日期时间"),
+		@Column(name="cm_0_2_5_1", attrName="cm_0_2_5_1", label="入住ICU日期时间"),
+		@Column(name="cm_0_2_5_2", attrName="cm_0_2_5_2", label="离开ICU日期时间"),
 		@Column(name="cm_0_3_1", attrName="cm_0_3_1", label="费用支付方式"),
 		@Column(name="cm_0_3_2", attrName="cm_0_3_2", label="收入住院途径"),
 		@Column(name="cm_0_3_3", attrName="cm_0_3_3", label="到院交通工具"),
@@ -190,7 +190,6 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_6_20", attrName="cm_6_20", label="中成药费"),
 		@Column(name="cm_6_21", attrName="cm_6_21", label="中草药费"),
 		@Column(name="cm_6_22", attrName="cm_6_22", label="血费"),
-		@Column(name="cm_0_1_4_1_1", attrName="cm01411", label="其他ICD-9-CM-3四位亚目编码与名称"),
 		@Column(name="cm_6_23", attrName="cm_6_23", label="白蛋白类制品费"),
 		@Column(name="cm_6_24", attrName="cm_6_24", label="球蛋白类制品费"),
 		@Column(name="cm_6_25", attrName="cm_6_25", label="凝血因子类制品费"),
@@ -199,15 +198,8 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_6_28", attrName="cm_6_28", label="治疗用一次性医用材料费"),
 		@Column(name="cm_6_29", attrName="cm_6_29", label="手术用一次性医用材料费"),
 		@Column(name="cm_6_30", attrName="cm_6_30", label="其他费"),
-		@Column(name="cm_0_1_4_2_1", attrName="cm01421", label="其他ICD-9-CM-3六位临床扩展编码与名称"),
-		@Column(name="cm_0_2_6_1", attrName="cm0261", label="手术开始", comment="手术开始（切皮）日期时间"),
-		@Column(name="cm_0_2_6_2", attrName="cm0262", label="手术结束", comment="手术结束（缝皮结束）日期时间"),
-		@Column(name="cm_3_1", attrName="cm31", label="手术野皮肤准备常用方法的选择"),
-		@Column(name="cm_3_2", attrName="cm32", label="使用含抗菌剂", comment="使用含抗菌剂（三氯生）缝线"),
-		@Column(name="cm_3_2_1", attrName="cm321", label="其他含抗菌剂缝线填写"),
-		@Column(name="cm_3_3", attrName="cm33", label="手术切口类别的选择"),
-		@Column(name="cm_3_4", attrName="cm34", label="手术切口愈合情况的选择"),
 		@Column(name="id", attrName="id", label="id", isPK=true),
+		@Column(includeEntity=DataEntity.class),
 	}, orderBy="a.update_date DESC"
 )
 public class QualityCapAdult extends DataEntity<QualityCapAdult> {
@@ -218,12 +210,13 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 	private String cm_0_1_1_3;		// 主治医师
 	private String cm_0_1_1_4;		// 责任护士
 	private String cm_0_1_1_5;		// 上报科室
-	private String caseId;		// 患者病案号
+	private String caseid;		// 患者病案号
 	private String cm_0_1_3_1;		// 主要诊断ICD-10四位亚目编码与名称
 	private String cm_0_1_3_2;		// 主要诊断ICD-10六位临床扩展编码与名称
 	private String cm_0_1_4_1;		// 主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称
 	private String cm_0_1_4_2;		// 主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称
-	private String cm_0_1_5;		// 是否出院后31天内重复住院
+	private String cm_0_1_4_3;		// 其他主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称
+	private String cm_0_1_5;		// 肺炎出院后是否31天内重复住院
 	private Date cm_0_2_1_1;		// 出生日期
 	private String cm_0_2_1_2;		// 患者性别
 	private Double cm_0_2_1_3;		// 患者体重（kg）
@@ -234,8 +227,8 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 	private Date cm_0_2_3_2;		// 到达本院急诊或者门诊日期时间
 	private Date cm_0_2_4_1;		// 入院日期时间
 	private Date cm_0_2_4_2;		// 出院日期时间
-	private Date cm_0_2_5_1;		// 入住CCU日期时间
-	private Date cm_0_2_5_2;		// 离开CCU日期时间
+	private Date cm_0_2_5_1;		// 入住ICU日期时间
+	private Date cm_0_2_5_2;		// 离开ICU日期时间
 	private String cm_0_3_1;		// 费用支付方式
 	private String cm_0_3_2;		// 收入住院途径
 	private String cm_0_3_3;		// 到院交通工具
@@ -274,12 +267,12 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 	private String cap_adult_3_5_1;		// 病原学检测结果的选择
 	private String cap_adult_3_5_1_1;		// 其它病原学检测结果
 	private String cap_adult_4_1;		// 患者有无接受抗菌药物治疗
-	private String cap_adult_4_1_3;		// 注射剂输入/注射起始日期
+	private Date cap_adult_4_1_3;		// 注射剂输入/注射起始日期
 	private String cap_adult_4_2;		// 接受首剂抗菌药物使用时机
 	private String cap_adult_4_3;		// 治疗途径
-	private String cap_adult_4_4;		// 注射剂输入/注射终止日期
-	private String cap_adult_4_2_3;		// 入院后使用抗菌药物（口服剂）首剂日期与时间
-	private String cap_adult_4_2_4;		// 末剂抗菌药物（口服剂）或出院日期与时间
+	private Date cap_adult_4_4;		// 注射剂输入/注射终止日期
+	private Date cap_adult_4_2_3;		// 入院后使用抗菌药物（口服剂）首剂日期与时间
+	private Date cap_adult_4_2_4;		// 末剂抗菌药物（口服剂）或出院日期与时间
 	private Double cap_adult_4_2_5;		// 口服剂抗菌药物疗程（天数）
 	private String cap_adult_5_1;		// 用药前病情判定分层
 	private String cap_adult_5_2;		// 经验性经验性抗感染药物的选择
@@ -317,20 +310,20 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 	private String cap_adult_7_2_1_1;		// 是否实施无创正压通气（NIV）
 	private String cap_adult_7_2_2_0;		// 无创正压通气的应用指征
 	private String cap_adult_7_2_2_1;		// 其它无创正压通气的应用指征
-	private String cap_adult_6_2_5_1;		// 患者无创正压通气起始日期时间
-	private String cap_adult_6_2_4_2;		// 患者无创正压通气终止日期时间
+	private Date cap_adult_6_2_5_1;		// 患者无创正压通气起始日期时间
+	private Date cap_adult_6_2_4_2;		// 患者无创正压通气终止日期时间
 	private Double cap_adult_6_2_5;		// 无创正压通气疗程（小时）
 	private String cap_adult_7_3_1;		// 是否实施有创机械通气
 	private String cap_adult_7_3_2;		// 有创机械通气的具体应用指征
 	private String cap_adult_7_3_2_1;		// 其它有创机械通气的具体应用指征
-	private String cap_adult_6_3_4_1;		// 患者有机械通气起始日期时间
-	private String cap_adult_6_3_4_2;		// 患者有机械通气终止日期时间
+	private Date cap_adult_6_3_4_1;		// 患者有机械通气起始日期时间
+	private Date cap_adult_6_3_4_2;		// 患者有机械通气终止日期时间
 	private Double cap_adult_6_3_5;		// 有机械通气疗程（小时）
 	private String cap_adult_7_4_1;		// 是否实施体外膜肺氧合ECMO
 	private String cap_adult_7_4_2;		// 体外膜肺氧合应用指征
 	private String cap_adult_7_4_2_1;		// 其它体外膜肺氧合应用指征
-	private String cap_adult_6_4_4_1;		// 患者体外膜肺氧合起始日期时间
-	private String cap_adult_6_4_4_2;		// 患者体外膜肺氧合终止日期时间
+	private Date cap_adult_6_4_4_1;		// 患者体外膜肺氧合起始日期时间
+	private Date cap_adult_6_4_4_2;		// 患者体外膜肺氧合终止日期时间
 	private Double cap_adult_6_4_5;		// 体外膜肺氧合疗程（小时）
 	private String cap_adult_8_1;		// 吸烟史
 	private String cap_adult_8_2;		// 吸烟程度评估有记录
@@ -382,7 +375,6 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 	private Double cm_6_20;		// 中成药费
 	private Double cm_6_21;		// 中草药费
 	private Double cm_6_22;		// 血费
-	private String cm01411;		// 其他ICD-9-CM-3四位亚目编码与名称
 	private Double cm_6_23;		// 白蛋白类制品费
 	private Double cm_6_24;		// 球蛋白类制品费
 	private Double cm_6_25;		// 凝血因子类制品费
@@ -391,14 +383,6 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 	private Double cm_6_28;		// 治疗用一次性医用材料费
 	private Double cm_6_29;		// 手术用一次性医用材料费
 	private Double cm_6_30;		// 其他费
-	private String cm01421;		// 其他ICD-9-CM-3六位临床扩展编码与名称
-	private Date cm0261;		// 手术开始（切皮）日期时间
-	private Date cm0262;		// 手术结束（缝皮结束）日期时间
-	private String cm31;		// 手术野皮肤准备常用方法的选择
-	private String cm32;		// 使用含抗菌剂（三氯生）缝线
-	private String cm321;		// 其他含抗菌剂缝线填写
-	private String cm33;		// 手术切口类别的选择
-	private String cm34;		// 手术切口愈合情况的选择
 	
 	public QualityCapAdult() {
 		this(null);
@@ -408,7 +392,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		super(id);
 	}
 	
-	@Length(min=0, max=32, message="质控医师长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="质控医师长度不能超过 64 个字符")
 	public String getCm_0_1_1_1() {
 		return cm_0_1_1_1;
 	}
@@ -417,7 +401,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_0_1_1_1 = cm_0_1_1_1;
 	}
 	
-	@Length(min=0, max=32, message="质控护士长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="质控护士长度不能超过 64 个字符")
 	public String getCm_0_1_1_2() {
 		return cm_0_1_1_2;
 	}
@@ -426,7 +410,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_0_1_1_2 = cm_0_1_1_2;
 	}
 	
-	@Length(min=0, max=32, message="主治医师长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主治医师长度不能超过 64 个字符")
 	public String getCm_0_1_1_3() {
 		return cm_0_1_1_3;
 	}
@@ -435,7 +419,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_0_1_1_3 = cm_0_1_1_3;
 	}
 	
-	@Length(min=0, max=32, message="责任护士长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="责任护士长度不能超过 64 个字符")
 	public String getCm_0_1_1_4() {
 		return cm_0_1_1_4;
 	}
@@ -444,7 +428,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_0_1_1_4 = cm_0_1_1_4;
 	}
 	
-	@Length(min=0, max=32, message="上报科室长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="上报科室长度不能超过 64 个字符")
 	public String getCm_0_1_1_5() {
 		return cm_0_1_1_5;
 	}
@@ -453,16 +437,16 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_0_1_1_5 = cm_0_1_1_5;
 	}
 	
-	@Length(min=0, max=32, message="患者病案号长度不能超过 32 个字符")
-	public String getCaseId() {
-		return caseId;
+	@Length(min=0, max=64, message="患者病案号长度不能超过 64 个字符")
+	public String getCaseid() {
+		return caseid;
 	}
 
-	public void setCaseId(String caseId) {
-		this.caseId = caseId;
+	public void setCaseid(String caseid) {
+		this.caseid = caseid;
 	}
 	
-	@Length(min=0, max=32, message="主要诊断ICD-10四位亚目编码与名称长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主要诊断ICD-10四位亚目编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_3_1() {
 		return cm_0_1_3_1;
 	}
@@ -471,7 +455,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_0_1_3_1 = cm_0_1_3_1;
 	}
 	
-	@Length(min=0, max=32, message="主要诊断ICD-10六位临床扩展编码与名称长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主要诊断ICD-10六位临床扩展编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_3_2() {
 		return cm_0_1_3_2;
 	}
@@ -480,7 +464,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_0_1_3_2 = cm_0_1_3_2;
 	}
 	
-	@Length(min=0, max=32, message="主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_4_1() {
 		return cm_0_1_4_1;
 	}
@@ -489,7 +473,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_0_1_4_1 = cm_0_1_4_1;
 	}
 	
-	@Length(min=0, max=32, message="主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_4_2() {
 		return cm_0_1_4_2;
 	}
@@ -498,7 +482,16 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_0_1_4_2 = cm_0_1_4_2;
 	}
 	
-	@Length(min=0, max=32, message="是否出院后31天内重复住院长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称长度不能超过 64 个字符")
+	public String getCm_0_1_4_3() {
+		return cm_0_1_4_3;
+	}
+
+	public void setCm_0_1_4_3(String cm_0_1_4_3) {
+		this.cm_0_1_4_3 = cm_0_1_4_3;
+	}
+	
+	@Length(min=0, max=64, message="肺炎出院后是否31天内重复住院长度不能超过 64 个字符")
 	public String getCm_0_1_5() {
 		return cm_0_1_5;
 	}
@@ -516,7 +509,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_0_2_1_1 = cm_0_2_1_1;
 	}
 	
-	@Length(min=0, max=32, message="患者性别长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="患者性别长度不能超过 64 个字符")
 	public String getCm_0_2_1_2() {
 		return cm_0_2_1_2;
 	}
@@ -541,7 +534,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_0_2_1_5 = cm_0_2_1_5;
 	}
 	
-	@Length(min=0, max=32, message="发病日期时间是否无法确定或无记录长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="发病日期时间是否无法确定或无记录长度不能超过 64 个字符")
 	public String getCm_0_2_2_1() {
 		return cm_0_2_2_1;
 	}
@@ -559,7 +552,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_0_2_2_2 = cm_0_2_2_2;
 	}
 	
-	@Length(min=0, max=32, message="到达本院急诊或者门诊日期时间是否无法确定或无记录长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="到达本院急诊或者门诊日期时间是否无法确定或无记录长度不能超过 64 个字符")
 	public String getCm_0_2_3_1() {
 		return cm_0_2_3_1;
 	}
@@ -613,7 +606,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_0_2_5_2 = cm_0_2_5_2;
 	}
 	
-	@Length(min=0, max=32, message="费用支付方式长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="费用支付方式长度不能超过 64 个字符")
 	public String getCm_0_3_1() {
 		return cm_0_3_1;
 	}
@@ -622,7 +615,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_0_3_1 = cm_0_3_1;
 	}
 	
-	@Length(min=0, max=32, message="收入住院途径长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="收入住院途径长度不能超过 64 个字符")
 	public String getCm_0_3_2() {
 		return cm_0_3_2;
 	}
@@ -631,7 +624,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_0_3_2 = cm_0_3_2;
 	}
 	
-	@Length(min=0, max=32, message="到院交通工具长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="到院交通工具长度不能超过 64 个字符")
 	public String getCm_0_3_3() {
 		return cm_0_3_3;
 	}
@@ -949,12 +942,12 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cap_adult_4_1 = cap_adult_4_1;
 	}
 	
-	@Length(min=0, max=64, message="注射剂输入/注射起始日期长度不能超过 64 个字符")
-	public String getCap_adult_4_1_3() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_adult_4_1_3() {
 		return cap_adult_4_1_3;
 	}
 
-	public void setCap_adult_4_1_3(String cap_adult_4_1_3) {
+	public void setCap_adult_4_1_3(Date cap_adult_4_1_3) {
 		this.cap_adult_4_1_3 = cap_adult_4_1_3;
 	}
 	
@@ -976,30 +969,30 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cap_adult_4_3 = cap_adult_4_3;
 	}
 	
-	@Length(min=0, max=64, message="注射剂输入/注射终止日期长度不能超过 64 个字符")
-	public String getCap_adult_4_4() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_adult_4_4() {
 		return cap_adult_4_4;
 	}
 
-	public void setCap_adult_4_4(String cap_adult_4_4) {
+	public void setCap_adult_4_4(Date cap_adult_4_4) {
 		this.cap_adult_4_4 = cap_adult_4_4;
 	}
 	
-	@Length(min=0, max=64, message="入院后使用抗菌药物长度不能超过 64 个字符")
-	public String getCap_adult_4_2_3() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_adult_4_2_3() {
 		return cap_adult_4_2_3;
 	}
 
-	public void setCap_adult_4_2_3(String cap_adult_4_2_3) {
+	public void setCap_adult_4_2_3(Date cap_adult_4_2_3) {
 		this.cap_adult_4_2_3 = cap_adult_4_2_3;
 	}
 	
-	@Length(min=0, max=64, message="末剂抗菌药物长度不能超过 64 个字符")
-	public String getCap_adult_4_2_4() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_adult_4_2_4() {
 		return cap_adult_4_2_4;
 	}
 
-	public void setCap_adult_4_2_4(String cap_adult_4_2_4) {
+	public void setCap_adult_4_2_4(Date cap_adult_4_2_4) {
 		this.cap_adult_4_2_4 = cap_adult_4_2_4;
 	}
 	
@@ -1335,21 +1328,21 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cap_adult_7_2_2_1 = cap_adult_7_2_2_1;
 	}
 	
-	@Length(min=0, max=64, message="患者无创正压通气起始日期时间长度不能超过 64 个字符")
-	public String getCap_adult_6_2_5_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_adult_6_2_5_1() {
 		return cap_adult_6_2_5_1;
 	}
 
-	public void setCap_adult_6_2_5_1(String cap_adult_6_2_5_1) {
+	public void setCap_adult_6_2_5_1(Date cap_adult_6_2_5_1) {
 		this.cap_adult_6_2_5_1 = cap_adult_6_2_5_1;
 	}
 	
-	@Length(min=0, max=64, message="患者无创正压通气终止日期时间长度不能超过 64 个字符")
-	public String getCap_adult_6_2_4_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_adult_6_2_4_2() {
 		return cap_adult_6_2_4_2;
 	}
 
-	public void setCap_adult_6_2_4_2(String cap_adult_6_2_4_2) {
+	public void setCap_adult_6_2_4_2(Date cap_adult_6_2_4_2) {
 		this.cap_adult_6_2_4_2 = cap_adult_6_2_4_2;
 	}
 	
@@ -1388,21 +1381,21 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cap_adult_7_3_2_1 = cap_adult_7_3_2_1;
 	}
 	
-	@Length(min=0, max=64, message="患者有机械通气起始日期时间长度不能超过 64 个字符")
-	public String getCap_adult_6_3_4_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_adult_6_3_4_1() {
 		return cap_adult_6_3_4_1;
 	}
 
-	public void setCap_adult_6_3_4_1(String cap_adult_6_3_4_1) {
+	public void setCap_adult_6_3_4_1(Date cap_adult_6_3_4_1) {
 		this.cap_adult_6_3_4_1 = cap_adult_6_3_4_1;
 	}
 	
-	@Length(min=0, max=64, message="患者有机械通气终止日期时间长度不能超过 64 个字符")
-	public String getCap_adult_6_3_4_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_adult_6_3_4_2() {
 		return cap_adult_6_3_4_2;
 	}
 
-	public void setCap_adult_6_3_4_2(String cap_adult_6_3_4_2) {
+	public void setCap_adult_6_3_4_2(Date cap_adult_6_3_4_2) {
 		this.cap_adult_6_3_4_2 = cap_adult_6_3_4_2;
 	}
 	
@@ -1441,21 +1434,21 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cap_adult_7_4_2_1 = cap_adult_7_4_2_1;
 	}
 	
-	@Length(min=0, max=64, message="患者体外膜肺氧合起始日期时间长度不能超过 64 个字符")
-	public String getCap_adult_6_4_4_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_adult_6_4_4_1() {
 		return cap_adult_6_4_4_1;
 	}
 
-	public void setCap_adult_6_4_4_1(String cap_adult_6_4_4_1) {
+	public void setCap_adult_6_4_4_1(Date cap_adult_6_4_4_1) {
 		this.cap_adult_6_4_4_1 = cap_adult_6_4_4_1;
 	}
 	
-	@Length(min=0, max=64, message="患者体外膜肺氧合终止日期时间长度不能超过 64 个字符")
-	public String getCap_adult_6_4_4_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCap_adult_6_4_4_2() {
 		return cap_adult_6_4_4_2;
 	}
 
-	public void setCap_adult_6_4_4_2(String cap_adult_6_4_4_2) {
+	public void setCap_adult_6_4_4_2(Date cap_adult_6_4_4_2) {
 		this.cap_adult_6_4_4_2 = cap_adult_6_4_4_2;
 	}
 	
@@ -1575,7 +1568,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cap_adult_9_3_4 = cap_adult_9_3_4;
 	}
 	
-	@Length(min=0, max=32, message="离院方式选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="离院方式选择长度不能超过 64 个字符")
 	public String getCm_4_3() {
 		return cm_4_3;
 	}
@@ -1584,7 +1577,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_4_3 = cm_4_3;
 	}
 	
-	@Length(min=0, max=32, message="非医嘱离院可能涉及因素长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="非医嘱离院可能涉及因素长度不能超过 64 个字符")
 	public String getCm_4_5() {
 		return cm_4_5;
 	}
@@ -1593,7 +1586,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_4_5 = cm_4_5;
 	}
 	
-	@Length(min=0, max=32, message="其他非医嘱离院因素填写长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他非医嘱离院因素填写长度不能超过 64 个字符")
 	public String getCm_4_4_1() {
 		return cm_4_4_1;
 	}
@@ -1611,7 +1604,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cap_adult_9_1 = cap_adult_9_1;
 	}
 	
-	@Length(min=0, max=32, message="死亡可能涉及因素长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="死亡可能涉及因素长度不能超过 64 个字符")
 	public String getCm_4_6() {
 		return cm_4_6;
 	}
@@ -1620,7 +1613,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_4_6 = cm_4_6;
 	}
 	
-	@Length(min=0, max=32, message="患者是否对服务的体验与评价长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="患者是否对服务的体验与评价长度不能超过 64 个字符")
 	public String getCm_5_1() {
 		return cm_5_1;
 	}
@@ -1629,7 +1622,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_5_1 = cm_5_1;
 	}
 	
-	@Length(min=0, max=32, message="整体医院评级长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="整体医院评级长度不能超过 64 个字符")
 	public String getCm_5_2_1() {
 		return cm_5_2_1;
 	}
@@ -1638,7 +1631,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_5_2_1 = cm_5_2_1;
 	}
 	
-	@Length(min=0, max=32, message="患者推荐长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="患者推荐长度不能超过 64 个字符")
 	public String getCm_5_2_2() {
 		return cm_5_2_2;
 	}
@@ -1647,7 +1640,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_5_2_2 = cm_5_2_2;
 	}
 	
-	@Length(min=0, max=32, message="病房、床单元和卫生间清洁度长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="病房、床单元和卫生间清洁度长度不能超过 64 个字符")
 	public String getCm_5_2_3() {
 		return cm_5_2_3;
 	}
@@ -1656,7 +1649,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_5_2_3 = cm_5_2_3;
 	}
 	
-	@Length(min=0, max=32, message="病房与周边噪音长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="病房与周边噪音长度不能超过 64 个字符")
 	public String getCm_5_2_5() {
 		return cm_5_2_5;
 	}
@@ -1665,7 +1658,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_5_2_5 = cm_5_2_5;
 	}
 	
-	@Length(min=0, max=32, message="医生沟通长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="医生沟通长度不能超过 64 个字符")
 	public String getCm_5_2_6() {
 		return cm_5_2_6;
 	}
@@ -1674,7 +1667,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_5_2_6 = cm_5_2_6;
 	}
 	
-	@Length(min=0, max=32, message="护士沟通长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="护士沟通长度不能超过 64 个字符")
 	public String getCm_5_2_7() {
 		return cm_5_2_7;
 	}
@@ -1683,7 +1676,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_5_2_7 = cm_5_2_7;
 	}
 	
-	@Length(min=0, max=32, message="药师沟通长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="药师沟通长度不能超过 64 个字符")
 	public String getCm_5_2_8() {
 		return cm_5_2_8;
 	}
@@ -1692,7 +1685,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_5_2_8 = cm_5_2_8;
 	}
 	
-	@Length(min=0, max=32, message="康复计划长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="康复计划长度不能超过 64 个字符")
 	public String getCm_5_2_9() {
 		return cm_5_2_9;
 	}
@@ -1701,7 +1694,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_5_2_9 = cm_5_2_9;
 	}
 	
-	@Length(min=0, max=32, message="出院时的知情告知长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="出院时的知情告知长度不能超过 64 个字符")
 	public String getCm_5_2_10() {
 		return cm_5_2_10;
 	}
@@ -1710,7 +1703,7 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_5_2_10 = cm_5_2_10;
 	}
 	
-	@Length(min=0, max=32, message="膳食评价长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="膳食评价长度不能超过 64 个字符")
 	public String getCm_5_2_11() {
 		return cm_5_2_11;
 	}
@@ -1895,15 +1888,6 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 		this.cm_6_22 = cm_6_22;
 	}
 	
-	@Length(min=0, max=32, message="其他ICD-9-CM-3四位亚目编码与名称长度不能超过 32 个字符")
-	public String getCm01411() {
-		return cm01411;
-	}
-
-	public void setCm01411(String cm01411) {
-		this.cm01411 = cm01411;
-	}
-	
 	public Double getCm_6_23() {
 		return cm_6_23;
 	}
@@ -1966,78 +1950,6 @@ public class QualityCapAdult extends DataEntity<QualityCapAdult> {
 
 	public void setCm_6_30(Double cm_6_30) {
 		this.cm_6_30 = cm_6_30;
-	}
-	
-	@Length(min=0, max=32, message="其他ICD-9-CM-3六位临床扩展编码与名称长度不能超过 32 个字符")
-	public String getCm01421() {
-		return cm01421;
-	}
-
-	public void setCm01421(String cm01421) {
-		this.cm01421 = cm01421;
-	}
-	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	public Date getCm0261() {
-		return cm0261;
-	}
-
-	public void setCm0261(Date cm0261) {
-		this.cm0261 = cm0261;
-	}
-	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	public Date getCm0262() {
-		return cm0262;
-	}
-
-	public void setCm0262(Date cm0262) {
-		this.cm0262 = cm0262;
-	}
-	
-	@Length(min=0, max=32, message="手术野皮肤准备常用方法的选择长度不能超过 32 个字符")
-	public String getCm31() {
-		return cm31;
-	}
-
-	public void setCm31(String cm31) {
-		this.cm31 = cm31;
-	}
-	
-	@Length(min=0, max=32, message="使用含抗菌剂长度不能超过 32 个字符")
-	public String getCm32() {
-		return cm32;
-	}
-
-	public void setCm32(String cm32) {
-		this.cm32 = cm32;
-	}
-	
-	@Length(min=0, max=32, message="其他含抗菌剂缝线填写长度不能超过 32 个字符")
-	public String getCm321() {
-		return cm321;
-	}
-
-	public void setCm321(String cm321) {
-		this.cm321 = cm321;
-	}
-	
-	@Length(min=0, max=32, message="手术切口类别的选择长度不能超过 32 个字符")
-	public String getCm33() {
-		return cm33;
-	}
-
-	public void setCm33(String cm33) {
-		this.cm33 = cm33;
-	}
-	
-	@Length(min=0, max=32, message="手术切口愈合情况的选择长度不能超过 32 个字符")
-	public String getCm34() {
-		return cm34;
-	}
-
-	public void setCm34(String cm34) {
-		this.cm34 = cm34;
 	}
 	
 }

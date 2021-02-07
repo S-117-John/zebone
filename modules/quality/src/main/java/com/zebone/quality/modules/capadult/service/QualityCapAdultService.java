@@ -16,7 +16,7 @@ import com.zebone.quality.modules.capadult.dao.QualityCapAdultDao;
 /**
  * Cap-Adult社区获得性肺炎（成人，首次住院）Service
  * @author 卡卡西
- * @version 2021-01-18
+ * @version 2021-02-07
  */
 @Service
 @Transactional(readOnly=true)
