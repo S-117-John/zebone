@@ -7,8 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
-//@Entity
-//@Table(name = "QUALITY_AECOPD")
+@Entity
+@Table(name = "QUALITY_AECOPD")
 @Data
 public class AecopdDO extends DataEntity{
 
@@ -35,7 +35,7 @@ public class AecopdDO extends DataEntity{
     private String cm_0_1_4_2;
     @Column(columnDefinition = "varchar(64) COMMENT '是否出院后31天内重复住院'")
     private String cm_0_1_5;
-    @Column(columnDefinition = "varchar(64) COMMENT '出生日期'")
+    @Column(columnDefinition = "datetime COMMENT '出生日期'")
     private Date cm_0_2_1_1;
     @Column(columnDefinition = "varchar(64) COMMENT '患者性别'")
     private String cm_0_2_1_2;
@@ -43,13 +43,13 @@ public class AecopdDO extends DataEntity{
     private Double cm_0_2_1_3;
     @Column(columnDefinition = "double COMMENT '患者身高（cm）'")
     private Double cm_0_2_1_5;
-    @Column(columnDefinition = "varchar(64) COMMENT '入院日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '入院日期时间'")
     private Date cm_0_2_4_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '出院日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '出院日期时间'")
     private Date cm_0_2_4_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '入住ICU/RICU日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '入住ICU/RICU日期时间'")
     private Date cm_0_2_5_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '离开ICU/RICU日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '离开ICU/RICU日期时间'")
     private Date cm_0_2_5_2;
     @Column(columnDefinition = "varchar(64) COMMENT '费用支付方式'")
     private String cm_0_3_1;
@@ -119,11 +119,11 @@ public class AecopdDO extends DataEntity{
     private String aecopd_4_1_2_5;
     @Column(columnDefinition = "varchar(64) COMMENT '其他重度及极重度COPD急性加重，有铜绿假单孢菌感染危险因素患者抗菌药物'")
     private String aecopd_4_1_2_6;
-    @Column(columnDefinition = "varchar(64) COMMENT '患者接受首剂抗菌药物治疗（注射剂输入/注射）日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '患者接受首剂抗菌药物治疗（注射剂输入/注射）日期时间'")
     private Date aecopd_4_1_3;
     @Column(columnDefinition = "varchar(64) COMMENT '接受首剂抗菌药物使用时机的分层'")
     private String aecopd_4_1_4;
-    @Column(columnDefinition = "varchar(64) COMMENT '患者停止使用抗菌药物日期'")
+    @Column(columnDefinition = "datetime COMMENT '患者停止使用抗菌药物日期'")
     private Date aecopd_4_1_5;
     @Column(columnDefinition = "varchar(64) COMMENT '支气管舒张剂、吸入糖皮质激素使用的选择'")
     private String aecopd_5_1_1;
@@ -135,9 +135,9 @@ public class AecopdDO extends DataEntity{
     private String aecopd_5_2_1;
     @Column(columnDefinition = "varchar(64) COMMENT '其他使用糖皮质激素药物'")
     private String aecopd_5_2_1_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '全身使用糖皮质激素药物起始日期'")
+    @Column(columnDefinition = "datetime COMMENT '全身使用糖皮质激素药物起始日期'")
     private Date aecopd_5_2_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '全身使用糖皮质激素药物终止日期'")
+    @Column(columnDefinition = "datetime COMMENT '全身使用糖皮质激素药物终止日期'")
     private Date aecopd_5_2_3;
     @Column(columnDefinition = "varchar(64) COMMENT '是否有有心功不全'")
     private String aecopd_6_1_1;
@@ -175,9 +175,9 @@ public class AecopdDO extends DataEntity{
     private String aecopd_7_1_2;
     @Column(columnDefinition = "varchar(64) COMMENT 'NIV相对禁忌证'")
     private String aecopd_7_1_3_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '患者无创正压通气起始日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '患者无创正压通气起始日期时间'")
     private Date aecopd_7_1_6;
-    @Column(columnDefinition = "varchar(64) COMMENT '患者无创正压通气终止日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '患者无创正压通气终止日期时间'")
     private Date aecopd_7_1_7;
     @Column(columnDefinition = "double COMMENT '无创正压通气疗程（小时）'")
     private Double aecopd_7_1_8;
@@ -185,9 +185,9 @@ public class AecopdDO extends DataEntity{
     private String aecopd_7_2_1;
     @Column(columnDefinition = "varchar(64) COMMENT '有创机械通气指征'")
     private String aecopd_7_2_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '患者有机械通气起始日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '患者有机械通气起始日期时间'")
     private Date aecopd_7_2_5_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '患者有机械通气终止日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '患者有机械通气终止日期时间'")
     private Date aecopd_7_2_6;
     @Column(columnDefinition = "double COMMENT '有机械通气疗程（小时）'")
     private Double aecopd_7_2_7;
@@ -301,6 +301,7 @@ public class AecopdDO extends DataEntity{
     private Double cm_6_29;
     @Column(columnDefinition = "double COMMENT '其他费'")
     private Double cm_6_30;
+
 
 
 }

@@ -17,11 +17,9 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 /**
  * STK脑梗死（首次住院）Entity
  * @author 卡卡西
- * @version 2021-02-05
+ * @version 2021-02-07
  */
 @Table(name="quality_stk", alias="a", columns={
-		@Column(name="id", attrName="id", label="id", isPK=true),
-		@Column(includeEntity=DataEntity.class),
 		@Column(name="cm_0_1_1_1", attrName="cm_0_1_1_1", label="质控医师"),
 		@Column(name="cm_0_1_1_2", attrName="cm_0_1_1_2", label="质控护士"),
 		@Column(name="cm_0_1_1_3", attrName="cm_0_1_1_3", label="主治医师"),
@@ -33,7 +31,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_0_1_4_1", attrName="cm_0_1_4_1", label="主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称"),
 		@Column(name="stk_0_1_3_1", attrName="stk_0_1_3_1", label="其他主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称"),
 		@Column(name="cm_0_1_4_2", attrName="cm_0_1_4_2", label="主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称"),
-		@Column(name="cm_0_1_5", attrName="cm_0_1_5", label="是否出院后31天内重复住院"),
+		@Column(name="cm_0_1_5", attrName="cm_0_1_5", label="出院后31天内重复住院"),
 		@Column(name="cm_0_2_1_1", attrName="cm_0_2_1_1", label="出生日期"),
 		@Column(name="cm_0_2_1_2", attrName="cm_0_2_1_2", label="患者性别"),
 		@Column(name="cm_0_2_1_3", attrName="cm_0_2_1_3", label="患者体重", comment="患者体重（kg）"),
@@ -44,10 +42,10 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_0_2_3_2", attrName="cm_0_2_3_2", label="到达本院急诊或者门诊日期时间"),
 		@Column(name="cm_0_2_4_1", attrName="cm_0_2_4_1", label="入院日期时间"),
 		@Column(name="cm_0_2_4_2", attrName="cm_0_2_4_2", label="出院日期时间"),
-		@Column(name="cm_0_2_5_1", attrName="cm_0_2_5_1", label="入住CCU日期时间"),
-		@Column(name="cm_0_2_5_2", attrName="cm_0_2_5_2", label="离开CCU日期时间"),
-		@Column(name="cm_0_2_6_1", attrName="cm_0_2_6_1", label="手术开始", comment="手术开始（切皮）日期时间"),
-		@Column(name="cm_0_2_6_2", attrName="cm_0_2_6_2", label="手术结束", comment="手术结束（缝皮结束）日期时间"),
+		@Column(name="cm_0_2_5_1", attrName="cm_0_2_5_1", label="入住卒中中心/ICU日期时间"),
+		@Column(name="cm_0_2_5_2", attrName="cm_0_2_5_2", label="离开卒中中心/ICU日期时间"),
+		@Column(name="cm_0_2_6_1", attrName="cm_0_2_6_1", label="手术/介入开始", comment="手术/介入开始（切皮）日期时间"),
+		@Column(name="cm_0_2_6_2", attrName="cm_0_2_6_2", label="手术/介入结束", comment="手术/介入结束（缝皮结束）日期时间"),
 		@Column(name="cm_0_3_1", attrName="cm_0_3_1", label="费用支付方式"),
 		@Column(name="cm_0_3_2", attrName="cm_0_3_2", label="收入住院途径"),
 		@Column(name="cm_0_3_3", attrName="cm_0_3_3", label="到院交通工具"),
@@ -103,7 +101,6 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="stk_2_2_2", attrName="stk_2_2_2", label="溶栓禁忌症选择"),
 		@Column(name="stk_2_2_2_1", attrName="stk_2_2_2_1", label="其他临床医师认定的其他禁忌症"),
 		@Column(name="stk_2_3_1_1", attrName="stk_2_3_1_1", label="发病时段适应证"),
-		@Column(name="caseid", attrName="caseid", label="患者病案号"),
 		@Column(name="stk_2_3_1_2", attrName="stk_2_3_1_2", label="溶栓适应证的选择"),
 		@Column(name="stk_2_3_2", attrName="stk_2_3_2", label="溶栓的评估结论的选择"),
 		@Column(name="stk_2_4_1_1_1", attrName="stk_2_4_1_1_1", label="溶栓开始日期时间"),
@@ -111,7 +108,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="stk_2_4_3", attrName="stk_2_4_3", label="溶栓药选择"),
 		@Column(name="stk_2_4_4", attrName="stk_2_4_4", label="实施溶栓", comment="实施溶栓（治疗性操作）途径"),
 		@Column(name="stk_2_4_5_1", attrName="stk_2_4_5_1", label="溶栓药物使用时机 DTN", comment="溶栓药物使用时机 DTN(Door-To-Needle)"),
-		@Column(name="stk_15_1_0", attrName="stk_15_1_0", label="是否实施介入治疗	字"),
+		@Column(name="stk_15_1_0", attrName="stk_15_1_0", label="是否实施介入治疗"),
 		@Column(name="stk_15_1_1_1", attrName="stk_15_1_1_1", label="介入治疗日期时间"),
 		@Column(name="stk_15_2", attrName="stk_15_2", label="介入治疗时机"),
 		@Column(name="stk_15_3", attrName="stk_15_3", label="决定适应证医师职称"),
@@ -262,6 +259,8 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_6_28", attrName="cm_6_28", label="治疗用一次性医用材料费"),
 		@Column(name="cm_6_29", attrName="cm_6_29", label="手术用一次性医用材料费"),
 		@Column(name="cm_6_30", attrName="cm_6_30", label="其他费"),
+		@Column(name="id", attrName="id", label="id", isPK=true),
+		@Column(includeEntity=DataEntity.class),
 	}, orderBy="a.update_date DESC"
 )
 public class QualityStk extends DataEntity<QualityStk> {
@@ -272,12 +271,13 @@ public class QualityStk extends DataEntity<QualityStk> {
 	private String cm_0_1_1_3;		// 主治医师
 	private String cm_0_1_1_4;		// 责任护士
 	private String cm_0_1_1_5;		// 上报科室
+	private String caseid;		// 患者病案号
 	private String cm_0_1_3_1;		// 主要诊断ICD-10四位亚目编码与名称
 	private String cm_0_1_3_2;		// 主要诊断ICD-10六位临床扩展编码与名称
 	private String cm_0_1_4_1;		// 主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称
 	private String stk_0_1_3_1;		// 其他主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称
 	private String cm_0_1_4_2;		// 主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称
-	private String cm_0_1_5;		// 是否出院后31天内重复住院
+	private String cm_0_1_5;		// 出院后31天内重复住院
 	private Date cm_0_2_1_1;		// 出生日期
 	private String cm_0_2_1_2;		// 患者性别
 	private Double cm_0_2_1_3;		// 患者体重（kg）
@@ -288,10 +288,10 @@ public class QualityStk extends DataEntity<QualityStk> {
 	private Date cm_0_2_3_2;		// 到达本院急诊或者门诊日期时间
 	private Date cm_0_2_4_1;		// 入院日期时间
 	private Date cm_0_2_4_2;		// 出院日期时间
-	private Date cm_0_2_5_1;		// 入住CCU日期时间
-	private Date cm_0_2_5_2;		// 离开CCU日期时间
-	private Date cm_0_2_6_1;		// 手术开始（切皮）日期时间
-	private Date cm_0_2_6_2;		// 手术结束（缝皮结束）日期时间
+	private Date cm_0_2_5_1;		// 入住卒中中心/ICU日期时间
+	private Date cm_0_2_5_2;		// 离开卒中中心/ICU日期时间
+	private Date cm_0_2_6_1;		// 手术/介入开始（切皮）日期时间
+	private Date cm_0_2_6_2;		// 手术/介入结束（缝皮结束）日期时间
 	private String cm_0_3_1;		// 费用支付方式
 	private String cm_0_3_2;		// 收入住院途径
 	private String cm_0_3_3;		// 到院交通工具
@@ -321,14 +321,14 @@ public class QualityStk extends DataEntity<QualityStk> {
 	private Double stk_1_4_1_3;		// 红血球计数RBC检测值
 	private Double stk_1_4_1_4;		// 白细胞计数WBC检测值
 	private Double stk_1_4_1_5;		// 血小板PLT检测值(10E9/L)
-	private Date stk_1_4_1_2;		// 急诊或入院后首次全血细胞计数报告日期时间
-	private String stk_1_4_1_1_1;		// 急诊或入院后首次全血细胞计数报告日期时间
+	private String stk_1_4_1_2;		// 急诊或入院后首次全血细胞计数报告日期时间
+	private Date stk_1_4_1_1_1;		// 急诊或入院后首次全血细胞计数报告日期时间
 	private String stk_1_4_2_1;		// 凝血功能检查项目
 	private String stk_1_4_2_3;		// 报告日期时间是否确定
 	private Date stk_1_4_2_2_1;		// 报告日期时间
 	private String stk_1_4_3_1;		// 生化检验项目
 	private String stk_1_4_3_3;		// 报告日期时间是否确定
-	private String stk_1_4_3_2_1;		// 报告日期时间
+	private Date stk_1_4_3_2_1;		// 报告日期时间
 	private String stk_1_4_2;		// 急诊/入院后24小时内首次临床检验检查
 	private Double stk_1_4_2_4;		// C-反应蛋白:检测值(mg/L)
 	private Double stk_1_4_2_5;		// 同型半胱氨酸（HCY）:检测值(μmol/L)
@@ -347,7 +347,6 @@ public class QualityStk extends DataEntity<QualityStk> {
 	private String stk_2_2_2;		// 溶栓禁忌症选择
 	private String stk_2_2_2_1;		// 其他临床医师认定的其他禁忌症
 	private String stk_2_3_1_1;		// 发病时段适应证
-	private String caseid;		// 患者病案号
 	private String stk_2_3_1_2;		// 溶栓适应证的选择
 	private String stk_2_3_2;		// 溶栓的评估结论的选择
 	private Date stk_2_4_1_1_1;		// 溶栓开始日期时间
@@ -355,7 +354,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 	private String stk_2_4_3;		// 溶栓药选择
 	private String stk_2_4_4;		// 实施溶栓（治疗性操作）途径
 	private Double stk_2_4_5_1;		// 溶栓药物使用时机 DTN(Door-To-Needle)
-	private String stk_15_1_0;		// 是否实施介入治疗	字
+	private String stk_15_1_0;		// 是否实施介入治疗
 	private Date stk_15_1_1_1;		// 介入治疗日期时间
 	private String stk_15_2;		// 介入治疗时机
 	private String stk_15_3;		// 决定适应证医师职称
@@ -431,7 +430,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 	private String stk_9_1_2;		// 呼吸评估结果
 	private String stk_9_1_3;		// 饮食评估结果
 	private String stk_9_1_4;		// 吞咽评估结果
-	private String stk_9_1_5_1;		// 压疮评估（Braden评分值）分值
+	private Double stk_9_1_5_1;		// 压疮评估（Braden评分值）分值
 	private String stk_9_1_6;		// 压疮评估结果选择
 	private String stk_9_1_7;		// 预防压疮告知
 	private String stk_9_3_1;		// 吸烟史
@@ -515,7 +514,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		super(id);
 	}
 	
-	@Length(min=0, max=32, message="质控医师长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="质控医师长度不能超过 64 个字符")
 	public String getCm_0_1_1_1() {
 		return cm_0_1_1_1;
 	}
@@ -524,7 +523,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_0_1_1_1 = cm_0_1_1_1;
 	}
 	
-	@Length(min=0, max=32, message="质控护士长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="质控护士长度不能超过 64 个字符")
 	public String getCm_0_1_1_2() {
 		return cm_0_1_1_2;
 	}
@@ -533,7 +532,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_0_1_1_2 = cm_0_1_1_2;
 	}
 	
-	@Length(min=0, max=32, message="主治医师长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主治医师长度不能超过 64 个字符")
 	public String getCm_0_1_1_3() {
 		return cm_0_1_1_3;
 	}
@@ -542,7 +541,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_0_1_1_3 = cm_0_1_1_3;
 	}
 	
-	@Length(min=0, max=32, message="责任护士长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="责任护士长度不能超过 64 个字符")
 	public String getCm_0_1_1_4() {
 		return cm_0_1_1_4;
 	}
@@ -551,7 +550,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_0_1_1_4 = cm_0_1_1_4;
 	}
 	
-	@Length(min=0, max=32, message="上报科室长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="上报科室长度不能超过 64 个字符")
 	public String getCm_0_1_1_5() {
 		return cm_0_1_1_5;
 	}
@@ -560,7 +559,16 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_0_1_1_5 = cm_0_1_1_5;
 	}
 	
-	@Length(min=0, max=32, message="主要诊断ICD-10四位亚目编码与名称长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="患者病案号长度不能超过 64 个字符")
+	public String getCaseid() {
+		return caseid;
+	}
+
+	public void setCaseid(String caseid) {
+		this.caseid = caseid;
+	}
+	
+	@Length(min=0, max=64, message="主要诊断ICD-10四位亚目编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_3_1() {
 		return cm_0_1_3_1;
 	}
@@ -569,7 +577,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_0_1_3_1 = cm_0_1_3_1;
 	}
 	
-	@Length(min=0, max=32, message="主要诊断ICD-10六位临床扩展编码与名称长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主要诊断ICD-10六位临床扩展编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_3_2() {
 		return cm_0_1_3_2;
 	}
@@ -578,7 +586,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_0_1_3_2 = cm_0_1_3_2;
 	}
 	
-	@Length(min=0, max=32, message="主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_4_1() {
 		return cm_0_1_4_1;
 	}
@@ -587,7 +595,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_0_1_4_1 = cm_0_1_4_1;
 	}
 	
-	@Length(min=0, max=32, message="其他主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称长度不能超过 64 个字符")
 	public String getStk_0_1_3_1() {
 		return stk_0_1_3_1;
 	}
@@ -596,7 +604,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_0_1_3_1 = stk_0_1_3_1;
 	}
 	
-	@Length(min=0, max=32, message="主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_4_2() {
 		return cm_0_1_4_2;
 	}
@@ -605,7 +613,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_0_1_4_2 = cm_0_1_4_2;
 	}
 	
-	@Length(min=0, max=32, message="是否出院后31天内重复住院长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="出院后31天内重复住院长度不能超过 64 个字符")
 	public String getCm_0_1_5() {
 		return cm_0_1_5;
 	}
@@ -623,7 +631,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_0_2_1_1 = cm_0_2_1_1;
 	}
 	
-	@Length(min=0, max=32, message="患者性别长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="患者性别长度不能超过 64 个字符")
 	public String getCm_0_2_1_2() {
 		return cm_0_2_1_2;
 	}
@@ -648,7 +656,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_0_2_1_5 = cm_0_2_1_5;
 	}
 	
-	@Length(min=0, max=32, message="发病日期时间是否无法确定或无记录长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="发病日期时间是否无法确定或无记录长度不能超过 64 个字符")
 	public String getCm_0_2_2_1() {
 		return cm_0_2_2_1;
 	}
@@ -666,7 +674,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_0_2_2_2 = cm_0_2_2_2;
 	}
 	
-	@Length(min=0, max=32, message="到达本院急诊或者门诊日期时间是否无法确定或无记录长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="到达本院急诊或者门诊日期时间是否无法确定或无记录长度不能超过 64 个字符")
 	public String getCm_0_2_3_1() {
 		return cm_0_2_3_1;
 	}
@@ -738,7 +746,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_0_2_6_2 = cm_0_2_6_2;
 	}
 	
-	@Length(min=0, max=32, message="费用支付方式长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="费用支付方式长度不能超过 64 个字符")
 	public String getCm_0_3_1() {
 		return cm_0_3_1;
 	}
@@ -747,7 +755,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_0_3_1 = cm_0_3_1;
 	}
 	
-	@Length(min=0, max=32, message="收入住院途径长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="收入住院途径长度不能超过 64 个字符")
 	public String getCm_0_3_2() {
 		return cm_0_3_2;
 	}
@@ -756,7 +764,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_0_3_2 = cm_0_3_2;
 	}
 	
-	@Length(min=0, max=32, message="到院交通工具长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="到院交通工具长度不能超过 64 个字符")
 	public String getCm_0_3_3() {
 		return cm_0_3_3;
 	}
@@ -765,7 +773,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_0_3_3 = cm_0_3_3;
 	}
 	
-	@Length(min=0, max=32, message="现场评估生命体征，施行急救长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="现场评估生命体征，施行急救长度不能超过 64 个字符")
 	public String getStk_0_4_1() {
 		return stk_0_4_1;
 	}
@@ -774,7 +782,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_0_4_1 = stk_0_4_1;
 	}
 	
-	@Length(min=0, max=32, message="到达现场后10分钟内完成院前卒中评分长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="到达现场后10分钟内完成院前卒中评分长度不能超过 64 个字符")
 	public String getStk_0_4_2() {
 		return stk_0_4_2;
 	}
@@ -783,7 +791,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_0_4_2 = stk_0_4_2;
 	}
 	
-	@Length(min=0, max=32, message="现场急救维持生命体征稳定长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="现场急救维持生命体征稳定长度不能超过 64 个字符")
 	public String getStk_0_4_3() {
 		return stk_0_4_3;
 	}
@@ -792,7 +800,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_0_4_3 = stk_0_4_3;
 	}
 	
-	@Length(min=0, max=32, message="利用车载信息系统、微信、彩信等多种形式传输心电图等院前信息至目标医院长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="利用车载信息系统、微信、彩信等多种形式传输心电图等院前信息至目标医院长度不能超过 64 个字符")
 	public String getStk_0_4_4() {
 		return stk_0_4_4;
 	}
@@ -801,7 +809,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_0_4_4 = stk_0_4_4;
 	}
 	
-	@Length(min=0, max=32, message="急诊医师接诊日期时间是否确定长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="急诊医师接诊日期时间是否确定长度不能超过 64 个字符")
 	public String getStk_1_1_1_1() {
 		return stk_1_1_1_1;
 	}
@@ -851,7 +859,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_1_1_7 = stk_1_1_7;
 	}
 	
-	@Length(min=0, max=32, message="急诊后首次评估还是入院后首次评估长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="急诊后首次评估还是入院后首次评估长度不能超过 64 个字符")
 	public String getStk_1_2_1() {
 		return stk_1_2_1;
 	}
@@ -860,7 +868,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_1_2_1 = stk_1_2_1;
 	}
 	
-	@Length(min=0, max=32, message="急诊首次实施神经功能缺损NIHSS评估长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="急诊首次实施神经功能缺损NIHSS评估长度不能超过 64 个字符")
 	public String getStk_1_2_1_1() {
 		return stk_1_2_1_1;
 	}
@@ -886,7 +894,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_1_2_1_3_1 = stk_1_2_1_3_1;
 	}
 	
-	@Length(min=0, max=32, message="入院后首次实施神经功能缺损NIHSS评估长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="入院后首次实施神经功能缺损NIHSS评估长度不能超过 64 个字符")
 	public String getStk_1_2_2_1() {
 		return stk_1_2_2_1;
 	}
@@ -912,7 +920,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_1_2_2_3_1 = stk_1_2_2_3_1;
 	}
 	
-	@Length(min=0, max=32, message="是否实施首次头部影像学检查长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否实施首次头部影像学检查长度不能超过 64 个字符")
 	public String getStk_1_3_1() {
 		return stk_1_3_1;
 	}
@@ -921,7 +929,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_1_3_1 = stk_1_3_1;
 	}
 	
-	@Length(min=0, max=32, message="头部影像学检查项目长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="头部影像学检查项目长度不能超过 64 个字符")
 	public String getStk_1_3_2() {
 		return stk_1_3_2;
 	}
@@ -939,7 +947,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_1_3_3_1 = stk_1_3_3_1;
 	}
 	
-	@Length(min=0, max=32, message="头部影像学检查评估的选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="头部影像学检查评估的选择长度不能超过 64 个字符")
 	public String getStk_2_1_3() {
 		return stk_2_1_3;
 	}
@@ -948,7 +956,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_2_1_3 = stk_2_1_3;
 	}
 	
-	@Length(min=0, max=32, message="其他头部影像学检查长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他头部影像学检查长度不能超过 64 个字符")
 	public String getStk_2_1_3_1() {
 		return stk_2_1_3_1;
 	}
@@ -957,7 +965,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_2_1_3_1 = stk_2_1_3_1;
 	}
 	
-	@Length(min=0, max=32, message="全血细胞计数长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="全血细胞计数长度不能超过 64 个字符")
 	public String getStk_1_4_1() {
 		return stk_1_4_1;
 	}
@@ -990,25 +998,25 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_1_4_1_5 = stk_1_4_1_5;
 	}
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	public Date getStk_1_4_1_2() {
+	@Length(min=0, max=64, message="急诊或入院后首次全血细胞计数报告日期时间长度不能超过 64 个字符")
+	public String getStk_1_4_1_2() {
 		return stk_1_4_1_2;
 	}
 
-	public void setStk_1_4_1_2(Date stk_1_4_1_2) {
+	public void setStk_1_4_1_2(String stk_1_4_1_2) {
 		this.stk_1_4_1_2 = stk_1_4_1_2;
 	}
 	
-	@Length(min=0, max=32, message="急诊或入院后首次全血细胞计数报告日期时间长度不能超过 32 个字符")
-	public String getStk_1_4_1_1_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getStk_1_4_1_1_1() {
 		return stk_1_4_1_1_1;
 	}
 
-	public void setStk_1_4_1_1_1(String stk_1_4_1_1_1) {
+	public void setStk_1_4_1_1_1(Date stk_1_4_1_1_1) {
 		this.stk_1_4_1_1_1 = stk_1_4_1_1_1;
 	}
 	
-	@Length(min=0, max=32, message="凝血功能检查项目长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="凝血功能检查项目长度不能超过 64 个字符")
 	public String getStk_1_4_2_1() {
 		return stk_1_4_2_1;
 	}
@@ -1017,7 +1025,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_1_4_2_1 = stk_1_4_2_1;
 	}
 	
-	@Length(min=0, max=32, message="报告日期时间是否确定长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="报告日期时间是否确定长度不能超过 64 个字符")
 	public String getStk_1_4_2_3() {
 		return stk_1_4_2_3;
 	}
@@ -1035,7 +1043,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_1_4_2_2_1 = stk_1_4_2_2_1;
 	}
 	
-	@Length(min=0, max=32, message="生化检验项目长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="生化检验项目长度不能超过 64 个字符")
 	public String getStk_1_4_3_1() {
 		return stk_1_4_3_1;
 	}
@@ -1044,7 +1052,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_1_4_3_1 = stk_1_4_3_1;
 	}
 	
-	@Length(min=0, max=32, message="报告日期时间是否确定长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="报告日期时间是否确定长度不能超过 64 个字符")
 	public String getStk_1_4_3_3() {
 		return stk_1_4_3_3;
 	}
@@ -1053,16 +1061,16 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_1_4_3_3 = stk_1_4_3_3;
 	}
 	
-	@Length(min=0, max=32, message="报告日期时间长度不能超过 32 个字符")
-	public String getStk_1_4_3_2_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getStk_1_4_3_2_1() {
 		return stk_1_4_3_2_1;
 	}
 
-	public void setStk_1_4_3_2_1(String stk_1_4_3_2_1) {
+	public void setStk_1_4_3_2_1(Date stk_1_4_3_2_1) {
 		this.stk_1_4_3_2_1 = stk_1_4_3_2_1;
 	}
 	
-	@Length(min=0, max=32, message="急诊/入院后24小时内首次临床检验检查长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="急诊/入院后24小时内首次临床检验检查长度不能超过 64 个字符")
 	public String getStk_1_4_2() {
 		return stk_1_4_2;
 	}
@@ -1119,7 +1127,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_1_4_2_9 = stk_1_4_2_9;
 	}
 	
-	@Length(min=0, max=32, message="急诊或入院后是否首次实施心电图长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="急诊或入院后是否首次实施心电图长度不能超过 64 个字符")
 	public String getStk_1_5_1() {
 		return stk_1_5_1;
 	}
@@ -1137,7 +1145,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_1_5_2_1 = stk_1_5_2_1;
 	}
 	
-	@Length(min=0, max=32, message="心电图长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="心电图长度不能超过 64 个字符")
 	public String getStk_1_5_3() {
 		return stk_1_5_3;
 	}
@@ -1146,7 +1154,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_1_5_3 = stk_1_5_3;
 	}
 	
-	@Length(min=0, max=32, message="其他心电图长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他心电图长度不能超过 64 个字符")
 	public String getStk_1_5_3_1() {
 		return stk_1_5_3_1;
 	}
@@ -1155,7 +1163,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_1_5_3_1 = stk_1_5_3_1;
 	}
 	
-	@Length(min=0, max=32, message="发病→到达急诊“绿色通道”时间是否确定长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="发病→到达急诊“绿色通道”时间是否确定长度不能超过 64 个字符")
 	public String getStk_2_1_1_1() {
 		return stk_2_1_1_1;
 	}
@@ -1172,7 +1180,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_2_1_1_2 = stk_2_1_1_2;
 	}
 	
-	@Length(min=0, max=32, message="发病→到达急诊“绿色通道”时间评估结论长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="发病→到达急诊“绿色通道”时间评估结论长度不能超过 64 个字符")
 	public String getStk_2_1_2() {
 		return stk_2_1_2;
 	}
@@ -1181,7 +1189,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_2_1_2 = stk_2_1_2;
 	}
 	
-	@Length(min=0, max=32, message="是否有溶栓禁忌症长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否有溶栓禁忌症长度不能超过 64 个字符")
 	public String getStk_2_2_1() {
 		return stk_2_2_1;
 	}
@@ -1190,7 +1198,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_2_2_1 = stk_2_2_1;
 	}
 	
-	@Length(min=0, max=32, message="溶栓禁忌症选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="溶栓禁忌症选择长度不能超过 64 个字符")
 	public String getStk_2_2_2() {
 		return stk_2_2_2;
 	}
@@ -1199,7 +1207,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_2_2_2 = stk_2_2_2;
 	}
 	
-	@Length(min=0, max=32, message="其他临床医师认定的其他禁忌症长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他临床医师认定的其他禁忌症长度不能超过 64 个字符")
 	public String getStk_2_2_2_1() {
 		return stk_2_2_2_1;
 	}
@@ -1208,7 +1216,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_2_2_2_1 = stk_2_2_2_1;
 	}
 	
-	@Length(min=0, max=32, message="发病时段适应证长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="发病时段适应证长度不能超过 64 个字符")
 	public String getStk_2_3_1_1() {
 		return stk_2_3_1_1;
 	}
@@ -1217,16 +1225,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_2_3_1_1 = stk_2_3_1_1;
 	}
 	
-	@Length(min=0, max=64, message="患者病案号长度不能超过 64 个字符")
-	public String getCaseid() {
-		return caseid;
-	}
-
-	public void setCaseid(String caseid) {
-		this.caseid = caseid;
-	}
-	
-	@Length(min=0, max=32, message="溶栓适应证的选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="溶栓适应证的选择长度不能超过 64 个字符")
 	public String getStk_2_3_1_2() {
 		return stk_2_3_1_2;
 	}
@@ -1235,7 +1234,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_2_3_1_2 = stk_2_3_1_2;
 	}
 	
-	@Length(min=0, max=32, message="溶栓的评估结论的选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="溶栓的评估结论的选择长度不能超过 64 个字符")
 	public String getStk_2_3_2() {
 		return stk_2_3_2;
 	}
@@ -1262,7 +1261,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_2_4_2_1_1 = stk_2_4_2_1_1;
 	}
 	
-	@Length(min=0, max=32, message="溶栓药选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="溶栓药选择长度不能超过 64 个字符")
 	public String getStk_2_4_3() {
 		return stk_2_4_3;
 	}
@@ -1271,7 +1270,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_2_4_3 = stk_2_4_3;
 	}
 	
-	@Length(min=0, max=32, message="实施溶栓长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="实施溶栓长度不能超过 64 个字符")
 	public String getStk_2_4_4() {
 		return stk_2_4_4;
 	}
@@ -1288,7 +1287,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_2_4_5_1 = stk_2_4_5_1;
 	}
 	
-	@Length(min=0, max=32, message="是否实施介入治疗	字长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否实施介入治疗长度不能超过 64 个字符")
 	public String getStk_15_1_0() {
 		return stk_15_1_0;
 	}
@@ -1306,7 +1305,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_15_1_1_1 = stk_15_1_1_1;
 	}
 	
-	@Length(min=0, max=32, message="介入治疗时机长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="介入治疗时机长度不能超过 64 个字符")
 	public String getStk_15_2() {
 		return stk_15_2;
 	}
@@ -1315,7 +1314,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_15_2 = stk_15_2;
 	}
 	
-	@Length(min=0, max=32, message="决定适应证医师职称长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="决定适应证医师职称长度不能超过 64 个字符")
 	public String getStk_15_3() {
 		return stk_15_3;
 	}
@@ -1324,7 +1323,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_15_3 = stk_15_3;
 	}
 	
-	@Length(min=0, max=32, message="介入主刀医师职称长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="介入主刀医师职称长度不能超过 64 个字符")
 	public String getStk_15_4() {
 		return stk_15_4;
 	}
@@ -1333,7 +1332,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_15_4 = stk_15_4;
 	}
 	
-	@Length(min=0, max=32, message="大血管闭塞重症患者实施血管内适应证选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="大血管闭塞重症患者实施血管内适应证选择长度不能超过 64 个字符")
 	public String getStk_15_6() {
 		return stk_15_6;
 	}
@@ -1342,7 +1341,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_15_6 = stk_15_6;
 	}
 	
-	@Length(min=0, max=32, message="其它适应证长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其它适应证长度不能超过 64 个字符")
 	public String getStk_15_6_1() {
 		return stk_15_6_1;
 	}
@@ -1351,7 +1350,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_15_6_1 = stk_15_6_1;
 	}
 	
-	@Length(min=0, max=32, message="血管内介入治疗术式选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="血管内介入治疗术式选择长度不能超过 64 个字符")
 	public String getStk_15_5_1() {
 		return stk_15_5_1;
 	}
@@ -1368,7 +1367,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_15_8 = stk_15_8;
 	}
 	
-	@Length(min=0, max=32, message="溶栓治疗院内延误时间超过1小时主要原因的选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="溶栓治疗院内延误时间超过1小时主要原因的选择长度不能超过 64 个字符")
 	public String getStk_2_6_1() {
 		return stk_2_6_1;
 	}
@@ -1377,7 +1376,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_2_6_1 = stk_2_6_1;
 	}
 	
-	@Length(min=0, max=32, message="溶栓治疗医嘱未能执行主要原因的长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="溶栓治疗医嘱未能执行主要原因的长度不能超过 64 个字符")
 	public String getStk_2_6_2() {
 		return stk_2_6_2;
 	}
@@ -1386,7 +1385,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_2_6_2 = stk_2_6_2;
 	}
 	
-	@Length(min=0, max=32, message="是否实施影像学评估血管再通分级长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否实施影像学评估血管再通分级长度不能超过 64 个字符")
 	public String getStk_15_7() {
 		return stk_15_7;
 	}
@@ -1395,7 +1394,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_15_7 = stk_15_7;
 	}
 	
-	@Length(min=0, max=32, message="血管再通分级长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="血管再通分级长度不能超过 64 个字符")
 	public String getStk_15_7_1() {
 		return stk_15_7_1;
 	}
@@ -1404,7 +1403,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_15_7_1 = stk_15_7_1;
 	}
 	
-	@Length(min=0, max=32, message="是否实施溶栓后72小时NIHSS评估长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否实施溶栓后72小时NIHSS评估长度不能超过 64 个字符")
 	public String getStk_2_5_1_1() {
 		return stk_2_5_1_1;
 	}
@@ -1445,7 +1444,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_2_5_1_5_1 = stk_2_5_1_5_1;
 	}
 	
-	@Length(min=0, max=32, message="是否实施溶栓长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否实施溶栓长度不能超过 64 个字符")
 	public String getStk_2_5_2_1() {
 		return stk_2_5_2_1;
 	}
@@ -1454,7 +1453,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_2_5_2_1 = stk_2_5_2_1;
 	}
 	
-	@Length(min=0, max=32, message="溶栓后72小时影像学复查项目长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="溶栓后72小时影像学复查项目长度不能超过 64 个字符")
 	public String getStk_2_5_2_2() {
 		return stk_2_5_2_2;
 	}
@@ -1463,7 +1462,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_2_5_2_2 = stk_2_5_2_2;
 	}
 	
-	@Length(min=0, max=32, message="是否出现溶栓治疗并发症长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否出现溶栓治疗并发症长度不能超过 64 个字符")
 	public String getStk_2_5_3_1() {
 		return stk_2_5_3_1;
 	}
@@ -1472,7 +1471,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_2_5_3_1 = stk_2_5_3_1;
 	}
 	
-	@Length(min=0, max=32, message="并发症严重程度长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="并发症严重程度长度不能超过 64 个字符")
 	public String getStk_2_5_3_2() {
 		return stk_2_5_3_2;
 	}
@@ -1481,7 +1480,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_2_5_3_2 = stk_2_5_3_2;
 	}
 	
-	@Length(min=0, max=32, message="是否为房颤患者脑卒中长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否为房颤患者脑卒中长度不能超过 64 个字符")
 	public String getStk_3_1_1_1() {
 		return stk_3_1_1_1;
 	}
@@ -1490,7 +1489,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_3_1_1_1 = stk_3_1_1_1;
 	}
 	
-	@Length(min=0, max=32, message="是否实施房颤患者脑卒中风险评估长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否实施房颤患者脑卒中风险评估长度不能超过 64 个字符")
 	public String getStk_3_1_1() {
 		return stk_3_1_1;
 	}
@@ -1507,7 +1506,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_3_1_2_1 = stk_3_1_2_1;
 	}
 	
-	@Length(min=0, max=32, message="CHA2DS2-VASc评分大于2分长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="CHA2DS2-VASc评分大于2分长度不能超过 64 个字符")
 	public String getStk_3_1_3() {
 		return stk_3_1_3;
 	}
@@ -1516,7 +1515,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_3_1_3 = stk_3_1_3;
 	}
 	
-	@Length(min=0, max=32, message="是否有使用抗凝药物的禁忌证长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否有使用抗凝药物的禁忌证长度不能超过 64 个字符")
 	public String getStk_3_2_1() {
 		return stk_3_2_1;
 	}
@@ -1525,7 +1524,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_3_2_1 = stk_3_2_1;
 	}
 	
-	@Length(min=0, max=32, message="使用抗凝药物的禁忌症长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="使用抗凝药物的禁忌症长度不能超过 64 个字符")
 	public String getStk_3_2_2() {
 		return stk_3_2_2;
 	}
@@ -1534,7 +1533,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_3_2_2 = stk_3_2_2;
 	}
 	
-	@Length(min=0, max=32, message="是否使用抗凝药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否使用抗凝药物长度不能超过 64 个字符")
 	public String getStk_3_3_1() {
 		return stk_3_3_1;
 	}
@@ -1552,7 +1551,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_3_3_2_1_1 = stk_3_3_2_1_1;
 	}
 	
-	@Length(min=0, max=32, message="抗凝药物选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="抗凝药物选择长度不能超过 64 个字符")
 	public String getStk_3_3_3() {
 		return stk_3_3_3;
 	}
@@ -1561,7 +1560,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_3_3_3 = stk_3_3_3;
 	}
 	
-	@Length(min=0, max=32, message="是否使用阿司匹林禁忌证长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否使用阿司匹林禁忌证长度不能超过 64 个字符")
 	public String getStk_4_1_1() {
 		return stk_4_1_1;
 	}
@@ -1570,7 +1569,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_4_1_1 = stk_4_1_1;
 	}
 	
-	@Length(min=0, max=32, message="阿司匹林禁忌症长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="阿司匹林禁忌症长度不能超过 64 个字符")
 	public String getStk_4_1_2() {
 		return stk_4_1_2;
 	}
@@ -1579,7 +1578,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_4_1_2 = stk_4_1_2;
 	}
 	
-	@Length(min=0, max=32, message="患者类别选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="患者类别选择长度不能超过 64 个字符")
 	public String getStk_4_2_3() {
 		return stk_4_2_3;
 	}
@@ -1597,7 +1596,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_4_2_2_1 = stk_4_2_2_1;
 	}
 	
-	@Length(min=0, max=32, message="药物选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="药物选择长度不能超过 64 个字符")
 	public String getStk_4_3() {
 		return stk_4_3;
 	}
@@ -1606,7 +1605,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_4_3 = stk_4_3;
 	}
 	
-	@Length(min=0, max=32, message="其他抗血小板药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他抗血小板药物长度不能超过 64 个字符")
 	public String getStk_4_3_1() {
 		return stk_4_3_1;
 	}
@@ -1615,7 +1614,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_4_3_1 = stk_4_3_1;
 	}
 	
-	@Length(min=0, max=32, message="血脂评价时间的选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="血脂评价时间的选择长度不能超过 64 个字符")
 	public String getStk_5_1() {
 		return stk_5_1;
 	}
@@ -1624,7 +1623,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_5_1 = stk_5_1;
 	}
 	
-	@Length(min=0, max=32, message="血脂评价结果长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="血脂评价结果长度不能超过 64 个字符")
 	public String getStk_5_2() {
 		return stk_5_2;
 	}
@@ -1633,7 +1632,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_5_2 = stk_5_2;
 	}
 	
-	@Length(min=0, max=32, message="是否有他汀药物禁忌症长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否有他汀药物禁忌症长度不能超过 64 个字符")
 	public String getStk_5_3_1() {
 		return stk_5_3_1;
 	}
@@ -1642,7 +1641,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_5_3_1 = stk_5_3_1;
 	}
 	
-	@Length(min=0, max=32, message="他汀类药物禁忌证的选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="他汀类药物禁忌证的选择长度不能超过 64 个字符")
 	public String getStk_5_3_2() {
 		return stk_5_3_2;
 	}
@@ -1651,7 +1650,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_5_3_2 = stk_5_3_2;
 	}
 	
-	@Length(min=0, max=32, message="是否有用药长期医嘱-他汀类药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否有用药长期医嘱-他汀类药物长度不能超过 64 个字符")
 	public String getStk_5_4() {
 		return stk_5_4;
 	}
@@ -1660,7 +1659,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_5_4 = stk_5_4;
 	}
 	
-	@Length(min=0, max=32, message="他汀类常用药物选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="他汀类常用药物选择长度不能超过 64 个字符")
 	public String getStk_5_4_1() {
 		return stk_5_4_1;
 	}
@@ -1669,7 +1668,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_5_4_1 = stk_5_4_1;
 	}
 	
-	@Length(min=0, max=32, message="是否糖尿病患者长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否糖尿病患者长度不能超过 64 个字符")
 	public String getStk_5_5_1() {
 		return stk_5_5_1;
 	}
@@ -1678,7 +1677,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_5_5_1 = stk_5_5_1;
 	}
 	
-	@Length(min=0, max=32, message="选择降糖药物的类别长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="选择降糖药物的类别长度不能超过 64 个字符")
 	public String getStk_5_5_2() {
 		return stk_5_5_2;
 	}
@@ -1687,7 +1686,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_5_5_2 = stk_5_5_2;
 	}
 	
-	@Length(min=0, max=32, message="其他降糖药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他降糖药物长度不能超过 64 个字符")
 	public String getStk_5_5_2_1() {
 		return stk_5_5_2_1;
 	}
@@ -1696,7 +1695,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_5_5_2_1 = stk_5_5_2_1;
 	}
 	
-	@Length(min=0, max=32, message="是否高血压患者长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否高血压患者长度不能超过 64 个字符")
 	public String getStk_5_7_1() {
 		return stk_5_7_1;
 	}
@@ -1705,7 +1704,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_5_7_1 = stk_5_7_1;
 	}
 	
-	@Length(min=0, max=32, message="选择降压药物的类别长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="选择降压药物的类别长度不能超过 64 个字符")
 	public String getStk_5_7_2() {
 		return stk_5_7_2;
 	}
@@ -1714,7 +1713,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_5_7_2 = stk_5_7_2;
 	}
 	
-	@Length(min=0, max=32, message="其它降压药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其它降压药物长度不能超过 64 个字符")
 	public String getStk_5_7_2_1() {
 		return stk_5_7_2_1;
 	}
@@ -1723,7 +1722,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_5_7_2_1 = stk_5_7_2_1;
 	}
 	
-	@Length(min=0, max=32, message="入院时是否正常进食与饮水长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="入院时是否正常进食与饮水长度不能超过 64 个字符")
 	public String getStk_6_1() {
 		return stk_6_1;
 	}
@@ -1732,7 +1731,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_6_1 = stk_6_1;
 	}
 	
-	@Length(min=0, max=32, message="是否进行吞咽评估长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否进行吞咽评估长度不能超过 64 个字符")
 	public String getStk_6_2_0() {
 		return stk_6_2_0;
 	}
@@ -1750,7 +1749,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_6_2_1_1 = stk_6_2_1_1;
 	}
 	
-	@Length(min=0, max=32, message="评价方法选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="评价方法选择长度不能超过 64 个字符")
 	public String getStk_6_3_1() {
 		return stk_6_3_1;
 	}
@@ -1759,7 +1758,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_6_3_1 = stk_6_3_1;
 	}
 	
-	@Length(min=0, max=32, message="其他评价方法填写长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他评价方法填写长度不能超过 64 个字符")
 	public String getStk_6_3_1_1() {
 		return stk_6_3_1_1;
 	}
@@ -1768,7 +1767,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_6_3_1_1 = stk_6_3_1_1;
 	}
 	
-	@Length(min=0, max=32, message="未进行吞咽困难评价的原因长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="未进行吞咽困难评价的原因长度不能超过 64 个字符")
 	public String getStk_6_3_2() {
 		return stk_6_3_2;
 	}
@@ -1777,7 +1776,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_6_3_2 = stk_6_3_2;
 	}
 	
-	@Length(min=0, max=32, message="其它未进行吞咽困难评价的原因长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其它未进行吞咽困难评价的原因长度不能超过 64 个字符")
 	public String getStk_6_3_2_1() {
 		return stk_6_3_2_1;
 	}
@@ -1786,7 +1785,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_6_3_2_1 = stk_6_3_2_1;
 	}
 	
-	@Length(min=0, max=32, message="入院后病情判定长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="入院后病情判定长度不能超过 64 个字符")
 	public String getStk_7_1() {
 		return stk_7_1;
 	}
@@ -1795,7 +1794,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_7_1 = stk_7_1;
 	}
 	
-	@Length(min=0, max=32, message="是否需要做预防DVT治疗长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否需要做预防DVT治疗长度不能超过 64 个字符")
 	public String getStk_7_2_1() {
 		return stk_7_2_1;
 	}
@@ -1804,7 +1803,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_7_2_1 = stk_7_2_1;
 	}
 	
-	@Length(min=0, max=32, message="禁忌证选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="禁忌证选择长度不能超过 64 个字符")
 	public String getStk_7_2_2() {
 		return stk_7_2_2;
 	}
@@ -1822,7 +1821,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_7_2_3_1_1 = stk_7_2_3_1_1;
 	}
 	
-	@Length(min=0, max=32, message="预防DVT治疗方法长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="预防DVT治疗方法长度不能超过 64 个字符")
 	public String getStk_7_3_1_4() {
 		return stk_7_3_1_4;
 	}
@@ -1831,7 +1830,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_7_3_1_4 = stk_7_3_1_4;
 	}
 	
-	@Length(min=0, max=32, message="其他预防DVT治疗药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他预防DVT治疗药物长度不能超过 64 个字符")
 	public String getStk_7_3_1_5() {
 		return stk_7_3_1_5;
 	}
@@ -1840,7 +1839,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_7_3_1_5 = stk_7_3_1_5;
 	}
 	
-	@Length(min=0, max=32, message="出院时继续使用抗血小扳聚集治疗药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="出院时继续使用抗血小扳聚集治疗药物长度不能超过 64 个字符")
 	public String getStk_8_1() {
 		return stk_8_1;
 	}
@@ -1849,7 +1848,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_8_1 = stk_8_1;
 	}
 	
-	@Length(min=0, max=32, message="其他抗血小板聚集治疗药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他抗血小板聚集治疗药物长度不能超过 64 个字符")
 	public String getStk_8_1_1() {
 		return stk_8_1_1;
 	}
@@ -1858,7 +1857,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_8_1_1 = stk_8_1_1;
 	}
 	
-	@Length(min=0, max=32, message="出院时使用选择他汀类药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="出院时使用选择他汀类药物长度不能超过 64 个字符")
 	public String getStk_8_2() {
 		return stk_8_2;
 	}
@@ -1867,7 +1866,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_8_2 = stk_8_2;
 	}
 	
-	@Length(min=0, max=32, message="出院时使用抗凝药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="出院时使用抗凝药物长度不能超过 64 个字符")
 	public String getStk_8_3() {
 		return stk_8_3;
 	}
@@ -1876,7 +1875,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_8_3 = stk_8_3;
 	}
 	
-	@Length(min=0, max=32, message="出院时使用降糖药物的类别长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="出院时使用降糖药物的类别长度不能超过 64 个字符")
 	public String getStk_8_4() {
 		return stk_8_4;
 	}
@@ -1885,7 +1884,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_8_4 = stk_8_4;
 	}
 	
-	@Length(min=0, max=32, message="其他降糖药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他降糖药物长度不能超过 64 个字符")
 	public String getStk_8_4_1() {
 		return stk_8_4_1;
 	}
@@ -1894,7 +1893,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_8_4_1 = stk_8_4_1;
 	}
 	
-	@Length(min=0, max=32, message="是否出院时有高血压长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否出院时有高血压长度不能超过 64 个字符")
 	public String getStk_8_5_0() {
 		return stk_8_5_0;
 	}
@@ -1903,7 +1902,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_8_5_0 = stk_8_5_0;
 	}
 	
-	@Length(min=0, max=32, message="出院时有高血压患者选择降压药物的类别长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="出院时有高血压患者选择降压药物的类别长度不能超过 64 个字符")
 	public String getStk_8_5() {
 		return stk_8_5;
 	}
@@ -1912,7 +1911,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_8_5 = stk_8_5;
 	}
 	
-	@Length(min=0, max=32, message="其他降压药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他降压药物长度不能超过 64 个字符")
 	public String getStk_8_5_1() {
 		return stk_8_5_1;
 	}
@@ -1921,7 +1920,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_8_5_1 = stk_8_5_1;
 	}
 	
-	@Length(min=0, max=32, message="入院时是否有重点护理评估记录长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="入院时是否有重点护理评估记录长度不能超过 64 个字符")
 	public String getStk_9_1() {
 		return stk_9_1;
 	}
@@ -1930,7 +1929,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_9_1 = stk_9_1;
 	}
 	
-	@Length(min=0, max=32, message="行走评估结果长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="行走评估结果长度不能超过 64 个字符")
 	public String getStk_9_1_1() {
 		return stk_9_1_1;
 	}
@@ -1939,7 +1938,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_9_1_1 = stk_9_1_1;
 	}
 	
-	@Length(min=0, max=32, message="呼吸评估结果长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="呼吸评估结果长度不能超过 64 个字符")
 	public String getStk_9_1_2() {
 		return stk_9_1_2;
 	}
@@ -1948,7 +1947,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_9_1_2 = stk_9_1_2;
 	}
 	
-	@Length(min=0, max=32, message="饮食评估结果长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="饮食评估结果长度不能超过 64 个字符")
 	public String getStk_9_1_3() {
 		return stk_9_1_3;
 	}
@@ -1957,7 +1956,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_9_1_3 = stk_9_1_3;
 	}
 	
-	@Length(min=0, max=32, message="吞咽评估结果长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="吞咽评估结果长度不能超过 64 个字符")
 	public String getStk_9_1_4() {
 		return stk_9_1_4;
 	}
@@ -1966,16 +1965,15 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_9_1_4 = stk_9_1_4;
 	}
 	
-	@Length(min=0, max=32, message="压疮评估长度不能超过 32 个字符")
-	public String getStk_9_1_5_1() {
+	public Double getStk_9_1_5_1() {
 		return stk_9_1_5_1;
 	}
 
-	public void setStk_9_1_5_1(String stk_9_1_5_1) {
+	public void setStk_9_1_5_1(Double stk_9_1_5_1) {
 		this.stk_9_1_5_1 = stk_9_1_5_1;
 	}
 	
-	@Length(min=0, max=32, message="压疮评估结果选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="压疮评估结果选择长度不能超过 64 个字符")
 	public String getStk_9_1_6() {
 		return stk_9_1_6;
 	}
@@ -1984,7 +1982,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_9_1_6 = stk_9_1_6;
 	}
 	
-	@Length(min=0, max=32, message="预防压疮告知长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="预防压疮告知长度不能超过 64 个字符")
 	public String getStk_9_1_7() {
 		return stk_9_1_7;
 	}
@@ -1993,7 +1991,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_9_1_7 = stk_9_1_7;
 	}
 	
-	@Length(min=0, max=32, message="吸烟史长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="吸烟史长度不能超过 64 个字符")
 	public String getStk_9_3_1() {
 		return stk_9_3_1;
 	}
@@ -2002,7 +2000,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_9_3_1 = stk_9_3_1;
 	}
 	
-	@Length(min=0, max=32, message="吸烟程度评估长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="吸烟程度评估长度不能超过 64 个字符")
 	public String getStk_9_3_2() {
 		return stk_9_3_2;
 	}
@@ -2011,7 +2009,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_9_3_2 = stk_9_3_2;
 	}
 	
-	@Length(min=0, max=32, message="接受戒烟的建议或者戒烟治疗长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="接受戒烟的建议或者戒烟治疗长度不能超过 64 个字符")
 	public String getStk_9_3_3() {
 		return stk_9_3_3;
 	}
@@ -2020,7 +2018,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_9_3_3 = stk_9_3_3;
 	}
 	
-	@Length(min=0, max=32, message="是否提供早期康复医疗服务长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否提供早期康复医疗服务长度不能超过 64 个字符")
 	public String getStk_13_1_1() {
 		return stk_13_1_1;
 	}
@@ -2029,7 +2027,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_13_1_1 = stk_13_1_1;
 	}
 	
-	@Length(min=0, max=32, message="是否有功能障碍长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否有功能障碍长度不能超过 64 个字符")
 	public String getStk_13_0() {
 		return stk_13_0;
 	}
@@ -2038,7 +2036,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_13_0 = stk_13_0;
 	}
 	
-	@Length(min=0, max=32, message="功能障碍评价长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="功能障碍评价长度不能超过 64 个字符")
 	public String getStk_13_1() {
 		return stk_13_1;
 	}
@@ -2047,7 +2045,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_13_1 = stk_13_1;
 	}
 	
-	@Length(min=0, max=32, message="康复治疗适宜性评估结果长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="康复治疗适宜性评估结果长度不能超过 64 个字符")
 	public String getStk_13_2() {
 		return stk_13_2;
 	}
@@ -2056,7 +2054,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_13_2 = stk_13_2;
 	}
 	
-	@Length(min=0, max=32, message="康复实施人员资质选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="康复实施人员资质选择长度不能超过 64 个字符")
 	public String getStk_13_3() {
 		return stk_13_3;
 	}
@@ -2074,7 +2072,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_13_4_1 = stk_13_4_1;
 	}
 	
-	@Length(min=0, max=32, message="选择未能进行康复原因长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="选择未能进行康复原因长度不能超过 64 个字符")
 	public String getStk_13_5() {
 		return stk_13_5;
 	}
@@ -2083,7 +2081,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_13_5 = stk_13_5;
 	}
 	
-	@Length(min=0, max=32, message="血管功能评估时间长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="血管功能评估时间长度不能超过 64 个字符")
 	public String getStk_10_1() {
 		return stk_10_1;
 	}
@@ -2092,7 +2090,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_10_1 = stk_10_1;
 	}
 	
-	@Length(min=0, max=32, message="血管功能评估方法长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="血管功能评估方法长度不能超过 64 个字符")
 	public String getStk_10_2() {
 		return stk_10_2;
 	}
@@ -2101,7 +2099,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_10_2 = stk_10_2;
 	}
 	
-	@Length(min=0, max=32, message="实施卒中健康教育有记录长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="实施卒中健康教育有记录长度不能超过 64 个字符")
 	public String getStk_12_1_3() {
 		return stk_12_1_3;
 	}
@@ -2110,7 +2108,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_12_1_3 = stk_12_1_3;
 	}
 	
-	@Length(min=0, max=32, message="出院时Essen卒中风险评分长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="出院时Essen卒中风险评分长度不能超过 64 个字符")
 	public String getStk_12_1_1() {
 		return stk_12_1_1;
 	}
@@ -2127,7 +2125,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_12_1_2_1 = stk_12_1_2_1;
 	}
 	
-	@Length(min=0, max=32, message="主要风险因素长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主要风险因素长度不能超过 64 个字符")
 	public String getStk_12_2_1() {
 		return stk_12_2_1;
 	}
@@ -2136,7 +2134,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_12_2_1 = stk_12_2_1;
 	}
 	
-	@Length(min=0, max=32, message="其他风险因素长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他风险因素长度不能超过 64 个字符")
 	public String getStk_12_2_2() {
 		return stk_12_2_2;
 	}
@@ -2145,7 +2143,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_12_2_2 = stk_12_2_2;
 	}
 	
-	@Length(min=0, max=32, message="是否有出院时mRS评分长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否有出院时mRS评分长度不能超过 64 个字符")
 	public String getStk_12_4_1() {
 		return stk_12_4_1;
 	}
@@ -2154,7 +2152,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_12_4_1 = stk_12_4_1;
 	}
 	
-	@Length(min=0, max=32, message="出院时mRS评分长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="出院时mRS评分长度不能超过 64 个字符")
 	public String getStk_12_4_2() {
 		return stk_12_4_2;
 	}
@@ -2171,7 +2169,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_12_4_3 = stk_12_4_3;
 	}
 	
-	@Length(min=0, max=32, message="发病的主要原因长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="发病的主要原因长度不能超过 64 个字符")
 	public String getStk_12_4_4() {
 		return stk_12_4_4;
 	}
@@ -2180,7 +2178,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_12_4_4 = stk_12_4_4;
 	}
 	
-	@Length(min=0, max=32, message="其他发病的主要原因长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他发病的主要原因长度不能超过 64 个字符")
 	public String getStk_12_4_4_1() {
 		return stk_12_4_4_1;
 	}
@@ -2189,7 +2187,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_12_4_4_1 = stk_12_4_4_1;
 	}
 	
-	@Length(min=0, max=32, message="交与患者“出院小结”的副本告知患者出院时风险因素长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="交与患者“出院小结”的副本告知患者出院时风险因素长度不能超过 64 个字符")
 	public String getStk_12_3_1() {
 		return stk_12_3_1;
 	}
@@ -2198,7 +2196,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_12_3_1 = stk_12_3_1;
 	}
 	
-	@Length(min=0, max=32, message="出院带药长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="出院带药长度不能超过 64 个字符")
 	public String getStk_12_3_2() {
 		return stk_12_3_2;
 	}
@@ -2207,7 +2205,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_12_3_2 = stk_12_3_2;
 	}
 	
-	@Length(min=0, max=32, message="告知何为风险因素与紧急情况长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="告知何为风险因素与紧急情况长度不能超过 64 个字符")
 	public String getStk_12_3_5() {
 		return stk_12_3_5;
 	}
@@ -2216,7 +2214,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_12_3_5 = stk_12_3_5;
 	}
 	
-	@Length(min=0, max=32, message="告知发生紧急情况时求援救治途径长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="告知发生紧急情况时求援救治途径长度不能超过 64 个字符")
 	public String getStk_12_3_3() {
 		return stk_12_3_3;
 	}
@@ -2225,7 +2223,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_12_3_3 = stk_12_3_3;
 	}
 	
-	@Length(min=0, max=32, message="出院时教育与随访长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="出院时教育与随访长度不能超过 64 个字符")
 	public String getStk_12_3_4() {
 		return stk_12_3_4;
 	}
@@ -2234,7 +2232,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.stk_12_3_4 = stk_12_3_4;
 	}
 	
-	@Length(min=0, max=32, message="离院方式选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="离院方式选择长度不能超过 64 个字符")
 	public String getCm_4_3() {
 		return cm_4_3;
 	}
@@ -2243,7 +2241,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_4_3 = cm_4_3;
 	}
 	
-	@Length(min=0, max=32, message="非医嘱离院可能涉及因素长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="非医嘱离院可能涉及因素长度不能超过 64 个字符")
 	public String getCm_4_5() {
 		return cm_4_5;
 	}
@@ -2252,7 +2250,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_4_5 = cm_4_5;
 	}
 	
-	@Length(min=0, max=32, message="其他非医嘱离院因素填写长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他非医嘱离院因素填写长度不能超过 64 个字符")
 	public String getCm_4_4_1() {
 		return cm_4_4_1;
 	}
@@ -2261,7 +2259,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_4_4_1 = cm_4_4_1;
 	}
 	
-	@Length(min=0, max=32, message="死亡可能涉及因素长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="死亡可能涉及因素长度不能超过 64 个字符")
 	public String getCm_4_6() {
 		return cm_4_6;
 	}
@@ -2270,7 +2268,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_4_6 = cm_4_6;
 	}
 	
-	@Length(min=0, max=32, message="患者是否对服务的体验与评价长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="患者是否对服务的体验与评价长度不能超过 64 个字符")
 	public String getCm_5_1() {
 		return cm_5_1;
 	}
@@ -2279,7 +2277,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_5_1 = cm_5_1;
 	}
 	
-	@Length(min=0, max=32, message="整体医院评级长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="整体医院评级长度不能超过 64 个字符")
 	public String getCm_5_2_1() {
 		return cm_5_2_1;
 	}
@@ -2288,7 +2286,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_5_2_1 = cm_5_2_1;
 	}
 	
-	@Length(min=0, max=32, message="患者推荐长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="患者推荐长度不能超过 64 个字符")
 	public String getCm_5_2_2() {
 		return cm_5_2_2;
 	}
@@ -2297,7 +2295,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_5_2_2 = cm_5_2_2;
 	}
 	
-	@Length(min=0, max=32, message="病房、床单元和卫生间清洁度长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="病房、床单元和卫生间清洁度长度不能超过 64 个字符")
 	public String getCm_5_2_3() {
 		return cm_5_2_3;
 	}
@@ -2306,7 +2304,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_5_2_3 = cm_5_2_3;
 	}
 	
-	@Length(min=0, max=32, message="病房与周边噪音长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="病房与周边噪音长度不能超过 64 个字符")
 	public String getCm_5_2_5() {
 		return cm_5_2_5;
 	}
@@ -2315,7 +2313,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_5_2_5 = cm_5_2_5;
 	}
 	
-	@Length(min=0, max=32, message="医生沟通长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="医生沟通长度不能超过 64 个字符")
 	public String getCm_5_2_6() {
 		return cm_5_2_6;
 	}
@@ -2324,7 +2322,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_5_2_6 = cm_5_2_6;
 	}
 	
-	@Length(min=0, max=32, message="护士沟通长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="护士沟通长度不能超过 64 个字符")
 	public String getCm_5_2_7() {
 		return cm_5_2_7;
 	}
@@ -2333,7 +2331,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_5_2_7 = cm_5_2_7;
 	}
 	
-	@Length(min=0, max=32, message="药师沟通长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="药师沟通长度不能超过 64 个字符")
 	public String getCm_5_2_8() {
 		return cm_5_2_8;
 	}
@@ -2342,7 +2340,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_5_2_8 = cm_5_2_8;
 	}
 	
-	@Length(min=0, max=32, message="康复计划长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="康复计划长度不能超过 64 个字符")
 	public String getCm_5_2_9() {
 		return cm_5_2_9;
 	}
@@ -2351,7 +2349,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_5_2_9 = cm_5_2_9;
 	}
 	
-	@Length(min=0, max=32, message="出院时的知情告知长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="出院时的知情告知长度不能超过 64 个字符")
 	public String getCm_5_2_10() {
 		return cm_5_2_10;
 	}
@@ -2360,7 +2358,7 @@ public class QualityStk extends DataEntity<QualityStk> {
 		this.cm_5_2_10 = cm_5_2_10;
 	}
 	
-	@Length(min=0, max=32, message="膳食评价长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="膳食评价长度不能超过 64 个字符")
 	public String getCm_5_2_11() {
 		return cm_5_2_11;
 	}
