@@ -6,6 +6,11 @@ package com.zebone.quality.modules.dg.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.zebone.quality.domain.UploadService;
+import com.zebone.quality.modules.common.UploadResult;
+import com.zebone.quality.modules.dg.entity.Dg;
+import com.zebone.quality.modules.hf.entity.Hf;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +27,9 @@ import com.jeesite.common.web.BaseController;
 import com.zebone.quality.modules.dg.entity.QualityDg;
 import com.zebone.quality.modules.dg.service.QualityDgService;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.Optional;
+
 /**
  * DG异位妊娠（手术治疗）Controller
  * @author 卡卡西
@@ -33,7 +41,10 @@ public class QualityDgController extends BaseController {
 
 	@Autowired
 	private QualityDgService qualityDgService;
-	
+
+	@Autowired
+	private UploadService uploadService;
+
 	/**
 	 * 获取数据
 	 */
@@ -79,8 +90,16 @@ public class QualityDgController extends BaseController {
 	@RequiresPermissions("dg:qualityDg:edit")
 	@PostMapping(value = "save")
 	@ResponseBody
-	public String save(@Validated QualityDg qualityDg) {
+	public String save(@Validated QualityDg qualityDg) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 		qualityDgService.save(qualityDg);
+		String result = uploadService.upload(qualityDg,new Dg(),"DG");
+		Gson gson = new Gson();
+		UploadResult uploadResult = gson.fromJson(result, UploadResult.class);
+		Integer resultCode = Optional.ofNullable(uploadResult).map(a->a.getCode()).orElse(null);
+		if(resultCode==1000){
+			String errorMessage = Optional.ofNullable(uploadResult).map(a->a.getMessage()).orElse("上传失败");
+			return renderResult(Global.FALSE, text(errorMessage));
+		}
 		return renderResult(Global.TRUE, text("保存DG异位妊娠（手术治疗）成功！"));
 	}
 	

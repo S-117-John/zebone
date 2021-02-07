@@ -3,7 +3,9 @@
  */
 package com.zebone.quality.modules.um.entity;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
+import javax.validation.constraints.NotNull;
 
 import com.jeesite.common.entity.DataEntity;
 import com.jeesite.common.mybatis.annotation.Column;
@@ -13,7 +15,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 /**
  * UM子宫肌瘤（手术治疗）Entity
  * @author 卡卡西
- * @version 2021-01-22
+ * @version 2021-02-06
  */
 @Table(name="quality_um", alias="a", columns={
 		@Column(name="cm_0_1_1_1", attrName="cm_0_1_1_1", label="质控医师"),
@@ -348,6 +350,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		super(id);
 	}
 	
+	@NotBlank(message="质控医师不能为空")
 	@Length(min=0, max=64, message="质控医师长度不能超过 64 个字符")
 	public String getCm_0_1_1_1() {
 		return cm_0_1_1_1;
@@ -357,6 +360,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_0_1_1_1 = cm_0_1_1_1;
 	}
 	
+	@NotBlank(message="质控护士不能为空")
 	@Length(min=0, max=64, message="质控护士长度不能超过 64 个字符")
 	public String getCm_0_1_1_2() {
 		return cm_0_1_1_2;
@@ -366,6 +370,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_0_1_1_2 = cm_0_1_1_2;
 	}
 	
+	@NotBlank(message="主治医师不能为空")
 	@Length(min=0, max=64, message="主治医师长度不能超过 64 个字符")
 	public String getCm_0_1_1_3() {
 		return cm_0_1_1_3;
@@ -375,6 +380,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_0_1_1_3 = cm_0_1_1_3;
 	}
 	
+	@NotBlank(message="责任护士不能为空")
 	@Length(min=0, max=64, message="责任护士长度不能超过 64 个字符")
 	public String getCm_0_1_1_4() {
 		return cm_0_1_1_4;
@@ -384,6 +390,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_0_1_1_4 = cm_0_1_1_4;
 	}
 	
+	@NotBlank(message="上报科室不能为空")
 	@Length(min=0, max=64, message="上报科室长度不能超过 64 个字符")
 	public String getCm_0_1_1_5() {
 		return cm_0_1_1_5;
@@ -393,6 +400,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_0_1_1_5 = cm_0_1_1_5;
 	}
 	
+	@NotBlank(message="患者病案号不能为空")
 	@Length(min=0, max=64, message="患者病案号长度不能超过 64 个字符")
 	public String getCaseid() {
 		return caseid;
@@ -402,6 +410,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.caseid = caseid;
 	}
 	
+	@NotBlank(message="主要诊断ICD-10四位亚目编码与名称不能为空")
 	@Length(min=0, max=64, message="主要诊断ICD-10四位亚目编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_3_1() {
 		return cm_0_1_3_1;
@@ -411,6 +420,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_0_1_3_1 = cm_0_1_3_1;
 	}
 	
+	@NotBlank(message="主要诊断ICD-10六位临床扩展编码与名称不能为空")
 	@Length(min=0, max=64, message="主要诊断ICD-10六位临床扩展编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_3_2() {
 		return cm_0_1_3_2;
@@ -420,6 +430,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_0_1_3_2 = cm_0_1_3_2;
 	}
 	
+	@NotBlank(message="主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称不能为空")
 	@Length(min=0, max=64, message="主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_4_1() {
 		return cm_0_1_4_1;
@@ -429,6 +440,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_0_1_4_1 = cm_0_1_4_1;
 	}
 	
+	@NotBlank(message="主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称不能为空")
 	@Length(min=0, max=64, message="主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_4_2() {
 		return cm_0_1_4_2;
@@ -438,6 +450,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_0_1_4_2 = cm_0_1_4_2;
 	}
 	
+	@NotBlank(message="是否UM出院后31天内重复住院不能为空")
 	@Length(min=0, max=64, message="是否UM出院后31天内重复住院长度不能超过 64 个字符")
 	public String getCm_0_1_5() {
 		return cm_0_1_5;
@@ -447,6 +460,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_0_1_5 = cm_0_1_5;
 	}
 	
+	@NotBlank(message="出生日期不能为空")
 	@Length(min=0, max=64, message="出生日期长度不能超过 64 个字符")
 	public String getCm_0_2_1_1() {
 		return cm_0_2_1_1;
@@ -456,6 +470,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_0_2_1_1 = cm_0_2_1_1;
 	}
 	
+	@NotBlank(message="患者性别不能为空")
 	@Length(min=0, max=64, message="患者性别长度不能超过 64 个字符")
 	public String getCm_0_2_1_2() {
 		return cm_0_2_1_2;
@@ -465,6 +480,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_0_2_1_2 = cm_0_2_1_2;
 	}
 	
+	@NotNull(message="患者体重不能为空")
 	public Double getCm_0_2_1_3() {
 		return cm_0_2_1_3;
 	}
@@ -499,6 +515,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_0_2_2_2 = cm_0_2_2_2;
 	}
 	
+	@NotBlank(message="入院日期时间不能为空")
 	@Length(min=0, max=64, message="入院日期时间长度不能超过 64 个字符")
 	public String getCm_0_2_4_1() {
 		return cm_0_2_4_1;
@@ -508,6 +525,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_0_2_4_1 = cm_0_2_4_1;
 	}
 	
+	@NotBlank(message="出院日期时间不能为空")
 	@Length(min=0, max=64, message="出院日期时间长度不能超过 64 个字符")
 	public String getCm_0_2_4_2() {
 		return cm_0_2_4_2;
@@ -517,6 +535,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_0_2_4_2 = cm_0_2_4_2;
 	}
 	
+	@NotBlank(message="手术开始不能为空")
 	@Length(min=0, max=64, message="手术开始长度不能超过 64 个字符")
 	public String getCm_0_2_6_1() {
 		return cm_0_2_6_1;
@@ -526,6 +545,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_0_2_6_1 = cm_0_2_6_1;
 	}
 	
+	@NotBlank(message="手术结束不能为空")
 	@Length(min=0, max=64, message="手术结束长度不能超过 64 个字符")
 	public String getCm_0_2_6_2() {
 		return cm_0_2_6_2;
@@ -535,6 +555,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_0_2_6_2 = cm_0_2_6_2;
 	}
 	
+	@NotBlank(message="费用支付方式不能为空")
 	@Length(min=0, max=64, message="费用支付方式长度不能超过 64 个字符")
 	public String getCm_0_3_1() {
 		return cm_0_3_1;
@@ -544,6 +565,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_0_3_1 = cm_0_3_1;
 	}
 	
+	@NotBlank(message="收入住院途径不能为空")
 	@Length(min=0, max=64, message="收入住院途径长度不能超过 64 个字符")
 	public String getCm_0_3_2() {
 		return cm_0_3_2;
@@ -553,6 +575,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_0_3_2 = cm_0_3_2;
 	}
 	
+	@NotBlank(message="到院交通工具不能为空")
 	@Length(min=0, max=64, message="到院交通工具长度不能超过 64 个字符")
 	public String getCm_0_3_3() {
 		return cm_0_3_3;
@@ -562,6 +585,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_0_3_3 = cm_0_3_3;
 	}
 	
+	@NotBlank(message="患者评估与知情同意不能为空")
 	@Length(min=0, max=64, message="患者评估与知情同意长度不能超过 64 个字符")
 	public String getUm_1_1_1() {
 		return um_1_1_1;
@@ -580,6 +604,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.um_1_1_1_1 = um_1_1_1_1;
 	}
 	
+	@NotBlank(message="影像学检查评估不能为空")
 	@Length(min=0, max=64, message="影像学检查评估长度不能超过 64 个字符")
 	public String getUm_1_1_2() {
 		return um_1_1_2;
@@ -598,6 +623,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.um_1_1_2_1 = um_1_1_2_1;
 	}
 	
+	@NotBlank(message="肌瘤数目不能为空")
 	@Length(min=0, max=64, message="肌瘤数目长度不能超过 64 个字符")
 	public String getUm_1_1_3() {
 		return um_1_1_3;
@@ -607,6 +633,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.um_1_1_3 = um_1_1_3;
 	}
 	
+	@NotBlank(message="子宫大小不能为空")
 	@Length(min=0, max=64, message="子宫大小长度不能超过 64 个字符")
 	public String getUm_1_1_4() {
 		return um_1_1_4;
@@ -616,6 +643,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.um_1_1_4 = um_1_1_4;
 	}
 	
+	@NotBlank(message="肌瘤大小不能为空")
 	@Length(min=0, max=64, message="肌瘤大小长度不能超过 64 个字符")
 	public String getUm_1_1_5() {
 		return um_1_1_5;
@@ -625,6 +653,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.um_1_1_5 = um_1_1_5;
 	}
 	
+	@NotBlank(message="按生长部位不能为空")
 	@Length(min=0, max=64, message="按生长部位长度不能超过 64 个字符")
 	public String getUm_1_2_1() {
 		return um_1_2_1;
@@ -643,6 +672,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.um_1_2_1_1 = um_1_2_1_1;
 	}
 	
+	@NotBlank(message="子宫肌瘤的分型不能为空")
 	@Length(min=0, max=64, message="子宫肌瘤的分型长度不能超过 64 个字符")
 	public String getUm_1_2_3() {
 		return um_1_2_3;
@@ -652,6 +682,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.um_1_2_3 = um_1_2_3;
 	}
 	
+	@NotBlank(message="是否伴发有全身系统性疾病不能为空")
 	@Length(min=0, max=64, message="是否伴发有全身系统性疾病长度不能超过 64 个字符")
 	public String getUm_1_3_2() {
 		return um_1_3_2;
@@ -679,6 +710,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.um_1_3_1_1 = um_1_3_1_1;
 	}
 	
+	@NotBlank(message="手术治疗符合适应证不能为空")
 	@Length(min=0, max=64, message="手术治疗符合适应证长度不能超过 64 个字符")
 	public String getUm_2_1_1() {
 		return um_2_1_1;
@@ -724,6 +756,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.um_2_1_1_4 = um_2_1_1_4;
 	}
 	
+	@NotBlank(message="是否有手术禁忌证不能为空")
 	@Length(min=0, max=64, message="是否有手术禁忌证长度不能超过 64 个字符")
 	public String getUm_2_1_2_1() {
 		return um_2_1_2_1;
@@ -742,6 +775,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.um_2_1_2 = um_2_1_2;
 	}
 	
+	@NotBlank(message="是否有术前预处理不能为空")
 	@Length(min=0, max=64, message="是否有术前预处理长度不能超过 64 个字符")
 	public String getUm_2_1_3_2() {
 		return um_2_1_3_2;
@@ -769,6 +803,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.um_2_1_3_1 = um_2_1_3_1;
 	}
 	
+	@NotBlank(message="手术途径选择不能为空")
 	@Length(min=0, max=64, message="手术途径选择长度不能超过 64 个字符")
 	public String getUm_2_1_4() {
 		return um_2_1_4;
@@ -886,6 +921,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.um_2_2_2_1 = um_2_2_2_1;
 	}
 	
+	@NotBlank(message="是否使用预防性抗菌药物不能为空")
 	@Length(min=0, max=64, message="是否使用预防性抗菌药物长度不能超过 64 个字符")
 	public String getCm_1_1_1() {
 		return cm_1_1_1;
@@ -1012,6 +1048,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_1_6_3 = cm_1_6_3;
 	}
 	
+	@NotNull(message="术中腹腔内出血量不能为空")
 	public Double getUm_4_1_1() {
 		return um_4_1_1;
 	}
@@ -1020,6 +1057,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.um_4_1_1 = um_4_1_1;
 	}
 	
+	@NotBlank(message="是否实施输血不能为空")
 	@Length(min=0, max=64, message="是否实施输血长度不能超过 64 个字符")
 	public String getUm_4_1_2() {
 		return um_4_1_2;
@@ -1080,6 +1118,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.um_4_2_1_1 = um_4_2_1_1;
 	}
 	
+	@NotBlank(message="是否有治疗中、治疗后并发症不能为空")
 	@Length(min=0, max=64, message="是否有治疗中、治疗后并发症长度不能超过 64 个字符")
 	public String getCm_2_1() {
 		return cm_2_1;
@@ -1251,6 +1290,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.um_5_3_1 = um_5_3_1;
 	}
 	
+	@NotBlank(message="术前不能为空")
 	@Length(min=0, max=64, message="术前长度不能超过 64 个字符")
 	public String getUm_6_1_1() {
 		return um_6_1_1;
@@ -1260,6 +1300,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.um_6_1_1 = um_6_1_1;
 	}
 	
+	@NotBlank(message="术后不能为空")
 	@Length(min=0, max=64, message="术后长度不能超过 64 个字符")
 	public String getUm_6_1_2() {
 		return um_6_1_2;
@@ -1269,6 +1310,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.um_6_1_2 = um_6_1_2;
 	}
 	
+	@NotBlank(message="交与患者“出院小结”的副本告知患者出院时风险因素不能为空")
 	@Length(min=0, max=64, message="交与患者“出院小结”的副本告知患者出院时风险因素长度不能超过 64 个字符")
 	public String getUm_6_2_1() {
 		return um_6_2_1;
@@ -1278,6 +1320,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.um_6_2_1 = um_6_2_1;
 	}
 	
+	@NotBlank(message="出院带药不能为空")
 	@Length(min=0, max=64, message="出院带药长度不能超过 64 个字符")
 	public String getUm_6_2_2() {
 		return um_6_2_2;
@@ -1287,6 +1330,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.um_6_2_2 = um_6_2_2;
 	}
 	
+	@NotBlank(message="告知发生紧急情况时求援救治途径不能为空")
 	@Length(min=0, max=64, message="告知发生紧急情况时求援救治途径长度不能超过 64 个字符")
 	public String getUm_6_2_3() {
 		return um_6_2_3;
@@ -1296,6 +1340,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.um_6_2_3 = um_6_2_3;
 	}
 	
+	@NotBlank(message="出院时教育与随访不能为空")
 	@Length(min=0, max=64, message="出院时教育与随访长度不能超过 64 个字符")
 	public String getUm_6_2_4() {
 		return um_6_2_4;
@@ -1305,6 +1350,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.um_6_2_4 = um_6_2_4;
 	}
 	
+	@NotBlank(message="告知何为风险因素与紧急情况不能为空")
 	@Length(min=0, max=64, message="告知何为风险因素与紧急情况长度不能超过 64 个字符")
 	public String getUm_6_2_5() {
 		return um_6_2_5;
@@ -1314,6 +1360,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.um_6_2_5 = um_6_2_5;
 	}
 	
+	@NotBlank(message="手术野皮肤准备常用方法的选择不能为空")
 	@Length(min=0, max=64, message="手术野皮肤准备常用方法的选择长度不能超过 64 个字符")
 	public String getCm_3_1() {
 		return cm_3_1;
@@ -1323,6 +1370,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_3_1 = cm_3_1;
 	}
 	
+	@NotBlank(message="使用含抗菌剂不能为空")
 	@Length(min=0, max=64, message="使用含抗菌剂长度不能超过 64 个字符")
 	public String getCm_3_2() {
 		return cm_3_2;
@@ -1341,6 +1389,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_3_2_1 = cm_3_2_1;
 	}
 	
+	@NotBlank(message="手术切口类别的选择不能为空")
 	@Length(min=0, max=64, message="手术切口类别的选择长度不能超过 64 个字符")
 	public String getCm_3_3() {
 		return cm_3_3;
@@ -1350,6 +1399,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_3_3 = cm_3_3;
 	}
 	
+	@NotBlank(message="手术切口愈合情况的选择不能为空")
 	@Length(min=0, max=64, message="手术切口愈合情况的选择长度不能超过 64 个字符")
 	public String getCm_3_4() {
 		return cm_3_4;
@@ -1359,6 +1409,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_3_4 = cm_3_4;
 	}
 	
+	@NotBlank(message="离院方式选择不能为空")
 	@Length(min=0, max=64, message="离院方式选择长度不能超过 64 个字符")
 	public String getCm_4_3() {
 		return cm_4_3;
@@ -1395,6 +1446,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_4_6 = cm_4_6;
 	}
 	
+	@NotBlank(message="患者是否对服务的体验与评价不能为空")
 	@Length(min=0, max=64, message="患者是否对服务的体验与评价长度不能超过 64 个字符")
 	public String getCm_5_1() {
 		return cm_5_1;
@@ -1494,6 +1546,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_5_2_11 = cm_5_2_11;
 	}
 	
+	@NotNull(message="住院总费用不能为空")
 	public Double getCm_6_1() {
 		return cm_6_1;
 	}
@@ -1502,6 +1555,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_1 = cm_6_1;
 	}
 	
+	@NotNull(message="住院总费用其中自付金额不能为空")
 	public Double getCm_6_2() {
 		return cm_6_2;
 	}
@@ -1510,6 +1564,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_2 = cm_6_2;
 	}
 	
+	@NotNull(message="一般医疗服务费不能为空")
 	public Double getCm_6_3() {
 		return cm_6_3;
 	}
@@ -1518,6 +1573,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_3 = cm_6_3;
 	}
 	
+	@NotNull(message="一般治疗操作费不能为空")
 	public Double getCm_6_4() {
 		return cm_6_4;
 	}
@@ -1526,6 +1582,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_4 = cm_6_4;
 	}
 	
+	@NotNull(message="护理费不能为空")
 	public Double getCm_6_5() {
 		return cm_6_5;
 	}
@@ -1534,6 +1591,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_5 = cm_6_5;
 	}
 	
+	@NotNull(message="综合医疗服务类其他费用不能为空")
 	public Double getCm_6_6() {
 		return cm_6_6;
 	}
@@ -1542,6 +1600,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_6 = cm_6_6;
 	}
 	
+	@NotNull(message="病理诊断费不能为空")
 	public Double getCm_6_7() {
 		return cm_6_7;
 	}
@@ -1550,6 +1609,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_7 = cm_6_7;
 	}
 	
+	@NotNull(message="实验室诊断费不能为空")
 	public Double getCm_6_8() {
 		return cm_6_8;
 	}
@@ -1558,6 +1618,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_8 = cm_6_8;
 	}
 	
+	@NotNull(message="影像学诊断费不能为空")
 	public Double getCm_6_9() {
 		return cm_6_9;
 	}
@@ -1566,6 +1627,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_9 = cm_6_9;
 	}
 	
+	@NotNull(message="临床诊断项目费不能为空")
 	public Double getCm_6_10() {
 		return cm_6_10;
 	}
@@ -1574,6 +1636,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_10 = cm_6_10;
 	}
 	
+	@NotNull(message="非手术治疗项目费不能为空")
 	public Double getCm_6_11() {
 		return cm_6_11;
 	}
@@ -1582,6 +1645,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_11 = cm_6_11;
 	}
 	
+	@NotNull(message="其中不能为空")
 	public Double getCm_6_12() {
 		return cm_6_12;
 	}
@@ -1590,6 +1654,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_12 = cm_6_12;
 	}
 	
+	@NotNull(message="手术治疗费不能为空")
 	public Double getCm_6_13() {
 		return cm_6_13;
 	}
@@ -1598,6 +1663,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_13 = cm_6_13;
 	}
 	
+	@NotNull(message="其中不能为空")
 	public Double getCm_6_14() {
 		return cm_6_14;
 	}
@@ -1606,6 +1672,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_14 = cm_6_14;
 	}
 	
+	@NotNull(message="其中不能为空")
 	public Double getCm_6_15() {
 		return cm_6_15;
 	}
@@ -1614,6 +1681,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_15 = cm_6_15;
 	}
 	
+	@NotNull(message="康复费不能为空")
 	public Double getCm_6_16() {
 		return cm_6_16;
 	}
@@ -1622,6 +1690,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_16 = cm_6_16;
 	}
 	
+	@NotNull(message="中医治疗费不能为空")
 	public Double getCm_6_17() {
 		return cm_6_17;
 	}
@@ -1630,6 +1699,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_17 = cm_6_17;
 	}
 	
+	@NotNull(message="西药费不能为空")
 	public Double getCm_6_18() {
 		return cm_6_18;
 	}
@@ -1638,6 +1708,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_18 = cm_6_18;
 	}
 	
+	@NotNull(message="其中不能为空")
 	public Double getCm_6_19() {
 		return cm_6_19;
 	}
@@ -1646,6 +1717,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_19 = cm_6_19;
 	}
 	
+	@NotNull(message="中成药费不能为空")
 	public Double getCm_6_20() {
 		return cm_6_20;
 	}
@@ -1654,6 +1726,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_20 = cm_6_20;
 	}
 	
+	@NotNull(message="中草药费不能为空")
 	public Double getCm_6_21() {
 		return cm_6_21;
 	}
@@ -1662,6 +1735,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_21 = cm_6_21;
 	}
 	
+	@NotNull(message="血费不能为空")
 	public Double getCm_6_22() {
 		return cm_6_22;
 	}
@@ -1670,6 +1744,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_22 = cm_6_22;
 	}
 	
+	@NotNull(message="白蛋白类制品费不能为空")
 	public Double getCm_6_23() {
 		return cm_6_23;
 	}
@@ -1678,6 +1753,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_23 = cm_6_23;
 	}
 	
+	@NotNull(message="球蛋白类制品费不能为空")
 	public Double getCm_6_24() {
 		return cm_6_24;
 	}
@@ -1686,6 +1762,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_24 = cm_6_24;
 	}
 	
+	@NotNull(message="凝血因子类制品费不能为空")
 	public Double getCm_6_25() {
 		return cm_6_25;
 	}
@@ -1694,6 +1771,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_25 = cm_6_25;
 	}
 	
+	@NotNull(message="细胞因子类制品费不能为空")
 	public Double getCm_6_26() {
 		return cm_6_26;
 	}
@@ -1702,6 +1780,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_26 = cm_6_26;
 	}
 	
+	@NotNull(message="检查用一次性医用材料费不能为空")
 	public Double getCm_6_27() {
 		return cm_6_27;
 	}
@@ -1710,6 +1789,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_27 = cm_6_27;
 	}
 	
+	@NotNull(message="治疗用一次性医用材料费不能为空")
 	public Double getCm_6_28() {
 		return cm_6_28;
 	}
@@ -1718,6 +1798,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_28 = cm_6_28;
 	}
 	
+	@NotNull(message="手术用一次性医用材料费不能为空")
 	public Double getCm_6_29() {
 		return cm_6_29;
 	}
@@ -1726,6 +1807,7 @@ public class QualityUm extends DataEntity<QualityUm> {
 		this.cm_6_29 = cm_6_29;
 	}
 	
+	@NotNull(message="其他费不能为空")
 	public Double getCm_6_30() {
 		return cm_6_30;
 	}
