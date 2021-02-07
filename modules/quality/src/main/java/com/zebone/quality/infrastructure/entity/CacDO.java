@@ -7,10 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
-//@Entity
-//@Table(name = "QUALITY_CAC")
+@Entity
+@Table(name = "QUALITY_CAC")
 @Data
 public class CacDO extends DataEntity{
+
 
     @Column(columnDefinition = "varchar(64) COMMENT '质控医师'")
     private String cm_0_1_1_1;
@@ -34,7 +35,7 @@ public class CacDO extends DataEntity{
     private String cm_0_1_4_2;
     @Column(columnDefinition = "varchar(64) COMMENT '是否出院后31天内重复住院'")
     private String cm_0_1_5;
-    @Column(columnDefinition = "varchar(64) COMMENT '出生日期'")
+    @Column(columnDefinition = "datetime COMMENT '出生日期'")
     private Date cm_0_2_1_1;
     @Column(columnDefinition = "varchar(64) COMMENT '患者性别'")
     private String cm_0_2_1_2;
@@ -44,19 +45,19 @@ public class CacDO extends DataEntity{
     private Double cm_0_2_1_5;
     @Column(columnDefinition = "varchar(64) COMMENT '发病日期时间是否无法确定或无记录'")
     private String cm_0_2_2_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '发病日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '发病日期时间'")
     private Date cm_0_2_2_2;
     @Column(columnDefinition = "varchar(64) COMMENT '到达本院急诊或者门诊日期时间是否无法确定或无记录'")
     private String cm_0_2_3_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '到达本院急诊或者门诊日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '到达本院急诊或者门诊日期时间'")
     private Date cm_0_2_3_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '入院日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '入院日期时间'")
     private Date cm_0_2_4_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '出院日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '出院日期时间'")
     private Date cm_0_2_4_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '入住ICU/RICU日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '入住ICU/RICU日期时间'")
     private Date cm_0_2_5_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '离开ICU/RICU日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '离开ICU/RICU日期时间'")
     private Date cm_0_2_5_2;
     @Column(columnDefinition = "varchar(64) COMMENT '费用支付方式'")
     private String cm_0_3_1;
@@ -112,9 +113,9 @@ public class CacDO extends DataEntity{
     private String cac_5_1_2;
     @Column(columnDefinition = "varchar(64) COMMENT '其他糖皮质激素治疗途径'")
     private String cac_5_1_2_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '全身糖皮质激素使用医嘱起始日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '全身糖皮质激素使用医嘱起始日期时间'")
     private Date cac_5_2_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '全身糖皮质激素使用医嘱终止日期'")
+    @Column(columnDefinition = "datetime COMMENT '全身糖皮质激素使用医嘱终止日期'")
     private Date cac_5_2_2;
     @Column(columnDefinition = "double COMMENT '全身糖皮质激素使用天数'")
     private Double cac_5_2_3;
@@ -150,7 +151,7 @@ public class CacDO extends DataEntity{
     private String cac_8_1_4_1;
     @Column(columnDefinition = "varchar(64) COMMENT '是否入院24小时内是否应用抗菌药物'")
     private String cac_8_2_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '患者接受首剂抗菌药物治疗（注射剂输入/注射）时间'")
+    @Column(columnDefinition = "datetime COMMENT '患者接受首剂抗菌药物治疗（注射剂输入/注射）时间'")
     private Date cac_8_2_2;
     @Column(columnDefinition = "varchar(64) COMMENT '接受首剂抗菌药物使用时机'")
     private String cac_8_2_3;
@@ -194,9 +195,9 @@ public class CacDO extends DataEntity{
     private String cac_9_1_2;
     @Column(columnDefinition = "varchar(64) COMMENT '其他机械通气应用指征'")
     private String cac_9_1_2_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '患者机械通气起始日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '患者机械通气起始日期时间'")
     private Date cac_9_1_3;
-    @Column(columnDefinition = "varchar(64) COMMENT '患者机械通气终止日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '患者机械通气终止日期时间'")
     private Date cac_9_1_4;
     @Column(columnDefinition = "double COMMENT '机械通气疗程（小时）'")
     private Double cac_9_1_5;

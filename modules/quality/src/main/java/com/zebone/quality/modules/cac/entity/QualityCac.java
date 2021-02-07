@@ -15,9 +15,9 @@ import com.jeesite.common.mybatis.annotation.Table;
 import com.jeesite.common.mybatis.mapper.query.QueryType;
 
 /**
- * quality_cacEntity
+ * CAC哮喘（成人，急性发作，住院）Entity
  * @author 卡卡西
- * @version 2021-01-27
+ * @version 2021-02-07
  */
 @Table(name="quality_cac", alias="a", columns={
 		@Column(name="cm_0_1_1_1", attrName="cm_0_1_1_1", label="质控医师"),
@@ -41,8 +41,8 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_0_2_3_2", attrName="cm_0_2_3_2", label="到达本院急诊或者门诊日期时间"),
 		@Column(name="cm_0_2_4_1", attrName="cm_0_2_4_1", label="入院日期时间"),
 		@Column(name="cm_0_2_4_2", attrName="cm_0_2_4_2", label="出院日期时间"),
-		@Column(name="cm_0_2_5_1", attrName="cm_0_2_5_1", label="入住CCU日期时间"),
-		@Column(name="cm_0_2_5_2", attrName="cm_0_2_5_2", label="离开CCU日期时间"),
+		@Column(name="cm_0_2_5_1", attrName="cm_0_2_5_1", label="入住ICU/RICU日期时间"),
+		@Column(name="cm_0_2_5_2", attrName="cm_0_2_5_2", label="离开ICU/RICU日期时间"),
 		@Column(name="cm_0_3_1", attrName="cm_0_3_1", label="费用支付方式"),
 		@Column(name="cm_0_3_2", attrName="cm_0_3_2", label="收入住院途径"),
 		@Column(name="cm_0_3_3", attrName="cm_0_3_3", label="到院交通工具"),
@@ -202,8 +202,8 @@ public class QualityCac extends DataEntity<QualityCac> {
 	private Date cm_0_2_3_2;		// 到达本院急诊或者门诊日期时间
 	private Date cm_0_2_4_1;		// 入院日期时间
 	private Date cm_0_2_4_2;		// 出院日期时间
-	private Date cm_0_2_5_1;		// 入住CCU日期时间
-	private Date cm_0_2_5_2;		// 离开CCU日期时间
+	private Date cm_0_2_5_1;		// 入住ICU/RICU日期时间
+	private Date cm_0_2_5_2;		// 离开ICU/RICU日期时间
 	private String cm_0_3_1;		// 费用支付方式
 	private String cm_0_3_2;		// 收入住院途径
 	private String cm_0_3_3;		// 到院交通工具
@@ -231,8 +231,8 @@ public class QualityCac extends DataEntity<QualityCac> {
 	private String cac_5_1_1;		// 是否使用全身糖皮质激素
 	private String cac_5_1_2;		// 糖皮质激素选择
 	private String cac_5_1_2_1;		// 其他糖皮质激素治疗途径
-	private String cac_5_2_1;		// 全身糖皮质激素使用医嘱起始日期时间
-	private String cac_5_2_2;		// 全身糖皮质激素使用医嘱终止日期
+	private Date cac_5_2_1;		// 全身糖皮质激素使用医嘱起始日期时间
+	private Date cac_5_2_2;		// 全身糖皮质激素使用医嘱终止日期
 	private Double cac_5_2_3;		// 全身糖皮质激素使用天数
 	private String cac_6_1_1;		// 患者病情稳定出院前是否开始应用控制性药物
 	private String cac_6_2_1;		// 控制药物使用情况
@@ -250,7 +250,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 	private String cac_8_1_4;		// 胸部影像学检查评估
 	private String cac_8_1_4_1;		// 其他胸部影像学检查评估
 	private String cac_8_2_1;		// 是否入院24小时内是否应用抗菌药物
-	private String cac_8_2_2;		// 患者接受首剂抗菌药物治疗（注射剂输入/注射）时间
+	private Date cac_8_2_2;		// 患者接受首剂抗菌药物治疗（注射剂输入/注射）时间
 	private String cac_8_2_3;		// 接受首剂抗菌药物使用时机
 	private Double cac_8_2_3_r;		// nan
 	private String cac_8_3_1;		// 入院后是否进行首次病原学检测
@@ -272,8 +272,8 @@ public class QualityCac extends DataEntity<QualityCac> {
 	private String cac_9_1_1;		// 是否实施机械通气
 	private String cac_9_1_2;		// 机械通气应用指征
 	private String cac_9_1_2_1;		// 其他机械通气应用指征
-	private String cac_9_1_3;		// 患者机械通气起始日期时间
-	private String cac_9_1_4;		// 患者机械通气终止日期时间
+	private Date cac_9_1_3;		// 患者机械通气起始日期时间
+	private Date cac_9_1_4;		// 患者机械通气终止日期时间
 	private Double cac_9_1_5;		// 机械通气疗程（小时）
 	private String cac_10_1_1;		// 是否有肺动脉高压和右心功能不全
 	private String cac_10_1_2;		// 首次处置血管扩张剂（无禁忌症）的选择
@@ -344,7 +344,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		super(id);
 	}
 	
-	@Length(min=0, max=32, message="质控医师长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="质控医师长度不能超过 64 个字符")
 	public String getCm_0_1_1_1() {
 		return cm_0_1_1_1;
 	}
@@ -353,7 +353,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_0_1_1_1 = cm_0_1_1_1;
 	}
 	
-	@Length(min=0, max=32, message="质控护士长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="质控护士长度不能超过 64 个字符")
 	public String getCm_0_1_1_2() {
 		return cm_0_1_1_2;
 	}
@@ -362,7 +362,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_0_1_1_2 = cm_0_1_1_2;
 	}
 	
-	@Length(min=0, max=32, message="主治医师长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主治医师长度不能超过 64 个字符")
 	public String getCm_0_1_1_3() {
 		return cm_0_1_1_3;
 	}
@@ -371,7 +371,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_0_1_1_3 = cm_0_1_1_3;
 	}
 	
-	@Length(min=0, max=32, message="责任护士长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="责任护士长度不能超过 64 个字符")
 	public String getCm_0_1_1_4() {
 		return cm_0_1_1_4;
 	}
@@ -380,7 +380,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_0_1_1_4 = cm_0_1_1_4;
 	}
 	
-	@Length(min=0, max=32, message="上报科室长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="上报科室长度不能超过 64 个字符")
 	public String getCm_0_1_1_5() {
 		return cm_0_1_1_5;
 	}
@@ -398,7 +398,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.caseid = caseid;
 	}
 	
-	@Length(min=0, max=32, message="主要诊断ICD-10四位亚目编码与名称长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主要诊断ICD-10四位亚目编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_3_1() {
 		return cm_0_1_3_1;
 	}
@@ -407,7 +407,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_0_1_3_1 = cm_0_1_3_1;
 	}
 	
-	@Length(min=0, max=32, message="主要诊断ICD-10六位临床扩展编码与名称长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主要诊断ICD-10六位临床扩展编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_3_2() {
 		return cm_0_1_3_2;
 	}
@@ -416,7 +416,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_0_1_3_2 = cm_0_1_3_2;
 	}
 	
-	@Length(min=0, max=32, message="主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_4_1() {
 		return cm_0_1_4_1;
 	}
@@ -425,7 +425,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_0_1_4_1 = cm_0_1_4_1;
 	}
 	
-	@Length(min=0, max=32, message="主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_4_2() {
 		return cm_0_1_4_2;
 	}
@@ -434,7 +434,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_0_1_4_2 = cm_0_1_4_2;
 	}
 	
-	@Length(min=0, max=32, message="是否出院后31天内重复住院长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否出院后31天内重复住院长度不能超过 64 个字符")
 	public String getCm_0_1_5() {
 		return cm_0_1_5;
 	}
@@ -452,7 +452,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_0_2_1_1 = cm_0_2_1_1;
 	}
 	
-	@Length(min=0, max=32, message="患者性别长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="患者性别长度不能超过 64 个字符")
 	public String getCm_0_2_1_2() {
 		return cm_0_2_1_2;
 	}
@@ -477,7 +477,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_0_2_1_5 = cm_0_2_1_5;
 	}
 	
-	@Length(min=0, max=32, message="发病日期时间是否无法确定或无记录长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="发病日期时间是否无法确定或无记录长度不能超过 64 个字符")
 	public String getCm_0_2_2_1() {
 		return cm_0_2_2_1;
 	}
@@ -495,7 +495,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_0_2_2_2 = cm_0_2_2_2;
 	}
 	
-	@Length(min=0, max=32, message="到达本院急诊或者门诊日期时间是否无法确定或无记录长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="到达本院急诊或者门诊日期时间是否无法确定或无记录长度不能超过 64 个字符")
 	public String getCm_0_2_3_1() {
 		return cm_0_2_3_1;
 	}
@@ -549,7 +549,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_0_2_5_2 = cm_0_2_5_2;
 	}
 	
-	@Length(min=0, max=32, message="费用支付方式长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="费用支付方式长度不能超过 64 个字符")
 	public String getCm_0_3_1() {
 		return cm_0_3_1;
 	}
@@ -558,7 +558,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_0_3_1 = cm_0_3_1;
 	}
 	
-	@Length(min=0, max=32, message="收入住院途径长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="收入住院途径长度不能超过 64 个字符")
 	public String getCm_0_3_2() {
 		return cm_0_3_2;
 	}
@@ -567,7 +567,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_0_3_2 = cm_0_3_2;
 	}
 	
-	@Length(min=0, max=32, message="到院交通工具长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="到院交通工具长度不能超过 64 个字符")
 	public String getCm_0_3_3() {
 		return cm_0_3_3;
 	}
@@ -790,21 +790,21 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cac_5_1_2_1 = cac_5_1_2_1;
 	}
 	
-	@Length(min=0, max=64, message="全身糖皮质激素使用医嘱起始日期时间长度不能超过 64 个字符")
-	public String getCac_5_2_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCac_5_2_1() {
 		return cac_5_2_1;
 	}
 
-	public void setCac_5_2_1(String cac_5_2_1) {
+	public void setCac_5_2_1(Date cac_5_2_1) {
 		this.cac_5_2_1 = cac_5_2_1;
 	}
 	
-	@Length(min=0, max=64, message="全身糖皮质激素使用医嘱终止日期长度不能超过 64 个字符")
-	public String getCac_5_2_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCac_5_2_2() {
 		return cac_5_2_2;
 	}
 
-	public void setCac_5_2_2(String cac_5_2_2) {
+	public void setCac_5_2_2(Date cac_5_2_2) {
 		this.cac_5_2_2 = cac_5_2_2;
 	}
 	
@@ -959,12 +959,12 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cac_8_2_1 = cac_8_2_1;
 	}
 	
-	@Length(min=0, max=64, message="患者接受首剂抗菌药物治疗长度不能超过 64 个字符")
-	public String getCac_8_2_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCac_8_2_2() {
 		return cac_8_2_2;
 	}
 
-	public void setCac_8_2_2(String cac_8_2_2) {
+	public void setCac_8_2_2(Date cac_8_2_2) {
 		this.cac_8_2_2 = cac_8_2_2;
 	}
 	
@@ -1156,21 +1156,21 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cac_9_1_2_1 = cac_9_1_2_1;
 	}
 	
-	@Length(min=0, max=64, message="患者机械通气起始日期时间长度不能超过 64 个字符")
-	public String getCac_9_1_3() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCac_9_1_3() {
 		return cac_9_1_3;
 	}
 
-	public void setCac_9_1_3(String cac_9_1_3) {
+	public void setCac_9_1_3(Date cac_9_1_3) {
 		this.cac_9_1_3 = cac_9_1_3;
 	}
 	
-	@Length(min=0, max=64, message="患者机械通气终止日期时间长度不能超过 64 个字符")
-	public String getCac_9_1_4() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCac_9_1_4() {
 		return cac_9_1_4;
 	}
 
-	public void setCac_9_1_4(String cac_9_1_4) {
+	public void setCac_9_1_4(Date cac_9_1_4) {
 		this.cac_9_1_4 = cac_9_1_4;
 	}
 	
@@ -1317,7 +1317,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cac_11_2_5 = cac_11_2_5;
 	}
 	
-	@Length(min=0, max=32, message="离院方式选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="离院方式选择长度不能超过 64 个字符")
 	public String getCm_4_3() {
 		return cm_4_3;
 	}
@@ -1326,7 +1326,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_4_3 = cm_4_3;
 	}
 	
-	@Length(min=0, max=32, message="非医嘱离院可能涉及因素长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="非医嘱离院可能涉及因素长度不能超过 64 个字符")
 	public String getCm_4_5() {
 		return cm_4_5;
 	}
@@ -1335,7 +1335,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_4_5 = cm_4_5;
 	}
 	
-	@Length(min=0, max=32, message="其他非医嘱离院因素填写长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他非医嘱离院因素填写长度不能超过 64 个字符")
 	public String getCm_4_4_1() {
 		return cm_4_4_1;
 	}
@@ -1344,7 +1344,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_4_4_1 = cm_4_4_1;
 	}
 	
-	@Length(min=0, max=32, message="死亡可能涉及因素长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="死亡可能涉及因素长度不能超过 64 个字符")
 	public String getCm_4_6() {
 		return cm_4_6;
 	}
@@ -1353,7 +1353,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_4_6 = cm_4_6;
 	}
 	
-	@Length(min=0, max=32, message="患者是否对服务的体验与评价长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="患者是否对服务的体验与评价长度不能超过 64 个字符")
 	public String getCm_5_1() {
 		return cm_5_1;
 	}
@@ -1362,7 +1362,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_5_1 = cm_5_1;
 	}
 	
-	@Length(min=0, max=32, message="整体医院评级长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="整体医院评级长度不能超过 64 个字符")
 	public String getCm_5_2_1() {
 		return cm_5_2_1;
 	}
@@ -1371,7 +1371,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_5_2_1 = cm_5_2_1;
 	}
 	
-	@Length(min=0, max=32, message="患者推荐长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="患者推荐长度不能超过 64 个字符")
 	public String getCm_5_2_2() {
 		return cm_5_2_2;
 	}
@@ -1380,7 +1380,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_5_2_2 = cm_5_2_2;
 	}
 	
-	@Length(min=0, max=32, message="病房、床单元和卫生间清洁度长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="病房、床单元和卫生间清洁度长度不能超过 64 个字符")
 	public String getCm_5_2_3() {
 		return cm_5_2_3;
 	}
@@ -1389,7 +1389,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_5_2_3 = cm_5_2_3;
 	}
 	
-	@Length(min=0, max=32, message="病房与周边噪音长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="病房与周边噪音长度不能超过 64 个字符")
 	public String getCm_5_2_5() {
 		return cm_5_2_5;
 	}
@@ -1398,7 +1398,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_5_2_5 = cm_5_2_5;
 	}
 	
-	@Length(min=0, max=32, message="医生沟通长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="医生沟通长度不能超过 64 个字符")
 	public String getCm_5_2_6() {
 		return cm_5_2_6;
 	}
@@ -1407,7 +1407,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_5_2_6 = cm_5_2_6;
 	}
 	
-	@Length(min=0, max=32, message="护士沟通长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="护士沟通长度不能超过 64 个字符")
 	public String getCm_5_2_7() {
 		return cm_5_2_7;
 	}
@@ -1416,7 +1416,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_5_2_7 = cm_5_2_7;
 	}
 	
-	@Length(min=0, max=32, message="药师沟通长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="药师沟通长度不能超过 64 个字符")
 	public String getCm_5_2_8() {
 		return cm_5_2_8;
 	}
@@ -1425,7 +1425,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_5_2_8 = cm_5_2_8;
 	}
 	
-	@Length(min=0, max=32, message="康复计划长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="康复计划长度不能超过 64 个字符")
 	public String getCm_5_2_9() {
 		return cm_5_2_9;
 	}
@@ -1434,7 +1434,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_5_2_9 = cm_5_2_9;
 	}
 	
-	@Length(min=0, max=32, message="出院时的知情告知长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="出院时的知情告知长度不能超过 64 个字符")
 	public String getCm_5_2_10() {
 		return cm_5_2_10;
 	}
@@ -1443,7 +1443,7 @@ public class QualityCac extends DataEntity<QualityCac> {
 		this.cm_5_2_10 = cm_5_2_10;
 	}
 	
-	@Length(min=0, max=32, message="膳食评价长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="膳食评价长度不能超过 64 个字符")
 	public String getCm_5_2_11() {
 		return cm_5_2_11;
 	}

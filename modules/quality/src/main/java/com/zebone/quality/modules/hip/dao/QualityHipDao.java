@@ -10,7 +10,7 @@ import com.zebone.quality.modules.hip.entity.QualityHip;
 /**
  * Hip髋关节置换术DAO接口
  * @author 卡卡西
- * @version 2021-01-21
+ * @version 2021-02-07
  */
 @MyBatisDao
 public interface QualityHipDao extends CrudDao<QualityHip> {

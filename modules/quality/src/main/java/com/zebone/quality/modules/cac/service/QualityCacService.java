@@ -14,9 +14,9 @@ import com.zebone.quality.modules.cac.entity.QualityCac;
 import com.zebone.quality.modules.cac.dao.QualityCacDao;
 
 /**
- * quality_cacService
+ * CAC哮喘（成人，急性发作，住院）Service
  * @author 卡卡西
- * @version 2021-01-27
+ * @version 2021-02-07
  */
 @Service
 @Transactional(readOnly=true)

@@ -13,6 +13,19 @@
 			<div class="box-body">
 				<div class="form-unit">${text('基本信息')}</div>
 				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('患者病案号')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-7">
+								<#form:input path="caseid" maxlength="64" class="form-control"/>
+							</div>
+							<div class="col-sm-3">
+								<button type="button" class="btn btn-sm btn-primary" id="patientSubmit" onclick="importPatient('hf/qualityHf')"><i class="fa fa-check"></i> ${text('导入患者信息')}</button>&nbsp;
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -68,17 +81,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('患者病案号')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-10">
-								<#form:input path="caseid" maxlength="64" class="form-control"/>
-							</div>
-						</div>
-					</div>
-				</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -151,7 +154,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否出院后31天内重复住院')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_0_1_5" dictType="HIP_CM_0_1_5" blankOption="true" class="form-control" />
+								<#form:radio path="cm_0_1_5" dictType="HIP_CM_0_1_5" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -174,7 +177,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('患者性别')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_0_2_1_2" dictType="HIP_CM_0_2_1_2" blankOption="true" class="form-control" />
+								<#form:radio path="cm_0_2_1_2" dictType="HIP_CM_0_2_1_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -321,7 +324,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否实施髋关节功能评估')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="hip_1_2_1" dictType="HIP_1_2_1" blankOption="true" class="form-control" />
+								<#form:radio path="hip_1_2_1" dictType="HIP_1_2_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -409,7 +412,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否使用预防性抗菌药物')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_1_1_1" dictType="HIP_CM_1_1_1" blankOption="true" class="form-control" />
+								<#form:radio path="cm_1_1_1" dictType="HIP_CM_1_1_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -565,7 +568,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('有无实施手术患者静脉血栓栓塞症风险评估')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="hip_3_1_1" dictType="HIP_3_1_1" blankOption="true" class="form-control" />
+								<#form:radio path="hip_3_1_1" dictType="HIP_3_1_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -598,7 +601,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('临床常用检测方法')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="hip_3_1_8" dictType="HIP_3_1_8" blankOption="true" class="form-control" />
+								<#form:checkbox path="hip_3_1_8" dictType="HIP_3_1_8" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -609,7 +612,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('有无实施预防术后深静脉血栓措施的禁忌')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="hip_3_2_1" dictType="HIP_3_2_1" blankOption="true" class="form-control" />
+								<#form:radio path="hip_3_2_1" dictType="HIP_3_2_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -665,7 +668,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('基本预防措施')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="hip_3_3_1_1" dictType="HIP_3_3_1_1" blankOption="true" class="form-control" />
+								<#form:checkbox path="hip_3_3_1_1" dictType="HIP_3_3_1_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -767,7 +770,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否实施输血')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="hip_4_1_1" dictType="HIP_4_1_1" blankOption="true" class="form-control" />
+								<#form:radio path="hip_4_1_1" dictType="HIP_4_1_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -855,7 +858,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否康复治疗前评估')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="hip_5_1_1" dictType="HIP_5_1_1" blankOption="true" class="form-control" />
+								<#form:radio path="hip_5_1_1" dictType="HIP_5_1_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -911,7 +914,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否进行手术后镇痛治疗')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="hip_5_2_1_1" dictType="HIP_5_2_1_1" blankOption="true" class="form-control" />
+								<#form:radio path="hip_5_2_1_1" dictType="HIP_5_2_1_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -988,7 +991,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否有手术后并发症')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_2_1" dictType="HIP_CM_2_1" blankOption="true" class="form-control" />
+								<#form:radio path="cm_2_1" dictType="HIP_CM_2_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1197,7 +1200,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否伴有内科原有疾病治疗')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="hip_6_2_1_1" dictType="HIP_6_2_1_1" blankOption="true" class="form-control" />
+								<#form:radio path="hip_6_2_1_1" dictType="HIP_6_2_1_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1241,7 +1244,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('入院宣教')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="hip_7_1_1" dictType="HIP_7_1_1" blankOption="true" class="form-control" />
+								<#form:checkbox path="hip_7_1_1" dictType="HIP_7_1_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1252,7 +1255,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('术前一日的健康教育')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="hip_7_1_2" dictType="HIP_7_1_2" blankOption="true" class="form-control" />
+								<#form:checkbox path="hip_7_1_2" dictType="HIP_7_1_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1263,7 +1266,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('术后六小时内的健康教育')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="hip_7_1_3" dictType="HIP_7_1_3" blankOption="true" class="form-control" />
+								<#form:checkbox path="hip_7_1_3" dictType="HIP_7_1_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1274,7 +1277,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('术后六小时至二十四小时的健康教育')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="hip_7_1_4" dictType="HIP_7_1_4" blankOption="true" class="form-control" />
+								<#form:checkbox path="hip_7_1_4" dictType="HIP_7_1_4" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1285,7 +1288,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('术后一周内健康教育')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="hip_7_1_5" dictType="HIP_7_1_5" blankOption="true" class="form-control" />
+								<#form:checkbox path="hip_7_1_5" dictType="HIP_7_1_5" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1296,7 +1299,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('术后一周后健康教育')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="hip_7_1_6" dictType="HIP_7_1_6" blankOption="true" class="form-control" />
+								<#form:checkbox path="hip_7_1_6" dictType="HIP_7_1_6" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1307,7 +1310,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('为患者提供出院前健康教育')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="hip_7_1_7" dictType="HIP_7_1_7" blankOption="true" class="form-control" />
+								<#form:checkbox path="hip_7_1_7" dictType="HIP_7_1_7" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1417,7 +1420,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('患者是否对服务的体验与评价')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_5_1" dictType="HIP_CM_5_1" blankOption="true" class="form-control" />
+								<#form:radio path="cm_5_1" dictType="HIP_CM_5_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1903,3 +1906,30 @@ $("#inputForm").validate({
     }
 });
 </script>
+<script>
+	function importPatient(url){
+		$.ajax({
+			url:'${ctx}/api/emr/emrHomePage/commonData',
+			type: "POST",
+			data: {patNo: $("#caseid").val()},
+			success:function (data){
+				var obj = JSON.parse(data);
+				for(var key in obj){
+					$("#"+key.toLowerCase()).val(obj[key])
+				}
+			}
+		});
+	}
+
+
+	// $("input[type=checkbox]").each(function (){
+	// 	$('#'+$(this).attr("id")).on('ifUnchecked', function(){
+	// 		$(this).removeAttr("checked")
+	// 		$(this).val("")
+	// 	});
+	// });
+
+
+
+</script>
+<link href="${ctxStatic}/quality_common.css" rel="stylesheet"/>
