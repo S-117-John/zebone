@@ -10,7 +10,7 @@ import com.zebone.quality.modules.knee.entity.QualityKnee;
 /**
  * Knee膝关节置换术DAO接口
  * @author 卡卡西
- * @version 2021-01-22
+ * @version 2021-02-07
  */
 @MyBatisDao
 public interface QualityKneeDao extends CrudDao<QualityKnee> {

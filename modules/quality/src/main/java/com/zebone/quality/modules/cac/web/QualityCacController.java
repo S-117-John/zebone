@@ -6,6 +6,11 @@ package com.zebone.quality.modules.cac.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.zebone.quality.domain.UploadService;
+import com.zebone.quality.modules.cac.entity.Cac;
+import com.zebone.quality.modules.capadult.entity.CapAdult;
+import com.zebone.quality.modules.common.UploadResult;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,10 +27,13 @@ import com.jeesite.common.web.BaseController;
 import com.zebone.quality.modules.cac.entity.QualityCac;
 import com.zebone.quality.modules.cac.service.QualityCacService;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.Optional;
+
 /**
- * quality_cacController
+ * CAC哮喘（成人，急性发作，住院）Controller
  * @author 卡卡西
- * @version 2021-01-27
+ * @version 2021-02-07
  */
 @Controller
 @RequestMapping(value = "${adminPath}/cac/qualityCac")
@@ -73,14 +81,27 @@ public class QualityCacController extends BaseController {
 		return "modules/cac/qualityCacForm";
 	}
 
+	@Autowired
+	private UploadService uploadService;
+
 	/**
 	 * 保存CAC哮喘（成人，急性发作，住院）
 	 */
 	@RequiresPermissions("cac:qualityCac:edit")
 	@PostMapping(value = "save")
 	@ResponseBody
-	public String save(@Validated QualityCac qualityCac) {
+	public String save(@Validated QualityCac qualityCac) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 		qualityCacService.save(qualityCac);
+
+		String result = uploadService.upload(qualityCac,new Cac(),"CAC");
+		Gson gson = new Gson();
+		UploadResult uploadResult = gson.fromJson(result, UploadResult.class);
+		Integer resultCode = Optional.ofNullable(uploadResult).map(a->a.getCode()).orElse(null);
+		if(resultCode==1000){
+			String errorMessage = Optional.ofNullable(uploadResult).map(a->a.getMessage()).orElse("上传失败");
+			return renderResult(Global.FALSE, text(errorMessage));
+		}
+
 		return renderResult(Global.TRUE, text("保存CAC哮喘（成人，急性发作，住院）成功！"));
 	}
 	

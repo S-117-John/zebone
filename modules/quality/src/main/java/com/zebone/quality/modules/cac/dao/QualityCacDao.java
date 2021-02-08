@@ -8,9 +8,9 @@ import com.jeesite.common.mybatis.annotation.MyBatisDao;
 import com.zebone.quality.modules.cac.entity.QualityCac;
 
 /**
- * quality_cacDAO接口
+ * CAC哮喘（成人，急性发作，住院）DAO接口
  * @author 卡卡西
- * @version 2021-01-27
+ * @version 2021-02-07
  */
 @MyBatisDao
 public interface QualityCacDao extends CrudDao<QualityCac> {

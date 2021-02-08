@@ -4,6 +4,10 @@
 package com.zebone.quality.modules.knee.entity;
 
 import org.hibernate.validator.constraints.Length;
+import java.util.Date;
+import com.jeesite.common.mybatis.annotation.JoinTable;
+import com.jeesite.common.mybatis.annotation.JoinTable.Type;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import com.jeesite.common.entity.DataEntity;
 import com.jeesite.common.mybatis.annotation.Column;
@@ -13,7 +17,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 /**
  * Knee膝关节置换术Entity
  * @author 卡卡西
- * @version 2021-01-22
+ * @version 2021-02-07
  */
 @Table(name="quality_knee", alias="a", columns={
 		@Column(name="cm_0_1_1_1", attrName="cm_0_1_1_1", label="质控医师"),
@@ -26,6 +30,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_0_1_3_2", attrName="cm_0_1_3_2", label="主要诊断ICD-10六位临床扩展编码与名称"),
 		@Column(name="knee_0_1_4_1", attrName="knee_0_1_4_1", label="其他主耍诊断ICD-10六位临床扩展编码与名称"),
 		@Column(name="cm_0_1_4_1", attrName="cm_0_1_4_1", label="主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称"),
+		@Column(name="id", attrName="id", label="id", isPK=true),
 		@Column(name="cm_0_1_4_2", attrName="cm_0_1_4_2", label="主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称"),
 		@Column(name="knee_0_1_3_1", attrName="knee_0_1_3_1", label="其他主要手术操作ICD-9-CM-3六位临床扩展编码与名称"),
 		@Column(name="cm_0_1_5", attrName="cm_0_1_5", label="是否出院后31天内重复住院"),
@@ -36,6 +41,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_0_2_4_1", attrName="cm_0_2_4_1", label="入院日期时间"),
 		@Column(name="cm_0_2_4_2", attrName="cm_0_2_4_2", label="出院日期时间"),
 		@Column(name="cm_0_2_6_1", attrName="cm_0_2_6_1", label="手术开始", comment="手术开始（切皮）日期时间"),
+		@Column(includeEntity=DataEntity.class),
 		@Column(name="cm_0_2_6_2", attrName="cm_0_2_6_2", label="手术结束", comment="手术结束（缝皮结束）日期时间"),
 		@Column(name="cm_0_3_1", attrName="cm_0_3_1", label="费用支付方式"),
 		@Column(name="cm_0_3_2", attrName="cm_0_3_2", label="收入住院途径"),
@@ -183,8 +189,6 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_6_28", attrName="cm_6_28", label="治疗用一次性医用材料费"),
 		@Column(name="cm_6_29", attrName="cm_6_29", label="手术用一次性医用材料费"),
 		@Column(name="cm_6_30", attrName="cm_6_30", label="其他费"),
-		@Column(name="id", attrName="id", label="id", isPK=true),
-		@Column(includeEntity=DataEntity.class),
 	}, orderBy="a.update_date DESC"
 )
 public class QualityKnee extends DataEntity<QualityKnee> {
@@ -203,14 +207,14 @@ public class QualityKnee extends DataEntity<QualityKnee> {
 	private String cm_0_1_4_2;		// 主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称
 	private String knee_0_1_3_1;		// 其他主要手术操作ICD-9-CM-3六位临床扩展编码与名称
 	private String cm_0_1_5;		// 是否出院后31天内重复住院
-	private String cm_0_2_1_1;		// 出生日期
+	private Date cm_0_2_1_1;		// 出生日期
 	private String cm_0_2_1_2;		// 患者性别
 	private Double cm_0_2_1_3;		// 患者体重（kg）
 	private Double cm_0_2_1_5;		// 患者/患儿身高（cm）
-	private String cm_0_2_4_1;		// 入院日期时间
-	private String cm_0_2_4_2;		// 出院日期时间
-	private String cm_0_2_6_1;		// 手术开始（切皮）日期时间
-	private String cm_0_2_6_2;		// 手术结束（缝皮结束）日期时间
+	private Date cm_0_2_4_1;		// 入院日期时间
+	private Date cm_0_2_4_2;		// 出院日期时间
+	private Date cm_0_2_6_1;		// 手术开始（切皮）日期时间
+	private Date cm_0_2_6_2;		// 手术结束（缝皮结束）日期时间
 	private String cm_0_3_1;		// 费用支付方式
 	private String cm_0_3_2;		// 收入住院途径
 	private String cm_0_3_3;		// 到院交通工具
@@ -232,12 +236,12 @@ public class QualityKnee extends DataEntity<QualityKnee> {
 	private String cm_1_2_2_1;		// 其他特殊使用级抗菌药物名称
 	private String cm_1_3_1_2;		// 选用“特殊使用级抗菌药物”或者其他类抗菌药物的因素
 	private String cm_1_3_1_1;		// 选用“特殊使用级抗菌药物”或者其他类抗菌药物的因素填写
-	private String cm_1_4_1;		// 使用首剂抗菌药物起始时间
+	private Date cm_1_4_1;		// 使用首剂抗菌药物起始时间
 	private String cm_1_5_1;		// 手术时间是否≥3小时
 	private String cm_1_5_2;		// 是否术中追加抗菌药物
 	private String cm_1_5_3;		// 术中出血量是否≥1500ml
 	private String cm_1_5_4;		// 是否术中追加抗菌药物
-	private String cm_1_6_1;		// 术后抗菌药物停止使用时间
+	private Date cm_1_6_1;		// 术后抗菌药物停止使用时间
 	private String cm_1_6_2;		// 使用抗菌药物时间使用时间分层
 	private String cm_1_6_3_2;		// 术后48小时之后继续使用的原因
 	private String knee_3_1_1;		// 有无实施手术患者静脉血栓栓塞症风险评估
@@ -248,16 +252,16 @@ public class QualityKnee extends DataEntity<QualityKnee> {
 	private String knee_3_2_3;		// 实施机械预防措施应用禁忌
 	private String knee_3_2_2;		// 实施药物应用绝对禁忌证
 	private String knee_3_2_4;		// 实施药物应用相对禁忌证
-	private String knee_3_3_1;		// 预防深静脉栓塞医嘱执行时间
+	private Date knee_3_3_1;		// 预防深静脉栓塞医嘱执行时间
 	private String knee_3_4_1;		// 基本预防措施
 	private String knee_3_4_1_1;		// 其他基本预防措施
-	private String knee_3_4_1_2;		// 基本预防措施医嘱执行日期
+	private Date knee_3_4_1_2;		// 基本预防措施医嘱执行日期
 	private String knee_3_4_2;		// 机械预防措施
 	private String knee_3_4_2_1;		// 其他机械预防措施
-	private String knee_3_4_2_2;		// 机械预防措施医嘱执行日期
+	private Date knee_3_4_2_2;		// 机械预防措施医嘱执行日期
 	private String knee_3_4_3;		// 预防性地给予药物治疗
 	private String knee_3_4_3_1;		// 预防性地给予药物治疗填写
-	private String knee_3_4_3_2;		// 预防性地给予药物医嘱执行日期
+	private Date knee_3_4_3_2;		// 预防性地给予药物医嘱执行日期
 	private String knee_3_5_1;		// 出院后继续使用抗凝药
 	private String knee_3_5_1_1;		// 其他出院后使用的抗凝药
 	private String knee_4_1_1;		// 是否实施输血
@@ -270,7 +274,7 @@ public class QualityKnee extends DataEntity<QualityKnee> {
 	private String knee_5_1_1;		// 康复治疗前是否评估
 	private String knee_5_1_2;		// 康复治疗适宜性评估结果
 	private String knee_5_1_3;		// 康复实施人员实施康复的方式
-	private String knee_5_1_4;		// 康复实施日期(首次)
+	private Date knee_5_1_4;		// 康复实施日期(首次)
 	private String knee_5_1_5;		// 选择未能进行康复原因
 	private String knee_5_2_1_1;		// 是否进行手术后镇痛治疗
 	private String knee_5_2_2_2;		// 疼痛强度评估方法的选择
@@ -483,12 +487,12 @@ public class QualityKnee extends DataEntity<QualityKnee> {
 		this.cm_0_1_5 = cm_0_1_5;
 	}
 	
-	@Length(min=0, max=64, message="出生日期长度不能超过 64 个字符")
-	public String getCm_0_2_1_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_1_1() {
 		return cm_0_2_1_1;
 	}
 
-	public void setCm_0_2_1_1(String cm_0_2_1_1) {
+	public void setCm_0_2_1_1(Date cm_0_2_1_1) {
 		this.cm_0_2_1_1 = cm_0_2_1_1;
 	}
 	
@@ -517,39 +521,39 @@ public class QualityKnee extends DataEntity<QualityKnee> {
 		this.cm_0_2_1_5 = cm_0_2_1_5;
 	}
 	
-	@Length(min=0, max=64, message="入院日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_4_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_4_1() {
 		return cm_0_2_4_1;
 	}
 
-	public void setCm_0_2_4_1(String cm_0_2_4_1) {
+	public void setCm_0_2_4_1(Date cm_0_2_4_1) {
 		this.cm_0_2_4_1 = cm_0_2_4_1;
 	}
 	
-	@Length(min=0, max=64, message="出院日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_4_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_4_2() {
 		return cm_0_2_4_2;
 	}
 
-	public void setCm_0_2_4_2(String cm_0_2_4_2) {
+	public void setCm_0_2_4_2(Date cm_0_2_4_2) {
 		this.cm_0_2_4_2 = cm_0_2_4_2;
 	}
 	
-	@Length(min=0, max=64, message="手术开始长度不能超过 64 个字符")
-	public String getCm_0_2_6_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_6_1() {
 		return cm_0_2_6_1;
 	}
 
-	public void setCm_0_2_6_1(String cm_0_2_6_1) {
+	public void setCm_0_2_6_1(Date cm_0_2_6_1) {
 		this.cm_0_2_6_1 = cm_0_2_6_1;
 	}
 	
-	@Length(min=0, max=64, message="手术结束长度不能超过 64 个字符")
-	public String getCm_0_2_6_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_6_2() {
 		return cm_0_2_6_2;
 	}
 
-	public void setCm_0_2_6_2(String cm_0_2_6_2) {
+	public void setCm_0_2_6_2(Date cm_0_2_6_2) {
 		this.cm_0_2_6_2 = cm_0_2_6_2;
 	}
 	
@@ -740,12 +744,12 @@ public class QualityKnee extends DataEntity<QualityKnee> {
 		this.cm_1_3_1_1 = cm_1_3_1_1;
 	}
 	
-	@Length(min=0, max=64, message="使用首剂抗菌药物起始时间长度不能超过 64 个字符")
-	public String getCm_1_4_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_1_4_1() {
 		return cm_1_4_1;
 	}
 
-	public void setCm_1_4_1(String cm_1_4_1) {
+	public void setCm_1_4_1(Date cm_1_4_1) {
 		this.cm_1_4_1 = cm_1_4_1;
 	}
 	
@@ -785,12 +789,12 @@ public class QualityKnee extends DataEntity<QualityKnee> {
 		this.cm_1_5_4 = cm_1_5_4;
 	}
 	
-	@Length(min=0, max=64, message="术后抗菌药物停止使用时间长度不能超过 64 个字符")
-	public String getCm_1_6_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_1_6_1() {
 		return cm_1_6_1;
 	}
 
-	public void setCm_1_6_1(String cm_1_6_1) {
+	public void setCm_1_6_1(Date cm_1_6_1) {
 		this.cm_1_6_1 = cm_1_6_1;
 	}
 	
@@ -883,12 +887,12 @@ public class QualityKnee extends DataEntity<QualityKnee> {
 		this.knee_3_2_4 = knee_3_2_4;
 	}
 	
-	@Length(min=0, max=64, message="预防深静脉栓塞医嘱执行时间长度不能超过 64 个字符")
-	public String getKnee_3_3_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getKnee_3_3_1() {
 		return knee_3_3_1;
 	}
 
-	public void setKnee_3_3_1(String knee_3_3_1) {
+	public void setKnee_3_3_1(Date knee_3_3_1) {
 		this.knee_3_3_1 = knee_3_3_1;
 	}
 	
@@ -910,12 +914,12 @@ public class QualityKnee extends DataEntity<QualityKnee> {
 		this.knee_3_4_1_1 = knee_3_4_1_1;
 	}
 	
-	@Length(min=0, max=64, message="基本预防措施医嘱执行日期长度不能超过 64 个字符")
-	public String getKnee_3_4_1_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getKnee_3_4_1_2() {
 		return knee_3_4_1_2;
 	}
 
-	public void setKnee_3_4_1_2(String knee_3_4_1_2) {
+	public void setKnee_3_4_1_2(Date knee_3_4_1_2) {
 		this.knee_3_4_1_2 = knee_3_4_1_2;
 	}
 	
@@ -937,12 +941,12 @@ public class QualityKnee extends DataEntity<QualityKnee> {
 		this.knee_3_4_2_1 = knee_3_4_2_1;
 	}
 	
-	@Length(min=0, max=64, message="机械预防措施医嘱执行日期长度不能超过 64 个字符")
-	public String getKnee_3_4_2_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getKnee_3_4_2_2() {
 		return knee_3_4_2_2;
 	}
 
-	public void setKnee_3_4_2_2(String knee_3_4_2_2) {
+	public void setKnee_3_4_2_2(Date knee_3_4_2_2) {
 		this.knee_3_4_2_2 = knee_3_4_2_2;
 	}
 	
@@ -964,12 +968,12 @@ public class QualityKnee extends DataEntity<QualityKnee> {
 		this.knee_3_4_3_1 = knee_3_4_3_1;
 	}
 	
-	@Length(min=0, max=64, message="预防性地给予药物医嘱执行日期长度不能超过 64 个字符")
-	public String getKnee_3_4_3_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getKnee_3_4_3_2() {
 		return knee_3_4_3_2;
 	}
 
-	public void setKnee_3_4_3_2(String knee_3_4_3_2) {
+	public void setKnee_3_4_3_2(Date knee_3_4_3_2) {
 		this.knee_3_4_3_2 = knee_3_4_3_2;
 	}
 	
@@ -1077,12 +1081,12 @@ public class QualityKnee extends DataEntity<QualityKnee> {
 		this.knee_5_1_3 = knee_5_1_3;
 	}
 	
-	@Length(min=0, max=64, message="康复实施日期长度不能超过 64 个字符")
-	public String getKnee_5_1_4() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getKnee_5_1_4() {
 		return knee_5_1_4;
 	}
 
-	public void setKnee_5_1_4(String knee_5_1_4) {
+	public void setKnee_5_1_4(Date knee_5_1_4) {
 		this.knee_5_1_4 = knee_5_1_4;
 	}
 	
