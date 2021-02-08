@@ -5,7 +5,7 @@
 	<div class="box box-main">
 		<div class="box-header with-border">
 			<div class="box-title">
-				<i class="fa fa-list-alt"></i> ${text(qualityCs.isNewRecord ? '新增cs剖宫产' : '编辑cs剖宫产')}
+				<i class="fa fa-list-alt"></i> ${text(审核cs剖宫产')}
 			</div>
 			<div class="box-tools pull-right">
 				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -29,11 +29,8 @@
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('质控医师')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-5">
-								<#form:input path="cm_0_1_1_1" maxlength="64" class="form-control required"/>
-							</div>
-							<div class="col-sm-3">
-								<button type="button" class="btn btn-sm btn-primary" id="patientSubmit" onclick="importPatient('cs/qualityCs')"><i class="fa fa-check"></i> ${text('导入患者信息')}</button>&nbsp;
+							<div class="col-sm-10">
+								<#form:input readonly="true" path="cm_0_1_1_1" maxlength="64" class="form-control required"/>
 							</div>
 						</div>
 					</div>
@@ -44,7 +41,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('质控护士')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_0_1_1_2" maxlength="64" class="form-control required"/>
+								<#form:input readonly="true" path="cm_0_1_1_2" maxlength="64" class="form-control required"/>
 							</div>
 						</div>
 					</div>
@@ -55,7 +52,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('主治医师')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_0_1_1_3" maxlength="64" class="form-control required"/>
+								<#form:input readonly="true" path="cm_0_1_1_3" maxlength="64" class="form-control required"/>
 							</div>
 						</div>
 					</div>
@@ -66,7 +63,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('责任护士')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_0_1_1_4" maxlength="64" class="form-control required"/>
+								<#form:input readonly="true" path="cm_0_1_1_4" maxlength="64" class="form-control required"/>
 							</div>
 						</div>
 					</div>
@@ -77,7 +74,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('上报科室')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_0_1_1_5" maxlength="64" class="form-control"/>
+								<#form:input readonly="true" path="cm_0_1_1_5" maxlength="64" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -88,7 +85,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('患者病案号')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="caseid" maxlength="64" class="form-control required"/>
+								<#form:input readonly="true" path="caseid" maxlength="64" class="form-control required"/>
 							</div>
 						</div>
 					</div>
@@ -99,7 +96,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('患者身份证号')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="idcard" maxlength="64" class="form-control required"/>
+								<#form:input readonly="true" path="idcard" maxlength="64" class="form-control required"/>
 							</div>
 						</div>
 					</div>
@@ -110,7 +107,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('出院诊断ICD-10四位亚目编码与名称')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_0_1_3_1" dictType="CS_CM_0_1_3_1" blankOption="true" class="form-control required" />
+								<#form:select disabled="disabled" path="cm_0_1_3_1" dictType="CS_CM_0_1_3_1" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -121,7 +118,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('出院诊断ICD-10六位临床扩展编码与名称')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_0_1_3_2" dictType="CS_CM_0_1_3_2" blankOption="true" class="form-control required" />
+								<#form:select disabled="disabled" path="cm_0_1_3_2" dictType="CS_CM_0_1_3_2" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -132,7 +129,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('主要手术操作 国家临床版ICD-9.CM-3编码与手术名称')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_0_1_4_1" dictType="CS_CM_0_1_4_1" blankOption="true" class="form-control required" />
+								<#form:select disabled="disabled" path="cm_0_1_4_1" dictType="CS_CM_0_1_4_1" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -143,7 +140,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('是否出院后31天内重复住院')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="cm_0_1_5" dictType="CS_CM_0_1_5" blankOption="true" class="form-control required" />
+								<#form:radio disabled="disabled" path="cm_0_1_5" dictType="CS_CM_0_1_5" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -155,10 +152,9 @@
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="">
-								<span class="required">*</span> ${text('出生日期')}：<i class="fa icon-question hide"></i></label>
+								<span class="required hide">*</span> ${text('出生日期')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_0_2_1_1" readonly="true" maxlength="20" class="form-control Wdate required"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+								<#form:input path="cm_0_2_1_1" disabled="disabled" class="form-control" dataFormat="datetime"/>
 							</div>
 						</div>
 					</div>
@@ -169,7 +165,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('患者体重')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_0_2_1_3" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_0_2_1_3" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -180,7 +176,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('患者身高')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_0_2_1_5" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_0_2_1_5" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -191,7 +187,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('新生儿出生体重')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_0_2_1_6" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_0_2_1_6" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -202,7 +198,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('末次月经日期是否确定')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_0_2_2_1" dictType="CS_0_2_2_1" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_0_2_2_1" dictType="CS_0_2_2_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -213,8 +209,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('末次月经日期')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cs_0_2_2" readonly="true" maxlength="20" class="form-control Wdate required"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+								<#form:input path="cs_0_2_2" disabled="disabled" class="form-control" dataFormat="datetime""/>
 							</div>
 						</div>
 					</div>
@@ -225,7 +220,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('到达本院急诊或者门诊日期时间是否确定')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_0_2_3_1" dictType="CS_CM_0_2_3_1" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cm_0_2_3_1" dictType="CS_CM_0_2_3_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -236,8 +231,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('到达本院急诊或者门诊日期时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_0_2_3_2" readonly="true" maxlength="20" class="form-control Wdate required"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+								<#form:input path="cm_0_2_3_2" disabled="disabled" class="form-control" dataFormat="datetime"/>
 							</div>
 						</div>
 					</div>
@@ -248,8 +242,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('入院日期时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_0_2_4_1" readonly="true" maxlength="20" class="form-control Wdate required"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+								<#form:input path="cm_0_2_4_1" disabled="disabled" class="form-control" dataFormat="datetime"/>
 							</div>
 						</div>
 					</div>
@@ -260,8 +253,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('出院日期时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_0_2_4_2" readonly="true" maxlength="20" class="form-control Wdate required"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+								<#form:input path="cm_0_2_4_2" disabled="disabled" class="form-control" dataFormat="datetime"/>
 							</div>
 						</div>
 					</div>
@@ -272,8 +264,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('手术开始')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_0_2_6_1" readonly="true" maxlength="20" class="form-control Wdate required"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+								<#form:input path="cm_0_2_6_1" disabled="disabled" class="form-control" dataFormat="datetime"/>
 							</div>
 						</div>
 					</div>
@@ -284,8 +275,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('手术结束')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_0_2_6_2" readonly="true" maxlength="20" class="form-control Wdate required"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+								<#form:input path="cm_0_2_6_2" disabled="disabled" class="form-control" dataFormat="datetime"/>
 							</div>
 						</div>
 					</div>
@@ -299,7 +289,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('费用支付方式')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_0_3_1" dictType="CS_CM_0_3_1" blankOption="true" class="form-control required" />
+								<#form:select disabled="disabled" path="cm_0_3_1" dictType="CS_CM_0_3_1" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -310,7 +300,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('收入住院途径')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_0_3_2" dictType="CS_CM_0_3_2" blankOption="true" class="form-control required" />
+								<#form:select disabled="disabled" path="cm_0_3_2" dictType="CS_CM_0_3_2" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -321,7 +311,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('到院交通工具')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_0_3_3" dictType="CS_CM_0_3_3" blankOption="true" class="form-control required" />
+								<#form:select disabled="disabled" path="cm_0_3_3" dictType="CS_CM_0_3_3" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -343,7 +333,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('产次')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="cs_1_1_1" dictType="CS_1_1_1" blankOption="true" class="form-control required" />
+								<#form:radio disabled="disabled" path="cs_1_1_1" dictType="CS_1_1_1" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -354,7 +344,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('剖宮产史')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="cs_1_1_1_1" dictType="CS_1_1_1_1" blankOption="true" class="form-control" />
+								<#form:radio disabled="disabled" path="cs_1_1_1_1" dictType="CS_1_1_1_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -365,7 +355,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('临产方式')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_1_1_3" dictType="CS_1_1_3" blankOption="true" class="form-control required" />
+								<#form:select disabled="disabled" path="cs_1_1_3" dictType="CS_1_1_3" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -376,7 +366,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('孕周')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_1_1_4" dictType="CS_1_1_4" blankOption="true" class="form-control required" />
+								<#form:select disabled="disabled" path="cs_1_1_4" dictType="CS_1_1_4" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -387,7 +377,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('胎位')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_1_1_5" dictType="CS_1_1_5" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_1_1_5" dictType="CS_1_1_5" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -398,7 +388,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('胎儿数量')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_1_1_6" dictType="CS_1_1_6" blankOption="true" class="form-control required" />
+								<#form:select disabled="disabled" path="cs_1_1_6" dictType="CS_1_1_6" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -412,7 +402,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('手术前风险评估的检查项目')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="cs_1_2_1" dictType="CS_1_2_1" blankOption="true" class="form-control required" />
+								<#form:checkbox disabled="disabled" path="cs_1_2_1" dictType="CS_1_2_1" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -423,7 +413,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('手术前知情告知')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="cs_1_2_2" dictType="CS_1_2_2" blankOption="true" class="form-control required" />
+								<#form:checkbox disabled="disabled" path="cs_1_2_2" dictType="CS_1_2_2" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -434,7 +424,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('麻醉前知情告知')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="cs_1_2_31" dictType="CS_1_2_31" blankOption="true" class="form-control required" />
+								<#form:checkbox disabled="disabled" path="cs_1_2_31" dictType="CS_1_2_31" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -445,7 +435,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('麻醉方式')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_1_2_4" dictType="CS_1_2_4" blankOption="true" class="form-control required" />
+								<#form:select disabled="disabled" path="cs_1_2_4" dictType="CS_1_2_4" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -456,7 +446,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('特殊感染评估')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_1_2_5" dictType="CS_1_2_5" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_1_2_5" dictType="CS_1_2_5" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -467,7 +457,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('孕妇伴有特殊感染ICD.10编码及诊断名称')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_1_2_6" dictType="CS_1_2_6" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_1_2_6" dictType="CS_1_2_6" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -487,7 +477,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('剖宫产指征')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="cs_2_1_1_1" dictType="CS_2_1_1_1" blankOption="true" class="form-control required" />
+								<#form:radio disabled="disabled" path="cs_2_1_1_1" dictType="CS_2_1_1_1" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -498,7 +488,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('符合医学指征')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="cs_2_5_1" dictType="CS_2_5_1" blankOption="true" class="form-control" />
+								<#form:checkbox disabled="disabled" path="cs_2_5_1" dictType="CS_2_5_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -509,7 +499,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('胎儿窘迫')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_2_1_1_a" dictType="CS_2_1_1_A" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_2_1_1_a" dictType="CS_2_1_1_A" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -520,7 +510,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('头盆不称')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_2_1_1_b" dictType="CS_2_1_1_B" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_2_1_1_b" dictType="CS_2_1_1_B" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -531,7 +521,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('瘢痕子宫')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_2_1_1_c" dictType="CS_2_1_1_C" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_2_1_1_c" dictType="CS_2_1_1_C" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -542,7 +532,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('胎位异常')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_2_1_1_d" dictType="CS_2_1_1_D" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_2_1_1_d" dictType="CS_2_1_1_D" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -553,7 +543,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('前置胎盘及前置血管')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_2_1_1_e" dictType="CS_2_1_1_E" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_2_1_1_e" dictType="CS_2_1_1_E" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -564,7 +554,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('双胎或多胎妊娠')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_2_1_1_f" dictType="CS_2_1_1_F" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_2_1_1_f" dictType="CS_2_1_1_F" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -575,7 +565,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('脐带脱垂')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_2_1_1_g" dictType="CS_2_1_1_G" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_2_1_1_g" dictType="CS_2_1_1_G" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -586,7 +576,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('胎盘早剥')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_2_1_1_h" dictType="CS_2_1_1_H" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_2_1_1_h" dictType="CS_2_1_1_H" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -597,7 +587,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('孕妇存在严重合并症和并发症')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_2_1_1_i" dictType="CS_2_1_1_I" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_2_1_1_i" dictType="CS_2_1_1_I" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -608,7 +598,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('妊娠巨大儿者')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_2_1_1_j" dictType="CS_2_1_1_J" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_2_1_1_j" dictType="CS_2_1_1_J" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -619,7 +609,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('产道畸形')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_2_1_1_k" dictType="CS_2_1_1_K" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_2_1_1_k" dictType="CS_2_1_1_K" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -630,7 +620,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('外阴疾病')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_2_1_1_l" dictType="CS_2_1_1_L" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_2_1_1_l" dictType="CS_2_1_1_L" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -641,7 +631,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('妊娠合并肿瘤')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_2_1_1_n" dictType="CS_2_1_1_N" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_2_1_1_n" dictType="CS_2_1_1_N" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -652,7 +642,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('生殖道严重的感染性疾病')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_2_1_1_m" dictType="CS_2_1_1_M" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_2_1_1_m" dictType="CS_2_1_1_M" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -663,7 +653,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('剖宫产+伴绝育手术')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_2_1_1_o" dictType="CS_2_1_1_O" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_2_1_1_o" dictType="CS_2_1_1_O" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -674,7 +664,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他病理状态')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_2_1_1_p" dictType="CS_2_1_1_P" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_2_1_1_p" dictType="CS_2_1_1_P" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -685,7 +675,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('高龄初产妇')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_2_1_1_q" dictType="CS_2_1_1_Q" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_2_1_1_q" dictType="CS_2_1_1_Q" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -696,7 +686,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('符合DRGs编码的 剖宫产,伴重要合并症与伴隨病')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_2_1_1_r" dictType="CS_2_1_1_R" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_2_1_1_r" dictType="CS_2_1_1_R" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -707,7 +697,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('孕妇要求剖宫产的评估')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_2_2_1" dictType="CS_2_2_1" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_2_2_1" dictType="CS_2_2_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -718,7 +708,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('手术方式选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_2_3_1" dictType="CS_2_3_1" blankOption="true" class="form-control required" />
+								<#form:select disabled="disabled" path="cs_2_3_1" dictType="CS_2_3_1" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -729,8 +719,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('胎儿娩出日期时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cs_2_4_2" readonly="true" maxlength="20" class="form-control Wdate required"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+								<#form:input path="cs_2_4_2" disabled="disabled" class="form-control" dataFormat="datetime"/>
 							</div>
 						</div>
 					</div>
@@ -752,7 +741,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('是否使用预防性抗菌药物')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="cm_1_1_1" dictType="CS_CM_1_1_1" blankOption="true" class="form-control required" />
+								<#form:radio disabled="disabled" path="cm_1_1_1" dictType="CS_CM_1_1_1" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -763,7 +752,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('预防性抗菌药物选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="cm_1_2_1_2" dictType="CS_CM_1_2_1_2" blankOption="true" class="form-control" />
+								<#form:checkbox disabled="disabled" path="cm_1_2_1_2" dictType="CS_CM_1_2_1_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -774,7 +763,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('选择碳青霉烯类及替加环素等特殊使用级抗菌药物')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="cm_1_2_2_2" dictType="CS_CM_1_2_2_2" blankOption="true" class="form-control" />
+								<#form:checkbox disabled="disabled" path="cm_1_2_2_2" dictType="CS_CM_1_2_2_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -785,7 +774,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他特殊使用级抗菌药物名称')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_1_2_2_1" maxlength="64" class="form-control"/>
+								<#form:input readonly="true" path="cm_1_2_2_1" maxlength="64" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -796,7 +785,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('选用“特殊使用级抗菌药物”或者其他类抗菌药物的因素')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="cm_1_3_1_2" dictType="CS_CM_1_3_1_2" blankOption="true" class="form-control" />
+								<#form:checkbox disabled="disabled" path="cm_1_3_1_2" dictType="CS_CM_1_3_1_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -807,7 +796,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('选用“特殊使用级抗菌药物”或者其他类抗菌药物的因素填写')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_1_3_1_1" maxlength="64" class="form-control"/>
+								<#form:input readonly="true" path="cm_1_3_1_1" maxlength="64" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -818,8 +807,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('使用首剂抗菌药物起始时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_1_4_1" readonly="true" maxlength="20" class="form-control Wdate"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+								<#form:input path="cm_1_4_1" disabled="disabled" class="form-control" dataFormat="datetime"/>
 							</div>
 						</div>
 					</div>
@@ -833,7 +821,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('手术时间是否≥3小时')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="cm_1_5_1" dictType="CS_CM_1_5_1" blankOption="true" class="form-control" />
+								<#form:radio disabled="disabled" path="cm_1_5_1" dictType="CS_CM_1_5_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -844,7 +832,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否术中追加抗菌药物')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="cm_1_5_2" dictType="CS_CM_1_5_2" blankOption="true" class="form-control" />
+								<#form:radio disabled="disabled" path="cm_1_5_2" dictType="CS_CM_1_5_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -855,7 +843,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('术中出血量是否≥1500ml')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="cm_1_5_3" dictType="CS_CM_1_5_3" blankOption="true" class="form-control" />
+								<#form:radio disabled="disabled" path="cm_1_5_3" dictType="CS_CM_1_5_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -866,7 +854,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否术中追加抗菌药物')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="cm_1_5_4" dictType="CS_CM_1_5_4" blankOption="true" class="form-control" />
+								<#form:radio disabled="disabled" path="cm_1_5_4" dictType="CS_CM_1_5_4" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -877,8 +865,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('术后抗菌药物停止使用时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_1_6_1" readonly="true" maxlength="20" class="form-control Wdate"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+								<#form:input path="cm_1_6_1" disabled="disabled" class="form-control" dataFormat="datetime"/>
 							</div>
 						</div>
 					</div>
@@ -889,7 +876,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('使用抗菌药物时间使用时间分层')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_1_6_2" dictType="CS_CM_1_6_2" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cm_1_6_2" dictType="CS_CM_1_6_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -900,7 +887,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('术后48小时之后继续使用的原因')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_1_6_3_2" dictType="CS_CM_1_6_3_2" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cm_1_6_3_2" dictType="CS_CM_1_6_3_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -920,7 +907,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('是否实施新生儿Apgar评分')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="cs_4_1" dictType="CS_4_1" blankOption="true" class="form-control required" />
+								<#form:radio disabled="disabled" path="cs_4_1" dictType="CS_4_1" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -931,7 +918,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('新生儿出生后1、5、10min,Apgar评分值')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="cs_4_2" dictType="CS_4_2" blankOption="true" class="form-control" />
+								<#form:checkbox disabled="disabled" path="cs_4_2" dictType="CS_4_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -942,7 +929,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('出生后1min,Apgar评分值')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cs_4_3_1" class="form-control number"/>
+								<#form:input readonly="true" path="cs_4_3_1" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -953,7 +940,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('出生后5min,Apgar评分值')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cs_4_3_2" class="form-control number"/>
+								<#form:input readonly="true" path="cs_4_3_2" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -964,7 +951,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('出生后10min,Apgar评分值')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cs_4_3_3" class="form-control number"/>
+								<#form:input readonly="true" path="cs_4_3_3" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -984,7 +971,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('术后24小时内出血量')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="cs_5_1" dictType="CS_5_1" blankOption="true" class="form-control required" />
+								<#form:radio disabled="disabled" path="cs_5_1" dictType="CS_5_1" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -995,7 +982,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('术后24小时内实际出血量')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cs_5_1_1" class="form-control number"/>
+								<#form:input readonly="true" path="cs_5_1_1" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -1006,7 +993,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('剖宫产产后出血可能的原因')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="cs_5_2_1" dictType="CS_5_2_1" blankOption="true" class="form-control required" />
+								<#form:checkbox disabled="disabled" path="cs_5_2_1" dictType="CS_5_2_1" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -1017,7 +1004,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('术后24小时内输血量')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="cs_5_3" dictType="CS_5_3" blankOption="true" class="form-control required" />
+								<#form:radio disabled="disabled" path="cs_5_3" dictType="CS_5_3" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -1028,7 +1015,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('术后24小时内实际输血量')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cs_5_4" class="form-control number"/>
+								<#form:input readonly="true" path="cs_5_4" class="form-control number"/>
 							</div>
 						</div>
 					</div>
@@ -1039,7 +1026,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('止血干预措施的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="cs_5_5" dictType="CS_5_5" blankOption="true" class="form-control" />
+								<#form:checkbox disabled="disabled" path="cs_5_5" dictType="CS_5_5" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1059,7 +1046,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('是否有剖宫产并发症')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="cs_6_1_1" dictType="CS_6_1_1" blankOption="true" class="form-control required" />
+								<#form:radio disabled="disabled" path="cs_6_1_1" dictType="CS_6_1_1" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -1070,7 +1057,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('剖宫产并发症ICD.10编码')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_6_1_2_1" dictType="CS_6_1_2_1" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_6_1_2_1" dictType="CS_6_1_2_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1081,7 +1068,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('产后出血')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_6_1_2_1_a" dictType="CS_6_1_2_1_A" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_6_1_2_1_a" dictType="CS_6_1_2_1_A" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1092,7 +1079,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('产褥期感染')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_6_1_2_1_b" dictType="CS_6_1_2_1_B" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_6_1_2_1_b" dictType="CS_6_1_2_1_B" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1103,7 +1090,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('产科栓塞')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_6_1_2_1_c" dictType="CS_6_1_2_1_C" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_6_1_2_1_c" dictType="CS_6_1_2_1_C" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1114,7 +1101,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('栓塞病')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_6_1_2_1_d" dictType="CS_6_1_2_1_D" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_6_1_2_1_d" dictType="CS_6_1_2_1_D" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1125,7 +1112,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('胎盘和胎膜滞留不伴有出血')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_6_1_2_1_e" dictType="CS_6_1_2_1_E" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_6_1_2_1_e" dictType="CS_6_1_2_1_E" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1136,7 +1123,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('产科手术伤口的感染')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_6_1_2_1_f" dictType="CS_6_1_2_1_F" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_6_1_2_1_f" dictType="CS_6_1_2_1_F" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1147,7 +1134,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('产科伤口裂开')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_6_1_2_1_g" dictType="CS_6_1_2_1_G" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_6_1_2_1_g" dictType="CS_6_1_2_1_G" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1158,7 +1145,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他并发症')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_6_1_2_1_h" dictType="CS_6_1_2_1_H" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_6_1_2_1_h" dictType="CS_6_1_2_1_H" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1169,7 +1156,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('是否再次手术')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="cs_6_2" dictType="CS_6_2" blankOption="true" class="form-control required" />
+								<#form:radio disabled="disabled" path="cs_6_2" dictType="CS_6_2" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -1180,7 +1167,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('再次手术原因')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_6_3" dictType="CS_6_3" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_6_3" dictType="CS_6_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1191,7 +1178,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他再次手术原因')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cs_6_3_1" maxlength="64" class="form-control"/>
+								<#form:input readonly="true" path="cs_6_3_1" maxlength="64" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -1202,7 +1189,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('影响程度的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_6_4" dictType="CS_6_4" blankOption="true" class="form-control required" />
+								<#form:select disabled="disabled" path="cs_6_4" dictType="CS_6_4" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -1222,7 +1209,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('是否有新生儿产伤')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="cs_7_1" dictType="CS_7_1" blankOption="true" class="form-control required" />
+								<#form:radio disabled="disabled" path="cs_7_1" dictType="CS_7_1" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -1233,7 +1220,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('产程和分娩期间并发症所列的名称及ICD.10编码')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_7_2" dictType="CS_7_2" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_7_2" dictType="CS_7_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1244,7 +1231,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('ICD-10')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_7_2_a" dictType="CS_7_2_A" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_7_2_a" dictType="CS_7_2_A" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1255,7 +1242,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('ICD-10')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_7_2_b" dictType="CS_7_2_B" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_7_2_b" dictType="CS_7_2_B" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1266,7 +1253,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('ICD-10')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_7_2_c" dictType="CS_7_2_C" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_7_2_c" dictType="CS_7_2_C" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1277,7 +1264,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('ICD-10')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_7_2_d" dictType="CS_7_2_D" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_7_2_d" dictType="CS_7_2_D" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1288,7 +1275,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('ICD-10')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_7_2_e" dictType="CS_7_2_E" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_7_2_e" dictType="CS_7_2_E" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1299,7 +1286,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('ICD-10')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_7_2_f" dictType="CS_7_2_F" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_7_2_f" dictType="CS_7_2_F" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1310,7 +1297,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('ICD-10')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_7_2_g" dictType="CS_7_2_G" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_7_2_g" dictType="CS_7_2_G" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1321,7 +1308,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('ICD-10')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_7_2_h" dictType="CS_7_2_H" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_7_2_h" dictType="CS_7_2_H" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1332,7 +1319,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('新生儿是否有先天性畸形、变形和染色体异常')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="cs_7_3" dictType="CS_7_3" blankOption="true" class="form-control required" />
+								<#form:radio disabled="disabled" path="cs_7_3" dictType="CS_7_3" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -1343,7 +1330,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('新生儿')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_7_4" dictType="CS_7_4" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_7_4" dictType="CS_7_4" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1363,7 +1350,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('是否有母乳喂养禁忌证')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="cs_8_2_1" dictType="CS_8_2_1" blankOption="true" class="form-control required" />
+								<#form:radio disabled="disabled" path="cs_8_2_1" dictType="CS_8_2_1" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -1374,7 +1361,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('母乳喂养禁忌证选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_8_1_1" dictType="CS_8_1_1" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_8_1_1" dictType="CS_8_1_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1385,7 +1372,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('提供母乳喂养')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cs_8_2" dictType="CS_8_2" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cs_8_2" dictType="CS_8_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1407,7 +1394,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('住院期间为产妇提供术前健康教育')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="cs_9_1_1" dictType="CS_9_1_1" blankOption="true" class="form-control" />
+								<#form:checkbox disabled="disabled" path="cs_9_1_1" dictType="CS_9_1_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1418,7 +1405,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('提供产后康复健康教育')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="cs_9_1_2" dictType="CS_9_1_2" blankOption="true" class="form-control" />
+								<#form:checkbox disabled="disabled" path="cs_9_1_2" dictType="CS_9_1_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1429,7 +1416,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('是否提供术后镇痛')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="cs_9_1_3" dictType="CS_9_1_3" blankOption="true" class="form-control" />
+								<#form:radio disabled="disabled" path="cs_9_1_3" dictType="CS_9_1_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1440,7 +1427,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('药物选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="cs_9_1_4" dictType="CS_9_1_4" blankOption="true" class="form-control" />
+								<#form:checkbox disabled="disabled" path="cs_9_1_4" dictType="CS_9_1_4" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1451,7 +1438,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他镇痛药物')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cs_9_1_4_1" maxlength="64" class="form-control"/>
+								<#form:input readonly="true" path="cs_9_1_4_1" maxlength="64" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -1465,7 +1452,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('交与患者“出院小结”的副本告知患者出院时风险因素')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="cm_7_2_1" dictType="CS_CM_7_2_1" blankOption="true" class="form-control" />
+								<#form:checkbox disabled="disabled" path="cm_7_2_1" dictType="CS_CM_7_2_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1476,7 +1463,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('母乳喂养与出院带药')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="cm_7_2_2" dictType="CS_CM_7_2_2" blankOption="true" class="form-control" />
+								<#form:checkbox disabled="disabled" path="cm_7_2_2" dictType="CS_CM_7_2_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1487,7 +1474,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('告知 出院关注事项')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="cm_7_2_3" dictType="CS_CM_7_2_3" blankOption="true" class="form-control" />
+								<#form:checkbox disabled="disabled" path="cm_7_2_3" dictType="CS_CM_7_2_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1498,7 +1485,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('出院时教育')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="cm_7_2_4" dictType="CS_CM_7_2_4" blankOption="true" class="form-control" />
+								<#form:checkbox disabled="disabled" path="cm_7_2_4" dictType="CS_CM_7_2_4" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1509,7 +1496,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('告知随访')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="cm_7_2_5" dictType="CS_CM_7_2_5" blankOption="true" class="form-control" />
+								<#form:checkbox disabled="disabled" path="cm_7_2_5" dictType="CS_CM_7_2_5" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1529,7 +1516,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('手术野皮肤准备常用方法的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_3_1" dictType="CS_CM_3_1" blankOption="true" class="form-control required" />
+								<#form:select disabled="disabled" path="cm_3_1" dictType="CS_CM_3_1" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -1540,7 +1527,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('使用含抗菌剂')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_3_2" dictType="CS_CM_3_2" blankOption="true" class="form-control required" />
+								<#form:select disabled="disabled" path="cm_3_2" dictType="CS_CM_3_2" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -1551,7 +1538,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他含抗菌剂缝线填写')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_3_2_1" maxlength="64" class="form-control"/>
+								<#form:input readonly="true" path="cm_3_2_1" maxlength="64" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -1562,7 +1549,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('手术切口类别的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_3_3" dictType="CS_CM_3_3" blankOption="true" class="form-control required" />
+								<#form:select disabled="disabled" path="cm_3_3" dictType="CS_CM_3_3" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -1573,7 +1560,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('手术切口愈合情况的选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_3_4" dictType="CS_CM_3_4" blankOption="true" class="form-control required" />
+								<#form:select disabled="disabled" path="cm_3_4" dictType="CS_CM_3_4" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -1593,7 +1580,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('离院方式选择')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_4_3" dictType="CS_CM_4_3" blankOption="true" class="form-control required" />
+								<#form:select disabled="disabled" path="cm_4_3" dictType="CS_CM_4_3" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -1604,7 +1591,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('非医嘱离院可能涉及因素')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_4_5" dictType="CS_CM_4_5" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cm_4_5" dictType="CS_CM_4_5" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1615,7 +1602,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('其他非医嘱离院因素填写')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_4_4_1" maxlength="64" class="form-control"/>
+								<#form:input readonly="true" path="cm_4_4_1" maxlength="64" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -1626,7 +1613,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('死亡可能涉及因素')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_4_6" dictType="CS_CM_4_6" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cm_4_6" dictType="CS_CM_4_6" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1646,7 +1633,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('患者是否对服务的体验与评价')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="cm_5_1" dictType="CS_CM_5_1" blankOption="true" class="form-control" />
+								<#form:radio disabled="disabled" path="cm_5_1" dictType="CS_CM_5_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1657,7 +1644,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('整体医院评级')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_5_2_1" dictType="CS_CM_5_2_1" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cm_5_2_1" dictType="CS_CM_5_2_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1668,7 +1655,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('患者推荐')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_5_2_2" dictType="CS_CM_5_2_2" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cm_5_2_2" dictType="CS_CM_5_2_2" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1679,7 +1666,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('病房、床单元和卫生间清洁度')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_5_2_3" dictType="CS_CM_5_2_3" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cm_5_2_3" dictType="CS_CM_5_2_3" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1690,7 +1677,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('病房与周边噪音')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_5_2_5" dictType="CS_CM_5_2_5" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cm_5_2_5" dictType="CS_CM_5_2_5" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1701,7 +1688,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('医生沟通')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_5_2_6" dictType="CS_CM_5_2_6" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cm_5_2_6" dictType="CS_CM_5_2_6" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1712,7 +1699,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('护士沟通')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_5_2_7" dictType="CS_CM_5_2_7" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cm_5_2_7" dictType="CS_CM_5_2_7" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1723,7 +1710,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('药师沟通')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_5_2_8" dictType="CS_CM_5_2_8" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cm_5_2_8" dictType="CS_CM_5_2_8" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1734,7 +1721,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('康复计划')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_5_2_9" dictType="CS_CM_5_2_9" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cm_5_2_9" dictType="CS_CM_5_2_9" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1745,7 +1732,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('出院时的知情告知')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_5_2_10" dictType="CS_CM_5_2_10" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cm_5_2_10" dictType="CS_CM_5_2_10" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1756,7 +1743,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('膳食评价')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_5_2_11" dictType="CS_CM_5_2_11" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="cm_5_2_11" dictType="CS_CM_5_2_11" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -1776,7 +1763,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('住院总费用')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_1" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_1" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -1787,7 +1774,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('住院总费用其中自付金额')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_2" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_2" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -1798,7 +1785,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('一般医疗服务费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_3" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_3" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -1809,7 +1796,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('一般治疗操作费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_4" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_4" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -1820,7 +1807,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('护理费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_5" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_5" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -1831,7 +1818,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('综合医疗服务类其他费用')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_6" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_6" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -1842,7 +1829,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('病理诊断费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_7" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_7" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -1853,7 +1840,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('实验室诊断费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_8" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_8" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -1864,7 +1851,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('影像学诊断费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_9" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_9" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -1875,7 +1862,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('临床诊断项目费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_10" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_10" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -1886,7 +1873,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('非手术治疗项目费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_11" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_11" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -1897,7 +1884,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('其中')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_12" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_12" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -1908,7 +1895,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('手术治疗费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_13" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_13" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -1919,7 +1906,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('其中')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_14" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_14" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -1930,7 +1917,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('其中')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_15" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_15" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -1941,7 +1928,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('康复费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_16" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_16" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -1952,7 +1939,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('中医治疗费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_17" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_17" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -1963,7 +1950,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('西药费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_18" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_18" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -1974,7 +1961,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('其中')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_19" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_19" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -1985,7 +1972,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('中成药费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_20" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_20" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -1996,7 +1983,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('中草药费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_21" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_21" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -2007,7 +1994,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('血费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_22" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_22" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -2018,7 +2005,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('白蛋白类制品费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_23" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_23" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -2029,7 +2016,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('球蛋白类制品费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_24" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_24" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -2040,7 +2027,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('凝血因子类制品费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_25" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_25" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -2051,7 +2038,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('细胞因子类制品费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_26" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_26" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -2062,7 +2049,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('检查用一次性医用材料费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_27" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_27" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -2073,7 +2060,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('治疗用一次性医用材料费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_28" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_28" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -2084,7 +2071,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('手术用一次性医用材料费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_29" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_29" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
@@ -2095,18 +2082,19 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required">*</span> ${text('其他费')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_6_30" class="form-control number required"/>
+								<#form:input readonly="true" path="cm_6_30" class="form-control number required"/>
 							</div>
 						</div>
 					</div>
 				</div>
 				<#form:hidden path="id"/>
+				<input type="hidden" id="taskId" name="taskId" value="${taskId}">
 			</div>
 			<div class="box-footer">
 				<div class="row">
 					<div class="col-sm-offset-2 col-sm-10">
 						<% if (hasPermi('cs:qualityCs:edit')){ %>
-							<button type="submit" class="btn btn-sm btn-primary" id="btnSubmit"><i class="fa fa-check"></i> ${text('保 存')}</button>&nbsp;
+							<button type="button" class="btn btn-sm btn-primary" id="review"><i class="fa fa-check"></i> ${text('审 核')}</button>&nbsp;
 						<% } %>
 						<button type="button" class="btn btn-sm btn-default" id="btnCancel" onclick="js.closeCurrentTabPage()"><i class="fa fa-reply-all"></i> ${text('关 闭')}</button>
 					</div>
@@ -2137,4 +2125,23 @@ $("#inputForm").validate({
 		}, "json");
     }
 });
+</script>
+
+<script>
+	$("#review").click(function (){
+		$.ajax({
+			url:'${ctx}/process/review',
+			type: "POST",
+			data: {taskId: $("#caseid").val(),approve:true},
+			success:function (data){
+				js.showMessage(data.message);
+				if(data.result == Global.TRUE){
+					js.closeCurrentTabPage(function(contentWindow){
+						contentWindow.page();
+					});
+				}
+
+			}
+		});
+	});
 </script>
