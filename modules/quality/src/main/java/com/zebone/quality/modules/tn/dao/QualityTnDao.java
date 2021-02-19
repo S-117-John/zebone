@@ -8,9 +8,9 @@ import com.jeesite.common.mybatis.annotation.MyBatisDao;
 import com.zebone.quality.modules.tn.entity.QualityTn;
 
 /**
- * quality_tnDAO接口
+ * TN甲状腺结节（手术治疗）DAO接口
  * @author 卡卡西
- * @version 2021-01-19
+ * @version 2021-02-19
  */
 @MyBatisDao
 public interface QualityTnDao extends CrudDao<QualityTn> {

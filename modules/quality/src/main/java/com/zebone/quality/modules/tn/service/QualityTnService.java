@@ -14,9 +14,9 @@ import com.zebone.quality.modules.tn.entity.QualityTn;
 import com.zebone.quality.modules.tn.dao.QualityTnDao;
 
 /**
- * quality_tnService
+ * TN甲状腺结节（手术治疗）Service
  * @author 卡卡西
- * @version 2021-01-19
+ * @version 2021-02-19
  */
 @Service
 @Transactional(readOnly=true)
