@@ -10,7 +10,7 @@ import com.zebone.quality.modules.tia.entity.QualityTia;
 /**
  * TIA短暂性脑缺血发作DAO接口
  * @author 卡卡西
- * @version 2021-01-16
+ * @version 2021-02-19
  */
 @MyBatisDao
 public interface QualityTiaDao extends CrudDao<QualityTia> {

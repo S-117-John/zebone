@@ -25,7 +25,7 @@ import com.zebone.quality.modules.tia.service.QualityTiaService;
 /**
  * TIA短暂性脑缺血发作Controller
  * @author 卡卡西
- * @version 2021-01-16
+ * @version 2021-02-19
  */
 @Controller
 @RequestMapping(value = "${adminPath}/tia/qualityTia")

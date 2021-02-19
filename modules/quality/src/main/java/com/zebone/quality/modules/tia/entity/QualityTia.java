@@ -17,7 +17,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 /**
  * TIA短暂性脑缺血发作Entity
  * @author 卡卡西
- * @version 2021-01-16
+ * @version 2021-02-19
  */
 @Table(name="quality_tia", alias="a", columns={
 		@Column(name="cm_0_1_1_1", attrName="cm_0_1_1_1", label="质控医师"),
@@ -25,7 +25,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_0_1_1_3", attrName="cm_0_1_1_3", label="主治医师"),
 		@Column(name="cm_0_1_1_4", attrName="cm_0_1_1_4", label="责任护士"),
 		@Column(name="cm_0_1_1_5", attrName="cm_0_1_1_5", label="上报科室"),
-		@Column(name="case_id", attrName="caseId", label="患者病案号"),
+		@Column(name="caseid", attrName="caseid", label="患者病案号"),
 		@Column(name="cm_0_1_3_1", attrName="cm_0_1_3_1", label="主要诊断ICD-10四位亚目编码与名称"),
 		@Column(name="cm_0_1_3_2", attrName="cm_0_1_3_2", label="主要诊断ICD-10六位临床扩展编码与名称"),
 		@Column(name="cm_0_1_5", attrName="cm_0_1_5", label="是否出院后31天内重复住院"),
@@ -40,7 +40,6 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_0_2_4_1", attrName="cm_0_2_4_1", label="入院日期时间"),
 		@Column(name="cm_0_2_4_2", attrName="cm_0_2_4_2", label="出院日期时间"),
 		@Column(name="cm_0_3_1", attrName="cm_0_3_1", label="费用支付方式"),
-		@Column(includeEntity=DataEntity.class),
 		@Column(name="cm_0_3_2", attrName="cm_0_3_2", label="收入住院途径"),
 		@Column(name="cm_0_3_3", attrName="cm_0_3_3", label="到院交通工具"),
 		@Column(name="tia_1_1_2_1", attrName="tia_1_1_2_1", label="评估日期时间"),
@@ -175,20 +174,8 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_6_28", attrName="cm_6_28", label="治疗用一次性医用材料费"),
 		@Column(name="cm_6_29", attrName="cm_6_29", label="手术用一次性医用材料费"),
 		@Column(name="cm_6_30", attrName="cm_6_30", label="其他费"),
-		@Column(name="cm_0_1_4_1", attrName="cm0141", label="主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称"),
-		@Column(name="cm_0_1_4_1_1", attrName="cm01411", label="其他ICD-9-CM-3四位亚目编码与名称"),
-		@Column(name="cm_0_1_4_2", attrName="cm0142", label="主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称"),
-		@Column(name="cm_0_1_4_2_1", attrName="cm01421", label="其他ICD-9-CM-3六位临床扩展编码与名称"),
-		@Column(name="cm_0_2_5_1", attrName="cm0251", label="入住CCU日期时间"),
-		@Column(name="cm_0_2_5_2", attrName="cm0252", label="离开CCU日期时间"),
-		@Column(name="cm_0_2_6_1", attrName="cm0261", label="手术开始", comment="手术开始（切皮）日期时间"),
-		@Column(name="cm_0_2_6_2", attrName="cm0262", label="手术结束", comment="手术结束（缝皮结束）日期时间"),
-		@Column(name="cm_3_1", attrName="cm31", label="手术野皮肤准备常用方法的选择"),
-		@Column(name="cm_3_2", attrName="cm32", label="使用含抗菌剂", comment="使用含抗菌剂（三氯生）缝线"),
-		@Column(name="cm_3_2_1", attrName="cm321", label="其他含抗菌剂缝线填写"),
-		@Column(name="cm_3_3", attrName="cm33", label="手术切口类别的选择"),
-		@Column(name="cm_3_4", attrName="cm34", label="手术切口愈合情况的选择"),
 		@Column(name="id", attrName="id", label="id", isPK=true),
+		@Column(includeEntity=DataEntity.class),
 	}, orderBy="a.update_date DESC"
 )
 public class QualityTia extends DataEntity<QualityTia> {
@@ -199,7 +186,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 	private String cm_0_1_1_3;		// 主治医师
 	private String cm_0_1_1_4;		// 责任护士
 	private String cm_0_1_1_5;		// 上报科室
-	private String caseId;		// 患者病案号
+	private String caseid;		// 患者病案号
 	private String cm_0_1_3_1;		// 主要诊断ICD-10四位亚目编码与名称
 	private String cm_0_1_3_2;		// 主要诊断ICD-10六位临床扩展编码与名称
 	private String cm_0_1_5;		// 是否出院后31天内重复住院
@@ -216,7 +203,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 	private String cm_0_3_1;		// 费用支付方式
 	private String cm_0_3_2;		// 收入住院途径
 	private String cm_0_3_3;		// 到院交通工具
-	private String tia_1_1_2_1;		// 评估日期时间
+	private Date tia_1_1_2_1;		// 评估日期时间
 	private String tia_1_1_3;		// 是否实施ABCD/2/3/3-I评分
 	private String tia_1_1_4;		// 选择评估分值实施类型
 	private Double tia_1_1_4_1_0;		// ABCD评估分值
@@ -227,24 +214,24 @@ public class QualityTia extends DataEntity<QualityTia> {
 	private String tia_1_2_1_1;		// 是否实施首次头部影像学检查
 	private String tia_1_2_1_2;		// 头部影像学检查项目
 	private String tia_1_2_1_4;		// 其他头部影像学检查项目
-	private String tia_1_2_1_3_1;		// 报告日期时间
+	private Date tia_1_2_1_3_1;		// 报告日期时间
 	private String tia_1_2_2_1;		// 是否实施首次全血细胞计数检查
-	private String tia_1_2_2_2_1;		// 报告日期时间
+	private Date tia_1_2_2_2_1;		// 报告日期时间
 	private String tia_1_2_3_1;		// 是否实施首次凝血功能检查
 	private String tia_1_2_3_2_1;		// 凝血功能检查项目
-	private String tia_1_2_3_3_1;		// 报告日期时间
+	private Date tia_1_2_3_3_1;		// 报告日期时间
 	private String tia_1_2_4_1;		// 是否实施首次生化检验检查
 	private String tia_1_2_4_2_1;		// 生化检验项目
-	private String tia_1_2_4_3_1;		// 报告日期时间
+	private Date tia_1_2_4_3_1;		// 报告日期时间
 	private String tia_1_2_5_1;		// 是否实施首次ECG检查
-	private String tia_1_2_5_2_1;		// 报告日期时间
+	private Date tia_1_2_5_2_1;		// 报告日期时间
 	private String tia_1_2_5_3;		// 心电图（ECG）检查结果
 	private String tia_1_2_6_1;		// 是否实施首次心脏与血管检查
 	private String tia_1_2_6_3;		// 心脏检查相关项目选择
 	private String tia_1_2_6_3_1;		// 其他心脏检查项目
 	private String tia_1_2_6_5;		// 血管检查相关项目选择
 	private String tia_1_2_6_5_1;		// 其他血管检查相关项目
-	private String tia_1_2_6_2_1;		// 首次报告日期时间
+	private Date tia_1_2_6_2_1;		// 首次报告日期时间
 	private String tia_1_2_6_4;		// 评估结论
 	private String tia_1_2_6_4_1;		// 其他评估结论
 	private String tia_1_3;		// 收入院诊疗指症
@@ -257,21 +244,21 @@ public class QualityTia extends DataEntity<QualityTia> {
 	private String tia_2_3_2;		// 使用抗凝药物的禁忌症
 	private String tia_2_4_1;		// 是否常用抗凝药物
 	private String tia_2_4_2;		// 抗凝药物
-	private String tia_2_4_3;		// 用药日期时间
+	private Date tia_2_4_3;		// 用药日期时间
 	private String tia_3_1_1_1;		// 高卒中复发风险因素
 	private String tia_3_1_1_2;		// 其他高卒中复发风险因素
 	private String tia_3_1_1;		// 是否有使用阿司匹林禁忌症
 	private String tia_3_1_2;		// 阿司匹林禁忌症
 	private String tia_3_2_1;		// 患者是否使用首剂阿司匹林/氯吡格雷
-	private String tia_3_2_2_1;		// 用药日期时间
+	private Date tia_3_2_2_1;		// 用药日期时间
 	private String tia_3_3;		// 选择药物
 	private String tia_3_3_1;		// 其他抗血小板药物
 	private String tia_4_1_1;		// 患者评估时机选择
-	private String tia_4_1_2_1;		// 评估日期
+	private Date tia_4_1_2_1;		// 评估日期
 	private String tia_4_2_1;		// 选择血脂评估项目
 	private String tia_4_3;		// 评价血脂水平
 	private String tia_4_4_0;		// 是否使用他汀类药物
-	private String tia_4_4_1_1;		// 首次使用他汀类医嘱的日期
+	private Date tia_4_4_1_1;		// 首次使用他汀类医嘱的日期
 	private String tia_4_4_2;		// 他汀类药物
 	private String tia_5_1;		// 选择抗血小扳聚集治疗药物
 	private String tia_5_1_1;		// 其他抗血小扳聚集治疗药物
@@ -348,19 +335,6 @@ public class QualityTia extends DataEntity<QualityTia> {
 	private Double cm_6_28;		// 治疗用一次性医用材料费
 	private Double cm_6_29;		// 手术用一次性医用材料费
 	private Double cm_6_30;		// 其他费
-	private String cm0141;		// 主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称
-	private String cm01411;		// 其他ICD-9-CM-3四位亚目编码与名称
-	private String cm0142;		// 主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称
-	private String cm01421;		// 其他ICD-9-CM-3六位临床扩展编码与名称
-	private Date cm0251;		// 入住CCU日期时间
-	private Date cm0252;		// 离开CCU日期时间
-	private Date cm0261;		// 手术开始（切皮）日期时间
-	private Date cm0262;		// 手术结束（缝皮结束）日期时间
-	private String cm31;		// 手术野皮肤准备常用方法的选择
-	private String cm32;		// 使用含抗菌剂（三氯生）缝线
-	private String cm321;		// 其他含抗菌剂缝线填写
-	private String cm33;		// 手术切口类别的选择
-	private String cm34;		// 手术切口愈合情况的选择
 	
 	public QualityTia() {
 		this(null);
@@ -370,7 +344,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		super(id);
 	}
 	
-	@Length(min=0, max=32, message="质控医师长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="质控医师长度不能超过 64 个字符")
 	public String getCm_0_1_1_1() {
 		return cm_0_1_1_1;
 	}
@@ -379,7 +353,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_0_1_1_1 = cm_0_1_1_1;
 	}
 	
-	@Length(min=0, max=32, message="质控护士长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="质控护士长度不能超过 64 个字符")
 	public String getCm_0_1_1_2() {
 		return cm_0_1_1_2;
 	}
@@ -388,7 +362,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_0_1_1_2 = cm_0_1_1_2;
 	}
 	
-	@Length(min=0, max=32, message="主治医师长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主治医师长度不能超过 64 个字符")
 	public String getCm_0_1_1_3() {
 		return cm_0_1_1_3;
 	}
@@ -397,7 +371,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_0_1_1_3 = cm_0_1_1_3;
 	}
 	
-	@Length(min=0, max=32, message="责任护士长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="责任护士长度不能超过 64 个字符")
 	public String getCm_0_1_1_4() {
 		return cm_0_1_1_4;
 	}
@@ -406,7 +380,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_0_1_1_4 = cm_0_1_1_4;
 	}
 	
-	@Length(min=0, max=32, message="上报科室长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="上报科室长度不能超过 64 个字符")
 	public String getCm_0_1_1_5() {
 		return cm_0_1_1_5;
 	}
@@ -415,16 +389,16 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_0_1_1_5 = cm_0_1_1_5;
 	}
 	
-	@Length(min=0, max=32, message="患者病案号长度不能超过 32 个字符")
-	public String getCaseId() {
-		return caseId;
+	@Length(min=0, max=64, message="患者病案号长度不能超过 64 个字符")
+	public String getCaseid() {
+		return caseid;
 	}
 
-	public void setCaseId(String caseId) {
-		this.caseId = caseId;
+	public void setCaseid(String caseid) {
+		this.caseid = caseid;
 	}
 	
-	@Length(min=0, max=32, message="主要诊断ICD-10四位亚目编码与名称长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主要诊断ICD-10四位亚目编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_3_1() {
 		return cm_0_1_3_1;
 	}
@@ -433,7 +407,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_0_1_3_1 = cm_0_1_3_1;
 	}
 	
-	@Length(min=0, max=32, message="主要诊断ICD-10六位临床扩展编码与名称长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主要诊断ICD-10六位临床扩展编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_3_2() {
 		return cm_0_1_3_2;
 	}
@@ -442,7 +416,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_0_1_3_2 = cm_0_1_3_2;
 	}
 	
-	@Length(min=0, max=32, message="是否出院后31天内重复住院长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否出院后31天内重复住院长度不能超过 64 个字符")
 	public String getCm_0_1_5() {
 		return cm_0_1_5;
 	}
@@ -460,7 +434,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_0_2_1_1 = cm_0_2_1_1;
 	}
 	
-	@Length(min=0, max=32, message="患者性别长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="患者性别长度不能超过 64 个字符")
 	public String getCm_0_2_1_2() {
 		return cm_0_2_1_2;
 	}
@@ -485,7 +459,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_0_2_1_5 = cm_0_2_1_5;
 	}
 	
-	@Length(min=0, max=32, message="发病日期时间是否无法确定或无记录长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="发病日期时间是否无法确定或无记录长度不能超过 64 个字符")
 	public String getCm_0_2_2_1() {
 		return cm_0_2_2_1;
 	}
@@ -503,7 +477,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_0_2_2_2 = cm_0_2_2_2;
 	}
 	
-	@Length(min=0, max=32, message="到达本院急诊或者门诊日期时间是否无法确定或无记录长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="到达本院急诊或者门诊日期时间是否无法确定或无记录长度不能超过 64 个字符")
 	public String getCm_0_2_3_1() {
 		return cm_0_2_3_1;
 	}
@@ -539,7 +513,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_0_2_4_2 = cm_0_2_4_2;
 	}
 	
-	@Length(min=0, max=32, message="费用支付方式长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="费用支付方式长度不能超过 64 个字符")
 	public String getCm_0_3_1() {
 		return cm_0_3_1;
 	}
@@ -548,7 +522,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_0_3_1 = cm_0_3_1;
 	}
 	
-	@Length(min=0, max=32, message="收入住院途径长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="收入住院途径长度不能超过 64 个字符")
 	public String getCm_0_3_2() {
 		return cm_0_3_2;
 	}
@@ -557,7 +531,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_0_3_2 = cm_0_3_2;
 	}
 	
-	@Length(min=0, max=32, message="到院交通工具长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="到院交通工具长度不能超过 64 个字符")
 	public String getCm_0_3_3() {
 		return cm_0_3_3;
 	}
@@ -566,16 +540,16 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_0_3_3 = cm_0_3_3;
 	}
 	
-	@Length(min=0, max=32, message="评估日期时间长度不能超过 32 个字符")
-	public String getTia_1_1_2_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getTia_1_1_2_1() {
 		return tia_1_1_2_1;
 	}
 
-	public void setTia_1_1_2_1(String tia_1_1_2_1) {
+	public void setTia_1_1_2_1(Date tia_1_1_2_1) {
 		this.tia_1_1_2_1 = tia_1_1_2_1;
 	}
 	
-	@Length(min=0, max=32, message="是否实施ABCD/2/3/3-I评分长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否实施ABCD/2/3/3-I评分长度不能超过 64 个字符")
 	public String getTia_1_1_3() {
 		return tia_1_1_3;
 	}
@@ -584,7 +558,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_1_1_3 = tia_1_1_3;
 	}
 	
-	@Length(min=0, max=32, message="选择评估分值实施类型长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="选择评估分值实施类型长度不能超过 64 个字符")
 	public String getTia_1_1_4() {
 		return tia_1_1_4;
 	}
@@ -625,7 +599,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_1_1_4_3_1 = tia_1_1_4_3_1;
 	}
 	
-	@Length(min=0, max=32, message="ABCD2/3/3-I 评估风险分层长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="ABCD2/3/3-I 评估风险分层长度不能超过 64 个字符")
 	public String getTia_1_1_4_5() {
 		return tia_1_1_4_5;
 	}
@@ -634,7 +608,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_1_1_4_5 = tia_1_1_4_5;
 	}
 	
-	@Length(min=0, max=32, message="是否实施首次头部影像学检查长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否实施首次头部影像学检查长度不能超过 64 个字符")
 	public String getTia_1_2_1_1() {
 		return tia_1_2_1_1;
 	}
@@ -643,7 +617,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_1_2_1_1 = tia_1_2_1_1;
 	}
 	
-	@Length(min=0, max=32, message="头部影像学检查项目长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="头部影像学检查项目长度不能超过 64 个字符")
 	public String getTia_1_2_1_2() {
 		return tia_1_2_1_2;
 	}
@@ -652,7 +626,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_1_2_1_2 = tia_1_2_1_2;
 	}
 	
-	@Length(min=0, max=32, message="其他头部影像学检查项目长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他头部影像学检查项目长度不能超过 64 个字符")
 	public String getTia_1_2_1_4() {
 		return tia_1_2_1_4;
 	}
@@ -661,16 +635,16 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_1_2_1_4 = tia_1_2_1_4;
 	}
 	
-	@Length(min=0, max=32, message="报告日期时间长度不能超过 32 个字符")
-	public String getTia_1_2_1_3_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getTia_1_2_1_3_1() {
 		return tia_1_2_1_3_1;
 	}
 
-	public void setTia_1_2_1_3_1(String tia_1_2_1_3_1) {
+	public void setTia_1_2_1_3_1(Date tia_1_2_1_3_1) {
 		this.tia_1_2_1_3_1 = tia_1_2_1_3_1;
 	}
 	
-	@Length(min=0, max=32, message="是否实施首次全血细胞计数检查长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否实施首次全血细胞计数检查长度不能超过 64 个字符")
 	public String getTia_1_2_2_1() {
 		return tia_1_2_2_1;
 	}
@@ -679,16 +653,16 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_1_2_2_1 = tia_1_2_2_1;
 	}
 	
-	@Length(min=0, max=32, message="报告日期时间长度不能超过 32 个字符")
-	public String getTia_1_2_2_2_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getTia_1_2_2_2_1() {
 		return tia_1_2_2_2_1;
 	}
 
-	public void setTia_1_2_2_2_1(String tia_1_2_2_2_1) {
+	public void setTia_1_2_2_2_1(Date tia_1_2_2_2_1) {
 		this.tia_1_2_2_2_1 = tia_1_2_2_2_1;
 	}
 	
-	@Length(min=0, max=32, message="是否实施首次凝血功能检查长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否实施首次凝血功能检查长度不能超过 64 个字符")
 	public String getTia_1_2_3_1() {
 		return tia_1_2_3_1;
 	}
@@ -697,7 +671,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_1_2_3_1 = tia_1_2_3_1;
 	}
 	
-	@Length(min=0, max=32, message="凝血功能检查项目长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="凝血功能检查项目长度不能超过 64 个字符")
 	public String getTia_1_2_3_2_1() {
 		return tia_1_2_3_2_1;
 	}
@@ -706,16 +680,16 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_1_2_3_2_1 = tia_1_2_3_2_1;
 	}
 	
-	@Length(min=0, max=32, message="报告日期时间长度不能超过 32 个字符")
-	public String getTia_1_2_3_3_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getTia_1_2_3_3_1() {
 		return tia_1_2_3_3_1;
 	}
 
-	public void setTia_1_2_3_3_1(String tia_1_2_3_3_1) {
+	public void setTia_1_2_3_3_1(Date tia_1_2_3_3_1) {
 		this.tia_1_2_3_3_1 = tia_1_2_3_3_1;
 	}
 	
-	@Length(min=0, max=32, message="是否实施首次生化检验检查长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否实施首次生化检验检查长度不能超过 64 个字符")
 	public String getTia_1_2_4_1() {
 		return tia_1_2_4_1;
 	}
@@ -724,7 +698,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_1_2_4_1 = tia_1_2_4_1;
 	}
 	
-	@Length(min=0, max=32, message="生化检验项目长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="生化检验项目长度不能超过 64 个字符")
 	public String getTia_1_2_4_2_1() {
 		return tia_1_2_4_2_1;
 	}
@@ -733,16 +707,16 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_1_2_4_2_1 = tia_1_2_4_2_1;
 	}
 	
-	@Length(min=0, max=32, message="报告日期时间长度不能超过 32 个字符")
-	public String getTia_1_2_4_3_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getTia_1_2_4_3_1() {
 		return tia_1_2_4_3_1;
 	}
 
-	public void setTia_1_2_4_3_1(String tia_1_2_4_3_1) {
+	public void setTia_1_2_4_3_1(Date tia_1_2_4_3_1) {
 		this.tia_1_2_4_3_1 = tia_1_2_4_3_1;
 	}
 	
-	@Length(min=0, max=32, message="是否实施首次ECG检查长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否实施首次ECG检查长度不能超过 64 个字符")
 	public String getTia_1_2_5_1() {
 		return tia_1_2_5_1;
 	}
@@ -751,16 +725,16 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_1_2_5_1 = tia_1_2_5_1;
 	}
 	
-	@Length(min=0, max=32, message="报告日期时间长度不能超过 32 个字符")
-	public String getTia_1_2_5_2_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getTia_1_2_5_2_1() {
 		return tia_1_2_5_2_1;
 	}
 
-	public void setTia_1_2_5_2_1(String tia_1_2_5_2_1) {
+	public void setTia_1_2_5_2_1(Date tia_1_2_5_2_1) {
 		this.tia_1_2_5_2_1 = tia_1_2_5_2_1;
 	}
 	
-	@Length(min=0, max=32, message="心电图长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="心电图长度不能超过 64 个字符")
 	public String getTia_1_2_5_3() {
 		return tia_1_2_5_3;
 	}
@@ -769,7 +743,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_1_2_5_3 = tia_1_2_5_3;
 	}
 	
-	@Length(min=0, max=32, message="是否实施首次心脏与血管检查长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否实施首次心脏与血管检查长度不能超过 64 个字符")
 	public String getTia_1_2_6_1() {
 		return tia_1_2_6_1;
 	}
@@ -778,7 +752,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_1_2_6_1 = tia_1_2_6_1;
 	}
 	
-	@Length(min=0, max=32, message="心脏检查相关项目选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="心脏检查相关项目选择长度不能超过 64 个字符")
 	public String getTia_1_2_6_3() {
 		return tia_1_2_6_3;
 	}
@@ -787,7 +761,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_1_2_6_3 = tia_1_2_6_3;
 	}
 	
-	@Length(min=0, max=32, message="其他心脏检查项目长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他心脏检查项目长度不能超过 64 个字符")
 	public String getTia_1_2_6_3_1() {
 		return tia_1_2_6_3_1;
 	}
@@ -796,7 +770,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_1_2_6_3_1 = tia_1_2_6_3_1;
 	}
 	
-	@Length(min=0, max=32, message="血管检查相关项目选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="血管检查相关项目选择长度不能超过 64 个字符")
 	public String getTia_1_2_6_5() {
 		return tia_1_2_6_5;
 	}
@@ -805,7 +779,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_1_2_6_5 = tia_1_2_6_5;
 	}
 	
-	@Length(min=0, max=32, message="其他血管检查相关项目长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他血管检查相关项目长度不能超过 64 个字符")
 	public String getTia_1_2_6_5_1() {
 		return tia_1_2_6_5_1;
 	}
@@ -814,16 +788,16 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_1_2_6_5_1 = tia_1_2_6_5_1;
 	}
 	
-	@Length(min=0, max=32, message="首次报告日期时间长度不能超过 32 个字符")
-	public String getTia_1_2_6_2_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getTia_1_2_6_2_1() {
 		return tia_1_2_6_2_1;
 	}
 
-	public void setTia_1_2_6_2_1(String tia_1_2_6_2_1) {
+	public void setTia_1_2_6_2_1(Date tia_1_2_6_2_1) {
 		this.tia_1_2_6_2_1 = tia_1_2_6_2_1;
 	}
 	
-	@Length(min=0, max=32, message="评估结论长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="评估结论长度不能超过 64 个字符")
 	public String getTia_1_2_6_4() {
 		return tia_1_2_6_4;
 	}
@@ -832,7 +806,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_1_2_6_4 = tia_1_2_6_4;
 	}
 	
-	@Length(min=0, max=32, message="其他评估结论长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他评估结论长度不能超过 64 个字符")
 	public String getTia_1_2_6_4_1() {
 		return tia_1_2_6_4_1;
 	}
@@ -841,7 +815,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_1_2_6_4_1 = tia_1_2_6_4_1;
 	}
 	
-	@Length(min=0, max=32, message="收入院诊疗指症长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="收入院诊疗指症长度不能超过 64 个字符")
 	public String getTia_1_3() {
 		return tia_1_3;
 	}
@@ -850,7 +824,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_1_3 = tia_1_3;
 	}
 	
-	@Length(min=0, max=32, message="房颤患者长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="房颤患者长度不能超过 64 个字符")
 	public String getTia_2_1_1_1() {
 		return tia_2_1_1_1;
 	}
@@ -859,7 +833,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_2_1_1_1 = tia_2_1_1_1;
 	}
 	
-	@Length(min=0, max=32, message="是否实施房颤患者脑卒中风险评估长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否实施房颤患者脑卒中风险评估长度不能超过 64 个字符")
 	public String getTia_2_1_1() {
 		return tia_2_1_1;
 	}
@@ -876,7 +850,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_2_1_2_1 = tia_2_1_2_1;
 	}
 	
-	@Length(min=0, max=32, message="是否实施房颤症状严重程度EHRA评估长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否实施房颤症状严重程度EHRA评估长度不能超过 64 个字符")
 	public String getTia_2_2_1() {
 		return tia_2_2_1;
 	}
@@ -885,7 +859,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_2_2_1 = tia_2_2_1;
 	}
 	
-	@Length(min=0, max=32, message="房颤症状严重程度EHRA评估结果长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="房颤症状严重程度EHRA评估结果长度不能超过 64 个字符")
 	public String getTia_2_2_2() {
 		return tia_2_2_2;
 	}
@@ -894,7 +868,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_2_2_2 = tia_2_2_2;
 	}
 	
-	@Length(min=0, max=32, message="是否有使用抗凝药物的禁忌症长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否有使用抗凝药物的禁忌症长度不能超过 64 个字符")
 	public String getTia_2_3_1() {
 		return tia_2_3_1;
 	}
@@ -903,7 +877,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_2_3_1 = tia_2_3_1;
 	}
 	
-	@Length(min=0, max=32, message="使用抗凝药物的禁忌症长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="使用抗凝药物的禁忌症长度不能超过 64 个字符")
 	public String getTia_2_3_2() {
 		return tia_2_3_2;
 	}
@@ -912,7 +886,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_2_3_2 = tia_2_3_2;
 	}
 	
-	@Length(min=0, max=32, message="是否常用抗凝药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否常用抗凝药物长度不能超过 64 个字符")
 	public String getTia_2_4_1() {
 		return tia_2_4_1;
 	}
@@ -921,7 +895,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_2_4_1 = tia_2_4_1;
 	}
 	
-	@Length(min=0, max=32, message="抗凝药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="抗凝药物长度不能超过 64 个字符")
 	public String getTia_2_4_2() {
 		return tia_2_4_2;
 	}
@@ -930,16 +904,16 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_2_4_2 = tia_2_4_2;
 	}
 	
-	@Length(min=0, max=32, message="用药日期时间长度不能超过 32 个字符")
-	public String getTia_2_4_3() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getTia_2_4_3() {
 		return tia_2_4_3;
 	}
 
-	public void setTia_2_4_3(String tia_2_4_3) {
+	public void setTia_2_4_3(Date tia_2_4_3) {
 		this.tia_2_4_3 = tia_2_4_3;
 	}
 	
-	@Length(min=0, max=32, message="高卒中复发风险因素长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="高卒中复发风险因素长度不能超过 64 个字符")
 	public String getTia_3_1_1_1() {
 		return tia_3_1_1_1;
 	}
@@ -948,7 +922,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_3_1_1_1 = tia_3_1_1_1;
 	}
 	
-	@Length(min=0, max=32, message="其他高卒中复发风险因素长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他高卒中复发风险因素长度不能超过 64 个字符")
 	public String getTia_3_1_1_2() {
 		return tia_3_1_1_2;
 	}
@@ -957,7 +931,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_3_1_1_2 = tia_3_1_1_2;
 	}
 	
-	@Length(min=0, max=32, message="是否有使用阿司匹林禁忌症长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否有使用阿司匹林禁忌症长度不能超过 64 个字符")
 	public String getTia_3_1_1() {
 		return tia_3_1_1;
 	}
@@ -966,7 +940,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_3_1_1 = tia_3_1_1;
 	}
 	
-	@Length(min=0, max=32, message="阿司匹林禁忌症长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="阿司匹林禁忌症长度不能超过 64 个字符")
 	public String getTia_3_1_2() {
 		return tia_3_1_2;
 	}
@@ -975,7 +949,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_3_1_2 = tia_3_1_2;
 	}
 	
-	@Length(min=0, max=32, message="患者是否使用首剂阿司匹林/氯吡格雷长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="患者是否使用首剂阿司匹林/氯吡格雷长度不能超过 64 个字符")
 	public String getTia_3_2_1() {
 		return tia_3_2_1;
 	}
@@ -984,16 +958,16 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_3_2_1 = tia_3_2_1;
 	}
 	
-	@Length(min=0, max=32, message="用药日期时间长度不能超过 32 个字符")
-	public String getTia_3_2_2_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getTia_3_2_2_1() {
 		return tia_3_2_2_1;
 	}
 
-	public void setTia_3_2_2_1(String tia_3_2_2_1) {
+	public void setTia_3_2_2_1(Date tia_3_2_2_1) {
 		this.tia_3_2_2_1 = tia_3_2_2_1;
 	}
 	
-	@Length(min=0, max=32, message="选择药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="选择药物长度不能超过 64 个字符")
 	public String getTia_3_3() {
 		return tia_3_3;
 	}
@@ -1002,7 +976,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_3_3 = tia_3_3;
 	}
 	
-	@Length(min=0, max=32, message="其他抗血小板药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他抗血小板药物长度不能超过 64 个字符")
 	public String getTia_3_3_1() {
 		return tia_3_3_1;
 	}
@@ -1011,7 +985,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_3_3_1 = tia_3_3_1;
 	}
 	
-	@Length(min=0, max=32, message="患者评估时机选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="患者评估时机选择长度不能超过 64 个字符")
 	public String getTia_4_1_1() {
 		return tia_4_1_1;
 	}
@@ -1020,16 +994,16 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_4_1_1 = tia_4_1_1;
 	}
 	
-	@Length(min=0, max=32, message="评估日期长度不能超过 32 个字符")
-	public String getTia_4_1_2_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getTia_4_1_2_1() {
 		return tia_4_1_2_1;
 	}
 
-	public void setTia_4_1_2_1(String tia_4_1_2_1) {
+	public void setTia_4_1_2_1(Date tia_4_1_2_1) {
 		this.tia_4_1_2_1 = tia_4_1_2_1;
 	}
 	
-	@Length(min=0, max=32, message="选择血脂评估项目长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="选择血脂评估项目长度不能超过 64 个字符")
 	public String getTia_4_2_1() {
 		return tia_4_2_1;
 	}
@@ -1038,7 +1012,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_4_2_1 = tia_4_2_1;
 	}
 	
-	@Length(min=0, max=32, message="评价血脂水平长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="评价血脂水平长度不能超过 64 个字符")
 	public String getTia_4_3() {
 		return tia_4_3;
 	}
@@ -1047,7 +1021,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_4_3 = tia_4_3;
 	}
 	
-	@Length(min=0, max=32, message="是否使用他汀类药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否使用他汀类药物长度不能超过 64 个字符")
 	public String getTia_4_4_0() {
 		return tia_4_4_0;
 	}
@@ -1056,16 +1030,16 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_4_4_0 = tia_4_4_0;
 	}
 	
-	@Length(min=0, max=32, message="首次使用他汀类医嘱的日期长度不能超过 32 个字符")
-	public String getTia_4_4_1_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getTia_4_4_1_1() {
 		return tia_4_4_1_1;
 	}
 
-	public void setTia_4_4_1_1(String tia_4_4_1_1) {
+	public void setTia_4_4_1_1(Date tia_4_4_1_1) {
 		this.tia_4_4_1_1 = tia_4_4_1_1;
 	}
 	
-	@Length(min=0, max=32, message="他汀类药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="他汀类药物长度不能超过 64 个字符")
 	public String getTia_4_4_2() {
 		return tia_4_4_2;
 	}
@@ -1074,7 +1048,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_4_4_2 = tia_4_4_2;
 	}
 	
-	@Length(min=0, max=32, message="选择抗血小扳聚集治疗药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="选择抗血小扳聚集治疗药物长度不能超过 64 个字符")
 	public String getTia_5_1() {
 		return tia_5_1;
 	}
@@ -1083,7 +1057,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_5_1 = tia_5_1;
 	}
 	
-	@Length(min=0, max=32, message="其他抗血小扳聚集治疗药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他抗血小扳聚集治疗药物长度不能超过 64 个字符")
 	public String getTia_5_1_1() {
 		return tia_5_1_1;
 	}
@@ -1092,7 +1066,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_5_1_1 = tia_5_1_1;
 	}
 	
-	@Length(min=0, max=32, message="他汀类药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="他汀类药物长度不能超过 64 个字符")
 	public String getTia_5_2() {
 		return tia_5_2;
 	}
@@ -1101,7 +1075,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_5_2 = tia_5_2;
 	}
 	
-	@Length(min=0, max=32, message="选择抗凝药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="选择抗凝药物长度不能超过 64 个字符")
 	public String getTia_5_3() {
 		return tia_5_3;
 	}
@@ -1110,7 +1084,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_5_3 = tia_5_3;
 	}
 	
-	@Length(min=0, max=32, message="患者是否伴发糖尿病长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="患者是否伴发糖尿病长度不能超过 64 个字符")
 	public String getTia_5_4_1() {
 		return tia_5_4_1;
 	}
@@ -1119,7 +1093,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_5_4_1 = tia_5_4_1;
 	}
 	
-	@Length(min=0, max=32, message="选择降糖药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="选择降糖药物长度不能超过 64 个字符")
 	public String getTia_5_4() {
 		return tia_5_4;
 	}
@@ -1128,7 +1102,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_5_4 = tia_5_4;
 	}
 	
-	@Length(min=0, max=32, message="其他降糖药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他降糖药物长度不能超过 64 个字符")
 	public String getTia_5_4_2() {
 		return tia_5_4_2;
 	}
@@ -1137,7 +1111,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_5_4_2 = tia_5_4_2;
 	}
 	
-	@Length(min=0, max=32, message="患者是否伴发高血压长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="患者是否伴发高血压长度不能超过 64 个字符")
 	public String getTia_5_5_1() {
 		return tia_5_5_1;
 	}
@@ -1146,7 +1120,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_5_5_1 = tia_5_5_1;
 	}
 	
-	@Length(min=0, max=32, message="选择降压药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="选择降压药物长度不能超过 64 个字符")
 	public String getTia_5_5() {
 		return tia_5_5;
 	}
@@ -1155,7 +1129,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_5_5 = tia_5_5;
 	}
 	
-	@Length(min=0, max=32, message="其他降压药物长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他降压药物长度不能超过 64 个字符")
 	public String getTia_5_5_2() {
 		return tia_5_5_2;
 	}
@@ -1164,7 +1138,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_5_5_2 = tia_5_5_2;
 	}
 	
-	@Length(min=0, max=32, message="行走评估结果长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="行走评估结果长度不能超过 64 个字符")
 	public String getTia_6_1_1() {
 		return tia_6_1_1;
 	}
@@ -1173,7 +1147,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_6_1_1 = tia_6_1_1;
 	}
 	
-	@Length(min=0, max=32, message="呼吸评估结果长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="呼吸评估结果长度不能超过 64 个字符")
 	public String getTia_6_1_2() {
 		return tia_6_1_2;
 	}
@@ -1182,7 +1156,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_6_1_2 = tia_6_1_2;
 	}
 	
-	@Length(min=0, max=32, message="饮食评估结果长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="饮食评估结果长度不能超过 64 个字符")
 	public String getTia_6_1_3() {
 		return tia_6_1_3;
 	}
@@ -1191,7 +1165,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_6_1_3 = tia_6_1_3;
 	}
 	
-	@Length(min=0, max=32, message="实施卒中健康教育有记录长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="实施卒中健康教育有记录长度不能超过 64 个字符")
 	public String getTia_6_2_1() {
 		return tia_6_2_1;
 	}
@@ -1200,7 +1174,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_6_2_1 = tia_6_2_1;
 	}
 	
-	@Length(min=0, max=32, message="吸烟史长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="吸烟史长度不能超过 64 个字符")
 	public String getTia_6_3_1() {
 		return tia_6_3_1;
 	}
@@ -1209,7 +1183,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_6_3_1 = tia_6_3_1;
 	}
 	
-	@Length(min=0, max=32, message="吸烟程度评估有记录长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="吸烟程度评估有记录长度不能超过 64 个字符")
 	public String getTia_6_3_2() {
 		return tia_6_3_2;
 	}
@@ -1218,7 +1192,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_6_3_2 = tia_6_3_2;
 	}
 	
-	@Length(min=0, max=32, message="接受戒烟的建议或者戒烟治疗有记录长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="接受戒烟的建议或者戒烟治疗有记录长度不能超过 64 个字符")
 	public String getTia_6_3_3() {
 		return tia_6_3_3;
 	}
@@ -1227,7 +1201,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_6_3_3 = tia_6_3_3;
 	}
 	
-	@Length(min=0, max=32, message="血管功能评估时间长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="血管功能评估时间长度不能超过 64 个字符")
 	public String getTia_7_1() {
 		return tia_7_1;
 	}
@@ -1236,7 +1210,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_7_1 = tia_7_1;
 	}
 	
-	@Length(min=0, max=32, message="血管功能评估方法长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="血管功能评估方法长度不能超过 64 个字符")
 	public String getTia_7_2() {
 		return tia_7_2;
 	}
@@ -1245,7 +1219,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_7_2 = tia_7_2;
 	}
 	
-	@Length(min=0, max=32, message="出院时是否进行Essen卒中风险评分长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="出院时是否进行Essen卒中风险评分长度不能超过 64 个字符")
 	public String getTia_9_1_1() {
 		return tia_9_1_1;
 	}
@@ -1262,7 +1236,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_9_1_2_1 = tia_9_1_2_1;
 	}
 	
-	@Length(min=0, max=32, message="主要风险因素评估长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主要风险因素评估长度不能超过 64 个字符")
 	public String getTia_9_2_1() {
 		return tia_9_2_1;
 	}
@@ -1271,7 +1245,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_9_2_1 = tia_9_2_1;
 	}
 	
-	@Length(min=0, max=32, message="其他主要风险因素填写长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他主要风险因素填写长度不能超过 64 个字符")
 	public String getTia_9_2_1_1() {
 		return tia_9_2_1_1;
 	}
@@ -1280,7 +1254,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_9_2_1_1 = tia_9_2_1_1;
 	}
 	
-	@Length(min=0, max=32, message="其他风险因素评估长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他风险因素评估长度不能超过 64 个字符")
 	public String getTia_9_2_2() {
 		return tia_9_2_2;
 	}
@@ -1289,7 +1263,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_9_2_2 = tia_9_2_2;
 	}
 	
-	@Length(min=0, max=32, message="其他风险因素填写长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他风险因素填写长度不能超过 64 个字符")
 	public String getTia_9_2_2_1() {
 		return tia_9_2_2_1;
 	}
@@ -1298,7 +1272,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_9_2_2_1 = tia_9_2_2_1;
 	}
 	
-	@Length(min=0, max=32, message="交与患者“出院小结”的副本告知患者出院时风险因素长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="交与患者“出院小结”的副本告知患者出院时风险因素长度不能超过 64 个字符")
 	public String getTia_9_3_1() {
 		return tia_9_3_1;
 	}
@@ -1307,7 +1281,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_9_3_1 = tia_9_3_1;
 	}
 	
-	@Length(min=0, max=32, message="出院带药长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="出院带药长度不能超过 64 个字符")
 	public String getTia_9_3_2() {
 		return tia_9_3_2;
 	}
@@ -1316,7 +1290,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_9_3_2 = tia_9_3_2;
 	}
 	
-	@Length(min=0, max=32, message="告知发生紧急情况时求援救治途径长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="告知发生紧急情况时求援救治途径长度不能超过 64 个字符")
 	public String getTia_9_3_3() {
 		return tia_9_3_3;
 	}
@@ -1325,7 +1299,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_9_3_3 = tia_9_3_3;
 	}
 	
-	@Length(min=0, max=32, message="出院时教育与随访长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="出院时教育与随访长度不能超过 64 个字符")
 	public String getTia_9_3_4() {
 		return tia_9_3_4;
 	}
@@ -1334,7 +1308,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_9_3_4 = tia_9_3_4;
 	}
 	
-	@Length(min=0, max=32, message="告知何为风险因素与紧急情况长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="告知何为风险因素与紧急情况长度不能超过 64 个字符")
 	public String getTia_9_3_5() {
 		return tia_9_3_5;
 	}
@@ -1343,7 +1317,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.tia_9_3_5 = tia_9_3_5;
 	}
 	
-	@Length(min=0, max=32, message="离院方式选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="离院方式选择长度不能超过 64 个字符")
 	public String getCm_4_3() {
 		return cm_4_3;
 	}
@@ -1352,7 +1326,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_4_3 = cm_4_3;
 	}
 	
-	@Length(min=0, max=32, message="非医嘱离院可能涉及因素长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="非医嘱离院可能涉及因素长度不能超过 64 个字符")
 	public String getCm_4_5() {
 		return cm_4_5;
 	}
@@ -1361,7 +1335,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_4_5 = cm_4_5;
 	}
 	
-	@Length(min=0, max=32, message="其他非医嘱离院因素填写长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他非医嘱离院因素填写长度不能超过 64 个字符")
 	public String getCm_4_4_1() {
 		return cm_4_4_1;
 	}
@@ -1370,7 +1344,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_4_4_1 = cm_4_4_1;
 	}
 	
-	@Length(min=0, max=32, message="死亡可能涉及因素长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="死亡可能涉及因素长度不能超过 64 个字符")
 	public String getCm_4_6() {
 		return cm_4_6;
 	}
@@ -1379,7 +1353,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_4_6 = cm_4_6;
 	}
 	
-	@Length(min=0, max=32, message="患者是否对服务的体验与评价长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="患者是否对服务的体验与评价长度不能超过 64 个字符")
 	public String getCm_5_1() {
 		return cm_5_1;
 	}
@@ -1388,7 +1362,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_5_1 = cm_5_1;
 	}
 	
-	@Length(min=0, max=32, message="整体医院评级长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="整体医院评级长度不能超过 64 个字符")
 	public String getCm_5_2_1() {
 		return cm_5_2_1;
 	}
@@ -1397,7 +1371,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_5_2_1 = cm_5_2_1;
 	}
 	
-	@Length(min=0, max=32, message="患者推荐长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="患者推荐长度不能超过 64 个字符")
 	public String getCm_5_2_2() {
 		return cm_5_2_2;
 	}
@@ -1406,7 +1380,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_5_2_2 = cm_5_2_2;
 	}
 	
-	@Length(min=0, max=32, message="病房、床单元和卫生间清洁度长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="病房、床单元和卫生间清洁度长度不能超过 64 个字符")
 	public String getCm_5_2_3() {
 		return cm_5_2_3;
 	}
@@ -1415,7 +1389,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_5_2_3 = cm_5_2_3;
 	}
 	
-	@Length(min=0, max=32, message="病房与周边噪音长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="病房与周边噪音长度不能超过 64 个字符")
 	public String getCm_5_2_5() {
 		return cm_5_2_5;
 	}
@@ -1424,7 +1398,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_5_2_5 = cm_5_2_5;
 	}
 	
-	@Length(min=0, max=32, message="医生沟通长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="医生沟通长度不能超过 64 个字符")
 	public String getCm_5_2_6() {
 		return cm_5_2_6;
 	}
@@ -1433,7 +1407,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_5_2_6 = cm_5_2_6;
 	}
 	
-	@Length(min=0, max=32, message="护士沟通长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="护士沟通长度不能超过 64 个字符")
 	public String getCm_5_2_7() {
 		return cm_5_2_7;
 	}
@@ -1442,7 +1416,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_5_2_7 = cm_5_2_7;
 	}
 	
-	@Length(min=0, max=32, message="药师沟通长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="药师沟通长度不能超过 64 个字符")
 	public String getCm_5_2_8() {
 		return cm_5_2_8;
 	}
@@ -1451,7 +1425,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_5_2_8 = cm_5_2_8;
 	}
 	
-	@Length(min=0, max=32, message="康复计划长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="康复计划长度不能超过 64 个字符")
 	public String getCm_5_2_9() {
 		return cm_5_2_9;
 	}
@@ -1460,7 +1434,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_5_2_9 = cm_5_2_9;
 	}
 	
-	@Length(min=0, max=32, message="出院时的知情告知长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="出院时的知情告知长度不能超过 64 个字符")
 	public String getCm_5_2_10() {
 		return cm_5_2_10;
 	}
@@ -1469,7 +1443,7 @@ public class QualityTia extends DataEntity<QualityTia> {
 		this.cm_5_2_10 = cm_5_2_10;
 	}
 	
-	@Length(min=0, max=32, message="膳食评价长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="膳食评价长度不能超过 64 个字符")
 	public String getCm_5_2_11() {
 		return cm_5_2_11;
 	}
@@ -1716,123 +1690,6 @@ public class QualityTia extends DataEntity<QualityTia> {
 
 	public void setCm_6_30(Double cm_6_30) {
 		this.cm_6_30 = cm_6_30;
-	}
-	
-	@Length(min=0, max=32, message="主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称长度不能超过 32 个字符")
-	public String getCm0141() {
-		return cm0141;
-	}
-
-	public void setCm0141(String cm0141) {
-		this.cm0141 = cm0141;
-	}
-	
-	@Length(min=0, max=32, message="其他ICD-9-CM-3四位亚目编码与名称长度不能超过 32 个字符")
-	public String getCm01411() {
-		return cm01411;
-	}
-
-	public void setCm01411(String cm01411) {
-		this.cm01411 = cm01411;
-	}
-	
-	@Length(min=0, max=32, message="主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称长度不能超过 32 个字符")
-	public String getCm0142() {
-		return cm0142;
-	}
-
-	public void setCm0142(String cm0142) {
-		this.cm0142 = cm0142;
-	}
-	
-	@Length(min=0, max=32, message="其他ICD-9-CM-3六位临床扩展编码与名称长度不能超过 32 个字符")
-	public String getCm01421() {
-		return cm01421;
-	}
-
-	public void setCm01421(String cm01421) {
-		this.cm01421 = cm01421;
-	}
-	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	public Date getCm0251() {
-		return cm0251;
-	}
-
-	public void setCm0251(Date cm0251) {
-		this.cm0251 = cm0251;
-	}
-	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	public Date getCm0252() {
-		return cm0252;
-	}
-
-	public void setCm0252(Date cm0252) {
-		this.cm0252 = cm0252;
-	}
-	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	public Date getCm0261() {
-		return cm0261;
-	}
-
-	public void setCm0261(Date cm0261) {
-		this.cm0261 = cm0261;
-	}
-	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	public Date getCm0262() {
-		return cm0262;
-	}
-
-	public void setCm0262(Date cm0262) {
-		this.cm0262 = cm0262;
-	}
-	
-	@Length(min=0, max=32, message="手术野皮肤准备常用方法的选择长度不能超过 32 个字符")
-	public String getCm31() {
-		return cm31;
-	}
-
-	public void setCm31(String cm31) {
-		this.cm31 = cm31;
-	}
-	
-	@Length(min=0, max=32, message="使用含抗菌剂长度不能超过 32 个字符")
-	public String getCm32() {
-		return cm32;
-	}
-
-	public void setCm32(String cm32) {
-		this.cm32 = cm32;
-	}
-	
-	@Length(min=0, max=32, message="其他含抗菌剂缝线填写长度不能超过 32 个字符")
-	public String getCm321() {
-		return cm321;
-	}
-
-	public void setCm321(String cm321) {
-		this.cm321 = cm321;
-	}
-	
-	@Length(min=0, max=32, message="手术切口类别的选择长度不能超过 32 个字符")
-	public String getCm33() {
-		return cm33;
-	}
-
-	public void setCm33(String cm33) {
-		this.cm33 = cm33;
-	}
-	
-	@Length(min=0, max=32, message="手术切口愈合情况的选择长度不能超过 32 个字符")
-	public String getCm34() {
-		return cm34;
-	}
-
-	public void setCm34(String cm34) {
-		this.cm34 = cm34;
 	}
 	
 }
