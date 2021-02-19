@@ -23,9 +23,9 @@ import com.zebone.quality.modules.mvr.entity.QualityMvr;
 import com.zebone.quality.modules.mvr.service.QualityMvrService;
 
 /**
- * MVR二尖瓣置换术Controller
+ * quality_mvrController
  * @author 卡卡西
- * @version 2021-01-20
+ * @version 2021-02-19
  */
 @Controller
 @RequestMapping(value = "${adminPath}/mvr/qualityMvr")
@@ -74,18 +74,18 @@ public class QualityMvrController extends BaseController {
 	}
 
 	/**
-	 * 保存MVR二尖瓣置换术
+	 * 保存quality_mvr
 	 */
 	@RequiresPermissions("mvr:qualityMvr:edit")
 	@PostMapping(value = "save")
 	@ResponseBody
 	public String save(@Validated QualityMvr qualityMvr) {
 		qualityMvrService.save(qualityMvr);
-		return renderResult(Global.TRUE, text("保存MVR二尖瓣置换术成功！"));
+		return renderResult(Global.TRUE, text("保存quality_mvr成功！"));
 	}
 	
 	/**
-	 * 停用MVR二尖瓣置换术
+	 * 停用quality_mvr
 	 */
 	@RequiresPermissions("mvr:qualityMvr:edit")
 	@RequestMapping(value = "disable")
@@ -93,11 +93,11 @@ public class QualityMvrController extends BaseController {
 	public String disable(QualityMvr qualityMvr) {
 		qualityMvr.setStatus(QualityMvr.STATUS_DISABLE);
 		qualityMvrService.updateStatus(qualityMvr);
-		return renderResult(Global.TRUE, text("停用MVR二尖瓣置换术成功"));
+		return renderResult(Global.TRUE, text("停用quality_mvr成功"));
 	}
 	
 	/**
-	 * 启用MVR二尖瓣置换术
+	 * 启用quality_mvr
 	 */
 	@RequiresPermissions("mvr:qualityMvr:edit")
 	@RequestMapping(value = "enable")
@@ -105,18 +105,18 @@ public class QualityMvrController extends BaseController {
 	public String enable(QualityMvr qualityMvr) {
 		qualityMvr.setStatus(QualityMvr.STATUS_NORMAL);
 		qualityMvrService.updateStatus(qualityMvr);
-		return renderResult(Global.TRUE, text("启用MVR二尖瓣置换术成功"));
+		return renderResult(Global.TRUE, text("启用quality_mvr成功"));
 	}
 	
 	/**
-	 * 删除MVR二尖瓣置换术
+	 * 删除quality_mvr
 	 */
 	@RequiresPermissions("mvr:qualityMvr:edit")
 	@RequestMapping(value = "delete")
 	@ResponseBody
 	public String delete(QualityMvr qualityMvr) {
 		qualityMvrService.delete(qualityMvr);
-		return renderResult(Global.TRUE, text("删除MVR二尖瓣置换术成功！"));
+		return renderResult(Global.TRUE, text("删除quality_mvr成功！"));
 	}
 	
 }

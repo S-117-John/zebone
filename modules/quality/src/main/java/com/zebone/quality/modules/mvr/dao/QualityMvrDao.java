@@ -8,9 +8,9 @@ import com.jeesite.common.mybatis.annotation.MyBatisDao;
 import com.zebone.quality.modules.mvr.entity.QualityMvr;
 
 /**
- * MVR二尖瓣置换术DAO接口
+ * quality_mvrDAO接口
  * @author 卡卡西
- * @version 2021-01-20
+ * @version 2021-02-19
  */
 @MyBatisDao
 public interface QualityMvrDao extends CrudDao<QualityMvr> {

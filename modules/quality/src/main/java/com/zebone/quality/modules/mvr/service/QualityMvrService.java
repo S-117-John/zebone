@@ -14,9 +14,9 @@ import com.zebone.quality.modules.mvr.entity.QualityMvr;
 import com.zebone.quality.modules.mvr.dao.QualityMvrDao;
 
 /**
- * MVR二尖瓣置换术Service
+ * quality_mvrService
  * @author 卡卡西
- * @version 2021-01-20
+ * @version 2021-02-19
  */
 @Service
 @Transactional(readOnly=true)
