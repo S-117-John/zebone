@@ -17,7 +17,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 /**
  * ICH脑出血Entity
  * @author 卡卡西
- * @version 2021-01-18
+ * @version 2021-02-19
  */
 @Table(name="quality_ich", alias="a", columns={
 		@Column(name="cm_0_1_1_1", attrName="cm_0_1_1_1", label="质控医师"),
@@ -25,7 +25,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_0_1_1_3", attrName="cm_0_1_1_3", label="主治医师"),
 		@Column(name="cm_0_1_1_4", attrName="cm_0_1_1_4", label="责任护士"),
 		@Column(name="cm_0_1_1_5", attrName="cm_0_1_1_5", label="上报科室"),
-		@Column(name="case_id", attrName="caseId", label="患者病案号"),
+		@Column(name="caseid", attrName="caseid", label="患者病案号"),
 		@Column(name="cm_0_1_3_1", attrName="cm_0_1_3_1", label="主要诊断ICD-10四位亚目编码与名称"),
 		@Column(name="ich_0_1_12_1", attrName="ich_0_1_12_1", label="其他主要诊断ICD-10四位亚目编码与名称"),
 		@Column(name="cm_0_1_3_2", attrName="cm_0_1_3_2", label="主要诊断ICD-10六位临床扩展编码与名称"),
@@ -34,21 +34,20 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="ich_0_1_11_1", attrName="ich_0_1_11_1", label="其他主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称"),
 		@Column(name="cm_0_1_4_2", attrName="cm_0_1_4_2", label="主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称"),
 		@Column(name="ich_0_1_7_1", attrName="ich_0_1_7_1", label="其他主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称"),
-		@Column(name="cm_0_1_5", attrName="cm_0_1_5", label="是否出院后31天内重复住院"),
+		@Column(name="cm_0_1_5", attrName="cm_0_1_5", label="是否ICH出院后31天内重复住院"),
 		@Column(name="cm_0_2_1_1", attrName="cm_0_2_1_1", label="出生日期"),
 		@Column(name="cm_0_2_1_2", attrName="cm_0_2_1_2", label="患者性别"),
 		@Column(name="cm_0_2_1_3", attrName="cm_0_2_1_3", label="患者体重", comment="患者体重（kg）"),
 		@Column(name="cm_0_2_1_5", attrName="cm_0_2_1_5", label="患者身高", comment="患者身高（cm）"),
 		@Column(name="cm_0_2_2_1", attrName="cm_0_2_2_1", label="发病日期时间是否无法确定或无记录"),
-		@Column(includeEntity=DataEntity.class),
 		@Column(name="cm_0_2_2_2", attrName="cm_0_2_2_2", label="发病日期时间"),
 		@Column(name="cm_0_2_3_1", attrName="cm_0_2_3_1", label="到达本院急诊或者门诊日期时间是否无法确定或无记录"),
 		@Column(name="cm_0_2_3_2", attrName="cm_0_2_3_2", label="到达本院急诊或者门诊日期时间"),
 		@Column(name="cm_0_2_4_1", attrName="cm_0_2_4_1", label="入院日期时间"),
 		@Column(name="age", attrName="age", label="年龄"),
 		@Column(name="cm_0_2_4_2", attrName="cm_0_2_4_2", label="出院日期时间"),
-		@Column(name="cm_0_2_5_1", attrName="cm_0_2_5_1", label="入住CCU日期时间"),
-		@Column(name="cm_0_2_5_2", attrName="cm_0_2_5_2", label="离开CCU日期时间"),
+		@Column(name="cm_0_2_5_1", attrName="cm_0_2_5_1", label="入住ICU/卒中中心日期时间"),
+		@Column(name="cm_0_2_5_2", attrName="cm_0_2_5_2", label="离开ICU/卒中中心日期时间"),
 		@Column(name="cm_0_2_6_1", attrName="cm_0_2_6_1", label="手术开始", comment="手术开始（切皮）日期时间"),
 		@Column(name="cm_0_2_6_2", attrName="cm_0_2_6_2", label="手术结束", comment="手术结束（缝皮结束）日期时间"),
 		@Column(name="cm_0_3_1", attrName="cm_0_3_1", label="费用支付方式"),
@@ -124,9 +123,27 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="ich_6_1_5_1", attrName="ich_6_1_5_1", label="其他手术适应证"),
 		@Column(name="ich_6_2_3", attrName="ich_6_2_3", label="神经外科干预措施"),
 		@Column(name="ich_6_2_3_1", attrName="ich_6_2_3_1", label="其他神经外科干预措施"),
+		@Column(name="cm_2_1", attrName="cm_2_1", label="是否有手术后并发症"),
+		@Column(name="cm_2_2", attrName="cm_2_2", label="手术后并发症类别及ICD-10四位亚目的选择"),
+		@Column(name="cm_2_3_1_1", attrName="cm_2_3_1_1", label="其他手术后并发症类别及ICD-10四位亚目和名称填写"),
+		@Column(name="cm_2_3_1", attrName="cm_2_3_1", label="介入操作与手术其他并发症"),
+		@Column(name="cm_2_3_2", attrName="cm_2_3_2", label="手术患者手术后肺栓塞例数"),
+		@Column(name="cm_2_3_3", attrName="cm_2_3_3", label="手术患者手术后深静脉血栓例数"),
+		@Column(name="cm_2_3_4", attrName="cm_2_3_4", label="手术患者手术后败血症例数"),
+		@Column(name="cm_2_3_5", attrName="cm_2_3_5", label="手术患者手术后出血或血肿例数"),
+		@Column(name="cm_2_3_6", attrName="cm_2_3_6", label="手术患者手术伤口裂开"),
+		@Column(name="cm_2_3_7", attrName="cm_2_3_7", label="手术患者猝死"),
+		@Column(name="cm_2_3_8", attrName="cm_2_3_8", label="手术患者手术后呼吸道并发症"),
+		@Column(name="cm_2_3_9", attrName="cm_2_3_9", label="手术患者手术后生理/代谢紊乱"),
+		@Column(name="cm_2_3_10", attrName="cm_2_3_10", label="与手术/操作相关感染"),
+		@Column(name="cm_2_3_11", attrName="cm_2_3_11", label="手术过程中异物遗留"),
+		@Column(name="cm_2_3_12", attrName="cm_2_3_12", label="麻醉并发症"),
+		@Column(name="cm_2_3_13", attrName="cm_2_3_13", label="输注、输血反应"),
+		@Column(name="cm_2_3_14", attrName="cm_2_3_14", label="住院患者发生压疮"),
 		@Column(name="ich_6_2_4", attrName="ich_6_2_4", label="ICH术后特指并发症"),
 		@Column(name="ich_6_2_4_1", attrName="ich_6_2_4_1", label="对腰椎穿刺的其他反应"),
 		@Column(name="ich_6_2_4_2", attrName="ich_6_2_4_2", label="神经系统的其他操作后疾患"),
+		@Column(name="cm_2_4", attrName="cm_2_4", label="影响程度的选择"),
 		@Column(name="ich_6_2_5", attrName="ich_6_2_5", label="是否手术后再手术"),
 		@Column(name="ich_7_1_1", attrName="ich_7_1_1", label="是否高血压", comment="是否高血压(收缩压大于180mmHg)患者"),
 		@Column(name="ich_7_1_2", attrName="ich_7_1_2", label="出院医嘱中有血压监测与用药长期医嘱"),
@@ -173,7 +190,6 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_5_2_9", attrName="cm_5_2_9", label="康复计划"),
 		@Column(name="cm_5_2_10", attrName="cm_5_2_10", label="出院时的知情告知"),
 		@Column(name="cm_5_2_11", attrName="cm_5_2_11", label="膳食评价"),
-		@Column(name="cm_0_1_4_1_1", attrName="cm01411", label="其他ICD-9-CM-3四位亚目编码与名称"),
 		@Column(name="cm_6_1", attrName="cm_6_1", label="住院总费用"),
 		@Column(name="cm_6_2", attrName="cm_6_2", label="住院总费用其中自付金额"),
 		@Column(name="cm_6_3", attrName="cm_6_3", label="一般医疗服务费"),
@@ -194,7 +210,6 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_6_18", attrName="cm_6_18", label="西药费"),
 		@Column(name="cm_6_19", attrName="cm_6_19", label="其中", comment="其中：抗菌药物费"),
 		@Column(name="cm_6_20", attrName="cm_6_20", label="中成药费"),
-		@Column(name="cm_0_1_4_2_1", attrName="cm01421", label="其他ICD-9-CM-3六位临床扩展编码与名称"),
 		@Column(name="cm_6_21", attrName="cm_6_21", label="中草药费"),
 		@Column(name="cm_6_22", attrName="cm_6_22", label="血费"),
 		@Column(name="cm_6_23", attrName="cm_6_23", label="白蛋白类制品费"),
@@ -205,12 +220,8 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_6_28", attrName="cm_6_28", label="治疗用一次性医用材料费"),
 		@Column(name="cm_6_29", attrName="cm_6_29", label="手术用一次性医用材料费"),
 		@Column(name="cm_6_30", attrName="cm_6_30", label="其他费"),
-		@Column(name="cm_3_1", attrName="cm31", label="手术野皮肤准备常用方法的选择"),
-		@Column(name="cm_3_2", attrName="cm32", label="使用含抗菌剂", comment="使用含抗菌剂（三氯生）缝线"),
-		@Column(name="cm_3_2_1", attrName="cm321", label="其他含抗菌剂缝线填写"),
-		@Column(name="cm_3_3", attrName="cm33", label="手术切口类别的选择"),
-		@Column(name="cm_3_4", attrName="cm34", label="手术切口愈合情况的选择"),
 		@Column(name="id", attrName="id", label="id", isPK=true),
+		@Column(includeEntity=DataEntity.class),
 	}, orderBy="a.update_date DESC"
 )
 public class QualityIch extends DataEntity<QualityIch> {
@@ -221,7 +232,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 	private String cm_0_1_1_3;		// 主治医师
 	private String cm_0_1_1_4;		// 责任护士
 	private String cm_0_1_1_5;		// 上报科室
-	private String caseId;		// 患者病案号
+	private String caseid;		// 患者病案号
 	private String cm_0_1_3_1;		// 主要诊断ICD-10四位亚目编码与名称
 	private String ich_0_1_12_1;		// 其他主要诊断ICD-10四位亚目编码与名称
 	private String cm_0_1_3_2;		// 主要诊断ICD-10六位临床扩展编码与名称
@@ -230,7 +241,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 	private String ich_0_1_11_1;		// 其他主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称
 	private String cm_0_1_4_2;		// 主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称
 	private String ich_0_1_7_1;		// 其他主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称
-	private String cm_0_1_5;		// 是否出院后31天内重复住院
+	private String cm_0_1_5;		// 是否ICH出院后31天内重复住院
 	private Date cm_0_2_1_1;		// 出生日期
 	private String cm_0_2_1_2;		// 患者性别
 	private Double cm_0_2_1_3;		// 患者体重（kg）
@@ -242,14 +253,14 @@ public class QualityIch extends DataEntity<QualityIch> {
 	private Date cm_0_2_4_1;		// 入院日期时间
 	private Double age;		// 年龄
 	private Date cm_0_2_4_2;		// 出院日期时间
-	private Date cm_0_2_5_1;		// 入住CCU日期时间
-	private Date cm_0_2_5_2;		// 离开CCU日期时间
+	private Date cm_0_2_5_1;		// 入住ICU/卒中中心日期时间
+	private Date cm_0_2_5_2;		// 离开ICU/卒中中心日期时间
 	private Date cm_0_2_6_1;		// 手术开始（切皮）日期时间
 	private Date cm_0_2_6_2;		// 手术结束（缝皮结束）日期时间
 	private String cm_0_3_1;		// 费用支付方式
 	private String cm_0_3_2;		// 收入住院途径
 	private String cm_0_3_3;		// 到院交通工具
-	private String ich_1_1_1;		// 本院急诊医师接诊日期时间
+	private Date ich_1_1_1;		// 本院急诊医师接诊日期时间
 	private Double ich_1_1_2_1;		// 身高(单位:厘米(cm))
 	private Double ich_1_1_2_2;		// 体重(单位:公斤(kg))
 	private Double ich_1_1_2_3;		// 呼吸(单位:次/分)
@@ -257,10 +268,10 @@ public class QualityIch extends DataEntity<QualityIch> {
 	private Double ich_1_1_2_5;		// 收缩压(单位:mmHg)
 	private Double ich_1_1_2_6;		// 舒张压(单位:mmHg)
 	private String ich_1_2_1;		// 是否实施格拉斯哥昏迷评估
-	private String ich_1_2_2;		// 评估日期时间
+	private Date ich_1_2_2;		// 评估日期时间
 	private Double ich_1_2_3;		// 实施格拉斯哥昏迷评估分值
 	private String ich_1_2_4;		// 是否实施神经功能缺损NIHSS评估
-	private String ich_1_2_5;		// 评估日期时间
+	private Date ich_1_2_5;		// 评估日期时间
 	private Double ich_1_2_6;		// 实施神经功能缺损NIHSS评估分值
 	private String ich_1_3_1;		// 急诊是否实施首次头部影像学检查
 	private String ich_1_3_2;		// 急诊首次头部影像学检查项目
@@ -271,9 +282,9 @@ public class QualityIch extends DataEntity<QualityIch> {
 	private Double ich_1_3_4;		// 血肿量(ml)
 	private String ich_1_3_5;		// 是否血肿破入脑室
 	private String ich_1_3_6;		// 是否血肿源自幕下
-	private String ich_1_3_7;		// 报告日期时间
+	private Date ich_1_3_7;		// 报告日期时间
 	private String ich_1_4_1;		// 是否急诊入住”卒中中心”
-	private String ich_1_4_2;		// 入住”卒中中心”日期时间
+	private Date ich_1_4_2;		// 入住”卒中中心”日期时间
 	private String ich_2_1_1;		// 是否为高血压(收缩压大于180mmHg)患者
 	private String ich_2_1_2;		// 是否24小时内有血压监测与用药长期医嘱
 	private String ich_2_1_3;		// 选择降压药物
@@ -283,7 +294,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 	private String ich_3_1_1;		// 入院后病情判定
 	private String ich_3_2_1;		// 是否需要做预防DVT治疗
 	private String ich_3_2_2;		// 禁忌证选择
-	private String ich_3_2_3;		// 预防DVT治疗医嘱执行日期与时间
+	private Date ich_3_2_3;		// 预防DVT治疗医嘱执行日期与时间
 	private String ich_3_3_1;		// 药物预防选择
 	private String ich_3_3_1_1;		// 其它预防药物
 	private String ich_3_3_2;		// 物理预防选择
@@ -294,20 +305,20 @@ public class QualityIch extends DataEntity<QualityIch> {
 	private String ich_4_2_1;		// 入院24小时内是否进行吞咽评估
 	private String ich_4_3_2;		// 未进行吞咽困难评价原因
 	private String ich_4_3_2_1;		// 其他未进行吞咽困难评价原因
-	private String ich_4_2_2;		// 评估日期时间
+	private Date ich_4_2_2;		// 评估日期时间
 	private String ich_4_3_1;		// 评价方法选择
 	private String ich_4_3_1_1;		// 其他评价方法
 	private String ich_5_1_1;		// 住院48小时内是否接受影像学检测复查
 	private String ich_5_1_2;		// 接受影像学检测复查项目选择
 	private String ich_5_1_2_1;		// 其他接受影像学检测复查项目名称
-	private String ich_5_1_3;		// 复查检测日期时间
+	private Date ich_5_1_3;		// 复查检测日期时间
 	private String ich_5_1_4;		// 是否血肿扩大
 	private String ich_5_1_5;		// 是否血管畸形
 	private String ich_5_1_6;		// 是否动脉瘤
 	private String ich_5_1_7;		// 是否淀粉样病变
 	private String ich_5_1_8;		// 是否再出血风险
 	private String ich_6_1_1;		// 是否首次ICH评分
-	private String ich_6_1_2;		// 评估日期时间
+	private Date ich_6_1_2;		// 评估日期时间
 	private String ich_6_1_3_1;		// GCS评分
 	private String ich_6_1_3_2;		// 血肿量
 	private String ich_6_1_3_3;		// 是否血肿破入脑室
@@ -319,9 +330,27 @@ public class QualityIch extends DataEntity<QualityIch> {
 	private String ich_6_1_5_1;		// 其他手术适应证
 	private String ich_6_2_3;		// 神经外科干预措施
 	private String ich_6_2_3_1;		// 其他神经外科干预措施
+	private String cm_2_1;		// 是否有手术后并发症
+	private String cm_2_2;		// 手术后并发症类别及ICD-10四位亚目的选择
+	private String cm_2_3_1_1;		// 其他手术后并发症类别及ICD-10四位亚目和名称填写
+	private String cm_2_3_1;		// 介入操作与手术其他并发症
+	private String cm_2_3_2;		// 手术患者手术后肺栓塞例数
+	private String cm_2_3_3;		// 手术患者手术后深静脉血栓例数
+	private String cm_2_3_4;		// 手术患者手术后败血症例数
+	private String cm_2_3_5;		// 手术患者手术后出血或血肿例数
+	private String cm_2_3_6;		// 手术患者手术伤口裂开
+	private String cm_2_3_7;		// 手术患者猝死
+	private String cm_2_3_8;		// 手术患者手术后呼吸道并发症
+	private String cm_2_3_9;		// 手术患者手术后生理/代谢紊乱
+	private String cm_2_3_10;		// 与手术/操作相关感染
+	private String cm_2_3_11;		// 手术过程中异物遗留
+	private String cm_2_3_12;		// 麻醉并发症
+	private String cm_2_3_13;		// 输注、输血反应
+	private String cm_2_3_14;		// 住院患者发生压疮
 	private String ich_6_2_4;		// ICH术后特指并发症
 	private String ich_6_2_4_1;		// 对腰椎穿刺的其他反应
 	private String ich_6_2_4_2;		// 神经系统的其他操作后疾患
+	private String cm_2_4;		// 影响程度的选择
 	private String ich_6_2_5;		// 是否手术后再手术
 	private String ich_7_1_1;		// 是否高血压(收缩压大于180mmHg)患者
 	private String ich_7_1_2;		// 出院医嘱中有血压监测与用药长期医嘱
@@ -368,7 +397,6 @@ public class QualityIch extends DataEntity<QualityIch> {
 	private String cm_5_2_9;		// 康复计划
 	private String cm_5_2_10;		// 出院时的知情告知
 	private String cm_5_2_11;		// 膳食评价
-	private String cm01411;		// 其他ICD-9-CM-3四位亚目编码与名称
 	private Double cm_6_1;		// 住院总费用
 	private Double cm_6_2;		// 住院总费用其中自付金额
 	private Double cm_6_3;		// 一般医疗服务费
@@ -389,7 +417,6 @@ public class QualityIch extends DataEntity<QualityIch> {
 	private Double cm_6_18;		// 西药费
 	private Double cm_6_19;		// 其中：抗菌药物费
 	private Double cm_6_20;		// 中成药费
-	private String cm01421;		// 其他ICD-9-CM-3六位临床扩展编码与名称
 	private Double cm_6_21;		// 中草药费
 	private Double cm_6_22;		// 血费
 	private Double cm_6_23;		// 白蛋白类制品费
@@ -400,11 +427,6 @@ public class QualityIch extends DataEntity<QualityIch> {
 	private Double cm_6_28;		// 治疗用一次性医用材料费
 	private Double cm_6_29;		// 手术用一次性医用材料费
 	private Double cm_6_30;		// 其他费
-	private String cm31;		// 手术野皮肤准备常用方法的选择
-	private String cm32;		// 使用含抗菌剂（三氯生）缝线
-	private String cm321;		// 其他含抗菌剂缝线填写
-	private String cm33;		// 手术切口类别的选择
-	private String cm34;		// 手术切口愈合情况的选择
 	
 	public QualityIch() {
 		this(null);
@@ -414,7 +436,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		super(id);
 	}
 	
-	@Length(min=0, max=32, message="质控医师长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="质控医师长度不能超过 64 个字符")
 	public String getCm_0_1_1_1() {
 		return cm_0_1_1_1;
 	}
@@ -423,7 +445,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_0_1_1_1 = cm_0_1_1_1;
 	}
 	
-	@Length(min=0, max=32, message="质控护士长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="质控护士长度不能超过 64 个字符")
 	public String getCm_0_1_1_2() {
 		return cm_0_1_1_2;
 	}
@@ -432,7 +454,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_0_1_1_2 = cm_0_1_1_2;
 	}
 	
-	@Length(min=0, max=32, message="主治医师长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主治医师长度不能超过 64 个字符")
 	public String getCm_0_1_1_3() {
 		return cm_0_1_1_3;
 	}
@@ -441,7 +463,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_0_1_1_3 = cm_0_1_1_3;
 	}
 	
-	@Length(min=0, max=32, message="责任护士长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="责任护士长度不能超过 64 个字符")
 	public String getCm_0_1_1_4() {
 		return cm_0_1_1_4;
 	}
@@ -450,7 +472,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_0_1_1_4 = cm_0_1_1_4;
 	}
 	
-	@Length(min=0, max=32, message="上报科室长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="上报科室长度不能超过 64 个字符")
 	public String getCm_0_1_1_5() {
 		return cm_0_1_1_5;
 	}
@@ -459,16 +481,16 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_0_1_1_5 = cm_0_1_1_5;
 	}
 	
-	@Length(min=0, max=32, message="患者病案号长度不能超过 32 个字符")
-	public String getCaseId() {
-		return caseId;
+	@Length(min=0, max=64, message="患者病案号长度不能超过 64 个字符")
+	public String getCaseid() {
+		return caseid;
 	}
 
-	public void setCaseId(String caseId) {
-		this.caseId = caseId;
+	public void setCaseid(String caseid) {
+		this.caseid = caseid;
 	}
 	
-	@Length(min=0, max=32, message="主要诊断ICD-10四位亚目编码与名称长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主要诊断ICD-10四位亚目编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_3_1() {
 		return cm_0_1_3_1;
 	}
@@ -486,7 +508,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.ich_0_1_12_1 = ich_0_1_12_1;
 	}
 	
-	@Length(min=0, max=32, message="主要诊断ICD-10六位临床扩展编码与名称长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主要诊断ICD-10六位临床扩展编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_3_2() {
 		return cm_0_1_3_2;
 	}
@@ -504,7 +526,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.ich_0_1_8_1 = ich_0_1_8_1;
 	}
 	
-	@Length(min=0, max=32, message="主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_4_1() {
 		return cm_0_1_4_1;
 	}
@@ -522,7 +544,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.ich_0_1_11_1 = ich_0_1_11_1;
 	}
 	
-	@Length(min=0, max=32, message="主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_4_2() {
 		return cm_0_1_4_2;
 	}
@@ -540,7 +562,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.ich_0_1_7_1 = ich_0_1_7_1;
 	}
 	
-	@Length(min=0, max=32, message="是否出院后31天内重复住院长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否ICH出院后31天内重复住院长度不能超过 64 个字符")
 	public String getCm_0_1_5() {
 		return cm_0_1_5;
 	}
@@ -558,7 +580,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_0_2_1_1 = cm_0_2_1_1;
 	}
 	
-	@Length(min=0, max=32, message="患者性别长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="患者性别长度不能超过 64 个字符")
 	public String getCm_0_2_1_2() {
 		return cm_0_2_1_2;
 	}
@@ -583,7 +605,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_0_2_1_5 = cm_0_2_1_5;
 	}
 	
-	@Length(min=0, max=32, message="发病日期时间是否无法确定或无记录长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="发病日期时间是否无法确定或无记录长度不能超过 64 个字符")
 	public String getCm_0_2_2_1() {
 		return cm_0_2_2_1;
 	}
@@ -601,7 +623,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_0_2_2_2 = cm_0_2_2_2;
 	}
 	
-	@Length(min=0, max=32, message="到达本院急诊或者门诊日期时间是否无法确定或无记录长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="到达本院急诊或者门诊日期时间是否无法确定或无记录长度不能超过 64 个字符")
 	public String getCm_0_2_3_1() {
 		return cm_0_2_3_1;
 	}
@@ -681,7 +703,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_0_2_6_2 = cm_0_2_6_2;
 	}
 	
-	@Length(min=0, max=32, message="费用支付方式长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="费用支付方式长度不能超过 64 个字符")
 	public String getCm_0_3_1() {
 		return cm_0_3_1;
 	}
@@ -690,7 +712,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_0_3_1 = cm_0_3_1;
 	}
 	
-	@Length(min=0, max=32, message="收入住院途径长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="收入住院途径长度不能超过 64 个字符")
 	public String getCm_0_3_2() {
 		return cm_0_3_2;
 	}
@@ -699,7 +721,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_0_3_2 = cm_0_3_2;
 	}
 	
-	@Length(min=0, max=32, message="到院交通工具长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="到院交通工具长度不能超过 64 个字符")
 	public String getCm_0_3_3() {
 		return cm_0_3_3;
 	}
@@ -708,12 +730,12 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_0_3_3 = cm_0_3_3;
 	}
 	
-	@Length(min=0, max=64, message="本院急诊医师接诊日期时间长度不能超过 64 个字符")
-	public String getIch_1_1_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getIch_1_1_1() {
 		return ich_1_1_1;
 	}
 
-	public void setIch_1_1_1(String ich_1_1_1) {
+	public void setIch_1_1_1(Date ich_1_1_1) {
 		this.ich_1_1_1 = ich_1_1_1;
 	}
 	
@@ -774,12 +796,12 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.ich_1_2_1 = ich_1_2_1;
 	}
 	
-	@Length(min=0, max=64, message="评估日期时间长度不能超过 64 个字符")
-	public String getIch_1_2_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getIch_1_2_2() {
 		return ich_1_2_2;
 	}
 
-	public void setIch_1_2_2(String ich_1_2_2) {
+	public void setIch_1_2_2(Date ich_1_2_2) {
 		this.ich_1_2_2 = ich_1_2_2;
 	}
 	
@@ -800,12 +822,12 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.ich_1_2_4 = ich_1_2_4;
 	}
 	
-	@Length(min=0, max=64, message="评估日期时间长度不能超过 64 个字符")
-	public String getIch_1_2_5() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getIch_1_2_5() {
 		return ich_1_2_5;
 	}
 
-	public void setIch_1_2_5(String ich_1_2_5) {
+	public void setIch_1_2_5(Date ich_1_2_5) {
 		this.ich_1_2_5 = ich_1_2_5;
 	}
 	
@@ -897,12 +919,12 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.ich_1_3_6 = ich_1_3_6;
 	}
 	
-	@Length(min=0, max=64, message="报告日期时间长度不能超过 64 个字符")
-	public String getIch_1_3_7() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getIch_1_3_7() {
 		return ich_1_3_7;
 	}
 
-	public void setIch_1_3_7(String ich_1_3_7) {
+	public void setIch_1_3_7(Date ich_1_3_7) {
 		this.ich_1_3_7 = ich_1_3_7;
 	}
 	
@@ -915,12 +937,12 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.ich_1_4_1 = ich_1_4_1;
 	}
 	
-	@Length(min=0, max=64, message="入住”卒中中心”日期时间长度不能超过 64 个字符")
-	public String getIch_1_4_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getIch_1_4_2() {
 		return ich_1_4_2;
 	}
 
-	public void setIch_1_4_2(String ich_1_4_2) {
+	public void setIch_1_4_2(Date ich_1_4_2) {
 		this.ich_1_4_2 = ich_1_4_2;
 	}
 	
@@ -1005,12 +1027,12 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.ich_3_2_2 = ich_3_2_2;
 	}
 	
-	@Length(min=0, max=64, message="预防DVT治疗医嘱执行日期与时间长度不能超过 64 个字符")
-	public String getIch_3_2_3() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getIch_3_2_3() {
 		return ich_3_2_3;
 	}
 
-	public void setIch_3_2_3(String ich_3_2_3) {
+	public void setIch_3_2_3(Date ich_3_2_3) {
 		this.ich_3_2_3 = ich_3_2_3;
 	}
 	
@@ -1104,12 +1126,12 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.ich_4_3_2_1 = ich_4_3_2_1;
 	}
 	
-	@Length(min=0, max=64, message="评估日期时间长度不能超过 64 个字符")
-	public String getIch_4_2_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getIch_4_2_2() {
 		return ich_4_2_2;
 	}
 
-	public void setIch_4_2_2(String ich_4_2_2) {
+	public void setIch_4_2_2(Date ich_4_2_2) {
 		this.ich_4_2_2 = ich_4_2_2;
 	}
 	
@@ -1158,12 +1180,12 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.ich_5_1_2_1 = ich_5_1_2_1;
 	}
 	
-	@Length(min=0, max=64, message="复查检测日期时间长度不能超过 64 个字符")
-	public String getIch_5_1_3() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getIch_5_1_3() {
 		return ich_5_1_3;
 	}
 
-	public void setIch_5_1_3(String ich_5_1_3) {
+	public void setIch_5_1_3(Date ich_5_1_3) {
 		this.ich_5_1_3 = ich_5_1_3;
 	}
 	
@@ -1221,12 +1243,12 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.ich_6_1_1 = ich_6_1_1;
 	}
 	
-	@Length(min=0, max=64, message="评估日期时间长度不能超过 64 个字符")
-	public String getIch_6_1_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getIch_6_1_2() {
 		return ich_6_1_2;
 	}
 
-	public void setIch_6_1_2(String ich_6_1_2) {
+	public void setIch_6_1_2(Date ich_6_1_2) {
 		this.ich_6_1_2 = ich_6_1_2;
 	}
 	
@@ -1328,6 +1350,159 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.ich_6_2_3_1 = ich_6_2_3_1;
 	}
 	
+	@Length(min=0, max=64, message="是否有手术后并发症长度不能超过 64 个字符")
+	public String getCm_2_1() {
+		return cm_2_1;
+	}
+
+	public void setCm_2_1(String cm_2_1) {
+		this.cm_2_1 = cm_2_1;
+	}
+	
+	@Length(min=0, max=64, message="手术后并发症类别及ICD-10四位亚目的选择长度不能超过 64 个字符")
+	public String getCm_2_2() {
+		return cm_2_2;
+	}
+
+	public void setCm_2_2(String cm_2_2) {
+		this.cm_2_2 = cm_2_2;
+	}
+	
+	@Length(min=0, max=64, message="其他手术后并发症类别及ICD-10四位亚目和名称填写长度不能超过 64 个字符")
+	public String getCm_2_3_1_1() {
+		return cm_2_3_1_1;
+	}
+
+	public void setCm_2_3_1_1(String cm_2_3_1_1) {
+		this.cm_2_3_1_1 = cm_2_3_1_1;
+	}
+	
+	@Length(min=0, max=64, message="介入操作与手术其他并发症长度不能超过 64 个字符")
+	public String getCm_2_3_1() {
+		return cm_2_3_1;
+	}
+
+	public void setCm_2_3_1(String cm_2_3_1) {
+		this.cm_2_3_1 = cm_2_3_1;
+	}
+	
+	@Length(min=0, max=64, message="手术患者手术后肺栓塞例数长度不能超过 64 个字符")
+	public String getCm_2_3_2() {
+		return cm_2_3_2;
+	}
+
+	public void setCm_2_3_2(String cm_2_3_2) {
+		this.cm_2_3_2 = cm_2_3_2;
+	}
+	
+	@Length(min=0, max=64, message="手术患者手术后深静脉血栓例数长度不能超过 64 个字符")
+	public String getCm_2_3_3() {
+		return cm_2_3_3;
+	}
+
+	public void setCm_2_3_3(String cm_2_3_3) {
+		this.cm_2_3_3 = cm_2_3_3;
+	}
+	
+	@Length(min=0, max=64, message="手术患者手术后败血症例数长度不能超过 64 个字符")
+	public String getCm_2_3_4() {
+		return cm_2_3_4;
+	}
+
+	public void setCm_2_3_4(String cm_2_3_4) {
+		this.cm_2_3_4 = cm_2_3_4;
+	}
+	
+	@Length(min=0, max=64, message="手术患者手术后出血或血肿例数长度不能超过 64 个字符")
+	public String getCm_2_3_5() {
+		return cm_2_3_5;
+	}
+
+	public void setCm_2_3_5(String cm_2_3_5) {
+		this.cm_2_3_5 = cm_2_3_5;
+	}
+	
+	@Length(min=0, max=64, message="手术患者手术伤口裂开长度不能超过 64 个字符")
+	public String getCm_2_3_6() {
+		return cm_2_3_6;
+	}
+
+	public void setCm_2_3_6(String cm_2_3_6) {
+		this.cm_2_3_6 = cm_2_3_6;
+	}
+	
+	@Length(min=0, max=64, message="手术患者猝死长度不能超过 64 个字符")
+	public String getCm_2_3_7() {
+		return cm_2_3_7;
+	}
+
+	public void setCm_2_3_7(String cm_2_3_7) {
+		this.cm_2_3_7 = cm_2_3_7;
+	}
+	
+	@Length(min=0, max=64, message="手术患者手术后呼吸道并发症长度不能超过 64 个字符")
+	public String getCm_2_3_8() {
+		return cm_2_3_8;
+	}
+
+	public void setCm_2_3_8(String cm_2_3_8) {
+		this.cm_2_3_8 = cm_2_3_8;
+	}
+	
+	@Length(min=0, max=64, message="手术患者手术后生理/代谢紊乱长度不能超过 64 个字符")
+	public String getCm_2_3_9() {
+		return cm_2_3_9;
+	}
+
+	public void setCm_2_3_9(String cm_2_3_9) {
+		this.cm_2_3_9 = cm_2_3_9;
+	}
+	
+	@Length(min=0, max=64, message="与手术/操作相关感染长度不能超过 64 个字符")
+	public String getCm_2_3_10() {
+		return cm_2_3_10;
+	}
+
+	public void setCm_2_3_10(String cm_2_3_10) {
+		this.cm_2_3_10 = cm_2_3_10;
+	}
+	
+	@Length(min=0, max=64, message="手术过程中异物遗留长度不能超过 64 个字符")
+	public String getCm_2_3_11() {
+		return cm_2_3_11;
+	}
+
+	public void setCm_2_3_11(String cm_2_3_11) {
+		this.cm_2_3_11 = cm_2_3_11;
+	}
+	
+	@Length(min=0, max=64, message="麻醉并发症长度不能超过 64 个字符")
+	public String getCm_2_3_12() {
+		return cm_2_3_12;
+	}
+
+	public void setCm_2_3_12(String cm_2_3_12) {
+		this.cm_2_3_12 = cm_2_3_12;
+	}
+	
+	@Length(min=0, max=64, message="输注、输血反应长度不能超过 64 个字符")
+	public String getCm_2_3_13() {
+		return cm_2_3_13;
+	}
+
+	public void setCm_2_3_13(String cm_2_3_13) {
+		this.cm_2_3_13 = cm_2_3_13;
+	}
+	
+	@Length(min=0, max=64, message="住院患者发生压疮长度不能超过 64 个字符")
+	public String getCm_2_3_14() {
+		return cm_2_3_14;
+	}
+
+	public void setCm_2_3_14(String cm_2_3_14) {
+		this.cm_2_3_14 = cm_2_3_14;
+	}
+	
 	@Length(min=0, max=64, message="ICH术后特指并发症长度不能超过 64 个字符")
 	public String getIch_6_2_4() {
 		return ich_6_2_4;
@@ -1353,6 +1528,15 @@ public class QualityIch extends DataEntity<QualityIch> {
 
 	public void setIch_6_2_4_2(String ich_6_2_4_2) {
 		this.ich_6_2_4_2 = ich_6_2_4_2;
+	}
+	
+	@Length(min=0, max=64, message="影响程度的选择长度不能超过 64 个字符")
+	public String getCm_2_4() {
+		return cm_2_4;
+	}
+
+	public void setCm_2_4(String cm_2_4) {
+		this.cm_2_4 = cm_2_4;
 	}
 	
 	@Length(min=0, max=64, message="是否手术后再手术长度不能超过 64 个字符")
@@ -1630,7 +1814,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.ich_9_2_2_5 = ich_9_2_2_5;
 	}
 	
-	@Length(min=0, max=32, message="离院方式选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="离院方式选择长度不能超过 64 个字符")
 	public String getCm_4_3() {
 		return cm_4_3;
 	}
@@ -1639,7 +1823,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_4_3 = cm_4_3;
 	}
 	
-	@Length(min=0, max=32, message="非医嘱离院可能涉及因素长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="非医嘱离院可能涉及因素长度不能超过 64 个字符")
 	public String getCm_4_5() {
 		return cm_4_5;
 	}
@@ -1648,7 +1832,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_4_5 = cm_4_5;
 	}
 	
-	@Length(min=0, max=32, message="其他非医嘱离院因素填写长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他非医嘱离院因素填写长度不能超过 64 个字符")
 	public String getCm_4_4_1() {
 		return cm_4_4_1;
 	}
@@ -1657,7 +1841,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_4_4_1 = cm_4_4_1;
 	}
 	
-	@Length(min=0, max=32, message="死亡可能涉及因素长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="死亡可能涉及因素长度不能超过 64 个字符")
 	public String getCm_4_6() {
 		return cm_4_6;
 	}
@@ -1666,7 +1850,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_4_6 = cm_4_6;
 	}
 	
-	@Length(min=0, max=32, message="患者是否对服务的体验与评价长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="患者是否对服务的体验与评价长度不能超过 64 个字符")
 	public String getCm_5_1() {
 		return cm_5_1;
 	}
@@ -1675,7 +1859,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_5_1 = cm_5_1;
 	}
 	
-	@Length(min=0, max=32, message="整体医院评级长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="整体医院评级长度不能超过 64 个字符")
 	public String getCm_5_2_1() {
 		return cm_5_2_1;
 	}
@@ -1684,7 +1868,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_5_2_1 = cm_5_2_1;
 	}
 	
-	@Length(min=0, max=32, message="患者推荐长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="患者推荐长度不能超过 64 个字符")
 	public String getCm_5_2_2() {
 		return cm_5_2_2;
 	}
@@ -1693,7 +1877,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_5_2_2 = cm_5_2_2;
 	}
 	
-	@Length(min=0, max=32, message="病房、床单元和卫生间清洁度长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="病房、床单元和卫生间清洁度长度不能超过 64 个字符")
 	public String getCm_5_2_3() {
 		return cm_5_2_3;
 	}
@@ -1702,7 +1886,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_5_2_3 = cm_5_2_3;
 	}
 	
-	@Length(min=0, max=32, message="病房与周边噪音长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="病房与周边噪音长度不能超过 64 个字符")
 	public String getCm_5_2_5() {
 		return cm_5_2_5;
 	}
@@ -1711,7 +1895,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_5_2_5 = cm_5_2_5;
 	}
 	
-	@Length(min=0, max=32, message="医生沟通长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="医生沟通长度不能超过 64 个字符")
 	public String getCm_5_2_6() {
 		return cm_5_2_6;
 	}
@@ -1720,7 +1904,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_5_2_6 = cm_5_2_6;
 	}
 	
-	@Length(min=0, max=32, message="护士沟通长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="护士沟通长度不能超过 64 个字符")
 	public String getCm_5_2_7() {
 		return cm_5_2_7;
 	}
@@ -1729,7 +1913,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_5_2_7 = cm_5_2_7;
 	}
 	
-	@Length(min=0, max=32, message="药师沟通长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="药师沟通长度不能超过 64 个字符")
 	public String getCm_5_2_8() {
 		return cm_5_2_8;
 	}
@@ -1738,7 +1922,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_5_2_8 = cm_5_2_8;
 	}
 	
-	@Length(min=0, max=32, message="康复计划长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="康复计划长度不能超过 64 个字符")
 	public String getCm_5_2_9() {
 		return cm_5_2_9;
 	}
@@ -1747,7 +1931,7 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_5_2_9 = cm_5_2_9;
 	}
 	
-	@Length(min=0, max=32, message="出院时的知情告知长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="出院时的知情告知长度不能超过 64 个字符")
 	public String getCm_5_2_10() {
 		return cm_5_2_10;
 	}
@@ -1756,22 +1940,13 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_5_2_10 = cm_5_2_10;
 	}
 	
-	@Length(min=0, max=32, message="膳食评价长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="膳食评价长度不能超过 64 个字符")
 	public String getCm_5_2_11() {
 		return cm_5_2_11;
 	}
 
 	public void setCm_5_2_11(String cm_5_2_11) {
 		this.cm_5_2_11 = cm_5_2_11;
-	}
-	
-	@Length(min=0, max=32, message="其他ICD-9-CM-3四位亚目编码与名称长度不能超过 32 个字符")
-	public String getCm01411() {
-		return cm01411;
-	}
-
-	public void setCm01411(String cm01411) {
-		this.cm01411 = cm01411;
 	}
 	
 	public Double getCm_6_1() {
@@ -1934,15 +2109,6 @@ public class QualityIch extends DataEntity<QualityIch> {
 		this.cm_6_20 = cm_6_20;
 	}
 	
-	@Length(min=0, max=32, message="其他ICD-9-CM-3六位临床扩展编码与名称长度不能超过 32 个字符")
-	public String getCm01421() {
-		return cm01421;
-	}
-
-	public void setCm01421(String cm01421) {
-		this.cm01421 = cm01421;
-	}
-	
 	public Double getCm_6_21() {
 		return cm_6_21;
 	}
@@ -2021,51 +2187,6 @@ public class QualityIch extends DataEntity<QualityIch> {
 
 	public void setCm_6_30(Double cm_6_30) {
 		this.cm_6_30 = cm_6_30;
-	}
-	
-	@Length(min=0, max=32, message="手术野皮肤准备常用方法的选择长度不能超过 32 个字符")
-	public String getCm31() {
-		return cm31;
-	}
-
-	public void setCm31(String cm31) {
-		this.cm31 = cm31;
-	}
-	
-	@Length(min=0, max=32, message="使用含抗菌剂长度不能超过 32 个字符")
-	public String getCm32() {
-		return cm32;
-	}
-
-	public void setCm32(String cm32) {
-		this.cm32 = cm32;
-	}
-	
-	@Length(min=0, max=32, message="其他含抗菌剂缝线填写长度不能超过 32 个字符")
-	public String getCm321() {
-		return cm321;
-	}
-
-	public void setCm321(String cm321) {
-		this.cm321 = cm321;
-	}
-	
-	@Length(min=0, max=32, message="手术切口类别的选择长度不能超过 32 个字符")
-	public String getCm33() {
-		return cm33;
-	}
-
-	public void setCm33(String cm33) {
-		this.cm33 = cm33;
-	}
-	
-	@Length(min=0, max=32, message="手术切口愈合情况的选择长度不能超过 32 个字符")
-	public String getCm34() {
-		return cm34;
-	}
-
-	public void setCm34(String cm34) {
-		this.cm34 = cm34;
 	}
 	
 }

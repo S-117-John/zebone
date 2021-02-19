@@ -10,7 +10,7 @@ import com.zebone.quality.modules.ich.entity.QualityIch;
 /**
  * ICH脑出血DAO接口
  * @author 卡卡西
- * @version 2021-01-18
+ * @version 2021-02-19
  */
 @MyBatisDao
 public interface QualityIchDao extends CrudDao<QualityIch> {

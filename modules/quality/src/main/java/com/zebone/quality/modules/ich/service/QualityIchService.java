@@ -16,7 +16,7 @@ import com.zebone.quality.modules.ich.dao.QualityIchDao;
 /**
  * ICH脑出血Service
  * @author 卡卡西
- * @version 2021-01-18
+ * @version 2021-02-19
  */
 @Service
 @Transactional(readOnly=true)

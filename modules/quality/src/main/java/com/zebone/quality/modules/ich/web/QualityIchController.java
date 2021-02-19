@@ -6,6 +6,11 @@ package com.zebone.quality.modules.ich.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.zebone.quality.domain.UploadService;
+import com.zebone.quality.modules.common.UploadResult;
+import com.zebone.quality.modules.ich.entity.Ich;
+import com.zebone.quality.modules.pd.entity.Pd;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,10 +27,13 @@ import com.jeesite.common.web.BaseController;
 import com.zebone.quality.modules.ich.entity.QualityIch;
 import com.zebone.quality.modules.ich.service.QualityIchService;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.Optional;
+
 /**
  * ICH脑出血Controller
  * @author 卡卡西
- * @version 2021-01-18
+ * @version 2021-02-19
  */
 @Controller
 @RequestMapping(value = "${adminPath}/ich/qualityIch")
@@ -73,14 +81,27 @@ public class QualityIchController extends BaseController {
 		return "modules/ich/qualityIchForm";
 	}
 
+
+	@Autowired
+	private UploadService uploadService;
 	/**
 	 * 保存ICH脑出血
 	 */
 	@RequiresPermissions("ich:qualityIch:edit")
 	@PostMapping(value = "save")
 	@ResponseBody
-	public String save(@Validated QualityIch qualityIch) {
+	public String save(@Validated QualityIch qualityIch) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 		qualityIchService.save(qualityIch);
+
+		String result = uploadService.upload(qualityIch,new Ich(),"ICH");
+		Gson gson = new Gson();
+		UploadResult uploadResult = gson.fromJson(result, UploadResult.class);
+		Integer resultCode = Optional.ofNullable(uploadResult).map(a->a.getCode()).orElse(null);
+		if(resultCode==1000){
+			String errorMessage = Optional.ofNullable(uploadResult).map(a->a.getMessage()).orElse("上传失败");
+			return renderResult(Global.FALSE, text(errorMessage));
+		}
+
 		return renderResult(Global.TRUE, text("保存ICH脑出血成功！"));
 	}
 	
