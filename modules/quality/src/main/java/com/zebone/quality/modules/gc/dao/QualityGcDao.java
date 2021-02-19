@@ -8,9 +8,9 @@ import com.jeesite.common.mybatis.annotation.MyBatisDao;
 import com.zebone.quality.modules.gc.entity.QualityGc;
 
 /**
- * GC胃癌（手术治疗）DAO接口
+ * quality_gcDAO接口
  * @author 卡卡西
- * @version 2021-01-19
+ * @version 2021-02-19
  */
 @MyBatisDao
 public interface QualityGcDao extends CrudDao<QualityGc> {

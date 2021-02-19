@@ -6,6 +6,11 @@ package com.zebone.quality.modules.gc.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.zebone.quality.domain.UploadService;
+import com.zebone.quality.modules.cac.entity.Cac;
+import com.zebone.quality.modules.common.UploadResult;
+import com.zebone.quality.modules.gc.entity.Gc;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,10 +27,13 @@ import com.jeesite.common.web.BaseController;
 import com.zebone.quality.modules.gc.entity.QualityGc;
 import com.zebone.quality.modules.gc.service.QualityGcService;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.Optional;
+
 /**
- * GC胃癌（手术治疗）Controller
+ * quality_gcController
  * @author 卡卡西
- * @version 2021-01-19
+ * @version 2021-02-19
  */
 @Controller
 @RequestMapping(value = "${adminPath}/gc/qualityGc")
@@ -73,14 +81,26 @@ public class QualityGcController extends BaseController {
 		return "modules/gc/qualityGcForm";
 	}
 
+	@Autowired
+	private UploadService uploadService;
 	/**
 	 * 保存GC胃癌（手术治疗）
 	 */
 	@RequiresPermissions("gc:qualityGc:edit")
 	@PostMapping(value = "save")
 	@ResponseBody
-	public String save(@Validated QualityGc qualityGc) {
+	public String save(@Validated QualityGc qualityGc) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 		qualityGcService.save(qualityGc);
+
+		String result = uploadService.upload(qualityGc,new Gc(),"GC");
+		Gson gson = new Gson();
+		UploadResult uploadResult = gson.fromJson(result, UploadResult.class);
+		Integer resultCode = Optional.ofNullable(uploadResult).map(a->a.getCode()).orElse(null);
+		if(resultCode==1000){
+			String errorMessage = Optional.ofNullable(uploadResult).map(a->a.getMessage()).orElse("上传失败");
+			return renderResult(Global.FALSE, text(errorMessage));
+		}
+
 		return renderResult(Global.TRUE, text("保存GC胃癌（手术治疗）成功！"));
 	}
 	

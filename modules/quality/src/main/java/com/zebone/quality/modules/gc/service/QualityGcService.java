@@ -14,9 +14,9 @@ import com.zebone.quality.modules.gc.entity.QualityGc;
 import com.zebone.quality.modules.gc.dao.QualityGcDao;
 
 /**
- * GC胃癌（手术治疗）Service
+ * quality_gcService
  * @author 卡卡西
- * @version 2021-01-19
+ * @version 2021-02-19
  */
 @Service
 @Transactional(readOnly=true)
