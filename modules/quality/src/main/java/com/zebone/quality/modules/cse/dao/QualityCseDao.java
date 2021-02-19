@@ -10,7 +10,7 @@ import com.zebone.quality.modules.cse.entity.QualityCse;
 /**
  * CSE惊厥性癫痫持续状态DAO接口
  * @author 卡卡西
- * @version 2021-01-18
+ * @version 2021-02-19
  */
 @MyBatisDao
 public interface QualityCseDao extends CrudDao<QualityCse> {
