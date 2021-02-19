@@ -7,10 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
-//@Entity
-//@Table(name = "QUALITY_CABG")
+@Entity
+@Table(name = "QUALITY_CABG")
 @Data
 public class CabgDO extends DataEntity{
+
 
     @Column(columnDefinition = "varchar(64) COMMENT '质控医师'")
     private String cm_0_1_1_1;
@@ -38,7 +39,7 @@ public class CabgDO extends DataEntity{
     private String cm_0_1_4_2_1;
     @Column(columnDefinition = "varchar(64) COMMENT '是否出院后31天内重复住院'")
     private String cm_0_1_5;
-    @Column(columnDefinition = "varchar(64) COMMENT '出生日期'")
+    @Column(columnDefinition = "datetime COMMENT '出生日期'")
     private Date cm_0_2_1_1;
     @Column(columnDefinition = "varchar(64) COMMENT '患者性别'")
     private String cm_0_2_1_2;
@@ -46,17 +47,17 @@ public class CabgDO extends DataEntity{
     private Double cm_0_2_1_3;
     @Column(columnDefinition = "double COMMENT '患者身高（cm）'")
     private Double cm_0_2_1_5;
-    @Column(columnDefinition = "varchar(64) COMMENT '入院日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '入院日期时间'")
     private Date cm_0_2_4_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '出院日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '出院日期时间'")
     private Date cm_0_2_4_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '入住ICU/麻醉复苏室日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '入住ICU/麻醉复苏室日期时间'")
     private Date cm_0_2_5_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '离开ICU/麻醉复苏室日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '离开ICU/麻醉复苏室日期时间'")
     private Date cm_0_2_5_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '手术开始日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '手术开始日期时间'")
     private Date cm_0_2_6_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '手术结束日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '手术结束日期时间'")
     private Date cm_0_2_6_2;
     @Column(columnDefinition = "varchar(64) COMMENT '费用支付方式'")
     private String cm_0_3_1;
@@ -136,9 +137,9 @@ public class CabgDO extends DataEntity{
     private String cabg_2_5;
     @Column(columnDefinition = "varchar(64) COMMENT '是否使用体外循环'")
     private String cabg_2_6;
-    @Column(columnDefinition = "varchar(64) COMMENT '体外循环使用日期开始时间'")
+    @Column(columnDefinition = "datetime COMMENT '体外循环使用日期开始时间'")
     private Date cabg_3_3_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '体外循环使用日期结束时间'")
+    @Column(columnDefinition = "datetime COMMENT '体外循环使用日期结束时间'")
     private Date cabg_3_3_3;
     @Column(columnDefinition = "double COMMENT '体外循环持续时间'")
     private Double cabg_3_3_4;
@@ -264,9 +265,9 @@ public class CabgDO extends DataEntity{
     private String cabg_3_12;
     @Column(columnDefinition = "varchar(64) COMMENT '在ICU/术后复苏室是否实施机械通气'")
     private String cabg_3_13;
-    @Column(columnDefinition = "varchar(64) COMMENT '起始时间'")
+    @Column(columnDefinition = "datetime COMMENT '起始时间'")
     private Date cabg_3_15_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '终止时间'")
+    @Column(columnDefinition = "datetime COMMENT '终止时间'")
     private Date cabg_3_15_2;
     @Column(columnDefinition = "varchar(64) COMMENT '是否使用预防性抗菌药物'")
     private String cm_1_1_1;
@@ -280,7 +281,7 @@ public class CabgDO extends DataEntity{
     private String cm_1_3_1_2;
     @Column(columnDefinition = "varchar(64) COMMENT '选用“特殊使用级抗菌药物”或者其他类抗菌药物的因素填写'")
     private String cm_1_3_1_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '使用首剂抗菌药物起始时间'")
+    @Column(columnDefinition = "datetime COMMENT '使用首剂抗菌药物起始时间'")
     private Date cm_1_4_1;
     @Column(columnDefinition = "varchar(64) COMMENT '手术时间是否≥3小时'")
     private String cm_1_5_1;
@@ -290,7 +291,7 @@ public class CabgDO extends DataEntity{
     private String cm_1_5_3;
     @Column(columnDefinition = "varchar(64) COMMENT '是否术中追加抗菌药物'")
     private String cm_1_5_4;
-    @Column(columnDefinition = "varchar(64) COMMENT '术后抗菌药物停止使用时间'")
+    @Column(columnDefinition = "datetime COMMENT '术后抗菌药物停止使用时间'")
     private Date cm_1_6_1;
     @Column(columnDefinition = "varchar(64) COMMENT '使用抗菌药物时间使用时间分层'")
     private String cm_1_6_2;
@@ -298,15 +299,15 @@ public class CabgDO extends DataEntity{
     private String cm_1_6_3_2;
     @Column(columnDefinition = "varchar(64) COMMENT '术后医嘱-阿司匹林药物'")
     private String cabg_13_1_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '用药日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '用药日期时间'")
     private Date cabg_4_1_2;
     @Column(columnDefinition = "varchar(64) COMMENT '术后医嘱-氯吡格雷'")
     private String cabg_13_2_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '用药日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '用药日期时间'")
     private Date cabg_4_2_2;
     @Column(columnDefinition = "varchar(64) COMMENT '术后医嘱-替格瑞洛'")
     private String cabg_13_2_2_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '用药日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '用药日期时间'")
     private Date cabg_4_3_1;
     @Column(columnDefinition = "varchar(64) COMMENT '术后是否有活动性出血或血肿'")
     private String cabg_5_1_1;
@@ -320,7 +321,7 @@ public class CabgDO extends DataEntity{
     private String cabg_5_2_2_1;
     @Column(columnDefinition = "varchar(64) COMMENT '其他非心脏问题再手术'")
     private String cabg_5_2_2_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '再手术起始时间'")
+    @Column(columnDefinition = "datetime COMMENT '再手术起始时间'")
     private Date cabg_5_4_1;
     @Column(columnDefinition = "varchar(64) COMMENT '是否有手术后并发证'")
     private String cm_2_1;
@@ -510,5 +511,6 @@ public class CabgDO extends DataEntity{
     private Double cm_6_29;
     @Column(columnDefinition = "double COMMENT '其他费'")
     private Double cm_6_30;
+
 
 }
