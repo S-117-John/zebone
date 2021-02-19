@@ -10,7 +10,7 @@ import com.zebone.quality.modules.vsd.entity.QualityVsd;
 /**
  * VSD室间隔缺损手术DAO接口
  * @author 卡卡西
- * @version 2021-01-20
+ * @version 2021-02-19
  */
 @MyBatisDao
 public interface QualityVsdDao extends CrudDao<QualityVsd> {
