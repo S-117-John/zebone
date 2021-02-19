@@ -7,16 +7,63 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
-//@Entity
-//@Table(name = "QUALITY_PD")
-//@Data
-public class PdDO extends BaseEntity{
+@Entity
+@Table(name = "QUALITY_PD")
+@Data
+public class PdDO extends DataEntity{
 
 
+
+    @Column(columnDefinition = "varchar(64) COMMENT '质控医师'")
+    private String cm_0_1_1_1;
+    @Column(columnDefinition = "varchar(64) COMMENT '质控护士'")
+    private String cm_0_1_1_2;
+    @Column(columnDefinition = "varchar(64) COMMENT '主治医师'")
+    private String cm_0_1_1_3;
+    @Column(columnDefinition = "varchar(64) COMMENT '责任护士'")
+    private String cm_0_1_1_4;
+    @Column(columnDefinition = "varchar(64) COMMENT '上报科室'")
+    private String cm_0_1_1_5;
+    @Column(columnDefinition = "varchar(64) COMMENT '患者病案号'")
+    private String caseid;
+    @Column(columnDefinition = "varchar(64) COMMENT '主要诊断ICD-10六位临床扩展编码与名称'")
+    private String cm_0_1_3_2;
+    @Column(columnDefinition = "varchar(64) COMMENT '主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称'")
+    private String cm_0_1_4_1;
     @Column(columnDefinition = "varchar(64) COMMENT '其他主要手术操作ICD-9-CM-3四位亚目编码与名称'")
     private String pd_0_1_4_1;
+    @Column(columnDefinition = "varchar(64) COMMENT '主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称'")
+    private String cm_0_1_4_2;
     @Column(columnDefinition = "varchar(64) COMMENT '其他主要手术操作ICD-9-CM-3六位临床扩展编码与名称'")
     private String pd_0_1_4_2;
+    @Column(columnDefinition = "varchar(64) COMMENT '是否出院后31天内重复住院'")
+    private String cm_0_1_5;
+    @Column(columnDefinition = "datetime COMMENT '出生日期'")
+    private Date cm_0_2_1_1;
+    @Column(columnDefinition = "varchar(64) COMMENT '患者性别'")
+    private String cm_0_2_1_2;
+    @Column(columnDefinition = "double COMMENT '患者体重（kg）'")
+    private Double cm_0_2_1_3;
+    @Column(columnDefinition = "double COMMENT '患者身高（cm）'")
+    private Double cm_0_2_1_5;
+    @Column(columnDefinition = "varchar(64) COMMENT '发病日期时间是否无法确定或无记录'")
+    private String cm_0_2_2_1;
+    @Column(columnDefinition = "datetime COMMENT '发病日期时间'")
+    private Date cm_0_2_2_2;
+    @Column(columnDefinition = "datetime COMMENT '入院日期时间'")
+    private Date cm_0_2_4_1;
+    @Column(columnDefinition = "datetime COMMENT '出院日期时间'")
+    private Date cm_0_2_4_2;
+    @Column(columnDefinition = "datetime COMMENT '手术开始（切皮）日期时间'")
+    private Date cm_0_2_6_1;
+    @Column(columnDefinition = "datetime COMMENT '手术结束（缝皮结束）日期时间'")
+    private Date cm_0_2_6_2;
+    @Column(columnDefinition = "varchar(64) COMMENT '费用支付方式'")
+    private String cm_0_3_1;
+    @Column(columnDefinition = "varchar(64) COMMENT '收入住院途径'")
+    private String cm_0_3_2;
+    @Column(columnDefinition = "varchar(64) COMMENT '到院交通工具'")
+    private String cm_0_3_3;
     @Column(columnDefinition = "varchar(64) COMMENT '绝对排除标准'")
     private String pd_1_1_1;
     @Column(columnDefinition = "varchar(64) COMMENT '是否在发病 5 年内出现快速进展的步态障碍，且需要规律使用轮椅'")
@@ -63,19 +110,19 @@ public class PdDO extends BaseEntity{
     private String pd_2_1_2;
     @Column(columnDefinition = "varchar(64) COMMENT '是否实施头部CT检查'")
     private String pd_2_1_3;
-    @Column(columnDefinition = "varchar(64) COMMENT '报告日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '报告日期时间'")
     private Date pd_2_1_4;
     @Column(columnDefinition = "varchar(64) COMMENT '是否实施黑质超声检查'")
     private String pd_2_2_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '报告日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '报告日期时间'")
     private Date pd_2_2_2;
     @Column(columnDefinition = "varchar(64) COMMENT '是否实施震颤分析检查'")
     private String pd_2_3_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '报告日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '报告日期时间'")
     private Date pd_2_3_2;
     @Column(columnDefinition = "varchar(64) COMMENT '是否实施肛门括约肌肌电图检查'")
     private String pd_2_4_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '报告日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '报告日期时间'")
     private Date pd_2_4_2;
     @Column(columnDefinition = "varchar(64) COMMENT '是否实施头PET检查'")
     private String pd_2_5_1;
@@ -83,7 +130,7 @@ public class PdDO extends BaseEntity{
     private String pd_2_5_2;
     @Column(columnDefinition = "varchar(64) COMMENT '其他头PET项目'")
     private String pd_2_5_2_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '报告日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '报告日期时间'")
     private Date pd_2_5_3;
     @Column(columnDefinition = "varchar(64) COMMENT '是否进行多巴胺能反应性评测'")
     private String pd_3_1_1;
@@ -143,7 +190,7 @@ public class PdDO extends BaseEntity{
     private String pd_3_4_1;
     @Column(columnDefinition = "varchar(64) COMMENT '不良反应风险的选择'")
     private String pd_3_5_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '完成日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '完成日期时间'")
     private Date pd_3_6_1;
     @Column(columnDefinition = "varchar(64) COMMENT '是否在入院24小时进行帕金森病Hoehn-Yahr分期评估'")
     private String pd_4_1_1;
@@ -151,7 +198,7 @@ public class PdDO extends BaseEntity{
     private String pd_4_1_2;
     @Column(columnDefinition = "varchar(64) COMMENT 'H-Y分期结论'")
     private String pd_4_1_3;
-    @Column(columnDefinition = "varchar(64) COMMENT '完成日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '完成日期时间'")
     private Date pd_4_1_4;
     @Column(columnDefinition = "varchar(64) COMMENT '是否进行神经功能缺损评估'")
     private String pd_5_1_1;
@@ -165,7 +212,7 @@ public class PdDO extends BaseEntity{
     private Double pd_5_1_5;
     @Column(columnDefinition = "double COMMENT '日常分值合计'")
     private Double pd_5_1_6;
-    @Column(columnDefinition = "varchar(64) COMMENT '完成日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '完成日期时间'")
     private Date pd_5_1_7;
     @Column(columnDefinition = "varchar(64) COMMENT '运动并发症类型'")
     private String pd_6_1_1;
@@ -191,7 +238,7 @@ public class PdDO extends BaseEntity{
     private String pd_6_1_4_3;
     @Column(columnDefinition = "varchar(64) COMMENT '其他双相异动处理'")
     private String pd_6_1_4_3_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '筛查完成日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '筛查完成日期时间'")
     private Date pd_6_1_5;
     @Column(columnDefinition = "varchar(64) COMMENT '是否实施筛查认知功能障碍评估'")
     private String pd_6_2_1;
@@ -213,7 +260,7 @@ public class PdDO extends BaseEntity{
     private String pd_6_2_4;
     @Column(columnDefinition = "varchar(64) COMMENT '认知功能障碍类型'")
     private String pd_6_2_5;
-    @Column(columnDefinition = "varchar(64) COMMENT '完成日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '完成日期时间'")
     private Date pd_6_2_6;
     @Column(columnDefinition = "varchar(64) COMMENT '其他进行认知功能筛查类型'")
     private String pd_6_2_2_1;
@@ -227,13 +274,13 @@ public class PdDO extends BaseEntity{
     private String pd_6_2_10;
     @Column(columnDefinition = "varchar(64) COMMENT '其他认知功能障碍治疗措施'")
     private String pd_6_2_10_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '治疗医嘱执行日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '治疗医嘱执行日期时间'")
     private Date pd_6_2_11;
     @Column(columnDefinition = "varchar(64) COMMENT '是否实施心理状况的筛查'")
     private String pd_6_3_1;
     @Column(columnDefinition = "varchar(64) COMMENT '进行心理状况筛查的项目'")
     private String pd_6_3_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '完成日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '完成日期时间'")
     private Date pd_6_3_3;
     @Column(columnDefinition = "varchar(64) COMMENT '是否实施睡眠状况的筛查'")
     private String pd_6_4_1;
@@ -241,7 +288,7 @@ public class PdDO extends BaseEntity{
     private String pd_6_4_2;
     @Column(columnDefinition = "varchar(64) COMMENT '其他睡眠状况筛查的项目'")
     private String pd_6_4_2_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '完成日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '完成日期时间'")
     private Date pd_6_4_3;
     @Column(columnDefinition = "varchar(64) COMMENT '入院查体时是否实施卧立位血压的检测'")
     private String pd_6_5_1;
@@ -265,7 +312,7 @@ public class PdDO extends BaseEntity{
     private Double pd_6_5_6_1;
     @Column(columnDefinition = "double COMMENT '立位大于3min血压-舒张压(mmHg)'")
     private Double pd_6_5_6_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '完成日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '完成日期时间'")
     private Date pd_6_5_7;
     @Column(columnDefinition = "varchar(64) COMMENT '告知患者,体位性低血压干预措施有记录'")
     private String pd_6_5_8;
@@ -285,7 +332,7 @@ public class PdDO extends BaseEntity{
     private String pd_7_1_2_5;
     @Column(columnDefinition = "varchar(64) COMMENT '手术禁忌证的选择'")
     private String pd_7_1_3;
-    @Column(columnDefinition = "varchar(64) COMMENT '完成日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '完成日期时间'")
     private Date pd_7_1_4;
     @Column(columnDefinition = "varchar(64) COMMENT '是否进行脑深部电刺激手术（DBS）'")
     private String pd_7_2_1;
@@ -293,8 +340,40 @@ public class PdDO extends BaseEntity{
     private String pd_7_2_2;
     @Column(columnDefinition = "varchar(64) COMMENT '实施脑深部电刺激其他手术'")
     private String pd_7_2_2_1;
-    @Column(columnDefinition = "varchar(64) COMMENT 'DBS手术完成日期'")
+    @Column(columnDefinition = "datetime COMMENT 'DBS手术完成日期'")
     private Date pd_7_2_3;
+    @Column(columnDefinition = "varchar(64) COMMENT '是否有手术后并发症'")
+    private String cm_2_1;
+    @Column(columnDefinition = "varchar(64) COMMENT '手术后并发症类别及ICD-10四位亚目的选择'")
+    private String cm_2_2;
+    @Column(columnDefinition = "varchar(64) COMMENT '其他手术后并发症类别及ICD-10四位亚目和名称填写'")
+    private String cm_2_3_1_1;
+    @Column(columnDefinition = "varchar(64) COMMENT '介入操作与手术其他并发症'")
+    private String cm_2_3_1;
+    @Column(columnDefinition = "varchar(64) COMMENT '手术患者手术后肺栓塞例数'")
+    private String cm_2_3_2;
+    @Column(columnDefinition = "varchar(64) COMMENT '手术患者手术后深静脉血栓例数'")
+    private String cm_2_3_3;
+    @Column(columnDefinition = "varchar(64) COMMENT '手术患者手术后败血症例数'")
+    private String cm_2_3_4;
+    @Column(columnDefinition = "varchar(64) COMMENT '手术患者手术后出血或血肿例数'")
+    private String cm_2_3_5;
+    @Column(columnDefinition = "varchar(64) COMMENT '手术患者手术伤口裂开'")
+    private String cm_2_3_6;
+    @Column(columnDefinition = "varchar(64) COMMENT '手术患者猝死'")
+    private String cm_2_3_7;
+    @Column(columnDefinition = "varchar(64) COMMENT '手术患者手术后呼吸道并发症'")
+    private String cm_2_3_8;
+    @Column(columnDefinition = "varchar(64) COMMENT '手术患者手术后生理/代谢紊乱'")
+    private String cm_2_3_9;
+    @Column(columnDefinition = "varchar(64) COMMENT '与手术/操作相关感染'")
+    private String cm_2_3_10;
+    @Column(columnDefinition = "varchar(64) COMMENT '手术过程中异物遗留'")
+    private String cm_2_3_11;
+    @Column(columnDefinition = "varchar(64) COMMENT '麻醉并发症'")
+    private String cm_2_3_12;
+    @Column(columnDefinition = "varchar(64) COMMENT '输注、输血反应'")
+    private String cm_2_3_13;
     @Column(columnDefinition = "varchar(64) COMMENT '神经系统手术并发症'")
     private String pd_7_3_3;
     @Column(columnDefinition = "varchar(64) COMMENT '其他术后并发症'")
@@ -307,11 +386,11 @@ public class PdDO extends BaseEntity{
     private String pd_8_1_3_1;
     @Column(columnDefinition = "double COMMENT '冻结步态量表（FOG-Q）评分值'")
     private Double pd_8_1_3;
-    @Column(columnDefinition = "varchar(64) COMMENT '评估日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '评估日期时间'")
     private Date pd_8_1_4;
     @Column(columnDefinition = "varchar(64) COMMENT '康复方式选择'")
     private String pd_8_2_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '康复实施日期(首次)'")
+    @Column(columnDefinition = "datetime COMMENT '康复实施日期(首次)'")
     private Date pd_8_2_2;
     @Column(columnDefinition = "varchar(64) COMMENT '未能进行康复原因'")
     private String pd_8_2_3;
@@ -347,4 +426,105 @@ public class PdDO extends BaseEntity{
     private String pd_9_1_2_2;
     @Column(columnDefinition = "varchar(64) COMMENT '手术（DBS）后健康教育有记录'")
     private String pd_9_1_3_3;
+    @Column(columnDefinition = "varchar(64) COMMENT '交与患者“出院小结”的副本告知患者出院时风险因素'")
+    private String cm_7_2_1;
+    @Column(columnDefinition = "varchar(64) COMMENT '出院带药'")
+    private String cm_7_2_2;
+    @Column(columnDefinition = "varchar(64) COMMENT '告知发生紧急意外情况或者疾病复发如何救治及前途经'")
+    private String cm_7_2_4;
+    @Column(columnDefinition = "varchar(64) COMMENT '出院时教育与随访'")
+    private String cm_7_2_5;
+    @Column(columnDefinition = "varchar(64) COMMENT '告知何为发生紧急意外情况或者疾病复发'")
+    private String cm_7_2_3;
+    @Column(columnDefinition = "varchar(64) COMMENT '离院方式选择'")
+    private String cm_4_3;
+    @Column(columnDefinition = "varchar(64) COMMENT '非医嘱离院可能涉及因素'")
+    private String cm_4_5;
+    @Column(columnDefinition = "varchar(64) COMMENT '其他非医嘱离院因素填写'")
+    private String cm_4_4_1;
+    @Column(columnDefinition = "varchar(64) COMMENT '死亡可能涉及因素'")
+    private String cm_4_6;
+    @Column(columnDefinition = "varchar(64) COMMENT '患者是否对服务的体验与评价'")
+    private String cm_5_1;
+    @Column(columnDefinition = "varchar(64) COMMENT '整体医院评级'")
+    private String cm_5_2_1;
+    @Column(columnDefinition = "varchar(64) COMMENT '患者推荐'")
+    private String cm_5_2_2;
+    @Column(columnDefinition = "varchar(64) COMMENT '病房、床单元和卫生间清洁度'")
+    private String cm_5_2_3;
+    @Column(columnDefinition = "varchar(64) COMMENT '病房与周边噪音'")
+    private String cm_5_2_5;
+    @Column(columnDefinition = "varchar(64) COMMENT '医生沟通'")
+    private String cm_5_2_6;
+    @Column(columnDefinition = "varchar(64) COMMENT '护士沟通'")
+    private String cm_5_2_7;
+    @Column(columnDefinition = "varchar(64) COMMENT '药师沟通'")
+    private String cm_5_2_8;
+    @Column(columnDefinition = "varchar(64) COMMENT '康复计划'")
+    private String cm_5_2_9;
+    @Column(columnDefinition = "varchar(64) COMMENT '出院时的知情告知'")
+    private String cm_5_2_10;
+    @Column(columnDefinition = "varchar(64) COMMENT '膳食评价'")
+    private String cm_5_2_11;
+    @Column(columnDefinition = "double COMMENT '住院总费用'")
+    private Double cm_6_1;
+    @Column(columnDefinition = "double COMMENT '住院总费用其中自付金额'")
+    private Double cm_6_2;
+    @Column(columnDefinition = "double COMMENT '一般医疗服务费'")
+    private Double cm_6_3;
+    @Column(columnDefinition = "double COMMENT '一般治疗操作费'")
+    private Double cm_6_4;
+    @Column(columnDefinition = "double COMMENT '护理费'")
+    private Double cm_6_5;
+    @Column(columnDefinition = "double COMMENT '综合医疗服务类其他费用'")
+    private Double cm_6_6;
+    @Column(columnDefinition = "double COMMENT '病理诊断费'")
+    private Double cm_6_7;
+    @Column(columnDefinition = "double COMMENT '实验室诊断费'")
+    private Double cm_6_8;
+    @Column(columnDefinition = "double COMMENT '影像学诊断费'")
+    private Double cm_6_9;
+    @Column(columnDefinition = "double COMMENT '临床诊断项目费'")
+    private Double cm_6_10;
+    @Column(columnDefinition = "double COMMENT '非手术治疗项目费'")
+    private Double cm_6_11;
+    @Column(columnDefinition = "double COMMENT '其中：临床物理治疗费'")
+    private Double cm_6_12;
+    @Column(columnDefinition = "double COMMENT '手术治疗费'")
+    private Double cm_6_13;
+    @Column(columnDefinition = "double COMMENT '其中：麻醉费'")
+    private Double cm_6_14;
+    @Column(columnDefinition = "double COMMENT '其中：手术费'")
+    private Double cm_6_15;
+    @Column(columnDefinition = "double COMMENT '康复费'")
+    private Double cm_6_16;
+    @Column(columnDefinition = "double COMMENT '中医治疗费'")
+    private Double cm_6_17;
+    @Column(columnDefinition = "double COMMENT '西药费'")
+    private Double cm_6_18;
+    @Column(columnDefinition = "double COMMENT '其中：抗菌药物费'")
+    private Double cm_6_19;
+    @Column(columnDefinition = "double COMMENT '中成药费'")
+    private Double cm_6_20;
+    @Column(columnDefinition = "double COMMENT '中草药费'")
+    private Double cm_6_21;
+    @Column(columnDefinition = "double COMMENT '血费'")
+    private Double cm_6_22;
+    @Column(columnDefinition = "double COMMENT '白蛋白类制品费'")
+    private Double cm_6_23;
+    @Column(columnDefinition = "double COMMENT '球蛋白类制品费'")
+    private Double cm_6_24;
+    @Column(columnDefinition = "double COMMENT '凝血因子类制品费'")
+    private Double cm_6_25;
+    @Column(columnDefinition = "double COMMENT '细胞因子类制品费'")
+    private Double cm_6_26;
+    @Column(columnDefinition = "double COMMENT '检查用一次性医用材料费'")
+    private Double cm_6_27;
+    @Column(columnDefinition = "double COMMENT '治疗用一次性医用材料费'")
+    private Double cm_6_28;
+    @Column(columnDefinition = "double COMMENT '手术用一次性医用材料费'")
+    private Double cm_6_29;
+    @Column(columnDefinition = "double COMMENT '其他费'")
+    private Double cm_6_30;
+
 }

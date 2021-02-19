@@ -6,6 +6,11 @@ package com.zebone.quality.modules.pd.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.zebone.quality.domain.UploadService;
+import com.zebone.quality.modules.common.UploadResult;
+import com.zebone.quality.modules.gc.entity.Gc;
+import com.zebone.quality.modules.pd.entity.Pd;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,10 +27,13 @@ import com.jeesite.common.web.BaseController;
 import com.zebone.quality.modules.pd.entity.QualityPd;
 import com.zebone.quality.modules.pd.service.QualityPdService;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.Optional;
+
 /**
  * PD帕金森病Controller
  * @author 卡卡西
- * @version 2021-01-16
+ * @version 2021-02-19
  */
 @Controller
 @RequestMapping(value = "${adminPath}/pd/qualityPd")
@@ -73,14 +81,27 @@ public class QualityPdController extends BaseController {
 		return "modules/pd/qualityPdForm";
 	}
 
+	@Autowired
+	private UploadService uploadService;
+
 	/**
 	 * 保存PD帕金森病
 	 */
 	@RequiresPermissions("pd:qualityPd:edit")
 	@PostMapping(value = "save")
 	@ResponseBody
-	public String save(@Validated QualityPd qualityPd) {
+	public String save(@Validated QualityPd qualityPd) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 		qualityPdService.save(qualityPd);
+
+		String result = uploadService.upload(qualityPd,new Pd(),"PD");
+		Gson gson = new Gson();
+		UploadResult uploadResult = gson.fromJson(result, UploadResult.class);
+		Integer resultCode = Optional.ofNullable(uploadResult).map(a->a.getCode()).orElse(null);
+		if(resultCode==1000){
+			String errorMessage = Optional.ofNullable(uploadResult).map(a->a.getMessage()).orElse("上传失败");
+			return renderResult(Global.FALSE, text(errorMessage));
+		}
+
 		return renderResult(Global.TRUE, text("保存PD帕金森病成功！"));
 	}
 	

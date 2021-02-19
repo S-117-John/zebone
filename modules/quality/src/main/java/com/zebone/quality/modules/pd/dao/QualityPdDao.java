@@ -10,7 +10,7 @@ import com.zebone.quality.modules.pd.entity.QualityPd;
 /**
  * PD帕金森病DAO接口
  * @author 卡卡西
- * @version 2021-01-16
+ * @version 2021-02-19
  */
 @MyBatisDao
 public interface QualityPdDao extends CrudDao<QualityPd> {

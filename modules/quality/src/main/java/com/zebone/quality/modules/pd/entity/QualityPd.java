@@ -17,7 +17,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 /**
  * PD帕金森病Entity
  * @author 卡卡西
- * @version 2021-01-16
+ * @version 2021-02-19
  */
 @Table(name="quality_pd", alias="a", columns={
 		@Column(name="cm_0_1_1_1", attrName="cm_0_1_1_1", label="质控医师"),
@@ -25,7 +25,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_0_1_1_3", attrName="cm_0_1_1_3", label="主治医师"),
 		@Column(name="cm_0_1_1_4", attrName="cm_0_1_1_4", label="责任护士"),
 		@Column(name="cm_0_1_1_5", attrName="cm_0_1_1_5", label="上报科室"),
-		@Column(name="case_id", attrName="caseId", label="患者病案号"),
+		@Column(name="caseid", attrName="caseid", label="患者病案号"),
 		@Column(name="cm_0_1_3_2", attrName="cm_0_1_3_2", label="主要诊断ICD-10六位临床扩展编码与名称"),
 		@Column(name="cm_0_1_4_1", attrName="cm_0_1_4_1", label="主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称"),
 		@Column(name="pd_0_1_4_1", attrName="pd_0_1_4_1", label="其他主要手术操作ICD-9-CM-3四位亚目编码与名称"),
@@ -40,7 +40,6 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_0_2_2_2", attrName="cm_0_2_2_2", label="发病日期时间"),
 		@Column(name="cm_0_2_4_1", attrName="cm_0_2_4_1", label="入院日期时间"),
 		@Column(name="cm_0_2_4_2", attrName="cm_0_2_4_2", label="出院日期时间"),
-		@Column(includeEntity=DataEntity.class),
 		@Column(name="cm_0_2_6_1", attrName="cm_0_2_6_1", label="手术开始", comment="手术开始（切皮）日期时间"),
 		@Column(name="cm_0_2_6_2", attrName="cm_0_2_6_2", label="手术结束", comment="手术结束（缝皮结束）日期时间"),
 		@Column(name="cm_0_3_1", attrName="cm_0_3_1", label="费用支付方式"),
@@ -48,16 +47,16 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_0_3_3", attrName="cm_0_3_3", label="到院交通工具"),
 		@Column(name="pd_1_1_1", attrName="pd_1_1_1", label="绝对排除标准"),
 		@Column(name="pd_1_2_1", attrName="pd_1_2_1", label="是否在发病 5 年内出现快速进展的步态障碍，且需要规律使用轮椅"),
-		@Column(name="pd_1_2_2", attrName="pd_1_2_2", label="是否发病 5 年或 5 年以上，"),
-		@Column(name="pd_1_2_3", attrName="pd_1_2_3", label="是否早期出现的球部功能障碍"),
+		@Column(name="pd_1_2_2", attrName="pd_1_2_2", label="是否发病 5 年或 5 年以上，运动症状或体征完全没有进展；除非这种稳定是与治疗相关的"),
+		@Column(name="pd_1_2_3", attrName="pd_1_2_3", label="是否早期出现的球部功能障碍：发病 5 年内出现的严重的发音困难或构音障碍", comment="是否早期出现的球部功能障碍：发病 5 年内出现的严重的发音困难或构音障碍（大部分时候言语难以理解）或严重的吞咽困难（需要进食较软的食物，或鼻胃管、胃造瘘进食）"),
 		@Column(name="pd_1_2_4", attrName="pd_1_2_4", label="是否有吸气性呼吸功能障碍", comment="是否有吸气性呼吸功能障碍：出现白天或夜间吸气性喘鸣或者频繁的吸气性叹息"),
 		@Column(name="pd_1_2_5", attrName="pd_1_2_5", label="是否在发病 5 年内出现严重的自主神经功能障碍"),
 		@Column(name="pd_1_2_5_1", attrName="pd_1_2_5_1", label="出现严重的自主神经功能障碍具体表现为"),
 		@Column(name="pd_1_2_6", attrName="pd_1_2_6", label="是否在发病 3 年内由于平衡损害导致的反复", comment="是否在发病 3 年内由于平衡损害导致的反复（&gt;1 次 / 年）摔倒"),
 		@Column(name="pd_1_2_7", attrName="pd_1_2_7", label="是否在发病 10 年内出现不成比例地颈部前倾", comment="是否在发病 10 年内出现不成比例地颈部前倾（肌张力障碍）或手足挛缩"),
-		@Column(name="pd_1_2_8", attrName="pd_1_2_8", label="是否是病程到了 5 年也不出现任何一种常见的非运动症状"),
-		@Column(name="pd_1_2_9", attrName="pd_1_2_9", label="是否有其他原因不能解释的锥体束征，"),
-		@Column(name="pd_1_2_10", attrName="pd_1_2_10", label="是否是双侧对称性的帕金森综合征。"),
+		@Column(name="pd_1_2_8", attrName="pd_1_2_8", label="是否是病程到"),
+		@Column(name="pd_1_2_9", attrName="pd_1_2_9", label="是否有其他原因不能解释的锥体束征，定义为锥体束性肢体无力或明确的病理性反射活跃", comment="是否有其他原因不能解释的锥体束征，定义为锥体束性肢体无力或明确的病理性反射活跃（包括轻度的反射不对称以及孤立性的跖趾反应）"),
+		@Column(name="pd_1_2_10", attrName="pd_1_2_10", label="是否是双侧对称性的帕金森综合征。患者或看护者报告为双侧起病，没有任何侧别优势，且客观体格检查也没有观察到明显的侧别性"),
 		@Column(name="pd_1_3_1", attrName="pd_1_3_1", label="是否对多巴胺药物治疗具有明确且显著的有效应答"),
 		@Column(name="pd_1_3_1_1", attrName="pd_1_3_1_1", label="初始治疗显著应答表现为"),
 		@Column(name="pd_1_3_2", attrName="pd_1_3_2", label="是否出现左旋多巴诱导的异动症"),
@@ -161,7 +160,6 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="pd_6_4_3", attrName="pd_6_4_3", label="完成日期时间"),
 		@Column(name="pd_6_5_1", attrName="pd_6_5_1", label="入院查体时是否实施卧立位血压的检测"),
 		@Column(name="pd_6_5_2_1", attrName="pd_6_5_2_1", label="卧位血压-收缩压", comment="卧位血压-收缩压(mmHg)"),
-		@Column(name="cm_0_1_3_1", attrName="cm0131", label="主要诊断ICD-10四位亚目编码与名称"),
 		@Column(name="pd_6_5_2_2", attrName="pd_6_5_2_2", label="卧位血压-舒张压", comment="卧位血压-舒张压(mmHg)"),
 		@Column(name="pd_6_5_3_1", attrName="pd_6_5_3_1", label="立位即刻血压-收缩压", comment="立位即刻血压-收缩压(mmHg)"),
 		@Column(name="pd_6_5_3_2", attrName="pd_6_5_3_2", label="立位即刻血压-舒张压", comment="立位即刻血压-舒张压(mmHg)"),
@@ -186,7 +184,22 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="pd_7_2_2", attrName="pd_7_2_2", label="实施脑深部电刺激手术", comment="实施脑深部电刺激手术（DBS）的ICD-9-CM-3四位亚目编码及名称的选择"),
 		@Column(name="pd_7_2_2_1", attrName="pd_7_2_2_1", label="实施脑深部电刺激其他手术"),
 		@Column(name="pd_7_2_3", attrName="pd_7_2_3", label="DBS手术完成日期"),
-		@Column(name="cm_0_1_4_1_1", attrName="cm01411", label="其他ICD-9-CM-3四位亚目编码与名称"),
+		@Column(name="cm_2_1", attrName="cm_2_1", label="是否有手术后并发症"),
+		@Column(name="cm_2_2", attrName="cm_2_2", label="手术后并发症类别及ICD-10四位亚目的选择"),
+		@Column(name="cm_2_3_1_1", attrName="cm_2_3_1_1", label="其他手术后并发症类别及ICD-10四位亚目和名称填写"),
+		@Column(name="cm_2_3_1", attrName="cm_2_3_1", label="介入操作与手术其他并发症"),
+		@Column(name="cm_2_3_2", attrName="cm_2_3_2", label="手术患者手术后肺栓塞例数"),
+		@Column(name="cm_2_3_3", attrName="cm_2_3_3", label="手术患者手术后深静脉血栓例数"),
+		@Column(name="cm_2_3_4", attrName="cm_2_3_4", label="手术患者手术后败血症例数"),
+		@Column(name="cm_2_3_5", attrName="cm_2_3_5", label="手术患者手术后出血或血肿例数"),
+		@Column(name="cm_2_3_6", attrName="cm_2_3_6", label="手术患者手术伤口裂开"),
+		@Column(name="cm_2_3_7", attrName="cm_2_3_7", label="手术患者猝死"),
+		@Column(name="cm_2_3_8", attrName="cm_2_3_8", label="手术患者手术后呼吸道并发症"),
+		@Column(name="cm_2_3_9", attrName="cm_2_3_9", label="手术患者手术后生理/代谢紊乱"),
+		@Column(name="cm_2_3_10", attrName="cm_2_3_10", label="与手术/操作相关感染"),
+		@Column(name="cm_2_3_11", attrName="cm_2_3_11", label="手术过程中异物遗留"),
+		@Column(name="cm_2_3_12", attrName="cm_2_3_12", label="麻醉并发症"),
+		@Column(name="cm_2_3_13", attrName="cm_2_3_13", label="输注、输血反应"),
 		@Column(name="pd_7_3_3", attrName="pd_7_3_3", label="神经系统手术并发症"),
 		@Column(name="pd_7_3_3_1", attrName="pd_7_3_3_1", label="其他术后并发症"),
 		@Column(name="pd_8_1_1", attrName="pd_8_1_1", label="是否有冻结步态"),
@@ -197,7 +210,6 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="pd_8_2_1", attrName="pd_8_2_1", label="康复方式选择"),
 		@Column(name="pd_8_2_2", attrName="pd_8_2_2", label="康复实施日期", comment="康复实施日期(首次)"),
 		@Column(name="pd_8_2_3", attrName="pd_8_2_3", label="未能进行康复原因"),
-		@Column(name="cm_0_1_4_2_1", attrName="cm01421", label="其他ICD-9-CM-3六位临床扩展编码与名称"),
 		@Column(name="pd_9_1_1", attrName="pd_9_1_1", label="入院时是否进行重点护理评估且有记录"),
 		@Column(name="pd_9_1_1_1", attrName="pd_9_1_1_1", label="行走评估结果"),
 		@Column(name="pd_9_1_2", attrName="pd_9_1_2", label="跌倒/坠床评估"),
@@ -214,6 +226,11 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="pd_9_1_2_1", attrName="pd_9_1_2_1", label="DBS前、后是否实施健康教育有记录"),
 		@Column(name="pd_9_1_2_2", attrName="pd_9_1_2_2", label="手术", comment="手术（DBS）前健康教育有记录"),
 		@Column(name="pd_9_1_3_3", attrName="pd_9_1_3_3", label="手术", comment="手术（DBS）后健康教育有记录"),
+		@Column(name="cm_7_2_1", attrName="cm_7_2_1", label="交与患者“出院小结”的副本告知患者出院时风险因素"),
+		@Column(name="cm_7_2_2", attrName="cm_7_2_2", label="出院带药"),
+		@Column(name="cm_7_2_4", attrName="cm_7_2_4", label="告知发生紧急意外情况或者疾病复发如何救治及前途经"),
+		@Column(name="cm_7_2_5", attrName="cm_7_2_5", label="出院时教育与随访"),
+		@Column(name="cm_7_2_3", attrName="cm_7_2_3", label="告知何为发生紧急意外情况或者疾病复发"),
 		@Column(name="cm_4_3", attrName="cm_4_3", label="离院方式选择"),
 		@Column(name="cm_4_5", attrName="cm_4_5", label="非医嘱离院可能涉及因素"),
 		@Column(name="cm_4_4_1", attrName="cm_4_4_1", label="其他非医嘱离院因素填写"),
@@ -259,16 +276,8 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_6_28", attrName="cm_6_28", label="治疗用一次性医用材料费"),
 		@Column(name="cm_6_29", attrName="cm_6_29", label="手术用一次性医用材料费"),
 		@Column(name="cm_6_30", attrName="cm_6_30", label="其他费"),
-		@Column(name="cm_0_2_3_1", attrName="cm0231", label="到达本院急诊或者门诊日期时间是否无法确定或无记录"),
-		@Column(name="cm_0_2_3_2", attrName="cm0232", label="到达本院急诊或者门诊日期时间"),
-		@Column(name="cm_0_2_5_1", attrName="cm0251", label="入住CCU日期时间"),
-		@Column(name="cm_0_2_5_2", attrName="cm0252", label="离开CCU日期时间"),
-		@Column(name="cm_3_1", attrName="cm31", label="手术野皮肤准备常用方法的选择"),
-		@Column(name="cm_3_2", attrName="cm32", label="使用含抗菌剂", comment="使用含抗菌剂（三氯生）缝线"),
-		@Column(name="cm_3_2_1", attrName="cm321", label="其他含抗菌剂缝线填写"),
-		@Column(name="cm_3_3", attrName="cm33", label="手术切口类别的选择"),
-		@Column(name="cm_3_4", attrName="cm34", label="手术切口愈合情况的选择"),
 		@Column(name="id", attrName="id", label="id", isPK=true),
+		@Column(includeEntity=DataEntity.class),
 	}, orderBy="a.update_date DESC"
 )
 public class QualityPd extends DataEntity<QualityPd> {
@@ -279,7 +288,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 	private String cm_0_1_1_3;		// 主治医师
 	private String cm_0_1_1_4;		// 责任护士
 	private String cm_0_1_1_5;		// 上报科室
-	private String caseId;		// 患者病案号
+	private String caseid;		// 患者病案号
 	private String cm_0_1_3_2;		// 主要诊断ICD-10六位临床扩展编码与名称
 	private String cm_0_1_4_1;		// 主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称
 	private String pd_0_1_4_1;		// 其他主要手术操作ICD-9-CM-3四位亚目编码与名称
@@ -301,16 +310,16 @@ public class QualityPd extends DataEntity<QualityPd> {
 	private String cm_0_3_3;		// 到院交通工具
 	private String pd_1_1_1;		// 绝对排除标准
 	private String pd_1_2_1;		// 是否在发病 5 年内出现快速进展的步态障碍，且需要规律使用轮椅
-	private String pd_1_2_2;		// 是否发病 5 年或 5 年以上，
-	private String pd_1_2_3;		// 是否早期出现的球部功能障碍
+	private String pd_1_2_2;		// 是否发病 5 年或 5 年以上，运动症状或体征完全没有进展；除非这种稳定是与治疗相关的
+	private String pd_1_2_3;		// 是否早期出现的球部功能障碍：发病 5 年内出现的严重的发音困难或构音障碍（大部分时候言语难以理解）或严重的吞咽困难（需要进食较软的食物，或鼻胃管、胃造瘘进食）
 	private String pd_1_2_4;		// 是否有吸气性呼吸功能障碍：出现白天或夜间吸气性喘鸣或者频繁的吸气性叹息
 	private String pd_1_2_5;		// 是否在发病 5 年内出现严重的自主神经功能障碍
 	private String pd_1_2_5_1;		// 出现严重的自主神经功能障碍具体表现为
 	private String pd_1_2_6;		// 是否在发病 3 年内由于平衡损害导致的反复（&gt;1 次 / 年）摔倒
 	private String pd_1_2_7;		// 是否在发病 10 年内出现不成比例地颈部前倾（肌张力障碍）或手足挛缩
-	private String pd_1_2_8;		// 是否是病程到了 5 年也不出现任何一种常见的非运动症状
-	private String pd_1_2_9;		// 是否有其他原因不能解释的锥体束征，
-	private String pd_1_2_10;		// 是否是双侧对称性的帕金森综合征。
+	private String pd_1_2_8;		// 是否是病程到
+	private String pd_1_2_9;		// 是否有其他原因不能解释的锥体束征，定义为锥体束性肢体无力或明确的病理性反射活跃（包括轻度的反射不对称以及孤立性的跖趾反应）
+	private String pd_1_2_10;		// 是否是双侧对称性的帕金森综合征。患者或看护者报告为双侧起病，没有任何侧别优势，且客观体格检查也没有观察到明显的侧别性
 	private String pd_1_3_1;		// 是否对多巴胺药物治疗具有明确且显著的有效应答
 	private String pd_1_3_1_1;		// 初始治疗显著应答表现为
 	private String pd_1_3_2;		// 是否出现左旋多巴诱导的异动症
@@ -322,17 +331,17 @@ public class QualityPd extends DataEntity<QualityPd> {
 	private String pd_2_1_1;		// 是否实施头部MRI检查
 	private String pd_2_1_2;		// 完成MRI序列
 	private String pd_2_1_3;		// 是否实施头部CT检查
-	private String pd_2_1_4;		// 报告日期时间
+	private Date pd_2_1_4;		// 报告日期时间
 	private String pd_2_2_1;		// 是否实施黑质超声检查
-	private String pd_2_2_2;		// 报告日期时间
+	private Date pd_2_2_2;		// 报告日期时间
 	private String pd_2_3_1;		// 是否实施震颤分析检查
-	private String pd_2_3_2;		// 报告日期时间
+	private Date pd_2_3_2;		// 报告日期时间
 	private String pd_2_4_1;		// 是否实施肛门括约肌肌电图检查
-	private String pd_2_4_2;		// 报告日期时间
+	private Date pd_2_4_2;		// 报告日期时间
 	private String pd_2_5_1;		// 是否实施头PET检查
 	private String pd_2_5_2;		// 完成头PET项目
 	private String pd_2_5_2_1;		// 其他头PET项目
-	private String pd_2_5_3;		// 报告日期时间
+	private Date pd_2_5_3;		// 报告日期时间
 	private String pd_3_1_1;		// 是否进行多巴胺能反应性评测
 	private String pd_3_1_2;		// 评测适应症的选择
 	private String pd_3_2_1;		// 是否有被选择评测药物的禁忌症
@@ -362,18 +371,18 @@ public class QualityPd extends DataEntity<QualityPd> {
 	private Double pd_3_3_1_2;		// 最佳改善值（开期）
 	private String pd_3_4_1;		// 疗效反应结论的选择
 	private String pd_3_5_1;		// 不良反应风险的选择
-	private String pd_3_6_1;		// 完成日期时间
+	private Date pd_3_6_1;		// 完成日期时间
 	private String pd_4_1_1;		// 是否在入院24小时进行帕金森病Hoehn-Yahr分期评估
 	private String pd_4_1_2;		// 临床分期依据一: 主要有那些临床表现及体征
 	private String pd_4_1_3;		// H-Y分期结论
-	private String pd_4_1_4;		// 完成日期时间
+	private Date pd_4_1_4;		// 完成日期时间
 	private String pd_5_1_1;		// 是否进行神经功能缺损评估
 	private Double pd_5_1_2;		// 第一部分：日常生活非运动症状体验
 	private Double pd_5_1_3;		// 第二部分：日常生活运动症状体验
 	private Double pd_5_1_4;		// 第三部分：运动功能检查
 	private Double pd_5_1_5;		// 第四部分：运动并发症
 	private Double pd_5_1_6;		// 日常分值合计
-	private String pd_5_1_7;		// 完成日期时间
+	private Date pd_5_1_7;		// 完成日期时间
 	private String pd_6_1_1;		// 运动并发症类型
 	private String pd_6_1_2;		// 剂末现象的筛查
 	private String pd_6_1_2_1;		// 其他剂末现象
@@ -386,7 +395,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 	private String pd_6_1_4_2_1;		// 其他剂末异动处理
 	private String pd_6_1_4_3;		// 双相异动症处理
 	private String pd_6_1_4_3_1;		// 其他双相异动处理
-	private String pd_6_1_5;		// 筛查完成日期时间
+	private Date pd_6_1_5;		// 筛查完成日期时间
 	private String pd_6_2_1;		// 是否实施筛查认知功能障碍评估
 	private String pd_6_2_2;		// 进行认知功能筛查类型的选择
 	private Double pd_6_2_3_1;		// 定向力筛查结果
@@ -397,24 +406,23 @@ public class QualityPd extends DataEntity<QualityPd> {
 	private Double pd_6_2_3;		// 入院1周完成筛查认知功能障碍（MMSE）评估分值
 	private String pd_6_2_4;		// 痴呆严重程度分级
 	private String pd_6_2_5;		// 认知功能障碍类型
-	private String pd_6_2_6;		// 完成日期时间
+	private Date pd_6_2_6;		// 完成日期时间
 	private String pd_6_2_2_1;		// 其他进行认知功能筛查类型
 	private Double pd_6_2_7;		// Moca量表评分值
 	private String pd_6_2_8;		// 痴呆严重程度分层
 	private String pd_6_2_9;		// 是否实施认知功能障碍治疗
 	private String pd_6_2_10;		// 认知功能障碍治疗措施的选择
 	private String pd_6_2_10_1;		// 其他认知功能障碍治疗措施
-	private String pd_6_2_11;		// 治疗医嘱执行日期时间
+	private Date pd_6_2_11;		// 治疗医嘱执行日期时间
 	private String pd_6_3_1;		// 是否实施心理状况的筛查
 	private String pd_6_3_2;		// 进行心理状况筛查的项目
-	private String pd_6_3_3;		// 完成日期时间
+	private Date pd_6_3_3;		// 完成日期时间
 	private String pd_6_4_1;		// 是否实施睡眠状况的筛查
 	private String pd_6_4_2;		// 进行睡眠状况筛查的项目
 	private String pd_6_4_2_1;		// 其他睡眠状况筛查的项目
-	private String pd_6_4_3;		// 完成日期时间
+	private Date pd_6_4_3;		// 完成日期时间
 	private String pd_6_5_1;		// 入院查体时是否实施卧立位血压的检测
 	private Double pd_6_5_2_1;		// 卧位血压-收缩压(mmHg)
-	private String cm0131;		// 主要诊断ICD-10四位亚目编码与名称
 	private Double pd_6_5_2_2;		// 卧位血压-舒张压(mmHg)
 	private Double pd_6_5_3_1;		// 立位即刻血压-收缩压(mmHg)
 	private Double pd_6_5_3_2;		// 立位即刻血压-舒张压(mmHg)
@@ -424,7 +432,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 	private Double pd_6_5_5_2;		// 立位3min血压-舒张压(mmHg)
 	private Double pd_6_5_6_1;		// 立位大于3min血压-收缩压(mmHg)
 	private Double pd_6_5_6_2;		// 立位大于3min血压-舒张压(mmHg)
-	private String pd_6_5_7;		// 完成日期时间
+	private Date pd_6_5_7;		// 完成日期时间
 	private String pd_6_5_8;		// 告知患者,体位性低血压干预措施有记录
 	private String pd_6_5_8_1;		// 其他体位性低血压干预措施记录
 	private String pd_7_1_1;		// 是否为合并运动并发症的患者
@@ -434,23 +442,37 @@ public class QualityPd extends DataEntity<QualityPd> {
 	private String pd_7_1_2_4;		// 病程
 	private String pd_7_1_2_5;		// 年龄：符合一条
 	private String pd_7_1_3;		// 手术禁忌证的选择
-	private String pd_7_1_4;		// 完成日期时间
+	private Date pd_7_1_4;		// 完成日期时间
 	private String pd_7_2_1;		// 是否进行脑深部电刺激手术（DBS）
 	private String pd_7_2_2;		// 实施脑深部电刺激手术（DBS）的ICD-9-CM-3四位亚目编码及名称的选择
 	private String pd_7_2_2_1;		// 实施脑深部电刺激其他手术
-	private String pd_7_2_3;		// DBS手术完成日期
-	private String cm01411;		// 其他ICD-9-CM-3四位亚目编码与名称
+	private Date pd_7_2_3;		// DBS手术完成日期
+	private String cm_2_1;		// 是否有手术后并发症
+	private String cm_2_2;		// 手术后并发症类别及ICD-10四位亚目的选择
+	private String cm_2_3_1_1;		// 其他手术后并发症类别及ICD-10四位亚目和名称填写
+	private String cm_2_3_1;		// 介入操作与手术其他并发症
+	private String cm_2_3_2;		// 手术患者手术后肺栓塞例数
+	private String cm_2_3_3;		// 手术患者手术后深静脉血栓例数
+	private String cm_2_3_4;		// 手术患者手术后败血症例数
+	private String cm_2_3_5;		// 手术患者手术后出血或血肿例数
+	private String cm_2_3_6;		// 手术患者手术伤口裂开
+	private String cm_2_3_7;		// 手术患者猝死
+	private String cm_2_3_8;		// 手术患者手术后呼吸道并发症
+	private String cm_2_3_9;		// 手术患者手术后生理/代谢紊乱
+	private String cm_2_3_10;		// 与手术/操作相关感染
+	private String cm_2_3_11;		// 手术过程中异物遗留
+	private String cm_2_3_12;		// 麻醉并发症
+	private String cm_2_3_13;		// 输注、输血反应
 	private String pd_7_3_3;		// 神经系统手术并发症
 	private String pd_7_3_3_1;		// 其他术后并发症
 	private String pd_8_1_1;		// 是否有冻结步态
 	private String pd_8_1_2;		// 是否有冻结步态量表（FOG-Q）评分
 	private String pd_8_1_3_1;		// (FOG-Q）评分值是否确定
 	private Double pd_8_1_3;		// 冻结步态量表（FOG-Q）评分值
-	private String pd_8_1_4;		// 评估日期时间
+	private Date pd_8_1_4;		// 评估日期时间
 	private String pd_8_2_1;		// 康复方式选择
-	private String pd_8_2_2;		// 康复实施日期(首次)
+	private Date pd_8_2_2;		// 康复实施日期(首次)
 	private String pd_8_2_3;		// 未能进行康复原因
-	private String cm01421;		// 其他ICD-9-CM-3六位临床扩展编码与名称
 	private String pd_9_1_1;		// 入院时是否进行重点护理评估且有记录
 	private String pd_9_1_1_1;		// 行走评估结果
 	private String pd_9_1_2;		// 跌倒/坠床评估
@@ -467,6 +489,11 @@ public class QualityPd extends DataEntity<QualityPd> {
 	private String pd_9_1_2_1;		// DBS前、后是否实施健康教育有记录
 	private String pd_9_1_2_2;		// 手术（DBS）前健康教育有记录
 	private String pd_9_1_3_3;		// 手术（DBS）后健康教育有记录
+	private String cm_7_2_1;		// 交与患者“出院小结”的副本告知患者出院时风险因素
+	private String cm_7_2_2;		// 出院带药
+	private String cm_7_2_4;		// 告知发生紧急意外情况或者疾病复发如何救治及前途经
+	private String cm_7_2_5;		// 出院时教育与随访
+	private String cm_7_2_3;		// 告知何为发生紧急意外情况或者疾病复发
 	private String cm_4_3;		// 离院方式选择
 	private String cm_4_5;		// 非医嘱离院可能涉及因素
 	private String cm_4_4_1;		// 其他非医嘱离院因素填写
@@ -512,15 +539,6 @@ public class QualityPd extends DataEntity<QualityPd> {
 	private Double cm_6_28;		// 治疗用一次性医用材料费
 	private Double cm_6_29;		// 手术用一次性医用材料费
 	private Double cm_6_30;		// 其他费
-	private String cm0231;		// 到达本院急诊或者门诊日期时间是否无法确定或无记录
-	private Date cm0232;		// 到达本院急诊或者门诊日期时间
-	private Date cm0251;		// 入住CCU日期时间
-	private Date cm0252;		// 离开CCU日期时间
-	private String cm31;		// 手术野皮肤准备常用方法的选择
-	private String cm32;		// 使用含抗菌剂（三氯生）缝线
-	private String cm321;		// 其他含抗菌剂缝线填写
-	private String cm33;		// 手术切口类别的选择
-	private String cm34;		// 手术切口愈合情况的选择
 	
 	public QualityPd() {
 		this(null);
@@ -530,7 +548,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		super(id);
 	}
 	
-	@Length(min=0, max=32, message="质控医师长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="质控医师长度不能超过 64 个字符")
 	public String getCm_0_1_1_1() {
 		return cm_0_1_1_1;
 	}
@@ -539,7 +557,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_0_1_1_1 = cm_0_1_1_1;
 	}
 	
-	@Length(min=0, max=32, message="质控护士长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="质控护士长度不能超过 64 个字符")
 	public String getCm_0_1_1_2() {
 		return cm_0_1_1_2;
 	}
@@ -548,7 +566,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_0_1_1_2 = cm_0_1_1_2;
 	}
 	
-	@Length(min=0, max=32, message="主治医师长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主治医师长度不能超过 64 个字符")
 	public String getCm_0_1_1_3() {
 		return cm_0_1_1_3;
 	}
@@ -557,7 +575,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_0_1_1_3 = cm_0_1_1_3;
 	}
 	
-	@Length(min=0, max=32, message="责任护士长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="责任护士长度不能超过 64 个字符")
 	public String getCm_0_1_1_4() {
 		return cm_0_1_1_4;
 	}
@@ -566,7 +584,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_0_1_1_4 = cm_0_1_1_4;
 	}
 	
-	@Length(min=0, max=32, message="上报科室长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="上报科室长度不能超过 64 个字符")
 	public String getCm_0_1_1_5() {
 		return cm_0_1_1_5;
 	}
@@ -575,16 +593,16 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_0_1_1_5 = cm_0_1_1_5;
 	}
 	
-	@Length(min=0, max=32, message="患者病案号长度不能超过 32 个字符")
-	public String getCaseId() {
-		return caseId;
+	@Length(min=0, max=64, message="患者病案号长度不能超过 64 个字符")
+	public String getCaseid() {
+		return caseid;
 	}
 
-	public void setCaseId(String caseId) {
-		this.caseId = caseId;
+	public void setCaseid(String caseid) {
+		this.caseid = caseid;
 	}
 	
-	@Length(min=0, max=32, message="主要诊断ICD-10六位临床扩展编码与名称长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主要诊断ICD-10六位临床扩展编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_3_2() {
 		return cm_0_1_3_2;
 	}
@@ -593,7 +611,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_0_1_3_2 = cm_0_1_3_2;
 	}
 	
-	@Length(min=0, max=32, message="主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_4_1() {
 		return cm_0_1_4_1;
 	}
@@ -611,7 +629,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_0_1_4_1 = pd_0_1_4_1;
 	}
 	
-	@Length(min=0, max=32, message="主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_4_2() {
 		return cm_0_1_4_2;
 	}
@@ -629,7 +647,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_0_1_4_2 = pd_0_1_4_2;
 	}
 	
-	@Length(min=0, max=32, message="是否出院后31天内重复住院长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="是否出院后31天内重复住院长度不能超过 64 个字符")
 	public String getCm_0_1_5() {
 		return cm_0_1_5;
 	}
@@ -647,7 +665,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_0_2_1_1 = cm_0_2_1_1;
 	}
 	
-	@Length(min=0, max=32, message="患者性别长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="患者性别长度不能超过 64 个字符")
 	public String getCm_0_2_1_2() {
 		return cm_0_2_1_2;
 	}
@@ -672,7 +690,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_0_2_1_5 = cm_0_2_1_5;
 	}
 	
-	@Length(min=0, max=32, message="发病日期时间是否无法确定或无记录长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="发病日期时间是否无法确定或无记录长度不能超过 64 个字符")
 	public String getCm_0_2_2_1() {
 		return cm_0_2_2_1;
 	}
@@ -726,7 +744,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_0_2_6_2 = cm_0_2_6_2;
 	}
 	
-	@Length(min=0, max=32, message="费用支付方式长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="费用支付方式长度不能超过 64 个字符")
 	public String getCm_0_3_1() {
 		return cm_0_3_1;
 	}
@@ -735,7 +753,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_0_3_1 = cm_0_3_1;
 	}
 	
-	@Length(min=0, max=32, message="收入住院途径长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="收入住院途径长度不能超过 64 个字符")
 	public String getCm_0_3_2() {
 		return cm_0_3_2;
 	}
@@ -744,7 +762,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_0_3_2 = cm_0_3_2;
 	}
 	
-	@Length(min=0, max=32, message="到院交通工具长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="到院交通工具长度不能超过 64 个字符")
 	public String getCm_0_3_3() {
 		return cm_0_3_3;
 	}
@@ -771,7 +789,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_1_2_1 = pd_1_2_1;
 	}
 	
-	@Length(min=0, max=64, message="是否发病 5 年或 5 年以上，长度不能超过 64 个字符")
+	@Length(min=0, max=64, message="是否发病 5 年或 5 年以上，运动症状或体征完全没有进展；除非这种稳定是与治疗相关的长度不能超过 64 个字符")
 	public String getPd_1_2_2() {
 		return pd_1_2_2;
 	}
@@ -780,7 +798,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_1_2_2 = pd_1_2_2;
 	}
 	
-	@Length(min=0, max=64, message="是否早期出现的球部功能障碍长度不能超过 64 个字符")
+	@Length(min=0, max=64, message="是否早期出现的球部功能障碍：发病 5 年内出现的严重的发音困难或构音障碍长度不能超过 64 个字符")
 	public String getPd_1_2_3() {
 		return pd_1_2_3;
 	}
@@ -834,7 +852,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_1_2_7 = pd_1_2_7;
 	}
 	
-	@Length(min=0, max=64, message="是否是病程到了 5 年也不出现任何一种常见的非运动症状长度不能超过 64 个字符")
+	@Length(min=0, max=64, message="是否是病程到长度不能超过 64 个字符")
 	public String getPd_1_2_8() {
 		return pd_1_2_8;
 	}
@@ -843,7 +861,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_1_2_8 = pd_1_2_8;
 	}
 	
-	@Length(min=0, max=64, message="是否有其他原因不能解释的锥体束征，长度不能超过 64 个字符")
+	@Length(min=0, max=64, message="是否有其他原因不能解释的锥体束征，定义为锥体束性肢体无力或明确的病理性反射活跃长度不能超过 64 个字符")
 	public String getPd_1_2_9() {
 		return pd_1_2_9;
 	}
@@ -852,7 +870,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_1_2_9 = pd_1_2_9;
 	}
 	
-	@Length(min=0, max=64, message="是否是双侧对称性的帕金森综合征。长度不能超过 64 个字符")
+	@Length(min=0, max=64, message="是否是双侧对称性的帕金森综合征。患者或看护者报告为双侧起病，没有任何侧别优势，且客观体格检查也没有观察到明显的侧别性长度不能超过 64 个字符")
 	public String getPd_1_2_10() {
 		return pd_1_2_10;
 	}
@@ -960,12 +978,12 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_2_1_3 = pd_2_1_3;
 	}
 	
-	@Length(min=0, max=64, message="报告日期时间长度不能超过 64 个字符")
-	public String getPd_2_1_4() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getPd_2_1_4() {
 		return pd_2_1_4;
 	}
 
-	public void setPd_2_1_4(String pd_2_1_4) {
+	public void setPd_2_1_4(Date pd_2_1_4) {
 		this.pd_2_1_4 = pd_2_1_4;
 	}
 	
@@ -978,12 +996,12 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_2_2_1 = pd_2_2_1;
 	}
 	
-	@Length(min=0, max=64, message="报告日期时间长度不能超过 64 个字符")
-	public String getPd_2_2_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getPd_2_2_2() {
 		return pd_2_2_2;
 	}
 
-	public void setPd_2_2_2(String pd_2_2_2) {
+	public void setPd_2_2_2(Date pd_2_2_2) {
 		this.pd_2_2_2 = pd_2_2_2;
 	}
 	
@@ -996,12 +1014,12 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_2_3_1 = pd_2_3_1;
 	}
 	
-	@Length(min=0, max=64, message="报告日期时间长度不能超过 64 个字符")
-	public String getPd_2_3_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getPd_2_3_2() {
 		return pd_2_3_2;
 	}
 
-	public void setPd_2_3_2(String pd_2_3_2) {
+	public void setPd_2_3_2(Date pd_2_3_2) {
 		this.pd_2_3_2 = pd_2_3_2;
 	}
 	
@@ -1014,12 +1032,12 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_2_4_1 = pd_2_4_1;
 	}
 	
-	@Length(min=0, max=64, message="报告日期时间长度不能超过 64 个字符")
-	public String getPd_2_4_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getPd_2_4_2() {
 		return pd_2_4_2;
 	}
 
-	public void setPd_2_4_2(String pd_2_4_2) {
+	public void setPd_2_4_2(Date pd_2_4_2) {
 		this.pd_2_4_2 = pd_2_4_2;
 	}
 	
@@ -1050,12 +1068,12 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_2_5_2_1 = pd_2_5_2_1;
 	}
 	
-	@Length(min=0, max=64, message="报告日期时间长度不能超过 64 个字符")
-	public String getPd_2_5_3() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getPd_2_5_3() {
 		return pd_2_5_3;
 	}
 
-	public void setPd_2_5_3(String pd_2_5_3) {
+	public void setPd_2_5_3(Date pd_2_5_3) {
 		this.pd_2_5_3 = pd_2_5_3;
 	}
 	
@@ -1318,12 +1336,12 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_3_5_1 = pd_3_5_1;
 	}
 	
-	@Length(min=0, max=64, message="完成日期时间长度不能超过 64 个字符")
-	public String getPd_3_6_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getPd_3_6_1() {
 		return pd_3_6_1;
 	}
 
-	public void setPd_3_6_1(String pd_3_6_1) {
+	public void setPd_3_6_1(Date pd_3_6_1) {
 		this.pd_3_6_1 = pd_3_6_1;
 	}
 	
@@ -1354,12 +1372,12 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_4_1_3 = pd_4_1_3;
 	}
 	
-	@Length(min=0, max=64, message="完成日期时间长度不能超过 64 个字符")
-	public String getPd_4_1_4() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getPd_4_1_4() {
 		return pd_4_1_4;
 	}
 
-	public void setPd_4_1_4(String pd_4_1_4) {
+	public void setPd_4_1_4(Date pd_4_1_4) {
 		this.pd_4_1_4 = pd_4_1_4;
 	}
 	
@@ -1412,12 +1430,12 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_5_1_6 = pd_5_1_6;
 	}
 	
-	@Length(min=0, max=64, message="完成日期时间长度不能超过 64 个字符")
-	public String getPd_5_1_7() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getPd_5_1_7() {
 		return pd_5_1_7;
 	}
 
-	public void setPd_5_1_7(String pd_5_1_7) {
+	public void setPd_5_1_7(Date pd_5_1_7) {
 		this.pd_5_1_7 = pd_5_1_7;
 	}
 	
@@ -1529,12 +1547,12 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_6_1_4_3_1 = pd_6_1_4_3_1;
 	}
 	
-	@Length(min=0, max=64, message="筛查完成日期时间长度不能超过 64 个字符")
-	public String getPd_6_1_5() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getPd_6_1_5() {
 		return pd_6_1_5;
 	}
 
-	public void setPd_6_1_5(String pd_6_1_5) {
+	public void setPd_6_1_5(Date pd_6_1_5) {
 		this.pd_6_1_5 = pd_6_1_5;
 	}
 	
@@ -1622,12 +1640,12 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_6_2_5 = pd_6_2_5;
 	}
 	
-	@Length(min=0, max=64, message="完成日期时间长度不能超过 64 个字符")
-	public String getPd_6_2_6() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getPd_6_2_6() {
 		return pd_6_2_6;
 	}
 
-	public void setPd_6_2_6(String pd_6_2_6) {
+	public void setPd_6_2_6(Date pd_6_2_6) {
 		this.pd_6_2_6 = pd_6_2_6;
 	}
 	
@@ -1684,12 +1702,12 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_6_2_10_1 = pd_6_2_10_1;
 	}
 	
-	@Length(min=0, max=64, message="治疗医嘱执行日期时间长度不能超过 64 个字符")
-	public String getPd_6_2_11() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getPd_6_2_11() {
 		return pd_6_2_11;
 	}
 
-	public void setPd_6_2_11(String pd_6_2_11) {
+	public void setPd_6_2_11(Date pd_6_2_11) {
 		this.pd_6_2_11 = pd_6_2_11;
 	}
 	
@@ -1711,12 +1729,12 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_6_3_2 = pd_6_3_2;
 	}
 	
-	@Length(min=0, max=64, message="完成日期时间长度不能超过 64 个字符")
-	public String getPd_6_3_3() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getPd_6_3_3() {
 		return pd_6_3_3;
 	}
 
-	public void setPd_6_3_3(String pd_6_3_3) {
+	public void setPd_6_3_3(Date pd_6_3_3) {
 		this.pd_6_3_3 = pd_6_3_3;
 	}
 	
@@ -1747,12 +1765,12 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_6_4_2_1 = pd_6_4_2_1;
 	}
 	
-	@Length(min=0, max=64, message="完成日期时间长度不能超过 64 个字符")
-	public String getPd_6_4_3() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getPd_6_4_3() {
 		return pd_6_4_3;
 	}
 
-	public void setPd_6_4_3(String pd_6_4_3) {
+	public void setPd_6_4_3(Date pd_6_4_3) {
 		this.pd_6_4_3 = pd_6_4_3;
 	}
 	
@@ -1771,15 +1789,6 @@ public class QualityPd extends DataEntity<QualityPd> {
 
 	public void setPd_6_5_2_1(Double pd_6_5_2_1) {
 		this.pd_6_5_2_1 = pd_6_5_2_1;
-	}
-	
-	@Length(min=0, max=32, message="主要诊断ICD-10四位亚目编码与名称长度不能超过 32 个字符")
-	public String getCm0131() {
-		return cm0131;
-	}
-
-	public void setCm0131(String cm0131) {
-		this.cm0131 = cm0131;
 	}
 	
 	public Double getPd_6_5_2_2() {
@@ -1854,12 +1863,12 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_6_5_6_2 = pd_6_5_6_2;
 	}
 	
-	@Length(min=0, max=64, message="完成日期时间长度不能超过 64 个字符")
-	public String getPd_6_5_7() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getPd_6_5_7() {
 		return pd_6_5_7;
 	}
 
-	public void setPd_6_5_7(String pd_6_5_7) {
+	public void setPd_6_5_7(Date pd_6_5_7) {
 		this.pd_6_5_7 = pd_6_5_7;
 	}
 	
@@ -1944,12 +1953,12 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_7_1_3 = pd_7_1_3;
 	}
 	
-	@Length(min=0, max=64, message="完成日期时间长度不能超过 64 个字符")
-	public String getPd_7_1_4() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getPd_7_1_4() {
 		return pd_7_1_4;
 	}
 
-	public void setPd_7_1_4(String pd_7_1_4) {
+	public void setPd_7_1_4(Date pd_7_1_4) {
 		this.pd_7_1_4 = pd_7_1_4;
 	}
 	
@@ -1980,22 +1989,157 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_7_2_2_1 = pd_7_2_2_1;
 	}
 	
-	@Length(min=0, max=64, message="DBS手术完成日期长度不能超过 64 个字符")
-	public String getPd_7_2_3() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getPd_7_2_3() {
 		return pd_7_2_3;
 	}
 
-	public void setPd_7_2_3(String pd_7_2_3) {
+	public void setPd_7_2_3(Date pd_7_2_3) {
 		this.pd_7_2_3 = pd_7_2_3;
 	}
 	
-	@Length(min=0, max=32, message="其他ICD-9-CM-3四位亚目编码与名称长度不能超过 32 个字符")
-	public String getCm01411() {
-		return cm01411;
+	@Length(min=0, max=64, message="是否有手术后并发症长度不能超过 64 个字符")
+	public String getCm_2_1() {
+		return cm_2_1;
 	}
 
-	public void setCm01411(String cm01411) {
-		this.cm01411 = cm01411;
+	public void setCm_2_1(String cm_2_1) {
+		this.cm_2_1 = cm_2_1;
+	}
+	
+	@Length(min=0, max=64, message="手术后并发症类别及ICD-10四位亚目的选择长度不能超过 64 个字符")
+	public String getCm_2_2() {
+		return cm_2_2;
+	}
+
+	public void setCm_2_2(String cm_2_2) {
+		this.cm_2_2 = cm_2_2;
+	}
+	
+	@Length(min=0, max=64, message="其他手术后并发症类别及ICD-10四位亚目和名称填写长度不能超过 64 个字符")
+	public String getCm_2_3_1_1() {
+		return cm_2_3_1_1;
+	}
+
+	public void setCm_2_3_1_1(String cm_2_3_1_1) {
+		this.cm_2_3_1_1 = cm_2_3_1_1;
+	}
+	
+	@Length(min=0, max=64, message="介入操作与手术其他并发症长度不能超过 64 个字符")
+	public String getCm_2_3_1() {
+		return cm_2_3_1;
+	}
+
+	public void setCm_2_3_1(String cm_2_3_1) {
+		this.cm_2_3_1 = cm_2_3_1;
+	}
+	
+	@Length(min=0, max=64, message="手术患者手术后肺栓塞例数长度不能超过 64 个字符")
+	public String getCm_2_3_2() {
+		return cm_2_3_2;
+	}
+
+	public void setCm_2_3_2(String cm_2_3_2) {
+		this.cm_2_3_2 = cm_2_3_2;
+	}
+	
+	@Length(min=0, max=64, message="手术患者手术后深静脉血栓例数长度不能超过 64 个字符")
+	public String getCm_2_3_3() {
+		return cm_2_3_3;
+	}
+
+	public void setCm_2_3_3(String cm_2_3_3) {
+		this.cm_2_3_3 = cm_2_3_3;
+	}
+	
+	@Length(min=0, max=64, message="手术患者手术后败血症例数长度不能超过 64 个字符")
+	public String getCm_2_3_4() {
+		return cm_2_3_4;
+	}
+
+	public void setCm_2_3_4(String cm_2_3_4) {
+		this.cm_2_3_4 = cm_2_3_4;
+	}
+	
+	@Length(min=0, max=64, message="手术患者手术后出血或血肿例数长度不能超过 64 个字符")
+	public String getCm_2_3_5() {
+		return cm_2_3_5;
+	}
+
+	public void setCm_2_3_5(String cm_2_3_5) {
+		this.cm_2_3_5 = cm_2_3_5;
+	}
+	
+	@Length(min=0, max=64, message="手术患者手术伤口裂开长度不能超过 64 个字符")
+	public String getCm_2_3_6() {
+		return cm_2_3_6;
+	}
+
+	public void setCm_2_3_6(String cm_2_3_6) {
+		this.cm_2_3_6 = cm_2_3_6;
+	}
+	
+	@Length(min=0, max=64, message="手术患者猝死长度不能超过 64 个字符")
+	public String getCm_2_3_7() {
+		return cm_2_3_7;
+	}
+
+	public void setCm_2_3_7(String cm_2_3_7) {
+		this.cm_2_3_7 = cm_2_3_7;
+	}
+	
+	@Length(min=0, max=64, message="手术患者手术后呼吸道并发症长度不能超过 64 个字符")
+	public String getCm_2_3_8() {
+		return cm_2_3_8;
+	}
+
+	public void setCm_2_3_8(String cm_2_3_8) {
+		this.cm_2_3_8 = cm_2_3_8;
+	}
+	
+	@Length(min=0, max=64, message="手术患者手术后生理/代谢紊乱长度不能超过 64 个字符")
+	public String getCm_2_3_9() {
+		return cm_2_3_9;
+	}
+
+	public void setCm_2_3_9(String cm_2_3_9) {
+		this.cm_2_3_9 = cm_2_3_9;
+	}
+	
+	@Length(min=0, max=64, message="与手术/操作相关感染长度不能超过 64 个字符")
+	public String getCm_2_3_10() {
+		return cm_2_3_10;
+	}
+
+	public void setCm_2_3_10(String cm_2_3_10) {
+		this.cm_2_3_10 = cm_2_3_10;
+	}
+	
+	@Length(min=0, max=64, message="手术过程中异物遗留长度不能超过 64 个字符")
+	public String getCm_2_3_11() {
+		return cm_2_3_11;
+	}
+
+	public void setCm_2_3_11(String cm_2_3_11) {
+		this.cm_2_3_11 = cm_2_3_11;
+	}
+	
+	@Length(min=0, max=64, message="麻醉并发症长度不能超过 64 个字符")
+	public String getCm_2_3_12() {
+		return cm_2_3_12;
+	}
+
+	public void setCm_2_3_12(String cm_2_3_12) {
+		this.cm_2_3_12 = cm_2_3_12;
+	}
+	
+	@Length(min=0, max=64, message="输注、输血反应长度不能超过 64 个字符")
+	public String getCm_2_3_13() {
+		return cm_2_3_13;
+	}
+
+	public void setCm_2_3_13(String cm_2_3_13) {
+		this.cm_2_3_13 = cm_2_3_13;
 	}
 	
 	@Length(min=0, max=64, message="神经系统手术并发症长度不能超过 64 个字符")
@@ -2051,12 +2195,12 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_8_1_3 = pd_8_1_3;
 	}
 	
-	@Length(min=0, max=64, message="评估日期时间长度不能超过 64 个字符")
-	public String getPd_8_1_4() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getPd_8_1_4() {
 		return pd_8_1_4;
 	}
 
-	public void setPd_8_1_4(String pd_8_1_4) {
+	public void setPd_8_1_4(Date pd_8_1_4) {
 		this.pd_8_1_4 = pd_8_1_4;
 	}
 	
@@ -2069,12 +2213,12 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_8_2_1 = pd_8_2_1;
 	}
 	
-	@Length(min=0, max=64, message="康复实施日期长度不能超过 64 个字符")
-	public String getPd_8_2_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getPd_8_2_2() {
 		return pd_8_2_2;
 	}
 
-	public void setPd_8_2_2(String pd_8_2_2) {
+	public void setPd_8_2_2(Date pd_8_2_2) {
 		this.pd_8_2_2 = pd_8_2_2;
 	}
 	
@@ -2085,15 +2229,6 @@ public class QualityPd extends DataEntity<QualityPd> {
 
 	public void setPd_8_2_3(String pd_8_2_3) {
 		this.pd_8_2_3 = pd_8_2_3;
-	}
-	
-	@Length(min=0, max=32, message="其他ICD-9-CM-3六位临床扩展编码与名称长度不能超过 32 个字符")
-	public String getCm01421() {
-		return cm01421;
-	}
-
-	public void setCm01421(String cm01421) {
-		this.cm01421 = cm01421;
 	}
 	
 	@Length(min=0, max=64, message="入院时是否进行重点护理评估且有记录长度不能超过 64 个字符")
@@ -2239,7 +2374,52 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.pd_9_1_3_3 = pd_9_1_3_3;
 	}
 	
-	@Length(min=0, max=32, message="离院方式选择长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="交与患者“出院小结”的副本告知患者出院时风险因素长度不能超过 64 个字符")
+	public String getCm_7_2_1() {
+		return cm_7_2_1;
+	}
+
+	public void setCm_7_2_1(String cm_7_2_1) {
+		this.cm_7_2_1 = cm_7_2_1;
+	}
+	
+	@Length(min=0, max=64, message="出院带药长度不能超过 64 个字符")
+	public String getCm_7_2_2() {
+		return cm_7_2_2;
+	}
+
+	public void setCm_7_2_2(String cm_7_2_2) {
+		this.cm_7_2_2 = cm_7_2_2;
+	}
+	
+	@Length(min=0, max=64, message="告知发生紧急意外情况或者疾病复发如何救治及前途经长度不能超过 64 个字符")
+	public String getCm_7_2_4() {
+		return cm_7_2_4;
+	}
+
+	public void setCm_7_2_4(String cm_7_2_4) {
+		this.cm_7_2_4 = cm_7_2_4;
+	}
+	
+	@Length(min=0, max=64, message="出院时教育与随访长度不能超过 64 个字符")
+	public String getCm_7_2_5() {
+		return cm_7_2_5;
+	}
+
+	public void setCm_7_2_5(String cm_7_2_5) {
+		this.cm_7_2_5 = cm_7_2_5;
+	}
+	
+	@Length(min=0, max=64, message="告知何为发生紧急意外情况或者疾病复发长度不能超过 64 个字符")
+	public String getCm_7_2_3() {
+		return cm_7_2_3;
+	}
+
+	public void setCm_7_2_3(String cm_7_2_3) {
+		this.cm_7_2_3 = cm_7_2_3;
+	}
+	
+	@Length(min=0, max=64, message="离院方式选择长度不能超过 64 个字符")
 	public String getCm_4_3() {
 		return cm_4_3;
 	}
@@ -2248,7 +2428,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_4_3 = cm_4_3;
 	}
 	
-	@Length(min=0, max=32, message="非医嘱离院可能涉及因素长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="非医嘱离院可能涉及因素长度不能超过 64 个字符")
 	public String getCm_4_5() {
 		return cm_4_5;
 	}
@@ -2257,7 +2437,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_4_5 = cm_4_5;
 	}
 	
-	@Length(min=0, max=32, message="其他非医嘱离院因素填写长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="其他非医嘱离院因素填写长度不能超过 64 个字符")
 	public String getCm_4_4_1() {
 		return cm_4_4_1;
 	}
@@ -2266,7 +2446,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_4_4_1 = cm_4_4_1;
 	}
 	
-	@Length(min=0, max=32, message="死亡可能涉及因素长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="死亡可能涉及因素长度不能超过 64 个字符")
 	public String getCm_4_6() {
 		return cm_4_6;
 	}
@@ -2275,7 +2455,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_4_6 = cm_4_6;
 	}
 	
-	@Length(min=0, max=32, message="患者是否对服务的体验与评价长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="患者是否对服务的体验与评价长度不能超过 64 个字符")
 	public String getCm_5_1() {
 		return cm_5_1;
 	}
@@ -2284,7 +2464,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_5_1 = cm_5_1;
 	}
 	
-	@Length(min=0, max=32, message="整体医院评级长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="整体医院评级长度不能超过 64 个字符")
 	public String getCm_5_2_1() {
 		return cm_5_2_1;
 	}
@@ -2293,7 +2473,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_5_2_1 = cm_5_2_1;
 	}
 	
-	@Length(min=0, max=32, message="患者推荐长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="患者推荐长度不能超过 64 个字符")
 	public String getCm_5_2_2() {
 		return cm_5_2_2;
 	}
@@ -2302,7 +2482,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_5_2_2 = cm_5_2_2;
 	}
 	
-	@Length(min=0, max=32, message="病房、床单元和卫生间清洁度长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="病房、床单元和卫生间清洁度长度不能超过 64 个字符")
 	public String getCm_5_2_3() {
 		return cm_5_2_3;
 	}
@@ -2311,7 +2491,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_5_2_3 = cm_5_2_3;
 	}
 	
-	@Length(min=0, max=32, message="病房与周边噪音长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="病房与周边噪音长度不能超过 64 个字符")
 	public String getCm_5_2_5() {
 		return cm_5_2_5;
 	}
@@ -2320,7 +2500,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_5_2_5 = cm_5_2_5;
 	}
 	
-	@Length(min=0, max=32, message="医生沟通长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="医生沟通长度不能超过 64 个字符")
 	public String getCm_5_2_6() {
 		return cm_5_2_6;
 	}
@@ -2329,7 +2509,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_5_2_6 = cm_5_2_6;
 	}
 	
-	@Length(min=0, max=32, message="护士沟通长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="护士沟通长度不能超过 64 个字符")
 	public String getCm_5_2_7() {
 		return cm_5_2_7;
 	}
@@ -2338,7 +2518,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_5_2_7 = cm_5_2_7;
 	}
 	
-	@Length(min=0, max=32, message="药师沟通长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="药师沟通长度不能超过 64 个字符")
 	public String getCm_5_2_8() {
 		return cm_5_2_8;
 	}
@@ -2347,7 +2527,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_5_2_8 = cm_5_2_8;
 	}
 	
-	@Length(min=0, max=32, message="康复计划长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="康复计划长度不能超过 64 个字符")
 	public String getCm_5_2_9() {
 		return cm_5_2_9;
 	}
@@ -2356,7 +2536,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_5_2_9 = cm_5_2_9;
 	}
 	
-	@Length(min=0, max=32, message="出院时的知情告知长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="出院时的知情告知长度不能超过 64 个字符")
 	public String getCm_5_2_10() {
 		return cm_5_2_10;
 	}
@@ -2365,7 +2545,7 @@ public class QualityPd extends DataEntity<QualityPd> {
 		this.cm_5_2_10 = cm_5_2_10;
 	}
 	
-	@Length(min=0, max=32, message="膳食评价长度不能超过 32 个字符")
+	@Length(min=0, max=64, message="膳食评价长度不能超过 64 个字符")
 	public String getCm_5_2_11() {
 		return cm_5_2_11;
 	}
@@ -2612,87 +2792,6 @@ public class QualityPd extends DataEntity<QualityPd> {
 
 	public void setCm_6_30(Double cm_6_30) {
 		this.cm_6_30 = cm_6_30;
-	}
-	
-	@Length(min=0, max=32, message="到达本院急诊或者门诊日期时间是否无法确定或无记录长度不能超过 32 个字符")
-	public String getCm0231() {
-		return cm0231;
-	}
-
-	public void setCm0231(String cm0231) {
-		this.cm0231 = cm0231;
-	}
-	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	public Date getCm0232() {
-		return cm0232;
-	}
-
-	public void setCm0232(Date cm0232) {
-		this.cm0232 = cm0232;
-	}
-	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	public Date getCm0251() {
-		return cm0251;
-	}
-
-	public void setCm0251(Date cm0251) {
-		this.cm0251 = cm0251;
-	}
-	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	public Date getCm0252() {
-		return cm0252;
-	}
-
-	public void setCm0252(Date cm0252) {
-		this.cm0252 = cm0252;
-	}
-	
-	@Length(min=0, max=32, message="手术野皮肤准备常用方法的选择长度不能超过 32 个字符")
-	public String getCm31() {
-		return cm31;
-	}
-
-	public void setCm31(String cm31) {
-		this.cm31 = cm31;
-	}
-	
-	@Length(min=0, max=32, message="使用含抗菌剂长度不能超过 32 个字符")
-	public String getCm32() {
-		return cm32;
-	}
-
-	public void setCm32(String cm32) {
-		this.cm32 = cm32;
-	}
-	
-	@Length(min=0, max=32, message="其他含抗菌剂缝线填写长度不能超过 32 个字符")
-	public String getCm321() {
-		return cm321;
-	}
-
-	public void setCm321(String cm321) {
-		this.cm321 = cm321;
-	}
-	
-	@Length(min=0, max=32, message="手术切口类别的选择长度不能超过 32 个字符")
-	public String getCm33() {
-		return cm33;
-	}
-
-	public void setCm33(String cm33) {
-		this.cm33 = cm33;
-	}
-	
-	@Length(min=0, max=32, message="手术切口愈合情况的选择长度不能超过 32 个字符")
-	public String getCm34() {
-		return cm34;
-	}
-
-	public void setCm34(String cm34) {
-		this.cm34 = cm34;
 	}
 	
 }
