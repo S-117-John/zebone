@@ -10,7 +10,7 @@ import com.zebone.quality.modules.asd.entity.QualityAsd;
 /**
  * ASD房间隔缺损手术DAO接口
  * @author 卡卡西
- * @version 2021-01-20
+ * @version 2021-02-19
  */
 @MyBatisDao
 public interface QualityAsdDao extends CrudDao<QualityAsd> {
