@@ -8,9 +8,9 @@ import com.jeesite.common.mybatis.annotation.MyBatisDao;
 import com.zebone.quality.modules.tc.entity.QualityTc;
 
 /**
- * quality_tcDAO接口
+ * TC甲状腺癌（手术治疗）DAO接口
  * @author 卡卡西
- * @version 2021-01-19
+ * @version 2021-02-19
  */
 @MyBatisDao
 public interface QualityTcDao extends CrudDao<QualityTc> {

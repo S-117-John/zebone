@@ -23,9 +23,9 @@ import com.zebone.quality.modules.tc.entity.QualityTc;
 import com.zebone.quality.modules.tc.service.QualityTcService;
 
 /**
- * quality_tcController
+ * TC甲状腺癌（手术治疗）Controller
  * @author 卡卡西
- * @version 2021-01-19
+ * @version 2021-02-19
  */
 @Controller
 @RequestMapping(value = "${adminPath}/tc/qualityTc")
