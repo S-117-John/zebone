@@ -25,7 +25,7 @@ import com.zebone.quality.modules.avr.service.QualityAvrService;
 /**
  * AVR主动脉瓣置换术Controller
  * @author 卡卡西
- * @version 2021-01-20
+ * @version 2021-02-19
  */
 @Controller
 @RequestMapping(value = "${adminPath}/avr/qualityAvr")

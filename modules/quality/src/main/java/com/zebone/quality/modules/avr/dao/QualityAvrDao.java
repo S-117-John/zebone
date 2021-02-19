@@ -10,7 +10,7 @@ import com.zebone.quality.modules.avr.entity.QualityAvr;
 /**
  * AVR主动脉瓣置换术DAO接口
  * @author 卡卡西
- * @version 2021-01-20
+ * @version 2021-02-19
  */
 @MyBatisDao
 public interface QualityAvrDao extends CrudDao<QualityAvr> {
