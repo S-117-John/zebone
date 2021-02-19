@@ -36,9 +36,10 @@ jdbc:
   # Mysql 数据库配置
   type: mysql
   driver: com.mysql.jdbc.Driver
-  url: jdbc:mysql://rm-2vc6kw5695uxe2a65io.mysql.cn-chengdu.rds.aliyuncs.com:3306/zebone?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
-  username: lijin
-  password: Lmz20160817
+#  url: jdbc:mysql://rm-2vc6kw5695uxe2a65io.mysql.cn-chengdu.rds.aliyuncs.com:3306/zebone?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
+  url: jdbc:mysql://127.0.0.1:3306/zebone?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
+  username: root
+  password: 123456
   testSql: SELECT 1
 
 #  # Oracle 数据库配置

@@ -18,7 +18,7 @@
 				<div class="form-group">
 					<label class="control-label">${text('患者病案号')}：</label>
 					<div class="control-inline">
-						<#form:input path="caseId" maxlength="32" class="form-control width-120"/>
+						<#form:input path="caseid" maxlength="64" class="form-control width-120"/>
 					</div>
 				</div>
 				<div class="form-group">
@@ -44,17 +44,11 @@ $('#dataGrid').dataGrid({
 		{header:'${text('主治医师')}', name:'cm_0_1_1_3', index:'a.cm_0_1_1_3', width:150, align:"left"},
 		{header:'${text('责任护士')}', name:'cm_0_1_1_4', index:'a.cm_0_1_1_4', width:150, align:"left"},
 		{header:'${text('上报科室')}', name:'cm_0_1_1_5', index:'a.cm_0_1_1_5', width:150, align:"left"},
-		{header:'${text('患者病案号')}', name:'caseId', index:'a.case_id', width:150, align:"left"},
+		{header:'${text('患者病案号')}', name:'caseid', index:'a.caseid', width:150, align:"left"},
 		{header:'${text('操作')}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
 			var actions = [];
 			<% if(hasPermi('bc:qualityBc:edit')){ %>
 				actions.push('<a href="${ctx}/bc/qualityBc/form?id='+row.id+'" class="btnList" title="${text('编辑BC乳腺癌（手术治疗）')}"><i class="fa fa-pencil"></i></a>&nbsp;');
-				if (row.status == Global.STATUS_NORMAL){
-					actions.push('<a href="${ctx}/bc/qualityBc/disable?id='+row.id+'" class="btnList" title="${text('停用BC乳腺癌（手术治疗）')}" data-confirm="${text('确认要停用该BC乳腺癌（手术治疗）吗？')}"><i class="glyphicon glyphicon-ban-circle"></i></a>&nbsp;');
-				}
-				if (row.status == Global.STATUS_DISABLE){
-					actions.push('<a href="${ctx}/bc/qualityBc/enable?id='+row.id+'" class="btnList" title="${text('启用BC乳腺癌（手术治疗）')}" data-confirm="${text('确认要启用该BC乳腺癌（手术治疗）吗？')}"><i class="glyphicon glyphicon-ok-circle"></i></a>&nbsp;');
-				}
 				actions.push('<a href="${ctx}/bc/qualityBc/delete?id='+row.id+'" class="btnList" title="${text('删除BC乳腺癌（手术治疗）')}" data-confirm="${text('确认要删除该BC乳腺癌（手术治疗）吗？')}"><i class="fa fa-trash-o"></i></a>&nbsp;');
 			<% } %>
 			return actions.join('');

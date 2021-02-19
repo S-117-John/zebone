@@ -10,7 +10,7 @@ import com.zebone.quality.modules.bc.entity.QualityBc;
 /**
  * BC乳腺癌（手术治疗）DAO接口
  * @author 卡卡西
- * @version 2021-01-20
+ * @version 2021-02-19
  */
 @MyBatisDao
 public interface QualityBcDao extends CrudDao<QualityBc> {
