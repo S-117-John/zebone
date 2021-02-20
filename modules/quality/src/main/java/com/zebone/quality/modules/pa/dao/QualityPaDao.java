@@ -8,9 +8,9 @@ import com.jeesite.common.mybatis.annotation.MyBatisDao;
 import com.zebone.quality.modules.pa.entity.QualityPa;
 
 /**
- * PA垂体腺瘤（初发，手术治疗）DAO接口
+ * 垂体腺瘤（初发，手术治疗）DAO接口
  * @author 卡卡西
- * @version 2021-01-21
+ * @version 2021-02-20
  */
 @MyBatisDao
 public interface QualityPaDao extends CrudDao<QualityPa> {

@@ -14,9 +14,9 @@ import com.zebone.quality.modules.pa.entity.QualityPa;
 import com.zebone.quality.modules.pa.dao.QualityPaDao;
 
 /**
- * PA垂体腺瘤（初发，手术治疗）Service
+ * 垂体腺瘤（初发，手术治疗）Service
  * @author 卡卡西
- * @version 2021-01-21
+ * @version 2021-02-20
  */
 @Service
 @Transactional(readOnly=true)

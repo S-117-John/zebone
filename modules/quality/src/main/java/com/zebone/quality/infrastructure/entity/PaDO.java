@@ -7,10 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
-//@Entity
-//@Data
-//@Table(name = "QUALITY_PA")
+@Entity
+@Data
+@Table(name = "QUALITY_PA")
 public class PaDO extends DataEntity{
+
 
 
     @Column(columnDefinition = "varchar(64) COMMENT '质控医师'")
@@ -43,7 +44,7 @@ public class PaDO extends DataEntity{
     private String pa_0_1_10_1;
     @Column(columnDefinition = "varchar(64) COMMENT 'PA出院后是否31天内重复住院'")
     private String cm_0_1_5;
-    @Column(columnDefinition = "varchar(64) COMMENT '出生日期'")
+    @Column(columnDefinition = "datetime COMMENT '出生日期'")
     private Date cm_0_2_1_1;
     @Column(columnDefinition = "varchar(64) COMMENT '患者性别'")
     private String cm_0_2_1_2;
@@ -53,19 +54,19 @@ public class PaDO extends DataEntity{
     private Double cm_0_2_1_5;
     @Column(columnDefinition = "varchar(64) COMMENT '发病日期时间是否无法确定或无记录'")
     private String cm_0_2_2_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '发病日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '发病日期时间'")
     private Date cm_0_2_2_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '入院日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '入院日期时间'")
     private Date cm_0_2_4_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '出院日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '出院日期时间'")
     private Date cm_0_2_4_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '入住ICU日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '入住ICU日期时间'")
     private Date cm_0_2_5_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '离开ICU日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '离开ICU日期时间'")
     private Date cm_0_2_5_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '手术开始（切皮）日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '手术开始（切皮）日期时间'")
     private Date cm_0_2_6_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '手术结束（缝皮结束）日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '手术结束（缝皮结束）日期时间'")
     private Date cm_0_2_6_2;
     @Column(columnDefinition = "varchar(64) COMMENT '费用支付方式'")
     private String cm_0_3_1;
@@ -79,7 +80,7 @@ public class PaDO extends DataEntity{
     private String pa_1_2_1;
     @Column(columnDefinition = "varchar(64) COMMENT '获得首次磁共振检查报告的日期时间是否确定'")
     private String pa_1_2_2_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '获得首次磁共振检查报告的日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '获得首次磁共振检查报告的日期时间'")
     private Date pa_1_2_2;
     @Column(columnDefinition = "varchar(64) COMMENT '首次磁共振扫描模式'")
     private String pa_1_2_3;
@@ -131,7 +132,7 @@ public class PaDO extends DataEntity{
     private String pa_2_4_4;
     @Column(columnDefinition = "varchar(64) COMMENT '是否进行术前多学科（MDT）诊疗讨论'")
     private String pa_2_5_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '讨论日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '讨论日期时间'")
     private Date pa_2_5_2;
     @Column(columnDefinition = "varchar(64) COMMENT '术前多学科（MDT）诊疗讨论主要内容'")
     private String pa_2_5_3;
@@ -171,7 +172,7 @@ public class PaDO extends DataEntity{
     private String cm_1_3_1_2;
     @Column(columnDefinition = "varchar(64) COMMENT '选用“特殊使用级抗菌药物”或者其他类抗菌药物的因素填写'")
     private String cm_1_3_1_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '使用首剂抗菌药物起始时间'")
+    @Column(columnDefinition = "datetime COMMENT '使用首剂抗菌药物起始时间'")
     private Date cm_1_4_1;
     @Column(columnDefinition = "varchar(64) COMMENT '手术时间是否≥3小时'")
     private String cm_1_5_1;
@@ -181,7 +182,7 @@ public class PaDO extends DataEntity{
     private String cm_1_5_3;
     @Column(columnDefinition = "varchar(64) COMMENT '是否术中追加抗菌药物'")
     private String cm_1_5_4;
-    @Column(columnDefinition = "varchar(64) COMMENT '术后抗菌药物停止使用时间'")
+    @Column(columnDefinition = "datetime COMMENT '术后抗菌药物停止使用时间'")
     private Date cm_1_6_1;
     @Column(columnDefinition = "varchar(64) COMMENT '使用抗菌药物时间使用时间分层'")
     private String cm_1_6_2;
@@ -231,7 +232,7 @@ public class PaDO extends DataEntity{
     private String pa_6_4_1;
     @Column(columnDefinition = "varchar(64) COMMENT '手术后再手术名称'")
     private String pa_6_4_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '再手术日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '再手术日期时间'")
     private Date pa_6_4_3;
     @Column(columnDefinition = "varchar(64) COMMENT '是否有病理报告记录单'")
     private String pa_7_1_1;
@@ -459,5 +460,6 @@ public class PaDO extends DataEntity{
     private Double cm_6_29;
     @Column(columnDefinition = "double COMMENT '其他费'")
     private Double cm_6_30;
+
 
 }

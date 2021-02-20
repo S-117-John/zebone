@@ -4,6 +4,10 @@
 package com.zebone.quality.modules.pa.entity;
 
 import org.hibernate.validator.constraints.Length;
+import java.util.Date;
+import com.jeesite.common.mybatis.annotation.JoinTable;
+import com.jeesite.common.mybatis.annotation.JoinTable.Type;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import com.jeesite.common.entity.DataEntity;
 import com.jeesite.common.mybatis.annotation.Column;
@@ -11,9 +15,9 @@ import com.jeesite.common.mybatis.annotation.Table;
 import com.jeesite.common.mybatis.mapper.query.QueryType;
 
 /**
- * PA垂体腺瘤（初发，手术治疗）Entity
+ * 垂体腺瘤（初发，手术治疗）Entity
  * @author 卡卡西
- * @version 2021-01-21
+ * @version 2021-02-20
  */
 @Table(name="quality_pa", alias="a", columns={
 		@Column(name="cm_0_1_1_1", attrName="cm_0_1_1_1", label="质控医师"),
@@ -261,25 +265,25 @@ public class QualityPa extends DataEntity<QualityPa> {
 	private String cm_0_1_4_2;		// 主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称
 	private String pa_0_1_10_1;		// 其他主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称
 	private String cm_0_1_5;		// PA出院后是否31天内重复住院
-	private String cm_0_2_1_1;		// 出生日期
+	private Date cm_0_2_1_1;		// 出生日期
 	private String cm_0_2_1_2;		// 患者性别
 	private Double cm_0_2_1_3;		// 患者体重（kg）
 	private Double cm_0_2_1_5;		// 患者身高（cm）
 	private String cm_0_2_2_1;		// 发病日期时间是否无法确定或无记录
-	private String cm_0_2_2_2;		// 发病日期时间
-	private String cm_0_2_4_1;		// 入院日期时间
-	private String cm_0_2_4_2;		// 出院日期时间
-	private String cm_0_2_5_1;		// 入住ICU日期时间
-	private String cm_0_2_5_2;		// 离开ICU日期时间
-	private String cm_0_2_6_1;		// 手术开始（切皮）日期时间
-	private String cm_0_2_6_2;		// 手术结束（缝皮结束）日期时间
+	private Date cm_0_2_2_2;		// 发病日期时间
+	private Date cm_0_2_4_1;		// 入院日期时间
+	private Date cm_0_2_4_2;		// 出院日期时间
+	private Date cm_0_2_5_1;		// 入住ICU日期时间
+	private Date cm_0_2_5_2;		// 离开ICU日期时间
+	private Date cm_0_2_6_1;		// 手术开始（切皮）日期时间
+	private Date cm_0_2_6_2;		// 手术结束（缝皮结束）日期时间
 	private String cm_0_3_1;		// 费用支付方式
 	private String cm_0_3_2;		// 收入住院途径
 	private String cm_0_3_3;		// 到院交通工具
 	private String pa_1_1_1;		// 主要临床表现
 	private String pa_1_2_1;		// 首次磁共振扫描
 	private String pa_1_2_2_1;		// 获得首次磁共振检查报告的日期时间是否确定
-	private String pa_1_2_2;		// 获得首次磁共振检查报告的日期时间
+	private Date pa_1_2_2;		// 获得首次磁共振检查报告的日期时间
 	private String pa_1_2_3;		// 首次磁共振扫描模式
 	private String pa_1_2_4;		// 肿瘤大小
 	private String pa_2_1_1;		// 是否进行术前双侧视力与视野评估
@@ -305,7 +309,7 @@ public class QualityPa extends DataEntity<QualityPa> {
 	private String pa_2_4_3;		// 术前评估肾上腺功能不全或显著的垂体功能低减的患者是否需给予激素替代治疗
 	private String pa_2_4_4;		// 生长激素腺瘤是否评估心肺等功能
 	private String pa_2_5_1;		// 是否进行术前多学科（MDT）诊疗讨论
-	private String pa_2_5_2;		// 讨论日期时间
+	private Date pa_2_5_2;		// 讨论日期时间
 	private String pa_2_5_3;		// 术前多学科（MDT）诊疗讨论主要内容
 	private String pa_2_5_3_1;		// 其他术前多学科（MDT）诊疗讨论主要内容
 	private String pa_2_5_4;		// 参加术前多学科（MDT）诊疗讨论的科室
@@ -325,12 +329,12 @@ public class QualityPa extends DataEntity<QualityPa> {
 	private String cm_1_2_2_1;		// 其他特殊使用级抗菌药物名称
 	private String cm_1_3_1_2;		// 选用“特殊使用级抗菌药物”或者其他类抗菌药物的因素
 	private String cm_1_3_1_1;		// 选用“特殊使用级抗菌药物”或者其他类抗菌药物的因素填写
-	private String cm_1_4_1;		// 使用首剂抗菌药物起始时间
+	private Date cm_1_4_1;		// 使用首剂抗菌药物起始时间
 	private String cm_1_5_1;		// 手术时间是否≥3小时
 	private String cm_1_5_2;		// 是否术中追加抗菌药物
 	private String cm_1_5_3;		// 术中出血量是否≥1500ml
 	private String cm_1_5_4;		// 是否术中追加抗菌药物
-	private String cm_1_6_1;		// 术后抗菌药物停止使用时间
+	private Date cm_1_6_1;		// 术后抗菌药物停止使用时间
 	private String cm_1_6_2;		// 使用抗菌药物时间使用时间分层
 	private String cm_1_6_3_2;		// 术后72小时之后继续使用的原因
 	private String cm_2_1;		// 是否有手术后并发症
@@ -355,7 +359,7 @@ public class QualityPa extends DataEntity<QualityPa> {
 	private String cm_2_4;		// 影响程度的选择
 	private String pa_6_4_1;		// 是否有手术后再手术
 	private String pa_6_4_2;		// 手术后再手术名称
-	private String pa_6_4_3;		// 再手术日期时间
+	private Date pa_6_4_3;		// 再手术日期时间
 	private String pa_7_1_1;		// 是否有病理报告记录单
 	private String pa_7_1_2;		// 病理报告记录单中基本内容
 	private String pa_7_1_3;		// 垂体腺瘤免疫组化情况
@@ -613,12 +617,12 @@ public class QualityPa extends DataEntity<QualityPa> {
 		this.cm_0_1_5 = cm_0_1_5;
 	}
 	
-	@Length(min=0, max=64, message="出生日期长度不能超过 64 个字符")
-	public String getCm_0_2_1_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_1_1() {
 		return cm_0_2_1_1;
 	}
 
-	public void setCm_0_2_1_1(String cm_0_2_1_1) {
+	public void setCm_0_2_1_1(Date cm_0_2_1_1) {
 		this.cm_0_2_1_1 = cm_0_2_1_1;
 	}
 	
@@ -656,66 +660,66 @@ public class QualityPa extends DataEntity<QualityPa> {
 		this.cm_0_2_2_1 = cm_0_2_2_1;
 	}
 	
-	@Length(min=0, max=64, message="发病日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_2_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_2_2() {
 		return cm_0_2_2_2;
 	}
 
-	public void setCm_0_2_2_2(String cm_0_2_2_2) {
+	public void setCm_0_2_2_2(Date cm_0_2_2_2) {
 		this.cm_0_2_2_2 = cm_0_2_2_2;
 	}
 	
-	@Length(min=0, max=64, message="入院日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_4_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_4_1() {
 		return cm_0_2_4_1;
 	}
 
-	public void setCm_0_2_4_1(String cm_0_2_4_1) {
+	public void setCm_0_2_4_1(Date cm_0_2_4_1) {
 		this.cm_0_2_4_1 = cm_0_2_4_1;
 	}
 	
-	@Length(min=0, max=64, message="出院日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_4_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_4_2() {
 		return cm_0_2_4_2;
 	}
 
-	public void setCm_0_2_4_2(String cm_0_2_4_2) {
+	public void setCm_0_2_4_2(Date cm_0_2_4_2) {
 		this.cm_0_2_4_2 = cm_0_2_4_2;
 	}
 	
-	@Length(min=0, max=64, message="入住ICU日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_5_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_5_1() {
 		return cm_0_2_5_1;
 	}
 
-	public void setCm_0_2_5_1(String cm_0_2_5_1) {
+	public void setCm_0_2_5_1(Date cm_0_2_5_1) {
 		this.cm_0_2_5_1 = cm_0_2_5_1;
 	}
 	
-	@Length(min=0, max=64, message="离开ICU日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_5_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_5_2() {
 		return cm_0_2_5_2;
 	}
 
-	public void setCm_0_2_5_2(String cm_0_2_5_2) {
+	public void setCm_0_2_5_2(Date cm_0_2_5_2) {
 		this.cm_0_2_5_2 = cm_0_2_5_2;
 	}
 	
-	@Length(min=0, max=64, message="手术开始长度不能超过 64 个字符")
-	public String getCm_0_2_6_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_6_1() {
 		return cm_0_2_6_1;
 	}
 
-	public void setCm_0_2_6_1(String cm_0_2_6_1) {
+	public void setCm_0_2_6_1(Date cm_0_2_6_1) {
 		this.cm_0_2_6_1 = cm_0_2_6_1;
 	}
 	
-	@Length(min=0, max=64, message="手术结束长度不能超过 64 个字符")
-	public String getCm_0_2_6_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_6_2() {
 		return cm_0_2_6_2;
 	}
 
-	public void setCm_0_2_6_2(String cm_0_2_6_2) {
+	public void setCm_0_2_6_2(Date cm_0_2_6_2) {
 		this.cm_0_2_6_2 = cm_0_2_6_2;
 	}
 	
@@ -773,12 +777,12 @@ public class QualityPa extends DataEntity<QualityPa> {
 		this.pa_1_2_2_1 = pa_1_2_2_1;
 	}
 	
-	@Length(min=0, max=64, message="获得首次磁共振检查报告的日期时间长度不能超过 64 个字符")
-	public String getPa_1_2_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getPa_1_2_2() {
 		return pa_1_2_2;
 	}
 
-	public void setPa_1_2_2(String pa_1_2_2) {
+	public void setPa_1_2_2(Date pa_1_2_2) {
 		this.pa_1_2_2 = pa_1_2_2;
 	}
 	
@@ -991,12 +995,12 @@ public class QualityPa extends DataEntity<QualityPa> {
 		this.pa_2_5_1 = pa_2_5_1;
 	}
 	
-	@Length(min=0, max=64, message="讨论日期时间长度不能超过 64 个字符")
-	public String getPa_2_5_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getPa_2_5_2() {
 		return pa_2_5_2;
 	}
 
-	public void setPa_2_5_2(String pa_2_5_2) {
+	public void setPa_2_5_2(Date pa_2_5_2) {
 		this.pa_2_5_2 = pa_2_5_2;
 	}
 	
@@ -1171,12 +1175,12 @@ public class QualityPa extends DataEntity<QualityPa> {
 		this.cm_1_3_1_1 = cm_1_3_1_1;
 	}
 	
-	@Length(min=0, max=64, message="使用首剂抗菌药物起始时间长度不能超过 64 个字符")
-	public String getCm_1_4_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_1_4_1() {
 		return cm_1_4_1;
 	}
 
-	public void setCm_1_4_1(String cm_1_4_1) {
+	public void setCm_1_4_1(Date cm_1_4_1) {
 		this.cm_1_4_1 = cm_1_4_1;
 	}
 	
@@ -1216,12 +1220,12 @@ public class QualityPa extends DataEntity<QualityPa> {
 		this.cm_1_5_4 = cm_1_5_4;
 	}
 	
-	@Length(min=0, max=64, message="术后抗菌药物停止使用时间长度不能超过 64 个字符")
-	public String getCm_1_6_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_1_6_1() {
 		return cm_1_6_1;
 	}
 
-	public void setCm_1_6_1(String cm_1_6_1) {
+	public void setCm_1_6_1(Date cm_1_6_1) {
 		this.cm_1_6_1 = cm_1_6_1;
 	}
 	
@@ -1441,12 +1445,12 @@ public class QualityPa extends DataEntity<QualityPa> {
 		this.pa_6_4_2 = pa_6_4_2;
 	}
 	
-	@Length(min=0, max=64, message="再手术日期时间长度不能超过 64 个字符")
-	public String getPa_6_4_3() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getPa_6_4_3() {
 		return pa_6_4_3;
 	}
 
-	public void setPa_6_4_3(String pa_6_4_3) {
+	public void setPa_6_4_3(Date pa_6_4_3) {
 		this.pa_6_4_3 = pa_6_4_3;
 	}
 	

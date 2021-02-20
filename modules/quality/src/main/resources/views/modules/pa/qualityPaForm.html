@@ -1,11 +1,9 @@
-<% layout('/layouts/default.html', {title: 'PA垂体腺瘤（初发，手术治疗）管理', libs: ['validate']}){ %>
-<script type="text/javascript" src="${ctxStatic}/importPatient.js"></script>
-<link rel="stylesheet" type="text/css" href="${ctxStatic}/quality_common.css"></linf>
+<% layout('/layouts/default.html', {title: '垂体腺瘤（初发，手术治疗）管理', libs: ['validate']}){ %>
 <div class="main-content">
 	<div class="box box-main">
 		<div class="box-header with-border">
 			<div class="box-title">
-				<i class="fa fa-list-alt"></i> ${text(qualityPa.isNewRecord ? '新增PA垂体腺瘤（初发，手术治疗）' : '编辑PA垂体腺瘤（初发，手术治疗）')}
+				<i class="fa fa-list-alt"></i> ${text(qualityPa.isNewRecord ? '新增垂体腺瘤（初发，手术治疗）' : '编辑垂体腺瘤（初发，手术治疗）')}
 			</div>
 			<div class="box-tools pull-right">
 				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -13,27 +11,17 @@
 		</div>
 		<#form:form id="inputForm" model="${qualityPa}" action="${ctx}/pa/qualityPa/save" method="post" class="form-horizontal">
 			<div class="box-body">
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					基本信息
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
-				<div class="form-unit">${text('适用的ICD-10编码与疾病名称：')}</div>
-
+				<div class="form-unit">${text('基本信息')}</div>
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('患者病案号')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-5">
+							<div class="col-sm-7">
 								<#form:input path="caseid" maxlength="64" class="form-control"/>
 							</div>
-							<div class="col-sm-3 hide">
-								<button type="button" class="btn btn-sm btn-primary" id="patientSubmit" onclick="importPatient()"><i class="fa fa-check"></i> ${text('导入患者信息')}</button>&nbsp;
+							<div class="col-sm-3">
+								<button type="button" class="btn btn-sm btn-primary" id="patientSubmit" onclick="importPatient('hf/qualityHf')"><i class="fa fa-check"></i> ${text('导入患者信息')}</button>&nbsp;
 							</div>
 						</div>
 					</div>
@@ -93,6 +81,7 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -192,9 +181,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('相关日期时间信息：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -335,9 +321,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('其他相关信息：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -371,15 +354,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					PA-1 患者入院病情评估
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -391,9 +365,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('获得首次鞍区增强磁共振检查报告的日期时间：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -450,17 +421,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					PA-2 术前评估
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
-				<div class="form-unit">${text('术前双侧视力与视野评估：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -494,9 +454,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('术前内分泌检查（垂体激素）评估：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -596,9 +553,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('术前内分泌检查（甲状腺激素）评估：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -665,9 +619,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('术前内分泌检查（IGF-1）评估：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -712,9 +663,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('术前是否有多学科讨论（MDT）的记录：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -782,17 +730,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					PA-3 手术适应证
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
-				<div class="form-unit">${text('手术治疗适应证：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -804,9 +741,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('手术治疗禁忌证：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -840,17 +774,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					PA-4 术前对可能并发症的评估及安全处置预案
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
-				<div class="form-unit">${text('术前对可能并发症的评估及安全处置预案：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -906,15 +829,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					PA-5 预防性抗菌药物使用情况
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -993,9 +907,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('术中追加抗菌药物：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1074,15 +985,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					PA-6 手术并发症与再手术情况
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1303,9 +1205,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('手术后再次进入手术室再次手术：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1340,17 +1239,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					PA-7 病理学分析评估情况
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
-				<div class="form-unit">${text('垂体腺瘤临床病理学诊断：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1384,9 +1272,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('垂体腺瘤Ki-67标记指数：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1409,17 +1294,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					PA-8 输血量
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
-				<div class="form-unit">${text('手术出血量与输血量：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1464,9 +1338,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('用血类别与量：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1500,17 +1371,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					PA-9 术后病情与疗效的评估
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
-				<div class="form-unit">${text('术后视力视野的复查及评估：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1555,9 +1415,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('术后2-3天完成内分泌激素复查，初步评估内分泌各轴系的功能情况：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1712,9 +1569,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('术后2-3天及7-8天电解质水平监测：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1781,17 +1635,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					PA-10 术后辅助治疗情况
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
-				<div class="form-unit">${text('术后辅助放疗、立体定向放射治疗：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1825,9 +1668,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('术后辅助药物治疗符合指征：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1850,17 +1690,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					PA-11 住院期间为患者提供术前、术后健康教育与出院教育告知五项要素情况
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
-				<div class="form-unit">${text('重点护理评估和健康教育：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -2015,9 +1844,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('实施手术前健康教育有记录：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -2051,9 +1877,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('实施术后健康教育有记录：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -2098,9 +1921,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('出院时提供教育告知五要素：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -2156,15 +1976,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					PA-12 离院方式
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -2220,15 +2031,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					PA-13 患者对服务的体验与评价
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -2350,15 +2152,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					PA-14 住院费用
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -2730,3 +2523,31 @@ $("#inputForm").validate({
     }
 });
 </script>
+
+<script>
+	function importPatient(url){
+		$.ajax({
+			url:'${ctx}/api/emr/emrHomePage/commonData',
+			type: "POST",
+			data: {patNo: $("#caseid").val()},
+			success:function (data){
+				var obj = JSON.parse(data);
+				for(var key in obj){
+					$("#"+key.toLowerCase()).val(obj[key])
+				}
+			}
+		});
+	}
+
+
+	// $("input[type=checkbox]").each(function (){
+	// 	$('#'+$(this).attr("id")).on('ifUnchecked', function(){
+	// 		$(this).removeAttr("checked")
+	// 		$(this).val("")
+	// 	});
+	// });
+
+
+
+</script>
+<link href="${ctxStatic}/quality_common.css" rel="stylesheet"/>
