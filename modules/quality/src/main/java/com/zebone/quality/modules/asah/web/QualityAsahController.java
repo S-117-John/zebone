@@ -6,6 +6,10 @@ package com.zebone.quality.modules.asah.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.zebone.quality.domain.UploadService;
+import com.zebone.quality.modules.common.UploadResult;
+import com.zebone.quality.modules.gli.entity.Gli;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,10 +26,13 @@ import com.jeesite.common.web.BaseController;
 import com.zebone.quality.modules.asah.entity.QualityAsah;
 import com.zebone.quality.modules.asah.service.QualityAsahService;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.Optional;
+
 /**
  * aSAH急性动脉瘤性蛛网膜下腔出血（初发，手术治疗）Controller
  * @author 卡卡西
- * @version 2021-01-21
+ * @version 2021-02-20
  */
 @Controller
 @RequestMapping(value = "${adminPath}/asah/qualityAsah")
@@ -73,14 +80,28 @@ public class QualityAsahController extends BaseController {
 		return "modules/asah/qualityAsahForm";
 	}
 
+	@Autowired
+	private UploadService uploadService;
+
 	/**
 	 * 保存aSAH急性动脉瘤性蛛网膜下腔出血（初发，手术治疗）
 	 */
 	@RequiresPermissions("asah:qualityAsah:edit")
 	@PostMapping(value = "save")
 	@ResponseBody
-	public String save(@Validated QualityAsah qualityAsah) {
+	public String save(@Validated QualityAsah qualityAsah) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 		qualityAsahService.save(qualityAsah);
+
+		String result = uploadService.upload(qualityAsah,new Gli(),"ASAH");
+		Gson gson = new Gson();
+		UploadResult uploadResult = gson.fromJson(result, UploadResult.class);
+		Integer resultCode = Optional.ofNullable(uploadResult).map(a->a.getCode()).orElse(null);
+		if(resultCode==1000){
+			String errorMessage = Optional.ofNullable(uploadResult).map(a->a.getMessage()).orElse("上传失败");
+			return renderResult(Global.FALSE, text(errorMessage));
+		}
+
+
 		return renderResult(Global.TRUE, text("保存aSAH急性动脉瘤性蛛网膜下腔出血（初发，手术治疗）成功！"));
 	}
 	

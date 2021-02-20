@@ -7,10 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
-//@Entity
-//@Table(name = "QUALITY_ASAH")
+@Entity
+@Table(name = "QUALITY_ASAH")
 @Data
 public class AsahDO extends DataEntity{
+
 
     @Column(columnDefinition = "varchar(64) COMMENT '质控医师'")
     private String cm_0_1_1_1;
@@ -38,7 +39,7 @@ public class AsahDO extends DataEntity{
     private String asah_0_1_10_1;
     @Column(columnDefinition = "varchar(64) COMMENT '是否aSAH出院后31天内重复住院'")
     private String cm_0_1_5;
-    @Column(columnDefinition = "varchar(64) COMMENT '出生日期'")
+    @Column(columnDefinition = "datetime COMMENT '出生日期'")
     private Date cm_0_2_1_1;
     @Column(columnDefinition = "varchar(64) COMMENT '患者性别'")
     private String cm_0_2_1_2;
@@ -48,23 +49,23 @@ public class AsahDO extends DataEntity{
     private Double cm_0_2_1_5;
     @Column(columnDefinition = "varchar(64) COMMENT '发病日期时间是否无法确定或无记录'")
     private String cm_0_2_2_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '发病日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '发病日期时间'")
     private Date cm_0_2_2_2;
     @Column(columnDefinition = "varchar(64) COMMENT '到达本院急诊或者门诊日期时间是否无法确定或无记录'")
     private String cm_0_2_3_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '到达本院急诊或者门诊日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '到达本院急诊或者门诊日期时间'")
     private Date cm_0_2_3_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '入院日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '入院日期时间'")
     private Date cm_0_2_4_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '出院日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '出院日期时间'")
     private Date cm_0_2_4_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '入住ICU/卒中中心日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '入住ICU/卒中中心日期时间'")
     private Date cm_0_2_5_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '离开ICU/卒中中心日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '离开ICU/卒中中心日期时间'")
     private Date cm_0_2_5_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '手术开始（切皮）日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '手术开始（切皮）日期时间'")
     private Date cm_0_2_6_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '手术结束（缝皮结束）日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '手术结束（缝皮结束）日期时间'")
     private Date cm_0_2_6_2;
     @Column(columnDefinition = "varchar(64) COMMENT '费用支付方式'")
     private String cm_0_3_1;
@@ -74,7 +75,7 @@ public class AsahDO extends DataEntity{
     private String cm_0_3_3;
     @Column(columnDefinition = "varchar(64) COMMENT '急诊医师接诊日期是否确定'")
     private String asah_1_1_1_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '本院急诊医师接诊日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '本院急诊医师接诊日期时间'")
     private Date asah_1_1_1;
     @Column(columnDefinition = "varchar(64) COMMENT '患者基础信息是否确定'")
     private String asah_1_2_1_1;
@@ -94,31 +95,31 @@ public class AsahDO extends DataEntity{
     private String asah_1_3_1;
     @Column(columnDefinition = "varchar(64) COMMENT '急诊首次头部影像学检查项目'")
     private String asah_1_3_2;
-    @Column(columnDefinition = "varchar(64) COMMENT 'CT检查回报日期时间'")
+    @Column(columnDefinition = "datetime COMMENT 'CT检查回报日期时间'")
     private Date asah_1_3_3;
     @Column(columnDefinition = "varchar(64) COMMENT '是否实施入院Hunt-Hess分级评估'")
     private String asah_2_1_1;
     @Column(columnDefinition = "varchar(64) COMMENT '分类标准 (若有严重的全身疾患如:高血压 糖尿病 严重动脉硬化 慢性肺病及动脉造影上有严重血管痉挛要加一级)'")
     private String asah_2_1_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '完成评估日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '完成评估日期时间'")
     private Date asah_2_1_3;
     @Column(columnDefinition = "varchar(64) COMMENT '术前检查项目的选择'")
     private String asah_3_1_1_2;
     @Column(columnDefinition = "varchar(64) COMMENT '其它术前检查项目'")
     private String asah_3_1_1_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '完成最后一次的时间'")
+    @Column(columnDefinition = "datetime COMMENT '完成最后一次的时间'")
     private Date asah_3_1_2;
     @Column(columnDefinition = "varchar(64) COMMENT '是否实施血管检查（CTA/DSA）'")
     private String asah_4_1_1;
     @Column(columnDefinition = "varchar(64) COMMENT '术前检查项目'")
     private String asah_4_1_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '完成血管检查（CTA/DSA）报告日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '完成血管检查（CTA/DSA）报告日期时间'")
     private Date asah_4_1_3;
     @Column(columnDefinition = "varchar(64) COMMENT '是否术前再次Hunt-Hess分级评估'")
     private String asah_5_1_1;
     @Column(columnDefinition = "varchar(64) COMMENT '分类标准 (若有严重的全身疾患如:高血压 糖尿病 严重动脉硬化 慢性肺病及动脉造影上有严重血管痉挛要加一级)'")
     private String asah_5_1_2;
-    @Column(columnDefinition = "varchar(64) COMMENT '完成评估日期时间'")
+    @Column(columnDefinition = "datetime COMMENT '完成评估日期时间'")
     private Date asah_5_1_3;
     @Column(columnDefinition = "varchar(64) COMMENT '手术指征'")
     private String asah_6_1_1;
@@ -146,7 +147,7 @@ public class AsahDO extends DataEntity{
     private String cm_1_3_1_2;
     @Column(columnDefinition = "varchar(64) COMMENT '选用“特殊使用级抗菌药物”或者其他类抗菌药物的因素填写'")
     private String cm_1_3_1_1;
-    @Column(columnDefinition = "varchar(64) COMMENT '使用首剂抗菌药物起始时间'")
+    @Column(columnDefinition = "datetime COMMENT '使用首剂抗菌药物起始时间'")
     private Date cm_1_4_1;
     @Column(columnDefinition = "varchar(64) COMMENT '手术时间是否≥3小时'")
     private String cm_1_5_1;
@@ -156,7 +157,7 @@ public class AsahDO extends DataEntity{
     private String cm_1_5_3;
     @Column(columnDefinition = "varchar(64) COMMENT '是否术中追加抗菌药物'")
     private String cm_1_5_4;
-    @Column(columnDefinition = "varchar(64) COMMENT '术后抗菌药物停止使用时间'")
+    @Column(columnDefinition = "datetime COMMENT '术后抗菌药物停止使用时间'")
     private Date cm_1_6_1;
     @Column(columnDefinition = "varchar(64) COMMENT '使用抗菌药物时间使用时间分层'")
     private String cm_1_6_2;

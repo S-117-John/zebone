@@ -4,6 +4,10 @@
 package com.zebone.quality.modules.asah.entity;
 
 import org.hibernate.validator.constraints.Length;
+import java.util.Date;
+import com.jeesite.common.mybatis.annotation.JoinTable;
+import com.jeesite.common.mybatis.annotation.JoinTable.Type;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import com.jeesite.common.entity.DataEntity;
 import com.jeesite.common.mybatis.annotation.Column;
@@ -13,7 +17,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 /**
  * aSAH急性动脉瘤性蛛网膜下腔出血（初发，手术治疗）Entity
  * @author 卡卡西
- * @version 2021-01-21
+ * @version 2021-02-20
  */
 @Table(name="quality_asah", alias="a", columns={
 		@Column(name="cm_0_1_1_1", attrName="cm_0_1_1_1", label="质控医师"),
@@ -215,25 +219,25 @@ public class QualityAsah extends DataEntity<QualityAsah> {
 	private String cm_0_1_4_2;		// 主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称
 	private String asah_0_1_10_1;		// 其他主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称
 	private String cm_0_1_5;		// 是否aSAH出院后31天内重复住院
-	private String cm_0_2_1_1;		// 出生日期
+	private Date cm_0_2_1_1;		// 出生日期
 	private String cm_0_2_1_2;		// 患者性别
 	private Double cm_0_2_1_3;		// 患者体重（kg）
 	private Double cm_0_2_1_5;		// 患者身高（cm）
 	private String cm_0_2_2_1;		// 发病日期时间是否无法确定或无记录
-	private String cm_0_2_2_2;		// 发病日期时间
+	private Date cm_0_2_2_2;		// 发病日期时间
 	private String cm_0_2_3_1;		// 到达本院急诊或者门诊日期时间是否无法确定或无记录
-	private String cm_0_2_3_2;		// 到达本院急诊或者门诊日期时间
-	private String cm_0_2_4_1;		// 入院日期时间
-	private String cm_0_2_4_2;		// 出院日期时间
-	private String cm_0_2_5_1;		// 入住ICU/卒中中心日期时间
-	private String cm_0_2_5_2;		// 离开ICU/卒中中心日期时间
-	private String cm_0_2_6_1;		// 手术开始（切皮）日期时间
-	private String cm_0_2_6_2;		// 手术结束（缝皮结束）日期时间
+	private Date cm_0_2_3_2;		// 到达本院急诊或者门诊日期时间
+	private Date cm_0_2_4_1;		// 入院日期时间
+	private Date cm_0_2_4_2;		// 出院日期时间
+	private Date cm_0_2_5_1;		// 入住ICU/卒中中心日期时间
+	private Date cm_0_2_5_2;		// 离开ICU/卒中中心日期时间
+	private Date cm_0_2_6_1;		// 手术开始（切皮）日期时间
+	private Date cm_0_2_6_2;		// 手术结束（缝皮结束）日期时间
 	private String cm_0_3_1;		// 费用支付方式
 	private String cm_0_3_2;		// 收入住院途径
 	private String cm_0_3_3;		// 到院交通工具
 	private String asah_1_1_1_1;		// 急诊医师接诊日期是否确定
-	private String asah_1_1_1;		// 本院急诊医师接诊日期时间
+	private Date asah_1_1_1;		// 本院急诊医师接诊日期时间
 	private String asah_1_2_1_1;		// 患者基础信息是否确定
 	private Double asah_1_2_1;		// 身高(单位:厘米(cm))
 	private Double asah_1_2_2;		// 体重(单位:公斤(kg))
@@ -243,19 +247,19 @@ public class QualityAsah extends DataEntity<QualityAsah> {
 	private Double asah_1_2_6;		// 舒张压(单位:mmHg)
 	private String asah_1_3_1;		// 是否实施首次头部影像学检查
 	private String asah_1_3_2;		// 急诊首次头部影像学检查项目
-	private String asah_1_3_3;		// CT检查回报日期时间
+	private Date asah_1_3_3;		// CT检查回报日期时间
 	private String asah_2_1_1;		// 是否实施入院Hunt-Hess分级评估
 	private String asah_2_1_2;		// 分类标准 (若有严重的全身疾患如:高血压 糖尿病 严重动脉硬化 慢性肺病及动脉造影上有严重血管痉挛要加一级)
-	private String asah_2_1_3;		// 完成评估日期时间
+	private Date asah_2_1_3;		// 完成评估日期时间
 	private String asah_3_1_1_2;		// 术前检查项目的选择
 	private String asah_3_1_1_1;		// 其它术前检查项目
-	private String asah_3_1_2;		// 完成最后一次的时间
+	private Date asah_3_1_2;		// 完成最后一次的时间
 	private String asah_4_1_1;		// 是否实施血管检查（CTA/DSA）
 	private String asah_4_1_2;		// 术前检查项目
-	private String asah_4_1_3;		// 完成血管检查（CTA/DSA）报告日期时间
+	private Date asah_4_1_3;		// 完成血管检查（CTA/DSA）报告日期时间
 	private String asah_5_1_1;		// 是否术前再次Hunt-Hess分级评估
 	private String asah_5_1_2;		// 分类标准 (若有严重的全身疾患如:高血压 糖尿病 严重动脉硬化 慢性肺病及动脉造影上有严重血管痉挛要加一级)
-	private String asah_5_1_3;		// 完成评估日期时间
+	private Date asah_5_1_3;		// 完成评估日期时间
 	private String asah_6_1_1;		// 手术指征
 	private String asah_6_1_1_1;		// 其他手术指征
 	private String asah_6_1_2;		// 手术名称与ICD-9-CM-3亚目编码
@@ -269,12 +273,12 @@ public class QualityAsah extends DataEntity<QualityAsah> {
 	private String cm_1_2_2_1;		// 其他特殊使用级抗菌药物名称
 	private String cm_1_3_1_2;		// 选用“特殊使用级抗菌药物”或者其他类抗菌药物的因素
 	private String cm_1_3_1_1;		// 选用“特殊使用级抗菌药物”或者其他类抗菌药物的因素填写
-	private String cm_1_4_1;		// 使用首剂抗菌药物起始时间
+	private Date cm_1_4_1;		// 使用首剂抗菌药物起始时间
 	private String cm_1_5_1;		// 手术时间是否≥3小时
 	private String cm_1_5_2;		// 是否术中追加抗菌药物
 	private String cm_1_5_3;		// 术中出血量是否≥1500ml
 	private String cm_1_5_4;		// 是否术中追加抗菌药物
-	private String cm_1_6_1;		// 术后抗菌药物停止使用时间
+	private Date cm_1_6_1;		// 术后抗菌药物停止使用时间
 	private String cm_1_6_2;		// 使用抗菌药物时间使用时间分层
 	private String cm_1_6_3_2;		// 术后72小时之后继续使用的原因
 	private String asah_9_1_1;		// 是否为特殊类型的急性aSAH患者
@@ -507,12 +511,12 @@ public class QualityAsah extends DataEntity<QualityAsah> {
 		this.cm_0_1_5 = cm_0_1_5;
 	}
 	
-	@Length(min=0, max=64, message="出生日期长度不能超过 64 个字符")
-	public String getCm_0_2_1_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_1_1() {
 		return cm_0_2_1_1;
 	}
 
-	public void setCm_0_2_1_1(String cm_0_2_1_1) {
+	public void setCm_0_2_1_1(Date cm_0_2_1_1) {
 		this.cm_0_2_1_1 = cm_0_2_1_1;
 	}
 	
@@ -550,12 +554,12 @@ public class QualityAsah extends DataEntity<QualityAsah> {
 		this.cm_0_2_2_1 = cm_0_2_2_1;
 	}
 	
-	@Length(min=0, max=64, message="发病日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_2_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_2_2() {
 		return cm_0_2_2_2;
 	}
 
-	public void setCm_0_2_2_2(String cm_0_2_2_2) {
+	public void setCm_0_2_2_2(Date cm_0_2_2_2) {
 		this.cm_0_2_2_2 = cm_0_2_2_2;
 	}
 	
@@ -568,66 +572,66 @@ public class QualityAsah extends DataEntity<QualityAsah> {
 		this.cm_0_2_3_1 = cm_0_2_3_1;
 	}
 	
-	@Length(min=0, max=64, message="到达本院急诊或者门诊日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_3_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_3_2() {
 		return cm_0_2_3_2;
 	}
 
-	public void setCm_0_2_3_2(String cm_0_2_3_2) {
+	public void setCm_0_2_3_2(Date cm_0_2_3_2) {
 		this.cm_0_2_3_2 = cm_0_2_3_2;
 	}
 	
-	@Length(min=0, max=64, message="入院日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_4_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_4_1() {
 		return cm_0_2_4_1;
 	}
 
-	public void setCm_0_2_4_1(String cm_0_2_4_1) {
+	public void setCm_0_2_4_1(Date cm_0_2_4_1) {
 		this.cm_0_2_4_1 = cm_0_2_4_1;
 	}
 	
-	@Length(min=0, max=64, message="出院日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_4_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_4_2() {
 		return cm_0_2_4_2;
 	}
 
-	public void setCm_0_2_4_2(String cm_0_2_4_2) {
+	public void setCm_0_2_4_2(Date cm_0_2_4_2) {
 		this.cm_0_2_4_2 = cm_0_2_4_2;
 	}
 	
-	@Length(min=0, max=64, message="入住ICU/卒中中心日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_5_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_5_1() {
 		return cm_0_2_5_1;
 	}
 
-	public void setCm_0_2_5_1(String cm_0_2_5_1) {
+	public void setCm_0_2_5_1(Date cm_0_2_5_1) {
 		this.cm_0_2_5_1 = cm_0_2_5_1;
 	}
 	
-	@Length(min=0, max=64, message="离开ICU/卒中中心日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_5_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_5_2() {
 		return cm_0_2_5_2;
 	}
 
-	public void setCm_0_2_5_2(String cm_0_2_5_2) {
+	public void setCm_0_2_5_2(Date cm_0_2_5_2) {
 		this.cm_0_2_5_2 = cm_0_2_5_2;
 	}
 	
-	@Length(min=0, max=64, message="手术开始长度不能超过 64 个字符")
-	public String getCm_0_2_6_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_6_1() {
 		return cm_0_2_6_1;
 	}
 
-	public void setCm_0_2_6_1(String cm_0_2_6_1) {
+	public void setCm_0_2_6_1(Date cm_0_2_6_1) {
 		this.cm_0_2_6_1 = cm_0_2_6_1;
 	}
 	
-	@Length(min=0, max=64, message="手术结束长度不能超过 64 个字符")
-	public String getCm_0_2_6_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_0_2_6_2() {
 		return cm_0_2_6_2;
 	}
 
-	public void setCm_0_2_6_2(String cm_0_2_6_2) {
+	public void setCm_0_2_6_2(Date cm_0_2_6_2) {
 		this.cm_0_2_6_2 = cm_0_2_6_2;
 	}
 	
@@ -667,12 +671,12 @@ public class QualityAsah extends DataEntity<QualityAsah> {
 		this.asah_1_1_1_1 = asah_1_1_1_1;
 	}
 	
-	@Length(min=0, max=64, message="本院急诊医师接诊日期时间长度不能超过 64 个字符")
-	public String getAsah_1_1_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getAsah_1_1_1() {
 		return asah_1_1_1;
 	}
 
-	public void setAsah_1_1_1(String asah_1_1_1) {
+	public void setAsah_1_1_1(Date asah_1_1_1) {
 		this.asah_1_1_1 = asah_1_1_1;
 	}
 	
@@ -751,12 +755,12 @@ public class QualityAsah extends DataEntity<QualityAsah> {
 		this.asah_1_3_2 = asah_1_3_2;
 	}
 	
-	@Length(min=0, max=64, message="CT检查回报日期时间长度不能超过 64 个字符")
-	public String getAsah_1_3_3() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getAsah_1_3_3() {
 		return asah_1_3_3;
 	}
 
-	public void setAsah_1_3_3(String asah_1_3_3) {
+	public void setAsah_1_3_3(Date asah_1_3_3) {
 		this.asah_1_3_3 = asah_1_3_3;
 	}
 	
@@ -778,12 +782,12 @@ public class QualityAsah extends DataEntity<QualityAsah> {
 		this.asah_2_1_2 = asah_2_1_2;
 	}
 	
-	@Length(min=0, max=64, message="完成评估日期时间长度不能超过 64 个字符")
-	public String getAsah_2_1_3() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getAsah_2_1_3() {
 		return asah_2_1_3;
 	}
 
-	public void setAsah_2_1_3(String asah_2_1_3) {
+	public void setAsah_2_1_3(Date asah_2_1_3) {
 		this.asah_2_1_3 = asah_2_1_3;
 	}
 	
@@ -805,12 +809,12 @@ public class QualityAsah extends DataEntity<QualityAsah> {
 		this.asah_3_1_1_1 = asah_3_1_1_1;
 	}
 	
-	@Length(min=0, max=64, message="完成最后一次的时间长度不能超过 64 个字符")
-	public String getAsah_3_1_2() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getAsah_3_1_2() {
 		return asah_3_1_2;
 	}
 
-	public void setAsah_3_1_2(String asah_3_1_2) {
+	public void setAsah_3_1_2(Date asah_3_1_2) {
 		this.asah_3_1_2 = asah_3_1_2;
 	}
 	
@@ -832,12 +836,12 @@ public class QualityAsah extends DataEntity<QualityAsah> {
 		this.asah_4_1_2 = asah_4_1_2;
 	}
 	
-	@Length(min=0, max=64, message="完成血管检查长度不能超过 64 个字符")
-	public String getAsah_4_1_3() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getAsah_4_1_3() {
 		return asah_4_1_3;
 	}
 
-	public void setAsah_4_1_3(String asah_4_1_3) {
+	public void setAsah_4_1_3(Date asah_4_1_3) {
 		this.asah_4_1_3 = asah_4_1_3;
 	}
 	
@@ -859,12 +863,12 @@ public class QualityAsah extends DataEntity<QualityAsah> {
 		this.asah_5_1_2 = asah_5_1_2;
 	}
 	
-	@Length(min=0, max=64, message="完成评估日期时间长度不能超过 64 个字符")
-	public String getAsah_5_1_3() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getAsah_5_1_3() {
 		return asah_5_1_3;
 	}
 
-	public void setAsah_5_1_3(String asah_5_1_3) {
+	public void setAsah_5_1_3(Date asah_5_1_3) {
 		this.asah_5_1_3 = asah_5_1_3;
 	}
 	
@@ -985,12 +989,12 @@ public class QualityAsah extends DataEntity<QualityAsah> {
 		this.cm_1_3_1_1 = cm_1_3_1_1;
 	}
 	
-	@Length(min=0, max=64, message="使用首剂抗菌药物起始时间长度不能超过 64 个字符")
-	public String getCm_1_4_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_1_4_1() {
 		return cm_1_4_1;
 	}
 
-	public void setCm_1_4_1(String cm_1_4_1) {
+	public void setCm_1_4_1(Date cm_1_4_1) {
 		this.cm_1_4_1 = cm_1_4_1;
 	}
 	
@@ -1030,12 +1034,12 @@ public class QualityAsah extends DataEntity<QualityAsah> {
 		this.cm_1_5_4 = cm_1_5_4;
 	}
 	
-	@Length(min=0, max=64, message="术后抗菌药物停止使用时间长度不能超过 64 个字符")
-	public String getCm_1_6_1() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getCm_1_6_1() {
 		return cm_1_6_1;
 	}
 
-	public void setCm_1_6_1(String cm_1_6_1) {
+	public void setCm_1_6_1(Date cm_1_6_1) {
 		this.cm_1_6_1 = cm_1_6_1;
 	}
 	

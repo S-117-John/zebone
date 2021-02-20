@@ -1,6 +1,4 @@
 <% layout('/layouts/default.html', {title: 'aSAH急性动脉瘤性蛛网膜下腔出血（初发，手术治疗）管理', libs: ['validate']}){ %>
-<script type="text/javascript" src="${ctxStatic}/importPatient.js"></script>
-<link rel="stylesheet" type="text/css" href="${ctxStatic}/quality_common.css"></linf>
 <div class="main-content">
 	<div class="box box-main">
 		<div class="box-header with-border">
@@ -13,27 +11,17 @@
 		</div>
 		<#form:form id="inputForm" model="${qualityAsah}" action="${ctx}/asah/qualityAsah/save" method="post" class="form-horizontal">
 			<div class="box-body">
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					基本信息
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
-				<div class="form-unit">${text('适用的ICD-10编码与疾病名称：')}</div>
-
+				<div class="form-unit">${text('基本信息')}</div>
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('患者病案号')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-5">
+							<div class="col-sm-7">
 								<#form:input path="caseid" maxlength="64" class="form-control"/>
 							</div>
-							<div class="col-sm-3 hide">
-								<button type="button" class="btn btn-sm btn-primary" id="patientSubmit" onclick="importPatient()"><i class="fa fa-check"></i> ${text('导入患者信息')}</button>&nbsp;
+							<div class="col-sm-3">
+								<button type="button" class="btn btn-sm btn-primary" id="patientSubmit" onclick="importPatient('hf/qualityHf')"><i class="fa fa-check"></i> ${text('导入患者信息')}</button>&nbsp;
 							</div>
 						</div>
 					</div>
@@ -93,6 +81,7 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -170,9 +159,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('相关日期时间信息：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -336,9 +322,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('其他相关信息：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -372,17 +355,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					aSAH-1 急诊影像学检查情况
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
-				<div class="form-unit">${text('到达本院急诊医师接诊：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -406,9 +378,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('患者基础信息：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -486,9 +455,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('急诊首次头部影像学检查：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -523,15 +489,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					aSAH-2 入院Hunt-Hess分级情况
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -566,15 +523,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					aSAH-3 术前检查情况
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -609,15 +557,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					aSAH-4 实行血管检查（CTA/DSA）情况
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -652,15 +591,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					aSAH-5 术前Hunt-Hess再分级情况
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -695,15 +625,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					aSAH-6 手术治疗情况
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -748,15 +669,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					aSAH-7 术中安全监测措施
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -790,15 +702,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					aSAH-8 围术期抗菌药物使用情况
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -877,9 +780,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('术中追加抗菌药物：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -958,17 +858,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					aSAH-9 特殊类型的急性aSAH患者开颅术后抗癫痫药物预防性使用情况
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
-				<div class="form-unit">${text('特殊类型的急性aSAH患者：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -991,9 +880,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('开颅术后预防使用抗癫痫药物：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1027,15 +913,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					aSAH-10 手术并发症与再手术情况
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1289,17 +1166,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					aSAH-11 输血量
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
-				<div class="form-unit">${text('手术出血量与输血量：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1344,9 +1210,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('用血类别与量：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1380,15 +1243,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					aSAH-12 术前Hunt-Hess分级 1-2级的患者出院前完成mRs评分情况
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1433,17 +1287,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					aSAH-13 住院期间为患者提供术前、术后健康教育与出院教育告知五项要素情况
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
-				<div class="form-unit">${text('aSAH重点护理评估和健康教育：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1598,9 +1441,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('出院时提供教育告知五要素：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1667,15 +1507,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					aSAH-14 离院方式
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1720,15 +1551,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					aSAH-15 患者对服务的体验与评价
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1850,15 +1672,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					aSAH-16 住院费用
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -2230,3 +2043,31 @@ $("#inputForm").validate({
     }
 });
 </script>
+
+<script>
+	function importPatient(url){
+		$.ajax({
+			url:'${ctx}/api/emr/emrHomePage/commonData',
+			type: "POST",
+			data: {patNo: $("#caseid").val()},
+			success:function (data){
+				var obj = JSON.parse(data);
+				for(var key in obj){
+					$("#"+key.toLowerCase()).val(obj[key])
+				}
+			}
+		});
+	}
+
+
+	// $("input[type=checkbox]").each(function (){
+	// 	$('#'+$(this).attr("id")).on('ifUnchecked', function(){
+	// 		$(this).removeAttr("checked")
+	// 		$(this).val("")
+	// 	});
+	// });
+
+
+
+</script>
+<link href="${ctxStatic}/quality_common.css" rel="stylesheet"/>
