@@ -6,6 +6,11 @@ package com.zebone.quality.modules.lc.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.zebone.quality.domain.UploadService;
+import com.zebone.quality.modules.cac.entity.Cac;
+import com.zebone.quality.modules.common.UploadResult;
+import com.zebone.quality.modules.lc.entity.Lc;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,10 +27,13 @@ import com.jeesite.common.web.BaseController;
 import com.zebone.quality.modules.lc.entity.QualityLc;
 import com.zebone.quality.modules.lc.service.QualityLcService;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.Optional;
+
 /**
  * LC肺癌（手术治疗）Controller
  * @author 卡卡西
- * @version 2021-01-21
+ * @version 2021-02-20
  */
 @Controller
 @RequestMapping(value = "${adminPath}/lc/qualityLc")
@@ -73,14 +81,28 @@ public class QualityLcController extends BaseController {
 		return "modules/lc/qualityLcForm";
 	}
 
+
+	@Autowired
+	private UploadService uploadService;
 	/**
 	 * 保存LC肺癌（手术治疗）
 	 */
 	@RequiresPermissions("lc:qualityLc:edit")
 	@PostMapping(value = "save")
 	@ResponseBody
-	public String save(@Validated QualityLc qualityLc) {
+	public String save(@Validated QualityLc qualityLc) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 		qualityLcService.save(qualityLc);
+
+
+		String result = uploadService.upload(qualityLc,new Lc(),"LC");
+		Gson gson = new Gson();
+		UploadResult uploadResult = gson.fromJson(result, UploadResult.class);
+		Integer resultCode = Optional.ofNullable(uploadResult).map(a->a.getCode()).orElse(null);
+		if(resultCode==1000){
+			String errorMessage = Optional.ofNullable(uploadResult).map(a->a.getMessage()).orElse("上传失败");
+			return renderResult(Global.FALSE, text(errorMessage));
+		}
+
 		return renderResult(Global.TRUE, text("保存LC肺癌（手术治疗）成功！"));
 	}
 	
