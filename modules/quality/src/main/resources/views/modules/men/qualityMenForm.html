@@ -1,6 +1,4 @@
 <% layout('/layouts/default.html', {title: 'MEN脑膜瘤（初发手术治疗）管理', libs: ['validate']}){ %>
-<script type="text/javascript" src="${ctxStatic}/importPatient.js"></script>
-<link rel="stylesheet" type="text/css" href="${ctxStatic}/quality_common.css"></linf>
 <div class="main-content">
 	<div class="box box-main">
 		<div class="box-header with-border">
@@ -13,27 +11,17 @@
 		</div>
 		<#form:form id="inputForm" model="${qualityMen}" action="${ctx}/men/qualityMen/save" method="post" class="form-horizontal">
 			<div class="box-body">
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					基本信息
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
-				<div class="form-unit">${text('适用的ICD-10编码与疾病名称：')}</div>
-
+				<div class="form-unit">${text('基本信息')}</div>
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('患者病案号')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-5">
+							<div class="col-sm-7">
 								<#form:input path="caseid" maxlength="64" class="form-control"/>
 							</div>
-							<div class="col-sm-3 hide">
-								<button type="button" class="btn btn-sm btn-primary" id="patientSubmit" onclick="importPatient()"><i class="fa fa-check"></i> ${text('导入患者信息')}</button>&nbsp;
+							<div class="col-sm-3">
+								<button type="button" class="btn btn-sm btn-primary" id="patientSubmit" onclick="importPatient('hf/qualityHf')"><i class="fa fa-check"></i> ${text('导入患者信息')}</button>&nbsp;
 							</div>
 						</div>
 					</div>
@@ -46,6 +34,7 @@
 							<div class="col-sm-10">
 								<#form:input path="cm_0_1_1_1" maxlength="64" class="form-control"/>
 							</div>
+
 						</div>
 					</div>
 				</div>
@@ -93,6 +82,7 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -148,9 +138,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('相关日期时间信息：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -291,9 +278,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('其他相关信息：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -327,15 +311,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					MEN-1: 基础影像学检查
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -370,15 +345,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					MEN-2: 术前评估
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -456,15 +422,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					MEN-3: 手术适应证
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -498,17 +455,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					MEN-4: 术中神经功能保护措施与肿瘤切除率评估措施
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
-				<div class="form-unit">${text('术中神经功能保护措施：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -564,17 +510,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					MEN-5: 输血量
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
-				<div class="form-unit">${text('手术出血量与输血量：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -619,9 +554,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('用血类别与量：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -655,15 +587,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					MEN-6: 术后影像学复查情况
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -720,15 +643,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					MEN-7:预防性抗菌药物使用情况
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -807,9 +721,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('术中追加抗菌药物：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -888,15 +799,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					MEN-8:术后并发症与再次手术情况
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1151,15 +1053,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					MEN-9:病理诊断采用2016 CNS WHO肿瘤分类情况
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1216,17 +1109,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					MEN-10:出院前病情评估
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
-				<div class="form-unit">${text('出院前生活质量评估：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1282,9 +1164,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('出院前完成MRI T1/T2加权平扫+增强扫描影像学评估：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1330,17 +1209,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					MEN-11: 住院期间为患者提供术前、术后健康教育与出院教育告知五项要素情况
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
-				<div class="form-unit">${text('入院时重点护理评估有记录：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1506,9 +1374,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="form-unit">${text('出院时提供教育告知五要素：')}</div>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1575,15 +1440,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					基本信息
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1639,15 +1495,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					MEN-13:离院方式
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1692,15 +1539,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					MEN-14:患者对服务的体验与评价
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -1822,15 +1660,6 @@
 						</div>
 					</div>
 				</div>
-
-				<p class="form-title form-cursor box-remark">
-					<span class="circle"></span>
-					MEN-15:住院费用
-					<span class="pull-right">
-						<span class="arrow-up"></span>
-					</span>
-				</p>
-
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -2202,3 +2031,31 @@ $("#inputForm").validate({
     }
 });
 </script>
+
+<script>
+	function importPatient(url){
+		$.ajax({
+			url:'${ctx}/api/emr/emrHomePage/commonData',
+			type: "POST",
+			data: {patNo: $("#caseid").val()},
+			success:function (data){
+				var obj = JSON.parse(data);
+				for(var key in obj){
+					$("#"+key.toLowerCase()).val(obj[key])
+				}
+			}
+		});
+	}
+
+
+	// $("input[type=checkbox]").each(function (){
+	// 	$('#'+$(this).attr("id")).on('ifUnchecked', function(){
+	// 		$(this).removeAttr("checked")
+	// 		$(this).val("")
+	// 	});
+	// });
+
+
+
+</script>
+<link href="${ctxStatic}/quality_common.css" rel="stylesheet"/>

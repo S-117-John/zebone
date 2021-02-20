@@ -10,7 +10,7 @@ import com.zebone.quality.modules.men.entity.QualityMen;
 /**
  * MEN脑膜瘤（初发手术治疗）DAO接口
  * @author 卡卡西
- * @version 2021-01-21
+ * @version 2021-02-20
  */
 @MyBatisDao
 public interface QualityMenDao extends CrudDao<QualityMen> {
