@@ -37,12 +37,12 @@ public class CsVo implements Serializable {
     private Double cm_0_2_1_5;		// 患者身高（cm）
     @JSONField(name="CM-0-2-1-6")
     private Double cm_0_2_1_6;		// 新生儿出生体重（克）
-    @JSONField(name="cs-0-2-2-1")
-    private String cs_0_2_2_1;		// 末次月经日期是否确定
+    @JSONField(name="CS-0-2-2-1")
+    private List<String> cs_0_2_2_1;		// 末次月经日期是否确定
     @JSONField(format = "yyyy-MM-dd",name = "CS-0-2-2")
     private Date cs_0_2_2;		// 末次月经日期
-    @JSONField(format = "yyyy-MM-dd HH:mm",name = "CM-0-2-3-1")
-    private String cm_0_2_3_1;		// 到达本院急诊或者门诊日期时间是否确定
+    @JSONField(name = "CM-0-2-3-1")
+    private List<String> cm_0_2_3_1;		// 到达本院急诊或者门诊日期时间是否确定
     @JSONField(format = "yyyy-MM-dd HH:mm",name = "CM-0-2-3-2")
     private Date cm_0_2_3_2;		// 到达本院急诊或者门诊日期时间
     @JSONField(format = "yyyy-MM-dd HH:mm",name = "CM-0-2-4-1")
@@ -479,11 +479,11 @@ public class CsVo implements Serializable {
         this.cm_0_2_1_6 = cm_0_2_1_6;
     }
 
-    public String getCs_0_2_2_1() {
+    public List<String> getCs_0_2_2_1() {
         return cs_0_2_2_1;
     }
 
-    public void setCs_0_2_2_1(String cs_0_2_2_1) {
+    public void setCs_0_2_2_1(List<String> cs_0_2_2_1) {
         this.cs_0_2_2_1 = cs_0_2_2_1;
     }
 
@@ -495,11 +495,11 @@ public class CsVo implements Serializable {
         this.cs_0_2_2 = cs_0_2_2;
     }
 
-    public String getCm_0_2_3_1() {
+    public List<String> getCm_0_2_3_1() {
         return cm_0_2_3_1;
     }
 
-    public void setCm_0_2_3_1(String cm_0_2_3_1) {
+    public void setCm_0_2_3_1(List<String> cm_0_2_3_1) {
         this.cm_0_2_3_1 = cm_0_2_3_1;
     }
 
