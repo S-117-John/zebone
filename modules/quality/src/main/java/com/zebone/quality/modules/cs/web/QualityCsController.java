@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.jeesite.common.shiro.realms.G;
 import com.zebone.quality.common.entity.ErrorMessage;
@@ -141,8 +142,9 @@ public class QualityCsController extends BaseController {
 		Integer resultCode = Optional.ofNullable(uploadResult).map(a->a.getCode()).orElse(null);
 		if(resultCode==1000){
 			String errorMessage = Optional.ofNullable(uploadResult).map(a->a.getMessage()).orElse("上传失败");
-			ErrorMessage errorResult = (ErrorMessage) JSON.parse(errorMessage);
-			return renderResult(Global.FALSE, text(errorResult.getErrorMessage()));
+			JSONObject jsonObject = (JSONObject) JSON.parse(errorMessage);
+			String errorMsg = (String) jsonObject.get("errorMessage");
+			return renderResult(Global.FALSE, text(errorMsg));
 		}
 		return renderResult(Global.TRUE, text("保存cs剖宫产成功！"));
 	}
