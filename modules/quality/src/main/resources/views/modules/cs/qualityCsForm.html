@@ -2124,7 +2124,7 @@ $("#inputForm").validate({
 	submitHandler: function(form){
 		js.ajaxSubmitForm($(form), function(data){
 			var obj = JSON.parse(data.message);
-			console.log(obj)
+			console.log(obj.errorMessage)
 			js.showMessage(data.message);
 			if(data.result == Global.TRUE){
 				js.closeCurrentTabPage(function(contentWindow){
