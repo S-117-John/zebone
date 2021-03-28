@@ -2125,6 +2125,11 @@ $("#inputForm").validate({
 		js.ajaxSubmitForm($(form), function(data){
 			var obj = JSON.parse(data.message);
 			console.log(obj.errorMessage)
+			for(var key in obj){
+				$("#"+key.toLowerCase()).val(obj[key]);
+				window.scrollTo(0,$("#"+key.replace(new RegExp("-","g") ,"_").toLowerCase()).offsetTop);
+				break;
+			}
 			js.showMessage(data.message);
 			if(data.result == Global.TRUE){
 				js.closeCurrentTabPage(function(contentWindow){
