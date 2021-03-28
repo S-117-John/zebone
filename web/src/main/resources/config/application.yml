@@ -31,8 +31,7 @@ server:
 #======================================#
 
 # 数据库连接
-jdbc: 
-  
+jdbc:
   # Mysql 数据库配置
   type: mysql
   driver: com.mysql.jdbc.Driver
@@ -41,7 +40,6 @@ jdbc:
   username: root
   password: 123456
   testSql: SELECT 1
-
 #  # Oracle 数据库配置
 #  type: oracle
 #  driver: oracle.jdbc.driver.OracleDriver
@@ -89,12 +87,19 @@ jdbc:
 #  
   # 多数据源配置：ds2
   ds2:
-    type: oracle
-    driver: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@127.0.0.1:1521/orcl
-    username: nhis
+#    type: oracle
+#    driver: oracle.jdbc.driver.OracleDriver
+#    url: jdbc:oracle:thin:@127.0.0.1:1521/orcl
+#    username: nhis
+#    password: 123456
+#    testSql: SELECT 1 FROM DUAL
+    type: mssql
+    driver: net.sourceforge.jtds.jdbc.Driver
+    url: jdbc:jtds:sqlserver://192.168.1.36:1433/nhis_test
+    username: sa
     password: 123456
-    testSql: SELECT 1 FROM DUAL
+    testSql: SELECT 1
+
     encrypt:
       username: false
       password: true

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UploadService {
@@ -32,8 +33,14 @@ public class UploadService {
         QualityDisease qualityDisease = new QualityDisease();
         qualityDisease.setCode(code);
         List<QualityDisease> list = qualityDiseaseService.findList(qualityDisease);
-        String apiUrl = list.get(0).getInterfaceUrl();
-        String result = RestTemplateUtil.getInstance().postForString(json, Global.getConfig("quality.url")+apiUrl);
+        String apiUrl = list.stream().
+                map(a->a.getInterfaceUrl()).
+                collect(Collectors.toList()).
+                stream().findFirst().
+                get();
+//        String apiUrl = list.get(0).getInterfaceUrl();
+        String url = Global.getConfig("quality.url")+apiUrl;
+        String result = RestTemplateUtil.getInstance().postForString(json, url);
 
         return result;
     }

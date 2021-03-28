@@ -12,6 +12,7 @@ import com.zebone.quality.modules.emr.entity.PvEncounter;
 import com.zebone.quality.modules.emr.service.EmrDataService;
 import com.zebone.quality.modules.hf.entity.Hf;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -112,15 +113,13 @@ public class EmrApiController {
         }
 
     @RequestMapping(value = "commonData")
-    public String commonData(String patNo,String type, HttpServletRequest request, HttpServletResponse response) throws IllegalAccessException, InstantiationException, InvocationTargetException {
+    public String commonData(String patNo,String type, HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<Map<String,Object>> result = emrDataService.getCommonData(patNo);
-        if(result.size()>0){
-            Map<String,Object> mapResult = result.get(0);
-            Gson gson = new Gson();
-            String jsonResult =  gson.toJson(mapResult);
-            return jsonResult;
-        }else {
-            return "";
-        }
+        Map<String,Object> mapResult = result.stream().findFirst().orElseThrow(()->new Exception("未查询到患者病案信息"));
+        String icd = MapUtils.getString(mapResult,"DIAG_CODE_CLINIC_ICD");
+
+        Gson gson = new Gson();
+        String jsonResult =  gson.toJson(mapResult);
+        return jsonResult;
     }
 }

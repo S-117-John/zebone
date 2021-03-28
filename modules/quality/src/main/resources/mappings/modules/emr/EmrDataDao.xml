@@ -61,9 +61,20 @@
        	pv.HEIGHT cm_0_2_1_5,
        	pv.DATE_BEGIN cm_0_2_4_1,
        	pv.DATE_END cm_0_2_4_2,
-		emr.ADMIT_PATH_NAME cm_0_3_2
+		emr.ADMIT_PATH_NAME cm_0_3_2,
+		emr.DIAG_CODE_CLINIC_ICD,
+		pi.ID_NO,
+		emr.PK_PI,
+		emr.admit_time,
+		emr.newborn_weight cm_0_2_1_6,
+		emr.dis_time,
+	    emr.total_cost cm_6_1,
+		emr.self_cost cm_6_2
 		from EMR_HOME_PAGE emr
 		left join  PV_ENCOUNTER pv on emr.PK_PV = pv.PK_PV
-		where emr.PAT_NO = #{caseId}
+		left join PI_MASTER pi on emr.PK_PI = pi.PK_PI
+		where emr.PAT_NO = #{caseId} order by emr.admit_time desc
 	</select>
+
+
 </mapper>

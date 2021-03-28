@@ -19,7 +19,7 @@ public class CsVo implements Serializable {
     private String cm_0_1_1_5;		// 上报科室
     @JSONField(name="caseId")
     private String caseid;		// 患者病案号
-    @JSONField(name="idCard")
+    @JSONField(name="IDCard")
     private String idcard;		// 患者身份证号
     @JSONField(name="CM-0-1-3-1")
     private String cm_0_1_3_1;		// 出院诊断ICD-10四位亚目编码与名称
@@ -39,7 +39,7 @@ public class CsVo implements Serializable {
     private Double cm_0_2_1_6;		// 新生儿出生体重（克）
     @JSONField(name="cs-0-2-2-1")
     private String cs_0_2_2_1;		// 末次月经日期是否确定
-    @JSONField(format = "yyyy-MM-dd HH:mm",name = "CM-0-2-2")
+    @JSONField(format = "yyyy-MM-dd",name = "CS-0-2-2")
     private Date cs_0_2_2;		// 末次月经日期
     @JSONField(format = "yyyy-MM-dd HH:mm",name = "CM-0-2-3-1")
     private String cm_0_2_3_1;		// 到达本院急诊或者门诊日期时间是否确定
@@ -86,7 +86,7 @@ public class CsVo implements Serializable {
     @JSONField(name="CS-2-1-1-1")
     private String cs_2_1_1_1;		// 剖宫产指征
     @JSONField(name="CS-2-5-1")
-    private String cs_2_5_1;		// 符合医学指征
+    private List<String> cs_2_5_1;		// 符合医学指征
     @JSONField(name="CS-2-1-1-a")
     private String cs_2_1_1_a;		// 胎儿窘迫
     @JSONField(name="CS-2-1-1-b")
@@ -127,35 +127,35 @@ public class CsVo implements Serializable {
     private String cs_2_2_1;		// 孕妇要求剖宫产的评估
     @JSONField(name="CS-2-3-1")
     private String cs_2_3_1;		// 手术方式选择
-    @JSONField(name="CS-2-4-2")
+    @JSONField(name="CS-2-4-2",format = "yyyy-MM-dd HH:mm")
     private Date cs_2_4_2;		// 胎儿娩出日期时间
     @JSONField(name="CS-1-1-1")
     private String cm_1_1_1;		// 是否使用预防性抗菌药物
-    @JSONField(name="CS-1-2-1-2")
+    @JSONField(name="CM-1-2-1-2")
     private List<String> cm_1_2_1_2;		// 预防性抗菌药物选择
-    @JSONField(name="CS-1-2-2-2")
+    @JSONField(name="CM-1-2-2-2")
     private List<String> cm_1_2_2_2;		// 选择碳青霉烯类及替加环素等特殊使用级抗菌药物
-    @JSONField(name="CS-1-2-2-1")
+    @JSONField(name="CM-1-2-2-1")
     private String cm_1_2_2_1;		// 其他特殊使用级抗菌药物名称
-    @JSONField(name="CS-1-3-1-2")
+    @JSONField(name="CM-1-3-1-2")
     private List<String> cm_1_3_1_2;		// 选用“特殊使用级抗菌药物”或者其他类抗菌药物的因素
-    @JSONField(name="CS-1-3-1-1")
+    @JSONField(name="CM-1-3-1-1")
     private String cm_1_3_1_1;		// 选用“特殊使用级抗菌药物”或者其他类抗菌药物的因素填写
-    @JSONField(name="CS-1-4-1")
+    @JSONField(name="CM-1-4-1",format = "yyyy-MM-dd HH:mm")
     private Date cm_1_4_1;		// 使用首剂抗菌药物起始时间
-    @JSONField(name="CS-1-5-1")
+    @JSONField(name="CM-1-5-1")
     private String cm_1_5_1;		// 手术时间是否≥3小时
-    @JSONField(name="CS-1-5-2")
+    @JSONField(name="CM-1-5-2")
     private String cm_1_5_2;		// 是否术中追加抗菌药物
-    @JSONField(name="CS-1-5-3")
+    @JSONField(name="CM-1-5-3")
     private String cm_1_5_3;		// 术中出血量是否≥1500ml
-    @JSONField(name="CS-1-5-4")
+    @JSONField(name="CM-1-5-4")
     private String cm_1_5_4;		// 是否术中追加抗菌药物
-    @JSONField(name="CS-1-6-1")
+    @JSONField(name="CM-1-6-1",format = "yyyy-MM-dd HH:mm")
     private Date cm_1_6_1;		// 术后抗菌药物停止使用时间
-    @JSONField(name="CS-1-6-2")
+    @JSONField(name="CM-1-6-2")
     private String cm_1_6_2;		// 使用抗菌药物时间使用时间分层
-    @JSONField(name="CS-1-6-3-2")
+    @JSONField(name="CM-1-6-3-2")
     private String cm_1_6_3_2;		// 术后48小时之后继续使用的原因
     @JSONField(name="CS-4-1")
     private String cs_4_1;		// 是否实施新生儿Apgar评分
@@ -178,7 +178,7 @@ public class CsVo implements Serializable {
     @JSONField(name="CS-5-4")
     private Double cs_5_4;		// 术后24小时内实际输血量（ml）
     @JSONField(name="CS-5-5")
-    private String cs_5_5;		// 止血干预措施的选择
+    private List<String> cs_5_5;		// 止血干预措施的选择
     @JSONField(name="CS-6-1-1")
     private String cs_6_1_1;		// 是否有剖宫产并发症
     @JSONField(name="CS-6-1-2-1")
@@ -671,11 +671,11 @@ public class CsVo implements Serializable {
         this.cs_2_1_1_1 = cs_2_1_1_1;
     }
 
-    public String getCs_2_5_1() {
+    public List<String> getCs_2_5_1() {
         return cs_2_5_1;
     }
 
-    public void setCs_2_5_1(String cs_2_5_1) {
+    public void setCs_2_5_1(List<String> cs_2_5_1) {
         this.cs_2_5_1 = cs_2_5_1;
     }
 
@@ -1039,11 +1039,11 @@ public class CsVo implements Serializable {
         this.cs_5_4 = cs_5_4;
     }
 
-    public String getCs_5_5() {
+    public List<String> getCs_5_5() {
         return cs_5_5;
     }
 
-    public void setCs_5_5(String cs_5_5) {
+    public void setCs_5_5(List<String> cs_5_5) {
         this.cs_5_5 = cs_5_5;
     }
 

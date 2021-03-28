@@ -6,12 +6,15 @@ package com.zebone.quality.modules.cs.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
+import com.jeesite.common.shiro.realms.G;
 import com.zebone.quality.common.utils.TaskUtil;
 import com.zebone.quality.domain.UploadService;
 import com.zebone.quality.modules.common.UploadResult;
 import com.zebone.quality.modules.cs.entity.CsVo;
+import com.zebone.quality.modules.emr.service.EmrDataService;
 import com.zebone.quality.modules.stemi.entity.Stemi;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.collections.MapUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.flowable.engine.TaskService;
 import org.flowable.task.api.Task;
@@ -30,9 +33,13 @@ import com.jeesite.common.web.BaseController;
 import com.zebone.quality.modules.cs.entity.QualityCs;
 import com.zebone.quality.modules.cs.service.QualityCsService;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * cs剖宫产Controller
@@ -117,12 +124,13 @@ public class QualityCsController extends BaseController {
 	@PostMapping(value = "save")
 	@ResponseBody
 	public String save(@Validated QualityCs qualityCs) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-		if(qualityCs.getIsNewRecord()){
-			qualityCsService.save(qualityCs);
-			TaskUtil.startTask("cs",qualityCs.getId());
-		}else{
-			qualityCsService.save(qualityCs);
-		}
+//		if(qualityCs.getIsNewRecord()){
+//			qualityCsService.save(qualityCs);
+//			TaskUtil.startTask("cs",qualityCs.getId());
+//		}else{
+//
+//		}
+		qualityCsService.save(qualityCs);
 
         String result = uploadService.upload(qualityCs, new CsVo(), "CS");
 		Gson gson = new Gson();
@@ -194,5 +202,41 @@ public class QualityCsController extends BaseController {
 		}
 
 		return renderResult(Global.TRUE, text("流程审核通过！"));
+	}
+
+
+	private static Map<String,Object> codeMap = new HashMap<>(16);
+	static {
+		codeMap.put("Z37.000","a");
+		codeMap.put("Z37.100","b");
+		codeMap.put("Z37.200","c");
+		codeMap.put("Z37.300","d");
+		codeMap.put("Z37.400","e");
+		codeMap.put("Z37.500","f");
+		codeMap.put("Z37.600","g");
+		codeMap.put("Z37.700","h");
+	}
+
+	@Autowired
+	private EmrDataService emrDataService;
+
+	@ResponseBody
+	@RequestMapping(value = "commonData")
+	public String commonData(String patNo,String type, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		List<Map<String,Object>> result = emrDataService.getCommonData(patNo);
+		Map<String,Object> mapResult = result.stream().findFirst().orElseThrow(()->new Exception("未查询到患者病案信息"));
+		String icd = MapUtils.getString(mapResult,"DIAG_CODE_CLINIC_ICD");
+		String idNo = MapUtils.getString(mapResult,"ID_NO","");
+		mapResult.put("CM_0_1_3_1",MapUtils.getString(codeMap,icd,""));
+		mapResult.put("idcard",idNo);
+		mapResult.put("cm_0_1_5","0".equals(MapUtils.getString(mapResult,"cm_0_1_5"))?"n":"y");
+		Gson gson = new Gson();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		mapResult.put("cm_0_2_1_1",simpleDateFormat.format(MapUtils.getObject(mapResult,"cm_0_2_1_1")));
+		mapResult.put("cm_0_2_4_1",simpleDateFormat.format(MapUtils.getObject(mapResult,"admit_time")));
+		mapResult.put("cm_0_2_4_2",simpleDateFormat.format(MapUtils.getObject(mapResult,"dis_time")));
+		String jsonResult =  gson.toJson(mapResult);
+		return jsonResult;
 	}
 }
