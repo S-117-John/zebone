@@ -2126,7 +2126,8 @@ $("#inputForm").validate({
 			var obj = JSON.parse(data.message);
 			console.log(obj.errorMessage)
 			for(var key in obj){
-				window.scrollTo(0,$("#"+key.replace(new RegExp("-","g") ,"_").toLowerCase()).offsetTop);
+				$('html,body').animate({scrollTop:$("#"+key.replace(new RegExp("-","g") ,"_").toLowerCase()).offset().top}, 800);
+				// window.scrollTo(0,$("#"+key.replace(new RegExp("-","g") ,"_").toLowerCase()).offsetTop);
 				break;
 			}
 			js.showMessage(data.message);
