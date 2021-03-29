@@ -2123,8 +2123,8 @@
 $("#inputForm").validate({
 	submitHandler: function(form){
 		js.ajaxSubmitForm($(form), function(data){
-			var obj = JSON.parse(data.message);
-			console.log(obj.errorMessage)
+			// var obj = JSON.parse(data.message);
+			// console.log(obj.errorMessage)
 			// for(var key in obj){
 			// 	// $('html,body').animate({scrollTop:$("#"+key.replace(new RegExp("-","g") ,"_").toLowerCase()).offset().top}, 800);
 			// 	// // window.scrollTo(0,$("#"+key.replace(new RegExp("-","g") ,"_").toLowerCase()).offsetTop);
