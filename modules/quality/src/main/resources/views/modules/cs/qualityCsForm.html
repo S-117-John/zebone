@@ -2126,7 +2126,6 @@ $("#inputForm").validate({
 			var obj = JSON.parse(data.message);
 			console.log(obj.errorMessage)
 			for(var key in obj){
-				$("#"+key.toLowerCase()).val(obj[key]);
 				window.scrollTo(0,$("#"+key.replace(new RegExp("-","g") ,"_").toLowerCase()).offsetTop);
 				break;
 			}
