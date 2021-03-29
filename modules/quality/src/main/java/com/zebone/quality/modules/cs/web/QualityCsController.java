@@ -104,6 +104,7 @@ public class QualityCsController extends BaseController {
 	@RequestMapping(value = "form")
 	public String form(QualityCs qualityCs, Model model) {
 		model.addAttribute("qualityCs", qualityCs);
+		qualityCs.setCm_1_6_2("a");
 		return "modules/cs/qualityCsForm";
 	}
 

@@ -156,7 +156,7 @@ public class CsVo implements Serializable {
     @JSONField(name="CM-1-6-2")
     private String cm_1_6_2;		// 使用抗菌药物时间使用时间分层
     @JSONField(name="CM-1-6-3-2")
-    private String cm_1_6_3_2;		// 术后48小时之后继续使用的原因
+    private List<String> cm_1_6_3_2;		// 术后48小时之后继续使用的原因
     @JSONField(name="CS-4-1")
     private String cs_4_1;		// 是否实施新生儿Apgar评分
     @JSONField(name="CS-4-2")
@@ -951,11 +951,11 @@ public class CsVo implements Serializable {
         this.cm_1_6_2 = cm_1_6_2;
     }
 
-    public String getCm_1_6_3_2() {
+    public List<String> getCm_1_6_3_2() {
         return cm_1_6_3_2;
     }
 
-    public void setCm_1_6_3_2(String cm_1_6_3_2) {
+    public void setCm_1_6_3_2(List<String> cm_1_6_3_2) {
         this.cm_1_6_3_2 = cm_1_6_3_2;
     }
 

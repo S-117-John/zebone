@@ -351,6 +351,7 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -362,6 +363,7 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -373,6 +375,9 @@
 						</div>
 					</div>
 				</div>
+
+
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -892,7 +897,7 @@
 							<label class="control-label col-sm-2" title="CM-1-6-2">
 								<span class="required hide">*</span> ${text('使用抗菌药物时间使用时间分层')}：<i class="fa icon-question"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_1_6_2" dictType="CS_CM_1_6_2" blankOption="true" class="form-control" />
+								<#form:select path="cm_1_6_2" disabled="disabled" dictType="CS_CM_1_6_2" blankOption="true" class="form-control "/>
 							</div>
 						</div>
 					</div>
@@ -2175,6 +2180,24 @@ $("#inputForm").validate({
 	// 		$(this).val("")
 	// 	});
 	// });
+
+	$('#cs_1_1_1').on('ifChecked', function(){
+		var v = $('#cs_1_1_1 input:radio:checked').val();
+		if("y"==v){
+			$("input[name='cs_1_1_1_1']").removeClass("required")
+		}else {
+
+			$("input[name='cs_1_1_1_1']").addClass("required")
+		}
+	});
+	$('#cs_1_2_5').on('ifChecked', function(){
+		var v = $('#cs_1_2_5 input:radio:checked').val();
+		if("y"==v){
+			$("#cs_1_2_6").addClass("required")
+		}else {
+			$("#cs_1_2_6").removeClass("required")
+		}
+	});
 
 
 
