@@ -24,4 +24,8 @@ public class EmrDataService extends CrudService<EmrDataDao, EmrData> {
     public List<Map<String,Object>> getCommonData(String caseId){
         return dao.getCommonData(caseId);
     }
+
+    public List<Map<String,Object>> chargeList(String pkPage){
+        return dao.chargeList(pkPage);
+    }
 }

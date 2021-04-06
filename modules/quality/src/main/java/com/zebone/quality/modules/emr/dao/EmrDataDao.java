@@ -13,6 +13,6 @@ public interface EmrDataDao extends CrudDao<EmrData> {
     List<EmrData> getCaesareanSectionData(String caseId);
 
     List<Map<String,Object>> getCommonData(String caseId);
-
+    List<Map<String,Object>> chargeList(String pkPage);
 
 }
