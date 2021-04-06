@@ -241,6 +241,8 @@ public class QualityCsController extends BaseController {
 		mapResult.put("cm_0_2_1_1",simpleDateFormat.format(MapUtils.getObject(mapResult,"cm_0_2_1_1")));
 		mapResult.put("cm_0_2_4_1",simpleDateFormat.format(MapUtils.getObject(mapResult,"admit_time")));
 		mapResult.put("cm_0_2_4_2",simpleDateFormat.format(MapUtils.getObject(mapResult,"dis_time")));
+		//获取价格
+
 		String jsonResult =  gson.toJson(mapResult);
 		return jsonResult;
 	}
