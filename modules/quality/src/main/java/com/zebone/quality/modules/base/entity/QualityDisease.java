@@ -62,6 +62,22 @@ public class QualityDisease extends DataEntity<QualityDisease> {
 	 */
 	private String day;
 
+	public String getDayCondition() {
+		return dayCondition;
+	}
+
+	public void setDayCondition(String dayCondition) {
+		this.dayCondition = dayCondition;
+	}
+
+	public String getDay() {
+		return day;
+	}
+
+	public void setDay(String day) {
+		this.day = day;
+	}
+
 	public String getAge() {
 		return age;
 	}
