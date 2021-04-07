@@ -9,9 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
+import com.jeesite.common.codec.EncodeUtils;
 import com.jeesite.common.lang.DateUtils;
+import com.jeesite.common.mapper.JsonMapper;
 import com.jeesite.common.shiro.realms.G;
+import com.jeesite.modules.sys.entity.EmpUser;
+import com.jeesite.modules.sys.entity.UserDataScope;
 import com.zebone.quality.common.entity.ErrorMessage;
+import com.zebone.quality.common.entity.Patient;
 import com.zebone.quality.common.utils.TaskUtil;
 import com.zebone.quality.domain.UploadService;
 import com.zebone.quality.modules.common.UploadResult;
@@ -445,5 +450,33 @@ public class QualityCsController extends BaseController {
 
 		String jsonResult =  gson.toJson(mapResult);
 		return jsonResult;
+	}
+
+
+	/**
+	 * 选择员工对话框
+	 */
+	@RequestMapping(value = "patientSelect")
+	public String empUserSelect(EmpUser empUser, String selectData, String checkbox, Model model) {
+		String selectDataJson = EncodeUtils.decodeUrl(selectData);
+		if (JsonMapper.fromJson(selectDataJson, Map.class) != null){
+			model.addAttribute("selectData", selectDataJson);
+		}
+		model.addAttribute("checkbox", checkbox); // 是否显示复选框，支持多选
+		model.addAttribute("empUser", empUser); // ModelAttribute
+		return "modules/cs/patientSelect";
+	}
+
+	@RequestMapping(value = "patientListData")
+	@ResponseBody
+	public List<Patient> patientListData(HttpServletRequest request, HttpServletResponse response) {
+		//1、获取配置条件
+		//2、mssql数据源中查询对应结果集
+		Patient patient = new Patient();
+		patient.setName("ad");
+		patient.setPatNo("123");
+		List<Patient> list = new ArrayList<>();
+		list.add(patient);
+		return list;
 	}
 }
