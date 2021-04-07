@@ -181,6 +181,11 @@ public class QualityCsController extends BaseController {
 //		}else{
 //
 //		}
+		//处理caseid多选节点
+		if(!StringUtils.isEmpty(qualityCs.getCaseid())){
+			qualityCs.setCaseid(qualityCs.getCaseid().split(",")[0]);
+		}
+
 		qualityCsService.save(qualityCs);
 
         String result = uploadService.upload(qualityCs, new CsVo(), "CS");

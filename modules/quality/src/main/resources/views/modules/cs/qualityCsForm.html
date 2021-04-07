@@ -34,7 +34,7 @@
 								<#form:listselect id="testUser3" title="患者选择"
 								path="caseid" labelPath="caseid"
 								url="${ctx}/cs/qualityCs/patientSelect" allowClear="false"
-								checkbox="false" itemCode="name" itemName="name"/>
+								checkbox="false" itemCode="patNo" itemName="name"/>
 							</div>
 							<div class="col-sm-3">
 								<button type="button" class="btn btn-sm btn-primary" id="patientSubmit" onclick="importPatient('cs/qualityCs')"><i class="fa fa-check"></i> ${text('导入患者信息')}</button>&nbsp;
