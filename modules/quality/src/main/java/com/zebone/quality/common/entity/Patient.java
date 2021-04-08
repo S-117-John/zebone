@@ -8,4 +8,10 @@ public class Patient {
     private String name;
 
     private String patNo;
+
+    private String opCode;
+
+    private String inHosDays;
+
+    private String age;
 }

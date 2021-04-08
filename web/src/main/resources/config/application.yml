@@ -87,18 +87,18 @@ jdbc:
 #  
   # 多数据源配置：ds2
   ds2:
-    type: oracle
-    driver: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@127.0.0.1:1521/orcl
-    username: nhis
-    password: 123456
-    testSql: SELECT 1 FROM DUAL
-#    type: mssql
-#    driver: net.sourceforge.jtds.jdbc.Driver
-#    url: jdbc:jtds:sqlserver://192.168.1.36:1433/nhis_test
-#    username: sa
+#    type: oracle
+#    driver: oracle.jdbc.driver.OracleDriver
+#    url: jdbc:oracle:thin:@127.0.0.1:1521/orcl
+#    username: nhis
 #    password: 123456
-#    testSql: SELECT 1
+#    testSql: SELECT 1 FROM DUAL
+    type: mssql
+    driver: net.sourceforge.jtds.jdbc.Driver
+    url: jdbc:jtds:sqlserver://192.168.1.36:1433/nhis_test
+    username: sa
+    password: 123456
+    testSql: SELECT 1
 
     encrypt:
       username: false

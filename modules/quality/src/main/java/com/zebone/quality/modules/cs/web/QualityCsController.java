@@ -19,7 +19,10 @@ import com.zebone.quality.common.entity.ErrorMessage;
 import com.zebone.quality.common.entity.Patient;
 import com.zebone.quality.common.utils.TaskUtil;
 import com.zebone.quality.domain.UploadService;
+import com.zebone.quality.modules.base.entity.QualityDisease;
+import com.zebone.quality.modules.base.service.QualityDiseaseService;
 import com.zebone.quality.modules.common.UploadResult;
+import com.zebone.quality.modules.cs.dao.QualityCsPatientDao;
 import com.zebone.quality.modules.cs.entity.CsVo;
 import com.zebone.quality.modules.emr.service.EmrDataService;
 import com.zebone.quality.modules.stemi.entity.Stemi;
@@ -66,7 +69,13 @@ public class QualityCsController extends BaseController {
 	private UploadService uploadService;
 	@Autowired
 	private TaskService taskService;
-	
+
+	@Autowired
+	private QualityDiseaseService qualityDiseaseService;
+
+	@Autowired
+	private QualityCsPatientDao qualityCsPatientDao;
+
 	/**
 	 * 获取数据
 	 */
@@ -477,11 +486,55 @@ public class QualityCsController extends BaseController {
 	public List<Patient> patientListData(HttpServletRequest request, HttpServletResponse response) {
 		//1、获取配置条件
 		//2、mssql数据源中查询对应结果集
-		Patient patient = new Patient();
-		patient.setName("ad");
-		patient.setPatNo("123");
-		List<Patient> list = new ArrayList<>();
-		list.add(patient);
-		return list;
+		Map<String,Object> param = new HashMap<>(16);
+		QualityDisease qualityDisease = new QualityDisease();
+		qualityDisease.setCode("CS");
+		List<QualityDisease> qualityDiseaseList = qualityDiseaseService.findList(qualityDisease);
+		//icd9条件
+		qualityDisease = qualityDiseaseList.stream().findFirst().orElseThrow(()->new RuntimeException("未找到病种设置条件"));
+		String icd9 = qualityDisease.getIcd9();
+		String dayCondition = qualityDisease.getDayCondition();
+		String day = qualityDisease.getDay();
+		String ageCondition = qualityDisease.getAgeCondition();
+		String age = qualityDisease.getAge();
+
+		List<Patient> patients = qualityCsPatientDao.list(param);
+		patients = patients.stream().filter(patient -> icd9.contains(patient.getOpCode())).collect(Collectors.toList());
+		if(!StringUtils.isEmpty(dayCondition)&&!StringUtils.isEmpty(day)){
+			switch (dayCondition){
+				case "大于":
+					patients = patients.stream().filter(patient -> Integer.parseInt(patient.getInHosDays())>Integer.parseInt(day)).collect(Collectors.toList());
+					break;
+				case "大于等于":
+					patients = patients.stream().filter(patient -> Integer.parseInt(patient.getInHosDays())>=Integer.parseInt(day)).collect(Collectors.toList());
+					break;
+				case "小于":
+					patients = patients.stream().filter(patient -> Integer.parseInt(patient.getInHosDays())<Integer.parseInt(day)).collect(Collectors.toList());
+					break;
+				case "小于等于":
+					patients = patients.stream().filter(patient -> Integer.parseInt(patient.getInHosDays())<=Integer.parseInt(day)).collect(Collectors.toList());
+					break;
+			}
+		}
+
+		if(!StringUtils.isEmpty(ageCondition)&&!StringUtils.isEmpty(age)){
+			switch (ageCondition){
+				case "大于":
+					patients = patients.stream().filter(patient -> Integer.parseInt(patient.getAge().replace("Y",""))>Integer.parseInt(age)).collect(Collectors.toList());
+					break;
+				case "大于等于":
+					patients = patients.stream().filter(patient -> Integer.parseInt(patient.getAge().replace("Y",""))>=Integer.parseInt(age)).collect(Collectors.toList());
+					break;
+				case "小于":
+					patients = patients.stream().filter(patient -> Integer.parseInt(patient.getAge().replace("Y",""))<Integer.parseInt(age)).collect(Collectors.toList());
+					break;
+				case "小于等于":
+					patients = patients.stream().filter(patient -> Integer.parseInt(patient.getAge().replace("Y",""))<=Integer.parseInt(age)).collect(Collectors.toList());
+					break;
+			}
+		}
+
+
+		return patients;
 	}
 }
