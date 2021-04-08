@@ -182,6 +182,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_6_14", attrName="cm_6_14", label="其中", comment="其中：麻醉费"),
 		@Column(name="cm_6_15", attrName="cm_6_15", label="其中", comment="其中：手术费"),
 		@Column(name="cm_6_16", attrName="cm_6_16", label="康复费"),
+		@Column(name="cm_6_17", attrName="cm_6_17", label="中医治疗费"),
 		@Column(name="cm_6_18", attrName="cm_6_18", label="西药费"),
 		@Column(name="cm_6_19", attrName="cm_6_19", label="其中", comment="其中：抗菌药物费"),
 		@Column(name="cm_6_20", attrName="cm_6_20", label="中成药费"),
