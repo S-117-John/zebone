@@ -31,7 +31,7 @@
 								<span class="required">*</span> ${text('患者病案号')}：<i class="fa icon-question"></i></label>
 							<div class="col-sm-7">
 <!--								<#form:input path="caseid" maxlength="64" class="form-control required"/>-->
-								<#form:listselect id="testUser3" title="患者选择"
+								<#form:listselect id="patNo" title="患者选择"
 								path="caseid" labelPath="caseid"
 								url="${ctx}/cs/qualityCs/patientSelect" allowClear="false"
 								checkbox="false" itemCode="patNo" itemName="name"/>
@@ -2162,7 +2162,7 @@ $("#inputForm").validate({
 		$.ajax({
 			url:'${ctx}/cs/qualityCs/commonData',
 			type: "POST",
-			data: {patNo: $("#caseid").val()},
+			data: {patNo: $("#patNoCode").val()},
 			success:function (data){
 				var obj = JSON.parse(data);
 				for(var key in obj){
