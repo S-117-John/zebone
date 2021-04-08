@@ -24,6 +24,11 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="type", attrName="type", label="病种分类"),
 		@Column(name="form_url", attrName="formUrl", label="表单Url"),
 		@Column(name="status", attrName="status", label="状态"),
+		@Column(name="icd9", attrName="icd9", label="手术ICD-9-CM-3编码"),
+		@Column(name="ageCondition", attrName="ageCondition", label="年龄条件"),
+		@Column(name="age", attrName="age", label="年龄"),
+		@Column(name="dayCondition", attrName="dayCondition", label="住院天数条件"),
+		@Column(name="day", attrName="day", label="住院天数"),
 	}, orderBy="a.id DESC"
 )
 public class QualityDisease extends DataEntity<QualityDisease> {
@@ -35,7 +40,68 @@ public class QualityDisease extends DataEntity<QualityDisease> {
 	private String imagePath;		// 图标
 	private String type;		// 病种分类
 	private String formUrl;		// 表单Url
-	
+	private String icd9;
+
+	/**
+	 * 年龄条件
+	 */
+	private String ageCondition;
+
+	/**
+	 * 年龄
+	 */
+	private String age;
+
+	/**
+	 * 住院天数条件
+	 */
+	private String dayCondition;
+
+	/**
+	 * 住院天数
+	 */
+	private String day;
+
+	public String getDayCondition() {
+		return dayCondition;
+	}
+
+	public void setDayCondition(String dayCondition) {
+		this.dayCondition = dayCondition;
+	}
+
+	public String getDay() {
+		return day;
+	}
+
+	public void setDay(String day) {
+		this.day = day;
+	}
+
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+	public String getAgeCondition() {
+		return ageCondition;
+	}
+
+	public void setAgeCondition(String ageCondition) {
+		this.ageCondition = ageCondition;
+	}
+
+	public String getIcd9() {
+		return icd9;
+	}
+
+	public void setIcd9(String icd9) {
+		this.icd9 = icd9;
+	}
+
 	public QualityDisease() {
 		this(null);
 	}
