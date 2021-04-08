@@ -2,6 +2,8 @@ package com.zebone.quality.common.entity;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class Patient {
 
@@ -14,4 +16,6 @@ public class Patient {
     private String inHosDays;
 
     private String age;
+
+    private Date birth;
 }

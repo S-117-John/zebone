@@ -4,7 +4,7 @@
 
 
 	<select id="list" resultType="com.zebone.quality.common.entity.Patient">
-		select page.NAME,page.PAT_NO,ops.OP_CODE,page.IN_HOS_DAYS,page.AGE_TXT age
+		select page.NAME,page.PAT_NO,ops.OP_CODE,page.IN_HOS_DAYS,page.AGE_TXT age,page.BIRTH_DATE birth
 		from emr_home_page_ops ops
 		inner join EMR_HOME_PAGE page on page.PK_PAGE = ops.PK_PAGE
 		where page.DIS_TIME is not null

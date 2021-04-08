@@ -17,6 +17,7 @@ import com.jeesite.modules.sys.entity.EmpUser;
 import com.jeesite.modules.sys.entity.UserDataScope;
 import com.zebone.quality.common.entity.ErrorMessage;
 import com.zebone.quality.common.entity.Patient;
+import com.zebone.quality.common.utils.QualityUtil;
 import com.zebone.quality.common.utils.TaskUtil;
 import com.zebone.quality.domain.UploadService;
 import com.zebone.quality.modules.base.entity.QualityDisease;
@@ -520,16 +521,16 @@ public class QualityCsController extends BaseController {
 		if(!StringUtils.isEmpty(ageCondition)&&!StringUtils.isEmpty(age)){
 			switch (ageCondition){
 				case "大于":
-					patients = patients.stream().filter(patient -> Integer.parseInt(patient.getAge().replace("Y",""))>Integer.parseInt(age)).collect(Collectors.toList());
+					patients = patients.stream().filter(patient -> QualityUtil.getAgeByBirth(patient.getBirth()) >Integer.parseInt(age)).collect(Collectors.toList());
 					break;
 				case "大于等于":
-					patients = patients.stream().filter(patient -> Integer.parseInt(patient.getAge().replace("Y",""))>=Integer.parseInt(age)).collect(Collectors.toList());
+					patients = patients.stream().filter(patient -> QualityUtil.getAgeByBirth(patient.getBirth())>=Integer.parseInt(age)).collect(Collectors.toList());
 					break;
 				case "小于":
-					patients = patients.stream().filter(patient -> Integer.parseInt(patient.getAge().replace("Y",""))<Integer.parseInt(age)).collect(Collectors.toList());
+					patients = patients.stream().filter(patient -> QualityUtil.getAgeByBirth(patient.getBirth())<Integer.parseInt(age)).collect(Collectors.toList());
 					break;
 				case "小于等于":
-					patients = patients.stream().filter(patient -> Integer.parseInt(patient.getAge().replace("Y",""))<=Integer.parseInt(age)).collect(Collectors.toList());
+					patients = patients.stream().filter(patient -> QualityUtil.getAgeByBirth(patient.getBirth())<=Integer.parseInt(age)).collect(Collectors.toList());
 					break;
 			}
 		}
