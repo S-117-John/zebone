@@ -3,10 +3,13 @@
 <mapper namespace="com.zebone.quality.modules.cs.dao.QualityCsPatientDao">
 
 
-	<select id="list" resultType="com.zebone.quality.common.entity.Patient">
+	<select id="list" parameterType="java.util.Map" resultType="com.zebone.quality.common.entity.Patient">
 		select page.NAME,page.PAT_NO,ops.OP_CODE,page.IN_HOS_DAYS,page.AGE_TXT age,page.BIRTH_DATE birth
 		from emr_home_page_ops ops
 		inner join EMR_HOME_PAGE page on page.PK_PAGE = ops.PK_PAGE
-		where page.DIS_TIME is not null
+		where page.DIS_TIME is not null and ops.OP_CODE in
+		<foreach item="item" index="index" collection="icd9" open="(" separator="," close=")">
+			#{item}
+		</foreach>
 	</select>
 </mapper>
