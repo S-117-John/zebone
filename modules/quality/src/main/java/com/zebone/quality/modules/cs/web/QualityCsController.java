@@ -500,6 +500,7 @@ public class QualityCsController extends BaseController {
 		String age = qualityDisease.getAge();
 		param.put("icd9",icd9.split(","));
 		param.put("patNo",patientParam.getPatNo());
+		param.put("name",patientParam.getName());
 		List<Patient> patients = qualityCsPatientDao.list(param);
 		patients = patients.stream().filter(patient -> icd9.contains(patient.getOpCode())).collect(Collectors.toList());
 		if(!StringUtils.isEmpty(dayCondition)&&!StringUtils.isEmpty(day)){

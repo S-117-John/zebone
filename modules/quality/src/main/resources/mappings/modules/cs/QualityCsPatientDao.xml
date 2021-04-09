@@ -17,6 +17,9 @@
 		<if test="patNo!=null and patNo!=''">
 			and page.PAT_NO = #{patNo}
 		</if>
+		<if test="name!=null and name!=''">
+			and page.NAME = #{name}
+		</if>
 
 	</select>
 </mapper>
