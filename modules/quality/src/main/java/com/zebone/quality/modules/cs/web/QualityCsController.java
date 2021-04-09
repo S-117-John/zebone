@@ -162,6 +162,33 @@ public class QualityCsController extends BaseController {
 			qualityCs.setCm_6_1(0.0);
 			qualityCs.setCm_6_2(0.0);
 			qualityCs.setCm_6_3(0.0);
+			qualityCs.setCm_6_4(0.0);
+            qualityCs.setCm_6_5(0.0);
+            qualityCs.setCm_6_6(0.0);
+            qualityCs.setCm_6_7(0.0);
+            qualityCs.setCm_6_8(0.0);
+            qualityCs.setCm_6_9(0.0);
+            qualityCs.setCm_6_10(0.0);
+            qualityCs.setCm_6_11(0.0);
+            qualityCs.setCm_6_12(0.0);
+            qualityCs.setCm_6_13(0.0);
+            qualityCs.setCm_6_14(0.0);
+            qualityCs.setCm_6_15(0.0);
+            qualityCs.setCm_6_16(0.0);
+            qualityCs.setCm_6_17(0.0);
+            qualityCs.setCm_6_18(0.0);
+            qualityCs.setCm_6_19(0.0);
+            qualityCs.setCm_6_20(0.0);
+            qualityCs.setCm_6_21(0.0);
+            qualityCs.setCm_6_22(0.0);
+            qualityCs.setCm_6_23(0.0);
+            qualityCs.setCm_6_24(0.0);
+            qualityCs.setCm_6_25(0.0);
+            qualityCs.setCm_6_26(0.0);
+            qualityCs.setCm_6_27(0.0);
+            qualityCs.setCm_6_28(0.0);
+            qualityCs.setCm_6_29(0.0);
+            qualityCs.setCm_6_30(0.0);
 		}
 
 		model.addAttribute("qualityCs", qualityCs);
