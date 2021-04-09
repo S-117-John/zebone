@@ -2912,4 +2912,55 @@ $("#inputForm").validate({
 		}
 	});
 
+
+
+	//末次月经日期是否确定(CS-0-2-2-1)等于"无法确定或无记录"(UTD)时无需填写
+	//末次月经日期 CS-0-2-2
+	$('#cs_0_2_2_1').on('ifChecked', function(){
+		$('#cs_0_2_2_1 input:checkbox:checked').each(function(i,v){
+			var value = $(this).val();
+			if("UTD"==value){
+				$("input[name='cs_0_2_2']").removeClass("required")
+			}
+		});
+	});
+	$('#cs_0_2_2_1').on('ifUnchecked', function(event){
+		var flag = true;
+		$('#cs_0_2_2_1 input:checkbox:checked').each(function(i,v){
+			var value = $(this).val();
+			if("UTD"==value){
+				flag = false;
+			}
+		});
+		if(flag){
+			$("input[name='cs_0_2_2']").addClass("required")
+		}
+	});
+
+
+	//到达本院急诊或者门诊日期时间是否确定(cm_0_2_3_1)等于"无法确定或无记录"(UTD)时无需填写
+	//到达本院急诊或者门诊日期时间 cm_0_2_3_2
+	$('#cm_0_2_3_1').on('ifChecked', function(){
+		$('#cm_0_2_3_1 input:checkbox:checked').each(function(i,v){
+			var value = $(this).val();
+			if("UTD"==value){
+				$("input[name='cm_0_2_3_2']").removeClass("required")
+			}
+		});
+	});
+	$('#cm_0_2_3_1').on('ifUnchecked', function(event){
+		var flag = true;
+		$('#cm_0_2_3_1 input:checkbox:checked').each(function(i,v){
+			var value = $(this).val();
+			if("UTD"==value){
+				flag = false;
+			}
+		});
+		if(flag){
+			$("input[name='cm_0_2_3_2']").addClass("required")
+		}
+	});
+
+
+
 </script>
