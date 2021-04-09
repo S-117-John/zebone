@@ -484,7 +484,7 @@ public class QualityCsController extends BaseController {
 
 	@RequestMapping(value = "patientListData")
 	@ResponseBody
-	public List<Patient> patientListData(HttpServletRequest request, HttpServletResponse response) {
+	public List<Patient> patientListData(Patient patientParam,HttpServletRequest request, HttpServletResponse response) {
 		//1、获取配置条件
 		//2、mssql数据源中查询对应结果集
 		Map<String,Object> param = new HashMap<>(16);
@@ -499,6 +499,7 @@ public class QualityCsController extends BaseController {
 		String ageCondition = qualityDisease.getAgeCondition();
 		String age = qualityDisease.getAge();
 		param.put("icd9",icd9.split(","));
+		param.put("patNo",patientParam.getPatNo());
 		List<Patient> patients = qualityCsPatientDao.list(param);
 		patients = patients.stream().filter(patient -> icd9.contains(patient.getOpCode())).collect(Collectors.toList());
 		if(!StringUtils.isEmpty(dayCondition)&&!StringUtils.isEmpty(day)){
