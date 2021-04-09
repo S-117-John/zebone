@@ -157,6 +157,11 @@ public class QualityCsController extends BaseController {
 			qualityCs.setCm_7_2_4("a,b,c,d");
 			//告知随访
 			qualityCs.setCm_7_2_5("a,b,c");
+
+			//默认费用
+			qualityCs.setCm_6_1(0.0);
+			qualityCs.setCm_6_2(0.0);
+			qualityCs.setCm_6_3(0.0);
 		}
 
 		model.addAttribute("qualityCs", qualityCs);
@@ -309,155 +314,155 @@ public class QualityCsController extends BaseController {
 				String itemCode = MapUtils.getString(map,"ITEM_CODE");
 				//住院总费用
 				if("0".equals(itemCode)){
-					mapResult.put("cm_6_1",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_1",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 				//自负金额
 				if("99".equals(itemCode)){
-					mapResult.put("cm_6_2",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_2",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 				//一般医疗服务费
 				if("1".equals(itemCode)){
-					mapResult.put("cm_6_3",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_3",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//一般医疗操作费
 				if("2".equals(itemCode)){
-					mapResult.put("cm_6_4",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_4",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//护理费
 				if("3".equals(itemCode)){
-					mapResult.put("cm_6_5",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_5",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//综合医疗服务类其他费用
 				if("4".equals(itemCode)){
-					mapResult.put("cm_6_6",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_6",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//病理诊断费
 				if("5".equals(itemCode)){
-					mapResult.put("cm_6_7",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_7",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//实验室诊断费
 				if("6".equals(itemCode)){
-					mapResult.put("cm_6_8",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_8",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//影像学诊断费
 				if("7".equals(itemCode)){
-					mapResult.put("cm_6_9",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_9",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//临床诊断项目费
 				if("8".equals(itemCode)){
-					mapResult.put("cm_6_10",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_10",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//非手术治疗项目费
 				if("9".equals(itemCode)){
-					mapResult.put("cm_6_11",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_11",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//非手术治疗项目费
 				if("9".equals(itemCode)){
-					mapResult.put("cm_6_11",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_11",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//其中：临床物理治疗费
 				if("901".equals(itemCode)){
-					mapResult.put("cm_6_12",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_12",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//手术治疗费
 				if("10".equals(itemCode)){
-					mapResult.put("cm_6_13",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_13",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//其中：麻醉费
 				if("1001".equals(itemCode)){
-					mapResult.put("cm_6_14",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_14",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//其中：手术费
 				if("1002".equals(itemCode)){
-					mapResult.put("cm_6_15",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_15",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//康复费
 				if("11".equals(itemCode)){
-					mapResult.put("cm_6_16",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_16",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//中医治疗费
 				if("12".equals(itemCode)){
-					mapResult.put("cm_6_17",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_17",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//西药费
 				if("13".equals(itemCode)){
-					mapResult.put("cm_6_18",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_18",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//其中：抗菌药物费
 				if("1301".equals(itemCode)){
-					mapResult.put("cm_6_19",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_19",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//中成药费
 				if("14".equals(itemCode)){
-					mapResult.put("cm_6_20",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_20",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//中成药费
 				if("15".equals(itemCode)){
-					mapResult.put("cm_6_21",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_21",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//血费
 				if("16".equals(itemCode)){
-					mapResult.put("cm_6_22",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_22",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//白蛋白类制品费
 				if("17".equals(itemCode)){
-					mapResult.put("cm_6_23",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_23",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//球蛋白类制品费
 				if("18".equals(itemCode)){
-					mapResult.put("cm_6_24",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_24",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//凝血因子类制品费
 				if("19".equals(itemCode)){
-					mapResult.put("cm_6_25",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_25",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//细胞因子类制品费
 				if("20".equals(itemCode)){
-					mapResult.put("cm_6_26",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_26",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//检查用一次性医用材料费
 				if("21".equals(itemCode)){
-					mapResult.put("cm_6_27",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_27",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//治疗用一次性医用材料费
 				if("22".equals(itemCode)){
-					mapResult.put("cm_6_28",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_28",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//手术用一次性医用材料费
 				if("23".equals(itemCode)){
-					mapResult.put("cm_6_29",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_29",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 				//其他费
 				if("24".equals(itemCode)){
-					mapResult.put("cm_6_30",MapUtils.getObject(map,"ITEM_AMOUNT"));
+					mapResult.put("cm_6_30",MapUtils.getObject(map,"ITEM_AMOUNT",0));
 				}
 
 			}
