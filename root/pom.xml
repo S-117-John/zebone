@@ -19,6 +19,7 @@
         <module>../web</module>
 		<module>../modules/pay</module>
 		<module>../modules/quality</module>
+		<module>../modules/payment</module>
     </modules>
 	
 

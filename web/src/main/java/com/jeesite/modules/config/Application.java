@@ -12,6 +12,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 import com.jeesite.common.io.PropertiesUtils;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 /**
  * JeeSite Web
@@ -21,6 +22,7 @@ import com.jeesite.common.io.PropertiesUtils;
 @SpringBootApplication(scanBasePackages={"com.jeesite.modules","com.zebone"})
 @EntityScan(basePackages = {"com.zebone"})
 @MapperScan("com.zebone.quality.modules")
+@EnableJpaAuditing
 public class Application extends SpringBootServletInitializer {
 	
 	public static void main(String[] args) {

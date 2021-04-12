@@ -3,7 +3,7 @@
 <mapper namespace="com.zebone.quality.modules.base.dao.QualityDiseaseDao">
 	
 
-	<select id="findList" resultType="QualityDisease">
+	<select id="findList" resultType="com.zebone.quality.modules.base.entity.QualityDisease">
 		SELECT ${sqlMap.column.toSql()}
 		FROM ${sqlMap.table.toSql()}
 		<where>

@@ -57,6 +57,12 @@
 			<version>0.0.1</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.zebone</groupId>
+			<artifactId>payment</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
 
 
 		<!-- 自定义jar依赖包演示
