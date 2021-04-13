@@ -388,4 +388,24 @@ public class QualityCs extends DataEntity<QualityCs> {
 	public QualityCs(String id){
 		super(id);
 	}
+
+	@Override
+	public Date getCreateDate_gte() {
+		return sqlMap.getWhere().getValue("create_date", QueryType.GTE);
+	}
+
+	@Override
+	public void setCreateDate_gte(Date createDate) {
+		sqlMap.getWhere().and("create_date", QueryType.GTE, createDate);
+	}
+
+	@Override
+	public Date getCreateDate_lte() {
+		return sqlMap.getWhere().getValue("create_date", QueryType.LTE);
+	}
+
+	@Override
+	public void setCreateDate_lte(Date createDate) {
+		sqlMap.getWhere().and("create_date", QueryType.LTE, createDate);
+	}
 }
