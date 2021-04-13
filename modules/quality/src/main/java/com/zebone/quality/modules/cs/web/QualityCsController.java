@@ -240,6 +240,21 @@ public class QualityCsController extends BaseController {
 		}
 		return renderResult(Global.TRUE, text("保存cs剖宫产成功！"));
 	}
+
+    /**
+     * 暂存cs剖宫产
+     * @param qualityCs
+     * @return
+     * @throws NoSuchMethodException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
+     */
+    @RequiresPermissions("cs:qualityCs:edit")
+    @RequestMapping(value = "temporary")
+    @ResponseBody
+	public String temporary(QualityCs qualityCs)throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        return null;
+    }
 	
 	/**
 	 * 停用cs剖宫产
@@ -317,6 +332,15 @@ public class QualityCsController extends BaseController {
 	@Autowired
 	private EmrDataService emrDataService;
 
+    /**
+     * 导入患者信息
+     * @param patNo
+     * @param type
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
 	@ResponseBody
 	@RequestMapping(value = "commonData")
 	public String commonData(String patNo,String type, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -514,6 +538,13 @@ public class QualityCsController extends BaseController {
 		return "modules/cs/patientSelect";
 	}
 
+    /**
+     * 新增上报时，查询符合条件的病人
+     * @param patientParam
+     * @param request
+     * @param response
+     * @return
+     */
 	@RequestMapping(value = "patientListData")
 	@ResponseBody
 	public List<Patient> patientListData(Patient patientParam,HttpServletRequest request, HttpServletResponse response) {
@@ -533,6 +564,10 @@ public class QualityCsController extends BaseController {
 		param.put("icd9",icd9.split(","));
 		param.put("patNo",patientParam.getPatNo());
 		param.put("name",patientParam.getName());
+		//增加出院起止时间
+        param.put("startTime",patientParam.getStartTime());
+        param.put("endTime",patientParam.getEndTime());
+
 		List<Patient> patients = qualityCsPatientDao.list(param);
 		patients = patients.stream().filter(patient -> icd9.contains(patient.getOpCode())).collect(Collectors.toList());
 		if(!StringUtils.isEmpty(dayCondition)&&!StringUtils.isEmpty(day)){

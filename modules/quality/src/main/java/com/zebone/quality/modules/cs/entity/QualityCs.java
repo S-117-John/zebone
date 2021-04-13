@@ -380,6 +380,9 @@ public class QualityCs extends DataEntity<QualityCs> {
 	private Double cm_6_28;		// 治疗用一次性医用材料费
 	private Double cm_6_29;		// 手术用一次性医用材料费
 	private Double cm_6_30;		// 其他费
+
+    private Date startTime;     //出院开始时间
+    private Date endTime;       //出院截至时间
 	
 	public QualityCs() {
 		this(null);

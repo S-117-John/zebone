@@ -36,7 +36,7 @@ jdbc:
   type: mysql
   driver: com.mysql.jdbc.Driver
 #  url: jdbc:mysql://rm-2vc6kw5695uxe2a65io.mysql.cn-chengdu.rds.aliyuncs.com:3306/zebone?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
-  url: jdbc:mysql://127.0.0.1:3306/zebone?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
+  url: jdbc:mysql://192.168.1.36:3306/zebone?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
   username: root
   password: 123456
   testSql: SELECT 1

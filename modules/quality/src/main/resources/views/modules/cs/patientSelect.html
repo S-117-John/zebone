@@ -16,6 +16,19 @@
 						<#form:input path="name" maxlength="100" class="form-control width-90"/>
 					</div>
 				</div>
+                 <!--加时间选择-->
+                <div class="form-group">
+                    <label class="control-label">${text('开始时间')}：</label>
+                       <#form:input path="startTime" readonly="true" maxlength="20" class="form-control Wdate required"
+                       dataFormat="date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});"/>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">${text('结束时间')}：</label>
+                       <#form:input path="endTime" readonly="true" maxlength="20" class="form-control Wdate required"
+                       dataFormat="date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});"/>
+                </div>
+                 <!--===============-->
+
 				<div class="form-group">
 					<button type="submit" class="btn btn-primary btn-sm">查询</button>
 					<button type="reset" class="btn btn-default btn-sm">重置</button>
