@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.zebone.common.constant.PayTypeConstant;
 import com.zebone.modules.ali.entity.AliConfig;
 import com.zebone.modules.ali.service.AliConfigService;
+import com.zebone.modules.api.dto.AlipayRefuntParam;
 import com.zebone.modules.api.dto.PayDTO;
 import com.zebone.modules.api.service.AlipayTradeService;
 import com.zebone.modules.pay.entity.TradeRecord;
@@ -33,10 +34,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "api/unite/pay")
+@RequestMapping(value = "api/alipay")
 
 @Api(value = "统一支付接口",tags = "统一支付接口")
-public class UnitePayController {
+public class AlipayPayController {
 
     @Autowired
     private AliConfigService aliConfigService;
@@ -159,5 +160,10 @@ public class UnitePayController {
 
 
         return result;
+    }
+
+    @ApiOperation(httpMethod = "POST",value = "统一收单交易退款接口",notes = "当交易发生之后一段时间内，由于买家或者卖家的原因需要退款时，卖家可以通过退款接口将支付款退还给买家，支付宝将在收到退款请求并且验证成功之后，按照退款规则将支付款按原路退到买家帐号上。 交易超过约定时间（签约时设置的可退款时间）的订单无法进行退款 支付宝退款支持单笔交易分多次退款，多次退款需要提交原支付订单的商户订单号和设置不同的退款单号。一笔退款失败后重新提交，要采用原来的退款单号。总退款金额不能超过用户实际支付金额")
+    public Object refund(@RequestBody AlipayRefuntParam param){
+        return null;
     }
 }
