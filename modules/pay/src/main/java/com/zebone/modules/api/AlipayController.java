@@ -4,17 +4,16 @@ import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.request.AlipayDataDataserviceBillDownloadurlQueryRequest;
-import com.alipay.api.request.AlipayTradePrecreateRequest;
 import com.alipay.api.response.AlipayDataDataserviceBillDownloadurlQueryResponse;
 import com.alipay.api.response.AlipayTradePayResponse;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
 import com.google.gson.Gson;
-import com.zebone.common.constant.PayTypeConstant;
 import com.zebone.modules.ali.entity.AliConfig;
 import com.zebone.modules.ali.service.AliConfigService;
+import com.zebone.modules.api.dto.AlipayBillParam;
 import com.zebone.modules.api.dto.AlipayRefuntParam;
-import com.zebone.modules.api.dto.PayDTO;
-import com.zebone.modules.api.service.AlipayTradeService;
+import com.zebone.modules.api.dto.AlipayParam;
+import com.zebone.modules.api.service.AlipayService;
 import com.zebone.modules.pay.entity.TradeRecord;
 import com.zebone.modules.pay.service.TradeRecordService;
 import io.swagger.annotations.Api;
@@ -28,7 +27,6 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -36,43 +34,38 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "api/alipay")
 
-@Api(value = "统一支付接口",tags = "统一支付接口")
-public class AlipayPayController {
+@Api(value = "支付宝支付接口",tags = "支付宝支付接口")
+public class AlipayController {
 
     @Autowired
     private AliConfigService aliConfigService;
 
     @Autowired
-    private AlipayTradeService alipayTradeService;
+    private AlipayService alipayService;
 
     @Autowired
     private TradeRecordService tradeRecordService;
 
     @ApiOperation(httpMethod = "POST",value = "统一收单交易支付接口",notes = "收银员使用扫码设备读取用户手机支付宝“付款码”信息后，将二维码或条码信息通过本接口上送至支付宝发起支付")
     @RequestMapping("aliPayBarcode")
-    public Object aliPayBarcode(@RequestBody PayDTO payDTO, HttpServletRequest request, HttpServletResponse response) throws InvocationTargetException, IllegalAccessException, AlipayApiException, AlipayApiException {
+    public Object aliPayBarcode(@RequestBody AlipayParam alipayParam, HttpServletRequest request, HttpServletResponse response) throws InvocationTargetException, IllegalAccessException, AlipayApiException, AlipayApiException {
         Object result = null;
-        if(PayTypeConstant.WX.equalsIgnoreCase(payDTO.getPayType())){
+        AliConfig aliConfig = new AliConfig();
+        aliConfig.setAppId(alipayParam.getAppId());
 
-        }else if(PayTypeConstant.AL.equalsIgnoreCase(payDTO.getPayType())){
-            AliConfig aliConfig = new AliConfig();
-            aliConfig.setAppId(payDTO.getAppId());
+        List<AliConfig> aliConfigList = aliConfigService.findList(aliConfig);
+        if(aliConfigList.size()==1){
+            result = alipayService.tradePay(alipayParam,aliConfigList.get(0));
 
-            List<AliConfig> aliConfigList = aliConfigService.findList(aliConfig);
-            if(aliConfigList.size()==1){
-                result = alipayTradeService.tradePay(payDTO,aliConfigList.get(0));
-
-                AlipayTradePayResponse alipayTradePayResponse = (AlipayTradePayResponse) result;
-                TradeRecord tradeRecord = new TradeRecord();
-                BeanUtils.copyProperties(alipayTradePayResponse,tradeRecord);
-                if(!alipayTradePayResponse.isSuccess()){
-                    tradeRecord.setRemarks(alipayTradePayResponse.getSubMsg());
-                }
-                tradeRecord.setOutTradeNo(payDTO.getOutTradeNo());
-                tradeRecord.setPayType(payDTO.getPayType());
-                tradeRecordService.save(tradeRecord);
+            AlipayTradePayResponse alipayTradePayResponse = (AlipayTradePayResponse) result;
+            TradeRecord tradeRecord = new TradeRecord();
+            BeanUtils.copyProperties(alipayTradePayResponse,tradeRecord);
+            if(!alipayTradePayResponse.isSuccess()){
+                tradeRecord.setRemarks(alipayTradePayResponse.getSubMsg());
             }
-
+            tradeRecord.setOutTradeNo(alipayParam.getOutTradeNo());
+            tradeRecord.setPayType("支付宝");
+            tradeRecordService.save(tradeRecord);
         }
 
 
@@ -95,7 +88,7 @@ public class AlipayPayController {
      */
     @ApiOperation(httpMethod = "POST",value = "支付宝查询对账单下载地址",notes = "为方便商户快速查账，支持商户通过本接口获取商户离线账单下载地址")
     @RequestMapping("aliDownLoadBill")
-    public Object downLoadAliBill(@RequestBody PayDTO payDTO, HttpServletRequest req, HttpServletResponse res) throws IOException, AlipayApiException {
+    public Object downLoadAliBill(@RequestBody AlipayBillParam alipayParam, HttpServletRequest req, HttpServletResponse res) throws IOException, AlipayApiException {
         String filePath = "";
         String jsonStr = "";
         String gateway = "";
@@ -104,7 +97,7 @@ public class AlipayPayController {
         String aliPublicKey = "";
         String alipayPublicKey = "";
         AliConfig aliConfig = new AliConfig();
-        aliConfig.setAppId(payDTO.getAppId());
+        aliConfig.setAppId(alipayParam.getAppId());
 
         List<AliConfig> aliConfigList = aliConfigService.findList(aliConfig);
         AliConfig ac = aliConfigList.get(0);
@@ -115,15 +108,15 @@ public class AlipayPayController {
             aliPublicKey = ac.getPayPublicKey();
         }
 
-        payDTO.setBillType("trade");
+        alipayParam.setBillType("trade");
         String strType = "json";// 数据格式
         String chartType = "utf-8";// 编码格式
         Gson gson = new Gson();
-        String bizContent = gson.toJson(payDTO);
+        String bizContent = gson.toJson(alipayParam);
         // 支付宝公钥
         AlipayClient alipayClient = new DefaultAlipayClient(gateway, appId, privateKey, strType, chartType, aliPublicKey,"RSA2");
         AlipayDataDataserviceBillDownloadurlQueryRequest request = new AlipayDataDataserviceBillDownloadurlQueryRequest();
-        request.setBizContent("{\"bill_type\":\"trade\",\"bill_date\":\""+ payDTO.getBillDate() + "\"}");
+        request.setBizContent("{\"bill_type\":\"trade\",\"bill_date\":\""+ alipayParam.getBillDate() + "\"}");
 
         AlipayDataDataserviceBillDownloadurlQueryResponse response = alipayClient.execute(request);
 
@@ -133,29 +126,24 @@ public class AlipayPayController {
 
     @ApiOperation(httpMethod = "POST",value = "统一收单线下交易预创建",notes = "收银员通过收银台或商户后台调用支付宝接口，生成二维码后，展示给用户，由用户扫描二维码完成订单支付。")
     @RequestMapping("aliPayQrcode")
-    public Object aliPayQrcode(@RequestBody PayDTO payDTO, @ApiIgnore HttpServletRequest request, @ApiIgnore HttpServletResponse response) throws AlipayApiException {
+    public Object aliPayQrcode(@RequestBody AlipayParam alipayParam, @ApiIgnore HttpServletRequest request, @ApiIgnore HttpServletResponse response) throws AlipayApiException {
         Object result = null;
-        if(PayTypeConstant.WX.equalsIgnoreCase(payDTO.getPayType())){
+        AliConfig aliConfig = new AliConfig();
+        aliConfig.setAppId(alipayParam.getAppId());
 
-        }else if(PayTypeConstant.AL.equalsIgnoreCase(payDTO.getPayType())){
-            AliConfig aliConfig = new AliConfig();
-            aliConfig.setAppId(payDTO.getAppId());
+        List<AliConfig> aliConfigList = aliConfigService.findList(aliConfig);
+        if(aliConfigList.size()==1){
+            result = alipayService.tradePayQrCode(alipayParam,aliConfigList.get(0));
 
-            List<AliConfig> aliConfigList = aliConfigService.findList(aliConfig);
-            if(aliConfigList.size()==1){
-                result = alipayTradeService.tradePayQrCode(payDTO,aliConfigList.get(0));
-
-                AlipayTradePrecreateResponse alipayTradePrecreateResponse = (AlipayTradePrecreateResponse) result;
-                TradeRecord tradeRecord = new TradeRecord();
-                BeanUtils.copyProperties(alipayTradePrecreateResponse,tradeRecord);
-                if(!alipayTradePrecreateResponse.isSuccess()){
-                    tradeRecord.setRemarks(alipayTradePrecreateResponse.getSubMsg());
-                }
-                tradeRecord.setOutTradeNo(payDTO.getOutTradeNo());
-                tradeRecord.setPayType(payDTO.getPayType());
-                tradeRecordService.save(tradeRecord);
+            AlipayTradePrecreateResponse alipayTradePrecreateResponse = (AlipayTradePrecreateResponse) result;
+            TradeRecord tradeRecord = new TradeRecord();
+            BeanUtils.copyProperties(alipayTradePrecreateResponse,tradeRecord);
+            if(!alipayTradePrecreateResponse.isSuccess()){
+                tradeRecord.setRemarks(alipayTradePrecreateResponse.getSubMsg());
             }
-
+            tradeRecord.setOutTradeNo(alipayParam.getOutTradeNo());
+            tradeRecord.setPayType("支付宝");
+            tradeRecordService.save(tradeRecord);
         }
 
 
@@ -163,7 +151,28 @@ public class AlipayPayController {
     }
 
     @ApiOperation(httpMethod = "POST",value = "统一收单交易退款接口",notes = "当交易发生之后一段时间内，由于买家或者卖家的原因需要退款时，卖家可以通过退款接口将支付款退还给买家，支付宝将在收到退款请求并且验证成功之后，按照退款规则将支付款按原路退到买家帐号上。 交易超过约定时间（签约时设置的可退款时间）的订单无法进行退款 支付宝退款支持单笔交易分多次退款，多次退款需要提交原支付订单的商户订单号和设置不同的退款单号。一笔退款失败后重新提交，要采用原来的退款单号。总退款金额不能超过用户实际支付金额")
-    public Object refund(@RequestBody AlipayRefuntParam param){
-        return null;
+    @RequestMapping("refund")
+    public Object refund(@RequestBody AlipayRefuntParam param) throws AlipayApiException {
+        Object result = null;
+        AliConfig aliConfig = new AliConfig();
+        aliConfig.setAppId(param.getAppId());
+
+        List<AliConfig> aliConfigList = aliConfigService.findList(aliConfig);
+        if(aliConfigList.size()==1){
+            result = alipayService.refund(param,aliConfigList.get(0));
+
+            AlipayTradePayResponse alipayTradePayResponse = (AlipayTradePayResponse) result;
+            TradeRecord tradeRecord = new TradeRecord();
+            BeanUtils.copyProperties(alipayTradePayResponse,tradeRecord);
+            if(!alipayTradePayResponse.isSuccess()){
+                tradeRecord.setRemarks(alipayTradePayResponse.getSubMsg());
+            }
+            tradeRecord.setOutTradeNo(param.getOutTradeNo());
+            tradeRecord.setPayType("支付宝");
+            tradeRecordService.save(tradeRecord);
+        }
+
+
+        return result;
     }
 }

@@ -7,17 +7,11 @@ import com.alipay.api.request.AlipayDataDataserviceBillDownloadurlQueryRequest;
 import com.alipay.api.response.AlipayDataDataserviceBillDownloadurlQueryResponse;
 import com.google.gson.Gson;
 import com.zebone.modules.ali.entity.AliConfig;
-import com.zebone.modules.api.dto.PayDTO;
+import com.zebone.modules.api.dto.AlipayBillParam;
+import com.zebone.modules.api.dto.AlipayParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -45,17 +39,17 @@ public class AliPayService {
             privateKey = ac.getPrivateKey();
             aliPublicKey = ac.getPayPublicKey();
         }
-        PayDTO payDTO = new PayDTO();
-        payDTO.setBillType("trade");
-        payDTO.setBillDate(billDate);
+        AlipayBillParam alipayParam = new AlipayBillParam();
+        alipayParam.setBillType("trade");
+        alipayParam.setBillDate(billDate);
         String strType = "json";// 数据格式
         String chartType = "utf-8";// 编码格式
         Gson gson = new Gson();
-        String bizContent = gson.toJson(payDTO);
+        String bizContent = gson.toJson(alipayParam);
         // 支付宝公钥
         AlipayClient alipayClient = new DefaultAlipayClient(gateway, appId, privateKey, strType, chartType, aliPublicKey,"RSA2");
         AlipayDataDataserviceBillDownloadurlQueryRequest request = new AlipayDataDataserviceBillDownloadurlQueryRequest();
-        request.setBizContent("{\"bill_type\":\"trade\",\"bill_date\":\""+ payDTO.getBillDate() + "\"}");
+        request.setBizContent("{\"bill_type\":\"trade\",\"bill_date\":\""+ alipayParam.getBillDate() + "\"}");
 
         AlipayDataDataserviceBillDownloadurlQueryResponse response = alipayClient.execute(request);
 
