@@ -180,6 +180,7 @@ public class AlipayController {
             }
             tradeRecord.setOutTradeNo(param.getOutTradeNo());
             tradeRecord.setPayType("1");
+            tradeRecord.setTotalAmount("-"+alipayTradeRefundResponse.getRefundFee());
             tradeRecordService.save(tradeRecord);
         }
 
