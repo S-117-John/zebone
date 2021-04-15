@@ -7,6 +7,7 @@ import com.alipay.api.request.AlipayDataDataserviceBillDownloadurlQueryRequest;
 import com.alipay.api.response.AlipayDataDataserviceBillDownloadurlQueryResponse;
 import com.alipay.api.response.AlipayTradePayResponse;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
+import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.google.gson.Gson;
 import com.zebone.modules.ali.entity.AliConfig;
 import com.zebone.modules.ali.service.AliConfigService;
@@ -161,11 +162,11 @@ public class AlipayController {
         if(aliConfigList.size()==1){
             result = alipayService.refund(param,aliConfigList.get(0));
 
-            AlipayTradePayResponse alipayTradePayResponse = (AlipayTradePayResponse) result;
+            AlipayTradeRefundResponse alipayTradeRefundResponse = (AlipayTradeRefundResponse) result;
             TradeRecord tradeRecord = new TradeRecord();
-            BeanUtils.copyProperties(alipayTradePayResponse,tradeRecord);
-            if(!alipayTradePayResponse.isSuccess()){
-                tradeRecord.setRemarks(alipayTradePayResponse.getSubMsg());
+            BeanUtils.copyProperties(alipayTradeRefundResponse,tradeRecord);
+            if(!alipayTradeRefundResponse.isSuccess()){
+                tradeRecord.setRemarks(alipayTradeRefundResponse.getSubMsg());
             }
             tradeRecord.setOutTradeNo(param.getOutTradeNo());
             tradeRecord.setPayType("支付宝");
