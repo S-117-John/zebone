@@ -18,4 +18,8 @@ public class Patient {
     private String age;
 
     private Date birth;
+
+    private Date startTime;  //出院开始时间
+
+    private Date endTime;  //出院结束时间
 }

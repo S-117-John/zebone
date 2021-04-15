@@ -7,6 +7,7 @@
 		select page.NAME,page.PAT_NO,ops.OP_CODE,page.IN_HOS_DAYS,page.AGE_TXT age,page.BIRTH_DATE birth
 		from emr_home_page_ops ops
 		inner join EMR_HOME_PAGE page on page.PK_PAGE = ops.PK_PAGE
+        left join pv_encounter pv ON page.PK_PV = pv.PK_PV
 		where page.DIS_TIME is not null
 		<if test="icd9!=null">
 			and ops.OP_CODE in
@@ -20,6 +21,13 @@
 		<if test="name!=null and name!=''">
 			and page.NAME = #{name}
 		</if>
-
+       <if test="params != null and params != '' ">
+        <if test="param.startTime != null and param.startTime != '' ">
+            and pv.date_end &gt;= #{startTime}
+        </if>
+        <if test="param.endTime != null and param.startTime != ''">
+            and pv.date_end &gt;= #{endTime}
+        </if>
+       </if>
 	</select>
 </mapper>
