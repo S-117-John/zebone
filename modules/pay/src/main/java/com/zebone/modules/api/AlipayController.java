@@ -61,6 +61,11 @@ public class AlipayController {
             AlipayTradePayResponse alipayTradePayResponse = (AlipayTradePayResponse) result;
             TradeRecord tradeRecord = new TradeRecord();
             BeanUtils.copyProperties(alipayTradePayResponse,tradeRecord);
+
+            if(alipayTradePayResponse.isSuccess()){
+                tradeRecord.setTradeStatus("1");
+            }
+
             if(!alipayTradePayResponse.isSuccess()){
                 tradeRecord.setRemarks(alipayTradePayResponse.getSubMsg());
             }
@@ -165,6 +170,11 @@ public class AlipayController {
             AlipayTradeRefundResponse alipayTradeRefundResponse = (AlipayTradeRefundResponse) result;
             TradeRecord tradeRecord = new TradeRecord();
             BeanUtils.copyProperties(alipayTradeRefundResponse,tradeRecord);
+
+            if(alipayTradeRefundResponse.isSuccess()){
+                tradeRecord.setTradeStatus("2");
+            }
+
             if(!alipayTradeRefundResponse.isSuccess()){
                 tradeRecord.setRemarks(alipayTradeRefundResponse.getSubMsg());
             }
