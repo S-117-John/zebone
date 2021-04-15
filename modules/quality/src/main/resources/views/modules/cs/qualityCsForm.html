@@ -2119,11 +2119,11 @@
 					<div class="col-sm-offset-2 col-sm-10">
                         <!--增加暂存按钮-->
                         <% if (hasPermi('cs:qualityCs:edit')){ %>
-                            <button type="submit" class="btn btn-sm btn-primary" id="btnSubmit_1" ><i class="fa fa-check"></i> ${text('暂 存')}</button>&nbsp;
+                            <button type="button" class="btn btn-sm btn-primary" id="btnSubmit_1" onclick="temporary()"><i class="fa fa-check"></i> ${text('暂 存')}</button>&nbsp;
                         <% } %>
 
 						<% if (hasPermi('cs:qualityCs:edit')){ %>
-							<button type="submit" class="btn btn-sm btn-primary" id="btnSubmit" onclick="js.ajaxSubmitForm()" ><i class="fa fa-check"></i> ${text('保 存')}</button>&nbsp;
+							<button type="submit" class="btn btn-sm btn-primary" id="btnSubmit" ><i class="fa fa-check"></i> ${text('保 存')}</button>&nbsp;
 						<% } %>
 						<button type="button" class="btn btn-sm btn-default" id="btnCancel" onclick="js.closeCurrentTabPage()"><i class="fa fa-reply-all"></i> ${text('关 闭')}</button>
 					</div>
@@ -2134,6 +2134,24 @@
 </div>
 <% } %>
 <script>
+function temporary(){
+    var form = $("#inputForm").serialize();
+    $.ajax({
+        url:'${ctx}/cs/qualityCs/temporary',
+        type: "POST",
+        dataType:'json',
+        data: form,
+        success:function(data) {
+            if(data.result == Global.TRUE){
+                alert("暂存成功！");
+                js.closeCurrentTabPage(function(contentWindow){
+                    contentWindow.page();
+                });
+            }
+        },
+    });
+}
+
 $("#inputForm").validate({
 	submitHandler: function(form){
 		js.ajaxSubmitForm($(form), function(data){
@@ -2291,17 +2309,17 @@ $("#inputForm").validate({
 	//是
 	//产程和分娩期间并发症所列的名称及ICD.10编码
 	//必填
-	$('#cs_7_1').on('ifChecked', function(){
-		var value = $('#cs_7_1 input:radio:checked').val();
-		if("y"==value){
-			$("#cs_7_2").addClass("required")
-		}else {
-			console.log("是否有新生儿产伤选择否")
-			//重置
-			$("#cs_7_2").removeClass("required")
-
-		}
-	});
+	// $('#cs_7_1').on('ifChecked', function(){
+	// 	var value = $('#cs_7_1 input:radio:checked').val();
+	// 	if("y"==value){
+	// 		$("#cs_7_2").addClass("required")
+	// 	}else {
+	// 		console.log("是否有新生儿产伤选择否")
+	// 		//重置
+	// 		$("#cs_7_2").removeClass("required")
+    //
+	// 	}
+	// });
 
 	//产程和分娩期间并发症所列的名称及ICD.10编码(CS-7-2)
 	$('#cs_7_2').on("select2:select", function (e) {
@@ -2965,7 +2983,6 @@ $("#inputForm").validate({
 			$("input[name='cm_0_2_3_2']").addClass("required")
 		}
 	});
-
 
 
 </script>

@@ -252,8 +252,12 @@ public class QualityCsController extends BaseController {
     @RequiresPermissions("cs:qualityCs:edit")
     @RequestMapping(value = "temporary")
     @ResponseBody
-	public String temporary(QualityCs qualityCs)throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        return null;
+	public String temporary(QualityCs qualityCs) {
+        if(!StringUtils.isEmpty(qualityCs.getCaseid())){
+            qualityCs.setCaseid(qualityCs.getCaseid().split(",")[0]);
+        }
+        qualityCsService.save(qualityCs);
+        return renderResult(Global.TRUE,text("暂存成功！"));
     }
 	
 	/**
