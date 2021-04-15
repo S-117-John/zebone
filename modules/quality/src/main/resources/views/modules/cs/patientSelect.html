@@ -16,18 +16,18 @@
 						<#form:input path="name" maxlength="100" class="form-control width-90"/>
 					</div>
 				</div>
-                 <!--加时间选择-->
+                 <!--增加出院时间选择-->
                 <div class="form-group">
-                    <label class="control-label">${text('开始时间')}：</label>
-                       <#form:input path="startTime" readonly="true" maxlength="20" class="form-control Wdate required"
-                       dataFormat="date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});"/>
+                    <label class="control-label">${text('出院时间')}：</label>
+                    <div class="control-inline">
+                        <#form:input value="${startTime}" path="startTime" readonly="true" maxlength="20" class="form-control Wdate-date"
+                        dataFormat="date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false,onpicked:function(){createDate_lte.click()}});"/>
+                        &nbsp;--&nbsp;
+                        <#form:input value="${endTime}" path="endTime" readonly="true" maxlength="20" class="form-control Wdate-date"
+                        dataFormat="date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label">${text('结束时间')}：</label>
-                       <#form:input path="endTime" readonly="true" maxlength="20" class="form-control Wdate required"
-                       dataFormat="date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});"/>
-                </div>
-                 <!--===============-->
+                <!--===========-->
 
 				<div class="form-group">
 					<button type="submit" class="btn btn-primary btn-sm">查询</button>
@@ -124,4 +124,5 @@ function removeSelectTag(key){
 function getSelectData(){
 	return selectData;
 }
+
 </script>

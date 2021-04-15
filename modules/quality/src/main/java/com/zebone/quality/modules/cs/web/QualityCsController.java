@@ -98,7 +98,12 @@ public class QualityCsController extends BaseController {
 	@RequiresPermissions("cs:qualityCs:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(QualityCs qualityCs, Model model) {
-		model.addAttribute("qualityCs", qualityCs);
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date());  //当前时间
+        c.add(Calendar.MONTH,-1);  //上一个月
+        qualityCs.setCreateDate_lte(new Date());
+        qualityCs.setCreateDate_gte(c.getTime());
+        model.addAttribute("qualityCs", qualityCs);
 		return "modules/cs/qualityCsList";
 	}
 	
@@ -359,8 +364,8 @@ public class QualityCsController extends BaseController {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 		mapResult.put("cm_0_2_1_1", DateUtils.formatDate((Date) MapUtils.getObject(mapResult,"cm_0_2_1_1"),"yyyy-MM-dd"));
-		mapResult.put("cm_0_2_4_1",DateUtils.formatDate((Date) MapUtils.getObject(mapResult,"admit_time"),"yyyy-MM-dd"));
-		mapResult.put("cm_0_2_4_2",DateUtils.formatDate((Date) MapUtils.getObject(mapResult,"dis_time"),"yyyy-MM-dd"));
+		mapResult.put("cm_0_2_4_1",DateUtils.formatDate((Date) MapUtils.getObject(mapResult,"admit_time"),"yyyy-MM-dd HH:mm"));
+		mapResult.put("cm_0_2_4_2",DateUtils.formatDate((Date) MapUtils.getObject(mapResult,"dis_time"),"yyyy-MM-dd HH:mm"));
 		//获取价格
 		String pkPage = MapUtils.getString(mapResult,"PK_PAGE");
 		if(!StringUtils.isEmpty(pkPage)){
@@ -539,6 +544,11 @@ public class QualityCsController extends BaseController {
 		}
 		model.addAttribute("checkbox", checkbox); // 是否显示复选框，支持多选
 		model.addAttribute("empUser", empUser); // ModelAttribute
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date());  //当前时间
+        c.add(Calendar.MONTH,-1);  //上一个月
+        model.addAttribute("startTime",c.getTime());
+        model.addAttribute("endTime",new Date());
 		return "modules/cs/patientSelect";
 	}
 

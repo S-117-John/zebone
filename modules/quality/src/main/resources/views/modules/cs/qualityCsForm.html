@@ -30,11 +30,15 @@
 							<label class="control-label col-sm-2" title="caseId">
 								<span class="required">*</span> ${text('患者病案号')}：<i class="fa icon-question"></i></label>
 							<div class="col-sm-7">
-								<!--<#form:input path="caseid" maxlength="64" class="form-control required"/>-->
-								<#form:listselect id="patNo" title="患者选择"
+                                <div class="input-group">
+                                <!--<#form:input path="caseid" maxlength="64" class="form-control required"/>-->
+                                    <input type="text" id="patNoCode" name="patNo" class="form-control" placeholder=" ">
+                                    <span class="input-group-btn" ><a href="${ctx}/cs/qualityCs/patientSelect" class="btn btn-default" type="button"><i class="fa fa-search"></i></a></span>
+								<!--<#form:listselect id="patNo" title="患者选择"
 								path="caseid" labelPath="caseid"
 								url="${ctx}/cs/qualityCs/patientSelect" allowClear="false"
-								checkbox="false" itemCode="patNo" itemName="patNo"/>
+                                    checkbox="false" itemCode="patNo" itemName="patNo"/>-->
+                                </div>
 							</div>
 							<div class="col-sm-3">
 								<button type="button" class="btn btn-sm btn-primary" id="patientSubmit" onclick="importPatient('cs/qualityCs')"><i class="fa fa-check"></i> ${text('导入患者信息')}</button>&nbsp;
@@ -2309,17 +2313,17 @@ $("#inputForm").validate({
 	//是
 	//产程和分娩期间并发症所列的名称及ICD.10编码
 	//必填
-	// $('#cs_7_1').on('ifChecked', function(){
-	// 	var value = $('#cs_7_1 input:radio:checked').val();
-	// 	if("y"==value){
-	// 		$("#cs_7_2").addClass("required")
-	// 	}else {
-	// 		console.log("是否有新生儿产伤选择否")
-	// 		//重置
-	// 		$("#cs_7_2").removeClass("required")
-    //
-	// 	}
-	// });
+	$('#cs_7_1').on('ifChecked', function(){
+		var value = $('#cs_7_1 input:radio:checked').val();
+		if("y"==value){
+			$("#cs_7_2").addClass("required")
+		}else {
+			console.log("是否有新生儿产伤选择否")
+			//重置
+			$("#cs_7_2").removeClass("required")
+
+		}
+	});
 
 	//产程和分娩期间并发症所列的名称及ICD.10编码(CS-7-2)
 	$('#cs_7_2').on("select2:select", function (e) {
