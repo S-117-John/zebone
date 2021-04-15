@@ -65,7 +65,7 @@ public class AlipayController {
                 tradeRecord.setRemarks(alipayTradePayResponse.getSubMsg());
             }
             tradeRecord.setOutTradeNo(alipayParam.getOutTradeNo());
-            tradeRecord.setPayType("支付宝");
+            tradeRecord.setPayType("1");
             tradeRecordService.save(tradeRecord);
         }
 
@@ -143,7 +143,7 @@ public class AlipayController {
                 tradeRecord.setRemarks(alipayTradePrecreateResponse.getSubMsg());
             }
             tradeRecord.setOutTradeNo(alipayParam.getOutTradeNo());
-            tradeRecord.setPayType("支付宝");
+            tradeRecord.setPayType("1");
             tradeRecordService.save(tradeRecord);
         }
 
@@ -169,7 +169,7 @@ public class AlipayController {
                 tradeRecord.setRemarks(alipayTradeRefundResponse.getSubMsg());
             }
             tradeRecord.setOutTradeNo(param.getOutTradeNo());
-            tradeRecord.setPayType("支付宝");
+            tradeRecord.setPayType("1");
             tradeRecordService.save(tradeRecord);
         }
 
