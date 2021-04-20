@@ -30,15 +30,10 @@
 							<label class="control-label col-sm-2" title="caseId">
 								<span class="required">*</span> ${text('患者病案号')}：<i class="fa icon-question"></i></label>
 							<div class="col-sm-7">
-                                <div class="input-group">
-                                <!--<#form:input path="caseid" maxlength="64" class="form-control required"/>-->
-                                    <input type="text" id="patNoCode" name="patNo" class="form-control" placeholder=" ">
-                                    <span class="input-group-btn" ><a href="${ctx}/cs/qualityCs/patientSelect" class="btn btn-default" type="button"><i class="fa fa-search"></i></a></span>
-								<!--<#form:listselect id="patNo" title="患者选择"
+								<#form:listselect id="patNo" title="患者选择"
 								path="caseid" labelPath="caseid"
-								url="${ctx}/cs/qualityCs/patientSelect" allowClear="false"
-                                    checkbox="false" itemCode="patNo" itemName="patNo"/>-->
-                                </div>
+								url="${ctx}/cs/qualityCs/patientSelect" allowClear="false" allowInput="true"
+								checkbox="false" itemCode="patNo" itemName="patNo"/>
 							</div>
 							<div class="col-sm-3">
 								<button type="button" class="btn btn-sm btn-primary" id="patientSubmit" onclick="importPatient('cs/qualityCs')"><i class="fa fa-check"></i> ${text('导入患者信息')}</button>&nbsp;
