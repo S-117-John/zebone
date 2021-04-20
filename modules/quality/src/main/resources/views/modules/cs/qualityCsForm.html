@@ -2142,7 +2142,6 @@ function temporary(){
         data: form,
         success:function(data) {
             if(data.result == Global.TRUE){
-                alert("暂存成功！");
                 js.closeCurrentTabPage(function(contentWindow){
                     contentWindow.page();
                 });
@@ -2184,7 +2183,7 @@ $("#inputForm").validate({
 		$.ajax({
 			url:'${ctx}/cs/qualityCs/commonData',
 			type: "POST",
-			data: {patNo: $("#patNoCode").val()},
+			data: {patNo: $("#patNoName").val()},
 			success:function (data){
 				var obj = JSON.parse(data);
 				for(var key in obj){

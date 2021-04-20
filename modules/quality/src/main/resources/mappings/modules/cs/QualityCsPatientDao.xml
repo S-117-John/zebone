@@ -21,7 +21,7 @@
 			and page.NAME = #{name}
 		</if>
         <if test="startTime != null and endTime != null">
-            and page.dis_time between #{startTime} and #{endTime}
+            and CONVERT(varchar(10), page.dis_time, 23) between #{startTime} and #{endTime}
         </if>
 
 	</select>
