@@ -31,11 +31,11 @@
 				<div class="form-group">
 					<label class="control-label">${text('上报时间')}：</label>
 					<div class="control-inline">
-						<#form:input path="createDate_gte" readonly="true" maxlength="20" class="form-control Wdate-date"
-						dataFormat="date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false,onpicked:function(){createDate_lte.click()}});"/>
+						<#form:input path="createDate_gte" readonly="true" maxlength="20" class="form-control Wdate"
+						dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false,onpicked:function(){createDate_lte.click()}});"/>
 						&nbsp;--&nbsp;
-						<#form:input path="createDate_lte" readonly="true" maxlength="20" class="form-control Wdate-date"
-						dataFormat="date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+						<#form:input path="createDate_lte" readonly="true" maxlength="20" class="form-control Wdate"
+						dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
 					</div>
 				</div>
 				<div class="form-group">

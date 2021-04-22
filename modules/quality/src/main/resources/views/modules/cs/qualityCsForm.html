@@ -900,7 +900,7 @@
 							<label class="control-label col-sm-2" title="CM-1-6-2">
 								<span class="required hide">*</span> ${text('使用抗菌药物时间使用时间分层')}：<i class="fa icon-question"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_1_6_2" disabled="disabled" dictType="CS_CM_1_6_2" blankOption="true" class="form-control "/>
+								<#form:select path="cm_1_6_2" dictType="CS_CM_1_6_2" blankOption="true" class="form-control "/>
 							</div>
 						</div>
 					</div>
@@ -2937,6 +2937,17 @@ $("#inputForm").validate({
 
 	//末次月经日期是否确定(CS-0-2-2-1)等于"无法确定或无记录"(UTD)时无需填写
 	//末次月经日期 CS-0-2-2
+    //判断cs_0_2_2_1是否为空
+    $('#cs_0_2_2_1 input:checkbox:checked').each(function(i,v){
+        debugger;
+        var value = $(this).val();
+        if("UTD"==value){
+            $("input[name='cs_0_2_2']").removeClass("required")
+        }else {
+            $("input[name='cs_0_2_2']").addClass("required")
+        }
+    });
+    //======
 	$('#cs_0_2_2_1').on('ifChecked', function(){
 		$('#cs_0_2_2_1 input:checkbox:checked').each(function(i,v){
 			var value = $(this).val();
@@ -2946,6 +2957,7 @@ $("#inputForm").validate({
 		});
 	});
 	$('#cs_0_2_2_1').on('ifUnchecked', function(event){
+	    debugger;
 		var flag = true;
 		$('#cs_0_2_2_1 input:checkbox:checked').each(function(i,v){
 			var value = $(this).val();
@@ -2961,6 +2973,16 @@ $("#inputForm").validate({
 
 	//到达本院急诊或者门诊日期时间是否确定(cm_0_2_3_1)等于"无法确定或无记录"(UTD)时无需填写
 	//到达本院急诊或者门诊日期时间 cm_0_2_3_2
+    //判断cm_0_2_3_1值是否为空
+    $('#cm_0_2_3_1 input:checkbox:checked').each(function(i,v){
+        var value = $(this).val();
+        if("UTD"==value){
+            $("input[name='cm_0_2_3_2']").removeClass("required")
+        }else {
+            $("input[name='cm_0_2_3_2']").addClass("required")
+        }
+    });
+    //=====
 	$('#cm_0_2_3_1').on('ifChecked', function(){
 		$('#cm_0_2_3_1 input:checkbox:checked').each(function(i,v){
 			var value = $(this).val();
@@ -2981,6 +3003,4 @@ $("#inputForm").validate({
 			$("input[name='cm_0_2_3_2']").addClass("required")
 		}
 	});
-
-
 </script>

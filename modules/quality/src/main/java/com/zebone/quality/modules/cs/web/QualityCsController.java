@@ -3,8 +3,10 @@
  */
 package com.zebone.quality.modules.cs.web;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.crypto.Data;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -48,10 +50,7 @@ import com.zebone.quality.modules.cs.entity.QualityCs;
 import com.zebone.quality.modules.cs.service.QualityCsService;
 import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -101,8 +100,19 @@ public class QualityCsController extends BaseController {
         Calendar c = Calendar.getInstance();
         c.setTime(new Date());  //当前时间
         c.add(Calendar.MONTH,-1);  //上一个月
-        qualityCs.setCreateDate_lte(new Date());
-        qualityCs.setCreateDate_gte(c.getTime());
+
+        LocalDateTime currentDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(new Date().getTime()), ZoneId.systemDefault());
+        LocalDateTime lastDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(c.getTime().getTime()), ZoneId.systemDefault());
+
+        // 通过LocalDateTime的 with方法设置某天的最小值和最大值！！
+        LocalDateTime maxDateTime = currentDateTime.with(LocalTime.MAX);
+        LocalDateTime minDateTime = lastDateTime.with(LocalTime.MIN);
+        // 格式化日期
+        Date createDateLte = Date.from(maxDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        Date CreateDateGte = Date.from(minDateTime.atZone(ZoneId.systemDefault()).toInstant());
+
+        qualityCs.setCreateDate_lte(createDateLte);
+        qualityCs.setCreateDate_gte(CreateDateGte);
         model.addAttribute("qualityCs", qualityCs);
 		return "modules/cs/qualityCsList";
 	}
@@ -125,7 +135,7 @@ public class QualityCsController extends BaseController {
 	@RequestMapping(value = "form")
 	public String form(QualityCs qualityCs, Model model) {
 		if(StringUtils.isEmpty(qualityCs.getId())){
-			qualityCs.setCm_1_6_2("a");
+			qualityCs.setCm_1_6_2("def");
 			qualityCs.setCm_5_1("y");
 			qualityCs.setCm_5_2_1("a");
 			qualityCs.setCm_5_2_2("a");
@@ -261,9 +271,16 @@ public class QualityCsController extends BaseController {
     @ResponseBody
 	public String temporary(QualityCs qualityCs) {
         if(!StringUtils.isEmpty(qualityCs.getCaseid())){
-            qualityCs.setCaseid(qualityCs.getCaseid().split(",")[0]);
+            if (("").equals(qualityCs.getCaseid().split(",")[0])){
+                qualityCs.setCaseid(qualityCs.getCaseid().split(",")[1]);
+                qualityCsService.save(qualityCs);
+            }else {
+                qualityCs.setCaseid(qualityCs.getCaseid().split(",")[0]);
+                qualityCsService.save(qualityCs);
+            }
+
         }
-        qualityCsService.save(qualityCs);
+
         return renderResult(Global.TRUE,text("暂存成功！"));
     }
 	
@@ -364,6 +381,39 @@ public class QualityCsController extends BaseController {
 		mapResult.put("cm_0_1_5","0".equals(MapUtils.getString(mapResult,"cm_0_1_5"))?"n":"y");
 		Gson gson = new Gson();
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        /**
+         *   cm_0_2_6_2：手术结束时间，cm_1_6_1:术后停药时间，使用抗菌药物时间使用时间分层（cm_1_6_2）=停药时间 - 手术结束时间
+         *   a:术后24小时内结束使用；b:术后48小时内结束使用；c:术后48小时之后继续使用；def：请选择
+         */
+        //获取术后停药时间
+        Object cm_1_6_11 = mapResult.get("cm_1_6_1");
+        Object cm_0_2_6_21 = mapResult.get("cm_0_2_6_2");
+        if (cm_1_6_11 != null && cm_0_2_6_21 != null) {
+            Integer cm_1_6_1 = Integer.valueOf(DateUtils.formatDate((Date) MapUtils.getObject(mapResult, "cm_1_6_1"), "yyyy-MM_dd HH:mm"));
+            //手术结束时间
+            Integer cm_0_2_6_2 = Integer.valueOf(DateUtils.formatDate((Date) MapUtils.getObject(mapResult, "cm_0_2_6_2"), "yyyy-MM_dd HH:mm"));
+
+        Integer cm_1_6_2 = cm_1_6_1 - cm_0_2_6_2;
+        if (0<=cm_1_6_2 && cm_1_6_2<=24){
+            mapResult.put("cm_1_6_2","a");
+            mapResult.put("cm_1_6_2",MapUtils.getString(mapResult,"cm_1_6_2"));
+        }
+        if (cm_1_6_2<24 && cm_1_6_2<=48){
+            mapResult.put("cm_1_6_2","b");
+            mapResult.put("cm_1_6_2",MapUtils.getString(mapResult,"cm_1_6_2"));
+        }
+        if (cm_1_6_2>48){
+            mapResult.put("cm_1_6_2","c");
+            mapResult.put("cm_1_6_2",MapUtils.getString(mapResult,"cm_1_6_2"));
+        }
+        else {
+            mapResult.put("cm_1_6_2","def");
+            mapResult.put("cm_1_6_2",MapUtils.getString(mapResult,"cm_1_6_2"));
+        }
+        }else {
+            mapResult.put("cm_1_6_2","def");
+            mapResult.put("cm_1_6_2",MapUtils.getString(mapResult,"cm_1_6_2"));
+        }
         //患者身高,如果为0则默认为1
         mapResult.put("cm_0_2_1_5",MapUtils.getDouble(mapResult,"cm_0_2_1_5") == 0?1.0:MapUtils.getDouble(mapResult,"cm_0_2_1_5"));
 		mapResult.put("cm_0_2_1_1", DateUtils.formatDate((Date) MapUtils.getObject(mapResult,"cm_0_2_1_1"),"yyyy-MM-dd"));
