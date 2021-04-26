@@ -91,9 +91,9 @@
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="CM-0-1-1-5">
-								<span class="required hide">*</span> ${text('上报科室')}：<i class="fa icon-question"></i></label>
+								<span class="required ">*</span> ${text('上报科室')}：<i class="fa icon-question"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_0_1_1_5" maxlength="64" class="form-control"/>
+								<#form:input path="cm_0_1_1_5" maxlength="64" class="form-control required"/>
 							</div>
 						</div>
 					</div>
@@ -885,10 +885,10 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="CM-1-6-1">
+							<label class="control-label col-sm-2" title="CM-1-6-1" >
 								<span class="required hide">*</span> ${text('术后抗菌药物停止使用时间')}：<i class="fa icon-question"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_1_6_1" readonly="true" maxlength="20" class="form-control Wdate"
+								<#form:input path="cm_1_6_1" readonly="true" maxlength="20" class="form-control Wdate" onblur="fun()"
 									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
@@ -1015,7 +1015,7 @@
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="CS-5-2-1">
-								<span class="required hide" >*</span> ${text('剖宫产产后出血可能的原因')}：<i class="fa icon-question"></i></label>
+								<span class="required " >*</span> ${text('剖宫产产后出血可能的原因')}：<i class="fa icon-question"></i></label>
 							<div class="col-sm-10">
 								<#form:checkbox path="cs_5_2_1" dictType="CS_5_2_1" blankOption="true" class="form-control" />
 							</div>
@@ -2534,6 +2534,9 @@ $("#inputForm").validate({
 			$("#cm_1_4_1").removeClass("required")
 		}
 	});
+
+
+
 
 	//术中出血量是否≥1500ml(CM-1-5-3)等于"是"(y)时必填 cm_1_5_3
 	//是否术中追加抗菌药物 CM-1-5-4
