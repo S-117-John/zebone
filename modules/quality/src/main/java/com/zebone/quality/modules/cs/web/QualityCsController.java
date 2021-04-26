@@ -135,7 +135,7 @@ public class QualityCsController extends BaseController {
 	@RequestMapping(value = "form")
 	public String form(QualityCs qualityCs, Model model) {
 		if(StringUtils.isEmpty(qualityCs.getId())){
-			qualityCs.setCm_1_6_2("def");
+			qualityCs.setCm_1_6_2("a");
 			qualityCs.setCm_5_1("y");
 			qualityCs.setCm_5_2_1("a");
 			qualityCs.setCm_5_2_2("a");
@@ -232,19 +232,47 @@ public class QualityCsController extends BaseController {
 	@PostMapping(value = "save")
 	@ResponseBody
 	public String save(@Validated QualityCs qualityCs) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-//		if(qualityCs.getIsNewRecord()){
-//			qualityCsService.save(qualityCs);
-//			TaskUtil.startTask("cs",qualityCs.getId());
-//		}else{
-//
-//		}
 		//处理caseid多选节点
-		if(!StringUtils.isEmpty(qualityCs.getCaseid())){
-			qualityCs.setCaseid(qualityCs.getCaseid().split(",")[0]);
-		}
+//		if(!StringUtils.isEmpty(qualityCs.getCaseid())){
+//			qualityCs.setCaseid(qualityCs.getCaseid().split(",")[0]);
+//		}
+//
+//		qualityCsService.save(qualityCs);
 
-		qualityCsService.save(qualityCs);
 
+        /**
+         *   cm_0_2_6_2：手术结束时间，cm_1_6_1:术后停药时间，使用抗菌药物时间使用时间分层（cm_1_6_2）=停药时间 - 手术结束时间
+         *   a:术后24小时内结束使用；b:术后48小时内结束使用；c:术后48小时之后继续使用；def：请选择
+         */
+        //得到术后抗菌药物停止使用时间
+        long cm_1_6_1 = qualityCs.getCm_1_6_1().getTime();
+        //得到手术结束时间
+        long cm_0_2_6_2 = qualityCs.getCm_0_2_6_2().getTime();
+        if (cm_0_2_6_2 != 0 && cm_1_6_1 != 0){
+
+          long hour = (cm_1_6_1 - cm_0_2_6_2)/ (60*60*1000);
+          if (0<=hour && hour<=24){
+              qualityCs.setCm_1_6_2("a");
+          }
+          if (hour<24 && hour<=48){
+              qualityCs.setCm_1_6_2("b");
+          }
+          if (hour>48){
+              qualityCs.setCm_1_6_2("c");
+          }else {
+              qualityCs.setCm_1_6_2("def");
+          }
+        }
+        if(!StringUtils.isEmpty(qualityCs.getCaseid())){
+            if (("").equals(qualityCs.getCaseid().split(",")[0])){
+                qualityCs.setCaseid(qualityCs.getCaseid().split(",")[1]);
+                qualityCsService.save(qualityCs);
+            }else {
+                qualityCs.setCaseid(qualityCs.getCaseid().split(",")[0]);
+                qualityCsService.save(qualityCs);
+            }
+
+        }
         String result = uploadService.upload(qualityCs, new CsVo(), "CS");
 		Gson gson = new Gson();
 		UploadResult uploadResult = gson.fromJson(result, UploadResult.class);
@@ -253,8 +281,10 @@ public class QualityCsController extends BaseController {
 			String errorMessage = Optional.ofNullable(uploadResult).map(a->a.getMessage()).orElse("上传失败");
 			return renderResult(Global.FALSE, text(errorMessage));
 		}
+
 		return renderResult(Global.TRUE, text("保存cs剖宫产成功！"));
 	}
+
 
     /**
      * 暂存cs剖宫产
@@ -384,23 +414,22 @@ public class QualityCsController extends BaseController {
          *   a:术后24小时内结束使用；b:术后48小时内结束使用；c:术后48小时之后继续使用；def：请选择
          */
         //获取术后停药时间
-        Object cm_1_6_11 = mapResult.get("cm_1_6_1");
-        Object cm_0_2_6_21 = mapResult.get("cm_0_2_6_2");
-        if (cm_1_6_11 != null && cm_0_2_6_21 != null) {
-            Integer cm_1_6_1 = Integer.valueOf(DateUtils.formatDate((Date) MapUtils.getObject(mapResult, "cm_1_6_1"), "yyyy-MM_dd HH:mm"));
-            //手术结束时间
-            Integer cm_0_2_6_2 = Integer.valueOf(DateUtils.formatDate((Date) MapUtils.getObject(mapResult, "cm_0_2_6_2"), "yyyy-MM_dd HH:mm"));
-
-        Integer cm_1_6_2 = cm_1_6_1 - cm_0_2_6_2;
-        if (0<=cm_1_6_2 && cm_1_6_2<=24){
+        String cm_1_6_11 = mapResult.get("cm_1_6_1").toString();
+        String cm_0_2_6_21 = mapResult.get("cm_0_2_6_2").toString();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        long cm_1_6_12 = sdf.parse(cm_1_6_11).getTime();
+        long cm_0_2_6_22 = sdf.parse(cm_0_2_6_21).getTime();
+        if (cm_0_2_6_22 != 0 && cm_1_6_12 !=0) {
+            long hour = (cm_1_6_12 - cm_0_2_6_22)/(60*60*1000);
+        if (0<=hour && hour<=24){
             mapResult.put("cm_1_6_2","a");
             mapResult.put("cm_1_6_2",MapUtils.getString(mapResult,"cm_1_6_2"));
         }
-        if (cm_1_6_2<24 && cm_1_6_2<=48){
+        if (hour<24 && hour<=48){
             mapResult.put("cm_1_6_2","b");
             mapResult.put("cm_1_6_2",MapUtils.getString(mapResult,"cm_1_6_2"));
         }
-        if (cm_1_6_2>48){
+        if (hour>48){
             mapResult.put("cm_1_6_2","c");
             mapResult.put("cm_1_6_2",MapUtils.getString(mapResult,"cm_1_6_2"));
         }
