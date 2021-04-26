@@ -6,6 +6,8 @@ package com.zebone.modules.wx.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.zebone.modules.merchant.entity.PayMerchant;
+import com.zebone.modules.merchant.service.PayMerchantService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,8 @@ import com.jeesite.common.web.BaseController;
 import com.zebone.modules.wx.entity.WxConfig;
 import com.zebone.modules.wx.service.WxConfigService;
 
+import java.util.List;
+
 /**
  * 微信配置Controller
  * @author lijin
@@ -33,7 +37,10 @@ public class WxConfigController extends BaseController {
 
 	@Autowired
 	private WxConfigService wxConfigService;
-	
+
+	@Autowired
+	private PayMerchantService payMerchantService;
+
 	/**
 	 * 获取数据
 	 */
@@ -70,6 +77,8 @@ public class WxConfigController extends BaseController {
 	@RequestMapping(value = "form")
 	public String form(WxConfig wxConfig, Model model) {
 		model.addAttribute("wxConfig", wxConfig);
+		List<PayMerchant> merchantList = payMerchantService.findList(new PayMerchant());
+		model.addAttribute("merchantList", merchantList);
 		return "modules/wx/wxConfigForm";
 	}
 

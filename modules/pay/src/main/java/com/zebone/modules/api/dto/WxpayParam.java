@@ -1,6 +1,7 @@
 package com.zebone.modules.api.dto;
 
 import com.google.gson.annotations.SerializedName;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
@@ -9,6 +10,7 @@ public class WxpayParam {
     @SerializedName("appid")
     private String appId;
 
+    @ApiModelProperty(hidden = true)
     @SerializedName("mch_id")
     private String mchId;
 
@@ -35,4 +37,10 @@ public class WxpayParam {
      */
     @SerializedName("auth_code")
     private String authCode;
+
+    /**
+     * 微信订单号
+     */
+    @SerializedName("transaction_id")
+    private String transactionId;
 }

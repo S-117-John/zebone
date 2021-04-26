@@ -33,18 +33,18 @@
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-xs-6">
-						<div class="form-group">
-							<label class="control-label col-sm-4" title="">
-								<span class="required hide">*</span> ${text('开发者密钥')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-8">
-								<#form:input path="appSecret" maxlength="255" class="form-control"/>
-							</div>
-						</div>
-					</div>
+<!--				<div class="row">-->
+<!--					<div class="col-xs-6">-->
+<!--						<div class="form-group">-->
+<!--							<label class="control-label col-sm-4" title="">-->
+<!--								<span class="required hide">*</span> ${text('开发者密钥')}：<i class="fa icon-question hide"></i></label>-->
+<!--							<div class="col-sm-8">-->
+<!--								<#form:input path="appSecret" maxlength="255" class="form-control"/>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
 
-				</div>
+<!--				</div>-->
 				<div class="row">
 					<div class="col-xs-6">
 						<div class="form-group">
@@ -58,9 +58,9 @@
 					<div class="col-xs-6">
 						<div class="form-group">
 							<label class="control-label col-sm-4" title="">
-								<span class="required hide">*</span> ${text('平台商户号')}：<i class="fa icon-question hide"></i></label>
+								<span class="required hide">*</span> ${text('商户')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-8">
-								<#form:input path="merchantId" maxlength="255" class="form-control"/>
+								<#form:select path="merchantId" items="${merchantList}" itemLabel="name" itemValue="id" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -87,17 +87,17 @@
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-xs-6">
-						<div class="form-group">
-							<label class="control-label col-sm-4" title="">
-								<span class="required hide">*</span> ${text('token')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-8">
-								<#form:input path="token" maxlength="255" class="form-control"/>
-							</div>
-						</div>
-					</div>
-				</div>
+<!--				<div class="row">-->
+<!--					<div class="col-xs-6">-->
+<!--						<div class="form-group">-->
+<!--							<label class="control-label col-sm-4" title="">-->
+<!--								<span class="required hide">*</span> ${text('token')}：<i class="fa icon-question hide"></i></label>-->
+<!--							<div class="col-sm-8">-->
+<!--								<#form:input path="token" maxlength="255" class="form-control"/>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">

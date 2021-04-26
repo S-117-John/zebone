@@ -42,7 +42,7 @@ public class TradeRecord extends DataEntity<TradeRecord> {
 	private String totalAmount;		// 交易金额
 	private String receiptAmount;		// 实收金额
 	private Date gmtPayment;		// 交易时间
-	private String tradeStatus;		// 交易状态
+	private String tradeStatus;		// 交易状态1:支付成功2：退款成功3：交易失败4：退款失败
 	private String buyerLogonId;		// 买家账号
 	private String buyerUserId;		// 买家用户id
 	
