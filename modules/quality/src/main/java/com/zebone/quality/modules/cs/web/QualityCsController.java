@@ -173,8 +173,6 @@ public class QualityCsController extends BaseController {
 			//告知随访
 			qualityCs.setCm_7_2_5("a,b,c");
 
-			//默认身高
-            qualityCs.setCm_0_2_1_5(1.0);
 			//默认费用
 			qualityCs.setCm_6_1(0.0);
 			qualityCs.setCm_6_2(0.0);
@@ -415,7 +413,7 @@ public class QualityCsController extends BaseController {
             mapResult.put("cm_1_6_2",MapUtils.getString(mapResult,"cm_1_6_2"));
         }
         //患者身高,如果为0则默认为1
-        mapResult.put("cm_0_2_1_5",MapUtils.getDouble(mapResult,"cm_0_2_1_5") == 0?1.0:MapUtils.getDouble(mapResult,"cm_0_2_1_5"));
+        mapResult.put("cm_0_2_1_5",MapUtils.getDouble(mapResult,"cm_0_2_1_5") == 0?"":MapUtils.getDouble(mapResult,"cm_0_2_1_5"));
 		mapResult.put("cm_0_2_1_1", DateUtils.formatDate((Date) MapUtils.getObject(mapResult,"cm_0_2_1_1"),"yyyy-MM-dd"));
 		mapResult.put("cm_0_2_4_1",DateUtils.formatDate((Date) MapUtils.getObject(mapResult,"admit_time"),"yyyy-MM-dd HH:mm"));
 		mapResult.put("cm_0_2_4_2",DateUtils.formatDate((Date) MapUtils.getObject(mapResult,"dis_time"),"yyyy-MM-dd HH:mm"));
