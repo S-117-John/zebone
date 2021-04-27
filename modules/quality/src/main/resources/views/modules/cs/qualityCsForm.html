@@ -2520,17 +2520,26 @@ $("#inputForm").validate({
 		var value = $('#cm_1_1_1 input:radio:checked').val();
 		if("y"==value){
 			$("#cm_1_6_1").addClass("required")
-			$("input[name='cm_1_5_3']").addClass("required")
-			$("input[name='cm_1_5_1']").addClass("required")
-			$("input[name='cm_1_2_1_2']").addClass("required")
+			// $("input[name='cm_1_5_3']").addClass("required")
+			// $("input[name='cm_1_5_1']").addClass("required")
+			// $("input[name='cm_1_2_1_2']").addClass("required")
 			$("#cm_1_4_1").addClass("required")
+            //自己加的
+            $("#cm_1_5_3").addClass("required")
+            $("#cm_1_5_1").addClass("required")
+            $("#cm_1_2_1_2").addClass("required")
 		}else {
 			//重置
 			$("#cm_1_6_1").removeClass("required")
-			$("input[name='cm_1_5_3']").removeClass("required")
-			$("input[name='cm_1_5_1']").removeClass("required")
-			$("input[name='cm_1_2_1_2']").removeClass("required")
+			// $("input[name='cm_1_5_3']").removeClass("required")
+			// $("input[name='cm_1_5_1']").removeClass("required")
+			// $("input[name='cm_1_2_1_2']").removeClass("required")
 			$("#cm_1_4_1").removeClass("required")
+
+            //自己加的
+            $("#cm_1_5_3").removeClass("required")
+            $("#cm_1_5_1").removeClass("required")
+            $("#cm_1_2_1_2").removeClass("required")
 		}
 	});
 
