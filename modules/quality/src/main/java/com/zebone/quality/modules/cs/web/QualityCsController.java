@@ -254,14 +254,17 @@ public class QualityCsController extends BaseController {
           if (0<=hour && hour<=24){
               qualityCs.setCm_1_6_2("a");
           }
-          if (hour<24 && hour<=48){
+          if (hour>24 && hour<=48){
               qualityCs.setCm_1_6_2("b");
           }
           if (hour>48){
               qualityCs.setCm_1_6_2("c");
-          }else {
-              qualityCs.setCm_1_6_2("def");
-          }
+              if (StringUtils.isEmpty(qualityCs.getCm_1_6_3_2())){
+                  return renderResult(Global.FALSE, text("术后48小时之后继续使用的原因不能为空！"));
+              }
+              }
+        }else {
+              qualityCs.setCm_1_6_2("UTD");
         }
         if(!StringUtils.isEmpty(qualityCs.getCaseid())){
             if (("").equals(qualityCs.getCaseid().split(",")[0])){
@@ -414,10 +417,6 @@ public class QualityCsController extends BaseController {
          *   a:术后24小时内结束使用；b:术后48小时内结束使用；c:术后48小时之后继续使用；def：请选择
          */
         //获取术后停药时间
-
-//        String cm_1_6_11 = mapResult.get("cm_1_6_1").toString();
-//        String cm_0_2_6_21 = mapResult.get("cm_0_2_6_2").toString();
-
         String cm_1_6_11 = MapUtils.getString(mapResult,"cm_1_6_1");
         String cm_0_2_6_21 = MapUtils.getString(mapResult,"cm_0_2_6_2");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -430,7 +429,7 @@ public class QualityCsController extends BaseController {
             mapResult.put("cm_1_6_2","a");
             mapResult.put("cm_1_6_2",MapUtils.getString(mapResult,"cm_1_6_2"));
         }
-        if (hour<24 && hour<=48){
+        if (hour>24 && hour<=48){
             mapResult.put("cm_1_6_2","b");
             mapResult.put("cm_1_6_2",MapUtils.getString(mapResult,"cm_1_6_2"));
         }
@@ -438,16 +437,12 @@ public class QualityCsController extends BaseController {
             mapResult.put("cm_1_6_2","c");
             mapResult.put("cm_1_6_2",MapUtils.getString(mapResult,"cm_1_6_2"));
         }
-        else {
-            mapResult.put("cm_1_6_2","def");
+        }else {
+            mapResult.put("cm_1_6_2","UTD");
             mapResult.put("cm_1_6_2",MapUtils.getString(mapResult,"cm_1_6_2"));
         }
         }else {
-            mapResult.put("cm_1_6_2","def");
-            mapResult.put("cm_1_6_2",MapUtils.getString(mapResult,"cm_1_6_2"));
-        }
-        }else {
-            mapResult.put("cm_1_6_2","def");
+            mapResult.put("cm_1_6_2","UTD");
             mapResult.put("cm_1_6_2",MapUtils.getString(mapResult,"cm_1_6_2"));
         }
         //患者身高,如果为0则默认为1

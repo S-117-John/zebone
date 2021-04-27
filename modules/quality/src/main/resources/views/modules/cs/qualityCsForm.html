@@ -888,7 +888,7 @@
 							<label class="control-label col-sm-2" title="CM-1-6-1" >
 								<span class="required hide">*</span> ${text('术后抗菌药物停止使用时间')}：<i class="fa icon-question"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_1_6_1" readonly="true" maxlength="20" class="form-control Wdate" onblur="fun()"
+								<#form:input path="cm_1_6_1" readonly="true" maxlength="20" class="form-control Wdate"
 									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
@@ -911,7 +911,7 @@
 							<label class="control-label col-sm-2" title="CM-1-6-3-2">
 								<span class="required hide">*</span> ${text('术后48小时之后继续使用的原因')}：<i class="fa icon-question"></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_1_6_3_2" dictType="CS_CM_1_6_3_2" blankOption="true" class="form-control" />
+								<#form:select path="cm_1_6_3_2" dictType="CS_CM_1_6_3_2" blankOption="true" class="form-control " />
 							</div>
 						</div>
 					</div>
@@ -3005,5 +3005,7 @@ $("#inputForm").validate({
 			$("input[name='cm_0_2_3_2']").addClass("required")
 		}
 	});
+
+	//使用抗菌药物时间使用时间分层(cm_1_6_2)等于"术后48小时继续使用(c)"时，术后48小时之后继续使用的原因（cm_1_6_3_2）必填
 
 </script>
