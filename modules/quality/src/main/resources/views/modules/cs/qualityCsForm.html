@@ -2208,11 +2208,11 @@ $("#inputForm").validate({
 
 	$('#cs_1_1_1').on('ifChecked', function(){
 		var v = $('#cs_1_1_1 input:radio:checked').val();
-		if("y"==v){
-			$("input[name='cs_1_1_1_1']").removeClass("required")
+		if("n"==v){
+			$("input[name='cs_1_1_1_1']").addClass("required")
 		}else {
 
-			$("input[name='cs_1_1_1_1']").addClass("required")
+			$("input[name='cs_1_1_1_1']").removeClass("required")
 		}
 	});
 	$('#cs_1_2_5').on('ifChecked', function(){
@@ -2282,8 +2282,9 @@ $("#inputForm").validate({
 		var value = $('#cs_8_2_1 input:radio:checked').val();
 		if("y"==value){
 			$("#cs_8_1_1").addClass("required")
+            $("#cs_8_2").removeClass("required")
 		}else {
-
+            $("#cs_8_2").addClass("required")
 			$("#cs_8_1_1").removeClass("required")
 		}
 	});
@@ -2519,11 +2520,9 @@ $("#inputForm").validate({
 		var value = $('#cm_1_1_1 input:radio:checked').val();
 		if("y"==value){
 			$("#cm_1_6_1").addClass("required")
-
 			$("input[name='cm_1_5_3']").addClass("required")
 			$("input[name='cm_1_5_1']").addClass("required")
 			$("input[name='cm_1_2_1_2']").addClass("required")
-
 			$("#cm_1_4_1").addClass("required")
 		}else {
 			//重置
@@ -2887,9 +2886,19 @@ $("#inputForm").validate({
 
 	//特殊感染评估(CS-1-2-5)等于"是"(y)时必填 cs_1_2_5
 	//孕妇伴有特殊感染ICD.10编码及诊断名称 CS-1-2-6
+
+    $('#cs_0_2_2_1 input:checkbox:checked').each(function(i,v){
+        var value = $(this).val();
+        if("UTD"==value){
+            $("input[name='cs_0_2_2']").removeClass("required")
+        }else {
+            $("input[name='cs_0_2_2']").addClass("required")
+        }
+    });
+    //特殊感染评估(cs_1_2_5)为"是(y)"时，孕妇伴有特殊感染ICD.10编码及诊断名称(cs_1_2_6)为必填
 	$('#cs_1_2_5').on('ifChecked', function(){
 		var value = $('#cs_1_2_5 input:radio:checked').val();
-		if("n"==value){
+		if("y"==value){
 			$("#cs_1_2_6").addClass("required")
 
 		}else {
