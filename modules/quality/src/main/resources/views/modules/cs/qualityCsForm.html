@@ -2516,30 +2516,38 @@ $("#inputForm").validate({
 	//使用首剂抗菌药物起始时间
 	//预防性抗菌药物选择 CM-1-2-1-2
 	//必填
+    //校验值
+    var v = $('#cm_1_1_1 input:radio:checked').val();
+    if ("y"==v){
+        $("#cm_1_6_1").addClass("required")
+        $("input[name='cm_1_5_3']").addClass("required")
+        $("input[name='cm_1_5_1']").addClass("required")
+        $("input[name='cm_1_2_1_2']").addClass("required")
+        $("#cm_1_4_1").addClass("required")
+    } else {
+        $("#cm_1_6_1").removeClass("required")
+        $("input[name='cm_1_5_3']").removeClass("required")
+        $("input[name='cm_1_5_1']").removeClass("required")
+        $("input[name='cm_1_2_1_2']").removeClass("required")
+        $("#cm_1_4_1").removeClass("required")
+    }
+    //监听事件
 	$('#cm_1_1_1').on('ifChecked', function(){
 		var value = $('#cm_1_1_1 input:radio:checked').val();
 		if("y"==value){
 			$("#cm_1_6_1").addClass("required")
-			// $("input[name='cm_1_5_3']").addClass("required")
-			// $("input[name='cm_1_5_1']").addClass("required")
-			// $("input[name='cm_1_2_1_2']").addClass("required")
+			$("input[name='cm_1_5_3']").addClass("required")
+			$("input[name='cm_1_5_1']").addClass("required")
+			$("input[name='cm_1_2_1_2']").addClass("required")
 			$("#cm_1_4_1").addClass("required")
-            //自己加的
-            $("#cm_1_5_3").addClass("required")
-            $("#cm_1_5_1").addClass("required")
-            $("#cm_1_2_1_2").addClass("required")
+
 		}else {
 			//重置
 			$("#cm_1_6_1").removeClass("required")
-			// $("input[name='cm_1_5_3']").removeClass("required")
-			// $("input[name='cm_1_5_1']").removeClass("required")
-			// $("input[name='cm_1_2_1_2']").removeClass("required")
+			$("input[name='cm_1_5_3']").removeClass("required")
+			$("input[name='cm_1_5_1']").removeClass("required")
+			$("input[name='cm_1_2_1_2']").removeClass("required")
 			$("#cm_1_4_1").removeClass("required")
-
-            //自己加的
-            $("#cm_1_5_3").removeClass("required")
-            $("#cm_1_5_1").removeClass("required")
-            $("#cm_1_2_1_2").removeClass("required")
 		}
 	});
 
@@ -2942,6 +2950,17 @@ $("#inputForm").validate({
 
 	//产次(CS-1-1-1)等于"经产"(n)时必填 cs_1_1_1
 	//剖宮产史 CS-1-1-1-1
+    //校验值
+    var value = $('#cs_1_1_1 input:radio:checked').val();
+    if("n"==value){
+        $("input[name='cs_1_1_1_1']").addClass("required")
+
+    }else {
+        //重置
+        $("input[name='cs_1_1_1_1']").removeClass("required")
+
+    }
+    //监听事件
 	$('#cs_1_1_1').on('ifChecked', function(){
 		var value = $('#cs_1_1_1 input:radio:checked').val();
 		if("n"==value){
