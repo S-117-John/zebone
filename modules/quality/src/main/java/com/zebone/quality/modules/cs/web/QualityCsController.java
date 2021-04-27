@@ -414,9 +414,14 @@ public class QualityCsController extends BaseController {
          *   a:术后24小时内结束使用；b:术后48小时内结束使用；c:术后48小时之后继续使用；def：请选择
          */
         //获取术后停药时间
-        String cm_1_6_11 = mapResult.get("cm_1_6_1").toString();
-        String cm_0_2_6_21 = mapResult.get("cm_0_2_6_2").toString();
+
+//        String cm_1_6_11 = mapResult.get("cm_1_6_1").toString();
+//        String cm_0_2_6_21 = mapResult.get("cm_0_2_6_2").toString();
+
+        String cm_1_6_11 = MapUtils.getString(mapResult,"cm_1_6_1");
+        String cm_0_2_6_21 = MapUtils.getString(mapResult,"cm_0_2_6_2");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        if (!StringUtils.isEmpty(cm_0_2_6_21) && !StringUtils.isEmpty(cm_1_6_11)){
         long cm_1_6_12 = sdf.parse(cm_1_6_11).getTime();
         long cm_0_2_6_22 = sdf.parse(cm_0_2_6_21).getTime();
         if (cm_0_2_6_22 != 0 && cm_1_6_12 !=0) {
@@ -434,6 +439,10 @@ public class QualityCsController extends BaseController {
             mapResult.put("cm_1_6_2",MapUtils.getString(mapResult,"cm_1_6_2"));
         }
         else {
+            mapResult.put("cm_1_6_2","def");
+            mapResult.put("cm_1_6_2",MapUtils.getString(mapResult,"cm_1_6_2"));
+        }
+        }else {
             mapResult.put("cm_1_6_2","def");
             mapResult.put("cm_1_6_2",MapUtils.getString(mapResult,"cm_1_6_2"));
         }
