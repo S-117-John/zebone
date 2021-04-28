@@ -54,6 +54,7 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -69,7 +70,7 @@
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="CM-0-1-1-3">
-								<span class="required">*</span> ${text('主治医师')}：<i class="fa icon-question"></i></label>
+								<span class="required">*</span> ${text('主治医师')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_0_1_1_3" maxlength="64" class="form-control required"/>
 							</div>
@@ -827,7 +828,7 @@
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="CM-1-4-1">
-								<span class="required hide">*</span> ${text('使用首剂抗菌药物起始时间')}：<i class="fa icon-question hide"></i></label>
+								<span class="required hide">*</span> ${text('使用首剂抗菌药物起始时间')}：<i class="fa icon-question"></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_1_4_1" readonly="true" maxlength="20" class="form-control Wdate required"
 									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
@@ -1015,7 +1016,7 @@
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="CS-5-2-1">
-								<span class="required hide" >*</span> ${text('剖宫产产后出血可能的原因')}：<i class="fa icon-question"></i></label>
+								<span class="required " >*</span> ${text('剖宫产产后出血可能的原因')}：<i class="fa icon-question"></i></label>
 							<div class="col-sm-10">
 								<#form:checkbox path="cs_5_2_1" dictType="CS_5_2_1" blankOption="true" class="form-control required" />
 							</div>
@@ -2282,9 +2283,9 @@ $("#inputForm").validate({
 		var value = $('#cs_8_2_1 input:radio:checked').val();
 		if("y"==value){
 			$("#cs_8_1_1").addClass("required")
-            $("#cs_8_2").removeClass("required")
+            $("input[name='cs_8_2']").removeClass("required")
 		}else {
-            $("#cs_8_2").addClass("required")
+            $("input[name='cs_8_2']").addClass("required")
 			$("#cs_8_1_1").removeClass("required")
 		}
 	});
@@ -2953,11 +2954,11 @@ $("#inputForm").validate({
     //校验值
     var value = $('#cs_1_1_1 input:radio:checked').val();
     if("n"==value){
-        $("#cs_1_1_1_1").addClass("required")
+        $("input[name='cs_1_1_1_1']").addClass("required")
 
     }else {
         //重置
-        $("#cs_1_1_1_1").removeClass("required")
+        $("input[name='cs_1_1_1_1']").removeClass("required")
 
     }
     //监听事件
@@ -2996,7 +2997,6 @@ $("#inputForm").validate({
 		});
 	});
 	$('#cs_0_2_2_1').on('ifUnchecked', function(event){
-	    debugger;
 		var flag = true;
 		$('#cs_0_2_2_1 input:checkbox:checked').each(function(i,v){
 			var value = $(this).val();
