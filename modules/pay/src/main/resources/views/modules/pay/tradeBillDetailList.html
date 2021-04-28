@@ -127,13 +127,14 @@ $('#dataGrid').dataGrid({
 		{header:'${text('商品名称')}', name:'productName', index:'a.product_name', width:150, align:"left"},
 		{header:'${text('实收金额')}', name:'receiptAmount', index:'a.receipt_amount', width:150, align:"left"},
 		{header:'${text('退款批次号')}', name:'refundBatchNo', index:'a.refund_batch_no', width:150, align:"left"},
-		{header:'${text('备注')}', name:'remarks', index:'a.remarks', width:150, align:"left"},
-		{header:'${text('状态')}', name:'status', index:'a.status', width:150, align:"center", formatter: function(val, obj, row, act){
-			return js.getDictLabel(${@DictUtils.getDictListJson('sys_search_status')}, val, '${text('未知')}', true);
-		}},
-		{header:'${text('交易创建时间')}', name:'tradeCreateTime', index:'a.trade_create_time', width:150, align:"center"},
-		{header:'${text('交易完成时间')}', name:'tradeEndTime', index:'a.trade_end_time', width:150, align:"center"},
+
+		// {header:'${text('状态')}', name:'status', index:'a.status', width:150, align:"center", formatter: function(val, obj, row, act){
+		// 	return js.getDictLabel(${@DictUtils.getDictListJson('sys_search_status')}, val, '${text('未知')}', true);
+		// }},
+		// {header:'${text('交易创建时间')}', name:'tradeCreateTime', index:'a.trade_create_time', width:150, align:"center"},
+		{header:'${text('交易时间')}', name:'tradeEndTime', index:'a.trade_end_time', width:150, align:"center"},
 		{header:'${text('交易号')}', name:'tradeNo', index:'a.trade_no', width:150, align:"left"},
+		{header:'${text('备注')}', name:'remarks', index:'a.remarks', width:150, align:"left"},
 		{header:'${text('操作')}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
 			var actions = [];
 			<% if(hasPermi('pay:tradeBillDetail:edit')){ %>
