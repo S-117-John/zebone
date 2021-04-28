@@ -361,7 +361,7 @@
 							<label class="control-label col-sm-2" title="CS-1-1-1-1">
 								<span class="required hide">*</span> ${text('剖宮产史')}：<i class="fa icon-question"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="cs_1_1_1_1" dictType="CS_1_1_1_1" blankOption="true" class="form-control" />
+								<#form:radio path="cs_1_1_1_1" dictType="CS_1_1_1_1" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -774,7 +774,7 @@
 							<label class="control-label col-sm-2" title="CM-1-2-1-2">
 								<span class="required hide">*</span> ${text('预防性抗菌药物选择')}：<i class="fa icon-question"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="cm_1_2_1_2" dictType="CS_CM_1_2_1_2" blankOption="true" class="form-control" />
+								<#form:checkbox path="cm_1_2_1_2" dictType="CS_CM_1_2_1_2" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -829,7 +829,7 @@
 							<label class="control-label col-sm-2" title="CM-1-4-1">
 								<span class="required hide">*</span> ${text('使用首剂抗菌药物起始时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cm_1_4_1" readonly="true" maxlength="20" class="form-control Wdate"
+								<#form:input path="cm_1_4_1" readonly="true" maxlength="20" class="form-control Wdate required"
 									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
@@ -844,7 +844,7 @@
 							<label class="control-label col-sm-2" title="CM-1-5-1">
 								<span class="required hide">*</span> ${text('手术时间是否≥3小时')}：<i class="fa icon-question"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="cm_1_5_1" dictType="CS_CM_1_5_1" blankOption="true" class="form-control" />
+								<#form:radio path="cm_1_5_1" dictType="CS_CM_1_5_1" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -866,7 +866,7 @@
 							<label class="control-label col-sm-2" title="CM-1-5-3">
 								<span class="required hide">*</span> ${text('术中出血量是否≥1500ml')}：<i class="fa icon-question"></i></label>
 							<div class="col-sm-10">
-								<#form:radio path="cm_1_5_3" dictType="CS_CM_1_5_3" blankOption="true" class="form-control" />
+								<#form:radio path="cm_1_5_3" dictType="CS_CM_1_5_3" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -1017,7 +1017,7 @@
 							<label class="control-label col-sm-2" title="CS-5-2-1">
 								<span class="required hide" >*</span> ${text('剖宫产产后出血可能的原因')}：<i class="fa icon-question"></i></label>
 							<div class="col-sm-10">
-								<#form:checkbox path="cs_5_2_1" dictType="CS_5_2_1" blankOption="true" class="form-control" />
+								<#form:checkbox path="cs_5_2_1" dictType="CS_5_2_1" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -2520,15 +2520,15 @@ $("#inputForm").validate({
     var v = $('#cm_1_1_1 input:radio:checked').val();
     if ("y"==v){
         $("#cm_1_6_1").addClass("required")
-        $("#cm_1_5_3").addClass("required")
-        $("#cm_1_5_1").addClass("required")
-        $("#cm_1_2_1_2").addClass("required")
+        $("input[name='cm_1_5_3']").addClass("required")
+        $("input[name='cm_1_5_1']").addClass("required")
+        $("input[name='cm_1_2_1_2']").addClass("required")
         $("#cm_1_4_1").addClass("required")
     } else {
         $("#cm_1_6_1").removeClass("required")
-        $("#cm_1_5_3").removeClass("required")
-        $("#cm_1_5_1").removeClass("required")
-        $("#cm_1_2_1_2").removeClass("required")
+        $("input[name='cm_1_5_3']").removeClass("required")
+        $("input[name='cm_1_5_1']").removeClass("required")
+        $("input[name='cm_1_2_1_2']").removeClass("required")
         $("#cm_1_4_1").removeClass("required")
     }
     //监听事件
