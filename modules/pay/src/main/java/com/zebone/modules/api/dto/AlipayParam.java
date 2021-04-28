@@ -52,5 +52,13 @@ public class AlipayParam {
     @SerializedName("total_amount")
     private String totalAmount;
 
+    @ApiModelProperty(value = "商户操作员编号",required = true)
+    @SerializedName("operator_id")
+    private String operatorId;
+
+    @ApiModelProperty(value = "商户号",required = true)
+    @SerializedName("operator_id")
+    private String storeId;
+
 
 }
