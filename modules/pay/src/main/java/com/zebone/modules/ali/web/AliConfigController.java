@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.zebone.modules.ali.vo.AliConfigVO;
 import com.zebone.modules.merchant.entity.PayMerchant;
 import com.zebone.modules.merchant.service.PayMerchantService;
+import com.zebone.modules.repository.AliConfigRepository;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,8 @@ public class AliConfigController extends BaseController {
 	@Autowired
 	private PayMerchantService payMerchantService;
 
+	@Autowired
+	private AliConfigRepository aliConfigRepository;
 
 	/**
 	 * 获取数据
@@ -142,7 +145,8 @@ public class AliConfigController extends BaseController {
 	@RequestMapping(value = "delete")
 	@ResponseBody
 	public String delete(AliConfig aliConfig) {
-		aliConfigService.delete(aliConfig);
+//		aliConfigService.delete(aliConfig);
+		aliConfigRepository.delete(aliConfig.getId());
 		return renderResult(Global.TRUE, text("删除支付宝配置成功！"));
 	}
 	

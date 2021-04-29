@@ -12,7 +12,9 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 import com.jeesite.common.io.PropertiesUtils;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
@@ -25,6 +27,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @MapperScan("com.zebone.quality.modules")
 @EnableJpaAuditing
 @EnableScheduling
+@EnableJpaRepositories(basePackages = {"com.zebone"})
 public class Application extends SpringBootServletInitializer {
 	
 	public static void main(String[] args) {
