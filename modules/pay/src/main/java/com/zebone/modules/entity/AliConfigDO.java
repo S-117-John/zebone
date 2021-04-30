@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "BIZ_ALI_CONFIG")
+@Table(name = "payment_ali_config")
 public class AliConfigDO{
 
     @Id

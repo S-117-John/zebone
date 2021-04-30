@@ -16,8 +16,6 @@ import com.jeesite.modules.sys.interceptor.LogInterceptor;
 
 /**
  * 后台管理日志记录拦截器
- * @author ThinkGem
- * @version 2018年1月10日
  */
 @Configuration
 @EnableWebMvc
