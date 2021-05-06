@@ -1,0 +1,72 @@
+<% layout('/layouts/default.html', {title: '', bodyClass: ''}){ %>
+<!-- <link rel="stylesheet" href="${ctxStatic}/modules/sys/sysDesktop.css?${_version}"> -->
+<div class="content pb0">
+	<div class="row">
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<div class="info-box">
+				<span class="info-box-icon bg-aqua"><i class="fa fa-cog"></i></span>
+				<div class="info-box-content">
+					<span class="info-box-text">今日支付笔数</span>
+					<span class="info-box-number">${text(payInfo.dayCount)}</span>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<div class="info-box">
+				<span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
+				<div class="info-box-content">
+					<span class="info-box-text">本月支付笔数</span>
+					<span class="info-box-number">${text(payInfo.monthCount)}</span>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix visible-sm-block"></div>
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<div class="info-box">
+				<span class="info-box-icon bg-green"><i class="fa fa-internet-explorer"></i></span>
+				<div class="info-box-content">
+					<span class="info-box-text">今日支付金额</span>
+					<span class="info-box-number">${text(payInfo.day)}</span>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<div class="info-box">
+				<span class="info-box-icon bg-yellow"><i class="fa fa-users"></i></span>
+
+				<div class="info-box-content">
+					<span class="info-box-text">本月支付金额</span>
+					<span class="info-box-number">${text(payInfo.month)}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<footer class="main-footer m0">
+	<div class="pull-right hidden-xs">当前版本： ${@Global.getConfig('productVersion')}</div>
+	&copy; ${@DateUtils.getYear()} ${@Global.getConfig('productName')} - Powered By <a href="http://jeesite.com">Zebone</a>
+</footer>
+<% } %>
+<script src="${ctxStatic}/jquery/jquery-ui-sortable-1.12.1.min.js"></script>
+<script src="${ctxStatic}/echarts/4.2/echarts.min.js"></script>
+<script>
+	$(function(){
+		$(window).resize(function(){
+			var footerHeight = $('.main-footer').outerHeight() || 0;
+			var windowHeight = $(window).height();
+			$('.content').css('min-height', windowHeight - footerHeight);
+			myChart1.resize(); myChart2.resize(); myChart3.resize();
+		}).resize();
+		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+			$(window).resize();
+		});
+		$('.ui-sortable').sortable({
+			connectWith : '.ui-sortable',
+			handle      : '.box-header, .nav-tabs',
+			placeholder : 'sort-highlight',
+			forcePlaceholderSize: true,
+			zIndex : 999999
+		}).find('.box-header, .nav-tabs').css('cursor', 'move');
+	});
+</script>
