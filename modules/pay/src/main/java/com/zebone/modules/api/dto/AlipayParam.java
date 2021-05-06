@@ -57,7 +57,7 @@ public class AlipayParam {
     private String operatorId;
 
     @ApiModelProperty(value = "商户号",required = true)
-    @SerializedName("operator_id")
+    @SerializedName("store_id")
     private String storeId;
 
 

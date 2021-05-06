@@ -11,6 +11,7 @@ import com.jeesite.common.utils.excel.ExcelExport;
 import com.jeesite.modules.sys.entity.EmpUser;
 import com.jeesite.modules.sys.entity.UserDataScope;
 import com.zebone.modules.entity.ExcelRecord;
+import com.zebone.modules.repository.TradeRecordRepository;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,10 @@ public class TradeRecordController extends BaseController {
 
 	@Autowired
 	private TradeRecordService tradeRecordService;
-	
+
+	@Autowired
+	private TradeRecordRepository tradeRecordRepository;
+
 	/**
 	 * 获取数据
 	 */
@@ -124,7 +128,8 @@ public class TradeRecordController extends BaseController {
 	@RequestMapping(value = "delete")
 	@ResponseBody
 	public String delete(TradeRecord tradeRecord) {
-		tradeRecordService.delete(tradeRecord);
+//		tradeRecordService.delete(tradeRecord);
+		tradeRecordRepository.delete(tradeRecord.getId());
 		return renderResult(Global.TRUE, text("删除交易记录成功！"));
 	}
 

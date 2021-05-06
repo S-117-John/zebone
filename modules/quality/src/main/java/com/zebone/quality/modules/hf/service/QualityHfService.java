@@ -8,10 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.zebone.quality.infrastructure.entity.HfDO;
-import com.zebone.quality.modules.hf.repository.HfRepository;
+
 import org.apache.commons.beanutils.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
