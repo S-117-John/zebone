@@ -30,6 +30,7 @@ import com.zebone.quality.modules.cs.entity.CsVo;
 import com.zebone.quality.modules.emr.service.EmrDataService;
 import com.zebone.quality.modules.stemi.entity.Stemi;
 import org.apache.commons.beanutils.BeanUtils;
+
 import org.apache.commons.collections.MapUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.flowable.engine.TaskService;
@@ -233,40 +234,37 @@ public class QualityCsController extends BaseController {
 	@ResponseBody
 	public String save(@Validated QualityCs qualityCs) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 		//处理caseid多选节点
-//		if(!StringUtils.isEmpty(qualityCs.getCaseid())){
-//			qualityCs.setCaseid(qualityCs.getCaseid().split(",")[0]);
-//		}
-//
-//		qualityCsService.save(qualityCs);
-
-
-        /**
-         *   cm_0_2_6_2：手术结束时间，cm_1_6_1:术后停药时间，使用抗菌药物时间使用时间分层（cm_1_6_2）=停药时间 - 手术结束时间
-         *   a:术后24小时内结束使用；b:术后48小时内结束使用；c:术后48小时之后继续使用；def：请选择
-         */
-        //得到术后抗菌药物停止使用时间
-        long cm_1_6_1 = qualityCs.getCm_1_6_1().getTime();
-        //得到手术结束时间
-        long cm_0_2_6_2 = qualityCs.getCm_0_2_6_2().getTime();
-        if (cm_0_2_6_2 != 0 && cm_1_6_1 != 0){
-
-          long hour = (cm_1_6_1 - cm_0_2_6_2)/ (60*60*1000);
-          if (0<=hour && hour<=24){
-              qualityCs.setCm_1_6_2("a");
-          }
-          if (hour>24 && hour<=48){
-              qualityCs.setCm_1_6_2("b");
-          }
-          if (hour>48){
-              qualityCs.setCm_1_6_2("c");
-              if (StringUtils.isEmpty(qualityCs.getCm_1_6_3_2())){
-                  return renderResult(Global.FALSE, text("术后48小时之后继续使用的原因不能为空！"));
-              }
-              }
-        }else {
-              qualityCs.setCm_1_6_2("UTD");
-        }
         if(!StringUtils.isEmpty(qualityCs.getCaseid())){
+            /**
+             *   cm_0_2_6_2：手术结束时间，cm_1_6_1:术后停药时间，使用抗菌药物时间使用时间分层（cm_1_6_2）=停药时间 - 手术结束时间
+             *   a:术后24小时内结束使用；b:术后48小时内结束使用；c:术后48小时之后继续使用；def：请选择
+             */
+            //得到术后抗菌药物停止使用时间
+            if (qualityCs.getCm_1_6_1() != null){
+            long cm_1_6_1 = qualityCs.getCm_1_6_1().getTime();
+            //得到手术结束时间
+            long cm_0_2_6_2 = qualityCs.getCm_0_2_6_2().getTime();
+            if (cm_0_2_6_2 != 0 && cm_1_6_1 != 0){
+
+                long hour = (cm_1_6_1 - cm_0_2_6_2)/ (60*60*1000);
+                if (0<=hour && hour<=24){
+                    qualityCs.setCm_1_6_2("a");
+                }
+                if (hour>24 && hour<=48){
+                    qualityCs.setCm_1_6_2("b");
+                }
+                if (hour>48){
+                    qualityCs.setCm_1_6_2("c");
+                    if (StringUtils.isEmpty(qualityCs.getCm_1_6_3_2())){
+                        return renderResult(Global.FALSE, text("术后48小时之后继续使用的原因不能为空！"));
+                    }
+                }
+            }else {
+                qualityCs.setCm_1_6_2("UTD");
+            }
+            }else {
+                qualityCs.setCm_1_6_2("UTD");
+            }
             if (("").equals(qualityCs.getCaseid().split(",")[0])){
                 qualityCs.setCaseid(qualityCs.getCaseid().split(",")[1]);
                 qualityCsService.save(qualityCs);
