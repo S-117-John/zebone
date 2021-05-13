@@ -89,6 +89,7 @@ public class TradeDayBillController extends BaseController {
 		model.addAttribute("tradeDayBill", tradeDayBill);
 		return "modules/pay/tradeDayBillList";
 	}
+
 	
 	/**
 	 * 查询列表数据

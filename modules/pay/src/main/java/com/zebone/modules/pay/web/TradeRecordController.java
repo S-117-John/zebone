@@ -11,6 +11,7 @@ import com.jeesite.common.utils.excel.ExcelExport;
 import com.jeesite.modules.sys.entity.EmpUser;
 import com.jeesite.modules.sys.entity.UserDataScope;
 import com.zebone.modules.entity.ExcelRecord;
+import com.zebone.modules.pay.entity.TradeMonthBillDetail;
 import com.zebone.modules.repository.TradeRecordRepository;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.BeanUtils;
@@ -155,4 +156,7 @@ public class TradeRecordController extends BaseController {
 			ee.setDataList(excelRecordList).write(response, fileName);
 		}
 	}
+
+
+
 }

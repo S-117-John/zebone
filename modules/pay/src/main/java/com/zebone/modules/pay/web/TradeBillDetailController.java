@@ -51,6 +51,16 @@ public class TradeBillDetailController extends BaseController {
 		model.addAttribute("tradeBillDetail", tradeBillDetail);
 		return "modules/pay/tradeBillDetailList";
 	}
+
+	/**
+	 * 差异列表
+	 */
+	@RequiresPermissions("pay:tradeBillDetail:view")
+	@RequestMapping(value = "difference")
+	public String difference (TradeBillDetail tradeBillDetail, Model model) {
+		model.addAttribute("tradeBillDetail", tradeBillDetail);
+		return "modules/pay/billDifferenceList";
+	}
 	
 	/**
 	 * 查询列表数据
