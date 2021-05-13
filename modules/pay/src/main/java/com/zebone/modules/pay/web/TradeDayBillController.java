@@ -11,16 +11,19 @@ import com.jeesite.common.io.FileUtils;
 import com.jeesite.common.lang.StringUtils;
 import com.zebone.common.utils.CsvUtil;
 import com.zebone.modules.ali.service.AliPayService;
+import com.zebone.modules.entity.DayBillDO;
 import com.zebone.modules.pay.entity.TradeBillDetail;
 import com.zebone.modules.pay.entity.TradeDayBillDetail;
 import com.zebone.modules.pay.entity.TradeMonthBillDetail;
 import com.zebone.modules.pay.service.TradeBillDetailService;
 import com.zebone.modules.pay.service.TradeDayBillDetailService;
+import com.zebone.modules.repository.DayBillRepository;
 import com.zebone.modules.wx.config.MyWxConfig;
 import com.zebone.modules.wx.entity.WxConfig;
 import com.zebone.modules.wx.sdk.WXPay;
 import com.zebone.modules.wx.service.WxConfigService;
 import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,11 +64,13 @@ public class TradeDayBillController extends BaseController {
 	@Autowired
 	private TradeDayBillService tradeDayBillService;
 
-	@Autowired
-	private TradeDayBillDetailService tradeDayBillDetailService;
+
 
 	@Autowired
 	private TradeBillDetailService tradeBillDetailService;
+
+	@Autowired
+	private DayBillRepository dayBillRepository;
 
 	/**
 	 * 获取数据
@@ -114,6 +119,10 @@ public class TradeDayBillController extends BaseController {
 	@PostMapping(value = "save")
 	@ResponseBody
 	public String save(@Validated TradeDayBill tradeDayBill) throws Exception {
+		List<DayBillDO> dayBillList = dayBillRepository.findByAppId(tradeDayBill.getAppId());
+		if(dayBillList.stream().anyMatch(a->DateUtils.isSameDay(tradeDayBill.getBillDate(),a.getBillDate()))){
+			return renderResult(Global.FALSE, text("账单已存在"));
+		}
 		if("1".equalsIgnoreCase(tradeDayBill.getPayType())){
 			SimpleDateFormat simpleDateFormatBill = new SimpleDateFormat("yyyyMMdd");
 			//微信账单
@@ -175,10 +184,11 @@ public class TradeDayBillController extends BaseController {
 			//获取支付宝账单地址
 			String billUrl = aliPayService.downLoadAliBill(simpleDateFormatBill.format(tradeDayBill.getBillDate()),tradeDayBill.getAppId());
 			//下载对账单
-//			String billName = FileUtils.downloadFromUrl(billUrl,billDir);
+			String billName = FileUtils.downloadFromUrl(billUrl,billDir);
 			//解压对账单
-			List<String> fileNames = new ArrayList<>();
-//			List<String> fileNames = FileUtils.unZipBillFiles(billName,billDir);
+//			List<String> fileNames = new ArrayList<>();
+			List<String> fileNames = FileUtils.unZipBillFiles(billName,billDir);
+			String dateStr = DateFormatUtils.format(tradeDayBill.getBillDate(),"yyyyMMdd");
 			//读取csv文件
 			for (String fileName : fileNames) {
 				List<String[]> contentList = CsvUtil.CSVReadAll(fileName);
@@ -193,7 +203,7 @@ public class TradeDayBillController extends BaseController {
 					String billTotalAmount = contentList.get(4)[4];
 					//实收金额
 					String billReceiptAmount = contentList.get(4)[5];
-					tradeDayBill.setBillNo(billNo);
+					tradeDayBill.setBillNo(billNo+"_"+dateStr);
 					tradeDayBill.setBillCount(billCount);
 					tradeDayBill.setRefundCount(refundCount);
 					tradeDayBill.setBillTotalAmount(billTotalAmount);
@@ -201,7 +211,7 @@ public class TradeDayBillController extends BaseController {
 					try{
 						tradeDayBillService.save(tradeDayBill);
 					}catch (Exception e){
-
+						e.printStackTrace();
 					}
 
 				}else{
@@ -231,7 +241,7 @@ public class TradeDayBillController extends BaseController {
 						String refundBath = contentList.get(i)[21];
 
 						TradeBillDetail tradeBillDetail = new TradeBillDetail();
-						tradeBillDetail.setBillNo(billNo);
+						tradeBillDetail.setBillNo(billNo+"_"+dateStr);
 						tradeBillDetail.setTradeNo(tradeNo);
 						tradeBillDetail.setOutTradeNo(outTradeNo);
 						tradeBillDetail.setBizType(bizType);

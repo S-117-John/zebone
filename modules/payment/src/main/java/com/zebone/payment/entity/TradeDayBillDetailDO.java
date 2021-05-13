@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "biz_trade_bill_detail")
+@Table(name = "payment_detail_bill")
 public class TradeDayBillDetailDO {
 
     @Id

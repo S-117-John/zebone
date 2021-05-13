@@ -2,12 +2,21 @@ package com.zebone.quality.modules.stemi.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-
+@Entity
+@Table(name = "quality_stemi")
 public class Stemi implements Serializable {
+
+    @Id
+    private String id;
 
     @JSONField(name="CM-0-1-1-1")
     private String cm_0_1_1_1;
@@ -40,6 +49,7 @@ public class Stemi implements Serializable {
     @JSONField(name="CM-0-2-1-5")
     private Double cm_0_2_1_5;
     @JSONField(name="CM-0-2-2-1")
+    @Transient
     private List<String> cm_0_2_2_1;
     @JSONField(format = "yyyy-MM-dd HH:mm",name = "CM-0-2-2-2")
     private Date cm_0_2_2_2;
@@ -86,16 +96,19 @@ public class Stemi implements Serializable {
     @JSONField(format = "yyyy-MM-dd HH:mm",name = "STEMI-1-1-2-1")
     private Date stemi_1_1_2_1;
     @JSONField(name="STEMI-1-1-3")
+    @Transient
     private List<String> stemi_1_1_3;
     @JSONField(name="STEMI-1-1-3-1")
     private String stemi_1_1_3_1;
     @JSONField(name="STEMI-1-2-1")
     private String stemi_1_2_1;
     @JSONField(name="STEMI-1-2-2")
+    @Transient
     private List<String> stemi_1_2_2;
     @JSONField(name="STEMI-1-2-2-1")
     private String stemi_1_2_2_1;
     @JSONField(name="STEMI-1-2-3")
+    @Transient
     private List<String> stemi_1_2_3;
     @JSONField(name="STEMI-1-2-3-1")
     private String stemi_1_2_3_1;
@@ -106,6 +119,7 @@ public class Stemi implements Serializable {
     @JSONField(format = "yyyy-MM-dd HH:mm",name = "STEMI-1-3-1-2-1")
     private Date stemi_1_3_1_2_1;
     @JSONField(name="STEMI-1-3-2")
+    @Transient
     private List<String> stemi_1_3_2;
     @JSONField(name="STEMI-1-4-1-1")
     private String stemi_1_4_1_1;
@@ -190,8 +204,10 @@ public class Stemi implements Serializable {
     @JSONField(name="STEMI-3-1-2-1")
     private String stemi_3_1_2_1;
     @JSONField(name="STEMI-3-1-2-2")
+    @Transient
     private List<String> stemi_3_1_2_2;
     @JSONField(name="STEMI-3-1-2-3")
+    @Transient
     private List<String> stemi_3_1_2_3;
     @JSONField(name="STEMI-3-1-3")
     private String stemi_3_1_3;
@@ -206,10 +222,12 @@ public class Stemi implements Serializable {
     @JSONField(name="STEMI-3-1-7-1")
     private Double stemi_3_1_7_1;
     @JSONField(name="STEMI-3-1-8")
+    @Transient
     private List<String> stemi_3_1_8;
     @JSONField(name="STEMI-3-1-9")
     private String stemi_3_1_9;
     @JSONField(name="STEMI-3-1-10")
+    @Transient
     private List<String> stemi_3_1_10;
     @JSONField(name="STEMI-3-2-1")
     private String stemi_3_2_1;
@@ -234,6 +252,7 @@ public class Stemi implements Serializable {
     @JSONField(name="STEMI-3-2-2-5")
     private String stemi_3_2_2_5;
     @JSONField(name="STEMI-3-2-3-1")
+    @Transient
     private List<String> stemi_3_2_3_1;
     @JSONField(name="STEMI-3-2-3-2-1")
     private String stemi_3_2_3_2_1;
@@ -252,6 +271,7 @@ public class Stemi implements Serializable {
     @JSONField(name="STEMI-3-2-3-2-8")
     private String stemi_3_2_3_2_8;
     @JSONField(name="STEMI-3-2-3-3")
+    @Transient
     private List<String> stemi_3_2_3_3;
     @JSONField(name="STEMI-3-2-3-3-1")
     private String stemi_3_2_3_3_1;
@@ -310,10 +330,12 @@ public class Stemi implements Serializable {
     @JSONField(name="STEMI-3-2-4-4")
     private String stemi_3_2_4_4;
     @JSONField(name="STEMI-3-2-5-1")
+    @Transient
     private List<String> stemi_3_2_5_1;
     @JSONField(name="STEMI-3-2-5-1-1")
     private String stemi_3_2_5_1_1;
     @JSONField(name="STEMI-3-2-5-2")
+    @Transient
     private List<String> stemi_3_2_5_2;
     @JSONField(name="STEMI-3-2-5-2-1")
     private String stemi_3_2_5_2_1;
@@ -332,10 +354,12 @@ public class Stemi implements Serializable {
     @JSONField(name="STEMI-3-3-0")
     private String stemi_3_3_0;
     @JSONField(name="STEMI-3-3-1-1")
+    @Transient
     private List<String> stemi_3_3_1_1;
     @JSONField(name="STEMI-3-3-1-1-1")
     private String stemi_3_3_1_1_1;
     @JSONField(name="STEMI-3-3-1-2")
+    @Transient
     private List<String> stemi_3_3_1_2;
     @JSONField(name="STEMI-3-3-1-2-1")
     private String stemi_3_3_1_2_1;
@@ -354,14 +378,17 @@ public class Stemi implements Serializable {
     @JSONField(name="STEMI-3-4-3-1")
     private Double stemi_3_4_3_1;
     @JSONField(name="STEMI-3-4-4")
+    @Transient
     private List<String> stemi_3_4_4;
     @JSONField(name="STEMI-4-1-1")
     private String stemi_4_1_1;
     @JSONField(name="STEMI-4-1-2-1")
+    @Transient
     private List<String> stemi_4_1_2_1;
     @JSONField(name="STEMI-4-1-2-1-1")
     private String stemi_4_1_2_1_1;
     @JSONField(name="STEMI-4-1-2-2")
+    @Transient
     private List<String> stemi_4_1_2_2;
     @JSONField(name="STEMI-4-1-2-2-1")
     private String stemi_4_1_2_2_1;
@@ -382,6 +409,7 @@ public class Stemi implements Serializable {
     @JSONField(name="STEMI-5-3-1")
     private String stemi_5_3_1;
     @JSONField(name="STEMI-5-3-2")
+    @Transient
     private List<String> stemi_5_3_2;
     @JSONField(name="STEMI-5-3-3")
     private String stemi_5_3_3;
@@ -396,6 +424,7 @@ public class Stemi implements Serializable {
     @JSONField(name="STEMI-5-4-1")
     private String stemi_5_4_1;
     @JSONField(name="STEMI-5-4-2")
+    @Transient
     private List<String> stemi_5_4_2;
     @JSONField(name="STEMI-5-4-3")
     private String stemi_5_4_3;
@@ -434,12 +463,14 @@ public class Stemi implements Serializable {
     @JSONField(name="STEMI-6-5-1")
     private String stemi_6_5_1;
     @JSONField(name="STEMI-6-5-2")
+    @Transient
     private List<String> stemi_6_5_2;
     @JSONField(name="STEMI-6-5-2-1")
     private String stemi_6_5_2_1;
     @JSONField(name="STEMI-6-5-3")
     private String stemi_6_5_3;
     @JSONField(name="STEMI-6-5-4")
+    @Transient
     private List<String> stemi_6_5_4;
     @JSONField(name="STEMI-6-5-5")
     private String stemi_6_5_5;
@@ -454,6 +485,7 @@ public class Stemi implements Serializable {
     @JSONField(name="STEMI-7-3-1")
     private String stemi_7_3_1;
     @JSONField(name="STEMI-7-3-2")
+    @Transient
     private List<String> stemi_7_3_2;
     @JSONField(name="STEMI-7-4")
     private String stemi_7_4;
@@ -466,26 +498,35 @@ public class Stemi implements Serializable {
     @JSONField(name="STEMI-8-1-3")
     private String stemi_8_1_3;
     @JSONField(name="STEMI-8-2-1")
+    @Transient
     private List<String> stemi_8_2_1;
     @JSONField(name="STEMI-8-2-2")
     private String stemi_8_2_2;
     @JSONField(name="STEMI-8-3")
+    @Transient
     private List<String> stemi_8_3;
     @JSONField(name="STEMI-8-4-1")
+    @Transient
     private List<String> stemi_8_4_1;
     @JSONField(name="STEMI-8-4-2")
+    @Transient
     private List<String> stemi_8_4_2;
     @JSONField(name="STEMI-8-4-3")
+    @Transient
     private List<String> stemi_8_4_3;
     @JSONField(name="STEMI-8-4-4")
+    @Transient
     private List<String> stemi_8_4_4;
     @JSONField(name="STEMI-8-4-5")
+    @Transient
     private List<String> stemi_8_4_5;
     @JSONField(name="STEMI-9-2-1")
+    @Transient
     private List<String> stemi_9_2_1;
     @JSONField(name="STEMI-9-2-1-1")
     private String stemi_9_2_1_1;
     @JSONField(name="STEMI-9-2-2-A-2")
+    @Transient
     private List<String> stemi_9_2_2_a_2;
     @JSONField(name="STEMI-9-2-2-A-1-1")
     private Double stemi_9_2_2_a_1_1;
@@ -494,6 +535,7 @@ public class Stemi implements Serializable {
     @JSONField(name="CM-4-3")
     private String cm_4_3;
     @JSONField(name="CM-4-5")
+    @Transient
     private List<String> cm_4_5;
     @JSONField(name="CM-4-4-1")
     private String cm_4_4_1;

@@ -109,4 +109,32 @@ public class AlipayService {
         return response;
     }
 
+
+    public Object precreate(AlipayParam aliAlipayParam, AliConfig aliConfig) throws AlipayApiException {
+        String gateway="";
+        String appId="";
+        String privateKey="";
+        String alipayPublicKey="";
+        if(aliConfig!=null){
+            gateway = aliConfig.getGateway();
+            appId = aliConfig.getAppId();
+            privateKey = aliConfig.getPrivateKey();
+            alipayPublicKey = aliConfig.getPayPublicKey();
+        }
+        String charset = "GBK";
+        Gson gson = new Gson();
+        String bizContent = gson.toJson(aliAlipayParam);
+
+        // 2.1使用SDK，构建群发请求模型
+        AlipayClient alipayClient = new DefaultAlipayClient(gateway, appId, privateKey, "json", charset, alipayPublicKey,"RSA2");
+        AlipayTradePrecreateRequest alipayRequest = new AlipayTradePrecreateRequest();
+        alipayRequest.setBizContent(bizContent);
+
+        //3.使用SDK，调用交易下单接口
+        AlipayTradePrecreateResponse alipayResponse = null;
+        alipayResponse = alipayClient.execute(alipayRequest);
+
+        return alipayResponse;
+    }
+
 }

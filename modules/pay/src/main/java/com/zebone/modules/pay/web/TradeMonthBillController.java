@@ -5,16 +5,21 @@ package com.zebone.modules.pay.web;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 
 import com.alipay.api.AlipayApiException;
 import com.jeesite.common.io.FileUtils;
 import com.jeesite.common.lang.StringUtils;
 import com.zebone.common.utils.CsvUtil;
 import com.zebone.modules.ali.service.AliPayService;
+import com.zebone.modules.entity.MonthBillDO;
 import com.zebone.modules.pay.entity.TradeBillDetail;
 import com.zebone.modules.pay.entity.TradeMonthBillDetail;
 import com.zebone.modules.pay.service.TradeBillDetailService;
 import com.zebone.modules.pay.service.TradeMonthBillDetailService;
+import com.zebone.modules.repository.DetailBillRepository;
+import com.zebone.modules.repository.MonthBillRepository;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -56,11 +61,16 @@ public class TradeMonthBillController extends BaseController {
 	@Autowired
 	private AliPayService aliPayService;
 
-	@Autowired
-	private TradeMonthBillDetailService tradeMonthBillDetailService;
+
 
 	@Autowired
 	private TradeBillDetailService tradeBillDetailService;
+
+	@Autowired
+	private MonthBillRepository billRepository;
+
+	@Autowired
+	private DetailBillRepository detailBillRepository;
 
 	/**
 	 * 获取数据
@@ -111,6 +121,10 @@ public class TradeMonthBillController extends BaseController {
 		if("1".equalsIgnoreCase(tradeMonthBill.getPayType())){
 			//微信账单
 		}else if("2".equalsIgnoreCase(tradeMonthBill.getPayType())){
+			List<TradeMonthBill> record = tradeMonthBillService.findList(tradeMonthBill);
+			if(record.size()>0){
+				return renderResult(Global.FALSE, text("已存在该月账单"));
+			}
 			SimpleDateFormat simpleDateFormatBill = new SimpleDateFormat("yyyy-MM");
 			//支付宝账单
 			//获取支付宝账单地址
@@ -120,8 +134,10 @@ public class TradeMonthBillController extends BaseController {
 			//解压对账单
 			List<String> fileNames = FileUtils.unZipBillFiles(billName,billDir);
 			//读取csv文件
+
 			for (String fileName : fileNames) {
 				List<String[]> contentList = CsvUtil.CSVReadAll(fileName);
+				String dateStr = fileName.split("_")[1];
 				if(fileName.contains("汇总")){
 					//账号
 					String billNo = StringUtils.substringBetween(contentList.get(0)[0],"[","]");
@@ -133,7 +149,7 @@ public class TradeMonthBillController extends BaseController {
 					String billTotalAmount = contentList.get(4)[4];
 					//实收金额
 					String billReceiptAmount = contentList.get(4)[5];
-					tradeMonthBill.setBillNo(billNo);
+					tradeMonthBill.setBillNo(billNo+"_"+dateStr);
 					tradeMonthBill.setBillCount(billCount);
 					tradeMonthBill.setRefundCount(refundCount);
 					tradeMonthBill.setBillTotalAmount(billTotalAmount);
@@ -141,10 +157,10 @@ public class TradeMonthBillController extends BaseController {
 					try{
 						tradeMonthBillService.save(tradeMonthBill);
 					}catch (Exception e){
-
+						e.printStackTrace();
 					}
 
-				}else{
+				}else {
 					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					for (int i = 4; i < contentList.size()-4; i++) {
 						//账号
@@ -171,7 +187,7 @@ public class TradeMonthBillController extends BaseController {
 						String refundBath = contentList.get(i)[21];
 
 						TradeBillDetail tradeBillDetail = new TradeBillDetail();
-						tradeBillDetail.setBillNo(billNo);
+						tradeBillDetail.setBillNo(billNo+"_"+dateStr);
 						tradeBillDetail.setTradeNo(tradeNo);
 						tradeBillDetail.setOutTradeNo(outTradeNo);
 						tradeBillDetail.setBizType(bizType);
@@ -196,7 +212,7 @@ public class TradeMonthBillController extends BaseController {
 
 		}
 
-		return renderResult(Global.TRUE, text("保存月账单成功！"));
+		return renderResult(Global.TRUE, text("生成月账单成功！"));
 	}
 	
 	/**
@@ -222,15 +238,21 @@ public class TradeMonthBillController extends BaseController {
 		tradeMonthBillService.updateStatus(tradeMonthBill);
 		return renderResult(Global.TRUE, text("启用月账单成功"));
 	}
-	
+
+
+
 	/**
 	 * 删除月账单
 	 */
 	@RequiresPermissions("pay:tradeMonthBill:edit")
 	@RequestMapping(value = "delete")
 	@ResponseBody
+	@Transactional
 	public String delete(TradeMonthBill tradeMonthBill) {
-		tradeMonthBillService.delete(tradeMonthBill);
+		MonthBillDO monthBillDO = new MonthBillDO();
+		monthBillDO.setId(tradeMonthBill.getId());
+		billRepository.delete(monthBillDO);
+		detailBillRepository.deleteByBillNo(tradeMonthBill.getBillNo());
 		return renderResult(Global.TRUE, text("删除月账单成功！"));
 	}
 	
