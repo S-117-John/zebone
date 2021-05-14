@@ -190,13 +190,13 @@
 			a.cm_6_28 AS "cm_6_28",
 			a.cm_6_29 AS "cm_6_29",
 			a.cm_6_30 AS "cm_6_30",
-			a.id AS "id",
-			a.STATUS AS "status",
-			a.create_by AS "createBy",
-			a.create_date AS "createDate",
-			a.update_by AS "updateBy",
-			a.update_date AS "updateDate",
-			a.remarks AS "remarks"
+            a.id AS "id",
+            a.STATUS AS "status",
+            a.create_by AS "createBy",
+            a.create_date AS "createDate",
+            a.update_by AS "updateBy",
+            a.update_date AS "updateDate",
+            a.remarks AS "remarks"
 		FROM
 			quality_cs a
 		WHERE

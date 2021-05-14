@@ -25,6 +25,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="form_url", attrName="formUrl", label="表单Url"),
 		@Column(name="status", attrName="status", label="状态"),
 		@Column(name="icd9", attrName="icd9", label="手术ICD-9-CM-3编码"),
+        @Column(name="icd10",attrName="icd10",label="主要诊断ICD-10编码"),
 		@Column(name="ageCondition", attrName="ageCondition", label="年龄条件"),
 		@Column(name="age", attrName="age", label="年龄"),
 		@Column(name="dayCondition", attrName="dayCondition", label="住院天数条件"),
@@ -40,7 +41,8 @@ public class QualityDisease extends DataEntity<QualityDisease> {
 	private String imagePath;		// 图标
 	private String type;		// 病种分类
 	private String formUrl;		// 表单Url
-	private String icd9;
+	private String icd9;        //手术ICD-9-CM-3编码
+	private String icd10;       //主要诊断ICD-10编码
 
 	/**
 	 * 年龄条件
@@ -163,5 +165,8 @@ public class QualityDisease extends DataEntity<QualityDisease> {
 	public void setFormUrl(String formUrl) {
 		this.formUrl = formUrl;
 	}
-	
+
+    public String getIcd10() { return icd10; }
+
+    public void setIcd10(String icd10) { this.icd10 = icd10; }
 }

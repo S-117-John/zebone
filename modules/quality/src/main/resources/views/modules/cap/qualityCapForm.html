@@ -1,4 +1,6 @@
 <% layout('/layouts/default.html', {title: 'Cap社区获得性肺炎（儿童，首次住院）管理', libs: ['validate']}){ %>
+<script type="text/javascript" src="${ctxStatic}/importPatient.js"></script>
+<link rel="stylesheet" type="text/css" href="${ctxStatic}/quality_common.css"></linf>
 <div class="main-content">
 	<div class="box box-main">
 		<div class="box-header with-border">
@@ -22,13 +24,17 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('患儿病案号')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="caseId">
+								<span class="required ">*</span> ${text('患儿病案号')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-7">
-								<#form:input path="caseid" maxlength="64" class="form-control required"/>
+								<!--<#form:input path="caseid" maxlength="64" class="form-control required"/>-->
+                                <#form:listselect id="patNo" title="患者选择"
+                                path="caseid" labelPath="caseid"
+                                url="${ctx}/cap/qualityCap/patientSelect" allowClear="false" allowInput="true"
+                                checkbox="false" itemCode="patNo" itemName="patNo"/>
 							</div>
 							<div class="col-sm-3">
-								<button type="button" class="btn btn-sm btn-primary" id="patientSubmit" onclick="importPatient('hf/qualityHf')"><i class="fa fa-check"></i> ${text('导入患者信息')}</button>&nbsp;
+								<button type="button" class="btn btn-sm btn-primary" id="patientSubmit" onclick="importPatient('cap/qualityCap')"><i class="fa fa-check"></i> ${text('导入患者信息')}</button>&nbsp;
 							</div>
 						</div>
 					</div>
@@ -39,8 +45,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('质控医师')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-0-1-1-1">
+								<span class="required ">*</span> ${text('质控医师')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_0_1_1_1" maxlength="64" class="form-control required"/>
 							</div>
@@ -50,8 +56,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('质控护士')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-0-1-1-2">
+								<span class="required ">*</span> ${text('质控护士')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_0_1_1_2" maxlength="64" class="form-control required"/>
 							</div>
@@ -61,8 +67,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('主治医师')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-0-1-1-3">
+								<span class="required ">*</span> ${text('主治医师')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_0_1_1_3" maxlength="64" class="form-control required"/>
 							</div>
@@ -72,8 +78,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('责任护士')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-0-1-1-4">
+								<span class="required ">*</span> ${text('责任护士')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_0_1_1_4" maxlength="64" class="form-control required"/>
 							</div>
@@ -83,8 +89,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('上报科室')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-0-1-1-5">
+								<span class="required ">*</span> ${text('上报科室')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_0_1_1_5" maxlength="64" class="form-control required"/>
 							</div>
@@ -92,13 +98,25 @@
 					</div>
 				</div>
 
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" title="IDCard">
+                                <span class="required hide">*</span> ${text('患儿身份证号')}：<i class="fa icon-question"></i></label>
+                            <div class="col-sm-10">
+                                <#form:input path="idcard" maxlength="64" class="form-control "/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('主要诊断ICD-10四位亚目编码与名称')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-0-1-3-1">
+								<span class="required ">*</span> ${text('主要诊断ICD-10四位亚目编码与名称')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_0_1_3_1" dictType="CAP_CM_0_1_3_1" class="form-control required" />
+								<#form:select path="cm_0_1_3_1" dictType="CAP_CM_0_1_3_1" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -106,10 +124,10 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('主要诊断ICD-10六位临床扩展编码与名称')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-0-1-3-2">
+								<span class="required ">*</span> ${text('主要诊断ICD-10六位临床扩展编码与名称')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_0_1_3_2" dictType="CAP_CM_0_1_3_2" class="form-control required" />
+								<#form:select path="cm_0_1_3_2" dictType="CAP_CM_0_1_3_2" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -117,8 +135,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-0-1-4-1">
+								<span class="required hide">*</span> ${text('主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cm_0_1_4_1" dictType="CAP_CM_0_1_4_1" blankOption="true" class="form-control" />
 							</div>
@@ -128,8 +146,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('其他主要手术操作ICD-9-CM-3四位亚目编码与名称')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-0-1-4-1">
+								<span class="required hide">*</span> ${text('其他主要手术操作ICD-9-CM-3四位亚目编码与名称')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_0_1_4_1" maxlength="64" class="form-control"/>
 							</div>
@@ -139,8 +157,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-0-1-4-2">
+								<span class="required hide">*</span> ${text('主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cm_0_1_4_2" dictType="CAP_CM_0_1_4_2" blankOption="true" class="form-control" />
 							</div>
@@ -150,8 +168,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('其他主要手术操作ICD-9-CM-3六位临床扩展编码与名称')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-0-1-5-1">
+								<span class="required hide">*</span> ${text('其他主要手术操作ICD-9-CM-3六位临床扩展编码与名称')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_0_1_5_1" maxlength="64" class="form-control"/>
 							</div>
@@ -161,10 +179,10 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('是否出院后31天内重复住院')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-0-1-5">
+								<span class="required ">*</span> ${text('是否出院后31天内重复住院')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_0_1_5" dictType="CAP_CM_0_1_5" class="form-control required" />
+								<#form:select path="cm_0_1_5" dictType="CAP_CM_0_1_5" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -172,11 +190,11 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('出生日期')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-0-2-1-1">
+								<span class="required ">*</span> ${text('出生日期')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_0_2_1_1" readonly="true" maxlength="20" class="form-control Wdate required"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+									dataFormat="date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});"/>
 							</div>
 						</div>
 					</div>
@@ -184,10 +202,10 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('患儿性别')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-0-2-1-2">
+								<span class="required ">*</span> ${text('患儿性别')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_0_2_1_2" dictType="CAP_CM_0_2_1_2" class="form-control required" />
+								<#form:select path="cm_0_2_1_2" dictType="CAP_CM_0_2_1_2" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -195,8 +213,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('患儿体重')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-0-2-1-3">
+								<span class="required ">*</span> ${text('患儿体重')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_0_2_1_3" class="form-control required number"/>
 							</div>
@@ -206,56 +224,57 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('患儿身高')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-0-2-1-5">
+								<span class="required ">*</span> ${text('患儿身高')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_0_2_1_5" class="form-control required number"/>
 							</div>
 						</div>
 					</div>
 				</div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" title="CS-0-2-2-1">
+                                <span class="required hide">*</span> ${text('发病日期时间是否无法确定或无记录')}：<i class="fa icon-question"></i></label>
+                            <div class="col-sm-10">
+                                <#form:checkbox path="cm_0_2_2_1" dictType="CAP_CM_0_2_2_1" blankOption="true" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('发病日期时间是否无法确定或无记录')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-10">
-								<#form:select path="cm_0_2_2_1" dictType="CAP_CM_0_2_2_1" blankOption="true" class="form-control" />
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('发病日期时间')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-0-2-2-2">
+								<span class="required hide">*</span> ${text('发病日期时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_0_2_2_2" readonly="true" maxlength="20" class="form-control Wdate"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
 					</div>
 				</div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" title="CM-0-2-3-1">
+                                <span class="required hide">*</span> ${text('到达本院急诊或者门诊日期时间是否无法确定或无记录')}：<i class="fa icon-question"></i></label>
+                            <div class="col-sm-10">
+                                <#form:checkbox path="cm_0_2_3_1" dictType="CAP_CM_0_2_3_1" blankOption="true" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('到达本院急诊或者门诊日期时间是否无法确定或无记录')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-10">
-								<#form:select path="cm_0_2_3_1" dictType="CAP_CM_0_2_3_1" blankOption="true" class="form-control" />
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('到达本院急诊或者门诊日期时间')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-0-2-3-2">
+								<span class="required hide">*</span> ${text('到达本院急诊或者门诊日期时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_0_2_3_2" readonly="true" maxlength="20" class="form-control Wdate"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
 					</div>
@@ -263,11 +282,11 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('入院日期时间')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-0-2-4-1">
+								<span class="required ">*</span> ${text('入院日期时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_0_2_4_1" readonly="true" maxlength="20" class="form-control Wdate required"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
 					</div>
@@ -275,11 +294,11 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('出院日期时间')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-0-2-4-2">
+								<span class="required ">*</span> ${text('出院日期时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_0_2_4_2" readonly="true" maxlength="20" class="form-control Wdate required"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
 					</div>
@@ -287,11 +306,11 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('入住ICU/RCU日期时间')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-0-2-5-1">
+								<span class="required hide">*</span> ${text('入住ICU/RCU日期时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_0_2_5_1" readonly="true" maxlength="20" class="form-control Wdate"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
 					</div>
@@ -299,11 +318,11 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('离开ICU/RCU日期时间')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-0-2-5-2">
+								<span class="required hide">*</span> ${text('离开ICU/RCU日期时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_0_2_5_2" readonly="true" maxlength="20" class="form-control Wdate"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
 					</div>
@@ -311,10 +330,10 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('费用支付方式')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-0-3-1">
+								<span class="required ">*</span> ${text('费用支付方式')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_0_3_1" dictType="CAP_CM_0_3_1" class="form-control required" />
+								<#form:select path="cm_0_3_1" dictType="CAP_CM_0_3_1" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -322,10 +341,10 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('收入住院途径')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-0-3-2">
+								<span class="required ">*</span> ${text('收入住院途径')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_0_3_2" dictType="CAP_CM_0_3_2" class="form-control required" />
+								<#form:select path="cm_0_3_2" dictType="CAP_CM_0_3_2" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -333,10 +352,10 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('到院交通工具')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-0-3-3">
+								<span class="required ">*</span> ${text('到院交通工具')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_0_3_3" dictType="CAP_CM_0_3_3" class="form-control required" />
+								<#form:select path="cm_0_3_3" dictType="CAP_CM_0_3_3" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -353,10 +372,10 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('是否有重症肺炎的高危因素')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-1-1-0">
+								<span class="required ">*</span> ${text('是否有重症肺炎的高危因素')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cap_1_1_0" dictType="CAP_1_1_0" class="form-control required" />
+								<#form:select path="cap_1_1_0" dictType="CAP_1_1_0" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -364,19 +383,32 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('重症肺炎的高危因素')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-1-1-1">
+								<span class="required hide">*</span> ${text('重症肺炎的高危因素')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_1_1_1" dictType="CAP_1_1_1" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
 				</div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" title="CAP-1-1-1-1">
+                                <span class="required hide">*</span> ${text('其他高危因素')}：<i class="fa icon-question "></i></label>
+                            <div class="col-sm-10">
+                                <#form:input path="cap_1_1_1_1" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('符合重症肺炎')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-1-1-2">
+								<span class="required hide">*</span> ${text('符合重症肺炎')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_1_1_2" dictType="CAP_1_1_2" blankOption="true" class="form-control" />
 							</div>
@@ -386,8 +418,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('符合以下情况之一,需住院')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-1-1-3">
+								<span class="required hide">*</span> ${text('符合以下情况之一,需住院')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_1_1_3" dictType="CAP_1_1_3" blankOption="true" class="form-control" />
 							</div>
@@ -397,8 +429,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('是否符合重症')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-1-2-1">
+								<span class="required hide">*</span> ${text('是否符合重症')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_1_2_1" dictType="CAP_1_2_1" blankOption="true" class="form-control" />
 							</div>
@@ -408,8 +440,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('重度肺炎表现')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-1-2-2">
+								<span class="required hide">*</span> ${text('重度肺炎表现')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_1_2_2" dictType="CAP_1_2_2" blankOption="true" class="form-control" />
 							</div>
@@ -419,8 +451,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('符合重症住院及住ICU/RCU标准')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-1-2-3">
+								<span class="required hide">*</span> ${text('符合重症住院及住ICU/RCU标准')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_1_2_3" dictType="CAP_1_2_3" blankOption="true" class="form-control" />
 							</div>
@@ -430,8 +462,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('是否接种肺炎链球菌疫苗和')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-1-3-1">
+								<span class="required hide">*</span> ${text('是否接种肺炎链球菌疫苗和')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_1_3_1" dictType="CAP_1_3_1" blankOption="true" class="form-control" />
 							</div>
@@ -450,10 +482,10 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('实施首次氧合评估（首次）')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-2-1">
+								<span class="required ">*</span> ${text('实施首次氧合评估（首次）')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cap_2_1" dictType="CAP_2_1" class="form-control required" />
+								<#form:select path="cap_2_1" dictType="CAP_2_1" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -461,8 +493,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('实施首次氧合评估时段')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-2-2">
+								<span class="required hide">*</span> ${text('实施首次氧合评估时段')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_2_2" dictType="CAP_2_2" blankOption="true" class="form-control" />
 							</div>
@@ -472,8 +504,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('实施首次氧合评估时是否吸氧')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-2-3">
+								<span class="required hide">*</span> ${text('实施首次氧合评估时是否吸氧')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_2_3" dictType="CAP_2_3" blankOption="true" class="form-control" />
 							</div>
@@ -483,8 +515,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('动脉血气分析/指氧仪检查')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-2-4">
+								<span class="required hide">*</span> ${text('动脉血气分析/指氧仪检查')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_2_4" dictType="CAP_2_4" blankOption="true" class="form-control" />
 							</div>
@@ -494,8 +526,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('动脉血气分析值')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-2-4-3">
+								<span class="required hide">*</span> ${text('动脉血气分析值(mmHg)')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_2_4_3" class="form-control number"/>
 							</div>
@@ -505,8 +537,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('指氧仪检查值')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-2-4-4">
+								<span class="required hide">*</span> ${text('指氧仪检查值')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_2_4_4" class="form-control number"/>
 							</div>
@@ -526,10 +558,10 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('是否为重症并收入ICU/RCU的患儿')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-3-1-1">
+								<span class="required ">*</span> ${text('是否为重症并收入ICU/RCU的患儿')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cap_3_1_1" dictType="CAP_3_1_1" class="form-control required" />
+								<#form:select path="cap_3_1_1" dictType="CAP_3_1_1" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -537,10 +569,10 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('是否入院之前已经经接受抗菌药物治疗')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-3-2-1">
+								<span class="required hide">*</span> ${text('是否入院之前已经经接受抗菌药物治疗')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cap_3_2_1" dictType="CAP_3_2_1" class="form-control required" />
+								<#form:select path="cap_3_2_1" dictType="CAP_3_2_1" blankOption="true" class="form-control " />
 							</div>
 						</div>
 					</div>
@@ -548,10 +580,10 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('实施首次采集标本时段')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-3-2-2">
+								<span class="required hide">*</span> ${text('实施首次采集标本时段')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cap_3_2_2" dictType="CAP_3_2_2" class="form-control required" />
+								<#form:select path="cap_3_2_2" dictType="CAP_3_2_2" blankOption="true" class="form-control " />
 							</div>
 						</div>
 					</div>
@@ -559,10 +591,10 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('实施首次采集什么标本')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-3-2-3">
+								<span class="required hide">*</span> ${text('实施首次采集什么标本')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cap_3_2_3" dictType="CAP_3_2_3" class="form-control required" />
+								<#form:select path="cap_3_2_3" dictType="CAP_3_2_3" blankOption="true" class="form-control " />
 							</div>
 						</div>
 					</div>
@@ -570,11 +602,11 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('采集标本日期时间')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-3-2-4">
+								<span class="required hide">*</span> ${text('采集标本日期时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cap_3_2_4" readonly="true" maxlength="20" class="form-control Wdate required"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+								<#form:input path="cap_3_2_4" readonly="true" maxlength="20" class="form-control Wdate "
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true});"/>
 							</div>
 						</div>
 					</div>
@@ -582,8 +614,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('细菌学检查项目的选择')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-3-3-1">
+								<span class="required hide">*</span> ${text('细菌学检查项目的选择')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_3_3_1" dictType="CAP_3_3_1" blankOption="true" class="form-control" />
 							</div>
@@ -593,8 +625,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('其他细菌学检查项目')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-3-3-1-1">
+								<span class="required hide">*</span> ${text('其他细菌学检查项目')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_3_3_1_1" maxlength="64" class="form-control"/>
 							</div>
@@ -604,10 +636,10 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('病毒学检查项目的选择')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-3-3-2">
+								<span class="required hide">*</span> ${text('病毒学检查项目的选择')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cap_3_3_2" dictType="CAP_3_3_2" class="form-control required" />
+								<#form:select path="cap_3_3_2" dictType="CAP_3_3_2" blankOption="true" class="form-control " />
 							</div>
 						</div>
 					</div>
@@ -615,8 +647,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('其他病毒学检查项目')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-3-3-2-1">
+								<span class="required hide">*</span> ${text('其他病毒学检查项目')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_3_3_2_1" maxlength="64" class="form-control"/>
 							</div>
@@ -626,10 +658,10 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('肺炎支原体检查项目的选择')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-3-3-3">
+								<span class="required hide">*</span> ${text('肺炎支原体检查项目的选择')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cap_3_3_3" dictType="CAP_3_3_3" class="form-control required" />
+								<#form:select path="cap_3_3_3" dictType="CAP_3_3_3" blankOption="true" class="form-control " />
 							</div>
 						</div>
 					</div>
@@ -637,8 +669,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('其他肺炎支原体检查项目')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-3-3-3-1">
+								<span class="required hide">*</span> ${text('其他肺炎支原体检查项目')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_3_3_3_1" maxlength="64" class="form-control"/>
 							</div>
@@ -648,10 +680,10 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('是否进行实验室检查')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-3-4-4">
+								<span class="required hide">*</span> ${text('是否进行实验室检查')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cap_3_4_1" dictType="CAP_3_4_1" class="form-control required" />
+								<#form:select path="cap_3_4_4" dictType="CAP_3_4_4" blankOption="true" class="form-control " />
 							</div>
 						</div>
 					</div>
@@ -659,8 +691,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('临床实验室检查项目的选择')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-3-4-2">
+								<span class="required hide">*</span> ${text('临床实验室检查项目的选择')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_3_4_2" dictType="CAP_3_4_2" blankOption="true" class="form-control" />
 							</div>
@@ -670,8 +702,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('其他临床实验室检查项目')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-3-4-2-1">
+								<span class="required hide">*</span> ${text('其他临床实验室检查项目')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_3_4_2_1" maxlength="64" class="form-control"/>
 							</div>
@@ -681,8 +713,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('病原学检测结果')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-3-5-1">
+								<span class="required hide">*</span> ${text('病原学检测结果')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_3_5_1" dictType="CAP_3_5_1" blankOption="true" class="form-control" />
 							</div>
@@ -692,8 +724,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('其他病原学检测结果')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-3-5-1-1">
+								<span class="required hide">*</span> ${text('其他病原学检测结果')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_3_5_1_1" maxlength="64" class="form-control"/>
 							</div>
@@ -703,8 +735,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('获得病原学诊断报告结果的日期时间')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-3-5-2">
+								<span class="required hide">*</span> ${text('获得病原学诊断报告结果的日期时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_3_5_2" readonly="true" maxlength="20" class="form-control Wdate"
 									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
@@ -725,10 +757,10 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('患儿有无接受抗菌药物治疗')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-4-0">
+								<span class="required ">*</span> ${text('患儿有无接受抗菌药物治疗')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cap_4_0" dictType="CAP_4_0" class="form-control required" />
+								<#form:select path="cap_4_0" dictType="CAP_4_0" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -736,8 +768,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('患儿入院后接受首剂抗菌药物治疗')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-4-1-2">
+								<span class="required hide">*</span> ${text('患儿入院后接受首剂抗菌药物治疗')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_4_1_2" readonly="true" maxlength="20" class="form-control Wdate"
 									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
@@ -748,8 +780,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('接受入院后首剂抗菌药物使用时机 DTN')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-4-1-3">
+								<span class="required hide">*</span> ${text('接受入院后首剂抗菌药物使用时机 DTN')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_4_1_3" dictType="CAP_4_1_3" blankOption="true" class="form-control" />
 							</div>
@@ -759,8 +791,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('使用首剂抗菌药物治疗途径')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-4-1-4">
+								<span class="required hide">*</span> ${text('使用首剂抗菌药物治疗途径')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_4_1_4" dictType="CAP_4_1_4" blankOption="true" class="form-control" />
 							</div>
@@ -770,11 +802,11 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('抗菌药物注射剂输入/注射治疗终止日期与时间')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-4-1-5">
+								<span class="required hide">*</span> ${text('抗菌药物注射剂输入/注射治疗终止日期与时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_4_1_5" readonly="true" maxlength="20" class="form-control Wdate"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
 					</div>
@@ -782,8 +814,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('是否抗菌药物注射剂改口服')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-4-2-1">
+								<span class="required hide">*</span> ${text('是否抗菌药物注射剂改口服')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_4_2_1" dictType="CAP_4_2_1" blankOption="true" class="form-control" />
 							</div>
@@ -793,11 +825,11 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('抗菌药物注射剂改口服日期与时间')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-4-2-2">
+								<span class="required hide">*</span> ${text('抗菌药物注射剂改口服日期与时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_4_2_2" readonly="true" maxlength="20" class="form-control Wdate"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
 					</div>
@@ -815,10 +847,10 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('拟诊需抗感染治疗肺炎缘由')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-5-1-1">
+								<span class="required hide">*</span> ${text('拟诊需抗感染治疗肺炎缘由')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cap_5_1_1" dictType="CAP_5_1_1" class="form-control required" />
+								<#form:select path="cap_5_1_1" dictType="CAP_5_1_1" blankOption="true" class="form-control " />
 							</div>
 						</div>
 					</div>
@@ -826,8 +858,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('其他类型肺炎')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-5-1-1-1">
+								<span class="required hide">*</span> ${text('其他类型肺炎')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_5_1_1_1" maxlength="64" class="form-control"/>
 							</div>
@@ -837,10 +869,10 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('是否需进行抗感染治疗')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-5-1-2">
+								<span class="required hide">*</span> ${text('是否需进行抗感染治疗')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cap_5_1_2" dictType="CAP_5_1_2" class="form-control required" />
+								<#form:select path="cap_5_1_2" dictType="CAP_5_1_2" blankOption="true" class="form-control " />
 							</div>
 						</div>
 					</div>
@@ -848,10 +880,10 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('抗感染治疗药物选择')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-5-2-1">
+								<span class="required hide">*</span> ${text('抗感染治疗药物选择')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cap_5_2_1" dictType="CAP_5_2_1" class="form-control required" />
+								<#form:select path="cap_5_2_1" dictType="CAP_5_2_1" blankOption="true" class="form-control " />
 							</div>
 						</div>
 					</div>
@@ -859,8 +891,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('青霉素类抗感染药物')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-5-2-2">
+								<span class="required hide">*</span> ${text('青霉素类抗感染药物')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_5_2_2" dictType="CAP_5_2_2" blankOption="true" class="form-control" />
 							</div>
@@ -870,8 +902,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('其它青霉素抗菌药')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-5-2-2-1">
+								<span class="required hide">*</span> ${text('其它青霉素抗菌药')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_5_2_2_1" maxlength="64" class="form-control"/>
 							</div>
@@ -881,8 +913,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('头孢菌素类抗感染药物')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-5-2-3">
+								<span class="required hide">*</span> ${text('头孢菌素类抗感染药物')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_5_2_3" dictType="CAP_5_2_3" blankOption="true" class="form-control" />
 							</div>
@@ -892,8 +924,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('其它头孢菌素抗菌药')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-5-2-3-1">
+								<span class="required hide">*</span> ${text('其它头孢菌素抗菌药')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_5_2_3_1" maxlength="64" class="form-control"/>
 							</div>
@@ -903,8 +935,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('大环内酯类抗感染药物')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-5-2-4">
+								<span class="required hide">*</span> ${text('大环内酯类抗感染药物')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_5_2_4" dictType="CAP_5_2_4" blankOption="true" class="form-control" />
 							</div>
@@ -914,8 +946,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('其它大环内酯抗菌药')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-5-2-4-1">
+								<span class="required hide">*</span> ${text('其它大环内酯抗菌药')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_5_2_4_1" maxlength="64" class="form-control"/>
 							</div>
@@ -925,8 +957,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('神经氨酸抑制剂')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-5-2-6">
+								<span class="required hide">*</span> ${text('神经氨酸抑制剂')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_5_2_6" dictType="CAP_5_2_6" blankOption="true" class="form-control" />
 							</div>
@@ -936,8 +968,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('神经氨酸抑制剂')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-5-2-6-1">
+								<span class="required hide">*</span> ${text('神经氨酸抑制剂')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_5_2_6_1" maxlength="64" class="form-control"/>
 							</div>
@@ -947,8 +979,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('其他类抗感染药物')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-5-2-5">
+								<span class="required hide">*</span> ${text('其他类抗感染药物')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_5_2_5" dictType="CAP_5_2_5" blankOption="true" class="form-control" />
 							</div>
@@ -958,8 +990,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('其他类抗菌药')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-5-2-5-1">
+								<span class="required hide">*</span> ${text('其他类抗菌药')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_5_2_5_1" maxlength="64" class="form-control"/>
 							</div>
@@ -978,10 +1010,10 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('初始治疗72小时后是否进行评价')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-6-1-1">
+								<span class="required hide">*</span> ${text('初始治疗72小时后是否进行评价')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cap_6_1_1" dictType="CAP_6_1_1" class="form-control required" />
+								<#form:select path="cap_6_1_1" dictType="CAP_6_1_1" blankOption="true" class="form-control " />
 							</div>
 						</div>
 					</div>
@@ -989,8 +1021,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('评价结论')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-6-1-2">
+								<span class="required hide">*</span> ${text('评价结论')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_6_1_2" dictType="CAP_6_1_2" blankOption="true" class="form-control" />
 							</div>
@@ -1000,8 +1032,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('初始治疗72小时后评价有效者下一步治疗方案')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-6-1-3">
+								<span class="required hide">*</span> ${text('初始治疗72小时后评价有效者下一步治疗方案')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_6_1_3" dictType="CAP_6_1_3" blankOption="true" class="form-control" />
 							</div>
@@ -1011,8 +1043,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('是否进行重复病原学检查')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-6-1-4">
+								<span class="required hide">*</span> ${text('是否进行重复病原学检查')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_6_1_4" dictType="CAP_6_1_4" blankOption="true" class="form-control" />
 							</div>
@@ -1022,8 +1054,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('初始治疗72小时后无效常见原因')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-6-1-5">
+								<span class="required hide">*</span> ${text('初始治疗72小时后无效常见原因')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_6_1_5" dictType="CAP_6_1_5" blankOption="true" class="form-control" />
 							</div>
@@ -1033,8 +1065,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('其它原因')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-6-1-5-1">
+								<span class="required hide">*</span> ${text('其它原因')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_6_1_5_1" maxlength="64" class="form-control"/>
 							</div>
@@ -1044,8 +1076,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('病原学检查项目选择')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-6-1-6">
+								<span class="required hide">*</span> ${text('病原学检查项目选择')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_6_1_6" dictType="CAP_6_1_6" blankOption="true" class="form-control" />
 							</div>
@@ -1055,8 +1087,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('其它检查')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-6-1-6-1">
+								<span class="required hide">*</span> ${text('其它检查')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_6_1_6_1" maxlength="64" class="form-control"/>
 							</div>
@@ -1066,8 +1098,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('重复病原学诊断结果选择')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-6-1-7">
+								<span class="required hide">*</span> ${text('重复病原学诊断结果选择')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_6_1_7" dictType="CAP_6_1_7" blankOption="true" class="form-control" />
 							</div>
@@ -1077,8 +1109,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('其它重复病原学诊断结果')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-6-1-7-1">
+								<span class="required hide">*</span> ${text('其它重复病原学诊断结果')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_6_1_7_1" maxlength="64" class="form-control"/>
 							</div>
@@ -1088,11 +1120,11 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('获得病原学诊断报告结果的日期时间')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-6-1-8">
+								<span class="required hide">*</span> ${text('获得病原学诊断报告结果的日期时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_6_1_8" readonly="true" maxlength="20" class="form-control Wdate"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true});"/>
 							</div>
 						</div>
 					</div>
@@ -1100,8 +1132,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('病原针对性治疗情况')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-6-2-1">
+								<span class="required hide">*</span> ${text('病原针对性治疗情况')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_6_2_1" dictType="CAP_6_2_1" blankOption="true" class="form-control" />
 							</div>
@@ -1111,8 +1143,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('抗感染治疗药物选择')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-6-2-2">
+								<span class="required hide">*</span> ${text('抗感染治疗药物选择')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_6_2_2" dictType="CAP_6_2_2" blankOption="true" class="form-control" />
 							</div>
@@ -1122,8 +1154,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('青霉素类抗感染药物')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-6-2-3">
+								<span class="required hide">*</span> ${text('青霉素类抗感染药物')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_6_2_3" dictType="CAP_6_2_3" blankOption="true" class="form-control" />
 							</div>
@@ -1133,8 +1165,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('其它青霉素抗菌药')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-6-2-3-1">
+								<span class="required hide">*</span> ${text('其它青霉素抗菌药')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_6_2_3_1" maxlength="64" class="form-control"/>
 							</div>
@@ -1144,8 +1176,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('头孢菌素类抗感染药物')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-6-2-4">
+								<span class="required hide">*</span> ${text('头孢菌素类抗感染药物')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_6_2_4" dictType="CAP_6_2_4" blankOption="true" class="form-control" />
 							</div>
@@ -1155,8 +1187,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('其它头孢菌素抗菌药')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-6-2-4-1">
+								<span class="required hide">*</span> ${text('其它头孢菌素抗菌药')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_6_2_4_1" maxlength="64" class="form-control"/>
 							</div>
@@ -1166,8 +1198,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('大环内酯类抗感染药物')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-6-2-5">
+								<span class="required hide">*</span> ${text('大环内酯类抗感染药物')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_6_2_5" dictType="CAP_6_2_5" blankOption="true" class="form-control" />
 							</div>
@@ -1177,8 +1209,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('其它大环内酯抗菌药')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-6-2-5-1">
+								<span class="required hide">*</span> ${text('其它大环内酯抗菌药')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_6_2_5_1" maxlength="64" class="form-control"/>
 							</div>
@@ -1188,8 +1220,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('其他类抗感染药物')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-6-2-6">
+								<span class="required hide">*</span> ${text('其他类抗感染药物')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_6_2_6" dictType="CAP_6_2_6" blankOption="true" class="form-control" />
 							</div>
@@ -1199,8 +1231,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('其他类抗菌药')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-6-2-6-1">
+								<span class="required hide">*</span> ${text('其他类抗菌药')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_6_2_6_1" maxlength="64" class="form-control"/>
 							</div>
@@ -1210,8 +1242,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('神经氨酸抑制剂')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-6-2-7">
+								<span class="required hide">*</span> ${text('神经氨酸抑制剂')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_6_2_7" dictType="CAP_6_2_7" blankOption="true" class="form-control" />
 							</div>
@@ -1221,8 +1253,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('神经氨酸抑制剂')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-6-2-7-1">
+								<span class="required hide">*</span> ${text('神经氨酸抑制剂')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_6_2_7_1" maxlength="64" class="form-control"/>
 							</div>
@@ -1242,10 +1274,10 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('是否使用氧疗与呼吸支持治疗')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-7-1-1">
+								<span class="required hide">*</span> ${text('是否使用氧疗与呼吸支持治疗')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cap_7_1_1" dictType="CAP_7_1_1" class="form-control required" />
+								<#form:select path="cap_7_1_1" dictType="CAP_7_1_1" blankOption="true" class="form-control " />
 							</div>
 						</div>
 					</div>
@@ -1253,8 +1285,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('是否使用普通氧疗')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-7-2-1">
+								<span class="required hide">*</span> ${text('是否使用普通氧疗')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_7_2_1" dictType="CAP_7_2_1" blankOption="true" class="form-control" />
 							</div>
@@ -1264,8 +1296,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('普通氧疗指征')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-7-2-2">
+								<span class="required hide">*</span> ${text('普通氧疗指征')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_7_2_2" dictType="CAP_7_2_2" blankOption="true" class="form-control" />
 							</div>
@@ -1275,8 +1307,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('给予氧疗医嘱')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-7-2-5">
+								<span class="required hide">*</span> ${text('给予氧疗医嘱')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_7_2_5" dictType="CAP_7_2_5" blankOption="true" class="form-control" />
 							</div>
@@ -1286,11 +1318,11 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('普通氧疗起始日期与时间')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-7-2-6">
+								<span class="required hide">*</span> ${text('普通氧疗起始日期与时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_7_2_6" readonly="true" maxlength="20" class="form-control Wdate"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
 					</div>
@@ -1298,11 +1330,11 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('普通氧疗终止日期与时间')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-7-2-7">
+								<span class="required hide">*</span> ${text('普通氧疗终止日期与时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_7_2_7" readonly="true" maxlength="20" class="form-control Wdate"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
 					</div>
@@ -1310,8 +1342,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('使用普通氧疗治疗天数')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-7-2-8">
+								<span class="required hide">*</span> ${text('使用普通氧疗治疗天数')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_7_2_8" class="form-control number"/>
 							</div>
@@ -1321,8 +1353,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('是否使用无创通气')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-7-3-1">
+								<span class="required hide">*</span> ${text('是否使用无创通气')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_7_3_1" dictType="CAP_7_3_1" blankOption="true" class="form-control" />
 							</div>
@@ -1332,8 +1364,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('无创通气指征')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-7-3-2">
+								<span class="required hide">*</span> ${text('无创通气指征')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_7_3_2" dictType="CAP_7_3_2" blankOption="true" class="form-control" />
 							</div>
@@ -1343,11 +1375,11 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('无创通气治疗起始日期与时间')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-7-3-3">
+								<span class="required hide">*</span> ${text('无创通气治疗起始日期与时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_7_3_3" readonly="true" maxlength="20" class="form-control Wdate"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
 					</div>
@@ -1355,11 +1387,11 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('无创通气治疗终止日期与时间')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-7-3-4">
+								<span class="required hide">*</span> ${text('无创通气治疗终止日期与时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_7_3_4" readonly="true" maxlength="20" class="form-control Wdate"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
 					</div>
@@ -1367,8 +1399,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('使用无创通气治疗小时数')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-7-3-5">
+								<span class="required hide">*</span> ${text('使用无创通气治疗小时数')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_7_3_5" class="form-control number"/>
 							</div>
@@ -1378,8 +1410,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('是否使用有创机械通气')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-7-4-1">
+								<span class="required hide">*</span> ${text('是否使用有创机械通气')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_7_4_1" dictType="CAP_7_4_1" blankOption="true" class="form-control" />
 							</div>
@@ -1389,8 +1421,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('机械通气指征')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-7-4-2">
+								<span class="required hide">*</span> ${text('机械通气指征')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_7_4_2" dictType="CAP_7_4_2" blankOption="true" class="form-control" />
 							</div>
@@ -1400,11 +1432,11 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('有创机械通气治疗起始日期与时间')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-7-4-3">
+								<span class="required hide">*</span> ${text('有创机械通气治疗起始日期与时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_7_4_3" readonly="true" maxlength="20" class="form-control Wdate"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
 					</div>
@@ -1412,11 +1444,11 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('有创机械通气治疗终止日期与时间')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-7-4-4">
+								<span class="required hide">*</span> ${text('有创机械通气治疗终止日期与时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_7_4_4" readonly="true" maxlength="20" class="form-control Wdate"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
 					</div>
@@ -1424,8 +1456,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('使用有创机械通气治疗小时数')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-7-4-5">
+								<span class="required hide">*</span> ${text('使用有创机械通气治疗小时数')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_7_4_5" class="form-control number"/>
 							</div>
@@ -1435,8 +1467,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('是否使用体外膜肺')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-7-5-1">
+								<span class="required hide">*</span> ${text('是否使用体外膜肺')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_7_5_1" dictType="CAP_7_5_1" blankOption="true" class="form-control" />
 							</div>
@@ -1446,8 +1478,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('ECMO指征')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-7-5-2">
+								<span class="required hide">*</span> ${text('ECMO指征')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_7_5_2" dictType="CAP_7_5_2" blankOption="true" class="form-control" />
 							</div>
@@ -1457,11 +1489,11 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('体外膜肺治疗起始日期与时间')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-7-5-3">
+								<span class="required hide">*</span> ${text('体外膜肺治疗起始日期与时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_7_5_3" readonly="true" maxlength="20" class="form-control Wdate"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
 					</div>
@@ -1469,11 +1501,11 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('体外膜肺治疗终止日期与时间')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-7-5-4">
+								<span class="required hide">*</span> ${text('体外膜肺治疗终止日期与时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_7_5_4" readonly="true" maxlength="20" class="form-control Wdate"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
 					</div>
@@ -1481,8 +1513,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('使用体外膜肺治疗小时数')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-7-5-5">
+								<span class="required hide">*</span> ${text('使用体外膜肺治疗小时数')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_7_5_5" class="form-control number"/>
 							</div>
@@ -1500,8 +1532,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('交与患儿/患儿家长“出院小结”的副本告知出院时风险因素')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-7-2-1">
+								<span class="required hide">*</span> ${text('交与患儿/患儿家长“出院小结”的副本告知出院时风险因素')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cm_7_2_1" dictType="CAP_CM_7_2_1" blankOption="true" class="form-control" />
 							</div>
@@ -1511,8 +1543,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('出院带药')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-7-2-2">
+								<span class="required hide">*</span> ${text('出院带药')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cm_7_2_2" dictType="CAP_CM_7_2_2" blankOption="true" class="form-control" />
 							</div>
@@ -1522,8 +1554,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('告知何为发生紧急意外情况或者疾病复发')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-7-2-3">
+								<span class="required hide">*</span> ${text('告知何为发生紧急意外情况或者疾病复发')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cm_7_2_3" dictType="CAP_CM_7_2_3" blankOption="true" class="form-control" />
 							</div>
@@ -1533,8 +1565,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('告知发生紧急意外情况或者疾病复发如何救治及前途经')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-7-2-4">
+								<span class="required hide">*</span> ${text('告知发生紧急意外情况或者疾病复发如何救治及前途经')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cm_7_2_4" dictType="CAP_CM_7_2_4" blankOption="true" class="form-control" />
 							</div>
@@ -1544,8 +1576,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('出院时教育与随访')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-7-2-5">
+								<span class="required hide">*</span> ${text('出院时教育与随访')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cm_7_2_5" dictType="CAP_CM_7_2_5" blankOption="true" class="form-control" />
 							</div>
@@ -1565,10 +1597,32 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('经有效治疗后，患儿病情明显好转,可以出院')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-9-1-1-1">
+								<span class="required ">*</span> ${text('经有效治疗后，患儿病情明显好转,可以出院')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cap_9_1_1_1" dictType="CAP_9_1_1_1" class="form-control required" />
+								<#form:select path="cap_9_1_1_1" dictType="CAP_9_1_1_1" blankOption="true" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" title="CAP-9-1-1-2">
+                                <span class="required hide">*</span> ${text('其他出院评估')}：<i class="fa icon-question "></i></label>
+                            <div class="col-sm-10">
+                                <#form:input path="cap_9_1_1_2"  class="form-control " />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="CAP-9-2-1">
+								<span class="required ">*</span> ${text('出院前末次氧合评估')}：<i class="fa icon-question "></i></label>
+							<div class="col-sm-10">
+								<#form:select path="cap_9_2_1" dictType="CAP_9_2_1" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -1576,19 +1630,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('出院前末次氧合评估')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-10">
-								<#form:select path="cap_9_2_1" dictType="CAP_9_2_1" class="form-control required" />
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('末次氧合评估项目')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-9-2-2">
+								<span class="required hide">*</span> ${text('末次氧合评估项目')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_9_2_2" dictType="CAP_9_2_2" blankOption="true" class="form-control" />
 							</div>
@@ -1598,8 +1641,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('测定值')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-9-2-2-1">
+								<span class="required hide">*</span> ${text('测定值')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_9_2_2_1" class="form-control number"/>
 							</div>
@@ -1609,8 +1652,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('测定值')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-9-2-2-2">
+								<span class="required hide">*</span> ${text('测定值')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_9_2_2_2" class="form-control number"/>
 							</div>
@@ -1620,10 +1663,10 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('离院方式选择')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-4-3">
+								<span class="required ">*</span> ${text('离院方式选择')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_4_3" dictType="CAP_CM_4_3" class="form-control required" />
+								<#form:select path="cm_4_3" dictType="CAP_CM_4_3" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -1631,8 +1674,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('非医嘱离院可能涉及因素')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-4-5">
+								<span class="required hide">*</span> ${text('非医嘱离院可能涉及因素')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cm_4_5" dictType="CAP_CM_4_5" blankOption="true" class="form-control" />
 							</div>
@@ -1642,8 +1685,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('其他非医嘱离院因素填写')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-4-4-1">
+								<span class="required hide">*</span> ${text('其他非医嘱离院因素填写')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_4_4_1" maxlength="64" class="form-control"/>
 							</div>
@@ -1653,8 +1696,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('死亡可能涉及因素')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-4-6">
+								<span class="required hide">*</span> ${text('死亡可能涉及因素')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cm_4_6" dictType="CAP_CM_4_6" blankOption="true" class="form-control" />
 							</div>
@@ -1674,10 +1717,10 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('患儿家长对服务的体验与评价')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-5-1">
+								<span class="required ">*</span> ${text('患儿家长对服务的体验与评价')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:select path="cm_5_1" dictType="CAP_CM_5_1" class="form-control required" />
+								<#form:select path="cm_5_1" dictType="CAP_CM_5_1" blankOption="true" class="form-control required" />
 							</div>
 						</div>
 					</div>
@@ -1685,8 +1728,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('整体医院评级')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-5-2-1">
+								<span class="required hide">*</span> ${text('整体医院评级')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cm_5_2_1" dictType="CAP_CM_5_2_1" blankOption="true" class="form-control" />
 							</div>
@@ -1696,8 +1739,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('患者推荐')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-5-2-2">
+								<span class="required hide">*</span> ${text('患者推荐')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cm_5_2_2" dictType="CAP_CM_5_2_2" blankOption="true" class="form-control" />
 							</div>
@@ -1707,8 +1750,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('病房、床单元和卫生间清洁度')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-5-2-3">
+								<span class="required hide">*</span> ${text('病房、床单元和卫生间清洁度')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cm_5_2_3" dictType="CAP_CM_5_2_3" blankOption="true" class="form-control" />
 							</div>
@@ -1718,8 +1761,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('病房与周边噪音')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-5-2-5">
+								<span class="required hide">*</span> ${text('病房与周边噪音')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cm_5_2_5" dictType="CAP_CM_5_2_5" blankOption="true" class="form-control" />
 							</div>
@@ -1729,8 +1772,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('医生沟通')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-5-2-6">
+								<span class="required hide">*</span> ${text('医生沟通')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cm_5_2_6" dictType="CAP_CM_5_2_6" blankOption="true" class="form-control" />
 							</div>
@@ -1740,8 +1783,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('护士沟通')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-5-2-7">
+								<span class="required hide">*</span> ${text('护士沟通')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cm_5_2_7" dictType="CAP_CM_5_2_7" blankOption="true" class="form-control" />
 							</div>
@@ -1751,8 +1794,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('药师沟通')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-5-2-8">
+								<span class="required hide">*</span> ${text('药师沟通')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cm_5_2_8" dictType="CAP_CM_5_2_8" blankOption="true" class="form-control" />
 							</div>
@@ -1762,8 +1805,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('康复计划')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-5-2-9">
+								<span class="required hide">*</span> ${text('康复计划')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cm_5_2_9" dictType="CAP_CM_5_2_9" blankOption="true" class="form-control" />
 							</div>
@@ -1773,8 +1816,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('出院时的知情告知')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-5-2-10">
+								<span class="required hide">*</span> ${text('出院时的知情告知')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cm_5_2_10" dictType="CAP_CM_5_2_10" blankOption="true" class="form-control" />
 							</div>
@@ -1784,8 +1827,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('膳食评价')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-5-2-11">
+								<span class="required hide">*</span> ${text('膳食评价')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cm_5_2_11" dictType="CAP_CM_5_2_11" blankOption="true" class="form-control" />
 							</div>
@@ -1805,11 +1848,11 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('患儿接受首剂抗菌药物治疗注射剂输入/注射日期时间')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-11-1-1">
+								<span class="required hide">*</span> ${text('患儿接受首剂抗菌药物治疗注射剂输入/注射日期时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cap_11_1_1" readonly="true" maxlength="20" class="form-control Wdate required"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+								<#form:input path="cap_11_1_1" readonly="true" maxlength="20" class="form-control Wdate "
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
 					</div>
@@ -1817,11 +1860,11 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('患儿接受未剂抗菌药物治疗注射剂输入/注射日期时间')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-11-1-2">
+								<span class="required hide">*</span> ${text('患儿接受未剂抗菌药物治疗注射剂输入/注射日期时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cap_11_1_2" readonly="true" maxlength="20" class="form-control Wdate required"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+								<#form:input path="cap_11_1_2" readonly="true" maxlength="20" class="form-control Wdate "
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
 					</div>
@@ -1829,8 +1872,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('注射剂输入/注射抗菌药物疗程')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-11-1-3">
+								<span class="required hide">*</span> ${text('注射剂输入/注射抗菌药物疗程')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_11_1_3" class="form-control number"/>
 							</div>
@@ -1840,8 +1883,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('是否抗菌药物注射剂改口服')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-11-2-1">
+								<span class="required hide">*</span> ${text('是否抗菌药物注射剂改口服')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:select path="cap_11_2_1" dictType="CAP_11_2_1" blankOption="true" class="form-control" />
 							</div>
@@ -1851,11 +1894,11 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('改用抗菌药物口服剂首剂日期与时间')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-11-2-2">
+								<span class="required hide">*</span> ${text('改用抗菌药物口服剂首剂日期与时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_11_2_2" readonly="true" maxlength="20" class="form-control Wdate"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
 					</div>
@@ -1863,11 +1906,11 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('末剂抗菌药物口服剂或出院日期与时间')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-11-2-3">
+								<span class="required hide">*</span> ${text('末剂抗菌药物口服剂或出院日期与时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_11_2_3" readonly="true" maxlength="20" class="form-control Wdate"
-									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
 					</div>
@@ -1875,8 +1918,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('口服剂抗菌药物疗程')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CAP-11-2-4">
+								<span class="required hide">*</span> ${text('口服剂抗菌药物疗程')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cap_11_2_4" class="form-control number"/>
 							</div>
@@ -1896,8 +1939,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('住院总费用')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-1">
+								<span class="required ">*</span> ${text('住院总费用')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_1" class="form-control required number"/>
 							</div>
@@ -1907,8 +1950,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('住院总费用其中自付金额')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-2">
+								<span class="required ">*</span> ${text('住院总费用其中自付金额')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_2" class="form-control required number"/>
 							</div>
@@ -1918,8 +1961,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('一般医疗服务费')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-3">
+								<span class="required ">*</span> ${text('一般医疗服务费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_3" class="form-control required number"/>
 							</div>
@@ -1929,8 +1972,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('一般治疗操作费')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-4">
+								<span class="required ">*</span> ${text('一般治疗操作费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_4" class="form-control required number"/>
 							</div>
@@ -1940,8 +1983,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('护理费')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-5">
+								<span class="required ">*</span> ${text('护理费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_5" class="form-control required number"/>
 							</div>
@@ -1951,8 +1994,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('综合医疗服务类其他费用')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-6">
+								<span class="required ">*</span> ${text('综合医疗服务类其他费用')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_6" class="form-control required number"/>
 							</div>
@@ -1962,8 +2005,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('病理诊断费')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-7">
+								<span class="required ">*</span> ${text('病理诊断费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_7" class="form-control required number"/>
 							</div>
@@ -1973,8 +2016,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('实验室诊断费')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-8">
+								<span class="required ">*</span> ${text('实验室诊断费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_8" class="form-control required number"/>
 							</div>
@@ -1984,8 +2027,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('影像学诊断费')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-9">
+								<span class="required ">*</span> ${text('影像学诊断费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_9" class="form-control required number"/>
 							</div>
@@ -1995,8 +2038,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('临床诊断项目费')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-10">
+								<span class="required ">*</span> ${text('临床诊断项目费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_10" class="form-control required number"/>
 							</div>
@@ -2006,8 +2049,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('非手术治疗项目费')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-11">
+								<span class="required ">*</span> ${text('非手术治疗项目费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_11" class="form-control required number"/>
 							</div>
@@ -2017,8 +2060,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('其中')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-12">
+								<span class="required ">*</span> ${text('其中：临床物理治疗费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_12" class="form-control required number"/>
 							</div>
@@ -2028,8 +2071,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('手术治疗费')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-13">
+								<span class="required ">*</span> ${text('手术治疗费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_13" class="form-control required number"/>
 							</div>
@@ -2039,8 +2082,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('其中')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-14">
+								<span class="required ">*</span> ${text('其中：麻醉费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_14" class="form-control required number"/>
 							</div>
@@ -2050,8 +2093,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('其中')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-15">
+								<span class="required ">*</span> ${text('其中：手术费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_15" class="form-control required number"/>
 							</div>
@@ -2061,8 +2104,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('康复费')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-16">
+								<span class="required ">*</span> ${text('康复费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_16" class="form-control required number"/>
 							</div>
@@ -2072,8 +2115,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('中医治疗费')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-17">
+								<span class="required ">*</span> ${text('中医治疗费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_17" class="form-control required number"/>
 							</div>
@@ -2083,8 +2126,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('西药费')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-18">
+								<span class="required ">*</span> ${text('西药费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_18" class="form-control required number"/>
 							</div>
@@ -2094,8 +2137,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('其中')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-19">
+								<span class="required ">*</span> ${text('其中：抗菌药物费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_19" class="form-control required number"/>
 							</div>
@@ -2105,8 +2148,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('中成药费')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-20">
+								<span class="required ">*</span> ${text('中成药费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_20" class="form-control required number"/>
 							</div>
@@ -2116,8 +2159,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('中草药费')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-21">
+								<span class="required ">*</span> ${text('中草药费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_21" class="form-control required number"/>
 							</div>
@@ -2127,8 +2170,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('血费')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-22">
+								<span class="required ">*</span> ${text('血费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_22" class="form-control required number"/>
 							</div>
@@ -2138,8 +2181,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('白蛋白类制品费')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-23">
+								<span class="required ">*</span> ${text('白蛋白类制品费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_23" class="form-control required number"/>
 							</div>
@@ -2149,8 +2192,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('球蛋白类制品费')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-24">
+								<span class="required ">*</span> ${text('球蛋白类制品费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_24" class="form-control required number"/>
 							</div>
@@ -2160,8 +2203,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('凝血因子类制品费')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-25">
+								<span class="required ">*</span> ${text('凝血因子类制品费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_25" class="form-control required number"/>
 							</div>
@@ -2171,8 +2214,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('细胞因子类制品费')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-26">
+								<span class="required ">*</span> ${text('细胞因子类制品费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_26" class="form-control required number"/>
 							</div>
@@ -2182,8 +2225,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('检查用一次性医用材料费')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-27">
+								<span class="required ">*</span> ${text('检查用一次性医用材料费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_27" class="form-control required number"/>
 							</div>
@@ -2193,8 +2236,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('治疗用一次性医用材料费')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-28">
+								<span class="required ">*</span> ${text('治疗用一次性医用材料费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_28" class="form-control required number"/>
 							</div>
@@ -2204,8 +2247,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('手术用一次性医用材料费')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-29">
+								<span class="required ">*</span> ${text('手术用一次性医用材料费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_29" class="form-control required number"/>
 							</div>
@@ -2215,8 +2258,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required ">*</span> ${text('其他费')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="CM-6-30">
+								<span class="required ">*</span> ${text('其他费')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:input path="cm_6_30" class="form-control required number"/>
 							</div>
@@ -2227,8 +2270,8 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('备注')}：<i class="fa icon-question hide"></i></label>
+							<label class="control-label col-sm-2" title="remarks">
+								<span class="required hide">*</span> ${text('备注')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
 								<#form:textarea path="remarks" rows="4" maxlength="500" class="form-control"/>
 							</div>
@@ -2267,9 +2310,9 @@ $("#inputForm").validate({
 <script>
 	function importPatient(url){
 		$.ajax({
-			url:'${ctx}/api/emr/emrHomePage/commonData',
+			url:'${ctx}/cap/qualityCap/commonData',
 			type: "POST",
-			data: {patNo: $("#caseid").val()},
+			data: {patNo: $("#caseName").val()},
 			success:function (data){
 				var obj = JSON.parse(data);
 				for(var key in obj){
@@ -2280,14 +2323,997 @@ $("#inputForm").validate({
 	}
 
 
-	// $("input[type=checkbox]").each(function (){
-	// 	$('#'+$(this).attr("id")).on('ifUnchecked', function(){
-	// 		$(this).removeAttr("checked")
-	// 		$(this).val("")
-	// 	});
-	// });
+	//主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称(CM-0-1-4-1)等于"其他"(oth)时,
+    //其他主要手术操作ICD-9-CM-3四位亚目编码与名称(Cap-0-1-4-1)必填
+    $('#cm_0_1_4_1').on("select2:select", function(){
+        var value = $('#cm_0_1_4_1').val();
+        if("oth"==value){
+            $("input[name='cap_0_1_4_1']").addClass("required")
+        }else {
+            $("input[name='cap_0_1_4_1']").removeClass("required")
+        }
+    });
 
+	//主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称(CM-0-1-4-2)等于"其他"(oth)时
+    //其他主要手术操作ICD-9-CM-3六位临床扩展编码与名称(Cap-0-1-5-1)必填
+    $('#cm_0_1_4_2').on("select2:select", function(){
+        var value = $('#cm_0_1_4_2').val();
+        if("oth"==value){
+            $("input[name='cap_0_1_5_1']").addClass("required")
+        }else {
+            $("input[name='cap_0_1_5_1']").removeClass("required")
+        }
+    });
 
+    //发病日期时间是否无法确定或无记录(CM-0-2-2-1)等于"无法确定或无记录"(UTD)时,发病日期时间(CM-0-2-2-2)无需填写
+    //判断CM_0_2_2_1是否为空
+    $('#cm_0_2_2_1 input:checkbox:checked').each(function(i,v){
+        var value = $(this).val();
+        if("UTD"==value){
+            $("input[name='cm_0_2_2_2']").removeClass("required")
+        }else {
+            $("input[name='cm_0_2_2_2']").addClass("required")
+        }
+    });
+    //======
+    $('#cm_0_2_2_1').on('ifChecked', function(){
+        $('#cm_0_2_2_1 input:checkbox:checked').each(function(i,v){
+            var value = $(this).val();
+            if("UTD"==value){
+                $("input[name='cm_0_2_2_2']").removeClass("required")
+            }
+        });
+    });
+    $('#cm_0_2_2_1').on('ifUnchecked', function(event){
+        debugger;
+        var flag = true;
+        $('#cm_0_2_2_1 input:checkbox:checked').each(function(i,v){
+            var value = $(this).val();
+            if("UTD"==value){
+                flag = false;
+            }
+        });
+        if(flag){
+            $("input[name='cm_0_2_2_2']").addClass("required")
+        }
+    });
 
+    //到达本院急诊或者门诊日期时间是否无法确定或无记录(CM-0-2-3-1)等于"无法确定或无记录"(UTD)时,到达本院急诊或者门诊日期时间(CM-0-2-3-2)无需填写
+    //判断CM_0_2_3_1是否为空
+    $('#cm_0_2_3_1 input:checkbox:checked').each(function(i,v){
+        var value = $(this).val();
+        if("UTD"==value){
+            $("input[name='cm_0_2_3_2']").removeClass("required")
+        }else {
+            $("input[name='cm_0_2_3_2']").addClass("required")
+        }
+    });
+    //======
+    $('#cm_0_2_3_1').on('ifChecked', function(){
+        $('#cm_0_2_3_1 input:checkbox:checked').each(function(i,v){
+            var value = $(this).val();
+            if("UTD"==value){
+                $("input[name='cm_0_2_3_2']").removeClass("required")
+            }
+        });
+    });
+    $('#cm_0_2_3_1').on('ifUnchecked', function(event){
+        debugger;
+        var flag = true;
+        $('#cm_0_2_2_1 input:checkbox:checked').each(function(i,v){
+            var value = $(this).val();
+            if("UTD"==value){
+                flag = false;
+            }
+        });
+        if(flag){
+            $("input[name='cm_0_2_3_2']").addClass("required")
+        }
+    });
+
+    //是否有重症肺炎的高危因素(Cap-1-1-0)等于"是"(y)时必填
+    //重症肺炎的高危因素(Cap-1-1-1)必填
+    //其它高危因素(Cap-1-1-1-1)必填
+    //符合重症肺炎(Cap-1-1-2)必填
+    //符合以下情况之一,需住院(Cap-1-1-3)必填
+    //是否为重症住院及住ICU/RCU患儿(Cap-1-2-1)必填
+    //重度肺炎表现(Cap-1-2-2)
+    //符合重症住院及住ICU/RCU标准(Cap-1-2-3)必填
+    //是否接种肺炎链球菌疫苗和（或）流感疫苗的(Cap-1-3-1)必填
+    //实施首次采集标本时段(Cap-3-2-2)必填
+    //实施首次采集什么标本(Cap-3-2-3)必填
+    //采集标本日期时间(Cap-3-2-4)必填
+    //细菌学检查项目的选择(Cap-3-3-1)必填
+    //其他细菌学检查项目(Cap-3-3-1-1)必填
+    //病毒学检查项目的选择(Cap-3-3-2)必填
+    //其他病毒学检查项目(Cap-3-3-2-1)必填
+    //肺炎支原体检查项目的选择(Cap-3-3-3)必填
+    //其他肺炎支原体检查项目(Cap-3-3-3-1)必填
+    //是否进行实验室检查(Cap-3-4-4)必填
+    //临床实验室检查项目的选择(Cap-3-4-2)必填
+    //其他临床实验室检查项目(Cap-3-4-2-1)必填
+    //病原学检测结果(Cap-3-5-1)必填
+    //其他病原学检测结果(Cap-3-5-1-1)必填
+    //获得病原学诊断报告结果的日期时间(Cap-3-5-2)必填
+    $('#cap_1_1_0').on("select2:select", function(){
+        var value = $('#cap_1_1_0').val();
+        if("y"==value){
+            $("#cap_1_1_1").addClass("required")
+            $("input[name='cap_1_1_1_1']").addClass("required")
+            $("#cap_1_1_2").addClass("required")
+            $("#cap_1_1_3").addClass("required")
+            $("#cap_1_2_1").addClass("required")
+            $("#cap_1_2_2").addClass("required")
+            $("#cap_1_2_3").addClass("required")
+            $("#cap_1_3_1").addClass("required")
+            $("#cap_3_2_2").addClass("required")
+            $("#cap_3_2_3").addClass("required")
+            $("input[name='cap_3_2_4']").addClass("required")
+            $("#cap_3_3_1").addClass("required")
+            $("input[name='cap_3_3_1_1']").addClass("required")
+            $("#cap_3_3_2").addClass("required")
+            $("input[name='cap_3_3_2_1']").addClass("required")
+            $("#cap_3_3_3").addClass("required")
+            $("input[name='cap_3_3_3_1']").addClass("required")
+            $("#cap_3_4_4").addClass("required")
+            $("#cap_3_4_2").addClass("required")
+            $("input[name='cap_3_4_2_1']").addClass("required")
+            $("#cap_3_5_1").addClass("required")
+            $("input[name='cap_3_5_1_1']").addClass("required")
+            $("input[name='cap_3_5_2']").addClass("required")
+        }else {
+            $("#cap_1_1_1").removeClass("required")
+            $("input[name='cap_1_1_1_1']").removeClass("required")
+            $("#cap_1_1_2").removeClass("required")
+            $("#cap_1_1_3").removeClass("required")
+            $("#cap_1_2_1").removeClass("required")
+            $("#cap_1_2_2").removeClass("required")
+            $("#cap_1_2_3").removeClass("required")
+            $("#cap_1_3_1").removeClass("required")
+            $("#cap_3_2_2").removeClass("required")
+            $("#cap_3_2_3").removeClass("required")
+            $("input[name='cap_3_2_4']").removeClass("required")
+            $("#cap_3_3_1").removeClass("required")
+            $("input[name='cap_3_3_1_1']").removeClass("required")
+            $("#cap_3_3_2").removeClass("required")
+            $("input[name='cap_3_3_2_1']").removeClass("required")
+            $("#cap_3_3_3").removeClass("required")
+            $("input[name='cap_3_3_3_1']").removeClass("required")
+            $("#cap_3_4_4").removeClass("required")
+            $("#cap_3_4_2").removeClass("required")
+            $("input[name='cap_3_4_2_1']").removeClass("required")
+            $("#cap_3_5_1").removeClass("required")
+            $("input[name='cap_3_5_1_1']").removeClass("required")
+            $("input[name='cap_3_5_2']").removeClass("required")
+        }
+    });
+
+    //其他高危因素(Cap-1-1-1-1)
+    //是否有重症肺炎的高危因素(Cap-1-1-0)等于"否"(n)时无需填写
+    //重症肺炎的高危因素(Cap-1-1-1)等于"其他高危因素"(oth)时必填
+    $('#cap_1_1_1').on("select2:select", function(){
+        var value = $('#cap_1_1_1').val();
+        if("oth"==value){
+            $("input[name='cap_0_1_1_1_1']").addClass("required")
+        }else {
+            $("input[name='cap_0_1_1_1_1']").removeClass("required")
+        }
+    });
+
+    //是否为重症住院及住ICU/RCU患儿(Cap-1-2-1)等于"是"(y)时,
+    //重度肺炎表现(Cap-1-2-2)必填
+    //符合重症住院及住ICU/RCU标准(Cap-1-2-3)必填
+    $('#cap_1_2_1').on("select2:select", function(){
+        var value = $('#cap_1_2_1').val();
+        if("y"==value){
+            $("#cap_1_2_2").addClass("required")
+            $("#cap_1_2_3").addClass("required")
+        }else {
+            $("cap_1_2_2").removeClass("required")
+            $("#cap_1_2_3").removeClass("required")
+        }
+    });
+
+    //实施首次氧合评估（首次）(Cap-2-1)等于"是"(y)时，
+    //实施首次氧合评估时段（Cap-2-2）必填
+    //实施首次氧合评估时是否吸氧（FiO₂）(Cap-2-3)必填
+    //动脉血气分析/指氧仪检查(Cap-2-4)必填
+    //动脉血气分析值(mmHg)(Cap-2-4-3)必填
+    $('#cap_2_1').on("select2:select", function(){
+        var value = $('#cap_2_1').val();
+        if("y"==value){
+            $("#cap_2_2").addClass("required")
+            $("#cap_2_3").addClass("required")
+            $("#cap_2_4").addClass("required")
+            $("input[name='cap_2_4_3']").addClass("required")
+        }else {
+            $("#cap_2_2").removeClass("required")
+            $("#cap_2_3").removeClass("required")
+            $("#cap_2_4").removeClass("required")
+            $("input[name='cap_2_4_3']").removeClass("required")
+        }
+    });
+
+    //动脉血气分析/指氧仪检查(Cap-2-4)等于"动脉血气分析（PaO₂）"(a)时,动脉血气分析值(mmHg)(Cap-2-4-3)必填;
+    //动脉血气分析/指氧仪检查(Cap-2-4)等于"指氧仪检查（SatO₂）"(b)时,动脉血气分析值(mmHg)(Cap-2-4-3)无需填写
+    //==============
+    //动脉血气分析/指氧仪检查(Cap-2-4)等于"动脉血气分析（PaO₂）"(a)时,指氧仪检查值(%)(Cap-2-4-4)无需填写
+    //动脉血气分析/指氧仪检查(Cap-2-4)等于"指氧仪检查（SatO₂）"(b)时,指氧仪检查值(%)(Cap-2-4-4)必填
+    $('#cap_2_4').on("select2:select",function () {
+        var value = $("#cap_2_4").val();
+        if ("a"==value){
+            $("input[name='cap_2_4_3']").addClass("required")
+            $("input[name='cap_2_4_4']").removeClass("required")
+        }
+        if ("b"==value){
+            $("input[name='cap_2_4_3']").removeClass("required")
+            $("input[name='cap_2_4_4']").addClass("required")
+        }
+    });
+
+    //当是否符合重症(Cap-1-2)值等于y时,是否为重症并收入ICU/RCU的患儿(Cap-3-1-1)该字段等于y
+    //当(Cap-1-2)值等于n时,是否为重症并收入ICU/RCU的患儿(Cap-3-1-1)该字段等于n 关联赋值
+    //======
+    //当是否符合重症(Cap-1-2)值等于y时,是否入院之前已经经接受抗菌药物治疗(Cap-3-2-1)必填
+    $('#cap_1_2_1').on("select2:select",function () {
+        var value = $("#cap_1_2_1").val();
+        if ("y"==value){
+            $("#cap_3_1_1").attr("value",'y')
+            $("#cap_3_2_1").addClass("required")
+        }
+        if ("n"==value){
+            $("#cap_3_1_1").attr("value",'n')
+            $("#cap_3_2_1").removeClass("required")
+        }
+    });
+
+    //是否为重症并收入ICU/RCU的患儿(Cap-3-1-1)等于"是"(y)时，
+    // 实施首次采集标本时段（Cap-3-2-2）必填
+    //实施首次采集什么标本(Cap-3-2-3)必填
+    //采集标本日期时间(Cap-3-2-4)必填
+    //病毒学检查项目的选择(Cap-3-3-2)必填
+    //肺炎支原体检查项目的选择(Cap-3-3-3)必填
+    //是否进行实验室检查(Cap-3-4-4)必填
+    $('#cap_3_1_1').on("select2:select", function(){
+        var value = $('#cap_3_1_1').val();
+        if("y"==value){
+            $("#cap_3_2_2").addClass("required")
+            $("#cap_3_2_3").addClass("required")
+            $("input[name='cap_3_2_4']").addClass("required")
+            $("#cap_3_3_2").addClass("required")
+            $("#cap_3_3_3").addClass("required")
+            $("#cap_3_4_4").addClass("required")
+        }else {
+            $("cap_3_2_2").removeClass("required")
+            $("cap_3_2_3").removeClass("required")
+            $("input[name='cap_3_2_4']").removeClass("required")
+            $("#cap_3_3_2").removeClass("required")
+            $("#cap_3_3_3").removeClass("required")
+            $("#cap_3_4_4").removeClass("required")
+        }
+    });
+
+    //实施首次采集标本时段(Cap-3-2-2)等于"入住ICU/RCU患儿72小时之内未采集标本"(c)时,实施首次采集什么标本(Cap-3-2-3)无需填写
+    //实施首次采集标本时段(Cap-3-2-2)等于"入住ICU/RCU患儿72小时之内未采集标本"(c)时,采集标本日期时间(Cap-3-2-4)无需填写
+    //实施首次采集标本时段(Cap-3-2-2)等于"入住ICU/RCU患儿72小时之内未采集标本"(c)时,细菌学检查项目的选择(Cap-3-3-1)无需填写
+    //实施首次采集标本时段(Cap-3-2-2)等于"入住ICU/RCU患儿72小时之内未采集标本"(c)时,其他细菌学检查项目(Cap-3-3-1-1)无需填写
+    //实施首次采集标本时段(Cap-3-2-2)等于"入住ICU/RCU患儿72小时之内未采集标本"(c)时,病毒学检查项目的选择(Cap-3-3-2)无需填写
+    //实施首次采集标本时段(Cap-3-2-2)等于"入住ICU/RCU患儿72小时之内未采集标本"(c)时,其他病毒学检查项目(Cap-3-3-2-1)无需填写
+    //实施首次采集标本时段(Cap-3-2-2)等于"入住ICU/RCU患儿72小时之内未采集标本"(c)时,肺炎支原体检查项目的选择(Cap-3-3-3)无需填写
+    //实施首次采集标本时段(Cap-3-2-2)等于"入住ICU/RCU患儿72小时之内未采集标本"(c)时,其他肺炎支原体检查项目(Cap-3-3-3-1)无需填写
+    //实施首次采集标本时段(Cap-3-2-2)等于"入住ICU/RCU患儿72小时之内未采集标本"(c)时,是否进行实验室检查(Cap-3-4-4)无需填写
+    //实施首次采集标本时段(Cap-3-2-2)等于"入住ICU/RCU患儿72小时之内未采集标本"(c)时,临床实验室检查项目的选择(Cap-3-4-2)无需填写
+    //实施首次采集标本时段(Cap-3-2-2)等于"入住ICU/RCU患儿72小时之内未采集标本"(c)时,其他临床实验室检查项目(Cap-3-4-2-1)无需填写
+    //实施首次采集标本时段(Cap-3-2-2)等于"入住ICU/RCU患儿72小时之内未采集标本"(c)时,病原学检测结果(Cap-3-5-1)无需填写
+    //实施首次采集标本时段(Cap-3-2-2)等于"入住ICU/RCU患儿72小时之内未采集标本"(c)时,其他病原学检测结果(Cap-3-5-1-1)无需填写
+    //实施首次采集标本时段(Cap-3-2-2)等于"入住ICU/RCU患儿72小时之内未采集标本"(c)时,获得病原学诊断报告结果的日期时间(Cap-3-5-2)无需填写
+    $('#cap_3_2_2').on("select2:select", function(){
+        var value = $('#cap_3_2_2').val();
+        if("c"==value){
+            $("#cap_3_2_3").removeClass("required")
+            $("input[name='cap_3_2_4']").removeClass("required")
+            $("#cap_3_3_1").removeClass("required")
+            $("input[name='cap_3_3_1_1']").removeClass("required")
+            $("#cap_3_3_2").removeClass("required")
+            $("input[name='cap_3_3_2_1']").removeClass("required")
+            $("#cap_3_3_3").removeClass("required")
+            $("input[name='cap_3_3_3_1']").removeClass("required")
+            $("#cap_3_4_4").removeClass("required")
+            $("#cap_3_4_2").removeClass("required")
+            $("input[name='cap_3_4_2_1']").removeClass("required")
+            $("#cap_3_5_1").removeClass("required")
+            $("input[name='cap_3_5_1_1']").removeClass("required")
+            $("input[name='cap_3_5_2']").removeClass("required")
+        }else {
+            $("cap_3_2_3").addClass("required")
+            $("input[name='cap_3_2_4']").addClass("required")
+            $("#cap_3_3_1").addClass("required")
+            $("input[name='cap_3_3_1_1']").addClass("required")
+            $("#cap_3_3_2").addClass("required")
+            $("input[name='cap_3_3_2_1']").addClass("required")
+            $("#cap_3_3_3").addClass("required")
+            $("input[name='cap_3_3_3_1']").addClass("required")
+            $("#cap_3_4_4").addClass("required")
+            $("#cap_3_4_2").addClass("required")
+            $("input[name='cap_3_4_2_1']").addClass("required")
+            $("#cap_3_5_1").addClass("required")
+            $("input[name='cap_3_5_1_1']").addClass("required")
+            $("input[name='cap_3_5_2']").addClass("required")
+        }
+    });
+
+    //细菌学检查项目的选择(Cap-3-3-1)等于"其他"(oth)时,其他细菌学检查项目(Cap-3-3-1-1)必填
+    $('#cap_3_3_1').on("select2:select",function () {
+        var value = $("#cap_3_3_1").val();
+        if ("oth"==value){
+            $("input[name='cap_3_3_1_1']").addClass("required")
+        }
+        else {
+            $("input[name='cap_3_3_1_1']").removeClass("required")
+        }
+    });
+
+    //病毒学检查项目的选择 (Cap-3-3-2)等于"其他"(oth)时,其他病毒学检查项目(Cap-3-3-2-1)可填写
+    $('#cap_3_3_2').on("select2:select",function () {
+        var value = $("#cap_3_3_2").val();
+        if ("oth"==value){
+            $("input[name='cap_3_3_2_1']").addClass("required")
+        }
+        else {
+            $("input[name='cap_3_3_2_1']").removeClass("required")
+        }
+    });
+
+    //肺炎支原体检查项目的选择(Cap-3-3-3)等于"其他"(oth)时,其他肺炎支原体检查项目(Cap-3-3-3-1)必填
+    $('#cap_3_3_3').on("select2:select",function () {
+        var value = $("#cap_3_3_3").val();
+        if ("oth"==value){
+            $("input[name='cap_3_3_3_1']").addClass("required")
+        }
+        else {
+            $("input[name='cap_3_3_3_1']").removeClass("required")
+        }
+    });
+
+    //是否进行实验室检查(Cap-3-4-4)等于"是"(y)时,
+    //临床实验室检查项目的选择(Cap-3-4-2)必填
+    //病原学检测结果(Cap-3-5-1)必填
+    //获得病原学诊断报告结果的日期时间(Cap-3-5-2)必填
+    $('#cap_3_4_4').on("select2:select",function () {
+        var value = $("#cap_3_4_4").val();
+        if ("y"==value){
+            $("input[name='cap_3_4_2']").addClass("required")
+            $("#cap_3_5_1").addClass("required")
+            $("input[name='cap_3_5_2']").addClass("required")
+        }
+        else {
+            $("input[name='cap_3_4_2']").removeClass("required")
+            $("#cap_3_5_1").removeClass("required")
+            $("input[name='cap_3_5_2']").removeClass("required")
+        }
+    });
+
+    //临床实验室检查项目的选择 (Cap-3-4-2)等于"其他"(oth)时,其他临床实验室检查项目(Cap-3-4-2-1)必填
+    $('#cap_3_4_2').on("select2:select",function () {
+        var value = $("#cap_3_4_2").val();
+        if ("oth"==value){
+            $("input[name='cap_3_4_2_1']").addClass("required")
+        }
+        else {
+            $("input[name='cap_3_4_2_1']").removeClass("required")
+        }
+    });
+
+    //病原学检测结果(Cap-3-5-1)等于"其他"(oth)时,其他病原学检测结果(Cap-3-5-1-1)必填
+    $('#cap_3_5_1').on("select2:select",function () {
+        var value = $("#cap_3_5_1").val();
+        if ("oth"==value){
+            $("input[name='cap_3_5_1_1']").addClass("required")
+        }
+        else {
+            $("input[name='cap_3_5_1_1']").removeClass("required")
+        }
+    });
+
+    //患儿有无接受抗菌药物治疗(Cap-4-0)等于"是"(y)时,
+    //患儿入院后接受首剂抗菌药物治疗（注射剂输入/注射）时间(Cap-4-1-2)必填
+    //接受入院后首剂抗菌药物使用时机 DTN(Cap-4-1-3)必填
+    //使用首剂抗菌药物治疗途径(Cap-4-1-4)必填
+    //抗菌药物注射剂输入/注射治疗终止日期与时间(Cap-4-1-5)必填
+    //是否抗菌药物注射剂改口服(Cap-4-2-1)必填
+    //拟诊需抗感染治疗肺炎缘由(Cap-5-1-1)必填
+    //是否需进行抗感染治疗(Cap-5-1-2)必填
+    //抗感染治疗药物选择(Cap-5-2-1)必填
+    //初始治疗72小时后是否进行评价(Cap-6-1-1)必填
+    //是否使用氧疗与呼吸支持治疗(Cap-7-1-1)必填
+    //患儿接受首剂抗菌药物治疗注射剂输入/注射日期时间(Cap-11-1-1)必填
+    //患儿接受未剂抗菌药物治疗注射剂输入/注射日期时间(Cap-11-1-2)必填
+    //注射剂输入/注射抗菌药物疗程（天数）(Cap-11-1-3)可填
+    //是否抗菌药物注射剂改口服(Cap-11-2-1)必填
+    $('#cap_4_0').on("select2:select",function () {
+        var value = $("#cap_4_0").val();
+        if ("y"==value){
+            $("input[name='cap_4_1_2']").addClass("required")
+            $("#cap_4_1_4").addClass("required")
+            $("input[name='cap_4_1_5']").addClass("required")
+            $("#cap_4_2_1").addClass("required")
+            $("#cap_5_1_1").addClass("required")
+            $("#cap_5_1_2").addClass("required")
+            $("#cap_5_2_1").addClass("required")
+            $("#cap_6_1_1").addClass("required")
+            $("#cap_7_1_1").addClass("required")
+            $("input[name='cap_11_1_1']").addClass("required")
+            $("input[name='cap_11_1_2']").addClass("required")
+            $("input[name='cap_11_1_3']").addClass("required")
+            $("#cap_11_2_1").addClass("required")
+        }
+        else {
+            $("input[name='cap_4_1_2']").removeClass("required")
+            $("#cap_4_1_4").removeClass("required")
+            $("input[name='cap_4_1_5']").removeClass("required")
+            $("#cap_4_2_1").removeClass("required")
+            $("#cap_5_1_1").removeClass("required")
+            $("#cap_5_1_2").removeClass("required")
+            $("#cap_5_2_1").removeClass("required")
+            $("#cap_6_1_1").removeClass("required")
+            $("#cap_7_1_1").removeClass("required")
+            $("input[name='cap_11_1_1']").removeClass("required")
+            $("input[name='cap_11_1_2']").removeClass("required")
+            $("input[name='cap_11_1_3']").removeClass("required")
+            $("#cap_11_2_1").removeClass("required")
+        }
+    });
+
+    //使用首剂抗菌药物治疗途径(Cap-4-1-4)等于"口服"(d)时,
+    //抗菌药物注射剂输入/注射治疗终止日期与时间(Cap-4-1-5)无需填写
+   //是否抗菌药物注射剂改口服(Cap-4-2-1)无需填写
+    //抗菌药物注射剂改口服日期与时间(Cap-4-2-2)
+    $('#cap_4_1_4').on("select2:select",function () {
+        var value = $("#cap_4_1_4").val();
+        if ("d"==value){
+            $("input[name='cap_4_1_5']").removeClass("required")
+            $("#cap_4_2_1").removeClass("required")
+            $("input[name='cap_4_2_2']").removeClass("required")
+        }
+        else {
+            $("input[name='cap_4_1_5']").addClass("required")
+            $("#cap_4_2_1").addClass("required")
+            $("input[name='cap_4_2_2']").addClass("required")
+        }
+    });
+
+    //是否抗菌药物注射剂改口服(Cap-4-2-1)等于"是"(y)时,抗菌药物注射剂改口服日期与时间(Cap-4-2-2)必填
+    $('#cap_4_2_1').on("select2:select",function () {
+        var value = $("#cap_4_2_1").val();
+        if ("y"==value){
+            $("input[name='cap_4_2_2']").addClass("required")
+
+        }
+        else {
+            $("input[name='cap_4_2_2']").removeClass("required")
+
+        }
+    });
+
+    //拟诊需抗感染治疗肺炎缘由(Cap-5-1-1)等于"其他类型肺炎"(oth)时,其他类型肺炎(Cap-5-1-1-1)必填
+    $('#cap_5_1_1').on("select2:select",function () {
+        var value = $("#cap_5_1_1").val();
+        if ("oth"==value){
+            $("input[name='cap_5_1_1_1']").addClass("required")
+
+        }
+        else {
+            $("input[name='cap_5_1_1_1']").removeClass("required")
+
+        }
+    });
+
+    //抗感染治疗药物选择(Cap-5-2-1)等于"青霉素类抗感染药物"(a)时,青霉素类抗感染药物(Cap-5-2-2）必填
+    $('#cap_5_2_1').on("select2:select",function () {
+        var value = $("#cap_5_2_1").val();
+        if ("a"==value){
+            $("#cap_5_2_2").addClass("required")
+
+        }
+        else {
+            $("#cap_5_2_2").removeClass("required")
+
+        }
+        //抗感染治疗药物选择(Cap-5-2-1)等于"头孢菌素类抗感染药物"(b)时,头孢菌素类抗感染药物(Cap-5-2-3)必填
+        if ("b"==value){
+            $("#cap_5_2_3").addClass("required")
+        } else {
+            $("#cap_5_2_3").removeClass("required")
+        }
+
+        //抗感染治疗药物选择(Cap-5-2-1)等于"大环内酯类抗感染药物"(c)时,大环内酯类抗感染药物(Cap-5-2-4)必填
+        if ("c"==value){
+            $("#cap_5_2_4").addClass("required")
+        }else {
+            $("#cap_5_2_4").removeClass("required")
+        }
+
+        //抗感染治疗药物选择(Cap-5-2-1)等于"神经氨酸抑制剂"(f)时,神经氨酸抑制剂(Cap-5-2-6)必填
+        if ("f"==value){
+            $("#cap_5_2_6").addClass("required")
+        }else {
+            $("#cap_5_2_6").removeClass("required")
+        }
+
+        //抗感染治疗药物选择(Cap-5-2-1)等于"其他类抗感染药物"(e)时,其他类抗感染药物(Cap-5-2-5)必填;
+        if ("e"==value){
+            $("#cap_5_2_5").addClass("required")
+        }else {
+            $("#cap_5_2_5").removeClass("required")
+        }
+    });
+
+    //青霉素类抗感染药物(Cap-5-2-2)等于"其他青霉素类抗菌药"(oth)时,其它青霉素抗菌药(Cap-5-2-2-1)必填
+    $('#cap_5_2_2').on("select2:select",function () {
+        var value = $("#cap_5_2_2").val();
+        if ("oth"==value){
+            $("input[name='cap_5_2_2_1']").addClass("required")
+        }
+        else {
+            $("input[name='cap_5_2_2_1']").removeClass("required")
+        }
+    });
+
+    //头孢菌素类抗感染药物(Cap-5-2-3)等于"其他头孢菌素类抗菌药"(oth)时,其它头孢菌素抗菌药(Cap-5-2-3-1)必填
+    $('#cap_5_2_3').on("select2:select",function () {
+        var value = $("#cap_5_2_3").val();
+        if ("oth"==value){
+            $("input[name='cap_5_2_3_1']").addClass("required")
+        }
+        else {
+            $("input[name='cap_5_2_3_1']").removeClass("required")
+        }
+    });
+
+    //大环内酯类抗感染药物(Cap-5-2-4)等于"其他大环内酯类抗菌药"(oth)时,其它大环内酯抗菌药(Cap-5-2-4-1)必填
+    $('#cap_5_2_4').on("select2:select",function () {
+        var value = $("#cap_5_2_4").val();
+        if ("oth"==value){
+            $("input[name='cap_5_2_4_1']").addClass("required")
+        }
+        else {
+            $("input[name='cap_5_2_4_1']").removeClass("required")
+        }
+    });
+
+    //其他类抗感染药物(Cap-5-2-5)等于"其他抗菌药"(oth)时,其他类抗菌药(Cap-5-2-5-1)必填
+    $('#cap_5_2_5').on("select2:select",function () {
+        var value = $("#cap_5_2_5").val();
+        if ("oth"==value){
+            $("input[name='cap_5_2_5_1']").addClass("required")
+        }
+        else {
+            $("input[name='cap_5_2_5_1']").removeClass("required")
+        }
+    });
+
+    //神经氨酸抑制剂(Cap-5-2-6)等于"其它神经氨酸抑制剂"(oth)时,神经氨酸抑制剂(Cap-5-2-6-1)必填
+    $('#cap_5_2_6').on("select2:select",function () {
+        var value = $("#cap_5_2_6").val();
+        if ("oth"==value){
+            $("input[name='cap_5_2_6_1']").addClass("required")
+        }
+        else {
+            $("input[name='cap_5_2_6_1']").removeClass("required")
+        }
+    });
+
+    //初始治疗72小时后是否进行评价(Cap-6-1-1)等于"是"(y)时,评价结论(Cap-6-1-2)必填
+    $('#cap_6_1_1').on("select2:select",function () {
+        var value = $("#cap_6_1_1").val();
+        if ("y"==value){
+            $("#cap_6_1_2").addClass("required")
+        }
+        else {
+            $("#cap_6_1_2").removeClass("required")
+        }
+    });
+
+    //评价结论(Cap-6-1-2)等于"有效继续治疗"(a)时,初始治疗72小时后评价有效者下一步治疗方案(Cap-6-1-3)必填
+    $('#cap_6_1_2').on("select2:select",function () {
+        var value = $("#cap_6_1_2").val();
+        if ("a"==value){
+            $("#cap_6_1_3").addClass("required")
+        }
+        else {
+            $("#cap_6_1_3").removeClass("required")
+        }
+
+        //评价结论(Cap-6-1-2)等于"治疗无效者"(b)时,是否进行重复病原学检查(Cap-6-1-4)必填
+        if ("b"==value){
+            $("#cap_6_1_4").addClass("required")
+        }
+        else {
+            $("#cap_6_1_4").removeClass("required")
+        }
+    });
+
+    //是否进行重复病原学检查(Cap-6-1-4)等于"是"(y)时,
+    //初始治疗72小时后无效常见原因(Cap-6-1-5)必填
+    //病原学检查项目选择(Cap-6-1-6)必填
+    //重复病原学诊断结果选择(Cap-6-1-7)必填
+    //获得病原学诊断报告结果的日期时间(Cap-6-1-8)必填
+    //病原针对性治疗情况(Cap-6-2-1)必填
+    //抗感染治疗药物选择(Cap-6-2-2)必填
+    $('#cap_6_1_4').on("select2:select",function () {
+        var value = $("#cap_6_1_1").val();
+        if ("y"==value){
+            $("#cap_6_1_5").addClass("required")
+            $("#cap_6_1_6").addClass("required")
+            $("#cap_6_1_7").addClass("required")
+            $("input[name='cap_6_1_8']").addClass("required")
+            $("#cap_6_2_1").addClass("required")
+            $("#cap_6_2_2").addClass("required")
+        }
+        else {
+            $("#cap_6_1_5").removeClass("required")
+            $("#cap_6_1_6").removeClass("required")
+            $("#cap_6_1_7").removeClass("required")
+            $("input[name='cap_6_1_8']").removeClass("required")
+            $("#cap_6_2_1").removeClass("required")
+            $("#cap_6_2_2").removeClass("required")
+        }
+    });
+
+    //初始治疗72小时后无效常见原因(Cap-6-1-5)等于"其他原因"(oth)时,其它原因(Cap-6-1-5-1)必填
+    $('#cap_6_1_5').on("select2:select",function () {
+        var value = $("#cap_6_1_5").val();
+        if ("oth"==value){
+            $("input[name='cap_6_1_5_1']").addClass("required")
+        }
+        else {
+            $("input[name='cap_6_1_5_1']").removeClass("required")
+        }
+    });
+
+    //病原学检查项目选择(Cap-6-1-6)等于"其他检查"(oth)时,其它检查(Cap-6-1-6-1)必填
+    $('#cap_6_1_6').on("select2:select",function () {
+        var value = $("#cap_6_1_6").val();
+        if ("oth"==value){
+            $("input[name='cap_6_1_6_1']").addClass("required")
+        }
+        else {
+            $("input[name='cap_6_1_6_1']").removeClass("required")
+        }
+    });
+
+    //重复病原学诊断结果选择(Cap-6-1-7)等于"其他"(oth)时,其它重复病原学诊断结果(Cap-6-1-7-1)必填
+    $('#cap_6_1_7').on("select2:select",function () {
+        var value = $("#cap_6_1_7").val();
+        if ("oth"==value){
+            $("input[name='cap_6_1_7_1']").addClass("required")
+        }
+        else {
+            $("input[name='cap_6_1_7_1']").removeClass("required")
+        }
+    });
+
+    //抗感染治疗药物选择(Cap-6-2-2)等于"青霉素类抗感染药物"(a)时,青霉素类抗感染药物(Cap-6-2-3)必填
+    $('#cap_6_2_2').on("select2:select",function () {
+        var value = $("#cap_6_2_2").val();
+        if ("a"==value){
+            $("#cap_6_2_3").addClass("required")
+        }
+        else {
+            $("#cap_6_2_3").removeClass("required")
+        }
+
+        //抗感染治疗药物选择(Cap-6-2-2)等于"头孢菌素类抗感染药物"(b)时,头孢菌素类抗感染药物(Cap-6-2-4)必填
+        if ("b"==value){
+            $("#cap_6_2_4").addClass("required")
+        }
+        else {
+            $("#cap_6_2_4").removeClass("required")
+        }
+
+        //抗感染治疗药物选择(Cap-6-2-2)等于"大环内酯类抗感染药物"(c)时,大环内酯类抗感染药物(Cap-6-2-5)必填
+        if ("c"==value){
+            $("#cap_6_2_5").addClass("required")
+        }
+        else {
+            $("#cap_6_2_5").removeClass("required")
+        }
+
+        //抗感染治疗药物选择(Cap-6-2-2)等于"其他类抗感染药物"(e)时,其他类抗感染药物(Cap-6-2-6)必填
+        if ("e"==value){
+            $("#cap_6_2_6").addClass("required")
+        }
+        else {
+            $("#cap_6_2_6").removeClass("required")
+        }
+
+        //抗感染治疗药物选择(Cap-6-2-2)等于"神经氨酸抑制剂"(f)时,神经氨酸抑制剂(Cap-6-2-7)必填
+        if ("f"==value){
+            $("#cap_6_2_7").addClass("required")
+        }
+        else {
+            $("#cap_6_2_7").removeClass("required")
+        }
+    });
+
+    //青霉素类抗感染药物(Cap-6-2-3)等于"其他青霉素类抗菌药"(oth)时,其它青霉素抗菌药(Cap-6-2-3-1)必填;
+    $('#cap_6_2_3').on("select2:select",function () {
+        var value = $("#cap_6_2_3").val();
+        if ("oth"==value){
+            $("input[name='cap_6_2_3_1']").addClass("required")
+        }
+        else {
+            $("input[name='cap_6_2_3_1']").removeClass("required")
+        }
+    });
+
+    //头孢菌素类抗感染药物(Cap-6-2-4)等于"其他头孢菌素类抗菌药"(oth)时,其它头孢菌素抗菌药(Cap-6-2-4-1)必填
+    $('#cap_6_2_4').on("select2:select",function () {
+        var value = $("#cap_6_2_4").val();
+        if ("oth"==value){
+            $("input[name='cap_6_2_4_1']").addClass("required")
+        }
+        else {
+            $("input[name='cap_6_2_4_1']").removeClass("required")
+        }
+    });
+
+    //大环内酯类抗感染药物(Cap-6-2-5)等于"其他大环内酯类抗菌药"(oth)时,其它大环内酯抗菌药(Cap-6-2-5-1)必填
+    $('#cap_6_2_5').on("select2:select",function () {
+        var value = $("#cap_6_2_5").val();
+        if ("oth"==value){
+            $("input[name='cap_6_2_5_1']").addClass("required")
+        }
+        else {
+            $("input[name='cap_6_2_5_1']").removeClass("required")
+        }
+    });
+
+    //其他类抗感染药物(Cap-6-2-6)等于"其他抗菌药"(oth)时,其他类抗菌药(Cap-6-2-6-1)必填
+    $('#cap_6_2_6').on("select2:select",function () {
+        var value = $("#cap_6_2_6").val();
+        if ("oth"==value){
+            $("input[name='cap_6_2_6_1']").addClass("required")
+        }
+        else {
+            $("input[name='cap_6_2_6_1']").removeClass("required")
+        }
+    });
+
+    //神经氨酸抑制剂(Cap-6-2-7)等于"其它神经氨酸抑制剂"(oth)时,神经氨酸抑制剂(Cap-6-2-7-1)必填
+    $('#cap_6_2_7').on("select2:select",function () {
+        var value = $("#cap_6_2_7").val();
+        if ("oth"==value){
+            $("input[name='cap_6_2_7_1']").addClass("required")
+        }
+        else {
+            $("input[name='cap_6_2_7_1']").removeClass("required")
+        }
+    });
+
+    //是否使用氧疗与呼吸支持治疗(Cap-7-1-1)等于"是"(y)时,
+    //是否使用普通氧疗(Cap-7-2-1)可填写
+    //是否使用无创通气(Cap-7-3-1)必填
+    //是否使用有创机械通气(Cap-7-4-1)必填
+    //是否使用体外膜肺(Cap-7-5-1)必填
+    $('#cap_7_1_1').on("select2:select",function () {
+        var value = $("#cap_7_1_1").val();
+        if ("y"==value){
+            $("#cap_7_2_1").addClass("required")
+            $("#cap_7_3_1").addClass("required")
+            $("#cap_7_4_1").addClass("required")
+            $("#cap_7_5_1").addClass("required")
+        }
+        else {
+            $("#cap_7_2_1").removeClass("required")
+            $("#cap_7_3_1").removeClass("required")
+            $("#cap_7_4_1").removeClass("required")
+            $("#cap_7_5_1").removeClass("required")
+        }
+    });
+
+    //是否使用普通氧疗(Cap-7-2-1)等于"是"(y)时,
+    //普通氧疗指征(Cap-7-2-2)必填
+    //给予氧疗医嘱(Cap-7-2-5)必填
+    //普通氧疗起始日期与时间(Cap-7-2-6)必填
+    //普通氧疗终止日期与时间(Cap-7-2-7)必填
+    //使用普通氧疗治疗天数(Cap-7-2-8)必填
+    $('#cap_7_2_1').on("select2:select",function () {
+        var value = $("#cap_7_2_1").val();
+        if ("y"==value){
+            $("#cap_7_2_2").addClass("required")
+            $("#cap_7_2_5").addClass("required")
+            $("input[name='cap_7_2_6']").addClass("required")
+            $("input[name='cap_7_2_7']").addClass("required")
+        }
+        else {
+            $("#cap_7_2_2").removeClass("required")
+            $("#cap_7_2_5").removeClass("required")
+            $("input[name='cap_7_2_6']").addClass("required")
+            $("input[name='cap_7_2_7']").addClass("required")
+        }
+    });
+
+    //是否使用无创通气(Cap-7-3-1)等于"是"(y)时,
+    //无创通气指征(Cap-7-3-2)必填
+    //无创通气治疗起始日期与时间(Cap-7-3-3)必填
+    //无创通气治疗终止日期与时间(Cap-7-3-4)必填
+    //使用无创通气治疗小时数(Cap-7-3-5)可填
+    $('#cap_7_3_1').on("select2:select",function () {
+        var value = $("#cap_7_3_1").val();
+        if ("y"==value){
+            $("#cap_7_3_2").addClass("required")
+            $("input[name='cap_7_3_3']").addClass("required")
+            $("input[name='cap_7_3_4']").addClass("required")
+            $("input[name='cap_7_3_5']").addClass("required")
+        }
+        else {
+            $("#cap_7_3_2").removeClass("required")
+            $("input[name='cap_7_3_3']").removeClass("required")
+            $("input[name='cap_7_3_4']").removeClass("required")
+            $("input[name='cap_7_3_5']").removeClass("required")
+        }
+    });
+
+    //是否使用有创机械通气(Cap-7-4-1)等于"是"(y)时,
+    //机械通气指征(Cap-7-4-2)必填
+    //有创机械通气治疗起始日期与时间(Cap-7-4-3)必填
+    //有创机械通气治疗终止日期与时间(Cap-7-4-4)必填
+    //使用有创机械通气治疗小时数(Cap-7-4-5)必填
+    $('#cap_7_4_1').on("select2:select",function () {
+        var value = $("#cap_7_4_1").val();
+        if ("y"==value){
+            $("#cap_7_4_2").addClass("required")
+            $("input[name='cap_7_4_3']").addClass("required")
+            $("input[name='cap_7_4_4']").addClass("required")
+            $("input[name='cap_7_4_5']").addClass("required")
+        }
+        else {
+            $("#cap_7_4_2").removeClass("required")
+            $("input[name='cap_7_4_3']").removeClass("required")
+            $("input[name='cap_7_4_4']").removeClass("required")
+            $("input[name='cap_7_4_5']").removeClass("required")
+        }
+    });
+
+    //是否使用体外膜肺(Cap-7-5-1)等于"是"(y)时,
+    //ECMO指征(Cap-7-5-2)必填
+    //体外膜肺治疗起始日期与时间(Cap-7-5-3)必填
+    //体外膜肺治疗终止日期与时间(Cap-7-5-4)必填
+    //使用体外膜肺治疗小时数(Cap-7-5-5)必填
+    $('#cap_7_5_1').on("select2:select",function () {
+        var value = $("#cap_7_5_1").val();
+        if ("y"==value){
+            $("#cap_7_5_2").addClass("required")
+            $("input[name='cap_7_5_3']").addClass("required")
+            $("input[name='cap_7_5_4']").addClass("required")
+            $("input[name='cap_7_5_5']").addClass("required")
+        }
+        else {
+            $("#cap_7_5_2").removeClass("required")
+            $("input[name='cap_7_5_3']").removeClass("required")
+            $("input[name='cap_7_5_4']").removeClass("required")
+            $("input[name='cap_7_5_5']").removeClass("required")
+        }
+    });
+
+    //经有效治疗后，患儿病情明显好转,可以出院(Cap-9-1-1-1)等于"其他"(oth)时,其他出院评估(Cap-9-1-1-2)必填
+    $('#cap_9_1_1_1').on("select2:select",function () {
+        var value = $("#cap_9_1_1_1").val();
+        if ("oth"==value){
+            $("input[name='cap_9_1_1_2']").addClass("required")
+        }
+        else {
+            $("input[name='cap_9_1_1_2']").removeClass("required")
+        }
+    });
+
+    //出院前末次氧合评估(Cap-9-2-1)等于"是"(y)时,末次氧合评估项目(Cap-9-2-2)必填
+    $('#cap_9_2_1').on("select2:select",function () {
+        var value = $("#cap_9_2_1").val();
+        if ("oth"==value){
+            $("#cap_9_2_2").addClass("required")
+        }
+        else {
+            $("#cap_9_2_2").removeClass("required")
+        }
+    });
+
+    //测定值(%)(Cap-9-2-2-1)
+    //末次氧合评估项目(Cap-9-2-2)等于"末次检测脉搏血氧饱和度测定值%"(b)时必填
+    //末次氧合评估项目(Cap-9-2-2)等于"末次检测动脉血气分析测定值mmHg"(a)时无需填写
+    //==============
+    //测定值(mmHg)(Cap-9-2-2-2)
+    //末次氧合评估项目(Cap-9-2-2)等于"末次检测动脉血气分析测定值mmHg"(a)时必填
+    //末次氧合评估项目(Cap-9-2-2)等于"末次检测脉搏血氧饱和度测定值%"(b)时无需填写
+    $('#cap_9_2_2').on("select2:select",function () {
+        var value = $("#cap_9_2_2").val();
+        if ("b"==value){
+            $("input[name='cap_9_2_2_1']").addClass("required")
+            $("input[name='cap_9_2_2_2']").removeClass("required")
+        }
+        if ("a"==value){
+            $("input[name='cap_9_2_2_1']").removeClass("required")
+            $("input[name='cap_9_2_2_2']").addClass("required")
+        }
+    });
+
+    //离院方式选择(CM-4-3)等于"非医嘱离院"(d)时,非医嘱离院可能涉及因素(CM-4-5)可填写
+    //离院方式选择(CM-4-3)等于"死亡"(e)时,死亡可能涉及因素(CM-4-6)可填写
+    $('#cm_4_3').on("select2:select",function () {
+        var value = $("#cm_4_3").val();
+        if ("d"==value){
+            $("#cm_4_5").addClass("required")
+        }else {
+            $("#cm_4_5").removeClass("required")
+        }
+        if ("e"==value){
+            $("#cm_4_6").addClass("required")
+        }else {
+            $("#cm_4_6").removeClass("required")
+        }
+    });
+
+    //非医嘱离院可能涉及因素(CM-4-5)等于"其他"(oth)时,其他非医嘱离院因素填写(CM-4-4-1)必填
+    $('#cm_4_5').on("select2:select",function () {
+        var value = $("#cm_4_5").val();
+        if ("oth"==value){
+            $("input[name='cm_4_4_1']").addClass("required")
+        }else {
+            $("input[name='cm_4_4_1']").removeClass("required")
+        }
+    });
+
+    //患儿家长对服务的体验与评价(CM-5-1)等于"是"(y)时,
+    //整体医院评级(CM-5-2-1)必填
+    //患者推荐(CM-5-2-2)必填
+    //病房、床单元和卫生间清洁度(CM-5-2-3)必填
+    //病房与周边噪音(CM-5-2-5)必填
+    //医生沟通(CM-5-2-6)必填
+    //护士沟通(CM-5-2-7)必填
+    //药师沟通(CM-5-2-8)必填
+    //康复计划(CM-5-2-9)必填
+    //出院时的知情告知(CM-5-2-10)必填
+    //膳食评价(CM-5-2-11)必填
+    $('#cm_5_1').on("select2:select",function () {
+        var value = $("#cm_5_1").val();
+        if ("y"==value){
+            $("#cm_5_2_1").addClass("required")
+            $("#cm_5_2_2").addClass("required")
+            $("#cm_5_2_3").addClass("required")
+            $("#cm_5_2_5").addClass("required")
+            $("#cm_5_2_6").addClass("required")
+            $("#cm_5_2_7").addClass("required")
+            $("#cm_5_2_8").addClass("required")
+            $("#cm_5_2_9").addClass("required")
+            $("#cm_5_2_10").addClass("required")
+            $("#cm_5_2_11").addClass("required")
+        }else {
+            $("#cm_5_2_1").removeClass("required")
+            $("#cm_5_2_2").removeClass("required")
+            $("#cm_5_2_3").removeClass("required")
+            $("#cm_5_2_5").removeClass("required")
+            $("#cm_5_2_6").removeClass("required")
+            $("#cm_5_2_7").removeClass("required")
+            $("#cm_5_2_8").removeClass("required")
+            $("#cm_5_2_9").removeClass("required")
+            $("#cm_5_2_10").removeClass("required")
+            $("#cm_5_2_11").removeClass("required")
+
+        }
+    });
+
+    //是否抗菌药物注射剂改口服(Cap-11-2-1)等于"是"(y)时,
+    //改用抗菌药物口服剂首剂日期与时间(Cap-11-2-2)必填
+    //末剂抗菌药物口服剂或出院日期与时间(Cap-11-2-3)必填
+    $('#cap_11_2_1').on("select2:select",function () {
+        var value = $("#cap_11_2_1").val();
+        if ("y"==value){
+            $("input[name='cap_11_2_2']").addClass("required")
+            $("input[name='cap_11_2_3']").addClass("required")
+        }else {
+            $("input[name='cap_11_2_2']").removeClass("required")
+            $("input[name='cap_11_2_3']").removeClass("required")
+        }
+    });
 </script>
-<link href="${ctxStatic}/quality_common.css" rel="stylesheet"/>

@@ -3,8 +3,12 @@
  */
 package com.zebone.quality.modules.cap.service;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +25,11 @@ import com.zebone.quality.modules.cap.dao.QualityCapDao;
 @Service
 @Transactional(readOnly=true)
 public class QualityCapService extends CrudService<QualityCapDao, QualityCap> {
+
+    public Map<String,Object> findById(String id) {
+        Map<String, Object> result = dao.findById(id);
+        return result;
+    }
 	
 	/**
 	 * 获取单条数据
@@ -40,7 +49,22 @@ public class QualityCapService extends CrudService<QualityCapDao, QualityCap> {
 	 */
 	@Override
 	public Page<QualityCap> findPage(Page<QualityCap> page, QualityCap qualityCap) {
-		return super.findPage(page, qualityCap);
+        qualityCap.setPage(page);
+        List<Map<String,Object>> result = dao.findListMap(qualityCap);
+        List<QualityCap> list = new ArrayList<>();
+        result.forEach(a->{
+            QualityCap bean = new QualityCap();
+            try {
+                BeanUtils.populate(bean,a);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+            list.add(bean);
+        });
+        return page.setList(list);
+
 	}
 	
 	/**

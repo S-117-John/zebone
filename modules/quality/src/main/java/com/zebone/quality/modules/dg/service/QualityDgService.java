@@ -3,8 +3,13 @@
  */
 package com.zebone.quality.modules.dg.service;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.collections.MapUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +26,12 @@ import com.zebone.quality.modules.dg.dao.QualityDgDao;
 @Service
 @Transactional(readOnly=true)
 public class QualityDgService extends CrudService<QualityDgDao, QualityDg> {
-	
+
+    public Map<String,Object> findById(String id) {
+        Map<String,Object> result = dao.findById(id);
+        return result;
+    }
+
 	/**
 	 * 获取单条数据
 	 * @param qualityDg
@@ -40,7 +50,21 @@ public class QualityDgService extends CrudService<QualityDgDao, QualityDg> {
 	 */
 	@Override
 	public Page<QualityDg> findPage(Page<QualityDg> page, QualityDg qualityDg) {
-		return super.findPage(page, qualityDg);
+       qualityDg.setPage(page);
+       List<Map<String,Object>> result = dao.findListMap(qualityDg);
+       List<QualityDg> list = new ArrayList<>();
+       result.forEach(a->{
+           QualityDg bean = new QualityDg();
+           try {
+               BeanUtils.populate(bean,a);
+           } catch (IllegalAccessException e) {
+               e.printStackTrace();
+           } catch (InvocationTargetException e) {
+               e.printStackTrace();
+           }
+           list.add(bean);
+       });
+        return page.setList(list);
 	}
 	
 	/**

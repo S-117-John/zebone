@@ -12,6 +12,8 @@ import com.jeesite.common.mybatis.annotation.Column;
 import com.jeesite.common.mybatis.annotation.Table;
 import com.jeesite.common.mybatis.mapper.query.QueryType;
 
+import java.util.Date;
+
 /**
  * UM子宫肌瘤（手术治疗）Entity
  * @author 卡卡西
@@ -24,6 +26,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_0_1_1_4", attrName="cm_0_1_1_4", label="责任护士"),
 		@Column(name="cm_0_1_1_5", attrName="cm_0_1_1_5", label="上报科室"),
 		@Column(name="caseid", attrName="caseid", label="患者病案号"),
+        @Column(name="idcard", attrName="idcard", label="患者身份证号"),
 		@Column(name="cm_0_1_3_1", attrName="cm_0_1_3_1", label="主要诊断ICD-10四位亚目编码与名称"),
 		@Column(name="cm_0_1_3_2", attrName="cm_0_1_3_2", label="主要诊断ICD-10六位临床扩展编码与名称"),
 		@Column(name="cm_0_1_4_1", attrName="cm_0_1_4_1", label="主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称"),
@@ -189,21 +192,22 @@ public class QualityUm extends DataEntity<QualityUm> {
 	private String cm_0_1_1_4;		// 责任护士
 	private String cm_0_1_1_5;		// 上报科室
 	private String caseid;		// 患者病案号
+    private String idcard;		// 患者身份证号
 	private String cm_0_1_3_1;		// 主要诊断ICD-10四位亚目编码与名称
 	private String cm_0_1_3_2;		// 主要诊断ICD-10六位临床扩展编码与名称
 	private String cm_0_1_4_1;		// 主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称
 	private String cm_0_1_4_2;		// 主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称
 	private String cm_0_1_5;		// 是否UM出院后31天内重复住院
-	private String cm_0_2_1_1;		// 出生日期
+	private Date cm_0_2_1_1;		// 出生日期
 	private String cm_0_2_1_2;		// 患者性别
 	private Double cm_0_2_1_3;		// 患者体重（kg）
 	private Double cm_0_2_1_5;		// 患者身高（cm）
 	private String cm_0_2_2_1;		// 发病日期时间是否无法确定或无记录
-	private String cm_0_2_2_2;		// 发病日期时间
-	private String cm_0_2_4_1;		// 入院日期时间
-	private String cm_0_2_4_2;		// 出院日期时间
-	private String cm_0_2_6_1;		// 手术开始（切皮）日期时间
-	private String cm_0_2_6_2;		// 手术结束（缝皮结束）日期时间
+	private Date cm_0_2_2_2;		// 发病日期时间
+	private Date cm_0_2_4_1;		// 入院日期时间
+	private Date cm_0_2_4_2;		// 出院日期时间
+	private Date cm_0_2_6_1;		// 手术开始（切皮）日期时间
+	private Date cm_0_2_6_2;		// 手术结束（缝皮结束）日期时间
 	private String cm_0_3_1;		// 费用支付方式
 	private String cm_0_3_2;		// 收入住院途径
 	private String cm_0_3_3;		// 到院交通工具
@@ -249,12 +253,12 @@ public class QualityUm extends DataEntity<QualityUm> {
 	private String cm_1_2_2_1;		// 其他特殊使用级抗菌药物名称
 	private String cm_1_3_1_2;		// 选用“特殊使用级抗菌药物”或者其他类抗菌药物的因素
 	private String cm_1_3_1_1;		// 选用“特殊使用级抗菌药物”或者其他类抗菌药物的因素填写
-	private String cm_1_4_1;		// 使用首剂抗菌药物起始时间
+	private Date cm_1_4_1;		// 使用首剂抗菌药物起始时间
 	private String cm_1_5_1;		// 手术时间是否≥3小时
 	private String cm_1_5_2;		// 是否术中追加抗菌药物
 	private String cm_1_5_3;		// 术中出血量是否≥1500ml
 	private String cm_1_5_4;		// 是否术中追加抗菌药物
-	private String cm_1_6_1;		// 术后抗菌药物停止使用时间
+	private Date cm_1_6_1;		// 术后抗菌药物停止使用时间
 	private String cm_1_6_2;		// 使用抗菌药物时间使用时间分层
 	private String cm_1_6_3;		// 术后72小时之后继续使用的原因
 	private Double um_4_1_1;		// 术中腹腔内出血量(ml)
@@ -459,14 +463,12 @@ public class QualityUm extends DataEntity<QualityUm> {
 	public void setCm_0_1_5(String cm_0_1_5) {
 		this.cm_0_1_5 = cm_0_1_5;
 	}
-	
-	@NotBlank(message="出生日期不能为空")
-	@Length(min=0, max=64, message="出生日期长度不能超过 64 个字符")
-	public String getCm_0_2_1_1() {
+
+	public Date getCm_0_2_1_1() {
 		return cm_0_2_1_1;
 	}
 
-	public void setCm_0_2_1_1(String cm_0_2_1_1) {
+	public void setCm_0_2_1_1(Date cm_0_2_1_1) {
 		this.cm_0_2_1_1 = cm_0_2_1_1;
 	}
 	
@@ -505,53 +507,44 @@ public class QualityUm extends DataEntity<QualityUm> {
 	public void setCm_0_2_2_1(String cm_0_2_2_1) {
 		this.cm_0_2_2_1 = cm_0_2_2_1;
 	}
-	
-	@Length(min=0, max=64, message="发病日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_2_2() {
+
+	public Date getCm_0_2_2_2() {
 		return cm_0_2_2_2;
 	}
 
-	public void setCm_0_2_2_2(String cm_0_2_2_2) {
+	public void setCm_0_2_2_2(Date cm_0_2_2_2) {
 		this.cm_0_2_2_2 = cm_0_2_2_2;
 	}
-	
-	@NotBlank(message="入院日期时间不能为空")
-	@Length(min=0, max=64, message="入院日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_4_1() {
+
+	public Date getCm_0_2_4_1() {
 		return cm_0_2_4_1;
 	}
 
-	public void setCm_0_2_4_1(String cm_0_2_4_1) {
+	public void setCm_0_2_4_1(Date cm_0_2_4_1) {
 		this.cm_0_2_4_1 = cm_0_2_4_1;
 	}
-	
-	@NotBlank(message="出院日期时间不能为空")
-	@Length(min=0, max=64, message="出院日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_4_2() {
+
+	public Date getCm_0_2_4_2() {
 		return cm_0_2_4_2;
 	}
 
-	public void setCm_0_2_4_2(String cm_0_2_4_2) {
+	public void setCm_0_2_4_2(Date cm_0_2_4_2) {
 		this.cm_0_2_4_2 = cm_0_2_4_2;
 	}
-	
-	@NotBlank(message="手术开始不能为空")
-	@Length(min=0, max=64, message="手术开始长度不能超过 64 个字符")
-	public String getCm_0_2_6_1() {
+
+	public Date getCm_0_2_6_1() {
 		return cm_0_2_6_1;
 	}
 
-	public void setCm_0_2_6_1(String cm_0_2_6_1) {
+	public void setCm_0_2_6_1(Date cm_0_2_6_1) {
 		this.cm_0_2_6_1 = cm_0_2_6_1;
 	}
-	
-	@NotBlank(message="手术结束不能为空")
-	@Length(min=0, max=64, message="手术结束长度不能超过 64 个字符")
-	public String getCm_0_2_6_2() {
+
+	public Date getCm_0_2_6_2() {
 		return cm_0_2_6_2;
 	}
 
-	public void setCm_0_2_6_2(String cm_0_2_6_2) {
+	public void setCm_0_2_6_2(Date cm_0_2_6_2) {
 		this.cm_0_2_6_2 = cm_0_2_6_2;
 	}
 	
@@ -975,13 +968,12 @@ public class QualityUm extends DataEntity<QualityUm> {
 	public void setCm_1_3_1_1(String cm_1_3_1_1) {
 		this.cm_1_3_1_1 = cm_1_3_1_1;
 	}
-	
-	@Length(min=0, max=64, message="使用首剂抗菌药物起始时间长度不能超过 64 个字符")
-	public String getCm_1_4_1() {
+
+	public Date getCm_1_4_1() {
 		return cm_1_4_1;
 	}
 
-	public void setCm_1_4_1(String cm_1_4_1) {
+	public void setCm_1_4_1(Date cm_1_4_1) {
 		this.cm_1_4_1 = cm_1_4_1;
 	}
 	
@@ -1020,13 +1012,12 @@ public class QualityUm extends DataEntity<QualityUm> {
 	public void setCm_1_5_4(String cm_1_5_4) {
 		this.cm_1_5_4 = cm_1_5_4;
 	}
-	
-	@Length(min=0, max=64, message="术后抗菌药物停止使用时间长度不能超过 64 个字符")
-	public String getCm_1_6_1() {
+
+	public Date getCm_1_6_1() {
 		return cm_1_6_1;
 	}
 
-	public void setCm_1_6_1(String cm_1_6_1) {
+	public void setCm_1_6_1(Date cm_1_6_1) {
 		this.cm_1_6_1 = cm_1_6_1;
 	}
 	

@@ -67,7 +67,6 @@ public class QualityHfService extends CrudService<QualityHfDao, QualityHf> {
 			}
 		});
 		return page.setList(list);
-//		return super.findPage(page, qualityHf);
 	}
 	
 	/**

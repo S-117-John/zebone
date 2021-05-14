@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zebone.quality.modules.emr.dao.EmrDataDao">
-	
-	<!-- 查询数据
-	<select id="findList" resultType="EmrHomePage">
-		SELECT ${sqlMap.column.toSql()}
-		FROM ${sqlMap.table.toSql()}
-		<where>
-			${sqlMap.where.toSql()}
-		</where>
-		ORDER BY ${sqlMap.order.toSql()}
-	</select> -->
 
 	<select id="getCaesareanSectionData" resultType="com.zebone.quality.modules.emr.entity.EmrData">
 		select
@@ -46,7 +36,6 @@
 	</select>
 
 
-
 	<select id="getCommonData" resultType="java.util.Map">
 		select
 		emr.QC_DOC_NAME cm_0_1_1_1,
@@ -76,6 +65,8 @@
 		left join PI_MASTER pi on emr.PK_PI = pi.PK_PI
 		where emr.PAT_NO = #{caseId} order by emr.admit_time desc
 	</select>
+
+
 
 	<select id="chargeList" resultType="java.util.Map">
 		select * from EMR_HOME_PAGE_CHARGES where PK_PAGE = #{pkPage}

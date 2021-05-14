@@ -136,7 +136,7 @@ public class QualityCsController extends BaseController {
 	@RequestMapping(value = "form")
 	public String form(QualityCs qualityCs, Model model) {
 		if(StringUtils.isEmpty(qualityCs.getId())){
-			qualityCs.setCm_1_6_2("a");
+			//qualityCs.setCm_1_6_2("a");
 			qualityCs.setCm_5_1("y");
 			qualityCs.setCm_5_2_1("a");
 			qualityCs.setCm_5_2_2("a");
@@ -249,9 +249,11 @@ public class QualityCsController extends BaseController {
                 long hour = (cm_1_6_1 - cm_0_2_6_2)/ (60*60*1000);
                 if (0<=hour && hour<=24){
                     qualityCs.setCm_1_6_2("a");
+                    qualityCs.setCm_1_6_3_2("UTD");
                 }
                 if (hour>24 && hour<=48){
                     qualityCs.setCm_1_6_2("b");
+                    qualityCs.setCm_1_6_3_2("UTD");
                 }
                 if (hour>48){
                     qualityCs.setCm_1_6_2("c");
@@ -260,10 +262,12 @@ public class QualityCsController extends BaseController {
                     }
                 }
             }else {
-                qualityCs.setCm_1_6_2("UTD");
+                qualityCs.setCm_1_6_2("def");
+                qualityCs.setCm_1_6_3_2("UTD");
             }
             }else {
-                qualityCs.setCm_1_6_2("UTD");
+                qualityCs.setCm_1_6_2("def");
+                qualityCs.setCm_1_6_3_2("UTD");
             }
             if (("").equals(qualityCs.getCaseid().split(",")[0])){
                 qualityCs.setCaseid(qualityCs.getCaseid().split(",")[1]);
