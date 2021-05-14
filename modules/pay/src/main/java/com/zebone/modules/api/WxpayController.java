@@ -150,4 +150,57 @@ public class WxpayController {
         return resp;
     }
 
+    @ApiOperation(httpMethod = "POST",value = "Native支付",notes = "除付款码支付场景以外，商户系统先调用该接口在微信支付服务后台生成预支付交易单，返回正确的预支付交易会话标识后再按Native、JSAPI、APP等不同场景生成交易串调起支付")
+    @RequestMapping("nativePay")
+    public Object nativePay(@RequestBody WxpayParam param){
+        Map<String, String> resp = null;
+        try {
+            MyWxConfig config = new MyWxConfig();
+            WxConfig wxConfig = new WxConfig();
+            wxConfig.setAppId(param.getAppId());
+            List<WxConfig> wxConfigList = wxConfigService.findList(wxConfig);
+            wxConfig = wxConfigList.stream().findFirst().orElseThrow(()->new Exception("未查询到微信支付信息"));
+//            WXPay wxpay = new WXPay(config, false, true);
+            config.setApiKey(wxConfig.getPaySignKey());
+            config.setAppId(param.getAppId());
+            config.setMchId(wxConfig.getMchId());
+            WXPay wxpay = new WXPay(config);
+            Map<String, String> data = new HashMap<String, String>();
+            data.put("body", param.getBody());
+            data.put("out_trade_no", param.getOutTradeNo());
+            data.put("total_fee", param.getTotalFee()+"");
+            InetAddress addr = InetAddress.getLocalHost();
+            data.put("spbill_create_ip", addr.getHostAddress());
+            data.put("notify_url","");
+            data.put("trade_type","NATIVE");
+            resp = wxpay.unifiedOrder(data);
+            TradeRecord tradeRecord = new TradeRecord();
+            tradeRecord.setPayType("1");
+            tradeRecord.setOutTradeNo(param.getOutTradeNo());
+            tradeRecord.setTotalAmount(param.getTotalFee()/100.00+"");
+            if("FAIL".equals(MapUtils.getString(resp,"result_code"))){
+                tradeRecord.setGmtPayment(new Date());
+                tradeRecord.setTradeStatus("3");
+                tradeRecord.setRemarks(MapUtils.getString(resp,"err_code_des"));
+            }
+            if("SUCCESS".equals(MapUtils.getString(resp,"result_code"))){
+                tradeRecord.setTradeNo(MapUtils.getString(resp,"transaction_id"));
+                tradeRecord.setReceiptAmount(MapUtils.getString(resp,"cash_fee"));
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+                tradeRecord.setGmtPayment(simpleDateFormat.parse(MapUtils.getString(resp,"time_end")));
+                tradeRecord.setTradeStatus("1");
+
+            }
+
+            tradeRecordService.save(tradeRecord);
+
+            System.out.println(resp);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return resp;
+    }
+
 }

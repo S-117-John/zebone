@@ -10,7 +10,7 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "BIZ_TRADE_BILL_DETAIL")
+@Table(name = "payment_detail_bill")
 public class BillDetailDO {
 
     @Id

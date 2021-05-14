@@ -117,9 +117,10 @@
 $('#dataGrid').dataGrid({
 	searchForm: $("#searchForm"),
 	columnModel: [
-		{header:'${text('订单金额')}', name:'billAmount', index:'a.bill_amount', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
-			return '<a href="${ctx}/pay/tradeBillDetail/form?id='+row.id+'" class="btnList" data-title="${text('编辑账单明细')}">'+(val||row.id)+'</a>';
-		}},
+		// {header:'${text('订单金额')}', name:'billAmount', index:'a.bill_amount', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
+		// 	return '<a href="${ctx}/pay/tradeBillDetail/form?id='+row.id+'" class="btnList" data-title="${text('编辑账单明细')}">'+(val||row.id)+'</a>';
+		// }},
+		{header:'${text('订单金额')}', name:'billAmount', index:'a.bill_amount', width:150, align:"left", frozen:true},
 		{header:'${text('账单号')}', name:'billNo', index:'a.bill_no', width:150, align:"left"},
 		{header:'${text('业务类型')}', name:'bizType', index:'a.biz_type', width:150, align:"left"},
 		{header:'${text('买家账号')}', name:'buyerId', index:'a.buyer_id', width:150, align:"left"},
@@ -135,20 +136,20 @@ $('#dataGrid').dataGrid({
 		{header:'${text('交易时间')}', name:'tradeEndTime', index:'a.trade_end_time', width:150, align:"center"},
 		{header:'${text('交易号')}', name:'tradeNo', index:'a.trade_no', width:150, align:"left"},
 		{header:'${text('备注')}', name:'remarks', index:'a.remarks', width:150, align:"left"},
-		{header:'${text('操作')}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
-			var actions = [];
-			<% if(hasPermi('pay:tradeBillDetail:edit')){ %>
-				actions.push('<a href="${ctx}/pay/tradeBillDetail/form?id='+row.id+'" class="btnList" title="${text('编辑账单明细')}"><i class="fa fa-pencil"></i></a>&nbsp;');
-				if (row.status == Global.STATUS_NORMAL){
-					actions.push('<a href="${ctx}/pay/tradeBillDetail/disable?id='+row.id+'" class="btnList" title="${text('停用账单明细')}" data-confirm="${text('确认要停用该账单明细吗？')}"><i class="glyphicon glyphicon-ban-circle"></i></a>&nbsp;');
-				}
-				if (row.status == Global.STATUS_DISABLE){
-					actions.push('<a href="${ctx}/pay/tradeBillDetail/enable?id='+row.id+'" class="btnList" title="${text('启用账单明细')}" data-confirm="${text('确认要启用该账单明细吗？')}"><i class="glyphicon glyphicon-ok-circle"></i></a>&nbsp;');
-				}
-				actions.push('<a href="${ctx}/pay/tradeBillDetail/delete?id='+row.id+'" class="btnList" title="${text('删除账单明细')}" data-confirm="${text('确认要删除该账单明细吗？')}"><i class="fa fa-trash-o"></i></a>&nbsp;');
-			<% } %>
-			return actions.join('');
-		}}
+		// {header:'${text('操作')}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
+		// 	var actions = [];
+		// 	<% if(hasPermi('pay:tradeBillDetail:edit')){ %>
+		// 		actions.push('<a href="${ctx}/pay/tradeBillDetail/form?id='+row.id+'" class="btnList" title="${text('编辑账单明细')}"><i class="fa fa-pencil"></i></a>&nbsp;');
+		// 		if (row.status == Global.STATUS_NORMAL){
+		// 			actions.push('<a href="${ctx}/pay/tradeBillDetail/disable?id='+row.id+'" class="btnList" title="${text('停用账单明细')}" data-confirm="${text('确认要停用该账单明细吗？')}"><i class="glyphicon glyphicon-ban-circle"></i></a>&nbsp;');
+		// 		}
+		// 		if (row.status == Global.STATUS_DISABLE){
+		// 			actions.push('<a href="${ctx}/pay/tradeBillDetail/enable?id='+row.id+'" class="btnList" title="${text('启用账单明细')}" data-confirm="${text('确认要启用该账单明细吗？')}"><i class="glyphicon glyphicon-ok-circle"></i></a>&nbsp;');
+		// 		}
+		// 		actions.push('<a href="${ctx}/pay/tradeBillDetail/delete?id='+row.id+'" class="btnList" title="${text('删除账单明细')}" data-confirm="${text('确认要删除该账单明细吗？')}"><i class="fa fa-trash-o"></i></a>&nbsp;');
+		// 	<% } %>
+		// 	return actions.join('');
+		// }}
 	],
 	// 加载成功后执行事件
 	ajaxSuccess: function(data){

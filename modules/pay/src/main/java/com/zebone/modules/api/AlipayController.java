@@ -187,4 +187,35 @@ public class AlipayController {
 
         return result;
     }
+
+    @ApiOperation(httpMethod = "POST",value = "统一收单线下交易预创建",notes = "收银员通过收银台或商户后台调用支付宝接口，生成二维码后，展示给用户，由用户扫描二维码完成订单支付")
+    @RequestMapping("precreate")
+    public Object precreate(@RequestBody AlipayParam alipayParam, HttpServletRequest request, HttpServletResponse response) throws InvocationTargetException, IllegalAccessException, AlipayApiException, AlipayApiException {
+        Object result = null;
+        AliConfig aliConfig = new AliConfig();
+        aliConfig.setAppId(alipayParam.getAppId());
+
+        List<AliConfig> aliConfigList = aliConfigService.findList(aliConfig);
+        if(aliConfigList.size()==1){
+            result = alipayService.precreate(alipayParam,aliConfigList.get(0));
+
+            AlipayTradePayResponse alipayTradePayResponse = (AlipayTradePayResponse) result;
+            TradeRecord tradeRecord = new TradeRecord();
+            BeanUtils.copyProperties(alipayTradePayResponse,tradeRecord);
+
+            if(alipayTradePayResponse.isSuccess()){
+                tradeRecord.setTradeStatus("5");
+            }
+
+            if(!alipayTradePayResponse.isSuccess()){
+                tradeRecord.setRemarks(alipayTradePayResponse.getSubMsg());
+            }
+            tradeRecord.setOutTradeNo(alipayParam.getOutTradeNo());
+            tradeRecord.setPayType("1");
+            tradeRecordService.save(tradeRecord);
+        }
+
+
+        return result;
+    }
 }

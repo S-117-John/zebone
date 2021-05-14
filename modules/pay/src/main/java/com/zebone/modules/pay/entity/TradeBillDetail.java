@@ -19,7 +19,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
  * @author lijin
  * @version 2020-12-09
  */
-@Table(name="biz_trade_bill_detail", alias="a", columns={
+@Table(name="payment_detail_bill", alias="a", columns={
 		@Column(name="id", attrName="id", label="id", isPK=true),
 		@Column(name="bill_amount", attrName="billAmount", label="订单金额"),
 		@Column(name="bill_no", attrName="billNo", label="账单号"),
