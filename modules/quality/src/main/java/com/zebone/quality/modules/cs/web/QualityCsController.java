@@ -703,8 +703,6 @@ public class QualityCsController extends BaseController {
 					break;
 			}
 		}
-
-
 		return patients;
 	}
 }
