@@ -6,11 +6,19 @@ package com.zebone.quality.modules.stemi.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
+import com.jeesite.common.codec.EncodeUtils;
 import com.jeesite.common.lang.DateUtils;
+import com.jeesite.common.mapper.JsonMapper;
+import com.jeesite.modules.sys.entity.EmpUser;
+import com.zebone.quality.common.entity.Patient;
+import com.zebone.quality.common.utils.QualityUtil;
 import com.zebone.quality.common.utils.TaskUtil;
 import com.zebone.quality.domain.UploadService;
+import com.zebone.quality.modules.base.entity.QualityDisease;
+import com.zebone.quality.modules.base.service.QualityDiseaseService;
 import com.zebone.quality.modules.common.UploadResult;
 import com.zebone.quality.modules.emr.service.EmrDataService;
+import com.zebone.quality.modules.stemi.dao.QualityStemiPatientDao;
 import com.zebone.quality.modules.stemi.entity.Stemi;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.MapUtils;
@@ -34,6 +42,7 @@ import com.zebone.quality.modules.stemi.service.QualityStemiService;
 import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * STEMI急性心肌梗死（ST 段抬高型，首次住院）Controller
@@ -52,7 +61,10 @@ public class QualityStemiController extends BaseController {
 	private TaskService taskService;
 	@Autowired
     private EmrDataService emrDataService;
-	
+	@Autowired
+    private QualityDiseaseService qualityDiseaseService;
+	@Autowired
+    private QualityStemiPatientDao qualityStemiPatientDao;
 	/**
 	 * 获取数据
 	 */
@@ -60,13 +72,11 @@ public class QualityStemiController extends BaseController {
 	public QualityStemi get(String id, boolean isNewRecord)  throws InvocationTargetException, IllegalAccessException {
         if(!StringUtils.isEmpty(id)&&!isNewRecord){
             Map<String,Object> result = qualityStemiService.findById(id);
-            QualityStemi qualityStemi = new QualityStemi();
-            BeanUtils.populate(qualityStemi,result);
-            return qualityStemi;
+            QualityStemi qualityCs = new QualityStemi();
+            BeanUtils.populate(qualityCs,result);
+            return qualityCs;
         }else {
-			QualityStemi qualityStemi = new QualityStemi();
-			qualityStemi =qualityStemiService.get(id, isNewRecord);
-            return qualityStemi;
+            return qualityStemiService.get(id, isNewRecord);
         }
 	}
 	
@@ -98,7 +108,17 @@ public class QualityStemiController extends BaseController {
 	@RequestMapping(value = "form")
 	public String form(QualityStemi qualityStemi, Model model) {
         if(StringUtils.isEmpty(qualityStemi.getId())){
-
+            qualityStemi.setCm_5_1("y");
+            qualityStemi.setCm_5_2_1("a");
+            qualityStemi.setCm_5_2_2("a");
+            qualityStemi.setCm_5_2_3("a");
+            qualityStemi.setCm_5_2_5("a");
+            qualityStemi.setCm_5_2_6("a");
+            qualityStemi.setCm_5_2_7("a");
+            qualityStemi.setCm_5_2_8("a");
+            qualityStemi.setCm_5_2_9("a");
+            qualityStemi.setCm_5_2_10("a");
+            qualityStemi.setCm_5_2_11("a");
             //默认费用
             qualityStemi.setCm_6_1(0.0);
             qualityStemi.setCm_6_2(0.0);
@@ -237,6 +257,25 @@ public class QualityStemiController extends BaseController {
 	}
 
     /**
+     * 选择员工对话框
+     */
+    @RequestMapping(value = "patientSelect")
+    public String empUserSelect(EmpUser empUser, String selectData, String checkbox, Model model) {
+        String selectDataJson = EncodeUtils.decodeUrl(selectData);
+        if (JsonMapper.fromJson(selectDataJson, Map.class) != null){
+            model.addAttribute("selectData", selectDataJson);
+        }
+        model.addAttribute("checkbox", checkbox); // 是否显示复选框，支持多选
+        model.addAttribute("empUser", empUser); // ModelAttribute
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date());  //当前时间
+        c.add(Calendar.MONTH,-1);  //上一个月
+        model.addAttribute("startTime",c.getTime());
+        model.addAttribute("endTime",new Date());
+        return "modules/stemi/patientSelect";
+    }
+
+    /**
      * 导入患者信息
      * @param patNo
      * @param type
@@ -250,48 +289,13 @@ public class QualityStemiController extends BaseController {
     public String commonData(String patNo,String type, HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<Map<String,Object>> result = emrDataService.getCommonData(patNo);
         Map<String,Object> mapResult = result.stream().findFirst().orElseThrow(()->new Exception("未查询到患者病案信息"));
-        //String icd = MapUtils.getString(mapResult,"DIAG_CODE_CLINIC_ICD");
         String idNo = MapUtils.getString(mapResult,"ID_NO","");
-       // mapResult.put("CM_0_1_3_1",MapUtils.getString(codeMap,icd,""));
         mapResult.put("idcard",idNo);
         mapResult.put("cm_0_1_5","0".equals(MapUtils.getString(mapResult,"cm_0_1_5"))?"n":"y");
         Gson gson = new Gson();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        /**
-         *   cm_0_2_6_2：手术结束时间，cm_1_6_1:术后停药时间，使用抗菌药物时间使用时间分层（cm_1_6_2）=停药时间 - 手术结束时间
-         *   a:术后24小时内结束使用；b:术后48小时内结束使用；c:术后48小时之后继续使用；def：请选择
-         */
-        //获取术后停药时间
-        String cm_1_6_11 = MapUtils.getString(mapResult,"cm_1_6_1");
-        String cm_0_2_6_21 = MapUtils.getString(mapResult,"cm_0_2_6_2");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        if (!StringUtils.isEmpty(cm_0_2_6_21) && !StringUtils.isEmpty(cm_1_6_11)){
-            long cm_1_6_12 = sdf.parse(cm_1_6_11).getTime();
-            long cm_0_2_6_22 = sdf.parse(cm_0_2_6_21).getTime();
-            if (cm_0_2_6_22 != 0 && cm_1_6_12 !=0) {
-                long hour = (cm_1_6_12 - cm_0_2_6_22)/(60*60*1000);
-                if (0<=hour && hour<=24){
-                    mapResult.put("cm_1_6_2","a");
-                    mapResult.put("cm_1_6_2",MapUtils.getString(mapResult,"cm_1_6_2"));
-                }
-                if (hour>24 && hour<=48){
-                    mapResult.put("cm_1_6_2","b");
-                    mapResult.put("cm_1_6_2",MapUtils.getString(mapResult,"cm_1_6_2"));
-                }
-                if (hour>48){
-                    mapResult.put("cm_1_6_2","c");
-                    mapResult.put("cm_1_6_2",MapUtils.getString(mapResult,"cm_1_6_2"));
-                }
-            }else {
-                mapResult.put("cm_1_6_2","UTD");
-                mapResult.put("cm_1_6_2",MapUtils.getString(mapResult,"cm_1_6_2"));
-            }
-        }else {
-            mapResult.put("cm_1_6_2","UTD");
-            mapResult.put("cm_1_6_2",MapUtils.getString(mapResult,"cm_1_6_2"));
-        }
         //患者身高,如果为0则默认为1
-        // mapResult.put("cm_0_2_1_5",MapUtils.getDouble(mapResult,"cm_0_2_1_5") == 0?"":MapUtils.getDouble(mapResult,"cm_0_2_1_5"));
+        mapResult.put("cm_0_2_1_5",MapUtils.getDouble(mapResult,"cm_0_2_1_5") == 0?"":MapUtils.getDouble(mapResult,"cm_0_2_1_5"));
         mapResult.put("cm_0_2_1_1", DateUtils.formatDate((Date) MapUtils.getObject(mapResult,"cm_0_2_1_1"),"yyyy-MM-dd"));
         mapResult.put("cm_0_2_4_1",DateUtils.formatDate((Date) MapUtils.getObject(mapResult,"admit_time"),"yyyy-MM-dd HH:mm"));
         mapResult.put("cm_0_2_4_2",DateUtils.formatDate((Date) MapUtils.getObject(mapResult,"dis_time"),"yyyy-MM-dd HH:mm"));
@@ -459,5 +463,74 @@ public class QualityStemiController extends BaseController {
 
         String jsonResult =  gson.toJson(mapResult);
         return jsonResult;
+    }
+
+    /**
+     * 新增上报时，查询符合条件的病人
+     * @param patientParam
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "patientListData")
+    @ResponseBody
+    public List<Patient> patientListData(Patient patientParam, HttpServletRequest request, HttpServletResponse response) {
+        //1、获取配置条件
+        //2、mssql数据源中查询对应结果集
+        Map<String,Object> param = new HashMap<>(16);
+        QualityDisease qualityDisease = new QualityDisease();
+        qualityDisease.setCode("STEMI");
+        List<QualityDisease> qualityDiseaseList = qualityDiseaseService.findList(qualityDisease);
+        //icd9条件
+        qualityDisease = qualityDiseaseList.stream().findFirst().orElseThrow(()->new RuntimeException("未找到病种设置条件"));
+        String dayCondition = qualityDisease.getDayCondition();
+        String day = qualityDisease.getDay();
+        String ageCondition = qualityDisease.getAgeCondition();
+        String age = qualityDisease.getAge();
+        //获取icd10的条件
+        String icd10 = qualityDisease.getIcd10();
+        param.put("icd10",icd10.split(","));
+        param.put("patNo",patientParam.getPatNo());
+        param.put("name",patientParam.getName());
+        //增加出院起止时间
+        param.put("startTime",patientParam.getStartTime());
+        param.put("endTime",patientParam.getEndTime());
+
+        List<Patient> patients = qualityStemiPatientDao.list(param);
+        patients = patients.stream().filter(patient -> icd10.contains(patient.getOpCode())).collect(Collectors.toList());
+        if(!StringUtils.isEmpty(dayCondition)&&!StringUtils.isEmpty(day)){
+            switch (dayCondition){
+                case "大于":
+                    patients = patients.stream().filter(patient -> Integer.parseInt(patient.getInHosDays())>Integer.parseInt(day)).collect(Collectors.toList());
+                    break;
+                case "大于等于":
+                    patients = patients.stream().filter(patient -> Integer.parseInt(patient.getInHosDays())>=Integer.parseInt(day)).collect(Collectors.toList());
+                    break;
+                case "小于":
+                    patients = patients.stream().filter(patient -> Integer.parseInt(patient.getInHosDays())<Integer.parseInt(day)).collect(Collectors.toList());
+                    break;
+                case "小于等于":
+                    patients = patients.stream().filter(patient -> Integer.parseInt(patient.getInHosDays())<=Integer.parseInt(day)).collect(Collectors.toList());
+                    break;
+            }
+        }
+
+        if(!StringUtils.isEmpty(ageCondition)&&!StringUtils.isEmpty(age)){
+            switch (ageCondition){
+                case "大于":
+                    patients = patients.stream().filter(patient -> QualityUtil.getAgeByBirth(patient.getBirth()) >Integer.parseInt(age)).collect(Collectors.toList());
+                    break;
+                case "大于等于":
+                    patients = patients.stream().filter(patient -> QualityUtil.getAgeByBirth(patient.getBirth())>=Integer.parseInt(age)).collect(Collectors.toList());
+                    break;
+                case "小于":
+                    patients = patients.stream().filter(patient -> QualityUtil.getAgeByBirth(patient.getBirth())<Integer.parseInt(age)).collect(Collectors.toList());
+                    break;
+                case "小于等于":
+                    patients = patients.stream().filter(patient -> QualityUtil.getAgeByBirth(patient.getBirth())<=Integer.parseInt(age)).collect(Collectors.toList());
+                    break;
+            }
+        }
+        return patients;
     }
 }
