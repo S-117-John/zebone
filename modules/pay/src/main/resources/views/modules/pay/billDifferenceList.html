@@ -13,101 +13,44 @@
 			</div>
 		</div>
 		<div class="box-body">
-			<#form:form id="searchForm" model="${tradeBillDetail}" action="${ctx}/pay/tradeBillDetail/listData" method="post" class="form-inline hide"
-					data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}" data-order-by="${parameter.orderBy}">
+			<#form:form id="searchForm" model="${tradeBillDetail}" action="${ctx}/pay/tradeBillDetail/differenceListData" method="post" class="form-inline hide"
+			data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}" data-order-by="${parameter.orderBy}">
+			<div class="form-group">
+				<label class="control-label">${text('商户交易号')}：</label>
+				<div class="control-inline">
+					<#form:input path="outTradeNo" maxlength="255" class="form-control width-120"/>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label">${text('实收金额')}：</label>
+				<div class="control-inline">
+					<#form:input path="receiptAmount" maxlength="255" class="form-control width-120"/>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label">${text('交易号')}：</label>
+				<div class="control-inline">
+					<#form:input path="tradeNo" maxlength="255" class="form-control width-120"/>
+				</div>
+			</div>
+			<div class="col-xs-6">
 				<div class="form-group">
-					<label class="control-label">${text('订单金额')}：</label>
-					<div class="control-inline">
-						<#form:input path="billAmount" maxlength="255" class="form-control width-120"/>
+					<label class="control-label col-sm-4" title="">
+						<span class="required hide">*</span> ${text('账单号')}：<i class="fa icon-question hide"></i></label>
+					<div class="col-sm-8">
+						<#form:input path="billNo" maxlength="255" class="form-control"/>
 					</div>
 				</div>
-				<div class="form-group">
-					<label class="control-label">${text('账单号')}：</label>
-					<div class="control-inline">
-						<#form:input path="billNo" maxlength="255" class="form-control width-120"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">${text('业务类型')}：</label>
-					<div class="control-inline">
-						<#form:input path="bizType" maxlength="255" class="form-control width-120"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">${text('买家账号')}：</label>
-					<div class="control-inline">
-						<#form:input path="buyerId" maxlength="255" class="form-control width-120"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">${text('商户交易号')}：</label>
-					<div class="control-inline">
-						<#form:input path="outTradeNo" maxlength="255" class="form-control width-120"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">${text('商品名称')}：</label>
-					<div class="control-inline">
-						<#form:input path="productName" maxlength="255" class="form-control width-120"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">${text('实收金额')}：</label>
-					<div class="control-inline">
-						<#form:input path="receiptAmount" maxlength="255" class="form-control width-120"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">${text('退款批次号')}：</label>
-					<div class="control-inline">
-						<#form:input path="refundBatchNo" maxlength="255" class="form-control width-120"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">${text('备注')}：</label>
-					<div class="control-inline">
-						<#form:input path="remarks" maxlength="255" class="form-control width-120"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">${text('状态')}：</label>
-					<div class="control-inline width-120">
-						<#form:select path="status" dictType="sys_search_status" blankOption="true" class="form-control"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">${text('交易创建时间')}：</label>
-					<div class="control-inline">
-						<#form:input path="tradeCreateTime_gte" readonly="true" maxlength="20" class="form-control Wdate-datetime"
-							dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false,onpicked:function(){tradeCreateTime_lte.click()}});"/>
-						&nbsp;--&nbsp;
-						<#form:input path="tradeCreateTime_lte" readonly="true" maxlength="20" class="form-control Wdate-datetime"
-							dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">${text('交易完成时间')}：</label>
-					<div class="control-inline">
-						<#form:input path="tradeEndTime_gte" readonly="true" maxlength="20" class="form-control Wdate-datetime"
-							dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false,onpicked:function(){tradeEndTime_lte.click()}});"/>
-						&nbsp;--&nbsp;
-						<#form:input path="tradeEndTime_lte" readonly="true" maxlength="20" class="form-control Wdate-datetime"
-							dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">${text('交易号')}：</label>
-					<div class="control-inline">
-						<#form:input path="tradeNo" maxlength="255" class="form-control width-120"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<button type="submit" class="btn btn-primary btn-sm">${text('查询')}</button>
-					<button type="reset" class="btn btn-default btn-sm">${text('重置')}</button>
-				</div>
-			</#form:form>
-			<table id="dataGrid"></table>
-			<div id="dataGridPage"></div>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary btn-sm">${text('查询')}</button>
+				<button type="reset" class="btn btn-default btn-sm">${text('重置')}</button>
+			</div>
+		</#form:form>
+		<table id="dataGrid"></table>
+		<div id="dataGridPage"></div>
 		</div>
 	</div>
 </div>
@@ -120,22 +63,13 @@ $('#dataGrid').dataGrid({
 		// {header:'${text('订单金额')}', name:'billAmount', index:'a.bill_amount', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
 		// 	return '<a href="${ctx}/pay/tradeBillDetail/form?id='+row.id+'" class="btnList" data-title="${text('编辑账单明细')}">'+(val||row.id)+'</a>';
 		// }},
-		{header:'${text('订单金额')}', name:'billAmount', index:'a.bill_amount', width:150, align:"left", frozen:true},
 		{header:'${text('账单号')}', name:'billNo', index:'a.bill_no', width:150, align:"left"},
-		{header:'${text('业务类型')}', name:'bizType', index:'a.biz_type', width:150, align:"left"},
-		{header:'${text('买家账号')}', name:'buyerId', index:'a.buyer_id', width:150, align:"left"},
 		{header:'${text('商户交易号')}', name:'outTradeNo', index:'a.out_trade_no', width:150, align:"left"},
-		{header:'${text('商品名称')}', name:'productName', index:'a.product_name', width:150, align:"left"},
 		{header:'${text('实收金额')}', name:'receiptAmount', index:'a.receipt_amount', width:150, align:"left"},
-		{header:'${text('退款批次号')}', name:'refundBatchNo', index:'a.refund_batch_no', width:150, align:"left"},
-
-		// {header:'${text('状态')}', name:'status', index:'a.status', width:150, align:"center", formatter: function(val, obj, row, act){
-		// 	return js.getDictLabel(${@DictUtils.getDictListJson('sys_search_status')}, val, '${text('未知')}', true);
-		// }},
-		// {header:'${text('交易创建时间')}', name:'tradeCreateTime', index:'a.trade_create_time', width:150, align:"center"},
 		{header:'${text('交易时间')}', name:'tradeEndTime', index:'a.trade_end_time', width:150, align:"center"},
 		{header:'${text('交易号')}', name:'tradeNo', index:'a.trade_no', width:150, align:"left"},
 		{header:'${text('备注')}', name:'remarks', index:'a.remarks', width:150, align:"left"},
+		{header:'${text('对账结果')}', name:'billResult', index:'a.billResult', width:150, align:"left"},
 		// {header:'${text('操作')}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
 		// 	var actions = [];
 		// 	<% if(hasPermi('pay:tradeBillDetail:edit')){ %>

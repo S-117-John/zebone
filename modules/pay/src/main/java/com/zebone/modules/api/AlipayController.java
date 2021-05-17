@@ -68,9 +68,10 @@ public class AlipayController {
 
             if(!alipayTradePayResponse.isSuccess()){
                 tradeRecord.setRemarks(alipayTradePayResponse.getSubMsg());
+                tradeRecord.setTradeStatus("3");
             }
             tradeRecord.setOutTradeNo(alipayParam.getOutTradeNo());
-            tradeRecord.setPayType("1");
+            tradeRecord.setPayType("2");
             tradeRecordService.save(tradeRecord);
         }
 
