@@ -10,6 +10,7 @@ import com.alipay.api.AlipayApiException;
 import com.jeesite.common.io.FileUtils;
 import com.jeesite.common.lang.StringUtils;
 import com.zebone.common.utils.CsvUtil;
+import com.zebone.common.utils.MyFileUtils;
 import com.zebone.modules.ali.service.AliPayService;
 import com.zebone.modules.entity.DayBillDO;
 import com.zebone.modules.pay.entity.TradeBillDetail;
@@ -185,10 +186,10 @@ public class TradeDayBillController extends BaseController {
 			//获取支付宝账单地址
 			String billUrl = aliPayService.downLoadAliBill(simpleDateFormatBill.format(tradeDayBill.getBillDate()),tradeDayBill.getAppId());
 			//下载对账单
-			String billName = FileUtils.downloadFromUrl(billUrl,billDir);
+			String billName = MyFileUtils.downloadFromUrl(billUrl,billDir);
 			//解压对账单
 //			List<String> fileNames = new ArrayList<>();
-			List<String> fileNames = FileUtils.unZipBillFiles(billName,billDir);
+			List<String> fileNames = MyFileUtils.unZipBillFiles(billName,billDir);
 			String dateStr = DateFormatUtils.format(tradeDayBill.getBillDate(),"yyyyMMdd");
 			//读取csv文件
 			for (String fileName : fileNames) {

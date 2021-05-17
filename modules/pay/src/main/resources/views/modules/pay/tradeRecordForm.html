@@ -19,7 +19,7 @@
 							<label class="control-label col-sm-4" title="">
 								<span class="required hide">*</span> ${text('支付方式')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-8">
-								<#form:select path="payType" dictType="pay_type" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="payType" dictType="pay_type" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -28,7 +28,7 @@
 							<label class="control-label col-sm-4" title="">
 								<span class="required hide">*</span> ${text('商户订单号')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-8">
-								<#form:input path="outTradeNo" maxlength="255" class="form-control"/>
+								<#form:input readonly="true" path="outTradeNo" maxlength="255" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -39,7 +39,7 @@
 							<label class="control-label col-sm-4" title="">
 								<span class="required hide">*</span> ${text('交易号')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-8">
-								<#form:input path="tradeNo" maxlength="255" class="form-control"/>
+								<#form:input readonly="true" path="tradeNo" maxlength="255" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -48,7 +48,7 @@
 							<label class="control-label col-sm-4" title="">
 								<span class="required hide">*</span> ${text('交易金额')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-8">
-								<#form:input path="totalAmount" maxlength="255" class="form-control"/>
+								<#form:input readonly="true" path="totalAmount" maxlength="255" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -59,7 +59,7 @@
 							<label class="control-label col-sm-4" title="">
 								<span class="required hide">*</span> ${text('实收金额')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-8">
-								<#form:input path="receiptAmount" maxlength="255" class="form-control"/>
+								<#form:input readonly="true" path="receiptAmount" maxlength="255" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -68,7 +68,7 @@
 							<label class="control-label col-sm-4" title="">
 								<span class="required hide">*</span> ${text('交易时间')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-8">
-								<#form:input path="gmtPayment" readonly="true" maxlength="20" class="form-control Wdate"
+								<#form:input disabled="disabled" path="gmtPayment" readonly="true" maxlength="20" class="form-control Wdate"
 									dataFormat="date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
 							</div>
 						</div>
@@ -80,7 +80,7 @@
 							<label class="control-label col-sm-4" title="">
 								<span class="required hide">*</span> ${text('交易状态')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-8">
-								<#form:select path="tradeStatus" dictType="trade_status" blankOption="true" class="form-control" />
+								<#form:select disabled="disabled" path="tradeStatus" dictType="trade_status" blankOption="true" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -102,7 +102,7 @@
 							<label class="control-label col-sm-4" title="">
 								<span class="required hide">*</span> ${text('买家账号')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-8">
-								<#form:input path="buyerLogonId" maxlength="255" class="form-control"/>
+								<#form:input readonly="true" path="buyerLogonId" maxlength="255" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -111,7 +111,7 @@
 							<label class="control-label col-sm-4" title="">
 								<span class="required hide">*</span> ${text('买家用户id')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-8">
-								<#form:input path="buyerUserId" maxlength="255" class="form-control"/>
+								<#form:input readonly="true" path="buyerUserId" maxlength="255" class="form-control"/>
 							</div>
 						</div>
 					</div>
