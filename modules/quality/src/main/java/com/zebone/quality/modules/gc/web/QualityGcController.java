@@ -11,6 +11,8 @@ import com.zebone.quality.domain.UploadService;
 import com.zebone.quality.modules.cac.entity.Cac;
 import com.zebone.quality.modules.common.UploadResult;
 import com.zebone.quality.modules.gc.entity.Gc;
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +30,7 @@ import com.zebone.quality.modules.gc.entity.QualityGc;
 import com.zebone.quality.modules.gc.service.QualityGcService;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -46,8 +49,15 @@ public class QualityGcController extends BaseController {
 	 * 获取数据
 	 */
 	@ModelAttribute
-	public QualityGc get(String id, boolean isNewRecord) {
-		return qualityGcService.get(id, isNewRecord);
+	public QualityGc get(String id, boolean isNewRecord) throws InvocationTargetException, IllegalAccessException{
+		if (!StringUtils.isEmpty(id) && !isNewRecord){
+            Map<String,Object> result = qualityGcService.findById(id);
+            QualityGc qualityGc = new QualityGc();
+            BeanUtils.populate(qualityGc,result);
+            return qualityGc;
+        }else {
+            return qualityGcService.get(id, isNewRecord);
+        }
 	}
 	
 	/**
@@ -61,7 +71,7 @@ public class QualityGcController extends BaseController {
 	}
 	
 	/**
-	 * 查询列表数据
+	 * 查询数据
 	 */
 	@RequiresPermissions("gc:qualityGc:view")
 	@RequestMapping(value = "listData")

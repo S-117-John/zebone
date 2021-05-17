@@ -30,7 +30,11 @@
 						<label class="control-label col-sm-2" title="">
 							<span class="required">*</span> ${text('患者病案号')}：<i class="fa icon-question hide"></i></label>
 						<div class="col-sm-5">
-							<#form:input path="caseid" maxlength="255" class="form-control required"/>
+							<!--<#form:input path="caseid" maxlength="255" class="form-control required"/>-->
+                            <#form:listselect id="patNo" title="患者选择"
+                            path="caseid" labelPath="caseid"
+                            url="${ctx}/stemi/qualityStemi/patientSelect" allowClear="false" allowInput="true"
+                            checkbox="false" itemCode="patNo" itemName="patNo"/>
 						</div>
 						<div class="col-sm-3 hide">
 							<button type="button" class="btn btn-sm btn-primary" id="patientSubmit" onclick="importPatient('stemi/qualityStemi')"><i class="fa fa-check"></i> ${text('导入患者信息')}</button>&nbsp;
@@ -3399,4 +3403,25 @@
 			}, "json");
 		}
 	});
+</script>
+<script>
+    function importPatient(url){
+        $.ajax({
+            url:'${ctx}/stemi/qualityStemi/commonData',
+            type: "POST",
+            data: {patNo: $("#patNoName").val()},
+            success:function (data){
+                var obj = JSON.parse(data);
+                for(var key in obj){
+                    $("#"+key.toLowerCase()).val(obj[key]);
+                    //是否31天住院
+                    if(key.toLowerCase()=="cm_0_1_5"){
+                        $('#cm_0_1_5').iCheck('check');
+                    }
+
+                }
+            }
+        });
+    }
+
 </script>

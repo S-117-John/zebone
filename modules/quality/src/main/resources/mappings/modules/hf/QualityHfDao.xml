@@ -215,18 +215,8 @@
     </update>
 
 
-    <!--	<select id="findList" resultType="java.util.Map">-->
-    <!--		SELECT ${sqlMap.column.toSql()}-->
-    <!--		FROM ${sqlMap.table.toSql()}-->
-    <!--		<where>-->
-    <!--			${sqlMap.where.toSql()}-->
-    <!--		</where>-->
-    <!--		ORDER BY ${sqlMap.order.toSql()}-->
-    <!--	</select> -->
-
 
     <select id="findById" resultType="java.util.Map">
-
         SELECT a.cm_0_1_1_1    AS "cm_0_1_1_1",
                a.cm_0_1_1_2    AS "cm_0_1_1_2",
                a.cm_0_1_1_3    AS "cm_0_1_1_3",

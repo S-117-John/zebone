@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zebone.quality.modules.um.dao.QualityUmPatientDao">
+
+
+	<select id="list" parameterType="java.util.Map" resultType="com.zebone.quality.common.entity.Patient">
+		select page.NAME,page.PAT_NO,diags.DIAG_CODE,ops.OP_CODE,page.IN_HOS_DAYS,page.AGE_TXT age,page.BIRTH_DATE birth
+		from emr_home_page_ops ops
+		inner join EMR_HOME_PAGE page on page.PK_PAGE = ops.PK_PAGE
+        inner join EMR_HOME_PAGE_DIAGS diags on diags.PK_PAGE = ops.PK_PAGE
+		where page.DIS_TIME is not null
+        <if test="icd10 != null">
+            and diags.DIAG_CODE like #{icd10} + '%'
+        </if>
+		<if test="icd9!=null">
+			and ops.OP_CODE in
+			<foreach item="item" index="index" collection="icd9" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		<if test="patNo!=null and patNo!=''">
+			and page.PAT_NO = #{patNo}
+		</if>
+		<if test="name!=null and name!=''">
+			and page.NAME = #{name}
+		</if>
+        <if test="startTime != null and endTime != null">
+            and CONVERT(varchar(10), page.dis_time, 23) between #{startTime} and #{endTime}
+        </if>
+
+	</select>
+</mapper>

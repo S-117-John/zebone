@@ -11,7 +11,9 @@ public class Patient {
 
     private String patNo;
 
-    private String opCode;
+    private String opCode;  //icd9编码
+
+    private String diagCode;   //icd10编码
 
     private String inHosDays;
 

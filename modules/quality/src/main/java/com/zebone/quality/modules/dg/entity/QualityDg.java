@@ -8,7 +8,9 @@ import org.hibernate.validator.constraints.Length;
 import com.jeesite.common.entity.DataEntity;
 import com.jeesite.common.mybatis.annotation.Column;
 import com.jeesite.common.mybatis.annotation.Table;
-import com.jeesite.common.mybatis.mapper.query.QueryType;
+
+import java.util.Date;
+
 
 /**
  * DG异位妊娠（手术治疗）Entity
@@ -22,6 +24,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_0_1_1_4", attrName="cm_0_1_1_4", label="责任护士"),
 		@Column(name="cm_0_1_1_5", attrName="cm_0_1_1_5", label="上报科室"),
 		@Column(name="caseid", attrName="caseid", label="患者病案号"),
+        @Column(name="idcard", attrName="idcard", label="患者身份证号"),
 		@Column(name="cm_0_1_3_1", attrName="cm_0_1_3_1", label="主要诊断ICD-10四位亚目编码与名称"),
 		@Column(name="cm_0_1_3_2", attrName="cm_0_1_3_2", label="主要诊断ICD-10六位临床扩展编码与名称"),
 		@Column(name="cm_0_1_4_1", attrName="cm_0_1_4_1", label="主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称"),
@@ -205,6 +208,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(includeEntity=DataEntity.class),
 	}, orderBy="a.update_date DESC"
 )
+
 public class QualityDg extends DataEntity<QualityDg> {
 	
 	private static final long serialVersionUID = 1L;
@@ -213,6 +217,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	private String cm_0_1_1_3;		// 主治医师
 	private String cm_0_1_1_4;		// 责任护士
 	private String cm_0_1_1_5;		// 上报科室
+    private String idcard;		// 患者身份证号
 	private String caseid;		// 患者病案号
 	private String cm_0_1_3_1;		// 主要诊断ICD-10四位亚目编码与名称
 	private String cm_0_1_3_2;		// 主要诊断ICD-10六位临床扩展编码与名称
@@ -221,22 +226,22 @@ public class QualityDg extends DataEntity<QualityDg> {
 	private String cm_0_1_4_2;		// 主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称
 	private String cm_0_1_4_2_1;		// 其他ICD-9-CM-3六位临床扩展编码与名称
 	private String cm_0_1_5;		// 是否出院后31天内重复住院
-	private String cm_0_2_1_1;		// 出生日期
+	private Date cm_0_2_1_1;		// 出生日期
 	private String cm_0_2_1_2;		// 患者性别
 	private Double cm_0_2_1_3;		// 患者体重（kg）
 	private Double cm_0_2_1_5;		// 患者身高（cm）
 	private String cm_0_2_2_1;		// 末次月经日期是否无法确定或无记录
-	private String cm_0_2_2_2;		// 末次月经日期
+	private Date cm_0_2_2_2;		// 末次月经日期
 	private String cm_0_2_3_1;		// 到达本院急诊或者门诊日期时间是否无法确定或无记录
-	private String cm_0_2_3_2;		// 到达本院急诊或者门诊日期时间
-	private String cm_0_2_4_1;		// 入院日期时间
-	private String cm_0_2_4_2;		// 出院日期时间
-	private String cm_0_2_6_1;		// 手术开始（切皮）日期时间
-	private String cm_0_2_6_2;		// 手术结束（缝皮结束）日期时间
+	private Date cm_0_2_3_2;		// 到达本院急诊或者门诊日期时间
+	private Date cm_0_2_4_1;		// 入院日期时间
+	private Date cm_0_2_4_2;		// 出院日期时间
+	private Date cm_0_2_6_1;		// 手术开始（切皮）日期时间
+	private Date cm_0_2_6_2;		// 手术结束（缝皮结束）日期时间
 	private String cm_0_3_1;		// 费用支付方式
 	private String cm_0_3_2;		// 收入住院途径
 	private String cm_0_3_3;		// 到院交通工具
-	private String dg_1_1;		// 评估日期时间
+	private Date dg_1_1;		// 评估日期时间
 	private String dg_1_2;		// 高危因素的选择
 	private String dg_1_2_1;		// 其他高危因素填写
 	private String dg_1_3_1;		// 妊娠周数
@@ -248,14 +253,14 @@ public class QualityDg extends DataEntity<QualityDg> {
 	private Double dg_1_2_2_3;		// 子宫内膜厚度(mm)
 	private String dg_1_3_4_2;		// 输卵管妊娠包块最大径的选择
 	private String dg_1_3_4_3;		// 盆腔内出血量最大径的选择
-	private String dg_1_4;		// 到院首次B超检查提示异位妊娠征象报告的时间
+	private Date dg_1_4;		// 到院首次B超检查提示异位妊娠征象报告的时间
 	private String dg_1_3_1_1;		// 是否进行β-HCG测定
 	private String dg_1_3_0;		// hCG测定方式选择
 	private Double dg_1_3_2_1;		// 静脉血hCG测定值(U/L)
 	private Double dg_1_3_3;		// 腹腔血hCG测定值(U/L)
 	private Double dg_1_3_4;		// 阴道血hCG测定值(U/L)
 	private String dg_1_3_5;		// 尿hCG测定结果
-	private String dg_1_3_6;		// 到院首次β-HCG测定报告的时间
+	private Date dg_1_3_6;		// 到院首次β-HCG测定报告的时间
 	private Double dg_1_3_7;		// 血清hCG阴道超声阈值
 	private String dg_1_3_8;		// 腹腔血与静脉血hCG比值（Rp/v-hCG）
 	private String dg_1_3_9;		// 静脉血与阴道血hCG比值（Rv/c-hCG）
@@ -263,7 +268,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	private String dg_1_4_2;		// 穿刺部位
 	private String dg_1_4_3;		// 后穹隆穿刺
 	private String dg_1_4_4;		// 腹腔穿刺
-	private String dg_1_4_5;		// 到院首次穿刺的时间
+	private Date dg_1_4_5;		// 到院首次穿刺的时间
 	private String dg_1_6;		// 治疗方式选择
 	private String dg_1_5_2;		// 需紧急手术的病情严重程度评估
 	private String dg_1_5_2_1;		// 其他需紧急手术的病情严重程度评估
@@ -293,12 +298,12 @@ public class QualityDg extends DataEntity<QualityDg> {
 	private String cm_1_2_2_1;		// 其他特殊使用级抗菌药物名称
 	private String cm_1_3_1_2;		// 选用“特殊使用级抗菌药物”或者其他类抗菌药物的因素
 	private String cm_1_3_1_1;		// 选用“特殊使用级抗菌药物”或者其他类抗菌药物的因素填写
-	private String cm_1_4_1;		// 使用首剂抗菌药物起始时间
+	private Date cm_1_4_1;		// 使用首剂抗菌药物起始时间
 	private String cm_1_5_1;		// 手术时间是否≥3小时
 	private String cm_1_5_2;		// 是否术中追加抗菌药物
 	private String cm_1_5_3;		// 术中出血量是否≥1500ml
 	private String cm_1_5_4;		// 是否术中追加抗菌药物
-	private String cm_1_6_1;		// 术后抗菌药物停止使用时间
+	private Date cm_1_6_1;		// 术后抗菌药物停止使用时间
 	private String cm_1_6_2;		// 使用抗菌药物时间使用时间分层
 	private String cm_1_6_3_2;		// 术后72小时之后继续使用的原因
 	private String cm_2_1;		// 是否有手术后并发症
@@ -410,7 +415,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_0_1_1_1(String cm_0_1_1_1) {
 		this.cm_0_1_1_1 = cm_0_1_1_1;
 	}
-	
+
 	@Length(min=0, max=64, message="质控护士长度不能超过 64 个字符")
 	public String getCm_0_1_1_2() {
 		return cm_0_1_1_2;
@@ -419,7 +424,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_0_1_1_2(String cm_0_1_1_2) {
 		this.cm_0_1_1_2 = cm_0_1_1_2;
 	}
-	
+
 	@Length(min=0, max=64, message="主治医师长度不能超过 64 个字符")
 	public String getCm_0_1_1_3() {
 		return cm_0_1_1_3;
@@ -428,7 +433,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_0_1_1_3(String cm_0_1_1_3) {
 		this.cm_0_1_1_3 = cm_0_1_1_3;
 	}
-	
+
 	@Length(min=0, max=64, message="责任护士长度不能超过 64 个字符")
 	public String getCm_0_1_1_4() {
 		return cm_0_1_1_4;
@@ -437,7 +442,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_0_1_1_4(String cm_0_1_1_4) {
 		this.cm_0_1_1_4 = cm_0_1_1_4;
 	}
-	
+
 	@Length(min=0, max=64, message="上报科室长度不能超过 64 个字符")
 	public String getCm_0_1_1_5() {
 		return cm_0_1_1_5;
@@ -446,7 +451,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_0_1_1_5(String cm_0_1_1_5) {
 		this.cm_0_1_1_5 = cm_0_1_1_5;
 	}
-	
+
 	@Length(min=0, max=64, message="患者病案号长度不能超过 64 个字符")
 	public String getCaseid() {
 		return caseid;
@@ -455,7 +460,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCaseid(String caseid) {
 		this.caseid = caseid;
 	}
-	
+
 	@Length(min=0, max=64, message="主要诊断ICD-10四位亚目编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_3_1() {
 		return cm_0_1_3_1;
@@ -464,7 +469,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_0_1_3_1(String cm_0_1_3_1) {
 		this.cm_0_1_3_1 = cm_0_1_3_1;
 	}
-	
+
 	@Length(min=0, max=64, message="主要诊断ICD-10六位临床扩展编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_3_2() {
 		return cm_0_1_3_2;
@@ -473,7 +478,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_0_1_3_2(String cm_0_1_3_2) {
 		this.cm_0_1_3_2 = cm_0_1_3_2;
 	}
-	
+
 	@Length(min=0, max=64, message="主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_4_1() {
 		return cm_0_1_4_1;
@@ -482,7 +487,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_0_1_4_1(String cm_0_1_4_1) {
 		this.cm_0_1_4_1 = cm_0_1_4_1;
 	}
-	
+
 	@Length(min=0, max=64, message="其他ICD-9-CM-3四位亚目编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_4_1_1() {
 		return cm_0_1_4_1_1;
@@ -491,7 +496,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_0_1_4_1_1(String cm_0_1_4_1_1) {
 		this.cm_0_1_4_1_1 = cm_0_1_4_1_1;
 	}
-	
+
 	@Length(min=0, max=64, message="主要手术操作栏中提取ICD-9-CM-3六位临床扩展编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_4_2() {
 		return cm_0_1_4_2;
@@ -500,7 +505,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_0_1_4_2(String cm_0_1_4_2) {
 		this.cm_0_1_4_2 = cm_0_1_4_2;
 	}
-	
+
 	@Length(min=0, max=64, message="其他ICD-9-CM-3六位临床扩展编码与名称长度不能超过 64 个字符")
 	public String getCm_0_1_4_2_1() {
 		return cm_0_1_4_2_1;
@@ -509,7 +514,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_0_1_4_2_1(String cm_0_1_4_2_1) {
 		this.cm_0_1_4_2_1 = cm_0_1_4_2_1;
 	}
-	
+
 	@Length(min=0, max=64, message="是否出院后31天内重复住院长度不能超过 64 个字符")
 	public String getCm_0_1_5() {
 		return cm_0_1_5;
@@ -518,16 +523,16 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_0_1_5(String cm_0_1_5) {
 		this.cm_0_1_5 = cm_0_1_5;
 	}
-	
-	@Length(min=0, max=64, message="出生日期长度不能超过 64 个字符")
-	public String getCm_0_2_1_1() {
+
+	//@Length(min=0, max=64, message="出生日期长度不能超过 64 个字符")
+	public  Date getCm_0_2_1_1() {
 		return cm_0_2_1_1;
 	}
 
-	public void setCm_0_2_1_1(String cm_0_2_1_1) {
+	public void setCm_0_2_1_1( Date cm_0_2_1_1) {
 		this.cm_0_2_1_1 = cm_0_2_1_1;
 	}
-	
+
 	@Length(min=0, max=64, message="患者性别长度不能超过 64 个字符")
 	public String getCm_0_2_1_2() {
 		return cm_0_2_1_2;
@@ -536,7 +541,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_0_2_1_2(String cm_0_2_1_2) {
 		this.cm_0_2_1_2 = cm_0_2_1_2;
 	}
-	
+
 	public Double getCm_0_2_1_3() {
 		return cm_0_2_1_3;
 	}
@@ -544,7 +549,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_0_2_1_3(Double cm_0_2_1_3) {
 		this.cm_0_2_1_3 = cm_0_2_1_3;
 	}
-	
+
 	public Double getCm_0_2_1_5() {
 		return cm_0_2_1_5;
 	}
@@ -552,7 +557,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_0_2_1_5(Double cm_0_2_1_5) {
 		this.cm_0_2_1_5 = cm_0_2_1_5;
 	}
-	
+
 	@Length(min=0, max=64, message="末次月经日期是否无法确定或无记录长度不能超过 64 个字符")
 	public String getCm_0_2_2_1() {
 		return cm_0_2_2_1;
@@ -561,16 +566,16 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_0_2_2_1(String cm_0_2_2_1) {
 		this.cm_0_2_2_1 = cm_0_2_2_1;
 	}
-	
-	@Length(min=0, max=64, message="末次月经日期长度不能超过 64 个字符")
-	public String getCm_0_2_2_2() {
+
+	//@Length(min=0, max=64, message="末次月经日期长度不能超过 64 个字符")
+	public  Date getCm_0_2_2_2() {
 		return cm_0_2_2_2;
 	}
 
-	public void setCm_0_2_2_2(String cm_0_2_2_2) {
+	public void setCm_0_2_2_2( Date cm_0_2_2_2) {
 		this.cm_0_2_2_2 = cm_0_2_2_2;
 	}
-	
+
 	@Length(min=0, max=64, message="到达本院急诊或者门诊日期时间是否无法确定或无记录长度不能超过 64 个字符")
 	public String getCm_0_2_3_1() {
 		return cm_0_2_3_1;
@@ -579,52 +584,50 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_0_2_3_1(String cm_0_2_3_1) {
 		this.cm_0_2_3_1 = cm_0_2_3_1;
 	}
-	
-	@Length(min=0, max=64, message="到达本院急诊或者门诊日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_3_2() {
+
+	//@Length(min=0, max=64, message="到达本院急诊或者门诊日期时间长度不能超过 64 个字符")
+	public Date getCm_0_2_3_2() {
 		return cm_0_2_3_2;
 	}
 
-	public void setCm_0_2_3_2(String cm_0_2_3_2) {
+	public void setCm_0_2_3_2(Date cm_0_2_3_2) {
 		this.cm_0_2_3_2 = cm_0_2_3_2;
 	}
-	
-	@Length(min=0, max=64, message="入院日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_4_1() {
+
+	//@Length(min=0, max=64, message="入院日期时间长度不能超过 64 个字符")
+	public  Date getCm_0_2_4_1() {
 		return cm_0_2_4_1;
 	}
 
-	public void setCm_0_2_4_1(String cm_0_2_4_1) {
+	public void setCm_0_2_4_1( Date cm_0_2_4_1) {
 		this.cm_0_2_4_1 = cm_0_2_4_1;
 	}
-	
-	@Length(min=0, max=64, message="出院日期时间长度不能超过 64 个字符")
-	public String getCm_0_2_4_2() {
+
+	//@Length(min=0, max=64, message="出院日期时间长度不能超过 64 个字符")
+	public  Date getCm_0_2_4_2() {
 		return cm_0_2_4_2;
 	}
 
-	public void setCm_0_2_4_2(String cm_0_2_4_2) {
+	public void setCm_0_2_4_2( Date cm_0_2_4_2) {
 		this.cm_0_2_4_2 = cm_0_2_4_2;
 	}
-	
-	@Length(min=0, max=64, message="手术开始长度不能超过 64 个字符")
-	public String getCm_0_2_6_1() {
+
+	//@Length(min=0, max=64, message="手术开始长度不能超过 64 个字符")
+	public  Date getCm_0_2_6_1() {
 		return cm_0_2_6_1;
 	}
 
-	public void setCm_0_2_6_1(String cm_0_2_6_1) {
-		this.cm_0_2_6_1 = cm_0_2_6_1;
-	}
-	
-	@Length(min=0, max=64, message="手术结束长度不能超过 64 个字符")
-	public String getCm_0_2_6_2() {
+	public void setCm_0_2_6_1( Date cm_0_2_6_1) { this.cm_0_2_6_1 = cm_0_2_6_1; }
+
+	//@Length(min=0, max=64, message="手术结束长度不能超过 64 个字符")
+	public  Date getCm_0_2_6_2() {
 		return cm_0_2_6_2;
 	}
 
-	public void setCm_0_2_6_2(String cm_0_2_6_2) {
+	public void setCm_0_2_6_2( Date cm_0_2_6_2) {
 		this.cm_0_2_6_2 = cm_0_2_6_2;
 	}
-	
+
 	@Length(min=0, max=64, message="费用支付方式长度不能超过 64 个字符")
 	public String getCm_0_3_1() {
 		return cm_0_3_1;
@@ -633,7 +636,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_0_3_1(String cm_0_3_1) {
 		this.cm_0_3_1 = cm_0_3_1;
 	}
-	
+
 	@Length(min=0, max=64, message="收入住院途径长度不能超过 64 个字符")
 	public String getCm_0_3_2() {
 		return cm_0_3_2;
@@ -642,7 +645,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_0_3_2(String cm_0_3_2) {
 		this.cm_0_3_2 = cm_0_3_2;
 	}
-	
+
 	@Length(min=0, max=64, message="到院交通工具长度不能超过 64 个字符")
 	public String getCm_0_3_3() {
 		return cm_0_3_3;
@@ -651,16 +654,16 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_0_3_3(String cm_0_3_3) {
 		this.cm_0_3_3 = cm_0_3_3;
 	}
-	
-	@Length(min=0, max=64, message="评估日期时间长度不能超过 64 个字符")
-	public String getDg_1_1() {
+
+	//@Length(min=0, max=64, message="评估日期时间长度不能超过 64 个字符")
+	public  Date getDg_1_1() {
 		return dg_1_1;
 	}
 
-	public void setDg_1_1(String dg_1_1) {
+	public void setDg_1_1( Date dg_1_1) {
 		this.dg_1_1 = dg_1_1;
 	}
-	
+
 	@Length(min=0, max=64, message="高危因素的选择长度不能超过 64 个字符")
 	public String getDg_1_2() {
 		return dg_1_2;
@@ -669,7 +672,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_2(String dg_1_2) {
 		this.dg_1_2 = dg_1_2;
 	}
-	
+
 	@Length(min=0, max=64, message="其他高危因素填写长度不能超过 64 个字符")
 	public String getDg_1_2_1() {
 		return dg_1_2_1;
@@ -678,7 +681,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_2_1(String dg_1_2_1) {
 		this.dg_1_2_1 = dg_1_2_1;
 	}
-	
+
 	@Length(min=0, max=64, message="妊娠周数长度不能超过 64 个字符")
 	public String getDg_1_3_1() {
 		return dg_1_3_1;
@@ -687,7 +690,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_3_1(String dg_1_3_1) {
 		this.dg_1_3_1 = dg_1_3_1;
 	}
-	
+
 	@Length(min=0, max=64, message="腹痛程度的选择长度不能超过 64 个字符")
 	public String getDg_1_3_2() {
 		return dg_1_3_2;
@@ -696,7 +699,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_3_2(String dg_1_3_2) {
 		this.dg_1_3_2 = dg_1_3_2;
 	}
-	
+
 	@Length(min=0, max=64, message="生命体征是否平稳长度不能超过 64 个字符")
 	public String getDg_1_2_4() {
 		return dg_1_2_4;
@@ -705,7 +708,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_2_4(String dg_1_2_4) {
 		this.dg_1_2_4 = dg_1_2_4;
 	}
-	
+
 	@Length(min=0, max=64, message="超声检查途径的选择长度不能超过 64 个字符")
 	public String getDg_1_3_4_1() {
 		return dg_1_3_4_1;
@@ -714,7 +717,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_3_4_1(String dg_1_3_4_1) {
 		this.dg_1_3_4_1 = dg_1_3_4_1;
 	}
-	
+
 	@Length(min=0, max=64, message="超声检查途径的选择长度不能超过 64 个字符")
 	public String getDg_1_2_2_2() {
 		return dg_1_2_2_2;
@@ -723,7 +726,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_2_2_2(String dg_1_2_2_2) {
 		this.dg_1_2_2_2 = dg_1_2_2_2;
 	}
-	
+
 	@Length(min=0, max=64, message="其他超声检查途径长度不能超过 64 个字符")
 	public String getDg_1_2_2_2_1() {
 		return dg_1_2_2_2_1;
@@ -732,7 +735,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_2_2_2_1(String dg_1_2_2_2_1) {
 		this.dg_1_2_2_2_1 = dg_1_2_2_2_1;
 	}
-	
+
 	public Double getDg_1_2_2_3() {
 		return dg_1_2_2_3;
 	}
@@ -740,7 +743,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_2_2_3(Double dg_1_2_2_3) {
 		this.dg_1_2_2_3 = dg_1_2_2_3;
 	}
-	
+
 	@Length(min=0, max=64, message="输卵管妊娠包块最大径的选择长度不能超过 64 个字符")
 	public String getDg_1_3_4_2() {
 		return dg_1_3_4_2;
@@ -749,7 +752,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_3_4_2(String dg_1_3_4_2) {
 		this.dg_1_3_4_2 = dg_1_3_4_2;
 	}
-	
+
 	@Length(min=0, max=64, message="盆腔内出血量最大径的选择长度不能超过 64 个字符")
 	public String getDg_1_3_4_3() {
 		return dg_1_3_4_3;
@@ -758,16 +761,16 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_3_4_3(String dg_1_3_4_3) {
 		this.dg_1_3_4_3 = dg_1_3_4_3;
 	}
-	
-	@Length(min=0, max=64, message="到院首次B超检查提示异位妊娠征象报告的时间长度不能超过 64 个字符")
-	public String getDg_1_4() {
+
+	//@Length(min=0, max=64, message="到院首次B超检查提示异位妊娠征象报告的时间长度不能超过 64 个字符")
+	public  Date getDg_1_4() {
 		return dg_1_4;
 	}
 
-	public void setDg_1_4(String dg_1_4) {
+	public void setDg_1_4( Date dg_1_4) {
 		this.dg_1_4 = dg_1_4;
 	}
-	
+
 	@Length(min=0, max=64, message="是否进行β-HCG测定长度不能超过 64 个字符")
 	public String getDg_1_3_1_1() {
 		return dg_1_3_1_1;
@@ -776,7 +779,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_3_1_1(String dg_1_3_1_1) {
 		this.dg_1_3_1_1 = dg_1_3_1_1;
 	}
-	
+
 	@Length(min=0, max=64, message="hCG测定方式选择长度不能超过 64 个字符")
 	public String getDg_1_3_0() {
 		return dg_1_3_0;
@@ -785,7 +788,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_3_0(String dg_1_3_0) {
 		this.dg_1_3_0 = dg_1_3_0;
 	}
-	
+
 	public Double getDg_1_3_2_1() {
 		return dg_1_3_2_1;
 	}
@@ -793,7 +796,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_3_2_1(Double dg_1_3_2_1) {
 		this.dg_1_3_2_1 = dg_1_3_2_1;
 	}
-	
+
 	public Double getDg_1_3_3() {
 		return dg_1_3_3;
 	}
@@ -801,7 +804,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_3_3(Double dg_1_3_3) {
 		this.dg_1_3_3 = dg_1_3_3;
 	}
-	
+
 	public Double getDg_1_3_4() {
 		return dg_1_3_4;
 	}
@@ -809,7 +812,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_3_4(Double dg_1_3_4) {
 		this.dg_1_3_4 = dg_1_3_4;
 	}
-	
+
 	@Length(min=0, max=64, message="尿hCG测定结果长度不能超过 64 个字符")
 	public String getDg_1_3_5() {
 		return dg_1_3_5;
@@ -818,16 +821,16 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_3_5(String dg_1_3_5) {
 		this.dg_1_3_5 = dg_1_3_5;
 	}
-	
-	@Length(min=0, max=64, message="到院首次β-HCG测定报告的时间长度不能超过 64 个字符")
-	public String getDg_1_3_6() {
+
+	//@Length(min=0, max=64, message="到院首次β-HCG测定报告的时间长度不能超过 64 个字符")
+	public  Date getDg_1_3_6() {
 		return dg_1_3_6;
 	}
 
-	public void setDg_1_3_6(String dg_1_3_6) {
+	public void setDg_1_3_6( Date dg_1_3_6) {
 		this.dg_1_3_6 = dg_1_3_6;
 	}
-	
+
 	public Double getDg_1_3_7() {
 		return dg_1_3_7;
 	}
@@ -835,7 +838,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_3_7(Double dg_1_3_7) {
 		this.dg_1_3_7 = dg_1_3_7;
 	}
-	
+
 	@Length(min=0, max=64, message="腹腔血与静脉血hCG比值长度不能超过 64 个字符")
 	public String getDg_1_3_8() {
 		return dg_1_3_8;
@@ -844,7 +847,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_3_8(String dg_1_3_8) {
 		this.dg_1_3_8 = dg_1_3_8;
 	}
-	
+
 	@Length(min=0, max=64, message="静脉血与阴道血hCG比值长度不能超过 64 个字符")
 	public String getDg_1_3_9() {
 		return dg_1_3_9;
@@ -853,7 +856,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_3_9(String dg_1_3_9) {
 		this.dg_1_3_9 = dg_1_3_9;
 	}
-	
+
 	@Length(min=0, max=64, message="是否进行穿刺长度不能超过 64 个字符")
 	public String getDg_1_4_1() {
 		return dg_1_4_1;
@@ -862,7 +865,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_4_1(String dg_1_4_1) {
 		this.dg_1_4_1 = dg_1_4_1;
 	}
-	
+
 	@Length(min=0, max=64, message="穿刺部位长度不能超过 64 个字符")
 	public String getDg_1_4_2() {
 		return dg_1_4_2;
@@ -871,7 +874,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_4_2(String dg_1_4_2) {
 		this.dg_1_4_2 = dg_1_4_2;
 	}
-	
+
 	@Length(min=0, max=64, message="后穹隆穿刺长度不能超过 64 个字符")
 	public String getDg_1_4_3() {
 		return dg_1_4_3;
@@ -880,7 +883,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_4_3(String dg_1_4_3) {
 		this.dg_1_4_3 = dg_1_4_3;
 	}
-	
+
 	@Length(min=0, max=64, message="腹腔穿刺长度不能超过 64 个字符")
 	public String getDg_1_4_4() {
 		return dg_1_4_4;
@@ -889,16 +892,16 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_4_4(String dg_1_4_4) {
 		this.dg_1_4_4 = dg_1_4_4;
 	}
-	
-	@Length(min=0, max=64, message="到院首次穿刺的时间长度不能超过 64 个字符")
-	public String getDg_1_4_5() {
+
+	//@Length(min=0, max=64, message="到院首次穿刺的时间长度不能超过 64 个字符")
+	public  Date getDg_1_4_5() {
 		return dg_1_4_5;
 	}
 
-	public void setDg_1_4_5(String dg_1_4_5) {
+	public void setDg_1_4_5( Date dg_1_4_5) {
 		this.dg_1_4_5 = dg_1_4_5;
 	}
-	
+
 	@Length(min=0, max=64, message="治疗方式选择长度不能超过 64 个字符")
 	public String getDg_1_6() {
 		return dg_1_6;
@@ -907,7 +910,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_6(String dg_1_6) {
 		this.dg_1_6 = dg_1_6;
 	}
-	
+
 	@Length(min=0, max=64, message="需紧急手术的病情严重程度评估长度不能超过 64 个字符")
 	public String getDg_1_5_2() {
 		return dg_1_5_2;
@@ -916,7 +919,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_5_2(String dg_1_5_2) {
 		this.dg_1_5_2 = dg_1_5_2;
 	}
-	
+
 	@Length(min=0, max=64, message="其他需紧急手术的病情严重程度评估长度不能超过 64 个字符")
 	public String getDg_1_5_2_1() {
 		return dg_1_5_2_1;
@@ -925,7 +928,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_5_2_1(String dg_1_5_2_1) {
 		this.dg_1_5_2_1 = dg_1_5_2_1;
 	}
-	
+
 	@Length(min=0, max=64, message="期待治疗纳入标准选择长度不能超过 64 个字符")
 	public String getDg_1_5_3() {
 		return dg_1_5_3;
@@ -934,7 +937,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_5_3(String dg_1_5_3) {
 		this.dg_1_5_3 = dg_1_5_3;
 	}
-	
+
 	@Length(min=0, max=64, message="其他期待治疗纳入标准长度不能超过 64 个字符")
 	public String getDg_1_5_3_1() {
 		return dg_1_5_3_1;
@@ -943,7 +946,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_1_5_3_1(String dg_1_5_3_1) {
 		this.dg_1_5_3_1 = dg_1_5_3_1;
 	}
-	
+
 	@Length(min=0, max=64, message="是否有药物治疗长度不能超过 64 个字符")
 	public String getDg_2_1_1() {
 		return dg_2_1_1;
@@ -952,7 +955,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_2_1_1(String dg_2_1_1) {
 		this.dg_2_1_1 = dg_2_1_1;
 	}
-	
+
 	@Length(min=0, max=64, message="是否有药物治疗禁忌症长度不能超过 64 个字符")
 	public String getDg_2_1_2() {
 		return dg_2_1_2;
@@ -961,7 +964,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_2_1_2(String dg_2_1_2) {
 		this.dg_2_1_2 = dg_2_1_2;
 	}
-	
+
 	@Length(min=0, max=64, message="药物治疗禁忌症的选择长度不能超过 64 个字符")
 	public String getDg_2_1_3() {
 		return dg_2_1_3;
@@ -970,7 +973,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_2_1_3(String dg_2_1_3) {
 		this.dg_2_1_3 = dg_2_1_3;
 	}
-	
+
 	@Length(min=0, max=64, message="其他药物治疗禁忌症填写长度不能超过 64 个字符")
 	public String getDg_2_1_3_1() {
 		return dg_2_1_3_1;
@@ -979,7 +982,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_2_1_3_1(String dg_2_1_3_1) {
 		this.dg_2_1_3_1 = dg_2_1_3_1;
 	}
-	
+
 	@Length(min=0, max=64, message="药物治疗适应症的选择长度不能超过 64 个字符")
 	public String getDg_2_1_4() {
 		return dg_2_1_4;
@@ -988,7 +991,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_2_1_4(String dg_2_1_4) {
 		this.dg_2_1_4 = dg_2_1_4;
 	}
-	
+
 	@Length(min=0, max=64, message="其他药物治疗适应症填写长度不能超过 64 个字符")
 	public String getDg_2_1_4_1() {
 		return dg_2_1_4_1;
@@ -997,7 +1000,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_2_1_4_1(String dg_2_1_4_1) {
 		this.dg_2_1_4_1 = dg_2_1_4_1;
 	}
-	
+
 	@Length(min=0, max=64, message="治疗药物的选择长度不能超过 64 个字符")
 	public String getDg_2_2() {
 		return dg_2_2;
@@ -1006,7 +1009,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_2_2(String dg_2_2) {
 		this.dg_2_2 = dg_2_2;
 	}
-	
+
 	@Length(min=0, max=64, message="其他治疗药物填写长度不能超过 64 个字符")
 	public String getDg_2_2_1() {
 		return dg_2_2_1;
@@ -1015,7 +1018,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_2_2_1(String dg_2_2_1) {
 		this.dg_2_2_1 = dg_2_2_1;
 	}
-	
+
 	@Length(min=0, max=64, message="甲氨蝶呤长度不能超过 64 个字符")
 	public String getDg_2_3() {
 		return dg_2_3;
@@ -1024,7 +1027,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_2_3(String dg_2_3) {
 		this.dg_2_3 = dg_2_3;
 	}
-	
+
 	@Length(min=0, max=64, message="接受甲氨蝶呤长度不能超过 64 个字符")
 	public String getDg_2_4_1() {
 		return dg_2_4_1;
@@ -1033,7 +1036,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_2_4_1(String dg_2_4_1) {
 		this.dg_2_4_1 = dg_2_4_1;
 	}
-	
+
 	@Length(min=0, max=64, message="手术的指征的选择长度不能超过 64 个字符")
 	public String getDg_3_1_1() {
 		return dg_3_1_1;
@@ -1042,7 +1045,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_3_1_1(String dg_3_1_1) {
 		this.dg_3_1_1 = dg_3_1_1;
 	}
-	
+
 	@Length(min=0, max=64, message="其他手术的指征长度不能超过 64 个字符")
 	public String getDg_3_1_1_1() {
 		return dg_3_1_1_1;
@@ -1051,7 +1054,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_3_1_1_1(String dg_3_1_1_1) {
 		this.dg_3_1_1_1 = dg_3_1_1_1;
 	}
-	
+
 	@Length(min=0, max=64, message="手术方式选择长度不能超过 64 个字符")
 	public String getDg_3_2() {
 		return dg_3_2;
@@ -1060,7 +1063,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_3_2(String dg_3_2) {
 		this.dg_3_2 = dg_3_2;
 	}
-	
+
 	@Length(min=0, max=64, message="腹腔镜手术术式选择长度不能超过 64 个字符")
 	public String getDg_3_2_2() {
 		return dg_3_2_2;
@@ -1069,7 +1072,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_3_2_2(String dg_3_2_2) {
 		this.dg_3_2_2 = dg_3_2_2;
 	}
-	
+
 	@Length(min=0, max=64, message="其他腹腔镜手术术式长度不能超过 64 个字符")
 	public String getDg_3_2_2_1() {
 		return dg_3_2_2_1;
@@ -1078,7 +1081,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_3_2_2_1(String dg_3_2_2_1) {
 		this.dg_3_2_2_1 = dg_3_2_2_1;
 	}
-	
+
 	@Length(min=0, max=64, message="其他手术方式长度不能超过 64 个字符")
 	public String getDg_3_2_1() {
 		return dg_3_2_1;
@@ -1087,7 +1090,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_3_2_1(String dg_3_2_1) {
 		this.dg_3_2_1 = dg_3_2_1;
 	}
-	
+
 	public Double getDg_3_3_3() {
 		return dg_3_3_3;
 	}
@@ -1095,7 +1098,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_3_3_3(Double dg_3_3_3) {
 		this.dg_3_3_3 = dg_3_3_3;
 	}
-	
+
 	@Length(min=0, max=64, message="手术治疗的患者长度不能超过 64 个字符")
 	public String getDg_4_1_1() {
 		return dg_4_1_1;
@@ -1104,7 +1107,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_4_1_1(String dg_4_1_1) {
 		this.dg_4_1_1 = dg_4_1_1;
 	}
-	
+
 	@Length(min=0, max=64, message="药物治疗的患者长度不能超过 64 个字符")
 	public String getDg_4_1_2() {
 		return dg_4_1_2;
@@ -1113,7 +1116,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_4_1_2(String dg_4_1_2) {
 		this.dg_4_1_2 = dg_4_1_2;
 	}
-	
+
 	@Length(min=0, max=64, message="预防性抗菌药物选择长度不能超过 64 个字符")
 	public String getCm_1_2_1_2() {
 		return cm_1_2_1_2;
@@ -1122,7 +1125,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_1_2_1_2(String cm_1_2_1_2) {
 		this.cm_1_2_1_2 = cm_1_2_1_2;
 	}
-	
+
 	@Length(min=0, max=64, message="选择碳青霉烯类及替加环素等特殊使用级抗菌药物长度不能超过 64 个字符")
 	public String getCm_1_2_2_2() {
 		return cm_1_2_2_2;
@@ -1131,7 +1134,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_1_2_2_2(String cm_1_2_2_2) {
 		this.cm_1_2_2_2 = cm_1_2_2_2;
 	}
-	
+
 	@Length(min=0, max=64, message="其他特殊使用级抗菌药物名称长度不能超过 64 个字符")
 	public String getCm_1_2_2_1() {
 		return cm_1_2_2_1;
@@ -1140,7 +1143,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_1_2_2_1(String cm_1_2_2_1) {
 		this.cm_1_2_2_1 = cm_1_2_2_1;
 	}
-	
+
 	@Length(min=0, max=64, message="选用“特殊使用级抗菌药物”或者其他类抗菌药物的因素长度不能超过 64 个字符")
 	public String getCm_1_3_1_2() {
 		return cm_1_3_1_2;
@@ -1149,7 +1152,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_1_3_1_2(String cm_1_3_1_2) {
 		this.cm_1_3_1_2 = cm_1_3_1_2;
 	}
-	
+
 	@Length(min=0, max=64, message="选用“特殊使用级抗菌药物”或者其他类抗菌药物的因素填写长度不能超过 64 个字符")
 	public String getCm_1_3_1_1() {
 		return cm_1_3_1_1;
@@ -1158,16 +1161,16 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_1_3_1_1(String cm_1_3_1_1) {
 		this.cm_1_3_1_1 = cm_1_3_1_1;
 	}
-	
-	@Length(min=0, max=64, message="使用首剂抗菌药物起始时间长度不能超过 64 个字符")
-	public String getCm_1_4_1() {
+
+	//@Length(min=0, max=64, message="使用首剂抗菌药物起始时间长度不能超过 64 个字符")
+	public Date getCm_1_4_1() {
 		return cm_1_4_1;
 	}
 
-	public void setCm_1_4_1(String cm_1_4_1) {
+	public void setCm_1_4_1(Date cm_1_4_1) {
 		this.cm_1_4_1 = cm_1_4_1;
 	}
-	
+
 	@Length(min=0, max=64, message="手术时间是否≥3小时长度不能超过 64 个字符")
 	public String getCm_1_5_1() {
 		return cm_1_5_1;
@@ -1176,7 +1179,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_1_5_1(String cm_1_5_1) {
 		this.cm_1_5_1 = cm_1_5_1;
 	}
-	
+
 	@Length(min=0, max=64, message="是否术中追加抗菌药物长度不能超过 64 个字符")
 	public String getCm_1_5_2() {
 		return cm_1_5_2;
@@ -1185,7 +1188,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_1_5_2(String cm_1_5_2) {
 		this.cm_1_5_2 = cm_1_5_2;
 	}
-	
+
 	@Length(min=0, max=64, message="术中出血量是否≥1500ml长度不能超过 64 个字符")
 	public String getCm_1_5_3() {
 		return cm_1_5_3;
@@ -1194,7 +1197,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_1_5_3(String cm_1_5_3) {
 		this.cm_1_5_3 = cm_1_5_3;
 	}
-	
+
 	@Length(min=0, max=64, message="是否术中追加抗菌药物长度不能超过 64 个字符")
 	public String getCm_1_5_4() {
 		return cm_1_5_4;
@@ -1203,16 +1206,16 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_1_5_4(String cm_1_5_4) {
 		this.cm_1_5_4 = cm_1_5_4;
 	}
-	
-	@Length(min=0, max=64, message="术后抗菌药物停止使用时间长度不能超过 64 个字符")
-	public String getCm_1_6_1() {
+
+	//@Length(min=0, max=64, message="术后抗菌药物停止使用时间长度不能超过 64 个字符")
+	public Date getCm_1_6_1() {
 		return cm_1_6_1;
 	}
 
-	public void setCm_1_6_1(String cm_1_6_1) {
+	public void setCm_1_6_1(Date cm_1_6_1) {
 		this.cm_1_6_1 = cm_1_6_1;
 	}
-	
+
 	@Length(min=0, max=64, message="使用抗菌药物时间使用时间分层长度不能超过 64 个字符")
 	public String getCm_1_6_2() {
 		return cm_1_6_2;
@@ -1221,7 +1224,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_1_6_2(String cm_1_6_2) {
 		this.cm_1_6_2 = cm_1_6_2;
 	}
-	
+
 	@Length(min=0, max=64, message="术后72小时之后继续使用的原因长度不能超过 64 个字符")
 	public String getCm_1_6_3_2() {
 		return cm_1_6_3_2;
@@ -1230,7 +1233,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_1_6_3_2(String cm_1_6_3_2) {
 		this.cm_1_6_3_2 = cm_1_6_3_2;
 	}
-	
+
 	@Length(min=0, max=64, message="是否有手术后并发症长度不能超过 64 个字符")
 	public String getCm_2_1() {
 		return cm_2_1;
@@ -1239,7 +1242,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_1(String cm_2_1) {
 		this.cm_2_1 = cm_2_1;
 	}
-	
+
 	@Length(min=0, max=64, message="手术后并发症类别及ICD-10四位亚目的选择长度不能超过 64 个字符")
 	public String getCm_2_2() {
 		return cm_2_2;
@@ -1248,7 +1251,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_2(String cm_2_2) {
 		this.cm_2_2 = cm_2_2;
 	}
-	
+
 	@Length(min=0, max=64, message="其他手术后并发症类别及ICD-10四位亚目和名称填写长度不能超过 64 个字符")
 	public String getCm_2_3_1_1() {
 		return cm_2_3_1_1;
@@ -1257,7 +1260,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_3_1_1(String cm_2_3_1_1) {
 		this.cm_2_3_1_1 = cm_2_3_1_1;
 	}
-	
+
 	@Length(min=0, max=64, message="介入操作与手术其他并发症长度不能超过 64 个字符")
 	public String getCm_2_3_1() {
 		return cm_2_3_1;
@@ -1266,7 +1269,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_3_1(String cm_2_3_1) {
 		this.cm_2_3_1 = cm_2_3_1;
 	}
-	
+
 	@Length(min=0, max=64, message="手术患者手术后肺栓塞长度不能超过 64 个字符")
 	public String getCm_2_3_2() {
 		return cm_2_3_2;
@@ -1275,7 +1278,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_3_2(String cm_2_3_2) {
 		this.cm_2_3_2 = cm_2_3_2;
 	}
-	
+
 	@Length(min=0, max=64, message="手术患者手术后深静脉血栓长度不能超过 64 个字符")
 	public String getCm_2_3_3() {
 		return cm_2_3_3;
@@ -1284,7 +1287,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_3_3(String cm_2_3_3) {
 		this.cm_2_3_3 = cm_2_3_3;
 	}
-	
+
 	@Length(min=0, max=64, message="手术患者手术后败血症长度不能超过 64 个字符")
 	public String getCm_2_3_4() {
 		return cm_2_3_4;
@@ -1293,7 +1296,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_3_4(String cm_2_3_4) {
 		this.cm_2_3_4 = cm_2_3_4;
 	}
-	
+
 	@Length(min=0, max=64, message="手术患者手术后出血或血肿长度不能超过 64 个字符")
 	public String getCm_2_3_5() {
 		return cm_2_3_5;
@@ -1302,7 +1305,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_3_5(String cm_2_3_5) {
 		this.cm_2_3_5 = cm_2_3_5;
 	}
-	
+
 	@Length(min=0, max=64, message="手术患者手术伤口裂开长度不能超过 64 个字符")
 	public String getCm_2_3_6() {
 		return cm_2_3_6;
@@ -1311,7 +1314,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_3_6(String cm_2_3_6) {
 		this.cm_2_3_6 = cm_2_3_6;
 	}
-	
+
 	@Length(min=0, max=64, message="手术患者猝死长度不能超过 64 个字符")
 	public String getCm_2_3_7() {
 		return cm_2_3_7;
@@ -1320,7 +1323,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_3_7(String cm_2_3_7) {
 		this.cm_2_3_7 = cm_2_3_7;
 	}
-	
+
 	@Length(min=0, max=64, message="手术患者手术后呼吸道并发症长度不能超过 64 个字符")
 	public String getCm_2_3_8() {
 		return cm_2_3_8;
@@ -1329,7 +1332,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_3_8(String cm_2_3_8) {
 		this.cm_2_3_8 = cm_2_3_8;
 	}
-	
+
 	@Length(min=0, max=64, message="手术患者手术后生理/代谢紊乱长度不能超过 64 个字符")
 	public String getCm_2_3_9() {
 		return cm_2_3_9;
@@ -1338,7 +1341,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_3_9(String cm_2_3_9) {
 		this.cm_2_3_9 = cm_2_3_9;
 	}
-	
+
 	@Length(min=0, max=64, message="与手术/操作相关感染长度不能超过 64 个字符")
 	public String getCm_2_3_10() {
 		return cm_2_3_10;
@@ -1347,7 +1350,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_3_10(String cm_2_3_10) {
 		this.cm_2_3_10 = cm_2_3_10;
 	}
-	
+
 	@Length(min=0, max=64, message="手术过程中异物遗留长度不能超过 64 个字符")
 	public String getCm_2_3_11() {
 		return cm_2_3_11;
@@ -1356,7 +1359,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_3_11(String cm_2_3_11) {
 		this.cm_2_3_11 = cm_2_3_11;
 	}
-	
+
 	@Length(min=0, max=64, message="麻醉并发症长度不能超过 64 个字符")
 	public String getCm_2_3_12() {
 		return cm_2_3_12;
@@ -1365,7 +1368,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_3_12(String cm_2_3_12) {
 		this.cm_2_3_12 = cm_2_3_12;
 	}
-	
+
 	@Length(min=0, max=64, message="输注、输血反应长度不能超过 64 个字符")
 	public String getCm_2_3_13() {
 		return cm_2_3_13;
@@ -1374,7 +1377,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_3_13(String cm_2_3_13) {
 		this.cm_2_3_13 = cm_2_3_13;
 	}
-	
+
 	@Length(min=0, max=64, message="住院患者发生压疮长度不能超过 64 个字符")
 	public String getCm_2_3_14() {
 		return cm_2_3_14;
@@ -1383,7 +1386,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_3_14(String cm_2_3_14) {
 		this.cm_2_3_14 = cm_2_3_14;
 	}
-	
+
 	@Length(min=0, max=64, message="产后出血长度不能超过 64 个字符")
 	public String getCm_2_3_15() {
 		return cm_2_3_15;
@@ -1392,7 +1395,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_3_15(String cm_2_3_15) {
 		this.cm_2_3_15 = cm_2_3_15;
 	}
-	
+
 	@Length(min=0, max=64, message="产褥期感染长度不能超过 64 个字符")
 	public String getCm_2_3_16() {
 		return cm_2_3_16;
@@ -1401,7 +1404,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_3_16(String cm_2_3_16) {
 		this.cm_2_3_16 = cm_2_3_16;
 	}
-	
+
 	@Length(min=0, max=64, message="其他产褥期感染长度不能超过 64 个字符")
 	public String getCm_2_3_16_1() {
 		return cm_2_3_16_1;
@@ -1410,7 +1413,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_3_16_1(String cm_2_3_16_1) {
 		this.cm_2_3_16_1 = cm_2_3_16_1;
 	}
-	
+
 	@Length(min=0, max=64, message="产科栓塞长度不能超过 64 个字符")
 	public String getCm_2_3_17() {
 		return cm_2_3_17;
@@ -1419,7 +1422,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_3_17(String cm_2_3_17) {
 		this.cm_2_3_17 = cm_2_3_17;
 	}
-	
+
 	@Length(min=0, max=64, message="胎盘和胎膜滞留不伴有出血长度不能超过 64 个字符")
 	public String getCm_2_3_18() {
 		return cm_2_3_18;
@@ -1428,7 +1431,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_3_18(String cm_2_3_18) {
 		this.cm_2_3_18 = cm_2_3_18;
 	}
-	
+
 	@Length(min=0, max=64, message="产科手术伤口的感染长度不能超过 64 个字符")
 	public String getCm_2_3_19() {
 		return cm_2_3_19;
@@ -1437,7 +1440,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_3_19(String cm_2_3_19) {
 		this.cm_2_3_19 = cm_2_3_19;
 	}
-	
+
 	@Length(min=0, max=64, message="产科伤口裂开长度不能超过 64 个字符")
 	public String getCm_2_3_20() {
 		return cm_2_3_20;
@@ -1446,7 +1449,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_3_20(String cm_2_3_20) {
 		this.cm_2_3_20 = cm_2_3_20;
 	}
-	
+
 	@Length(min=0, max=64, message="其他并发症长度不能超过 64 个字符")
 	public String getCm_2_3_21() {
 		return cm_2_3_21;
@@ -1455,7 +1458,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_3_21(String cm_2_3_21) {
 		this.cm_2_3_21 = cm_2_3_21;
 	}
-	
+
 	@Length(min=0, max=64, message="其他的其他并发症长度不能超过 64 个字符")
 	public String getCm_2_3_21_1() {
 		return cm_2_3_21_1;
@@ -1464,7 +1467,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_3_21_1(String cm_2_3_21_1) {
 		this.cm_2_3_21_1 = cm_2_3_21_1;
 	}
-	
+
 	@Length(min=0, max=64, message="影响程度的选择长度不能超过 64 个字符")
 	public String getCm_2_4() {
 		return cm_2_4;
@@ -1473,7 +1476,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_2_4(String cm_2_4) {
 		this.cm_2_4 = cm_2_4;
 	}
-	
+
 	public Double getDg_6_1() {
 		return dg_6_1;
 	}
@@ -1481,7 +1484,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_6_1(Double dg_6_1) {
 		this.dg_6_1 = dg_6_1;
 	}
-	
+
 	@Length(min=0, max=64, message="是否实施输血长度不能超过 64 个字符")
 	public String getDg_6_2_1() {
 		return dg_6_2_1;
@@ -1490,7 +1493,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_6_2_1(String dg_6_2_1) {
 		this.dg_6_2_1 = dg_6_2_1;
 	}
-	
+
 	@Length(min=0, max=64, message="是否实施回收式自体输血长度不能超过 64 个字符")
 	public String getDg_6_2_2() {
 		return dg_6_2_2;
@@ -1499,7 +1502,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_6_2_2(String dg_6_2_2) {
 		this.dg_6_2_2 = dg_6_2_2;
 	}
-	
+
 	@Length(min=0, max=64, message="用血类别的选择长度不能超过 64 个字符")
 	public String getDg_6_3_1() {
 		return dg_6_3_1;
@@ -1508,7 +1511,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_6_3_1(String dg_6_3_1) {
 		this.dg_6_3_1 = dg_6_3_1;
 	}
-	
+
 	public Double getDg_6_3_2() {
 		return dg_6_3_2;
 	}
@@ -1516,7 +1519,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_6_3_2(Double dg_6_3_2) {
 		this.dg_6_3_2 = dg_6_3_2;
 	}
-	
+
 	public Double getDg_6_2_3() {
 		return dg_6_2_3;
 	}
@@ -1524,7 +1527,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_6_2_3(Double dg_6_2_3) {
 		this.dg_6_2_3 = dg_6_2_3;
 	}
-	
+
 	@Length(min=0, max=64, message="是否实施储存式自体输血长度不能超过 64 个字符")
 	public String getDg_6_4_1() {
 		return dg_6_4_1;
@@ -1533,7 +1536,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_6_4_1(String dg_6_4_1) {
 		this.dg_6_4_1 = dg_6_4_1;
 	}
-	
+
 	public Double getDg_6_4_1_1() {
 		return dg_6_4_1_1;
 	}
@@ -1541,7 +1544,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_6_4_1_1(Double dg_6_4_1_1) {
 		this.dg_6_4_1_1 = dg_6_4_1_1;
 	}
-	
+
 	@Length(min=0, max=64, message="术前长度不能超过 64 个字符")
 	public String getDg_7_1_1() {
 		return dg_7_1_1;
@@ -1550,7 +1553,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_7_1_1(String dg_7_1_1) {
 		this.dg_7_1_1 = dg_7_1_1;
 	}
-	
+
 	@Length(min=0, max=64, message="术后长度不能超过 64 个字符")
 	public String getDg_7_1_2() {
 		return dg_7_1_2;
@@ -1559,7 +1562,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_7_1_2(String dg_7_1_2) {
 		this.dg_7_1_2 = dg_7_1_2;
 	}
-	
+
 	@Length(min=0, max=64, message="交与患者“出院小结”的副本告知患者出院时风险因素长度不能超过 64 个字符")
 	public String getDg_7_2_1() {
 		return dg_7_2_1;
@@ -1568,7 +1571,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_7_2_1(String dg_7_2_1) {
 		this.dg_7_2_1 = dg_7_2_1;
 	}
-	
+
 	@Length(min=0, max=64, message="出院带药长度不能超过 64 个字符")
 	public String getDg_7_2_2() {
 		return dg_7_2_2;
@@ -1577,7 +1580,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_7_2_2(String dg_7_2_2) {
 		this.dg_7_2_2 = dg_7_2_2;
 	}
-	
+
 	@Length(min=0, max=64, message="告知发生紧急情况时求援救治途径长度不能超过 64 个字符")
 	public String getDg_7_2_3() {
 		return dg_7_2_3;
@@ -1586,7 +1589,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_7_2_3(String dg_7_2_3) {
 		this.dg_7_2_3 = dg_7_2_3;
 	}
-	
+
 	@Length(min=0, max=64, message="出院时教育与随访长度不能超过 64 个字符")
 	public String getDg_7_2_4() {
 		return dg_7_2_4;
@@ -1595,7 +1598,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_7_2_4(String dg_7_2_4) {
 		this.dg_7_2_4 = dg_7_2_4;
 	}
-	
+
 	@Length(min=0, max=64, message="告知何为风险因素与紧急情况长度不能超过 64 个字符")
 	public String getDg_7_2_5() {
 		return dg_7_2_5;
@@ -1604,7 +1607,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setDg_7_2_5(String dg_7_2_5) {
 		this.dg_7_2_5 = dg_7_2_5;
 	}
-	
+
 	@Length(min=0, max=64, message="手术野皮肤准备常用方法的选择长度不能超过 64 个字符")
 	public String getCm_3_1() {
 		return cm_3_1;
@@ -1613,7 +1616,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_3_1(String cm_3_1) {
 		this.cm_3_1 = cm_3_1;
 	}
-	
+
 	@Length(min=0, max=64, message="使用含抗菌剂长度不能超过 64 个字符")
 	public String getCm_3_2() {
 		return cm_3_2;
@@ -1622,7 +1625,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_3_2(String cm_3_2) {
 		this.cm_3_2 = cm_3_2;
 	}
-	
+
 	@Length(min=0, max=64, message="其他含抗菌剂缝线填写长度不能超过 64 个字符")
 	public String getCm_3_2_1() {
 		return cm_3_2_1;
@@ -1631,7 +1634,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_3_2_1(String cm_3_2_1) {
 		this.cm_3_2_1 = cm_3_2_1;
 	}
-	
+
 	@Length(min=0, max=64, message="手术切口类别的选择长度不能超过 64 个字符")
 	public String getCm_3_3() {
 		return cm_3_3;
@@ -1640,7 +1643,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_3_3(String cm_3_3) {
 		this.cm_3_3 = cm_3_3;
 	}
-	
+
 	@Length(min=0, max=64, message="手术切口愈合情况的选择长度不能超过 64 个字符")
 	public String getCm_3_4() {
 		return cm_3_4;
@@ -1649,7 +1652,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_3_4(String cm_3_4) {
 		this.cm_3_4 = cm_3_4;
 	}
-	
+
 	@Length(min=0, max=64, message="离院方式选择长度不能超过 64 个字符")
 	public String getCm_4_3() {
 		return cm_4_3;
@@ -1658,7 +1661,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_4_3(String cm_4_3) {
 		this.cm_4_3 = cm_4_3;
 	}
-	
+
 	@Length(min=0, max=64, message="非医嘱离院可能涉及因素长度不能超过 64 个字符")
 	public String getCm_4_5() {
 		return cm_4_5;
@@ -1667,7 +1670,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_4_5(String cm_4_5) {
 		this.cm_4_5 = cm_4_5;
 	}
-	
+
 	@Length(min=0, max=64, message="其他非医嘱离院因素填写长度不能超过 64 个字符")
 	public String getCm_4_4_1() {
 		return cm_4_4_1;
@@ -1676,7 +1679,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_4_4_1(String cm_4_4_1) {
 		this.cm_4_4_1 = cm_4_4_1;
 	}
-	
+
 	@Length(min=0, max=64, message="死亡可能涉及因素长度不能超过 64 个字符")
 	public String getCm_4_6() {
 		return cm_4_6;
@@ -1685,7 +1688,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_4_6(String cm_4_6) {
 		this.cm_4_6 = cm_4_6;
 	}
-	
+
 	@Length(min=0, max=64, message="患者是否对服务的体验与评价长度不能超过 64 个字符")
 	public String getCm_5_1() {
 		return cm_5_1;
@@ -1694,7 +1697,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_5_1(String cm_5_1) {
 		this.cm_5_1 = cm_5_1;
 	}
-	
+
 	@Length(min=0, max=64, message="整体医院评级长度不能超过 64 个字符")
 	public String getCm_5_2_1() {
 		return cm_5_2_1;
@@ -1703,7 +1706,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_5_2_1(String cm_5_2_1) {
 		this.cm_5_2_1 = cm_5_2_1;
 	}
-	
+
 	@Length(min=0, max=64, message="患者推荐长度不能超过 64 个字符")
 	public String getCm_5_2_2() {
 		return cm_5_2_2;
@@ -1712,7 +1715,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_5_2_2(String cm_5_2_2) {
 		this.cm_5_2_2 = cm_5_2_2;
 	}
-	
+
 	@Length(min=0, max=64, message="病房、床单元和卫生间清洁度长度不能超过 64 个字符")
 	public String getCm_5_2_3() {
 		return cm_5_2_3;
@@ -1721,7 +1724,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_5_2_3(String cm_5_2_3) {
 		this.cm_5_2_3 = cm_5_2_3;
 	}
-	
+
 	@Length(min=0, max=64, message="病房与周边噪音长度不能超过 64 个字符")
 	public String getCm_5_2_5() {
 		return cm_5_2_5;
@@ -1730,7 +1733,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_5_2_5(String cm_5_2_5) {
 		this.cm_5_2_5 = cm_5_2_5;
 	}
-	
+
 	@Length(min=0, max=64, message="医生沟通长度不能超过 64 个字符")
 	public String getCm_5_2_6() {
 		return cm_5_2_6;
@@ -1739,7 +1742,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_5_2_6(String cm_5_2_6) {
 		this.cm_5_2_6 = cm_5_2_6;
 	}
-	
+
 	@Length(min=0, max=64, message="护士沟通长度不能超过 64 个字符")
 	public String getCm_5_2_7() {
 		return cm_5_2_7;
@@ -1748,7 +1751,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_5_2_7(String cm_5_2_7) {
 		this.cm_5_2_7 = cm_5_2_7;
 	}
-	
+
 	@Length(min=0, max=64, message="药师沟通长度不能超过 64 个字符")
 	public String getCm_5_2_8() {
 		return cm_5_2_8;
@@ -1757,7 +1760,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_5_2_8(String cm_5_2_8) {
 		this.cm_5_2_8 = cm_5_2_8;
 	}
-	
+
 	@Length(min=0, max=64, message="康复计划长度不能超过 64 个字符")
 	public String getCm_5_2_9() {
 		return cm_5_2_9;
@@ -1766,7 +1769,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_5_2_9(String cm_5_2_9) {
 		this.cm_5_2_9 = cm_5_2_9;
 	}
-	
+
 	@Length(min=0, max=64, message="出院时的知情告知长度不能超过 64 个字符")
 	public String getCm_5_2_10() {
 		return cm_5_2_10;
@@ -1775,7 +1778,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_5_2_10(String cm_5_2_10) {
 		this.cm_5_2_10 = cm_5_2_10;
 	}
-	
+
 	@Length(min=0, max=64, message="膳食评价长度不能超过 64 个字符")
 	public String getCm_5_2_11() {
 		return cm_5_2_11;
@@ -1784,7 +1787,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_5_2_11(String cm_5_2_11) {
 		this.cm_5_2_11 = cm_5_2_11;
 	}
-	
+
 	public Double getCm_6_1() {
 		return cm_6_1;
 	}
@@ -1792,7 +1795,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_1(Double cm_6_1) {
 		this.cm_6_1 = cm_6_1;
 	}
-	
+
 	public Double getCm_6_2() {
 		return cm_6_2;
 	}
@@ -1800,7 +1803,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_2(Double cm_6_2) {
 		this.cm_6_2 = cm_6_2;
 	}
-	
+
 	public Double getCm_6_3() {
 		return cm_6_3;
 	}
@@ -1808,7 +1811,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_3(Double cm_6_3) {
 		this.cm_6_3 = cm_6_3;
 	}
-	
+
 	public Double getCm_6_4() {
 		return cm_6_4;
 	}
@@ -1816,7 +1819,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_4(Double cm_6_4) {
 		this.cm_6_4 = cm_6_4;
 	}
-	
+
 	public Double getCm_6_5() {
 		return cm_6_5;
 	}
@@ -1824,7 +1827,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_5(Double cm_6_5) {
 		this.cm_6_5 = cm_6_5;
 	}
-	
+
 	public Double getCm_6_6() {
 		return cm_6_6;
 	}
@@ -1832,7 +1835,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_6(Double cm_6_6) {
 		this.cm_6_6 = cm_6_6;
 	}
-	
+
 	public Double getCm_6_7() {
 		return cm_6_7;
 	}
@@ -1840,7 +1843,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_7(Double cm_6_7) {
 		this.cm_6_7 = cm_6_7;
 	}
-	
+
 	public Double getCm_6_8() {
 		return cm_6_8;
 	}
@@ -1848,7 +1851,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_8(Double cm_6_8) {
 		this.cm_6_8 = cm_6_8;
 	}
-	
+
 	public Double getCm_6_9() {
 		return cm_6_9;
 	}
@@ -1856,7 +1859,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_9(Double cm_6_9) {
 		this.cm_6_9 = cm_6_9;
 	}
-	
+
 	public Double getCm_6_10() {
 		return cm_6_10;
 	}
@@ -1864,7 +1867,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_10(Double cm_6_10) {
 		this.cm_6_10 = cm_6_10;
 	}
-	
+
 	public Double getCm_6_11() {
 		return cm_6_11;
 	}
@@ -1872,7 +1875,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_11(Double cm_6_11) {
 		this.cm_6_11 = cm_6_11;
 	}
-	
+
 	public Double getCm_6_12() {
 		return cm_6_12;
 	}
@@ -1880,7 +1883,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_12(Double cm_6_12) {
 		this.cm_6_12 = cm_6_12;
 	}
-	
+
 	public Double getCm_6_13() {
 		return cm_6_13;
 	}
@@ -1888,7 +1891,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_13(Double cm_6_13) {
 		this.cm_6_13 = cm_6_13;
 	}
-	
+
 	public Double getCm_6_14() {
 		return cm_6_14;
 	}
@@ -1896,7 +1899,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_14(Double cm_6_14) {
 		this.cm_6_14 = cm_6_14;
 	}
-	
+
 	public Double getCm_6_15() {
 		return cm_6_15;
 	}
@@ -1904,7 +1907,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_15(Double cm_6_15) {
 		this.cm_6_15 = cm_6_15;
 	}
-	
+
 	public Double getCm_6_16() {
 		return cm_6_16;
 	}
@@ -1912,7 +1915,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_16(Double cm_6_16) {
 		this.cm_6_16 = cm_6_16;
 	}
-	
+
 	public Double getCm_6_17() {
 		return cm_6_17;
 	}
@@ -1920,7 +1923,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_17(Double cm_6_17) {
 		this.cm_6_17 = cm_6_17;
 	}
-	
+
 	public Double getCm_6_18() {
 		return cm_6_18;
 	}
@@ -1928,7 +1931,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_18(Double cm_6_18) {
 		this.cm_6_18 = cm_6_18;
 	}
-	
+
 	public Double getCm_6_19() {
 		return cm_6_19;
 	}
@@ -1936,7 +1939,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_19(Double cm_6_19) {
 		this.cm_6_19 = cm_6_19;
 	}
-	
+
 	public Double getCm_6_20() {
 		return cm_6_20;
 	}
@@ -1944,7 +1947,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_20(Double cm_6_20) {
 		this.cm_6_20 = cm_6_20;
 	}
-	
+
 	public Double getCm_6_21() {
 		return cm_6_21;
 	}
@@ -1952,7 +1955,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_21(Double cm_6_21) {
 		this.cm_6_21 = cm_6_21;
 	}
-	
+
 	public Double getCm_6_22() {
 		return cm_6_22;
 	}
@@ -1960,7 +1963,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_22(Double cm_6_22) {
 		this.cm_6_22 = cm_6_22;
 	}
-	
+
 	public Double getCm_6_23() {
 		return cm_6_23;
 	}
@@ -1968,7 +1971,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_23(Double cm_6_23) {
 		this.cm_6_23 = cm_6_23;
 	}
-	
+
 	public Double getCm_6_24() {
 		return cm_6_24;
 	}
@@ -1976,7 +1979,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_24(Double cm_6_24) {
 		this.cm_6_24 = cm_6_24;
 	}
-	
+
 	public Double getCm_6_25() {
 		return cm_6_25;
 	}
@@ -1984,7 +1987,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_25(Double cm_6_25) {
 		this.cm_6_25 = cm_6_25;
 	}
-	
+
 	public Double getCm_6_26() {
 		return cm_6_26;
 	}
@@ -1992,7 +1995,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_26(Double cm_6_26) {
 		this.cm_6_26 = cm_6_26;
 	}
-	
+
 	public Double getCm_6_27() {
 		return cm_6_27;
 	}
@@ -2000,7 +2003,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_27(Double cm_6_27) {
 		this.cm_6_27 = cm_6_27;
 	}
-	
+
 	public Double getCm_6_28() {
 		return cm_6_28;
 	}
@@ -2008,7 +2011,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_28(Double cm_6_28) {
 		this.cm_6_28 = cm_6_28;
 	}
-	
+
 	public Double getCm_6_29() {
 		return cm_6_29;
 	}
@@ -2016,7 +2019,7 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_29(Double cm_6_29) {
 		this.cm_6_29 = cm_6_29;
 	}
-	
+
 	public Double getCm_6_30() {
 		return cm_6_30;
 	}
@@ -2024,5 +2027,5 @@ public class QualityDg extends DataEntity<QualityDg> {
 	public void setCm_6_30(Double cm_6_30) {
 		this.cm_6_30 = cm_6_30;
 	}
-	
+
 }

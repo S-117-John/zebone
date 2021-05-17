@@ -3,8 +3,12 @@
  */
 package com.zebone.quality.modules.gc.service;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +25,11 @@ import com.zebone.quality.modules.gc.dao.QualityGcDao;
 @Service
 @Transactional(readOnly=true)
 public class QualityGcService extends CrudService<QualityGcDao, QualityGc> {
-	
+
+    public Map<String,Object> findById(String id) {
+        Map<String,Object> result = dao.findById(id);
+        return result;
+    }
 	/**
 	 * 获取单条数据
 	 * @param qualityGc
@@ -40,7 +48,22 @@ public class QualityGcService extends CrudService<QualityGcDao, QualityGc> {
 	 */
 	@Override
 	public Page<QualityGc> findPage(Page<QualityGc> page, QualityGc qualityGc) {
-		return super.findPage(page, qualityGc);
+//		return super.findPage(page, qualityGc);
+        qualityGc.setPage(page);
+        List<Map<String,Object>> result = dao.findListMap(qualityGc);
+        List<QualityGc> list = new ArrayList<>();
+        result.forEach(a->{
+            QualityGc bean = new QualityGc();
+            try {
+                BeanUtils.populate(bean,a);
+                list.add(bean);
+            }catch (IllegalAccessException e){
+                e.printStackTrace();
+            } catch (InvocationTargetException e){
+                e.printStackTrace();
+            }
+        });
+        return page.setList(list);
 	}
 	
 	/**

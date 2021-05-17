@@ -37,6 +37,7 @@
 $('#dataGrid').dataGrid({
 	searchForm: $("#searchForm"),
 	columnModel: [
+        {header:'${text('患者病案号')}', name:'caseid', index:'a.caseid', width:150, align:"left"},
 		{header:'${text('质控医师')}', name:'cm_0_1_1_1', index:'a.cm_0_1_1_1', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
 			return '<a href="${ctx}/um/qualityUm/form?id='+row.id+'" class="btnList" data-title="${text('编辑UM子宫肌瘤（手术治疗）')}">'+(val||row.id)+'</a>';
 		}},
@@ -44,7 +45,7 @@ $('#dataGrid').dataGrid({
 		{header:'${text('主治医师')}', name:'cm_0_1_1_3', index:'a.cm_0_1_1_3', width:150, align:"left"},
 		{header:'${text('责任护士')}', name:'cm_0_1_1_4', index:'a.cm_0_1_1_4', width:150, align:"left"},
 		{header:'${text('上报科室')}', name:'cm_0_1_1_5', index:'a.cm_0_1_1_5', width:150, align:"left"},
-		{header:'${text('患者病案号')}', name:'caseid', index:'a.caseid', width:150, align:"left"},
+        {header:'${text('创建时间')}', name:'createDate', index:'a.create_date', width:150, align:"left"},
 		{header:'${text('操作')}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
 			var actions = [];
 			<% if(hasPermi('um:qualityUm:edit')){ %>

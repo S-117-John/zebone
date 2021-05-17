@@ -52,6 +52,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_0_3_3", attrName="cm_0_3_3", label="到院交通工具"),
 		@Column(name="cap_1_1_0", attrName="cap_1_1_0", label="是否有重症肺炎的高危因素"),
 		@Column(name="cap_1_1_1", attrName="cap_1_1_1", label="重症肺炎的高危因素"),
+        @Column(name = "cap_1_1_1_1",attrName = "cap_1_1_1_1",label = "其他高危因素"),
 		@Column(name="cap_1_1_2", attrName="cap_1_1_2", label="符合重症肺炎"),
 		@Column(name="cap_1_1_3", attrName="cap_1_1_3", label="符合以下情况之一,需住院"),
 		@Column(name="cap_1_2_1", attrName="cap_1_2_1", label="是否符合重症"),
@@ -75,7 +76,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cap_3_3_2_1", attrName="cap_3_3_2_1", label="其他病毒学检查项目"),
 		@Column(name="cap_3_3_3", attrName="cap_3_3_3", label="肺炎支原体检查项目的选择"),
 		@Column(name="cap_3_3_3_1", attrName="cap_3_3_3_1", label="其他肺炎支原体检查项目"),
-		@Column(name="cap_3_4_1", attrName="cap_3_4_1", label="是否进行实验室检查"),
+		@Column(name="cap_3_4_4", attrName="cap_3_4_4", label="是否进行实验室检查"),
 		@Column(name="cap_3_4_2", attrName="cap_3_4_2", label="临床实验室检查项目的选择"),
 		@Column(name="cap_3_4_2_1", attrName="cap_3_4_2_1", label="其他临床实验室检查项目"),
 		@Column(name="cap_3_5_1", attrName="cap_3_5_1", label="病原学检测结果"),
@@ -153,6 +154,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="cm_7_2_4", attrName="cm_7_2_4", label="告知发生紧急意外情况或者疾病复发如何救治及前途经"),
 		@Column(name="cm_7_2_5", attrName="cm_7_2_5", label="出院时教育与随访"),
 		@Column(name="cap_9_1_1_1", attrName="cap_9_1_1_1", label="经有效治疗后，患儿病情明显好转,可以出院"),
+        @Column(name = "cap_9_1_1_2", attrName = "cap_9_1_1_2", label = "其他出院评估"),
 		@Column(name="cap_9_2_1", attrName="cap_9_2_1", label="出院前末次氧合评估"),
 		@Column(name="cap_9_2_2", attrName="cap_9_2_2", label="末次氧合评估项目"),
 		@Column(name="cap_9_2_2_1", attrName="cap_9_2_2_1", label="测定值", comment="测定值(%)"),
@@ -221,7 +223,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 	private String cm_0_1_1_3;		// 主治医师
 	private String cm_0_1_1_4;		// 责任护士
 	private String cm_0_1_1_5;		// 上报科室
-	private String caseid;		// 患儿病案号
+	private String caseid;		    // 患儿病案号
 	private String cm_0_1_3_1;		// 主要诊断ICD-10四位亚目编码与名称
 	private String cm_0_1_3_2;		// 主要诊断ICD-10六位临床扩展编码与名称
 	private String cm_0_1_4_1;		// 主要手术操作栏中提取ICD-9-CM-3四位亚目编码与名称
@@ -238,7 +240,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 	private String cm_0_2_3_1;		// 到达本院急诊或者门诊日期时间是否无法确定或无记录
 	private Date cm_0_2_3_2;		// 到达本院急诊或者门诊日期时间
 	private Date cm_0_2_4_1;		// 入院日期时间
-	private Date cm_0_2_4_2;		// 出院日期时间
+    private Date cm_0_2_4_2;		// 出院日期时间
 	private Date cm_0_2_5_1;		// 入住ICU/RCU日期时间
 	private Date cm_0_2_5_2;		// 离开ICU/RCU日期时间
 	private String cm_0_3_1;		// 费用支付方式
@@ -246,6 +248,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 	private String cm_0_3_3;		// 到院交通工具
 	private String cap_1_1_0;		// 是否有重症肺炎的高危因素
 	private String cap_1_1_1;		// 重症肺炎的高危因素
+    private String cap_1_1_1_1;     //其他高危因素
 	private String cap_1_1_2;		// 符合重症肺炎
 	private String cap_1_1_3;		// 符合以下情况之一,需住院
 	private String cap_1_2_1;		// 是否符合重症
@@ -269,7 +272,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 	private String cap_3_3_2_1;		// 其他病毒学检查项目
 	private String cap_3_3_3;		// 肺炎支原体检查项目的选择
 	private String cap_3_3_3_1;		// 其他肺炎支原体检查项目
-	private String cap_3_4_1;		// 是否进行实验室检查
+	private String cap_3_4_4;		// 是否进行实验室检查
 	private String cap_3_4_2;		// 临床实验室检查项目的选择
 	private String cap_3_4_2_1;		// 其他临床实验室检查项目
 	private String cap_3_5_1;		// 病原学检测结果
@@ -347,6 +350,7 @@ public class QualityCap extends DataEntity<QualityCap> {
 	private String cm_7_2_4;		// 告知发生紧急意外情况或者疾病复发如何救治及前途经
 	private String cm_7_2_5;		// 出院时教育与随访
 	private String cap_9_1_1_1;		// 经有效治疗后，患儿病情明显好转,可以出院
+    private String cap_9_1_1_2;     // 其他出院评估
 	private String cap_9_2_1;		// 出院前末次氧合评估
 	private String cap_9_2_2;		// 末次氧合评估项目
 	private Double cap_9_2_2_1;		// 测定值(%)
@@ -914,12 +918,12 @@ public class QualityCap extends DataEntity<QualityCap> {
 	
 	@NotBlank(message="是否进行实验室检查不能为空")
 	@Length(min=0, max=64, message="是否进行实验室检查长度不能超过 64 个字符")
-	public String getCap_3_4_1() {
-		return cap_3_4_1;
+	public String getCap_3_4_4() {
+		return cap_3_4_4;
 	}
 
-	public void setCap_3_4_1(String cap_3_4_1) {
-		this.cap_3_4_1 = cap_3_4_1;
+	public void setCap_3_4_4(String cap_3_4_4) {
+		this.cap_3_4_4 = cap_3_4_4;
 	}
 	
 	@Length(min=0, max=64, message="临床实验室检查项目的选择长度不能超过 64 个字符")
@@ -2122,5 +2126,12 @@ public class QualityCap extends DataEntity<QualityCap> {
 	public void setCm_6_30(Double cm_6_30) {
 		this.cm_6_30 = cm_6_30;
 	}
-	
+
+    public String getCap_1_1_1_1() {
+        return cap_1_1_1_1;
+    }
+
+    public void setCap_1_1_1_1(String cap_1_1_1_1) {
+        this.cap_1_1_1_1 = cap_1_1_1_1;
+    }
 }
