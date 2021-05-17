@@ -84,7 +84,9 @@ public class AliConfigController extends BaseController {
 			payMerchant = payMerchantService.get(payMerchant);
 			AliConfigVO aliConfigVO = new AliConfigVO();
 			BeanUtils.copyProperties(aliConfigList.get(i),aliConfigVO);
-			aliConfigVO.setMerchantName(payMerchant.getName());
+			if (payMerchant!=null){
+				aliConfigVO.setMerchantName(payMerchant.getName());
+			}
 			aliConfigVOList.add(aliConfigVO);
 		}
 		voPage.setList(aliConfigVOList);
