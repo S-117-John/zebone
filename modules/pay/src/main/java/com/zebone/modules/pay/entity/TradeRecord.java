@@ -31,6 +31,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(includeEntity=DataEntity.class),
 		@Column(name="buyer_logon_id", attrName="buyerLogonId", label="买家账号"),
 		@Column(name="buyer_user_id", attrName="buyerUserId", label="买家用户id"),
+		@Column(name="app_id", attrName="appId", label="app id"),
 	}, orderBy="a.update_date DESC"
 )
 public class TradeRecord extends DataEntity<TradeRecord> {
@@ -45,7 +46,16 @@ public class TradeRecord extends DataEntity<TradeRecord> {
 	private String tradeStatus;		// 交易状态1:支付成功2：退款成功3：交易失败4：退款失败,5:预创建成功，6:预创建失败
 	private String buyerLogonId;		// 买家账号
 	private String buyerUserId;		// 买家用户id
-	
+	private String appId;
+
+	public String getAppId() {
+		return appId;
+	}
+
+	public void setAppId(String appId) {
+		this.appId = appId;
+	}
+
 	public TradeRecord() {
 		this(null);
 	}

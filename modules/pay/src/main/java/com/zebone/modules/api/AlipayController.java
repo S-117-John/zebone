@@ -72,6 +72,7 @@ public class AlipayController {
             }
             tradeRecord.setOutTradeNo(alipayParam.getOutTradeNo());
             tradeRecord.setPayType("2");
+            tradeRecord.setAppId(alipayParam.getAppId());
             tradeRecordService.save(tradeRecord);
         }
 
