@@ -204,14 +204,14 @@ public class TradeRecordController extends BaseController {
 				}
 				AlipayTradeRefundResponse alipayTradeRefundResponse = (AlipayTradeRefundResponse) result;
 				BeanUtils.copyProperties(alipayTradeRefundResponse,refuntRecord);
-				tradeRecord.setTradeStatus("2");
-				tradeRecord.setOutTradeNo(param.getOutTradeNo());
-				tradeRecord.setTotalAmount("-"+alipayTradeRefundResponse.getRefundFee());
+				refuntRecord.setTradeStatus("2");
+				refuntRecord.setOutTradeNo(param.getOutTradeNo());
+				refuntRecord.setTotalAmount("-"+alipayTradeRefundResponse.getRefundFee());
 				if (!alipayTradeRefundResponse.isSuccess()) {
-					tradeRecord.setRemarks(alipayTradeRefundResponse.getSubMsg());
+					refuntRecord.setRemarks(alipayTradeRefundResponse.getSubMsg());
 					return renderResult(Global.FALSE, text("退款失败"));
 				}
-				tradeRecordService.save(tradeRecord);
+				tradeRecordService.save(refuntRecord);
 			}
 
 
