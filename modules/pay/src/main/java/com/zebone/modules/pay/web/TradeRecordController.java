@@ -194,7 +194,7 @@ public class TradeRecordController extends BaseController {
 			param.setTradeNo(record.getTradeNo());
 			param.setAppId("2019112869487414");
 			TradeRecord refuntRecord = new TradeRecord();
-
+			refuntRecord.setPayType("2");
 			if (aliConfigList.size() == 1) {
 				Object result = null;
 				try {
@@ -204,6 +204,7 @@ public class TradeRecordController extends BaseController {
 				}
 				AlipayTradeRefundResponse alipayTradeRefundResponse = (AlipayTradeRefundResponse) result;
 				BeanUtils.copyProperties(alipayTradeRefundResponse,refuntRecord);
+				refuntRecord.setGmtPayment(alipayTradeRefundResponse.getGmtRefundPay());
 				refuntRecord.setTradeStatus("2");
 				refuntRecord.setOutTradeNo(param.getOutTradeNo());
 				refuntRecord.setTotalAmount("-"+alipayTradeRefundResponse.getRefundFee());
