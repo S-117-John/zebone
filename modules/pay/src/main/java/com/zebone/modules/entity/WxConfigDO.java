@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "BIZ_WX_CONFIG")
+@Table(name = "payment_wx_config")
 public class WxConfigDO {
 
     @Id

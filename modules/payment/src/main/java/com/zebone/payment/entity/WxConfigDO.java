@@ -2,14 +2,13 @@ package com.zebone.payment.entity;
 
 import lombok.Data;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "biz_wx_config")
+@Table(name = "payment_wx_config")
 public class WxConfigDO {
 
     @Id

@@ -6,6 +6,8 @@ package com.zebone.modules.pay.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.zebone.modules.entity.TradeRecordDO;
+import com.zebone.modules.repository.TradeRecordRepository;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,8 @@ import com.jeesite.common.web.BaseController;
 import com.zebone.modules.pay.entity.TradeBillDetail;
 import com.zebone.modules.pay.service.TradeBillDetailService;
 
+import java.util.List;
+
 /**
  * 账单明细Controller
  * @author lijin
@@ -33,6 +37,9 @@ public class TradeBillDetailController extends BaseController {
 
 	@Autowired
 	private TradeBillDetailService tradeBillDetailService;
+
+	@Autowired
+	private TradeRecordRepository tradeRecordRepository;
 	
 	/**
 	 * 获取数据
@@ -51,7 +58,44 @@ public class TradeBillDetailController extends BaseController {
 		model.addAttribute("tradeBillDetail", tradeBillDetail);
 		return "modules/pay/tradeBillDetailList";
 	}
-	
+
+	/**
+	 * 差异列表
+	 */
+	@RequiresPermissions("pay:tradeBillDetail:view")
+	@RequestMapping(value = "difference")
+	public String difference (TradeBillDetail tradeBillDetail, Model model) {
+		model.addAttribute("tradeBillDetail", tradeBillDetail);
+		return "modules/pay/billDifferenceList";
+	}
+
+	/**
+	 * 差异列表数据
+	 */
+	@RequiresPermissions("pay:tradeBillDetail:view")
+	@RequestMapping(value = "differenceListData")
+	@ResponseBody
+	public Page<TradeBillDetail> differenceListData(TradeBillDetail tradeBillDetail, HttpServletRequest request, HttpServletResponse response) {
+		Page<TradeBillDetail> page = tradeBillDetailService.findPage(new Page<TradeBillDetail>(request, response), tradeBillDetail);
+		List<TradeBillDetail> billList = page.getList();
+		for (TradeBillDetail billDetail : billList) {
+			TradeRecordDO tradeRecord = tradeRecordRepository.findByTradeNo(billDetail.getTradeNo());
+			if(tradeRecord==null){
+				billDetail.setBillResult("异常");
+				billDetail.setRemarks("交易记录不存在");
+				continue;
+			}
+			if(!billDetail.getReceiptAmount().equals(tradeRecord.getReceiptAmount())){
+				billDetail.setBillResult("异常");
+				billDetail.setRemarks("交易记录金额不一致");
+				continue;
+			}
+			billDetail.setBillResult("正常");
+		}
+		return page;
+	}
+
+
 	/**
 	 * 查询列表数据
 	 */

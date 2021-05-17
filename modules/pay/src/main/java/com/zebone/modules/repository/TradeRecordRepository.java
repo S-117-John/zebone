@@ -9,4 +9,6 @@ import java.util.List;
 public interface TradeRecordRepository extends JpaRepository<TradeRecordDO,String> {
 
     List<TradeRecordDO> findAll(Specification<TradeRecordDO> specification);
+
+    TradeRecordDO findByTradeNo(String tradeNo);
 }

@@ -49,7 +49,20 @@ public class TradeBillDetail extends DataEntity<TradeBillDetail> {
 	private Date tradeCreateTime;		// 交易创建时间
 	private Date tradeEndTime;		// 交易完成时间
 	private String tradeNo;		// 交易号
-	
+
+	/**
+	 * 对账结果
+	 */
+	private String billResult;
+
+	public String getBillResult() {
+		return billResult;
+	}
+
+	public void setBillResult(String billResult) {
+		this.billResult = billResult;
+	}
+
 	public TradeBillDetail() {
 		this(null);
 	}

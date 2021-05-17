@@ -6,11 +6,19 @@ package com.zebone.modules.pay.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.jeesite.common.lang.DateUtils;
 import com.jeesite.common.utils.excel.ExcelExport;
 import com.jeesite.modules.sys.entity.EmpUser;
 import com.jeesite.modules.sys.entity.UserDataScope;
+import com.zebone.modules.ali.entity.AliConfig;
+import com.zebone.modules.ali.service.AliConfigService;
+import com.zebone.modules.api.dto.AlipayRefuntParam;
+import com.zebone.modules.api.service.AlipayService;
 import com.zebone.modules.entity.ExcelRecord;
+import com.zebone.modules.entity.TradeRecordDO;
+import com.zebone.modules.pay.entity.TradeMonthBillDetail;
 import com.zebone.modules.repository.TradeRecordRepository;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.BeanUtils;
@@ -46,6 +54,12 @@ public class TradeRecordController extends BaseController {
 
 	@Autowired
 	private TradeRecordRepository tradeRecordRepository;
+
+	@Autowired
+	private AliConfigService aliConfigService;
+
+	@Autowired
+	private AlipayService alipayService;
 
 	/**
 	 * 获取数据
@@ -155,4 +169,56 @@ public class TradeRecordController extends BaseController {
 			ee.setDataList(excelRecordList).write(response, fileName);
 		}
 	}
+
+
+	/**
+	 * 启用交易记录
+	 */
+	@RequiresPermissions("pay:tradeRecord:edit")
+	@RequestMapping(value = "refunt")
+	@ResponseBody
+	public String refunt(TradeRecord tradeRecord) {
+
+		TradeRecordDO record = tradeRecordRepository.findOne(tradeRecord.getId());
+
+		if ("1".equals(record.getPayType())) {
+			//微信
+		} else {
+			//支付宝
+			AliConfig aliConfig = new AliConfig();
+			aliConfig.setAppId("2019112869487414");
+
+			List<AliConfig> aliConfigList = aliConfigService.findList(aliConfig);
+			AlipayRefuntParam param = new AlipayRefuntParam();
+			param.setRefundAmount(Double.valueOf(record.getReceiptAmount()));
+			param.setTradeNo(record.getTradeNo());
+			param.setAppId("2019112869487414");
+			TradeRecord refuntRecord = new TradeRecord();
+			refuntRecord.setPayType("2");
+			if (aliConfigList.size() == 1) {
+				Object result = null;
+				try {
+					result = alipayService.refund(param, aliConfigList.get(0));
+				} catch (AlipayApiException e) {
+					return renderResult(Global.FALSE, text("退款失败"));
+				}
+				AlipayTradeRefundResponse alipayTradeRefundResponse = (AlipayTradeRefundResponse) result;
+				BeanUtils.copyProperties(alipayTradeRefundResponse,refuntRecord);
+				refuntRecord.setGmtPayment(alipayTradeRefundResponse.getGmtRefundPay());
+				refuntRecord.setTradeStatus("2");
+				refuntRecord.setOutTradeNo(param.getOutTradeNo());
+				refuntRecord.setTotalAmount("-"+alipayTradeRefundResponse.getRefundFee());
+				if (!alipayTradeRefundResponse.isSuccess()) {
+					refuntRecord.setRemarks(alipayTradeRefundResponse.getSubMsg());
+					return renderResult(Global.FALSE, text("退款失败"));
+				}
+				tradeRecordService.save(refuntRecord);
+			}
+
+
+
+		}
+		return renderResult(Global.TRUE, text("退款成功"));
+	}
+
 }
