@@ -42,7 +42,7 @@
 						<#form:input path="tradeNo" maxlength="255" class="form-control width-120"/>
 					</div>
 				</div>
-				<div class="form-group">
+<!--				<div class="form-group">
 					<label class="control-label">${text('交易金额')}：</label>
 					<div class="control-inline">
 						<#form:input path="totalAmount" maxlength="255" class="form-control width-120"/>
@@ -53,7 +53,7 @@
 					<div class="control-inline">
 						<#form:input path="receiptAmount" maxlength="255" class="form-control width-120"/>
 					</div>
-				</div>
+				</div>-->
 				<div class="form-group">
 					<label class="control-label">${text('交易时间')}：</label>
 					<div class="control-inline">
@@ -70,7 +70,7 @@
 						<#form:select path="tradeStatus" dictType="trade_status" blankOption="true" class="form-control"/>
 					</div>
 				</div>
-				<div class="form-group">
+<!--				<div class="form-group">
 					<label class="control-label">${text('备注')}：</label>
 					<div class="control-inline">
 						<#form:input path="remarks" maxlength="255" class="form-control width-120"/>
@@ -93,7 +93,7 @@
 					<div class="control-inline">
 						<#form:input path="createDate_gte" readonly="true" maxlength="20" class="form-control Wdate-date"
 							dataFormat="date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false,onpicked:function(){createDate_lte.click()}});"/>
-						&nbsp;--&nbsp;
+						&nbsp;&#45;&#45;&nbsp;
 						<#form:input path="createDate_lte" readonly="true" maxlength="20" class="form-control Wdate-date"
 							dataFormat="date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
 					</div>
@@ -103,7 +103,7 @@
 					<div class="control-inline width-120">
 						<#form:select path="status" dictType="sys_search_status" blankOption="true" class="form-control"/>
 					</div>
-				</div>
+				</div>-->
 				<div class="form-group">
 					<button type="submit" class="btn btn-primary btn-sm">${text('查询')}</button>
 					<button type="reset" class="btn btn-default btn-sm">${text('重置')}</button>

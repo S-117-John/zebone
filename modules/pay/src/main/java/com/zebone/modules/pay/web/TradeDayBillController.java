@@ -5,6 +5,7 @@ package com.zebone.modules.pay.web;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 
 import com.alipay.api.AlipayApiException;
 import com.jeesite.common.io.FileUtils;
@@ -19,6 +20,7 @@ import com.zebone.modules.pay.entity.TradeMonthBillDetail;
 import com.zebone.modules.pay.service.TradeBillDetailService;
 import com.zebone.modules.pay.service.TradeDayBillDetailService;
 import com.zebone.modules.repository.DayBillRepository;
+import com.zebone.modules.repository.DetailBillRepository;
 import com.zebone.modules.wx.config.MyWxConfig;
 import com.zebone.modules.wx.entity.WxConfig;
 import com.zebone.modules.wx.sdk.WXPay;
@@ -72,6 +74,9 @@ public class TradeDayBillController extends BaseController {
 
 	@Autowired
 	private DayBillRepository dayBillRepository;
+
+	@Autowired
+	private DetailBillRepository detailBillRepository;
 
 	/**
 	 * 获取数据
@@ -196,15 +201,15 @@ public class TradeDayBillController extends BaseController {
 				List<String[]> contentList = CsvUtil.CSVReadAll(fileName);
 				if(fileName.contains("汇总")){
 					//账号
-					String billNo = StringUtils.substringBetween(contentList.get(0)[0],"[","]");
+					String billNo = StringUtils.substringBetween(contentList.get(0)[0],"[","]").replaceAll("\t","");
 					//订单笔数
-					String billCount = contentList.get(4)[2];
+					String billCount = contentList.get(4)[2].replaceAll("\t","");
 					//退款笔数
-					String refundCount = contentList.get(4)[3];
+					String refundCount = contentList.get(4)[3].replaceAll("\t","");
 					//订单金额
-					String billTotalAmount = contentList.get(4)[4];
+					String billTotalAmount = contentList.get(4)[4].replaceAll("\t","");
 					//实收金额
-					String billReceiptAmount = contentList.get(4)[5];
+					String billReceiptAmount = contentList.get(4)[5].replaceAll("\t","");
 					tradeDayBill.setBillNo(billNo+"_"+dateStr);
 					tradeDayBill.setBillCount(billCount);
 					tradeDayBill.setRefundCount(refundCount);
@@ -220,27 +225,27 @@ public class TradeDayBillController extends BaseController {
 					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					for (int i = 4; i < contentList.size()-4; i++) {
 						//账号
-						String billNo = StringUtils.substringBetween(contentList.get(0)[0],"[","]");
+						String billNo = StringUtils.substringBetween(contentList.get(0)[0],"[","]").replaceAll("\t","");
 						//支付宝交易号
-						String tradeNo = contentList.get(i)[0];
+						String tradeNo = contentList.get(i)[0].replaceAll("\t","");
 						//商户订单
-						String outTradeNo = contentList.get(i)[1];
+						String outTradeNo = contentList.get(i)[1].replaceAll("\t","");
 						//业务类型
-						String bizType = contentList.get(i)[2];
+						String bizType = contentList.get(i)[2].replaceAll("\t","");
 						//商品名称
-						String productName = contentList.get(i)[3];
+						String productName = contentList.get(i)[3].replaceAll("\t","");
 						//交易创建时间
-						Date tradeCreateTime = simpleDateFormat.parse(contentList.get(i)[4]);
+						Date tradeCreateTime = simpleDateFormat.parse(contentList.get(i)[4].replaceAll("\t",""));
 						//交易完成时间
-						Date tradeEndTime = simpleDateFormat.parse(contentList.get(i)[5]);
+						Date tradeEndTime = simpleDateFormat.parse(contentList.get(i)[5].replaceAll("\t",""));
 						//买家账户
-						String buyerId = contentList.get(i)[10];
+						String buyerId = contentList.get(i)[10].replaceAll("\t","");
 						//订单金额
-						String billAmount = contentList.get(i)[11];
+						String billAmount = contentList.get(i)[11].replaceAll("\t","");
 						//实收金额
-						String receiptAmount = contentList.get(i)[12];
+						String receiptAmount = contentList.get(i)[12].replaceAll("\t","");
 						//退款批次
-						String refundBath = contentList.get(i)[21];
+						String refundBath = contentList.get(i)[21].replaceAll("\t","");
 
 						TradeBillDetail tradeBillDetail = new TradeBillDetail();
 						tradeBillDetail.setBillNo(billNo+"_"+dateStr);
@@ -300,8 +305,12 @@ public class TradeDayBillController extends BaseController {
 	@RequiresPermissions("pay:tradeDayBill:edit")
 	@RequestMapping(value = "delete")
 	@ResponseBody
+	@Transactional
 	public String delete(TradeDayBill tradeDayBill) {
-		tradeDayBillService.delete(tradeDayBill);
+		DayBillDO dayBill = new DayBillDO();
+		dayBill.setId(tradeDayBill.getId());
+		dayBillRepository.delete(dayBill);
+		detailBillRepository.deleteByBillNo(tradeDayBill.getBillNo());
 		return renderResult(Global.TRUE, text("删除日账单成功！"));
 	}
 	

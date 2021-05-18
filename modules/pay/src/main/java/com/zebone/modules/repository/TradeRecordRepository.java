@@ -10,5 +10,5 @@ public interface TradeRecordRepository extends JpaRepository<TradeRecordDO,Strin
 
     List<TradeRecordDO> findAll(Specification<TradeRecordDO> specification);
 
-    TradeRecordDO findByTradeNo(String tradeNo);
+    TradeRecordDO findByTradeNoAndTradeStatus(String tradeNo,String tradeStatus);
 }

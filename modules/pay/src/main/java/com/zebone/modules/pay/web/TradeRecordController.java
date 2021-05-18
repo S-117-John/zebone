@@ -186,15 +186,17 @@ public class TradeRecordController extends BaseController {
 		} else {
 			//支付宝
 			AliConfig aliConfig = new AliConfig();
-			aliConfig.setAppId("2019112869487414");
+			aliConfig.setAppId(record.getAppId());
 
 			List<AliConfig> aliConfigList = aliConfigService.findList(aliConfig);
 			AlipayRefuntParam param = new AlipayRefuntParam();
 			param.setRefundAmount(Double.valueOf(record.getReceiptAmount()));
 			param.setTradeNo(record.getTradeNo());
-			param.setAppId("2019112869487414");
+			param.setAppId(record.getAppId());
 			TradeRecord refuntRecord = new TradeRecord();
-			refuntRecord.setPayType("2");
+			refuntRecord.setPayType(record.getPayType());
+			refuntRecord.setOutTradeNo(record.getOutTradeNo());
+			refuntRecord.setAppId(record.getAppId());
 			if (aliConfigList.size() == 1) {
 				Object result = null;
 				try {
@@ -206,7 +208,7 @@ public class TradeRecordController extends BaseController {
 				BeanUtils.copyProperties(alipayTradeRefundResponse,refuntRecord);
 				refuntRecord.setGmtPayment(alipayTradeRefundResponse.getGmtRefundPay());
 				refuntRecord.setTradeStatus("2");
-				refuntRecord.setOutTradeNo(param.getOutTradeNo());
+//				refuntRecord.setOutTradeNo(param.getOutTradeNo());
 				refuntRecord.setTotalAmount("-"+alipayTradeRefundResponse.getRefundFee());
 				if (!alipayTradeRefundResponse.isSuccess()) {
 					refuntRecord.setRemarks(alipayTradeRefundResponse.getSubMsg());

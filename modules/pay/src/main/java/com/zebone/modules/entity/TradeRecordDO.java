@@ -66,4 +66,5 @@ public class TradeRecordDO {
      */
     private String tradeStatus;
 
+    private String appId;
 }

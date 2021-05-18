@@ -79,7 +79,7 @@ public class TradeBillDetailController extends BaseController {
 		Page<TradeBillDetail> page = tradeBillDetailService.findPage(new Page<TradeBillDetail>(request, response), tradeBillDetail);
 		List<TradeBillDetail> billList = page.getList();
 		for (TradeBillDetail billDetail : billList) {
-			TradeRecordDO tradeRecord = tradeRecordRepository.findByTradeNo(billDetail.getTradeNo());
+			TradeRecordDO tradeRecord = tradeRecordRepository.findByTradeNoAndTradeStatus(billDetail.getTradeNo(),"1");
 			if(tradeRecord==null){
 				billDetail.setBillResult("异常");
 				billDetail.setRemarks("交易记录不存在");
