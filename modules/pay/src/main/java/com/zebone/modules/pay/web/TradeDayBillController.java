@@ -5,6 +5,7 @@ package com.zebone.modules.pay.web;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 
 import com.alipay.api.AlipayApiException;
 import com.jeesite.common.io.FileUtils;
@@ -19,6 +20,7 @@ import com.zebone.modules.pay.entity.TradeMonthBillDetail;
 import com.zebone.modules.pay.service.TradeBillDetailService;
 import com.zebone.modules.pay.service.TradeDayBillDetailService;
 import com.zebone.modules.repository.DayBillRepository;
+import com.zebone.modules.repository.DetailBillRepository;
 import com.zebone.modules.wx.config.MyWxConfig;
 import com.zebone.modules.wx.entity.WxConfig;
 import com.zebone.modules.wx.sdk.WXPay;
@@ -72,6 +74,9 @@ public class TradeDayBillController extends BaseController {
 
 	@Autowired
 	private DayBillRepository dayBillRepository;
+
+	@Autowired
+	private DetailBillRepository detailBillRepository;
 
 	/**
 	 * 获取数据
@@ -300,8 +305,12 @@ public class TradeDayBillController extends BaseController {
 	@RequiresPermissions("pay:tradeDayBill:edit")
 	@RequestMapping(value = "delete")
 	@ResponseBody
+	@Transactional
 	public String delete(TradeDayBill tradeDayBill) {
-		tradeDayBillService.delete(tradeDayBill);
+		DayBillDO dayBill = new DayBillDO();
+		dayBill.setId(tradeDayBill.getId());
+		dayBillRepository.delete(dayBill);
+		detailBillRepository.deleteByBillNo(tradeDayBill.getBillNo());
 		return renderResult(Global.TRUE, text("删除日账单成功！"));
 	}
 	
