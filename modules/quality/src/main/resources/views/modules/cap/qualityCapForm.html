@@ -27,7 +27,6 @@
 							<label class="control-label col-sm-2" title="caseId">
 								<span class="required ">*</span> ${text('患儿病案号')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-7">
-								<!--<#form:input path="caseid" maxlength="64" class="form-control required"/>-->
                                 <#form:listselect id="patNo" title="患者选择"
                                 path="caseid" labelPath="caseid"
                                 url="${ctx}/cap/qualityCap/patientSelect" allowClear="false" allowInput="true"
@@ -1333,7 +1332,7 @@
 							<label class="control-label col-sm-2" title="CAP-7-2-7">
 								<span class="required hide">*</span> ${text('普通氧疗终止日期与时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cap_7_2_7" readonly="true" maxlength="20" class="form-control Wdate"
+								<#form:input path="cap_7_2_7" onChange="cap_7_2_8_day()" readonly="true" maxlength="20" class="form-control Wdate"
 									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
@@ -1345,7 +1344,7 @@
 							<label class="control-label col-sm-2" title="CAP-7-2-8">
 								<span class="required hide">*</span> ${text('使用普通氧疗治疗天数')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cap_7_2_8" class="form-control number"/>
+								<#form:input path="cap_7_2_8" class="form-control number" />
 							</div>
 						</div>
 					</div>
@@ -1390,7 +1389,7 @@
 							<label class="control-label col-sm-2" title="CAP-7-3-4">
 								<span class="required hide">*</span> ${text('无创通气治疗终止日期与时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cap_7_3_4" readonly="true" maxlength="20" class="form-control Wdate"
+								<#form:input path="cap_7_3_4" onChange="cap_7_3_5_hour()" readonly="true" maxlength="20" class="form-control Wdate"
 									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
@@ -1447,7 +1446,7 @@
 							<label class="control-label col-sm-2" title="CAP-7-4-4">
 								<span class="required hide">*</span> ${text('有创机械通气治疗终止日期与时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cap_7_4_4" readonly="true" maxlength="20" class="form-control Wdate"
+								<#form:input path="cap_7_4_4" onChange="cap_7_4_5_hour()" readonly="true" maxlength="20" class="form-control Wdate"
 									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
@@ -1504,7 +1503,7 @@
 							<label class="control-label col-sm-2" title="CAP-7-5-4">
 								<span class="required hide">*</span> ${text('体外膜肺治疗终止日期与时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cap_7_5_4" readonly="true" maxlength="20" class="form-control Wdate"
+								<#form:input path="cap_7_5_4" onChange="cap_7_5_5_hour()" readonly="true" maxlength="20" class="form-control Wdate"
 									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
@@ -1863,7 +1862,7 @@
 							<label class="control-label col-sm-2" title="CAP-11-1-2">
 								<span class="required hide">*</span> ${text('患儿接受未剂抗菌药物治疗注射剂输入/注射日期时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cap_11_1_2" readonly="true" maxlength="20" class="form-control Wdate "
+								<#form:input path="cap_11_1_2"  onChange="cap_11_1_3_day()" readonly="true" maxlength="20" class="form-control Wdate "
 									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
@@ -1909,7 +1908,7 @@
 							<label class="control-label col-sm-2" title="CAP-11-2-3">
 								<span class="required hide">*</span> ${text('末剂抗菌药物口服剂或出院日期与时间')}：<i class="fa icon-question "></i></label>
 							<div class="col-sm-10">
-								<#form:input path="cap_11_2_3" readonly="true" maxlength="20" class="form-control Wdate"
+								<#form:input path="cap_11_2_3" onChange="cap_11_2_4_day()" readonly="true" maxlength="20" class="form-control Wdate"
 									dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:true});"/>
 							</div>
 						</div>
@@ -3316,4 +3315,94 @@ $("#inputForm").validate({
             $("input[name='cap_11_2_3']").removeClass("required")
         }
     });
+
+    //使用普通氧疗治疗天数Cap-7-2-8:日期差值计算公式:普通氧疗终止日期与时间(Cap-7-2-7)-普通氧疗起始日期与时间(Cap-7-2-6),单位:天数
+    function cap_7_2_8_day(){//获得天数
+        //date1：开始日期，date2：结束日期
+        //获取开始时间（普通氧疗起始日期与时间(Cap-7-2-6)）
+        var value1 = $("input[name='cap_7_2_6']").val();
+        console.log("开始时间" + value1);
+        //获取结束时间（普通氧疗终止日期与时间(Cap-7-2-7)）
+        var value2 = $("input[name='cap_7_2_7']").val();
+        console.log("结束时间" + value2);
+        var a1 = Date.parse(new Date(value1));
+        var a2 = Date.parse(new Date(value2));
+        var day = parseFloat((a2-a1)/ (1000 * 60 * 60 * 24));//核心：时间戳相减，然后除以天数
+        $("input[name='cap_7_2_8']").val(day);
+    };
+
+    //使用无创通气治疗小时数Cap-7-3-5:日期差值计算公式:无创通气治疗终止日期与时间(Cap-7-3-4)-无创通气治疗起始日期与时间(Cap-7-3-3),单位:小时
+    function cap_7_3_5_hour(){//获得小时
+        //date1：开始日期，date2：结束日期
+        //获取开始时间（普通氧疗起始日期与时间(Cap-7-3-3)）
+        var value1 = $("input[name='cap_7_3_3']").val();
+        console.log("开始时间" + value1);
+        //获取结束时间（普通氧疗终止日期与时间(Cap-7-3-4)）
+        var value2 = $("input[name='cap_7_3_4']").val();
+        console.log("结束时间" + value2);
+        var a1 = Date.parse(new Date(value1));
+        var a2 = Date.parse(new Date(value2));
+        var day = parseFloat((a2-a1)/ (1000 * 60 * 60));//核心：时间戳相减，然后除以天数
+        $("input[name='cap_7_3_5']").val(day);
+    };
+
+    //使用有创机械通气治疗小时数Cap-7-4-5,日期差值计算公式:有创机械通气治疗终止日期与时间(Cap-7-4-4)-有创机械通气治疗起始日期与时间(Cap-7-4-3),单位:小时
+    function cap_7_4_5_hour(){//获得小时
+        //date1：开始日期，date2：结束日期
+        //获取开始时间（普通氧疗起始日期与时间(Cap-7-4-3)）
+        var value1 = $("input[name='cap_7_4_3']").val();
+        console.log("开始时间" + value1);
+        //获取结束时间（普通氧疗终止日期与时间(Cap-7-4-4)）
+        var value2 = $("input[name='cap_7_4_4']").val();
+        console.log("结束时间" + value2);
+        var a1 = Date.parse(new Date(value1));
+        var a2 = Date.parse(new Date(value2));
+        var day = parseFloat((a2-a1)/ (1000 * 60 * 60));//核心：时间戳相减，然后除以天数
+        $("input[name='cap_7_4_5']").val(day);
+    };
+
+    //使用体外膜肺治疗小时数Cap-7-5-5,日期差值计算公式:体外膜肺治疗终止日期与时间(Cap-7-5-4)-体外膜肺治疗起始日期与时间(Cap-7-5-3),单位:小时
+    function cap_7_5_5_hour(){//获得小时
+        //date1：开始日期，date2：结束日期
+        //获取开始时间（普通氧疗起始日期与时间(Cap-7-5-3)）
+        var value1 = $("input[name='cap_7_5_3']").val();
+        console.log("开始时间" + value1);
+        //获取结束时间（普通氧疗终止日期与时间(Cap-7-5-4)）
+        var value2 = $("input[name='cap_7_5_4']").val();
+        console.log("结束时间" + value2);
+        var a1 = Date.parse(new Date(value1));
+        var a2 = Date.parse(new Date(value2));
+        var day = parseFloat((a2-a1)/ (1000 * 60 * 60));//核心：时间戳相减，然后除以天数
+        $("input[name='cap_7_5_5']").val(day);
+    };
+
+    //注射剂输入/注射抗菌药物疗程（天数）:Cap-11-1-3,日期差值计算公式:患儿接受未剂抗菌药物治疗注射剂输入/注射日期时间(Cap-11-1-2)-患儿接受首剂抗菌药物治疗注射剂输入/注射日期时间(Cap-11-1-1),单位:天数
+    function cap_11_1_3_day(){//获得天数
+        //date1：开始日期，date2：结束日期
+        //获取开始时间（普通氧疗起始日期与时间(Cap-11-1-1)）
+        var value1 = $("input[name='cap_11_1_1']").val();
+        console.log("开始时间" + value1);
+        //获取结束时间（普通氧疗终止日期与时间(Cap-11-1-2)）
+        var value2 = $("input[name='cap_11_1_2']").val();
+        console.log("结束时间" + value2);
+        var a1 = Date.parse(new Date(value1));
+        var a2 = Date.parse(new Date(value2));
+        var day = parseFloat((a2-a1)/ (1000 * 60 * 60 * 24));//核心：时间戳相减，然后除以天数
+        $("input[name='cap_11_1_3']").val(day);
+    };
+
+    //口服剂抗菌药物疗程（天数):Cap-11-2-4,日期差值计算公式:末剂抗菌药物口服剂或出院日期与时间(Cap-11-2-3)-改用抗菌药物口服剂首剂日期与时间(Cap-11-2-2),单位:天数
+    function cap_11_2_4_day(){//获得天数
+        //date1：开始日期，date2：结束日期
+        //获取开始时间（普通氧疗起始日期与时间(Cap-11-2-2)）
+        var value1 = $("input[name='cap_11_2_2']").val();
+        console.log("开始时间" + value1);
+        //获取结束时间（普通氧疗终止日期与时间(Cap-11-2-3)）
+        var value2 = $("input[name='cap_11_2_2']").val();
+        console.log("结束时间" + value2);
+        var a1 = Date.parse(new Date(value1));
+        var a2 = Date.parse(new Date(value2));
+        var day = parseFloat((a2-a1)/ (1000 * 60 * 60 * 24));//核心：时间戳相减，然后除以天数
+        $("input[name='cap_11_2_4']").val(day);
+    };
 </script>
