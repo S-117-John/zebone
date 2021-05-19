@@ -161,6 +161,11 @@ public class TradeRecordController extends BaseController {
 		for (TradeRecord record : list) {
 			ExcelRecord excelRecord = new ExcelRecord();
 			BeanUtils.copyProperties(record,excelRecord);
+			if("1".equals(excelRecord.getPayType())){
+				excelRecord.setPayType("微信");
+			}else {
+				excelRecord.setPayType("支付宝");
+			}
 			excelRecordList.add(excelRecord);
 		}
 
