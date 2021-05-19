@@ -22,7 +22,7 @@ public class AlipayRefuntParam {
     @SerializedName("trade_no")
     private String tradeNo;
 
-    @ApiModelProperty(value = "需要退款的金额，该金额不能大于订单金额,单位为元，支持两位小数",required = true)
+    @ApiModelProperty(value = "需要退款的金额,退款金额必须与之前支付的订单金额一致,单位为元，支持两位小数",required = true)
     @SerializedName("refund_amount")
     private Double refundAmount;
 

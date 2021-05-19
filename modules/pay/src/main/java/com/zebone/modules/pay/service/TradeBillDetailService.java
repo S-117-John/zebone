@@ -5,6 +5,7 @@ package com.zebone.modules.pay.service;
 
 import java.util.List;
 
+import com.zebone.modules.pay.entity.TradeRecord;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -72,5 +73,15 @@ public class TradeBillDetailService extends CrudService<TradeBillDetailDao, Trad
 	public void delete(TradeBillDetail tradeBillDetail) {
 		super.delete(tradeBillDetail);
 	}
-	
+
+	/**
+	 * @author 刘旋
+	 * @param tradeBillDetail
+	 * @Description 条件查询
+	 */
+	@Override
+	public List<TradeBillDetail> findList(TradeBillDetail tradeBillDetail){
+		return super.findList(tradeBillDetail);
+	}
+
 }
