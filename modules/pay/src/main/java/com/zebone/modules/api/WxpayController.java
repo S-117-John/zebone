@@ -298,13 +298,13 @@ public class WxpayController {
             data.put("transaction_id",param.getTransactionId());
 
             //商户退款单号
-            data.put("out_refund_no","");
+            data.put("out_refund_no",param.getOutRefundNo());
 
             //订单金额
             data.put("total_fee", param.getTotalFee()+"");
 
             //退款金额
-            data.put("refund_fee",param.getTotalFee()+"");
+            data.put("refund_fee",param.getRefundFee()+"");
 
 
             resp = wxpay.refund(data);
@@ -312,12 +312,12 @@ public class WxpayController {
             tradeRecord.setPayType("1");
             tradeRecord.setOutTradeNo(param.getOutTradeNo());
             tradeRecord.setTotalAmount(param.getTotalFee()/100.00+"");
-            if("FAIL".equals(MapUtils.getString(resp,"result_code"))){
+            if("FAIL".equals(MapUtils.getString(resp,"return_code"))){
                 tradeRecord.setGmtPayment(new Date());
-                tradeRecord.setTradeStatus("3");
-                tradeRecord.setRemarks(MapUtils.getString(resp,"err_code_des"));
+                tradeRecord.setTradeStatus("4");
+                tradeRecord.setRemarks(MapUtils.getString(resp,"return_msg"));
             }
-            if("SUCCESS".equals(MapUtils.getString(resp,"result_code"))){
+            if("SUCCESS".equals(MapUtils.getString(resp,"return_code"))){
                 tradeRecord.setTradeNo(MapUtils.getString(resp,"transaction_id"));
                 tradeRecord.setReceiptAmount(MapUtils.getString(resp,"cash_fee"));
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");

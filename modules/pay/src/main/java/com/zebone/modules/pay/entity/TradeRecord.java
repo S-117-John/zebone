@@ -48,6 +48,12 @@ public class TradeRecord extends DataEntity<TradeRecord> {
 	private String buyerUserId;		// 买家用户id
 	private String appId;
 
+	/**
+	 * 退款单号
+	 */
+	private String refundNo;
+
+
 	public String getAppId() {
 		return appId;
 	}
