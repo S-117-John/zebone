@@ -1,6 +1,10 @@
 package com.zebone.modules.api;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.jeesite.common.shiro.realms.O;
+import com.zebone.modules.api.dto.WxRefuntParam;
 import com.zebone.modules.api.dto.WxpayParam;
 import com.zebone.modules.pay.entity.TradeRecord;
 import com.zebone.modules.pay.service.TradeRecordService;
@@ -22,10 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "api/wx")
@@ -117,7 +118,7 @@ public class WxpayController {
             data.put("out_trade_no", param.getOutTradeNo());
 
             if(!StringUtils.isEmpty(param.getTransactionId())){
-                data.put("transaction_id", param.getOutTradeNo());
+                data.put("transaction_id", param.getTransactionId());
             }
 
             resp = wxpay.orderQuery(data);
@@ -202,5 +203,74 @@ public class WxpayController {
 
         return resp;
     }
-
+    @ApiOperation(httpMethod = "POST",value = "Native支付",notes = "除付款码支付场景以外，商户系统先调用该接口在微信支付服务后台生成预支付交易单，返回正确的预支付交易会话标识后再按Native、JSAPI、APP等不同场景生成交易串调起支付")
+    @RequestMapping("nativePay")
+    public Map<String,String> wxRefund(@RequestBody WxRefuntParam wxRefuntParam){
+        Map<String,String> map=new LinkedHashMap<>();
+        Map<String,String> data=new LinkedHashMap<>();
+        boolean flag=false;
+        Map<String,String> res=null;
+        try {
+            //微信订单号
+            if (StringUtils.hasText(wxRefuntParam.getTransactionId())){
+                data.put("transaction_id",wxRefuntParam.getTransactionId());
+                flag=true;
+            }
+            //商户订单号
+            if (StringUtils.hasText(wxRefuntParam.getOutRefundNo())){
+                data.put("out_trade_no",wxRefuntParam.getOutRefundNo());
+                flag=true;
+            }
+            if (flag){
+                TradeRecord tradeRecord=new TradeRecord();
+                tradeRecord.setOutTradeNo(wxRefuntParam.getOutRefundNo());
+                tradeRecord.setTradeNo(wxRefuntParam.getTransactionId());
+                tradeRecord = tradeRecordService.get(tradeRecord);
+                if (tradeRecord==null){
+                    throw new Exception("查询不到此笔订单");
+                }
+                //商户退款单号
+                data.put("outRefundNo",wxRefuntParam.getOutRefundNo());
+                //退款原因
+                data.put("reason",wxRefuntParam.getReason());
+                //退款金额
+                Map<String,Object> amount=new LinkedHashMap<>();
+                amount.put("refund",wxRefuntParam.getRefund());
+                //交易金额
+                amount.put("total",tradeRecord.getTotalAmount());
+                //币种
+                amount.put("currency","CNY");
+                String json = (String) JSON.toJSONString(amount);
+                data.put("amount",json);
+                //发起退款
+                MyWxConfig config = new MyWxConfig();
+                WXPay wxPay=new WXPay(config);
+                res=wxPay.refund(data);
+                //退款完毕，将记录持久化
+                tradeRecord = new TradeRecord();
+                tradeRecord.setPayType("1");
+                tradeRecord.setOutTradeNo(wxRefuntParam.getOutTradeNo());
+                if("FAIL".equals(MapUtils.getString(res,"result_code"))){
+                    tradeRecord.setGmtPayment(new Date());
+                    tradeRecord.setTradeStatus("3");
+                    tradeRecord.setRemarks(MapUtils.getString(res,"err_code_des"));
+                }
+                if("SUCCESS".equals(MapUtils.getString(res,"result_code"))){
+                    tradeRecord.setTradeNo(MapUtils.getString(res,"transaction_id"));
+                    Map<String,String> maps = (Map<String, String>) JSONObject.parse(res.get("amount"));
+                    Integer refund = Integer.valueOf(maps.get("refund"));
+                    tradeRecord.setTotalAmount(String.valueOf(refund));
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+                    tradeRecord.setGmtPayment(simpleDateFormat.parse(MapUtils.getString(res,"time_end")));
+                    tradeRecord.setTradeStatus("1");
+                }
+                tradeRecordService.save(tradeRecord);
+            }else{
+                throw new Exception("微信订单号和商户订单号不能同时为空");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return res;
+    }
 }

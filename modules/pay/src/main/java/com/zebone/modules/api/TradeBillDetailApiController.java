@@ -34,7 +34,7 @@ public class TradeBillDetailApiController {
     public Map<String,Object> findList(@RequestBody TradeBillDetailParam tradeBillDetailParam){
         map.clear();
         TradeBillDetail tradeBillDetail=new TradeBillDetail();
-        if (StringUtils.isEmpty(tradeBillDetailParam.getOutTradeNo()) && StringUtils.isEmpty(tradeBillDetailParam.getTradeNo())){
+        if (!StringUtils.hasText(tradeBillDetailParam.getOutTradeNo()) && !StringUtils.hasText(tradeBillDetailParam.getTradeNo())){
             map.put("state","error");
             map.put("data","请至少传入一项参数进行筛选");
             return map;

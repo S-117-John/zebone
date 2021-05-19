@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class WxpayParam {
 
+    @ApiModelProperty(value = "app id",required = true)
     @SerializedName("appid")
     private String appId;
 
@@ -17,6 +18,7 @@ public class WxpayParam {
     /**
      * 商品描述
      */
+    @ApiModelProperty(value = "商品描述",required = true)
     @SerializedName("body")
     private String body;
 
@@ -29,18 +31,21 @@ public class WxpayParam {
     /**
      *订单金额
      */
+    @ApiModelProperty(value = "订单金额",required = true)
     @SerializedName("total_fee")
     private Integer totalFee;
 
     /**
      * 付款吗
      */
+    @ApiModelProperty(value = "付款码",required = true)
     @SerializedName("auth_code")
     private String authCode;
 
     /**
      * 微信订单号
      */
+    @ApiModelProperty(value = "微信订单号",required = true)
     @SerializedName("transaction_id")
     private String transactionId;
 }
