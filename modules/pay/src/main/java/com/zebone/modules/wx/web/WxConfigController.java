@@ -10,8 +10,10 @@ import com.zebone.modules.merchant.entity.PayMerchant;
 import com.zebone.modules.merchant.service.PayMerchantService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,6 +36,9 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "${adminPath}/wx/wxConfig")
 public class WxConfigController extends BaseController {
+
+	@Value("${file.baseDir}")
+	private String fillRoot;
 
 	@Autowired
 	private WxConfigService wxConfigService;
@@ -89,6 +94,13 @@ public class WxConfigController extends BaseController {
 	@PostMapping(value = "save")
 	@ResponseBody
 	public String save(@Validated WxConfig wxConfig) {
+		String path = wxConfig.getCertificatePath();
+		if(!StringUtils.isEmpty(path)){
+			if(path.contains("nhis")){
+				path = fillRoot+path.split("nhis")[1];
+			}
+		}
+		wxConfig.setCertificatePath(path);
 		wxConfigService.save(wxConfig);
 		return renderResult(Global.TRUE, text("保存微信配置成功！"));
 	}

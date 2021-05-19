@@ -13,6 +13,7 @@ import java.io.InputStream;
 
 public class MyWxConfig extends WXPayConfig {
 
+
     private byte[] certData;
 
     private String appId;
@@ -34,12 +35,15 @@ public class MyWxConfig extends WXPayConfig {
     }
 
     public MyWxConfig() throws Exception {
-//        String certPath = "/path/to/apiclient_cert.p12";
-//        File file = new File(certPath);
-//        InputStream certStream = new FileInputStream(file);
-//        this.certData = new byte[(int) file.length()];
-//        certStream.read(this.certData);
-//        certStream.close();
+
+    }
+
+    public MyWxConfig(String certPath) throws Exception {
+        File file = new File(certPath);
+        InputStream certStream = new FileInputStream(file);
+        this.certData = new byte[(int) file.length()];
+        certStream.read(this.certData);
+        certStream.close();
     }
 
 
