@@ -12,6 +12,7 @@ import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.google.gson.Gson;
 import com.zebone.modules.ali.entity.AliConfig;
 import com.zebone.modules.api.dto.AlipayParam;
+import com.zebone.modules.api.dto.AlipayPrecreateParam;
 import com.zebone.modules.api.dto.AlipayRefuntParam;
 import org.springframework.stereotype.Service;
 
@@ -110,7 +111,7 @@ public class AlipayService {
     }
 
 
-    public Object precreate(AlipayParam aliAlipayParam, AliConfig aliConfig) throws AlipayApiException {
+    public AlipayTradePrecreateResponse precreate(AlipayPrecreateParam aliAlipayParam, AliConfig aliConfig) throws AlipayApiException {
         String gateway="";
         String appId="";
         String privateKey="";

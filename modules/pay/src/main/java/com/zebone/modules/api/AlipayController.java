@@ -11,9 +11,7 @@ import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.google.gson.Gson;
 import com.zebone.modules.ali.entity.AliConfig;
 import com.zebone.modules.ali.service.AliConfigService;
-import com.zebone.modules.api.dto.AlipayBillParam;
-import com.zebone.modules.api.dto.AlipayRefuntParam;
-import com.zebone.modules.api.dto.AlipayParam;
+import com.zebone.modules.api.dto.*;
 import com.zebone.modules.api.service.AlipayService;
 import com.zebone.modules.pay.entity.TradeRecord;
 import com.zebone.modules.pay.service.TradeRecordService;
@@ -132,31 +130,31 @@ public class AlipayController {
         return response;
     }
 
-    @ApiOperation(httpMethod = "POST",value = "统一收单线下交易预创建",notes = "收银员通过收银台或商户后台调用支付宝接口，生成二维码后，展示给用户，由用户扫描二维码完成订单支付。")
-    @RequestMapping("aliPayQrcode")
-    public Object aliPayQrcode(@RequestBody AlipayParam alipayParam, @ApiIgnore HttpServletRequest request, @ApiIgnore HttpServletResponse response) throws AlipayApiException {
-        Object result = null;
-        AliConfig aliConfig = new AliConfig();
-        aliConfig.setAppId(alipayParam.getAppId());
-
-        List<AliConfig> aliConfigList = aliConfigService.findList(aliConfig);
-        if(aliConfigList.size()==1){
-            result = alipayService.tradePayQrCode(alipayParam,aliConfigList.get(0));
-
-            AlipayTradePrecreateResponse alipayTradePrecreateResponse = (AlipayTradePrecreateResponse) result;
-            TradeRecord tradeRecord = new TradeRecord();
-            BeanUtils.copyProperties(alipayTradePrecreateResponse,tradeRecord);
-            if(!alipayTradePrecreateResponse.isSuccess()){
-                tradeRecord.setRemarks(alipayTradePrecreateResponse.getSubMsg());
-            }
-            tradeRecord.setOutTradeNo(alipayParam.getOutTradeNo());
-            tradeRecord.setPayType("1");
-            tradeRecordService.save(tradeRecord);
-        }
-
-
-        return result;
-    }
+//    @ApiOperation(httpMethod = "POST",value = "统一收单线下交易预创建",notes = "收银员通过收银台或商户后台调用支付宝接口，生成二维码后，展示给用户，由用户扫描二维码完成订单支付。")
+//    @RequestMapping("aliPayQrcode")
+//    public Object aliPayQrcode(@RequestBody AlipayParam alipayParam, @ApiIgnore HttpServletRequest request, @ApiIgnore HttpServletResponse response) throws AlipayApiException {
+//        Object result = null;
+//        AliConfig aliConfig = new AliConfig();
+//        aliConfig.setAppId(alipayParam.getAppId());
+//
+//        List<AliConfig> aliConfigList = aliConfigService.findList(aliConfig);
+//        if(aliConfigList.size()==1){
+//            result = alipayService.tradePayQrCode(alipayParam,aliConfigList.get(0));
+//
+//            AlipayTradePrecreateResponse alipayTradePrecreateResponse = (AlipayTradePrecreateResponse) result;
+//            TradeRecord tradeRecord = new TradeRecord();
+//            BeanUtils.copyProperties(alipayTradePrecreateResponse,tradeRecord);
+//            if(!alipayTradePrecreateResponse.isSuccess()){
+//                tradeRecord.setRemarks(alipayTradePrecreateResponse.getSubMsg());
+//            }
+//            tradeRecord.setOutTradeNo(alipayParam.getOutTradeNo());
+//            tradeRecord.setPayType("1");
+//            tradeRecordService.save(tradeRecord);
+//        }
+//
+//
+//        return result;
+//    }
 
     @ApiOperation(httpMethod = "POST",value = "统一收单交易退款接口",notes = "当交易发生之后一段时间内，由于买家或者卖家的原因需要退款时，卖家可以通过退款接口将支付款退还给买家，支付宝将在收到退款请求并且验证成功之后，按照退款规则将支付款按原路退到买家帐号上。 交易超过约定时间（签约时设置的可退款时间）的订单无法进行退款 支付宝退款支持单笔交易分多次退款，多次退款需要提交原支付订单的商户订单号和设置不同的退款单号。一笔退款失败后重新提交，要采用原来的退款单号。总退款金额不能超过用户实际支付金额")
     @RequestMapping("refund")
@@ -192,8 +190,8 @@ public class AlipayController {
 
     @ApiOperation(httpMethod = "POST",value = "统一收单线下交易预创建",notes = "收银员通过收银台或商户后台调用支付宝接口，生成二维码后，展示给用户，由用户扫描二维码完成订单支付")
     @RequestMapping("precreate")
-    public Object precreate(@RequestBody AlipayParam alipayParam, HttpServletRequest request, HttpServletResponse response) throws InvocationTargetException, IllegalAccessException, AlipayApiException, AlipayApiException {
-        Object result = null;
+    public AlipayPrecreateResponse precreate(@RequestBody AlipayPrecreateParam alipayParam, HttpServletRequest request, HttpServletResponse response) throws InvocationTargetException, IllegalAccessException, AlipayApiException, AlipayApiException {
+        AlipayTradePrecreateResponse result = null;
         AliConfig aliConfig = new AliConfig();
         aliConfig.setAppId(alipayParam.getAppId());
 
@@ -201,23 +199,23 @@ public class AlipayController {
         if(aliConfigList.size()==1){
             result = alipayService.precreate(alipayParam,aliConfigList.get(0));
 
-            AlipayTradePayResponse alipayTradePayResponse = (AlipayTradePayResponse) result;
             TradeRecord tradeRecord = new TradeRecord();
-            BeanUtils.copyProperties(alipayTradePayResponse,tradeRecord);
+            BeanUtils.copyProperties(result,tradeRecord);
 
-            if(alipayTradePayResponse.isSuccess()){
+            if(result.isSuccess()){
                 tradeRecord.setTradeStatus("5");
             }
 
-            if(!alipayTradePayResponse.isSuccess()){
-                tradeRecord.setRemarks(alipayTradePayResponse.getSubMsg());
+            if(!result.isSuccess()){
+                tradeRecord.setRemarks(result.getSubMsg());
             }
             tradeRecord.setOutTradeNo(alipayParam.getOutTradeNo());
             tradeRecord.setPayType("1");
             tradeRecordService.save(tradeRecord);
         }
 
-
-        return result;
+        AlipayPrecreateResponse alipayPrecreateResponse = new AlipayPrecreateResponse();
+        BeanUtils.copyProperties(result,alipayPrecreateResponse);
+        return alipayPrecreateResponse;
     }
 }
