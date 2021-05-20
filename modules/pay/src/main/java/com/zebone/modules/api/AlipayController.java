@@ -47,14 +47,14 @@ public class AlipayController {
 
     @ApiOperation(httpMethod = "POST",value = "统一收单交易支付接口",notes = "收银员使用扫码设备读取用户手机支付宝“付款码”信息后，将二维码或条码信息通过本接口上送至支付宝发起支付")
     @RequestMapping("aliPayBarcode")
-    public Object aliPayBarcode(@RequestBody AlipayParam alipayParam, HttpServletRequest request, HttpServletResponse response) throws InvocationTargetException, IllegalAccessException, AlipayApiException, AlipayApiException {
-        Object result = null;
+    public AlipayPayResponse aliPayBarcode(@RequestBody AlipayParam alipayParam, HttpServletRequest request, HttpServletResponse response) throws InvocationTargetException, IllegalAccessException, AlipayApiException, AlipayApiException {
+        AlipayTradePayResponse result = null;
         AliConfig aliConfig = new AliConfig();
         aliConfig.setAppId(alipayParam.getAppId());
 
         List<AliConfig> aliConfigList = aliConfigService.findList(aliConfig);
         if(aliConfigList.size()==1){
-            result = alipayService.tradePay(alipayParam,aliConfigList.get(0));
+            result = (AlipayTradePayResponse) alipayService.tradePay(alipayParam,aliConfigList.get(0));
 
             AlipayTradePayResponse alipayTradePayResponse = (AlipayTradePayResponse) result;
             TradeRecord tradeRecord = new TradeRecord();
@@ -74,8 +74,9 @@ public class AlipayController {
             tradeRecordService.save(tradeRecord);
         }
 
-
-        return result;
+        AlipayPayResponse alipayPayResponse=new AlipayPayResponse();
+        BeanUtils.copyProperties(result,alipayPayResponse);
+        return alipayPayResponse;
     }
 
 
@@ -94,7 +95,7 @@ public class AlipayController {
      */
     @ApiOperation(httpMethod = "POST",value = "支付宝查询对账单下载地址",notes = "为方便商户快速查账，支持商户通过本接口获取商户离线账单下载地址")
     @RequestMapping("aliDownLoadBill")
-    public Object downLoadAliBill(@RequestBody AlipayBillParam alipayParam, HttpServletRequest req, HttpServletResponse res) throws IOException, AlipayApiException {
+    public AlipayDownloadurlQueryResponse  downLoadAliBill(@RequestBody AlipayBillParam alipayParam, HttpServletRequest req, HttpServletResponse res) throws IOException, AlipayApiException {
         String filePath = "";
         String jsonStr = "";
         String gateway = "";
@@ -104,7 +105,7 @@ public class AlipayController {
         String alipayPublicKey = "";
         AliConfig aliConfig = new AliConfig();
         aliConfig.setAppId(alipayParam.getAppId());
-
+        AlipayDownloadurlQueryResponse alipayDownloadurlQueryResponse=new AlipayDownloadurlQueryResponse();
         List<AliConfig> aliConfigList = aliConfigService.findList(aliConfig);
         AliConfig ac = aliConfigList.get(0);
         if (ac != null) {
@@ -125,9 +126,9 @@ public class AlipayController {
         request.setBizContent("{\"bill_type\":\"trade\",\"bill_date\":\""+ alipayParam.getBillDate() + "\"}");
 
         AlipayDataDataserviceBillDownloadurlQueryResponse response = alipayClient.execute(request);
-
+        BeanUtils.copyProperties(response,alipayDownloadurlQueryResponse);
         // 获得下载对账单地址
-        return response;
+        return alipayDownloadurlQueryResponse;
     }
 
 //    @ApiOperation(httpMethod = "POST",value = "统一收单线下交易预创建",notes = "收银员通过收银台或商户后台调用支付宝接口，生成二维码后，展示给用户，由用户扫描二维码完成订单支付。")
@@ -158,14 +159,14 @@ public class AlipayController {
 
     @ApiOperation(httpMethod = "POST",value = "统一收单交易退款接口",notes = "当交易发生之后一段时间内，由于买家或者卖家的原因需要退款时，卖家可以通过退款接口将支付款退还给买家，支付宝将在收到退款请求并且验证成功之后，按照退款规则将支付款按原路退到买家帐号上。 交易超过约定时间（签约时设置的可退款时间）的订单无法进行退款 支付宝退款支持单笔交易分多次退款，多次退款需要提交原支付订单的商户订单号和设置不同的退款单号。一笔退款失败后重新提交，要采用原来的退款单号。总退款金额不能超过用户实际支付金额")
     @RequestMapping("refund")
-    public Object refund(@RequestBody AlipayRefuntParam param) throws AlipayApiException {
-        Object result = null;
+    public AlipayRefundResponse refund(@RequestBody AlipayRefuntParam param) throws AlipayApiException {
+        AlipayTradeRefundResponse result=null;
         AliConfig aliConfig = new AliConfig();
         aliConfig.setAppId(param.getAppId());
 
         List<AliConfig> aliConfigList = aliConfigService.findList(aliConfig);
         if(aliConfigList.size()==1){
-            result = alipayService.refund(param,aliConfigList.get(0));
+            result = (AlipayTradeRefundResponse) alipayService.refund(param,aliConfigList.get(0));
 
             AlipayTradeRefundResponse alipayTradeRefundResponse = (AlipayTradeRefundResponse) result;
             TradeRecord tradeRecord = new TradeRecord();
@@ -181,11 +182,12 @@ public class AlipayController {
             tradeRecord.setOutTradeNo(param.getOutTradeNo());
             tradeRecord.setPayType("1");
             tradeRecord.setTotalAmount("-"+alipayTradeRefundResponse.getRefundFee());
+            tradeRecord.setAppId(param.getAppId());
             tradeRecordService.save(tradeRecord);
         }
-
-
-        return result;
+        AlipayRefundResponse alipayRefundResponse=new AlipayRefundResponse();
+        BeanUtils.copyProperties(result,alipayRefundResponse);
+        return alipayRefundResponse;
     }
 
     @ApiOperation(httpMethod = "POST",value = "统一收单线下交易预创建",notes = "收银员通过收银台或商户后台调用支付宝接口，生成二维码后，展示给用户，由用户扫描二维码完成订单支付")
@@ -210,7 +212,8 @@ public class AlipayController {
                 tradeRecord.setRemarks(result.getSubMsg());
             }
             tradeRecord.setOutTradeNo(alipayParam.getOutTradeNo());
-            tradeRecord.setPayType("1");
+            tradeRecord.setPayType("2");
+            tradeRecord.setAppId(alipayParam.getAppId());
             tradeRecordService.save(tradeRecord);
         }
 

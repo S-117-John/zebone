@@ -2,7 +2,6 @@ package com.zebone.modules.api;
 
 
 import com.zebone.modules.api.dto.WxpayParam;
-import com.zebone.modules.api.dto.WxpayRefundParam;
 import com.zebone.modules.pay.entity.TradeRecord;
 import com.zebone.modules.pay.service.TradeRecordService;
 import com.zebone.modules.wx.config.MyWxConfig;
@@ -58,6 +57,7 @@ public class WxpayController {
             resp = wxpay.microPay(data);
             TradeRecord tradeRecord = new TradeRecord();
             tradeRecord.setPayType("1");
+            tradeRecord.setAppId(param.getAppId());
             tradeRecord.setOutTradeNo(param.getOutTradeNo());
             tradeRecord.setTotalAmount(param.getTotalFee()/100.00+"");
             if("FAIL".equals(MapUtils.getString(resp,"result_code"))){
@@ -119,6 +119,7 @@ public class WxpayController {
             TradeRecord tradeRecord = new TradeRecord();
             tradeRecord.setPayType("1");
             tradeRecord.setOutTradeNo(param.getOutTradeNo());
+            tradeRecord.setAppId(param.getAppId());
             if("FAIL".equals(MapUtils.getString(resp,"result_code"))){
                 tradeRecord.setGmtPayment(new Date());
                 tradeRecord.setTradeStatus("3");
@@ -172,6 +173,7 @@ public class WxpayController {
             TradeRecord tradeRecord = new TradeRecord();
             tradeRecord.setPayType("1");
             tradeRecord.setOutTradeNo(param.getOutTradeNo());
+            tradeRecord.setAppId(param.getAppId());
             tradeRecord.setTotalAmount(param.getTotalFee()/100.00+"");
             if("FAIL".equals(MapUtils.getString(resp,"result_code"))){
                 tradeRecord.setGmtPayment(new Date());
@@ -199,65 +201,5 @@ public class WxpayController {
     }
 
 
-    @ApiOperation(httpMethod = "POST",value = "申请退款",notes = "当交易发生之后一段时间内，由于买家或者卖家的原因需要退款时，卖家可以通过退款接口将支付款退还给买家，微信支付将在收到退款请求并且验证成功之后，按照退款规则将支付款按原路退到买家账号上")
-    @RequestMapping("refund")
-    public Object refund(@RequestBody WxpayRefundParam param){
-        Map<String, String> resp = null;
-        try {
 
-            WxConfig wxConfig = new WxConfig();
-            wxConfig.setAppId(param.getAppId());
-            List<WxConfig> wxConfigList = wxConfigService.findList(wxConfig);
-            wxConfig = wxConfigList.stream().findFirst().orElseThrow(()->new Exception("未查询到微信支付信息"));
-
-            MyWxConfig config = new MyWxConfig(wxConfig.getCertificatePath());
-            config.setApiKey(wxConfig.getPaySignKey());
-            config.setAppId(param.getAppId());
-            config.setMchId(wxConfig.getMchId());
-            WXPay wxpay = new WXPay(config);
-            Map<String, String> data = new HashMap<String, String>();
-            //商户订单号
-            data.put("out_trade_no", param.getOutTradeNo());
-            //微信支付订单号
-            data.put("transaction_id",param.getTransactionId());
-
-            //商户退款单号
-            data.put("out_refund_no",param.getOutRefundNo());
-
-            //订单金额
-            data.put("total_fee", param.getTotalFee()+"");
-
-            //退款金额
-            data.put("refund_fee",param.getRefundFee()+"");
-
-
-            resp = wxpay.refund(data);
-            TradeRecord tradeRecord = new TradeRecord();
-            tradeRecord.setPayType("1");
-            tradeRecord.setOutTradeNo(param.getOutTradeNo());
-            tradeRecord.setTotalAmount(param.getTotalFee()/100.00+"");
-            if("FAIL".equals(MapUtils.getString(resp,"return_code"))){
-                tradeRecord.setGmtPayment(new Date());
-                tradeRecord.setTradeStatus("4");
-                tradeRecord.setRemarks(MapUtils.getString(resp,"return_msg"));
-            }
-            if("SUCCESS".equals(MapUtils.getString(resp,"return_code"))){
-                tradeRecord.setTradeNo(MapUtils.getString(resp,"transaction_id"));
-                tradeRecord.setReceiptAmount(MapUtils.getString(resp,"cash_fee"));
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-                tradeRecord.setGmtPayment(simpleDateFormat.parse(MapUtils.getString(resp,"time_end")));
-                tradeRecord.setTradeStatus("1");
-
-            }
-
-            tradeRecordService.save(tradeRecord);
-
-            System.out.println(resp);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        return resp;
-    }
 }

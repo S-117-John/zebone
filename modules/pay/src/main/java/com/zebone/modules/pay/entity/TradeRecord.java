@@ -32,6 +32,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 		@Column(name="buyer_logon_id", attrName="buyerLogonId", label="买家账号"),
 		@Column(name="buyer_user_id", attrName="buyerUserId", label="买家用户id"),
 		@Column(name="app_id", attrName="appId", label="app id"),
+		@Column(name="refund_no", attrName="refundNo", label="退款单号"),
 	}, orderBy="a.update_date DESC"
 )
 public class TradeRecord extends DataEntity<TradeRecord> {
@@ -182,5 +183,12 @@ public class TradeRecord extends DataEntity<TradeRecord> {
 	public void setCreateDate_lte(Date createDate) {
 		sqlMap.getWhere().and("create_date", QueryType.LTE, createDate);
 	}
-	
+
+	public String getRefundNo() {
+		return refundNo;
+	}
+
+	public void setRefundNo(String refundNo) {
+		this.refundNo = refundNo;
+	}
 }
