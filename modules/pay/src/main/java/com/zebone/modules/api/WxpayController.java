@@ -1,6 +1,9 @@
 package com.zebone.modules.api;
 
 
+import com.zebone.modules.api.dto.WxMicropayResponse;
+import com.zebone.modules.api.dto.WxNativePayResponse;
+import com.zebone.modules.api.dto.WxOrderqueryRespnonse;
 import com.zebone.modules.api.dto.WxpayParam;
 import com.zebone.modules.pay.entity.TradeRecord;
 import com.zebone.modules.pay.service.TradeRecordService;
@@ -11,6 +14,7 @@ import com.zebone.modules.wx.service.WxConfigService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections.MapUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,7 +38,7 @@ public class WxpayController {
 
     @ApiOperation(httpMethod = "POST",value = "付款码支付",notes = "收银员使用扫码设备读取微信用户付款码以后，二维码或条码信息会传送至商户收银台，由商户收银台或者商户后台调用该接口发起支付")
     @RequestMapping("micropay")
-    public Object micropay(@RequestBody WxpayParam param){
+    public WxMicropayResponse micropay(@RequestBody WxpayParam param){
         Map<String, String> resp = null;
         try {
             MyWxConfig config = new MyWxConfig();
@@ -80,9 +84,10 @@ public class WxpayController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        WxMicropayResponse wxMicropayResponse=new WxMicropayResponse();
+        BeanUtils.copyProperties(resp,wxMicropayResponse);
 
-
-        return resp;
+        return wxMicropayResponse;
     }
 
     @ApiOperation(httpMethod = "POST",value = "查询订单",notes = "该接口提供所有微信支付订单的查询，商户可以通过查询订单接口主动查询订单状态，完成下一步的业务逻辑。\n" +
@@ -94,7 +99,7 @@ public class WxpayController {
             "◆ 调用付款码支付API，返回USERPAYING的状态；\n" +
             "◆ 调用关单或撤销接口API之前，需确认支付状态")
     @RequestMapping("orderquery")
-    public Object orderquery(@RequestBody WxpayParam param){
+    public WxOrderqueryRespnonse orderquery(@RequestBody WxpayParam param){
         Map<String, String> resp = null;
         try {
             MyWxConfig config = new MyWxConfig();
@@ -141,14 +146,14 @@ public class WxpayController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-        return resp;
+        WxOrderqueryRespnonse wxOrderqueryRespnonse=new WxOrderqueryRespnonse();
+        BeanUtils.copyProperties(resp,wxOrderqueryRespnonse);
+        return wxOrderqueryRespnonse;
     }
 
     @ApiOperation(httpMethod = "POST",value = "Native支付",notes = "除付款码支付场景以外，商户系统先调用该接口在微信支付服务后台生成预支付交易单，返回正确的预支付交易会话标识后再按Native、JSAPI、APP等不同场景生成交易串调起支付")
     @RequestMapping("nativePay")
-    public Object nativePay(@RequestBody WxpayParam param){
+    public WxNativePayResponse nativePay(@RequestBody WxpayParam param){
         Map<String, String> resp = null;
         try {
             MyWxConfig config = new MyWxConfig();
@@ -195,9 +200,10 @@ public class WxpayController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        WxNativePayResponse wxNativePayResponse=new WxNativePayResponse();
+        BeanUtils.copyProperties(resp,wxNativePayResponse);
 
-
-        return resp;
+        return wxNativePayResponse;
     }
 
 
