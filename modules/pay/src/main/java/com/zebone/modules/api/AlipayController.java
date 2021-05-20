@@ -4,10 +4,7 @@ import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.request.AlipayDataDataserviceBillDownloadurlQueryRequest;
-import com.alipay.api.response.AlipayDataDataserviceBillDownloadurlQueryResponse;
-import com.alipay.api.response.AlipayTradePayResponse;
-import com.alipay.api.response.AlipayTradePrecreateResponse;
-import com.alipay.api.response.AlipayTradeRefundResponse;
+import com.alipay.api.response.*;
 import com.google.gson.Gson;
 import com.zebone.modules.ali.entity.AliConfig;
 import com.zebone.modules.ali.service.AliConfigService;
@@ -221,4 +218,40 @@ public class AlipayController {
         BeanUtils.copyProperties(result,alipayPrecreateResponse);
         return alipayPrecreateResponse;
     }
+
+
+    @ApiOperation(httpMethod = "POST",value = "统一收单线下交易查询",notes = "该接口提供所有支付宝支付订单的查询，商户可以通过该接口主动查询订单状态，完成下一步的业务逻辑。 需要调用查询接口的情况： 当商户后台、网络、服务器等出现异常，商户系统最终未接收到支付通知； 调用支付接口后，返回系统错误或未知交易状态情况； 调用alipay.trade.pay，返回INPROCESS的状态； 调用alipay.trade.cancel之前，需确认支付状态")
+    @RequestMapping("query")
+    public AlipayQueryResponse query(@RequestBody AlipayQueryParam alipayParam, HttpServletRequest request, HttpServletResponse response) throws InvocationTargetException, IllegalAccessException, AlipayApiException, AlipayApiException {
+        AlipayTradeQueryResponse result = null;
+        AliConfig aliConfig = new AliConfig();
+        aliConfig.setAppId(alipayParam.getAppId());
+
+        List<AliConfig> aliConfigList = aliConfigService.findList(aliConfig);
+        if(aliConfigList.size()==1){
+            result = (AlipayTradeQueryResponse) alipayService.query(alipayParam,aliConfigList.get(0));
+
+            AlipayTradeQueryResponse alipayTradePayResponse = (AlipayTradeQueryResponse) result;
+            TradeRecord tradeRecord = new TradeRecord();
+            BeanUtils.copyProperties(alipayTradePayResponse,tradeRecord);
+
+            if(alipayTradePayResponse.isSuccess()){
+                tradeRecord.setTradeStatus("1");
+            }
+
+            if(!alipayTradePayResponse.isSuccess()){
+                tradeRecord.setRemarks(alipayTradePayResponse.getSubMsg());
+                tradeRecord.setTradeStatus("3");
+            }
+            tradeRecord.setOutTradeNo(alipayParam.getOutTradeNo());
+            tradeRecord.setPayType("2");
+            tradeRecord.setAppId(alipayParam.getAppId());
+            tradeRecordService.save(tradeRecord);
+        }
+
+        AlipayQueryResponse alipayPayResponse=new AlipayQueryResponse();
+        BeanUtils.copyProperties(result,alipayPayResponse);
+        return alipayPayResponse;
+    }
+
 }

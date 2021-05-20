@@ -5,14 +5,17 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.request.AlipayTradePayRequest;
 import com.alipay.api.request.AlipayTradePrecreateRequest;
+import com.alipay.api.request.AlipayTradeQueryRequest;
 import com.alipay.api.request.AlipayTradeRefundRequest;
 import com.alipay.api.response.AlipayTradePayResponse;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
+import com.alipay.api.response.AlipayTradeQueryResponse;
 import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.google.gson.Gson;
 import com.zebone.modules.ali.entity.AliConfig;
 import com.zebone.modules.api.dto.AlipayParam;
 import com.zebone.modules.api.dto.AlipayPrecreateParam;
+import com.zebone.modules.api.dto.AlipayQueryParam;
 import com.zebone.modules.api.dto.AlipayRefuntParam;
 import org.springframework.stereotype.Service;
 
@@ -133,6 +136,34 @@ public class AlipayService {
 
         //3.使用SDK，调用交易下单接口
         AlipayTradePrecreateResponse alipayResponse = null;
+        alipayResponse = alipayClient.execute(alipayRequest);
+
+        return alipayResponse;
+    }
+
+
+    public Object query(AlipayQueryParam aliAlipayParam, AliConfig aliConfig) throws AlipayApiException {
+        String gateway="";
+        String appId="";
+        String privateKey="";
+        String alipayPublicKey="";
+        if(aliConfig!=null){
+            gateway = aliConfig.getGateway();
+            appId = aliConfig.getAppId();
+            privateKey = aliConfig.getPrivateKey();
+            alipayPublicKey = aliConfig.getPayPublicKey();
+        }
+        String charset = "GBK";
+        Gson gson = new Gson();
+        String bizContent = gson.toJson(aliAlipayParam);
+
+        // 2.1使用SDK，构建群发请求模型
+        AlipayClient alipayClient = new DefaultAlipayClient(gateway, appId, privateKey, "json", charset, alipayPublicKey,"RSA2");
+        AlipayTradeQueryRequest alipayRequest = new AlipayTradeQueryRequest();
+        alipayRequest.setBizContent(bizContent);
+
+        //3.使用SDK，调用交易下单接口
+        AlipayTradeQueryResponse alipayResponse = null;
         alipayResponse = alipayClient.execute(alipayRequest);
 
         return alipayResponse;
