@@ -30,7 +30,7 @@ import javax.persistence.EntityManagerFactory;
  */
 @SpringBootApplication(scanBasePackages={"com.jeesite.modules","com.zebone"})
 @EntityScan(basePackages = {"com.zebone"})
-@MapperScan("com.zebone.quality.modules")
+@MapperScan("com.zebone")
 @EnableJpaAuditing
 @EnableScheduling
 @EnableJpaRepositories(basePackages = {"com.zebone"})

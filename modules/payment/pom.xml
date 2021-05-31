@@ -68,6 +68,12 @@
 			<version>4.4</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/oracle.jdbc.oracledriver/ojdbc6 -->
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0.3</version>
+		</dependency>
 
 
 		<!--		<dependency>-->

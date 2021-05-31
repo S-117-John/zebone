@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zebone.modules.api.dao.TradeRecordMapper">
+	<select id="getPayRecord" resultType="com.zebone.modules.api.dto.PayRecordResponse">
+		select
+			'支付平台' as settBusiName,
+			to_char(p.gmt_payment,'yyyy-MM-dd') as trxDate,
+			to_char(p.gmt_payment,'yyyy-MM-dd hh:mm:ss') as trxTime,
+			p.total_amount as payAmount,
+			p.OUT_TRADE_NO as merOrderNo,
+			p.trade_no as tradeNo
+		from
+			payment_record_trade p
+		where
+			(p.trade_status = '1'
+		    or p.trade_status = '2')
+			<if test="outTradeNo != null and  outTradeNo != ''">
+				and p.OUT_TRADE_NO = #{outTradeNo}
+			</if>
+			<if test="tradeNo != null and  tradeNo != ''">
+				and p.trade_no = #{outTradeNo}
+			</if>
+			<if test="timeStamp != null and  timeStamp != ''">
+				and to_char(p.gmt_payment,'yyyy-MM-dd') = #{timeStamp,jdbcType=VARCHAR}
+			</if>
+			<if test="payMode != null and  payMode != ''">
+				and p.pay_type = #{payMode}
+			</if>
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
