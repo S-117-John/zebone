@@ -19,7 +19,7 @@ public class PayRecordParam {
     @ApiModelProperty(value = "交易号")
     private String tradeNo;
 
-    @ApiModelProperty(value = "交易时间格式：YYYY-MM-DD 24HH:MI:SS")
+    @ApiModelProperty(value = "交易时间格式：yyyyMMdd")
     private String timeStamp;
 
     @ApiModelProperty(value = "交易渠道 1：微信支付 2：支付宝")

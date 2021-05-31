@@ -4,8 +4,8 @@
 	<select id="getPayRecord" resultType="com.zebone.modules.api.dto.PayRecordResponse">
 		select
 			'支付平台' as settBusiName,
-			to_char(p.gmt_payment,'yyyy-MM-dd') as trxDate,
-			to_char(p.gmt_payment,'yyyy-MM-dd hh:mm:ss') as trxTime,
+			to_char(p.gmt_payment,'yyyyMMdd') as trxDate,
+			to_char(p.gmt_payment,'yyyyMMddhhmmss') as trxTime,
 			p.total_amount as payAmount,
 			p.OUT_TRADE_NO as merOrderNo,
 			p.trade_no as tradeNo
@@ -21,7 +21,7 @@
 				and p.trade_no = #{outTradeNo}
 			</if>
 			<if test="timeStamp != null and  timeStamp != ''">
-				and to_char(p.gmt_payment,'yyyy-MM-dd') = #{timeStamp,jdbcType=VARCHAR}
+				and to_char(p.gmt_payment,'yyyyMMdd') = #{timeStamp,jdbcType=VARCHAR}
 			</if>
 			<if test="payMode != null and  payMode != ''">
 				and p.pay_type = #{payMode}
