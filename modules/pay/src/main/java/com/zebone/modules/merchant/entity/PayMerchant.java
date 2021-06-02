@@ -15,7 +15,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
  * @author lijin
  * @version 2020-12-08
  */
-@Table(name="biz_pay_merchant", alias="a", columns={
+@Table(name="payment_merchant", alias="a", columns={
 		@Column(name="id", attrName="id", label="id", isPK=true),
 		@Column(includeEntity=DataEntity.class),
 		@Column(name="merchant_no", attrName="merchantNo", label="商户编号"),

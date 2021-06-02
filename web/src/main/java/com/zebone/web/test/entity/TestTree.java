@@ -1,16 +1,15 @@
 /**
  * Copyright (c) 2013-Now http://jeesite.com All rights reserved.
  */
-package com.jeesite.modules.test.entity;
-
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.Length;
+package com.zebone.web.test.entity;
 
 import com.jeesite.common.entity.DataEntity;
 import com.jeesite.common.entity.TreeEntity;
 import com.jeesite.common.mybatis.annotation.Column;
 import com.jeesite.common.mybatis.annotation.Table;
 import com.jeesite.common.mybatis.mapper.query.QueryType;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * 测试树表Entity

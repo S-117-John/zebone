@@ -8,14 +8,6 @@
 		<artifactId>zebone-parent</artifactId>
 		<version>4.0.8-SNAPSHOT</version>
 		<relativePath>../../parent/pom.xml</relativePath>
-		
-		<!-- ====== 这是一个新增模块示例项目，你可以拷贝此项目，修改 artifactId 为您的模块即可 ====== -->
-		
-		<!-- <relativePath>../parent/pom.xml</relativePath>					/jeesite -->
-		<!-- <relativePath>../../parent/pom.xml</relativePath>				/jeesite/modules -->
-		<!-- <relativePath>../../jeesite/parent/pom.xml</relativePath>		/jeesite-xxx -->
-		<!-- <relativePath>../../../jeesite/parent/pom.xml</relativePath>	/jeesite-xxx/modules -->
-		
 	</parent>
 	
 	<artifactId>pay</artifactId>

@@ -1,21 +1,20 @@
 /**
  * Copyright (c) 2013-Now http://jeesite.com All rights reserved.
  */
-package com.jeesite.modules.test.service;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+package com.zebone.web.test.service;
 
 import com.jeesite.common.entity.Page;
 import com.jeesite.common.lang.DateUtils;
 import com.jeesite.common.service.CrudService;
 import com.jeesite.modules.file.utils.FileUploadUtils;
 import com.jeesite.modules.sys.service.UserService;
-import com.jeesite.modules.test.dao.TestDataChildDao;
-import com.jeesite.modules.test.dao.TestDataDao;
-import com.jeesite.modules.test.entity.TestData;
-import com.jeesite.modules.test.entity.TestDataChild;
+import com.zebone.web.test.dao.TestDataChildDao;
+import com.zebone.web.test.dao.TestDataDao;
+import com.zebone.web.test.entity.TestData;
+import com.zebone.web.test.entity.TestDataChild;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 测试数据Service

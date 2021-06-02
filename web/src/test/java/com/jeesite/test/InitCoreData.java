@@ -3,12 +3,11 @@
  */
 package com.jeesite.test;
 
+import com.zebone.web.config.Application;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
-
-import com.jeesite.modules.config.Application;
 
 /**
  * 初始化核心表数据
@@ -16,7 +15,7 @@ import com.jeesite.modules.config.Application;
  * @version 2017-10-22
  */
 @ActiveProfiles("test")
-@SpringBootTest(classes=Application.class)
+@SpringBootTest(classes= Application.class)
 @Rollback(false)
 public class InitCoreData extends com.jeesite.modules.sys.db.InitCoreData {
 	

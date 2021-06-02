@@ -20,7 +20,7 @@
 	<properties>
 		
 		<finalName>web</finalName><!-- war包的名称 ${project.artifactId} -->
-		<start-class>com.jeesite.modules.config.Application</start-class>
+		<start-class>com.zebone.web.config.Application</start-class>
 		
 		<!-- environment setting -->
 		<java.version>1.8</java.version>

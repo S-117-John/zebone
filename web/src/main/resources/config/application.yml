@@ -36,7 +36,7 @@ jdbc:
   type: mysql
   driver: com.mysql.jdbc.Driver
 #  url: jdbc:mysql://rm-2vc6kw5695uxe2a65io.mysql.cn-chengdu.rds.aliyuncs.com:3306/zebone?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
-  url: jdbc:mysql://192.168.1.36:3306/zebone?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
+  url: jdbc:mysql://127.0.0.1:3306/zebone?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
   username: root
   password: 123456
   testSql: SELECT 1
@@ -159,7 +159,6 @@ spring:
   #======================================#
 #========== System settings ===========#
 #======================================#
-
 # 管理基础路径
 #adminPath: /a
 #
@@ -240,9 +239,10 @@ spring:
 # 国际化管理（专业版+）
 #lang:
 #  enabled: true
-  jpa:
-    hibernate:
-      ddl-auto: update
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
 # 任务调度（个人版+）
 #job:
 #  enabled: true
@@ -352,9 +352,9 @@ shiro:
 #  
 #  # URI 权限过滤器定义
   filterChainDefinitions: |
+    /ReportServer/** = user
+    ${adminPath}/** = user
     /api/** = anon
-#    /ReportServer/** = user
-#    ${adminPath}/** = user
 #  
 # Session 相关
 #session:
@@ -483,7 +483,7 @@ file:
 #  #设置允许上传的文件后缀
   imageAllowSuffixes: .gif,.bmp,.jpeg,.jpg,.ico,.png,.tif,.tiff,
   mediaAllowSuffixes: .flv,.swf,.mkv,webm,.mid,.mov,.mp3,.mp4,.m4v,.mpc,.mpeg,.mpg,.swf,.wav,.wma,.wmv,.avi,.rm,.rmi,.rmvb,.aiff,.asf,.ogg,.ogv,
-  fileAllowSuffixes: .doc,.docx,.rtf,.xls,.xlsx,.csv,.ppt,.pptx,.pdf,.vsd,.txt,.md,.xml,.rar,.zip,7z,.tar,.tgz,.jar,.gz,.gzip,.bz2,.cab,.iso,.ipa,.apk,
+  fileAllowSuffixes: .doc,.docx,.rtf,.xls,.xlsx,.csv,.ppt,.pptx,.pdf,.vsd,.txt,.md,.xml,.rar,.zip,7z,.tar,.tgz,.jar,.gz,.gzip,.bz2,.cab,.iso,.ipa,.apk,.p12,
 #  
 #  #允许上传的文件内容类型（图片、word、excel、ppt）防止修改后缀恶意上传文件（默认不启用验证）
 ##  allowContentTypes: image/jpeg,image/gif,image/bmp,image/png,image/x-png,
